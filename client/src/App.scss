@@ -1,0 +1,312 @@
+$theme-colors: (
+  primary: #3F7AEC,
+  info: #00B2AE
+   );
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+.body{
+  background-color: #FCFCFC;
+}
+
+.cardgifiti {
+  top: 40px;
+  left: 130px;
+  width: 1260px;
+  height: 500px;
+  background-color:#F2FBFB !important;
+}
+
+.cardgifiti-startgf {
+  top: 40px;
+  left: 130px;
+  width: 1260px;
+  height: 340px;
+  background-color:#F2FBFB !important;
+  box-shadow: 0px 2px 28px #3E357824;
+}
+
+.cardgifiti-card {
+  top: 40px;
+  left: 130px;
+  margin-top:85px;
+  width: auto;
+  height: 340px;
+  background-color:#F2FBFB !important;
+}
+
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 1.25rem;
+}
+
+.custom-card-startgifting {
+  top: 40px;
+  left: 130px;
+  width: 1260px;
+  height: 500px;
+  background-color: #F2FBFB !important;
+}
+
+.card-image {
+ width: 850px;
+ height: 500px;
+ align-self: flex-end;
+}
+
+.gifticard-text{
+  font-family: Cairo;
+  margin-top: 95px;
+  margin-left: 75px;
+  margin-right: -50px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  color: rgba(17,20,45,1);
+}
+
+.giftiallcard-text{
+  font-family: Cairo;
+  margin-top: 95px;
+  margin-left: 130px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 35px;
+  color: rgba(17,20,45,1);
+}
+
+.startgf-text{
+  margin-top: 50px;
+  font-family: Cairo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  color: rgba(17,20,45,1);
+
+}
+
+.icons{
+  margin-left: 76px;
+}
+
+.custom-font{
+  line-height: 24px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: Cairo;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  color: rgba(110,110,110,1);
+}
+
+.startgiftimg{
+ margin-bottom: 45px;
+}
+
+.gificards{
+  margin-left: 130px;
+}
+
+.imgcards{
+  height: 180px;
+  width: 290px;
+}
+
+.home-footer{
+  top: 40px;
+  left: 130px;
+  margin-top: 85px;
+  width: auto;
+  height: 340px;
+  background-color: #FFFFFF !important;
+}
+
+.Footer-text{
+  font-family: Open Sans, Regular;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(6,4,10,1);
+}
+
+.Gifti_Global_is{
+  margin-left: 60px;
+  font-family: Cairo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgba(6,4,10,1);
+}
+
+.footer-text-list{
+  text-align: left;
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(84,78,93,1);
+}
+
+.searchbar{
+  margin-right: 100px;
+}
+
+.Navbar-button{
+ opacity: 1;
+ border-radius: 10px;
+ height: 45px;
+ font-family: Cairo;
+ font-style: normal;
+ width: 130px;
+}
+.search-field{
+width: 430px;
+font-family: Open Sans;
+font-style: normal;
+}
+
+.search-button{
+  height: 45px;
+}
+
+.search-button-b{
+  color: white;
+  background-color: white;
+  border-color: #ced4da;
+}
+
+.Navbar-button-b{
+  opacity: 1;
+  border-radius: 10px;
+  height: 45px;
+  font-family: Cairo;
+  font-style: normal;
+  width: 248px;
+}
+
+.Navbar-button-c{
+  opacity: 1;
+  border-radius: 10px;
+  height: 45px;
+  font-family: Cairo;
+  font-style: normal;
+  width: 112px;
+}
+
+
+.login-card{
+  margin-top: 65px;
+  top: 40px;
+  left: 130px;
+  width: 500px;
+  height: 640px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
+.forgot-password{
+  top: 40px;
+  left: 130px;
+  width: 500px;
+  height: 450px;
+  margin-top: 100px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
+.login-text{
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 33.3079833984375px;
+  color: rgba(3,1,76,1);
+}
+
+.btn-custom {
+    width: 385px;
+    height: 60px;
+    margin-left: 58px;
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.google-button{
+  margin-left: 100px; 
+  height: 65px;
+  width: 160px;
+  border-radius: 12px;
+}
+
+.facebook-button{
+  height: 65px;
+  width: 160px;
+  border-radius: 12px;
+}
+
+.singup-input{
+margin-left: 77px;
+width: 179px ! important;
+}
+
+.singup-inputfield{
+  width: 179px ! important; 
+}
+
+input::-webkit-input-placeholder {
+font-family: Open Sans;
+font-size:13px;
+color:#B2B2C9;
+opacity: 1;
+}
+
+.icons_login { 
+  position:relative;
+}
+.icons_fields { 
+  margin:0;
+  padding-left:60px;
+  height: 60px;
+}
+
+.icons_fields_b{
+ height: 60px;
+ padding-left: 30px;
+}
+
+
+.icon_img {
+  position:absolute;
+  bottom:21px;
+  left:24px;
+}
+
+.location{
+  position: absolute;
+  margin-top: -12px;
+  margin-left: 26px;
+  font-family: Cairo;
+  color: #484265;
+}
+
+.dashboard{
+  margin-top: 300px;
+}
+
+.dasboard-a{
+
+  margin-top:250px;
+}
