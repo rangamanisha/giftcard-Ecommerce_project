@@ -45,7 +45,7 @@ const Login = () => {
       <Navbar />   
       <div className="login-card mx-auto">
         <p className="login-text text-center h3 pt-5">Login to your Account</p>
-        <p className="text-center mt-0">
+        <p className="login-sub-text text-center mt-0">
           <small>Enter to continue and explore within your grasp</small>
         </p>
 
@@ -89,7 +89,7 @@ const Login = () => {
             Login to Continue
           </Button>
 
-          <p className="text-center mt-4">Don’t have an account ? Sign up</p>
+          <p className="login-bottom-text text-center mt-4">Don’t have an account ? Sign up</p>
 
           <table width="100%">
             <tbody>
@@ -103,6 +103,7 @@ const Login = () => {
                     padding: "0 10px",
                     whiteSpace: "nowrap",
                   }}
+                  className="login-bottom-text"
                 >
                   or sign in with
                 </td>
