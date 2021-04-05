@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Card from "./Card";
+import Cards from "./Cards";
 import Giftcards from "./Giftcards";
 import Footer from "./Footer";
 
@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="App body">
       <Navbar />
-      <Card />
+      <Cards />
       <Giftcards />
       <Footer />
     </div>

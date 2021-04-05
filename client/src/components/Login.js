@@ -1,82 +1,66 @@
-import React, { useState } from 'react';
-import ReactBootstrap, {
-  Button,
-  Form,
-  FormControl,
-  Col,
-  Alert,
-  Row,
-  InputGroup,
-} from "react-bootstrap";
-import axios from 'axios';  
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+import Row from 'react-bootstrap/Row';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
 import Googleicon from '../assets/Google-icon.svg';
 import Facebookicon from '../assets/Facebook-icon.svg';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import {getAuthState} from '../reducer/auth.reducer'
 
 
+const Login = () => { 
 
-const Login = (props) => { 
-  const [employee, setemployee] = useState({ Email: '', Password: ''});  
-    const apiUrl = "https://api.giftiglobal.com/v1/accounts/sessions/signin";    
-    const Login = (e) => {    
-            e.preventDefault();    
-            debugger;   
-            const data ={ "signin": { email:employee.Email,
-              password: employee.Password } }; 
-            axios.post(apiUrl, data)    
-            .then((result) => {    
-                debugger;  
-                console.log(result.data);   
-                const serializedState = JSON.stringify(result.data);  
-                var a = localStorage.setItem('myData', serializedState);   
-                console.log("A:",a)  
-                const user = result.data.status;  
-                console.log(result.data.message);  
-                if (result.data.status == 'OK')    
-                    props.history.push('/Dashboard')    
-                else    
-                alert('Invalid User');  
+  const dispatch = useDispatch();
+  const state = useSelector(getAuthState);
 
-        })        
-      };  
-   
-          const onChange = (e) => {    
-                e.persist();    
-                debugger;    
-                setemployee({...employee, [e.target.name]: e.target.value});    
-              }    
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      isActive: true
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().min(2).max(200).email().required(),
+      password: Yup.string().min(2).max(200).required(),
+    }),
+    onSubmit: (data) => {
+      console.log('data ', data);
+    }
+  });
+  
 
-            
-        
   return (
     <div className="body">
       <Navbar />   
       <div className="login-card mx-auto">
         <p className="login-text text-center h3 pt-5">Login to your Account</p>
-        <p className="text-center mt-0">
+        <p className="login-sub-text text-center mt-0">
           <small>Enter to continue and explore within your grasp</small>
         </p>
 
-        <Form onSubmit={Login} class="user">
+        <Form onSubmit={formik.handleSubmit} class="user">
           <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="email" placeholder="Enter email" value={employee.Email} onChange={ onChange }  className="icons_fields" name="Email"/>
+            <Form.Control size="lg" type="email" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange}  className="icons_fields" name="email"/>
             <img
                 src={Usericon}
                 alt="Icon"
                 className="icon_img"
               />
           </Form.Group>
-
-
-
           <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
           
-            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields" value={employee.Password} onChange={ onChange }  name="Password" />
-
+            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={ formik.handleChange }  name="password" />
             <img
                 src={Passwordicon}
                 alt="Icon"
@@ -92,12 +76,10 @@ const Login = (props) => {
                 id="formHorizontalRadios1"
               />
             </Form.Group>
-
             <Form.Group style={{ marginLeft: "162px" }}>
               <span>Forgot me?</span>
             </Form.Group>
           </div>
-
           <Button
             className="btn-custom mt-3"
             variant="info"
@@ -107,7 +89,7 @@ const Login = (props) => {
             Login to Continue
           </Button>
 
-          <p className="text-center mt-4">Don’t have an account ? Sign up</p>
+          <p className="login-bottom-text text-center mt-4">Don’t have an account ? Sign up</p>
 
           <table width="100%">
             <tbody>
@@ -121,6 +103,7 @@ const Login = (props) => {
                     padding: "0 10px",
                     whiteSpace: "nowrap",
                   }}
+                  className="login-bottom-text"
                 >
                   or sign in with
                 </td>

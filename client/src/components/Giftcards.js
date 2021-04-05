@@ -51,7 +51,6 @@ const Giftcards = () =>{
             <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
             <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
             <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" />
-
             </div>
         </div>
     )
