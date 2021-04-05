@@ -73,6 +73,7 @@ $theme-colors: (
   font-family: Cairo;
   margin-top: 95px;
   margin-left: 130px;
+  padding-top: 28px;
   font-style: normal;
   font-weight: bold;
   font-size: 35px;
@@ -307,6 +308,61 @@ opacity: 1;
 }
 
 .dasboard-a{
-
   margin-top:250px;
+}
+
+
+.startgf-fields-text{
+  font-family: Cairo;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.startgf-fields-button{
+  height: 46px;
+  width: 190px;
+  border-radius: 10px;
+}
+
+.allgiftcard-text{
+margin-left: 129px;
+font-family: 'Open Sans';
+font-weight: 500;
+font-size: 14px;
+}
+
+.box {
+  width: 130px;
+  height: 100px;
+  background-color: #f6f6f6;
+}
+
+.box a{
+  display: block;
+  padding: 20% 15px 0px 20px;
+  text-align: center;
+}
+
+.box:hover{
+  color:#fff;
+  background-color: #00B2AE;
+}
+
+.box:hover a{
+  color:#fff;
+  text-decoration:none;
+ }
+
+
+.products_icons{
+font-size: 13px;
+font-family: 'Open Sans';
+margin-top: 6px;
+ }
+
+#basic-nav-dropdown.dropdown-toggle.nav-link {
+    color: #00B2AE !important; 
+    opacity: 1 !important; 
+    font-family: Cairo-Bold;
+    font-size: 16px;
 }

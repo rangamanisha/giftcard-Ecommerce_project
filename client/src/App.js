@@ -8,18 +8,23 @@ import { BrowserRouter as Router,Route,
   Link
 } from "react-router-dom";
 import ForgotPassword from './components/ForgotPassword';
-import Dashboard from './components/Dashboard';
-
+import Index from './index';
+import AllFeaturedCards from './components/AllFeaturedCards';
 
 function App() {
   return (
     <Router>
+      <Link to ="/home"></Link>
+      <Link to ="/auth/login"></Link>
+      <Link to = "/signup"></Link>
+      <Link to = "/forgotpassword"></Link>
+      <Link to = "/allfeaturedcards"></Link>
     <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/login" component={Login} exact />
+        <Route path="/home" component={Home} exact />
+        <Route path="/auth/login" component={Login} exact />
         <Route path="/signup" component={Signup} exact />
         <Route path="/forgotpassword" component={ForgotPassword} exact />
-        <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
     </Switch>
     </Router>
   );
