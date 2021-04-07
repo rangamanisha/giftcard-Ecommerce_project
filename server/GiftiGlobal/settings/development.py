@@ -1,15 +1,23 @@
 from .base import *
 import os
+from config import *
 
 DEBUG = True
 
 DATABASES = {
      'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', 'djongo'),
-        'NAME': os.environ.get('DB_NAME', 'giftiglobal'),
-        'HOST': os.environ.get("DB_HOST", 'localhost'),
-        'PORT': os.environ.get("DB_PORT", 27017), 
-        'USER': os.environ.get("DB_USER_NAME", "root"),
-        "PASSWORD": os.environ.get("DB_PASS", "root")
+        'ENGINE': 'djongo',
+        'NAME':db_name,
+        'HOST' : host
+
     }
 }
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = EMAIL
+EMAIL_HOST_PASSWORD = PASSWORD
