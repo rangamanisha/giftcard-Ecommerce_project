@@ -1,8 +1,6 @@
 
-#DATABASE VARIABLES for development
-
 db_name ='gifti_global'
-host = "mongodb://bhanu:bhanu@123@localhost:27017/gifti_global"
+host = "mongodb://root:root@db:27017/giftiglobal"
 
 
 
