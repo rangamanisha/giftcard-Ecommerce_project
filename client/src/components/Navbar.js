@@ -10,7 +10,7 @@ import Location from '../assets/location.svg';
 
   const Navbars = () => {
   let history = useHistory();
-  const handleClick = () => history.push("/login");
+  const handleClick = () => history.push("/auth/login");
   
   return (
     <div>
