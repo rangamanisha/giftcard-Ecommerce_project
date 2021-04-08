@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from './reducer';
 import "typeface-cairo";
 import "typeface-open-sans";
-import "poppins-font";
+import "typeface-poppins";
 
 ReactDOM.render(
   <BrowserRouter>
