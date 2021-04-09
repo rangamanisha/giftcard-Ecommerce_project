@@ -24,6 +24,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
 
-CMD /wait && python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+RUN chmod +x /wait
+
+EXPOSE 8001
+
+CMD /wait && python manage.py migrate && python manage.py runserver 0.0.0.0:8001

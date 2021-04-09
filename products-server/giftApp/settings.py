@@ -124,9 +124,9 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'gift_db',
+        'NAME': 'giftiglobal',
         'CLIENT': {
-            'host': 'mongodb',
+            'host': 'db',
             'port': 27017,
             'username': 'root',
             'password': 'root',
