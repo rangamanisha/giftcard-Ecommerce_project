@@ -1,13 +1,6 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Col from 'react-bootstrap/Col';
-import Alert from 'react-bootstrap/Alert';
-import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
-
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Usericon from '../assets/User-icon.svg';
@@ -16,13 +9,8 @@ import Googleicon from '../assets/Google-icon.svg';
 import Facebookicon from '../assets/Facebook-icon.svg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import {getAuthState} from '../reducer/auth.reducer'
-
 
 const Login = () => { 
-
-  const dispatch = useDispatch();
-  const state = useSelector(getAuthState);
 
   const formik = useFormik({
     initialValues: {

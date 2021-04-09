@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';  
-import ReactBootstrap, {
+import {
     Button,
     Form,
-    FormControl,
-    Col,
-    Row,
-    InputGroup,
   } from "react-bootstrap";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
-import Passwordicon from '../assets/Password-icon.svg';
 
 
 const Signup = (props) => {
@@ -30,9 +25,8 @@ const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:''
                 const serializedState = JSON.stringify(result.data);  
                 var a = localStorage.setItem('myData', serializedState);   
                 console.log("A:",a)  
-                const user = result.data.status;  
                 console.log(result.data.message);  
-                if (result.data.status == 'OK')  {
+                if (result.data.status === 'OK')  {
                     props.history.push('/home')    
                   alert('mail sent');}
                 else {

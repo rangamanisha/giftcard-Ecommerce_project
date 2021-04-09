@@ -1,21 +1,7 @@
 
-import React, { useState, useEffect  } from 'react';
+import React, { useState  } from 'react';
 import axios from 'axios';  
-import Giftcards from "./Giftcards";
-import Footer from "./Footer";
 import Navbar from "./Navbar";
-import Asec from "../assets/5asec.png";
-import Careem from "../assets/Careem.png";
-import Ace from "../assets/Ace.png";
-import Appleitunes from "../assets/Appleitunes.png";
-import Carrefour from "../assets/Carrefour.png";
-import Biobox from "../assets/biobox.png";
-import Amazon from "../assets/amazon.png";
-import GiftGlobalCard from "../assets/GiftiGlobalcard.png";
-import Ballooncard from "../assets/Ballooncard.png";
-import Bollywoodparks from "../assets/bollywoodparks.png";
-import Deliveroo from "../assets/deliveroo.png";
-import Mylist from "../assets/mylist.png";
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -29,24 +15,11 @@ const AllFeaturedCards = () => {
    
   const [pics, setPics] = useState([]);
   const [imglist, setImglist] = useState([]);
-  
- {/* useEffect(() => {
-    axios.get('https://api.giftiglobal.com/v1/brands/featured_brands?currency=38&program_id=1')
-    .then(res => {
-      console.log(res)
-      setPics(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  })  */
-}
 
 const apiUrl = "https://api.giftiglobal.com/v1/brands/featured_brands?currency=1&program_id=1";
   const Featuredcards = () => {
     axios.get(apiUrl)
     .then((result) => {    
-       const serializedState = JSON.stringify(result.data);    
        const pics = result.data.data.brands;
        const imglist = pics.map((img) => <img className="imgcards mr-sm-5 mt-5" src={img.images.color.small_rectangle} />)
        setPics(pics);
@@ -61,7 +34,6 @@ const apiUrl = "https://api.giftiglobal.com/v1/brands/featured_brands?currency=1
     axios.get(Url)
     .then((result) => {    
       ; 
-       const serializedState = JSON.stringify(result.data);    
        const pics = result.data.data.brands;
        const imglist = pics.map((img) => <img className="imgcards mr-sm-5 mt-5" src={img.images.color.small_rectangle} />)
        setPics(pics);
@@ -76,7 +48,6 @@ const apiUrl = "https://api.giftiglobal.com/v1/brands/featured_brands?currency=1
     axios.get(BUrl)
     .then((result) => {    
       ; 
-       const serializedState = JSON.stringify(result.data);    
        const pics = result.data.data.brands;
        const imglist = pics.map((img) => <img className="imgcards mr-sm-5 mt-5" src={img.images.color.small_rectangle} />)
        setPics(pics);

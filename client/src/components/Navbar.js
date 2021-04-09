@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
-import { Redirect, useHistory  } from 'react-router-dom';
-import ReactBootstrap, { Navbar, NavDropdown, Nav , Button, Form, FormControl, Col, InputGroup, FontAwesomeIcon } from 'react-bootstrap';
+import React from 'react';
+import { useHistory  } from 'react-router-dom';
+import { Navbar, NavDropdown, Nav , Button, FormControl, InputGroup } from 'react-bootstrap';
 import Logo from '../assets/logo.svg';
 import Search from '../assets/search.svg';
 import Shoppingcart from '../assets/shopping-cart.svg';
