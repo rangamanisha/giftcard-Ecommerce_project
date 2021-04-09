@@ -21,4 +21,4 @@ deploy_giftiglobal_ui:
   only:
     - master 
   script:
-    - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
+    - aws s3 sync client/build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
