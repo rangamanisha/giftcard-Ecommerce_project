@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactBootstrap, { Carousel } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
 import Appleitunes from "../assets/Appleitunes.png";
 import Carrefour from "../assets/Carrefour.png";
 import Careem from "../assets/Careem.png";

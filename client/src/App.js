@@ -1,5 +1,4 @@
 import './App.scss';
-import i18n from './translations/i18n';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Registration';
@@ -8,7 +7,6 @@ import { BrowserRouter as Router,Route,
   Link
 } from "react-router-dom";
 import ForgotPassword from './components/ForgotPassword';
-import Index from './index';
 import AllFeaturedCards from './components/AllFeaturedCards';
 
 function App() {
