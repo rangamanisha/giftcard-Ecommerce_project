@@ -12,6 +12,7 @@ build:giftiglobal_ui:
   script:
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
+    - npm run build
 
 deploy_giftiglobal_ui:
   stage: deploy
