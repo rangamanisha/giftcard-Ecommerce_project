@@ -30,4 +30,5 @@ RUN chmod +x /wait
 
 EXPOSE 8001
 
+
 CMD /wait && python manage.py migrate && python manage.py runserver 0.0.0.0:8001
