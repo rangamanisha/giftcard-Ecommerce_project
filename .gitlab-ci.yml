@@ -1,23 +1,23 @@
-build:precise:
+before_script:
+  - apt-get update
+  - apt-get install -y -qq python3-dev python3-pip
+  - pip3 install --upgrade awscli
+
+cache:
+  paths:
+    - node_modules/
+build:giftiglobal_ui:
   image: node:14
-
-  cache:
-    paths:
-      - node_modules/
-
-  before_script:
-    - apt-get update
-    - apt-get install -y -qq python3-dev python3-pip
-    - pip3 install --upgrade awscli
+  stage: build
+  script:
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
 
-  deploy_development:
-    stage: deploy
-    environment:
-      name: Development
-    only:
-      - master 
-    script:
-      - npm run build
-      - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
+deploy_giftiglobal_ui:
+  stage: deploy
+  environment:
+    name: development
+  only:
+    - master 
+  script:
+    - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
