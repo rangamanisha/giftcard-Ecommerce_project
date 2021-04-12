@@ -9,32 +9,23 @@ services:
     volumes:
       - ./server:/app/server
     environment:
-      PROJECT_NAME: 'GiftiGlobal Server'
-      DJANGO_SETTINGS_MODULE: 'GiftiGlobal.settings.development'
-      SECRET_KEY: 'abcdefghijklmnopqrstuvwxyz0123456'
-      SECRET_ADMIN_URL: 'very_secret_url'
-      DB_ENGINE: 'djongo'
-      DB_NAME: 'giftiglobal'
-      DB_HOST: 'db'
-      DB_PORT: '27017'
-      DB_USER_NAME: 'root'
-      DB_PASS: 'root'
+      PROJECT_NAME: 'User Server'
+      WAIT_HOSTS: db:27017
     depends_on:
       - db
-  client:
+  products-server:
     build:
-      context: ./client
+      context: ./products-server
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - 8001:8001
     volumes:
-      - ./client/src:/app/src
+      - ./products-server:/app/product-server
     environment:
-      CHOKIDAR_USEPOLLING: 'true'
-      REACT_APP_API_URL: 'http://localhost:8080/api'
-    stdin_open: true
+      PROJECT_NAME: 'Products Server'
+      WAIT_HOSTS: db:27017
     depends_on:
-      - server
+      - db
   db:
     image: mongo:4.4.4-bionic
     ports:
@@ -43,16 +34,3 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: 'giftiglobal'
-  mongoexpress:
-    image: mongo-express
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      MONGO_INITDB_DATABASE: 'giftiglobal'
-      ME_CONFIG_MONGODB_ADMINUSERNAME: 'root'
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 'root'
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_SERVER: 'db'
-    
