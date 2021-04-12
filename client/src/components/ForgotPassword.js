@@ -1,9 +1,6 @@
 import React from 'react';
 import Emailicon from '../assets/Email-icon.svg';
-import {
-    Button,
-    Form,
-  } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 

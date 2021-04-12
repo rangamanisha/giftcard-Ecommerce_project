@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Navbar from "./Navbar";
+import React from 'react';
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -9,84 +7,42 @@ import Flowersandgift from "../assets/flowersandgift.svg";
 import Beauty from "../assets/Beauty.svg";
 import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Appleitunes from "../assets/Appleitunes.png";
+import Carrefour from "../assets/Carrefour.png";
+import Careem from "../assets/Careem.png";
+import Ace from "../assets/Ace.png";
+import Asec from "../assets/5asec.png";
+import Biobox from "../assets/biobox.png";
+import Amazon from "../assets/amazon.png";
+import GiftGlobalCard from "../assets/GiftiGlobalcard.png";
+import Ballooncard from "../assets/Ballooncard.png";
+import Bollywoodparks from "../assets/bollywoodparks.png";
+import Deliveroo from "../assets/deliveroo.png";
+import Mylist from "../assets/mylist.png";
 
-const AllFeaturedCards = () => {
-  const [pics, setPics] = useState([]);
-  const [imglist, setImglist] = useState([]);
-  const [countrylist, setCountrylist] = useState([]);
-  const apiUrl =
-    "https://api.giftiglobal.com/v1/brands/featured_brands?currency=1&program_id=1";
 
-  const Featuredcards = () => {
-    axios.get(apiUrl).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
 
-  const Url =
-    "https://api.giftiglobal.com/v1/brands/brands_by_category?category_id=12&currency=1&program_id=1";
-  const Flowers = () => {
-    axios.get(Url).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
+function AllGiftCard() {
+    return (
+     
+<div>
+        <div>
+          <p className="giftiallcard-text">All Gift Cards in the UAE</p>
+          <p className="giftiallcard-text-a">Browse by Category</p>
+        </div>
 
-  const BUrl =
-    "https://api.giftiglobal.com/v1/brands/brands_by_category?category_id=31&currency=1&program_id=1";
-  const Beautycards = () => {
-    axios.get(BUrl).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
+        <div className="mt-5 ">
 
-  const countryurl = "https://api-giftiglobal.meritincentives.com/v1/countries";
-  useEffect(() => {
-    axios.get(countryurl).then((result) => {
-      const names = result.data.data.countries;
-      const countrylist = names.map((name) => <NavDropdown.Item>{name.country_name}</NavDropdown.Item>);
-      setCountrylist(countrylist);
-    })
-
-  });
-
-  return (
-    <div className="body">
-      <Navbar country={countrylist}/>
-      <div className="mt-5 ">
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
-            <a></a>
+            <a>
+              Arrow
+            </a>
           </div>
           <div className="box">
             <a>
               <img
                 src={Allmenu}
-                onClick={Featuredcards}
                 alt="Icon"
                 style={{ width: "30px", height: "30px" }}
               />
@@ -99,7 +55,6 @@ const AllFeaturedCards = () => {
             <a>
               <img
                 src={Flowersandgift}
-                onClick={Flowers}
                 alt="Icon"
                 style={{ width: "30px", height: "30px" }}
               />
@@ -113,7 +68,6 @@ const AllFeaturedCards = () => {
               <img
                 src={Beauty}
                 alt="Icon"
-                onClick={Beautycards}
                 style={{ width: "30px", height: "30px" }}
               />
               <br />
@@ -185,22 +139,25 @@ const AllFeaturedCards = () => {
             <a></a>
           </div>
         </div>
-        <div className="cardgifiti-card">
-          <p className="giftiallcard-text">Featured Cards</p>
-          <p className="allgiftcard-text">
-            Buy Most Popular eGift Cards in UAE
-            <br />
-            Personalized gift vouchers delivered online & redeemable at popular
-            Brands
-          </p>
-          <div style={{ marginLeft: "130px", marginTop: "-35px" }}>
-            <div></div>
-            <div className="mr-sm-5 row">{imglist}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+     
 
-export default AllFeaturedCards;
+        <div className="gificards mt-5 row">
+            <img src={Appleitunes} className="mr-sm-5 imgcards" alt="Appleitunes" />
+            <img src={Asec} className="mr-sm-5 imgcards" alt="Asec" />
+            <img src={Ace} className="mr-sm-5 imgcards" alt="Ace" />
+            <img src={Careem} className="imgcards" alt="Careem" />
+            <img src={Carrefour} className="mr-sm-5 imgcards mt-5" alt="Carrefour" />
+            <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
+            <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
+            <img src={GiftGlobalCard} className="mr-sm-5 imgcards mt-5" alt="GiftGlobalCard" />
+            <img src={Ballooncard} className="mr-sm-5 imgcards mt-5" alt="Ballooncard" />
+            <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
+            <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
+            <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" />
+        </div>
+</div>
+</div>
+    )
+}
+
+export default AllGiftCard;

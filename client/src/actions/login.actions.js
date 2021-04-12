@@ -8,7 +8,6 @@ export const loginAction = createAsyncThunk('auth/login', async (payload, thunkA
             password: payload.password
         }
     }
-    const response = await loginAPI();
-    console.log('response ', response);
+    const response = await loginAPI(request);
     return response;
 });

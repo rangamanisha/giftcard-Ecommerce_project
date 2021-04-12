@@ -1,45 +1,43 @@
-import React, { useState } from 'react';
-import axios from 'axios';  
-import {
-    Button,
-    Form,
-  } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
+import { signupAction } from '../actions/signup.actions';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { getAuthState } from '../reducer/auth.reducer'
+import { useHistory } from 'react-router';
 
+const Signup = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(getAuthState);
+  const history = useHistory();
 
-const Signup = (props) => {
-const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:'',Country_name:''});  
-    const apiUrl = "https://api.giftiglobal.com/v1/accounts/registrations/signup";    
-    const Signup = (e) => {    
-            e.preventDefault();    
-            ;   
-            const data ={ "signup": { first_name:user.First_name, last_name:user.Last_name, email:user.Email,
-            country_name:user.Country_name,phone:user.Phone ,"lang_key": "en"} }; 
-            axios.post(apiUrl, data)    
-            .then((result) => {    
-                ;  
-                console.log(result.data);   
-                const serializedState = JSON.stringify(result.data);  
-                var a = localStorage.setItem('myData', serializedState);   
-                console.log("A:",a)  
-                console.log(result.data.message);  
-                if (result.data.status === 'OK')  {
-                    props.history.push('/home')    
-                  alert('mail sent');}
-                else {
-                alert('Invalid User');  }
-              
-        })        
-      };  
-   
-          const onChange = (e) => {    
-                e.persist();    
-                ;    
-                setuser({...user, [e.target.name]: e.target.value});    
-          }    
+  const formik = useFormik({
+    initialValues: {
+      first_name: '',
+      last_name: '',
+      email:'',
+      country_name:'',
+      phone: '',
+      "lang_key": "en"
+    },
+    validationSchema: Yup.object({
+      first_name: Yup.string().min(2).max(200).email().required(),
+      last_name: Yup.string().min(2).max(200).email().required(),
+      email: Yup.string().min(2).max(200).email().required(),
+      password: Yup.string().min(2).max(200).required(),
+      country_name: Yup.string().min(2).max(200).required(),
+    }),
+    onSubmit: (data) => {
+      dispatch(signupAction(data));
+      console.log(data);
+    }
+  });
+
     return (
         <div className="body">
           <Navbar />
@@ -50,10 +48,10 @@ const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:''
           <small>Enter to continue and explore within your grasp</small>
         </p>
 
-        <Form onSubmit={Signup} class="user" >
+        <Form onsubmit={formik.handleSubmit} className="user" >
         <div className="row">
         <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
-            <Form.Control size="lg" type="text" placeholder="First Name" className="icons_fields" value={user.First_name} onChange={ onChange } name="First_name"/>
+            <Form.Control size="lg" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={ formik.handleChange } name="first_name"/>
             <img
                 src={Usericon}
                 alt="Icon"
@@ -61,12 +59,12 @@ const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:''
               />
         </Form.Group>
         <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
-            <Form.Control size="lg" type="text" placeholder="Last Name"  className="icons_fields_b" value={user.Last_name} onChange={ onChange } name="Last_name"/>
+            <Form.Control size="lg" type="text" placeholder="Last Name"  className="icons_fields_b" value={formik.values.last_name} onChange={ formik.handleChange } name="last_name"/>
         </Form.Group>
         </div>
 
         <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="email" placeholder="Enter email" className="icons_fields" value={user.Email} onChange={ onChange } name="Email"/>
+            <Form.Control size="lg" type="email" placeholder="Enter email" className="icons_fields" value={formik.values.email} onChange={ formik.handleChange } name="email"/>
             <img
                 src={Emailicon}
                 alt="Icon"
@@ -75,13 +73,13 @@ const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:''
           </Form.Group>
 
           <Form.Group controlId="formBasictel" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="tel" placeholder="Phone" className="icons_fields" value={user.Phone} onChange={ onChange } name="Phone"/>
+            <Form.Control size="lg" type="tel" placeholder="Phone" className="icons_fields" value={formik.values.phone} onChange={ formik.handleChange } name="phone"/>
     </Form.Group>   
 
 
 
           <Form.Group controlId="formBasictext" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="text" placeholder="Country name" className="icons_fields" value={user.Country_name} onChange={ onChange } name="Country_name"/>
+            <Form.Control size="lg" type="text" placeholder="Country name" className="icons_fields" value={formik.values.country_name} onChange={ formik.handleChange } name="country_name"/>
           </Form.Group>
 
       {/*    <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
@@ -133,10 +131,9 @@ const [user, setuser] = useState({ First_name:'',Last_name:'',Email:'', Phone:''
           </table>
         </Form>
       </div>
-
-          </div>
-          <Footer />  
-        </div>
+      </div>
+    <Footer />  
+  </div>
     )
 }
 
