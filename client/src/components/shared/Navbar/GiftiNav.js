@@ -21,8 +21,8 @@ const GiftiNav = () => {
     const countries = topbarState.countries.map(country => country['country_name']);
 
     useEffect(() => {
-        dispatch(getCountriesListAction({}));
-    }, []);
+        dispatch(getCountriesListAction());
+    }, [dispatch]);
 
 
     const countryChanged = (event) => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import Emailicon from '../assets/Email-icon.svg';
 import { Button, Form } from "react-bootstrap";
-import GiftiNav from './shared/Navbar/GiftiNav';
 import Footer from "./Footer";
 
 function ForgotPassword() {

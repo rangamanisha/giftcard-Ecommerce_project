@@ -35,12 +35,12 @@ function AllGiftCard() {
 
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
-            <a>
+            <a href="#/">
               Arrow
             </a>
           </div>
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Allmenu}
                 alt="Icon"
@@ -52,7 +52,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Flowersandgift}
                 alt="Icon"
@@ -64,7 +64,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Beauty}
                 alt="Icon"
@@ -76,7 +76,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Hypermarket}
                 alt="Icon"
@@ -88,7 +88,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Technology}
                 alt="Icon"
@@ -100,7 +100,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Toys}
                 alt="Icon"
@@ -113,7 +113,7 @@ function AllGiftCard() {
 
           <div className="box">
             {" "}
-            <a>
+            <a href="#/">
               <img
                 src={Suitcase}
                 alt="Icon"
@@ -125,7 +125,7 @@ function AllGiftCard() {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Shipped}
                 alt="Icon"
@@ -136,7 +136,7 @@ function AllGiftCard() {
             </a>
           </div>
           <div className="box">
-            <a></a>
+            <a href="#/">Arrow</a>
           </div>
         </div>
      

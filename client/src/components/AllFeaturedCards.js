@@ -1,6 +1,3 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Navbar from "./Navbar";
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -9,83 +6,19 @@ import Flowersandgift from "../assets/flowersandgift.svg";
 import Beauty from "../assets/Beauty.svg";
 import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const AllFeaturedCards = () => {
-  const [pics, setPics] = useState([]);
-  const [imglist, setImglist] = useState([]);
-  const [countrylist, setCountrylist] = useState([]);
-  const apiUrl =
-    "https://api.giftiglobal.com/v1/brands/featured_brands?currency=1&program_id=1";
-
-  const Featuredcards = () => {
-    axios.get(apiUrl).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
-
-  const Url =
-    "https://api.giftiglobal.com/v1/brands/brands_by_category?category_id=12&currency=1&program_id=1";
-  const Flowers = () => {
-    axios.get(Url).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
-
-  const BUrl =
-    "https://api.giftiglobal.com/v1/brands/brands_by_category?category_id=31&currency=1&program_id=1";
-  const Beautycards = () => {
-    axios.get(BUrl).then((result) => {
-      const pics = result.data.data.brands;
-      const imglist = pics.map((img) => (
-        <img
-          className="imgcards mr-sm-5 mt-5"
-          src={img.images.color.small_rectangle}
-        />
-      ));
-      setPics(pics);
-      setImglist(imglist);
-    });
-  };
-
-  const countryurl = "https://api-giftiglobal.meritincentives.com/v1/countries";
-  useEffect(() => {
-    axios.get(countryurl).then((result) => {
-      const names = result.data.data.countries;
-      const countrylist = names.map((name) => <NavDropdown.Item>{name.country_name}</NavDropdown.Item>);
-      setCountrylist(countrylist);
-    })
-
-  });
-
   return (
     <>
       <div className="mt-5 ">
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
-            <a></a>
+            <a href="#/">Arrow</a>
           </div>
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Allmenu}
-                onClick={Featuredcards}
                 alt="Icon"
                 style={{ width: "30px", height: "30px" }}
               />
@@ -95,10 +28,9 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Flowersandgift}
-                onClick={Flowers}
                 alt="Icon"
                 style={{ width: "30px", height: "30px" }}
               />
@@ -108,11 +40,10 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Beauty}
                 alt="Icon"
-                onClick={Beautycards}
                 style={{ width: "30px", height: "30px" }}
               />
               <br />
@@ -121,7 +52,7 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Hypermarket}
                 alt="Icon"
@@ -133,7 +64,7 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Technology}
                 alt="Icon"
@@ -145,7 +76,7 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Toys}
                 alt="Icon"
@@ -157,8 +88,7 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            {" "}
-            <a>
+            <a href="#/">
               <img
                 src={Suitcase}
                 alt="Icon"
@@ -170,7 +100,7 @@ const AllFeaturedCards = () => {
           </div>
 
           <div className="box">
-            <a>
+            <a href="#/">
               <img
                 src={Shipped}
                 alt="Icon"
@@ -181,7 +111,7 @@ const AllFeaturedCards = () => {
             </a>
           </div>
           <div className="box">
-            <a></a>
+            <a href="#/">arrow</a>
           </div>
         </div>
         <div className="cardgifiti-card">
@@ -194,7 +124,7 @@ const AllFeaturedCards = () => {
           </p>
           <div style={{ marginLeft: "130px", marginTop: "-35px" }}>
             <div></div>
-            <div className="mr-sm-5 row">{imglist}</div>
+            <div className="mr-sm-5 row"></div>
           </div>
         </div>
       </div>

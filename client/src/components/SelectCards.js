@@ -1,6 +1,5 @@
 import React from 'react';
 import Footer from './Footer';
-import GiftiNav from './shared/Navbar/GiftiNav';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AmazonMedium from "../assets/amazon_medium.png";
