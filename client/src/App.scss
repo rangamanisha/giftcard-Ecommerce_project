@@ -2,8 +2,9 @@ $theme-colors: (
   primary: #3F7AEC,
   info: #00B2AE
    );
+
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
 
 
 @font-face {
@@ -40,18 +41,34 @@ $theme-colors: (
 }
 
 
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: local('Poppins-Bold'), url(./assets/fonts/Poppins-Bold.ttf) format('truetype');
+}
 
 
-.body{
-  background-color: #FCFCFC;
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: local('Poppins-SemiBold'), url(./assets/fonts/Poppins-SemiBold.ttf) format('truetype');
+}
+
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: local('Poppins-Regular'), url(./assets/fonts/Poppins-Regular.ttf) format('truetype');
+}
+
+
+
+#root{
+  width : 100%;
+  height: 100%;
 }
 
 .cardgifiti {
-  top: 40px;
-  left: 130px;
-  width: 1260px;
-  height: 500px;
   background-color:#F2FBFB !important;
+  border-radius: 1.25rem;
+  width: 85%;
 }
 
 .cardgifiti-startgf {
@@ -72,11 +89,7 @@ $theme-colors: (
   background-color:#F2FBFB !important;
 }
 
-.custom-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
+.custom-card{
   background-color: #fff;
   background-clip: border-box;
   border-radius: 1.25rem;
@@ -90,17 +103,8 @@ $theme-colors: (
   background-color: #F2FBFB !important;
 }
 
-.card-image {
- width: 850px;
- height: 500px;
- align-self: flex-end;
-}
-
 .gifticard-text{
   font-family: Cairo-Bold;
-  margin-top: 95px;
-  margin-left: 75px;
-  margin-right: -50px;
   font-style: normal;
   font-weight: bold;
   font-size: 45px;
@@ -119,6 +123,16 @@ $theme-colors: (
   color: rgba(17,20,45,1);
 }
 
+
+.giftiallcard-text-a{
+  font-family: Cairo-Bold;
+  margin-left: 130px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  color: rgba(17,20,45,1);
+}
+
 .startgf-text {
     margin-top: 50px;
     font-family: 'Cairo-Bold';
@@ -130,7 +144,7 @@ $theme-colors: (
 }
 
 .icons{
-  margin-left: 76px;
+  margin-left: 40px;
 }
 
 .custom-font{
@@ -217,6 +231,7 @@ width: 430px;
   letter-spacing: 0px;
   color: #B2B2C9;
   opacity: 1;
+  width: 380px ! important;
 }
 
 .search-button-b{
@@ -366,8 +381,7 @@ opacity: 1;
 }
 
 .startgf-fields-button{
-  height: 46px;
-  width: 190px;
+  padding: 10px 60px;
   border-radius: 10px;
 }
 
@@ -420,3 +434,86 @@ font-family: OpenSans-Regular;
 font-size: 15px;
 opacity: 1;
 }
+
+
+.validation-messages{
+color: red;
+text-align: center;
+}
+
+.select-card-button {
+  width: 90px;
+  border-radius: 5px;
+  border-color: #B2B2C9;
+  color: #11142D;
+}
+
+.selects-card-button-a {
+    width: 180px;
+    border-radius: 10px;
+}
+
+.selects-card-button-b {
+  width: 150px;
+  border-radius: 10px;
+}
+
+.select-card-size{
+width:344px;
+height:217px;
+}
+
+.select-card-text{
+font-family: Cairo-Bold;
+}
+
+.nav-btn-link {
+  text-decoration: none;
+}
+
+.nav-btn {
+  opacity: 1;
+  border-radius: 10px;
+  font-family: Cairo-semibold;
+  padding: 0.6rem 1rem !important;
+}
+
+
+.card-text-align{
+  padding-top: 70px;
+  padding-left: 80px;
+}
+
+.widgets_div .icon_div {
+  display: inline-block;
+  vertical-align:middle;
+}
+
+.widgets_div .icon_div span i {
+  font-size: 24px;
+}
+
+.widgets_div .text_div {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Cairo-SemiBold';
+}
+
+.widgets_div .text_div span {
+  color: #58666e;
+}
+
+.widgets_div .text_div span+span {
+  color: #747F85;
+  font-size: 11px;
+}
+
+.icon-margin{
+  padding: 0rem 1rem 0rem 7rem;
+}
+
+
+.startgiftingimg{
+  padding: 0px 65px;
+}
+
