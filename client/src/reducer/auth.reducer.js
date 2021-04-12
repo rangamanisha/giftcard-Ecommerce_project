@@ -1,6 +1,5 @@
 import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
-import { loginAction } from "../actions/login.actions";
-import { signupAction } from "../actions/signup.actions";
+import { loginAction, signupAction } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
     user:null,
@@ -11,16 +10,8 @@ export const AUTH_INITIAL_STATE_LOGIN = {
     accessToken: null,
     idToken: null,
     refreshToken: null,
-    expiresIn: null
-}
-
-
-export const AUTH_INITIAL_STATE_SIGNUP = {
-    user:null,
-    status : null,
-    errors: null,
-    code: null,
-    message: null
+    expiresIn: null,
+    signupSuccess: false
 }
 
 
@@ -55,42 +46,26 @@ export const authSlice = createSlice({
         .addCase(loginAction.rejected, (state, action) => {
             state.errors = [action.error.message || ''];
         })
-    }
-});
-
-
-
-
-export const signupslice = createSlice({
-    name: AUTH_FEATURE_KEY,
-    initialState: AUTH_INITIAL_STATE_SIGNUP,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(signupAction.pending, (state, action) => {
+        .addCase(signupAction.pending, (state, action) => {
             state.errors = null;
-            state.user = null;
-
+            state.signupSuccess = false;
         })
         .addCase(signupAction.fulfilled, (state, action) => {
             const response = action.payload;
             if(response.code === 200) {
-                state.user = response.data.user;
+                state.signupSuccess = true;
             }
             if(response.code === 400) {
-                state.user = null;
+                state.signupSuccess = false;
                 state.errors = [response.message]
             }
         })
         .addCase(signupAction.rejected, (state, action) => {
+            state.signupSuccess = false;
             state.errors = [action.error.message || ''];
         })
     }
 });
-
-
-
-
-
 
 
 export const authReducer = authSlice.reducer;

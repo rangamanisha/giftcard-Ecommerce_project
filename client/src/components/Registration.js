@@ -1,20 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import GiftiNav from './shared/Navbar/GiftiNav';
 import Footer from "./Footer";
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
-import { signupAction } from '../actions/signup.actions';
+import { signupAction } from '../actions/auth.actions';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { getAuthState } from '../reducer/auth.reducer'
-import { useHistory } from 'react-router';
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const state = useSelector(getAuthState);
-  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -23,16 +19,17 @@ const Signup = () => {
       email: '',
       country_name: '',
       phone: '',
-      "lang_key": "en"
+      lang_key: 'en'
     },
     validationSchema: Yup.object({
-      first_name: Yup.string().min(2).max(200).email().required(),
-      last_name: Yup.string().min(2).max(200).email().required(),
+      first_name: Yup.string().min(2).max(200).required(),
+      last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
-      password: Yup.string().min(2).max(200).required(),
       country_name: Yup.string().min(2).max(200).required(),
+      phone: Yup.string().min(10).max(10).required()
     }),
     onSubmit: (data) => {
+      console.log('data ', data);
       dispatch(signupAction(data));
     }
   });
@@ -46,7 +43,7 @@ const Signup = () => {
             <small>Enter to continue and explore within your grasp</small>
           </p>
 
-          <Form onsubmit={formik.handleSubmit} className="user" >
+          <Form onSubmit={formik.handleSubmit} className="user" >
             <div className="row">
               <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
                 <Form.Control size="lg" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={formik.handleChange} name="first_name" />
@@ -55,10 +52,12 @@ const Signup = () => {
                   alt="Icon"
                   className="icon_img"
                 />
-              </Form.Group>
+              </Form.Group> 
+              {formik.errors.first_name ? (<p className="validation-messages">{formik.errors.first_name}</p>) : null}
               <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
                 <Form.Control size="lg" type="text" placeholder="Last Name" className="icons_fields_b" value={formik.values.last_name} onChange={formik.handleChange} name="last_name" />
               </Form.Group>
+              {formik.errors.last_name ? (<p className="validation-messages">{formik.errors.last_name}</p>) : null}
             </div>
 
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
@@ -69,39 +68,26 @@ const Signup = () => {
                 className="icon_img"
               />
             </Form.Group>
+            {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
 
             <Form.Group controlId="formBasictel" className="w-75 mx-auto icons_login">
               <Form.Control size="lg" type="tel" placeholder="Phone" className="icons_fields" value={formik.values.phone} onChange={formik.handleChange} name="phone" />
             </Form.Group>
-
+            {formik.errors.phone ? (<p className="validation-messages">{formik.errors.phone}</p>) : null}
 
 
             <Form.Group controlId="formBasictext" className="w-75 mx-auto icons_login">
               <Form.Control size="lg" type="text" placeholder="Country name" className="icons_fields" value={formik.values.country_name} onChange={formik.handleChange} name="country_name" />
             </Form.Group>
+            {formik.errors.country_name ? (<p className="validation-messages">{formik.errors.country_name}</p>) : null}
 
-            {/*    <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields"/>
-            <img
-                src={Passwordicon}
-                alt="Icon"
-                className="icon_img"
-              />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="password" placeholder="Confirm Password" className="icons_fields"/>
-            <img
-                src={Passwordicon}
-                alt="Icon"
-                className="icon_img"
-              />
-          </Form.Group>
-
-    */}
-
-            <Button className="btn-custom mt-3" variant="info" size="lg" type="Submit">
-              Sign up
+            <Button
+            className="btn-custom mt-3"
+            variant="info"
+            size="lg"
+            type="submit"
+          >
+            Sign up
           </Button>
 
             <p className="text-center mt-3">Already have an account ? Log in</p>

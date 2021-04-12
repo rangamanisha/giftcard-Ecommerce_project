@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import GiftiNav from './shared/Navbar/GiftiNav';
 import Footer from "./Footer";
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
@@ -11,7 +10,7 @@ import Facebookicon from '../assets/Facebook-icon.svg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { getAuthState } from '../reducer/auth.reducer'
-import { loginAction } from '../actions/login.actions';
+import { loginAction } from '../actions/auth.actions';
 import { useHistory } from 'react-router';
 
 
