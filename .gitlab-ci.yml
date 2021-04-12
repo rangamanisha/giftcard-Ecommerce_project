@@ -11,6 +11,7 @@ build:giftiglobal_ui:
   image: node:14
   stage: build
   script:
+    - echo $GIFTI_GLOBAL_BUCKET_NAME
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
     - npm run build
@@ -19,6 +20,7 @@ deploy:giftiglobal_ui:
   image: node:14
   stage: deploy
   script: 
+    - echo $GIFTI_GLOBAL_BUCKET_NAME
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
     - npm run build
