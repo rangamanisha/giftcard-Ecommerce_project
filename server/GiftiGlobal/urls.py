@@ -1,22 +1,16 @@
-"""backendproject URL Configuration
+from django.shortcuts import render
+from django.conf.urls import url
+from .views import UserAPI,getUpdateDeleteUser,TestSigin,UpdatePassword,SignupAPI
+from django.contrib.auth import views as auth_views
+from django.urls import include
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('addons.urls')),
-]
+
+    url(r'^api/users', UserAPI.as_view()),
+    url(r'^api/getupdateuser/(?P<id>[0-9]+)$',getUpdateDeleteUser.as_view()),
+    url(r'^api/updatepassword/(?P<id>[0-9]+)$',UpdatePassword.as_view()),
+    url(r'^api/signup', SignupAPI.as_view()),
+    url(r'^api/testsigin',TestSigin.as_view()),
+    #url(r'^api/refreshtoken',RefreshToken.as_view())
+    ]
