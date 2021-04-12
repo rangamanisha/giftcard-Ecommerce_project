@@ -1,23 +1,22 @@
-export const API_URL = process.env.REACT_APP_API_URL || 'http://api.giftiglobal.com/v1';
+export const API_URL = process.env.REACT_APP_API_URL;
 
-export const apiCall = async (url, method, data, headers) => {
-    console.log('url ', url);
+export const apiCall = async (url, method, data, headers, isAuthenticatedReq = true) => {
     const accessToken = localStorage.getItem('access_token');
-    if(!accessToken) {
+    if(isAuthenticatedReq && !accessToken) {
         localStorage.clear();
         sessionStorage.clear();
         window.location.href="/";
     }
 
-    const requestHeaders = new Headers({
+    const requestHeaders = isAuthenticatedReq ?  new Headers({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
         ...headers
-    });
+    }) : new Headers({'Content-Type': 'application/json', ...headers });
 
     const config = {
         method,
-        headers = requestHeaders,
+        headers: requestHeaders,
         body: data && JSON.stringify(data)
     }
 
@@ -32,9 +31,9 @@ export const apiCall = async (url, method, data, headers) => {
     }
 
     if(result.status === 401) {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.href = '/';
+        // localStorage.clear();
+        // sessionStorage.clear();
+        // window.location.href = '/';
     }
 
     if(!result.ok) {

@@ -1,17 +1,19 @@
 import React from "react";
-import Navbar from "./Navbar";
 import Cards from "./Cards";
-import Giftcards from "./Giftcards";
 import Footer from "./Footer";
+import StartGifting from "./StartGifting";
+import RecommandedCards from './RecommandedCards';
+import AllGiftCard from "./AllGiftCard";
 
 const Home = () => {
   return (
-    <div className="App body">
-      <Navbar />
+    <>
       <Cards />
-      <Giftcards />
+      <StartGifting />
+      <RecommandedCards />
+      <AllGiftCard />
       <Footer />
-    </div>
+    </>
   );
 }
 
