@@ -20,7 +20,7 @@ export const AUTH_INITIAL_STATE_SIGNUP = {
     status : null,
     errors: null,
     code: null,
-    message: null,z
+    message: null
 }
 
 
