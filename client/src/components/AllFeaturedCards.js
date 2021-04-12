@@ -75,8 +75,7 @@ const AllFeaturedCards = () => {
   });
 
   return (
-    <div className="body">
-      <Navbar country={countrylist}/>
+    <>
       <div className="mt-5 ">
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
@@ -199,7 +198,7 @@ const AllFeaturedCards = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

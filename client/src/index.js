@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -7,12 +7,13 @@ import "typeface-cairo";
 import "typeface-open-sans";
 import "typeface-poppins";
 
+
 ReactDOM.render(
-  <BrowserRouter>
-   <Provider store={store}>
-        <App />
-    </Provider>
-    </BrowserRouter>, 
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+      </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

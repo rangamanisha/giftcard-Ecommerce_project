@@ -1,14 +1,13 @@
 import React from 'react';
 import Emailicon from '../assets/Email-icon.svg';
 import { Button, Form } from "react-bootstrap";
-import Navbar from "./Navbar";
+import GiftiNav from './shared/Navbar/GiftiNav';
 import Footer from "./Footer";
 
 function ForgotPassword() {
-    return (
-        <div className="body">
-        <Navbar />
-        <div className="forgot-password mx-auto">
+  return (
+    <>
+      <div className="forgot-password mx-auto">
         <p className="login-text text-center h3 pt-5">Forgot your password?</p>
         <p className="text-center mt-0">
           <small>Enter your email below</small>
@@ -16,12 +15,12 @@ function ForgotPassword() {
 
         <Form>
           <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login mt-5">
-            <Form.Control size="lg" type="email" placeholder="Enter email" className="icons_fields"/>
+            <Form.Control size="lg" type="email" placeholder="Enter email" className="icons_fields" />
             <img
-                src={Emailicon}
-                alt="Icon"
-                className="icon_img"
-              />
+              src={Emailicon}
+              alt="Icon"
+              className="icon_img"
+            />
           </Form.Group>
 
           <Button className="btn-custom mt-3" variant="info" size="lg">
@@ -29,9 +28,9 @@ function ForgotPassword() {
           </Button>
         </Form>
       </div>
-      <Footer /> 
-        </div>
-    )
+      <Footer />
+    </>
+  )
 }
 
 export default ForgotPassword;

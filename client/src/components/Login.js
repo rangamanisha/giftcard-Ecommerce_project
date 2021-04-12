@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Navbar from "./Navbar";
+import GiftiNav from './shared/Navbar/GiftiNav';
 import Footer from "./Footer";
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
@@ -44,14 +44,14 @@ const Login = () => {
 
 
   return (
-    <div className="body">
-      <Navbar />
+    <>
+
       <div className="login-card mx-auto">
         <p className="login-text text-center h3 pt-5">Login to your Account</p>
         <p className="login-sub-text text-center mt-0">
           <small>Enter to continue and explore within your grasp</small>
         </p>
-       
+
         <Form onSubmit={formik.handleSubmit} className="user">
           <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
             <Form.Control size="lg" type="email" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange} className="icons_fields" name="email" />
@@ -61,7 +61,7 @@ const Login = () => {
               className="icon_img"
             />
           </Form.Group>
-          
+
           {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
 
           <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
@@ -88,8 +88,8 @@ const Login = () => {
             </Form.Group>
           </div>
           {state.errors && state.errors.length ? (
-          <p className="validation-messages">{state.errors.join('\n')}</p>
-        ) : null}
+            <p className="validation-messages">{state.errors.join('\n')}</p>
+          ) : null}
           <Button
             className="btn-custom mt-3"
             variant="info"
@@ -98,7 +98,7 @@ const Login = () => {
           >
             Login to Continue
           </Button>
-       
+
 
           <p className="login-bottom-text text-center mt-4">Don’t have an account ? Sign up</p>
 
@@ -152,7 +152,7 @@ const Login = () => {
         </Form>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -35,15 +35,11 @@ import Location from '../assets/location.svg';
       <div className="pl-3">
         <Button className="nav-btn mr-2 text-white">For Business</Button>{' '}
         <Button className="nav-btn mr-2" variant="info">Redeem Your Gifti Global Card</Button>{' '}
-        <Link to='/auth/login'>
         <Button className="nav-btn mr-2" variant="info">
-          <img src={UserLogin} alt="Icon" className="mr-3" />Log in</Button></Link> 
-
-          <Link>
+          <img src={UserLogin} alt="Icon" className="mr-3" />Log in</Button>
           <Button className="nav-btn-link" variant="link">
           <img src={Shoppingcart} alt="shoppingcart-icon" />
-        </Button></Link>      
-       
+        </Button>   
         </div>
       </Form>
       </Navbar>    

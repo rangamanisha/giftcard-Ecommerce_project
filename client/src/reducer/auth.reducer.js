@@ -41,7 +41,6 @@ export const authSlice = createSlice({
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
-            console.log('response ', response);
             if(response.code === 200) {
                 state.user = response.data.user;
                 state.accessToken = response.data.user.access_token;
@@ -74,7 +73,6 @@ export const signupslice = createSlice({
         })
         .addCase(signupAction.fulfilled, (state, action) => {
             const response = action.payload;
-            console.log('response ', response);
             if(response.code === 200) {
                 state.user = response.data.user;
             }
