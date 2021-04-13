@@ -41,12 +41,12 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('accounts/', include('allauth.urls')),
 
-    path('rest-auth/', include('rest_auth.urls')),
+    # path('rest-auth/', include('rest_auth.urls')),
     # path('rest-auth/facebook/', user_views.FacebookLogin.as_view(), name='fb_login'),
     path('api/v1/', include(router.urls)),
     path('api/v1/login/', user_views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/reset-user-password/', user_views.UserResetPassword.as_view(), name='reset_password'),
     path('api/v1/send-forget-passwod-otp/', user_views.SendOTPForForgetPassword.as_view(), name='send_otp'),
-    path('api/v1/reset-forget-password/', user_views.UserResetPassword.as_view(), name="rest_forget_password")
+    path('api/v1/reset-forget-password/', user_views.UserResetForgetPassword.as_view(), name="rest_forget_password")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,12 +15,12 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "user20213@mailinator.com",
+							"value": "newone@mailinator.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "admin@2020",
+							"value": "admin@1234566",
 							"type": "text"
 						}
 					]
@@ -646,7 +646,7 @@
 						},
 						{
 							"key": "email",
-							"value": "user20213@mailinator.com",
+							"value": "newone@mailinator.com",
 							"type": "text"
 						},
 						{
@@ -657,6 +657,16 @@
 						{
 							"key": "confirm_password",
 							"value": "admin@12345",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "english",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "ind",
 							"type": "text"
 						}
 					]
@@ -685,7 +695,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MzEyNTcwLCJqdGkiOiJkNWRkMzE3NTBhYTg0YzE4YTI3YmYzOTQ0ZjI4NGM1ZCIsInVzZXJfaWQiOiIzYzA5MzJlMy1iZjE3LTQ0ZTEtYThhNy0yNWE0ZDIxN2YzODgifQ.o_xudG7n6R6vJUsTj9-nOGw7C7AxZSrhLIer2A8jOY0",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxODkxMDk4OSwianRpIjoiZTU3YjA4MjRlNjRhNDhmNTk0Y2FmODNhODY1YzJhMWIiLCJ1c2VyX2lkIjoiNmJlN2Y2YzItM2UwYi00ZjAyLThjYzUtNjJmNDYzMjUzMzFiIn0.JPV6_CEEDj05XP825aeEzJJ38Ofimk6zVMDDN5JE648",
 						"type": "text"
 					}
 				],
@@ -830,7 +840,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MjIxOTA5LCJqdGkiOiI0MWNlZTdmYTliNDc0N2JmYTJlNGJlNDI3MDU2MmVjYyIsInVzZXJfaWQiOiI2NjAzM2M1Zi1kNzcyLTRiMTgtYjA1ZS1jNDRkMGQwMzQ0YTUifQ.tNY7h3GvL0Wg-o9u2xfLnGZeBzRVTdZ5ZAPbAhc23PM",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MzkzMDI2LCJqdGkiOiIyOWRjZjhmN2M3ZGM0MDhhOTZlNmEyNWFkMTY1ZDFmYSIsInVzZXJfaWQiOiIzM2Q4M2U4Yi00YjNjLTRiZGYtYTA2Ny1jOWMxNjNhNGY2NDYifQ.EZy7l7RPLGtdCL4JiVTMV2OwiTlckld2eVWTqCxFyUA",
 						"type": "text"
 					}
 				],
@@ -881,7 +891,7 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "user20213@mailinator.com",
+							"value": "newone@mailinator.com",
 							"type": "text"
 						}
 					]
@@ -923,12 +933,12 @@
 						},
 						{
 							"key": "email",
-							"value": "user20213@mailinator.com",
+							"value": "newone@mailinator.com",
 							"type": "text"
 						},
 						{
 							"key": "otp",
-							"value": "643166",
+							"value": "646027",
 							"type": "text"
 						}
 					]

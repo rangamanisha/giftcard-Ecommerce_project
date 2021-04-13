@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'mail_templated',
+    'corsheaders',
 
     # gift app
     'category',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,9 +146,9 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'gift_db',
+        'NAME': 'giftiglobal',
         'CLIENT': {
-            'host': 'mongodb',
+            'host': 'db',
             'port': 27017,
             'username': 'root',
             'password': 'root',
@@ -223,3 +225,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'
 
+
+
+CORS_ORIGIN_ALLOW_ALL=True

@@ -48,7 +48,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'email', 'password', 
             'id', 'is_active', 'role', 'date_joined', 'confirm_password',
             'language', 'date_of_birth', 'country')
-        read_only_fields = ('id', 'is_active', 'role', 'date_joined', 'language', 'date_of_birth', 'country')
+        read_only_fields = ('id', 'is_active', 'role', 'date_joined','date_of_birth',)
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -99,6 +99,13 @@ class UserRestPasswordSerializer(serializers.Serializer):
 class SendOTPForForgetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
+    def validate_email(self, data):
+        user = User.objects.filter(email=data).exists()
+
+        if not user:
+            raise serializers.ValidationError("Email address is not exists")
+        return data
+
 
 class UserForgetPasswordSerializer(serializers.Serializer):
     confirm_password = serializers.CharField(style={'input_type': 'password'},
@@ -131,20 +138,4 @@ class UserForgetPasswordSerializer(serializers.Serializer):
 class LoginSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-
-        refresh = self.get_token(self.user)
-        data['refresh'] = str(refresh)
-        data['access'] = str(refresh.access_token)
-        
-        data["first_name"] = self.user.first_name
-        data["last_name"] = self.user.last_name
-        data["email"] = self.user.email
-        data["id"] = self.user.id
-        data["is_active"] = self.user.is_active
-        data["role"] = self.user.role
-        data["date_joined"] = self.user.date_joined
-        data["language"] = self.user.language
-        data["date_of_birth"] = self.user.date_of_birth
-        data["country"] = self.user.country
-
         return data
