@@ -53,11 +53,9 @@ const Signup = () => {
                   className="icon_img"
                 />
               </Form.Group> 
-              {formik.errors.first_name ? (<p className="validation-messages">{formik.errors.first_name}</p>) : null}
               <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
                 <Form.Control size="lg" type="text" placeholder="Last Name" className="icons_fields_b" value={formik.values.last_name} onChange={formik.handleChange} name="last_name" />
               </Form.Group>
-              {formik.errors.last_name ? (<p className="validation-messages">{formik.errors.last_name}</p>) : null}
             </div>
 
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
@@ -68,18 +66,15 @@ const Signup = () => {
                 className="icon_img"
               />
             </Form.Group>
-            {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
 
             <Form.Group controlId="formBasictel" className="w-75 mx-auto icons_login">
               <Form.Control size="lg" type="tel" placeholder="Phone" className="icons_fields" value={formik.values.phone} onChange={formik.handleChange} name="phone" />
             </Form.Group>
-            {formik.errors.phone ? (<p className="validation-messages">{formik.errors.phone}</p>) : null}
 
 
             <Form.Group controlId="formBasictext" className="w-75 mx-auto icons_login">
               <Form.Control size="lg" type="text" placeholder="Country name" className="icons_fields" value={formik.values.country_name} onChange={formik.handleChange} name="country_name" />
             </Form.Group>
-            {formik.errors.country_name ? (<p className="validation-messages">{formik.errors.country_name}</p>) : null}
 
             <Button
             className="btn-custom mt-3"

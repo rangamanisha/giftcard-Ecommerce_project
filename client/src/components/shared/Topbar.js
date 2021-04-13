@@ -15,15 +15,9 @@ const Topbar = (props) => {
     const history = useHistory();
 
     const getProfile = () => {
-        if (showLogin) {
-            return (
-                <Button className="nav-btn mr-2" variant="info" onClick={() => history.push({ pathname: '/auth/login' })}>
-                    <img src={userLoginIcon} alt="Icon" className="mr-3" />Log in</Button>
-            )
-        }
         return (
-            <Button className="nav-btn mr-2" variant="info">
-                <img src={userLoginIcon} alt="Icon" className="mr-3" />User Signed in</Button>
+            <Button className="nav-btn mr-2" variant="info" onClick={() => history.push({ pathname: '/auth/login' })}>
+                <img src={userLoginIcon} alt="Icon" className="mr-3" />Log in</Button>
         )
     }
 
@@ -57,9 +51,9 @@ const Topbar = (props) => {
                     <Button className="nav-btn mr-2 text-white">For Business</Button>{' '}
                     <Button className="nav-btn mr-2" variant="info">Redeem Your Gifti Global Card</Button>{' '}
                     {getProfile()}
-                        <Button className="nav-btn-link" variant="link">
-                            <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-                        </Button>
+                    <Button className="nav-btn-link" variant="link">
+                        <img src={shoppingCartIcon} alt="shoppingcart-icon" />
+                    </Button>
                 </div>
             </Form>
         </Navbar>

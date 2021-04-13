@@ -6,8 +6,12 @@ export const loginAPI = (userData) => {
 }
 
 export const signupAPI = (userData) => {
-    const url = `${API_URL}/accounts/registrations/signup`;
+    const url = `${API_URL}/users/`;
     return apiCall(url, 'POST', userData, null, false);
 }
 
 
+export const getUserByIdAPI = (id) => {
+    const url = `${API_URL}/users/${id}/`;
+    return apiCall(url, 'GET');
+}
