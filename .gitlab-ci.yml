@@ -21,6 +21,7 @@ deploy:giftiglobal_ui:
   stage: deploy
   script: 
     - echo $GIFTI_GLOBAL_BUCKET_NAME
+    - echo $GIFTI_GLOBAL_BUCKET_NAME
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
     - npm run build
