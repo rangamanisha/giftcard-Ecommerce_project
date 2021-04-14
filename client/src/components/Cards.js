@@ -6,6 +6,8 @@ import {
   Container,
   Row,
 } from "react-bootstrap";
+import * as Scroll from 'react-scroll';
+import {Link} from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
@@ -29,10 +31,11 @@ const Cards = () => {
           selection of +4,000 brands in +100 countries
         </p>
         <div>
-          <Button className="custom-button mr-sm-3">
+          <Link to="allGiftCard"><Button className="custom-button mr-sm-3" >
             Start Gifiting&nbsp;
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>
+          </Link>
           <Button variant="outline-secondary">How it works</Button>
         </div>
       </Col>

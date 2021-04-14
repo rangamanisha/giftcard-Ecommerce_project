@@ -19,13 +19,23 @@ import Ballooncard from "../assets/Ballooncard.png";
 import Bollywoodparks from "../assets/bollywoodparks.png";
 import Deliveroo from "../assets/deliveroo.png";
 import Mylist from "../assets/mylist.png";
+import {useDispatch, useSelector} from 'react-redux';
+import {categoryAction} from '../actions/category.actions';
+
 
 
 
 function AllGiftCard() {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(categoryAction({
+      currency:1,
+      program_id: 1
+    }))
+  }, [])
     return (
      
-<div>
+<div id="allGiftCard">
         <div>
           <p className="giftiallcard-text">All Gift Cards in the UAE</p>
           <p className="giftiallcard-text-a">Browse by Category</p>
