@@ -28,20 +28,25 @@ export const authSlice = createSlice({
         builder.addCase(loginAction.pending, (state, action) => {
             state.errors = null;
             state.user = null;
-
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
-            if(response.code === 200) {
-                state.user = response.data.user;
-                state.accessToken = response.data.user.access_token;
+            console.log('response ', response);
+            if(response.access && response.refresh) {
+                state.accessToken = response.access;
                 state.isAuthenticated = true;
-                localStorage.setItem('access_token', response.data.user.access_token);
+                localStorage.setItem('access_token', response.access);
             }
-            if(response.code === 400) {
-                state.user = null;
-                state.errors = [response.message]
-            }
+            // if(response.code === 200) {
+            //     state.user = response.data.user;
+            //     state.accessToken = response.data.user.access_token;
+            //     state.isAuthenticated = true;
+            //     localStorage.setItem('access_token', response.data.user.access_token);
+            // }
+            // if(response.code === 400) {
+            //     state.user = null;
+            //     state.errors = [response.message]
+            // }
         })
         .addCase(loginAction.rejected, (state, action) => {
             state.errors = [action.error.message || ''];
