@@ -15,8 +15,6 @@
 #  Python project build does a `docker build`. The deploy stage pushes the image to gitlab container registry.
 #
 
-version: 1.0
-
 build:giftiglobal_ui:
   image: node:14
   before_script:
