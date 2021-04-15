@@ -19,14 +19,22 @@ import Ballooncard from "../assets/Ballooncard.png";
 import Bollywoodparks from "../assets/bollywoodparks.png";
 import Deliveroo from "../assets/deliveroo.png";
 import Mylist from "../assets/mylist.png";
+import CategoryCard from '../components/categoryCard'
 import {useDispatch, useSelector} from 'react-redux';
 import {categoryAction} from '../actions/category.actions';
-
-
-
-
+import {getCategoryState} from '../reducer/category.reducer'
+import {get, map, isEmpty} from 'lodash'
+import Slider from 'react-slick'
+const sliderSettings = {
+  infinite: false,
+  slidesToShow: 8,
+  slidesToScroll: 8,
+  speed: 500
+}
 function AllGiftCard() {
   const dispatch = useDispatch();
+  const state = useSelector(getCategoryState)
+  const data = get(state, 'data')
   React.useEffect(() => {
     dispatch(categoryAction({
       currency:1,
@@ -41,14 +49,17 @@ function AllGiftCard() {
           <p className="giftiallcard-text-a">Browse by Category</p>
         </div>
 
-        <div className="mt-5 ">
-
-        <div className="row" style={{ marginLeft: "130px" }}>
+        <div className="mt-5" >
+          <div className="container">
+            {/*
+        <div className="row" style={{ marginLeft: "130px" }} >
           <div className="box">
             <a href="#/">
               Arrow
             </a>
           </div>
+            */}
+            <Slider {...sliderSettings}>
           <div className="box">
             <a href="#/">
               <img
@@ -60,8 +71,17 @@ function AllGiftCard() {
               <p className="products_icons">All Gift Cards</p>
             </a>
           </div>
-
-          <div className="box">
+          {
+            !isEmpty(data) && map(data, category => (
+              <>
+              {
+                category.active && 
+                <CategoryCard category={category} key={category.id}/>
+              }
+              </>
+            ))
+          }
+          {/* <div className="box">
             <a href="#/">
               <img
                 src={Flowersandgift}
@@ -144,10 +164,13 @@ function AllGiftCard() {
               <br />
               <p className="products_icons">Transportation</p>
             </a>
-          </div>
+          </div> */}
+          {/*
           <div className="box">
             <a href="#/">Arrow</a>
           </div>
+          */}
+          </Slider>
         </div>
      
 

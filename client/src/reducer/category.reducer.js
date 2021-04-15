@@ -1,11 +1,11 @@
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 import { categoryAction } from '../actions/category.actions';
-import _ from 'lodash';
+import {get} from 'lodash'
 
 export const CATEGORY_INIT_STATE = {
     message:"",
     errors:null,
-    category:null,
+    data:null,
     currency:"1",
     program_id:"1",
     image_size:null,
@@ -24,13 +24,13 @@ export const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(categoryAction.pending, (state,action)=>{
             state.errors = null;
-            state.category = null;
+            state.data = null;
         })
         .addCase(categoryAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
-               state.catagory = data;
+            const {data, code} = response;
+            if(200 == code){
+               state.data = get(data, 'categories');
             }
         })
         .addCase(categoryAction.rejected, (state, action) => {
