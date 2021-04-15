@@ -18,9 +18,6 @@ build:giftiglobal_ui:
   only:
     - merge_requests
 
-build:giftiglobal_backend:
-  image:
-
 deploy:giftiglobal_ui:
   image: node:14
   stage: deploy
