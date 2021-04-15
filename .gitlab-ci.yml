@@ -1,3 +1,22 @@
+#
+# @title:  'GiftiGlobal: CI File'
+#
+# @author:
+# - name: Sai Charan K
+#  affiliation: Merit Incentives
+#
+# @date: 2021-15-04
+#
+# @tags: [giftiglobal-ui, giftiglobal-server]
+#
+# @abstract: |
+#  There are 2 different stages, (build and deploy) for 2 projects. (React and Python)
+#  React project build does an `npm build`. The deploy stage deploys the content of the build folder to S3
+#  Python project build does a `docker build`. The deploy stage pushes the image to gitlab container registry.
+#
+
+version: 1.0
+
 build:giftiglobal_ui:
   image: node:14
   before_script:
@@ -59,7 +78,6 @@ deploy:giftiglobal_ui:
     paths:
       - node_modules/
   script: 
-    - echo $GIFTI_GLOBAL_BUCKET_NAME
     - echo $GIFTI_GLOBAL_BUCKET_NAME
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
