@@ -15,6 +15,11 @@ build:giftiglobal_ui:
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
     - npm run build
+  only:
+    - merge_requests
+
+build:giftiglobal_backend:
+  image:
 
 deploy:giftiglobal_ui:
   image: node:14
@@ -25,3 +30,5 @@ deploy:giftiglobal_ui:
     - cd client && npm install
     - npm run build
     - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
+  only:
+    - master
