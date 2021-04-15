@@ -20,6 +20,8 @@ build:giftiglobal_ui:
 build:giftiglobal_server:
   image: docker:19.03.12
   stage: build
+  services:
+    - docker:19.03.12-dind
   variables:
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: "/certs"
@@ -32,6 +34,8 @@ build:giftiglobal_server:
 deploy:giftiglobal_server:
   image: docker:19.03.12
   stage: build
+  services:
+    - docker:19.03.12-dind
   variables:
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: "/certs"
