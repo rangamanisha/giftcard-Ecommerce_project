@@ -1,0 +1,24 @@
+{% extends "mail_templated/base.tpl" %}
+
+{% block subject %}
+    Account Confirmation
+{% endblock %}
+
+
+{% block body %}
+    <center><h2><b>Welcome {{user.get_full_name }}!</b></h2></center><br>
+    <p> 
+        Your Gift Global account has been created and we are excited to have you!
+    </p>
+    <p>
+        GiftiGlobal is a leading online shop of gift cards and we have a wide range of gift cards for popular brands from 60+ countries.<br>
+        Our wide range of gift cards is ideal for birthdays, Christmas, weddings, anniversaries or any occasions.
+    </p>  
+    <p>
+        You are receiving this email as your email address is registered on giftiglobal.com
+    </p>
+{% endblock %}
+
+{% block html %}
+
+{% endblock %}

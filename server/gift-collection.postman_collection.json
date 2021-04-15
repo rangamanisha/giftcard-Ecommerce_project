@@ -1,0 +1,964 @@
+{
+	"info": {
+		"_postman_id": "1e0e3aa8-acbc-44d4-a19d-2f48e7c8bd92",
+		"name": "gift-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "newone@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin@1234566",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MTU1NjU2LCJqdGkiOiJkYzJmNTA1ZDQ1MzU0ZDhiYTY1MWU1Njk1YTk1ZmI5OCIsInVzZXJfaWQiOiI2YmU3ZjZjMi0zZTBiLTRmMDItOGNjNS02MmY0NjMyNTMzMWIifQ.91lMmD5baazSGezacxqj7MzTCskNIUKazL3hmZxMzgQ",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "token 58525588888888",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/categories/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTg4NzM5LCJqdGkiOiJmOWY2Yzc0NGU0ZDU0ZjRlYmQ4YjI3MGQxMGU3YzUyZiIsInVzZXJfaWQiOjF9.FcRf45im08NflglXb9F7AhOTRtfG1alekqoIc7RWxwc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "travel",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "travle",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/categories/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update category",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3ODY0OTg0LCJqdGkiOiI4YTExNTUyZTMxODI0NTY5YmNjYmFmNGQ2NmE3NWY5ZSIsInVzZXJfaWQiOjF9.2-ByccvqZroIdkOqAi1k56c1JF5f7UHbYrXl3aaSYDQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "kids",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "kids",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/categories/8933fff1-5632-4340-8243-db9512d3e96b/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"8933fff1-5632-4340-8243-db9512d3e96b",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete category",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3ODY1MzU5LCJqdGkiOiJlYjEwNjk3ZDc3ZDA0NGY5YWU0NjMxOTU0OWY0MDc2NSIsInVzZXJfaWQiOjF9.nYhSau-bgso3YwnIJ7M3R6djuf_hqXE6DXyc4R6-BgQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/categories/8933fff1-5632-4340-8243-db9512d3e96b/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"8933fff1-5632-4340-8243-db9512d3e96b",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list brands",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/brands/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get category by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/categories/61bb399a-175d-4979-a64a-3d7f58936720/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"61bb399a-175d-4979-a64a-3d7f58936720",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create brands",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "puma",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "puma",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/brands/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "brand by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/brands/5b57c5a9-7467-4f64-8cc8-131500c50597/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"5b57c5a9-7467-4f64-8cc8-131500c50597",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update brand",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "reebok",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "reebok",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/brands/5b57c5a9-7467-4f64-8cc8-131500c50597/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"5b57c5a9-7467-4f64-8cc8-131500c50597",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete brand by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/brands/5b57c5a9-7467-4f64-8cc8-131500c50597/?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"5b57c5a9-7467-4f64-8cc8-131500c50597",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "dell-laptop",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "laptop category",
+							"type": "text"
+						},
+						{
+							"key": "sku",
+							"value": "25415222",
+							"type": "text"
+						},
+						{
+							"key": "product_code",
+							"value": "1001",
+							"type": "text"
+						},
+						{
+							"key": "brand",
+							"value": "3bc34b91-2ada-4017-aff0-32045ade97c8",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "61bb399a-175d-4979-a64a-3d7f58936720",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/developer/Pictures/Screenshot from 2020-09-13 12-33-01.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/10c85ff1-42e8-44b0-bb5d-ba087f3c7613/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"10c85ff1-42e8-44b0-bb5d-ba087f3c7613",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/10c85ff1-42e8-44b0-bb5d-ba087f3c7613/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"10c85ff1-42e8-44b0-bb5d-ba087f3c7613",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3OTUxNzEzLCJqdGkiOiI3ZDM3ODQ3MDQ3Y2I0YjMzODllNjBhMzA5MmYwMWE2ZCIsInVzZXJfaWQiOjF9.1LBfSKUQjiyRcVr4GGlSe3oUksyswUwQKJ2P4gbfXkg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "newone",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "newone",
+							"type": "text"
+						},
+						{
+							"key": "sku",
+							"value": "25555",
+							"type": "text"
+						},
+						{
+							"key": "product_code ",
+							"value": "252",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/developer/Pictures/Screenshot from 2020-09-13 12-33-01.png"
+						},
+						{
+							"key": "brand",
+							"value": "3bc34b91-2ada-4017-aff0-32045ade97c8",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "61bb399a-175d-4979-a64a-3d7f58936720",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/69ca113e-a372-44c2-9f07-6c6fb17b6266/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"69ca113e-a372-44c2-9f07-6c6fb17b6266",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "myuser",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "newone",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "newone@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin@12345",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "admin@12345",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "english",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "ind",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxODkxMDk4OSwianRpIjoiZTU3YjA4MjRlNjRhNDhmNTk0Y2FmODNhODY1YzJhMWIiLCJ1c2VyX2lkIjoiNmJlN2Y2YzItM2UwYi00ZjAyLThjYzUtNjJmNDYzMjUzMzFiIn0.JPV6_CEEDj05XP825aeEzJJ38Ofimk6zVMDDN5JE648",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MjIxNzM3LCJqdGkiOiJlNGU3NGI1ZmMyMTE0NzI1YjYyNTFkYzY0MmNjYTU1YSIsInVzZXJfaWQiOiJjZTI4NWE5ZC1lMThjLTQyNWUtYTJiZi05MGM3MTJhNmQ5NTkifQ.skxcBHFv8RKIK3-rjZp6eWxv2FGZMM_C4G_u_DfLn2Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/users/d73771a7-3bc9-4925-b1d5-c607eed46d5e/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"d73771a7-3bc9-4925-b1d5-c607eed46d5e",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MjIxNzM3LCJqdGkiOiJlNGU3NGI1ZmMyMTE0NzI1YjYyNTFkYzY0MmNjYTU1YSIsInVzZXJfaWQiOiJjZTI4NWE5ZC1lMThjLTQyNWUtYTJiZi05MGM3MTJhNmQ5NTkifQ.skxcBHFv8RKIK3-rjZp6eWxv2FGZMM_C4G_u_DfLn2Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "qqq",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "ankiteee",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "englistw",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "date_of_birth",
+							"value": "1993-07-07",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/users/ce285a9d-e18c-425e-a2bf-90c712a6d959/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"ce285a9d-e18c-425e-a2bf-90c712a6d959",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MjIxNzM3LCJqdGkiOiJlNGU3NGI1ZmMyMTE0NzI1YjYyNTFkYzY0MmNjYTU1YSIsInVzZXJfaWQiOiJjZTI4NWE5ZC1lMThjLTQyNWUtYTJiZi05MGM3MTJhNmQ5NTkifQ.skxcBHFv8RKIK3-rjZp6eWxv2FGZMM_C4G_u_DfLn2Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/users/d73771a7-3bc9-4925-b1d5-c607eed46d5e/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"d73771a7-3bc9-4925-b1d5-c607eed46d5e",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change user password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4MzkzMDI2LCJqdGkiOiIyOWRjZjhmN2M3ZGM0MDhhOTZlNmEyNWFkMTY1ZDFmYSIsInVzZXJfaWQiOiIzM2Q4M2U4Yi00YjNjLTRiZGYtYTA2Ny1jOWMxNjNhNGY2NDYifQ.EZy7l7RPLGtdCL4JiVTMV2OwiTlckld2eVWTqCxFyUA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "confirm_password",
+							"value": "admin@1234566",
+							"type": "text"
+						},
+						{
+							"key": "new_password",
+							"value": "admin@1234566",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin@12345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/reset-user-password/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"reset-user-password",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send reset password otp to email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "newone@mailinator.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/send-forget-passwod-otp/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"send-forget-passwod-otp",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Reset forget password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "confirm_password",
+							"value": "admin@2020",
+							"type": "text"
+						},
+						{
+							"key": "new_password",
+							"value": "admin@2020",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "newone@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "otp",
+							"value": "646027",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/reset-forget-password/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"reset-forget-password",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

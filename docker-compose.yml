@@ -5,25 +5,12 @@ services:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8000:8000
     volumes:
       - ./server:/app/server
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     environment:
       PROJECT_NAME: 'User Server'
-      WAIT_HOSTS: db:27017
-    depends_on:
-      - db
-  products-server:
-    build:
-      context: ./products-server
-      dockerfile: Dockerfile
-    ports:
-      - 8001:8001
-    volumes:
-      - ./products-server:/app/product-server
-    environment:
-      PROJECT_NAME: 'Products Server'
-      WAIT_HOSTS: db:27017
     depends_on:
       - db
   db:
