@@ -31,7 +31,7 @@ const Cards = () => {
           selection of +4,000 brands in +100 countries
         </p>
         <div>
-          <Link to="allGiftCard"><Button className="custom-button mr-sm-3" >
+          <Link to="allGiftCard" smooth={true} offset={50} duration={500}><Button className="custom-button mr-sm-3" >
             Start Gifiting&nbsp;
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>
