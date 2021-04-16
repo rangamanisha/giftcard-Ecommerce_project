@@ -8,5 +8,6 @@ ssh -o StrictHostKeyChecking=no ec2-user@$EC2_PUBLIC_IP_ADDRESS  << 'ENDSSH'
   docker system prune -f
   docker image rm $IMAGE
   docker pull $IMAGE:latest
+  docker tag $IMAGE:latest giftiglobal_server_1:latest
   docker-compose up --no-build -d
 ENDSSH
