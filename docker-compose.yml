@@ -1,13 +1,9 @@
 version: "3.9"
 services:
   server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    image: registry.gitlab.com/merit-team/my-global-giftcards/giftiglobal
     ports:
       - 8000:8000
-    volumes:
-      - ./server:/app/server
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     environment:
       PROJECT_NAME: 'User Server'
