@@ -1,3 +1,5 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -6,10 +8,29 @@ import Flowersandgift from "../assets/flowersandgift.svg";
 import Beauty from "../assets/Beauty.svg";
 import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
+import {featureBrandsAction} from '../actions/brands.action';
 
 const AllFeaturedCards = () => {
+  const dispatch = useDispatch();
+  
+  React.useEffect(() => {
+    dispatch(featureBrandsAction({
+      currency: 33,
+      program_id: 1
+    }))
+  }, [])
+
   return (
-    <>
+    <div>
+    <div className="cardgifiti-card">
+      <p className="giftiallcard-text">Featured Cards</p>
+      <p className="allgiftcard-text">
+        Buy Most Popular eGift Cards in UAE
+        <br />
+        Personalized gift vouchers delivered online & redeemable at popular
+        Brands
+      </p>
+      <div>
       <div className="mt-5 ">
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
@@ -113,8 +134,9 @@ const AllFeaturedCards = () => {
           <div className="box">
             <a href="#/">arrow</a>
           </div>
+          </div>
         </div>
-        <div className="cardgifiti-card">
+        {/* <div className="cardgifiti-card">
           <p className="giftiallcard-text">Featured Cards</p>
           <p className="allgiftcard-text">
             Buy Most Popular eGift Cards in UAE
@@ -127,8 +149,11 @@ const AllFeaturedCards = () => {
             <div className="mr-sm-5 row"></div>
           </div>
         </div>
-      </div>
-    </>
+      </div> */}
+    
+  </div>
+  </div>
+  </div>
   );
 };
 

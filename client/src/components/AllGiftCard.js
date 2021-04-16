@@ -22,6 +22,7 @@ import Mylist from "../assets/mylist.png";
 import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
+// import { giftcardUnitAction } from '../actions/category.actions'
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty } from 'lodash'
 function AllGiftCard() {

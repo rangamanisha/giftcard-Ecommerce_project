@@ -1,11 +1,13 @@
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 import { categoryAction } from '../actions/category.actions';
+import { giftcardUnitAction } from '../actions/category.actions';
 import {get} from 'lodash'
 
 export const CATEGORY_INIT_STATE = {
     message:"",
     errors:null,
     data:null,
+    giftcardunits :null,
     currency:"1",
     program_id:"1",
     image_size:null,
@@ -35,6 +37,20 @@ export const categorySlice = createSlice({
         })
         .addCase(categoryAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
+        })
+        .addCase(giftcardUnitAction.pending, (state,action)=>{
+            state.errors = null;
+            state.giftcardunits = null;
+        })
+        .addCase(giftcardUnitAction.fulfilled, (state, action) => {
+            const response = action.payload;
+            const {data, code} = response;
+            if(200 == code){
+               state.giftcardunits = get(data, 'giftcard_units');
+            }
+        })
+        .addCase(giftcardUnitAction.rejected, (state, action) => {
+            state.giftcardunits = [action.error.message || '']
         })
         
     }
