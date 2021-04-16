@@ -28,24 +28,30 @@ function AllGiftCard() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState)
   const data = get(state, 'data')
+  const [activeCategory, setActiveCategory] = React.useState()
   React.useEffect(() => {
     dispatch(categoryAction({
       currency: 1,
       program_id: 1
     }))
   }, [])
+  const getCardsWithCategory = (category) => {
+    const {id, name} = category
+    //dispatch action to get cars by category
+    setActiveCategory(id)
+  }
   return (
 
-    <div id="allGiftCard">
+    <div class="allGiftCard">
       <div>
         <p className="giftiallcard-text">All Gift Cards in the UAE</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
 
       <div className="mt-5" >
-        <div className="row" style={{ marginLeft: "130px" }} >
+        <div className="scroll"  >
           
-          <div className="box">
+          <div className="box" >
             <a href="#/">
               <img
                 src={Allmenu}
@@ -57,23 +63,26 @@ function AllGiftCard() {
             </a>
           </div>
           {
-            !isEmpty(data) && map(data, category => (
+            !isEmpty(data) && map(data, (category, i) => (
               <>
                 {
                   category.active &&
-                  <CategoryCard category={category} key={category.id} />
+                  <button class="transparentButton" onClick={() => getCardsWithCategory(category)}>
+                  <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false}/>
+                  </button>
                 }
               </>
             ))
           }
+      
       </div>
 
 
-      <div className="gificards mt-5 row">
-        <img src={Appleitunes} className="mr-sm-5 imgcards" alt="Appleitunes" />
-        <img src={Asec} className="mr-sm-5 imgcards" alt="Asec" />
-        <img src={Ace} className="mr-sm-5 imgcards" alt="Ace" />
-        <img src={Careem} className="imgcards" alt="Careem" />
+      <div className="gificards mt-5 ">
+        <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
+        <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
+        <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
+        <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
         <img src={Carrefour} className="mr-sm-5 imgcards mt-5" alt="Carrefour" />
         <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
         <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
