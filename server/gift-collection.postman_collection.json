@@ -15,12 +15,12 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "newone@mailinator.com",
+							"value": "new2021@mailinator.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "admin@1234566",
+							"value": "admin@20201",
 							"type": "text"
 						}
 					]
@@ -646,7 +646,7 @@
 						},
 						{
 							"key": "email",
-							"value": "newone@mailinator.com",
+							"value": "new2021@mailinator.com",
 							"type": "text"
 						},
 						{
@@ -667,6 +667,11 @@
 						{
 							"key": "country",
 							"value": "ind",
+							"type": "text"
+						},
+						{
+							"key": "is_superuser",
+							"value": "true",
 							"type": "text"
 						}
 					]
@@ -891,13 +896,13 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "newone@mailinator.com",
+							"value": "new2021@mailinator.com",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/send-forget-passwod-otp/",
+					"raw": "http://localhost:8000/api/v1/send-forget-passwod-email/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -906,7 +911,7 @@
 					"path": [
 						"api",
 						"v1",
-						"send-forget-passwod-otp",
+						"send-forget-passwod-email",
 						""
 					]
 				}
@@ -923,22 +928,17 @@
 					"formdata": [
 						{
 							"key": "confirm_password",
-							"value": "admin@2020",
+							"value": "admin@20201",
 							"type": "text"
 						},
 						{
 							"key": "new_password",
-							"value": "admin@2020",
+							"value": "admin@20201",
 							"type": "text"
 						},
 						{
-							"key": "email",
-							"value": "newone@mailinator.com",
-							"type": "text"
-						},
-						{
-							"key": "otp",
-							"value": "646027",
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4NTA4MTc5LCJqdGkiOiJiYTYxMGNkNmFjMWE0ZTJjOTcxZmI1NjgzNjk1ZjVmNSIsInVzZXJfaWQiOiIxOTRkNWIzOC0yNGZmLTRmNDEtYTY0NS1hYjNjMjJiMDI2YTAifQ.UAie1CnLHIy4GyMYS2A3cN5yx3fNamVIFZdc8TJvNmo",
 							"type": "text"
 						}
 					]
@@ -955,6 +955,41 @@
 						"v1",
 						"reset-forget-password",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET verified user  account",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4NDA4MDY5LCJqdGkiOiI5MWQzMDQ4Njg1ZDA0NmE4OWI2YTkyOWE4MWMzYTJlOSIsInVzZXJfaWQiOiI0NzI2OTcxMC1hMTI2LTQzODYtYWJmNy01ZGRlMTNmYzVmYzYifQ.dAAzFvJOIM_pAlm6ThlGDS6OWqoEJFe6dS4NAZMXtFQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/activate-user-account/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4NTA4MDcwLCJqdGkiOiIyYWRlN2I4MzA1NWU0OTc5OGM1NDQ3MDQ4OWZlZWQ4NSIsInVzZXJfaWQiOiIxOTRkNWIzOC0yNGZmLTRmNDEtYTY0NS1hYjNjMjJiMDI2YTAifQ.g23wFNvk4TobEmP7fvmwVYJ5PcDV0_oQ15l_QBL1wR4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"activate-user-account",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE4NTA4MDcwLCJqdGkiOiIyYWRlN2I4MzA1NWU0OTc5OGM1NDQ3MDQ4OWZlZWQ4NSIsInVzZXJfaWQiOiIxOTRkNWIzOC0yNGZmLTRmNDEtYTY0NS1hYjNjMjJiMDI2YTAifQ.g23wFNvk4TobEmP7fvmwVYJ5PcDV0_oQ15l_QBL1wR4"
+						}
 					]
 				}
 			},

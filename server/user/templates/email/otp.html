@@ -8,14 +8,9 @@
 {% block body %}
     <center><h2><b>Hello, {{user.get_full_name }}!</b></h2></center><br>
     <center><p> 
-        The account under {{user.email }} has failed to login 3 times. We have put their account in a state<br>
-        to enter an OTP in next login. If successfull, we will remove this state<br>
-        and allow them to login without this extra verification step.<br>
-        
+        A request has been received to change the password for the Gifti Global Account.
     </p></center>
-    
-    <center><h2><b>{{ code }}</b></h2></center>
-
+        <a href="{{link}}?token={{token}}">RESET MY PASSWORD</a>
     <center>
         <p>
             You are receiving this email as your email address is registered on giftiglobal.com

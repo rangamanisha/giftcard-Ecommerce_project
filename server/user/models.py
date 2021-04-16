@@ -9,7 +9,7 @@ from .managers import UserManager
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import User
-
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class AbstructBaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -88,6 +88,12 @@ class UserForGetPassword(AbstructTimeStampModel):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         from mail_templated import EmailMessage
+        refresh = RefreshToken.for_user(instance)
+
         message = EmailMessage('email/welcome.html', 
-        {'user': instance}, 'test@ducduc.com',to=[instance.email])
+        {
+            'user': instance, 
+            'token': str(refresh.access_token), 
+            'url' : 'http://localhost:3000/activate-user-account/'
+        }, '',to=[instance.email])
         message.send()
