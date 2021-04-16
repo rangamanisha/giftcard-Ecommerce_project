@@ -1,8 +1,10 @@
+import jwt
 from rest_framework import serializers
 
 from product.models import Product
 from brand.models import Brand
 from category.models import Category
+from django.conf import settings
 
 from django.contrib.auth import get_user_model
 from user.models import UserForGetPassword
@@ -62,6 +64,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         validated_data.pop('confirm_password')
         user = User.objects.create(**validated_data)
         user.set_password(user.password)
+        user.is_active = False
         user.save()
         return user
 
@@ -96,7 +99,7 @@ class UserRestPasswordSerializer(serializers.Serializer):
         return user
 
 
-class SendOTPForForgetPasswordSerializer(serializers.Serializer):
+class SendEmailForForgetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
     def validate_email(self, data):
@@ -112,24 +115,26 @@ class UserForgetPasswordSerializer(serializers.Serializer):
         max_length=20, min_length=8, required=True, write_only = True,)
     new_password = serializers.CharField(style={'input_type': 'password'},
         max_length=20, min_length=8, required=True, write_only = True,)
-    email = serializers.EmailField(required=True)
-    otp = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
     
     def validate(self, data):
-        user_otp = UserForGetPassword.objects.filter(
-                user__email=data['email'],
-                code=data['otp']
-            ).exists()
-        
-        if not user_otp:
-            raise serializers.ValidationError("OTP doesn't valid")
+        if data.get('token'):
+            try:
+                token = jwt.decode(data.get('token'), settings.SECRET_KEY, algorithms=["HS256"])
+            except Exception as e:
+                raise serializers.ValidationError("token is expired or invalided")
 
         if data.get('confirm_password') != data.get('new_password'):
             raise serializers.ValidationError("Those passwords don't match.")
         return data
 
     def create(self, validated_data):
-        user = User.objects.get(email=validated_data['email'])
+        try:
+            token = jwt.decode(validated_data.pop('token'), settings.SECRET_KEY, algorithms=["HS256"])
+        except Exception as e:
+            pass
+
+        user = User.objects.get(id=token['user_id'])
         user.set_password(validated_data.pop('new_password'))
         user.save()
         return user
