@@ -24,13 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty } from 'lodash'
-import Slider from 'react-slick'
-const sliderSettings = {
-  infinite: false,
-  slidesToShow: 8,
-  slidesToScroll: 8,
-  speed: 500
-}
 function AllGiftCard() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState)
@@ -51,6 +44,7 @@ function AllGiftCard() {
 
       <div className="mt-5" >
         <div className="row" style={{ marginLeft: "130px" }} >
+          
           <div className="box">
             <a href="#/">
               <img
