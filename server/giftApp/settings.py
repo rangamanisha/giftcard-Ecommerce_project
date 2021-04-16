@@ -148,7 +148,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'giftiglobal',
         'CLIENT': {
-            'host': 'db',
+            'host': 'localhost',
             'port': 27017,
             'username': 'root',
             'password': 'root',
