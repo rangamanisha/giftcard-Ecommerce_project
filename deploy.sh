@@ -9,5 +9,5 @@ ssh -o StrictHostKeyChecking=no ec2-user@$EC2_PUBLIC_IP_ADDRESS  << 'ENDSSH'
   docker system prune -f
   docker image rm $IMAGE
   docker pull $IMAGE:latest
-  docker run --name giftiglobal -d -p 8000:8000 $IMAGE:latest
+  docker run --name giftiglobal --network="host" -d -p 8000:8000 $IMAGE:latest
 ENDSSH
