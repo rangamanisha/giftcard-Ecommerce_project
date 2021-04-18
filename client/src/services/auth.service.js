@@ -10,8 +10,14 @@ export const signupAPI = (userData) => {
     return apiCall(url, 'POST', userData, null, false);
 }
 
-
-export const getUserByIdAPI = (id) => {
-    const url = `${API_URL}/users/${id}/`;
-    return apiCall(url, 'GET');
+export const resetpasswordAPI = (userData) => {
+    const url = `${API_URL}/reset-forget-password/`;
+    return apiCall(url, 'POST', userData, null, false);
 }
+
+
+export const forgotpasswordAPI = (userData) => {
+    const url = `${API_URL}/send-forget-passwod-email/`;
+    return apiCall(url, 'POST', userData, null, false);
+}
+
