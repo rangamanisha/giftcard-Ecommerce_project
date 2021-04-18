@@ -52,6 +52,7 @@ deploy:giftiglobal_ui:
     - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
   only:
     - master
+    - development
 
 build:giftiglobal_server:
   image: docker:19.03.12
@@ -90,3 +91,4 @@ deploy:giftiglobal_server:
     - bash ./deploy.sh
   only:
    - master
+   - development
