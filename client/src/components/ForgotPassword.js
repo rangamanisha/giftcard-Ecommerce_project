@@ -30,7 +30,6 @@ const ForgotPassword = () => {
       });
 
       useEffect(() => {
-        debugger;
         if (state.success) {
           history.push({ pathname: '/' })
         }

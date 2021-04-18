@@ -44,7 +44,6 @@ const Signup = () => {
 
 
   useEffect(() => {
-    debugger;
     if (state.status) {
       history.push({ pathname: '/' })
     }

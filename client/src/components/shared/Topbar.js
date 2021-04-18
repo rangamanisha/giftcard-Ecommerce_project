@@ -20,7 +20,6 @@ const Topbar = (props) => {
     const history = useHistory();
          
     const clearsession = () => {
-        debugger;
         localStorage.clear();
         sessionStorage.clear();
         window.location.reload();

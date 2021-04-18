@@ -43,7 +43,6 @@ const Login = () => {
   });
 
   useEffect(() => {
-    debugger;
     if (state.isAuthenticated) {
       history.push({ pathname: '/' })
     }
