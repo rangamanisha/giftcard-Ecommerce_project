@@ -1,7 +1,9 @@
 $theme-colors: (
   primary: #3F7AEC,
-  info: #00B2AE
+  info: #00B2AE,
    );
+
+  
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -475,9 +477,17 @@ font-family: Cairo-Bold;
   opacity: 1;
   border-radius: 10px;
   font-family: Cairo-semibold;
-  padding: 0.6rem 1rem !important;
+  padding: 
+  0.6rem 1rem !important;
 }
 
+.nav-login {
+  opacity: 1;
+  border-radius: 10px;
+  margin-top: 4px;
+  font-family: Cairo-semibold;
+  height: 46px;
+}
 
 .card-text-align{
   padding-top: 70px;
@@ -515,5 +525,14 @@ font-family: Cairo-Bold;
 
 .startgiftingimg{
   padding: 0px 65px;
+}
+
+.alert-info {
+  color: #000000;
+  background-color: #EEEEF2;
+  border-color: #EEEEF2;
+  font-family: Cairo-semibold;
+  text-align: center;
+  font-size: larger;
 }
 

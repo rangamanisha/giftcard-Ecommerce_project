@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,9 +9,13 @@ import Googleicon from '../assets/Google-icon.svg';
 import Facebookicon from '../assets/Facebook-icon.svg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Alert from 'react-bootstrap/Alert';
 import { getAuthState } from '../reducer/auth.reducer'
 import { loginAction } from '../actions/auth.actions';
 import { useHistory } from 'react-router';
+import Fade from 'react-bootstrap/Fade';
+import { Link } from 'react-router-dom';
+
 
 
 const Login = () => {
@@ -19,6 +23,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
+  
+  const [isValid, setIsValid] = useState(false);
+  const [visible, setVisible] = useState(true);
+
 
   const formik = useFormik({
     initialValues: {
@@ -34,17 +42,27 @@ const Login = () => {
     }
   });
 
-
   useEffect(() => {
     if (state.isAuthenticated) {
       history.push({ pathname: '/' })
+    }
+    else{
+      setIsValid('no');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },1000000)
     }
   }, [state.isAuthenticated, history])
 
 
   return (
     <>
-
+    <div>
+     {isValid === "yes"
+      ? <Fade><Alert variant="danger" text="center" transition={visible}>test.</Alert></Fade>
+      : <></>
+    }
+    </div>
       <div className="login-card mx-auto">
         <p className="login-text text-center h3 pt-5">Login to your Account</p>
         <p className="login-sub-text text-center mt-0">
@@ -53,7 +71,7 @@ const Login = () => {
 
         <Form onSubmit={formik.handleSubmit} className="user">
           <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="email" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange} className="icons_fields" name="email" />
+            <Form.Control size="md" type="email" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange} className="icons_fields" name="email" />
             <img
               src={Usericon}
               alt="Icon"
@@ -65,7 +83,7 @@ const Login = () => {
 
           <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
 
-            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={formik.handleChange} name="password" />
+            <Form.Control size="md" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={formik.handleChange} name="password" />
             <img
               src={Passwordicon}
               alt="Icon"
@@ -83,7 +101,7 @@ const Login = () => {
               />
             </Form.Group>
             <Form.Group style={{ marginLeft: "162px" }}>
-              <span>Forgot me?</span>
+              <Link className="link-color" to="/forgotpassword">Forgot me?</Link>
             </Form.Group>
           </div>
           {state.errors && state.errors.length ? (
@@ -95,11 +113,11 @@ const Login = () => {
             size="lg"
             type="Submit"
           >
-            Login to Continue
+             Login to Continue
           </Button>
 
 
-          <p className="login-bottom-text text-center mt-4">Don’t have an account ? Sign up</p>
+          <p className="login-bottom-text text-center mt-4">Don’t have an account ? <Link to="/auth/signup">Sign up</Link></p>
 
           <table width="100%">
             <tbody>
@@ -126,7 +144,7 @@ const Login = () => {
 
           <div className="row mt-4">
             <Button
-              variant="outline-secondary"
+              variant="outline-light"
               className="google-button mr-sm-3"
             >
               <img
@@ -137,7 +155,7 @@ const Login = () => {
               />
             </Button>
             <Button
-              variant="outline-secondary"
+              variant="outline-light"
               className="facebook-button mr-sm-3"
             >
               {" "}
