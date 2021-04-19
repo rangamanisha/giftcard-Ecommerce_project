@@ -1,6 +1,6 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { AUTH_FEATURE_KEY, authReducer } from "./auth.reducer";
-import { topbarReducer, TOPBAR_FEATURE_KEY } from "./topbar.reducer";
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { AUTH_FEATURE_KEY, authReducer } from './auth.reducer';
+import { topbarReducer, TOPBAR_FEATURE_KEY } from './topbar.reducer';
 
 const store = configureStore({
   reducer: {
@@ -9,7 +9,7 @@ const store = configureStore({
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-  preloadedState: {},
+  preloadedState: {}
 });
 
 export default store;
