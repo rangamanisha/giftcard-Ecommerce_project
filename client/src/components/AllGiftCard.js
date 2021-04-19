@@ -7,6 +7,15 @@ import Flowersandgift from "../assets/flowersandgift.svg";
 import Beauty from "../assets/Beauty.svg";
 import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
 import Appleitunes from "../assets/Appleitunes.png";
 import Carrefour from "../assets/Carrefour.png";
 import Careem from "../assets/Careem.png";
@@ -29,6 +38,7 @@ import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../ac
 import {getBrandsState} from '../reducer/brands.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
 import {getGiftcardsState} from '../reducer/giftCards.reducer'
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 function AllGiftCard() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState)
@@ -81,9 +91,35 @@ function AllGiftCard() {
         <p className="giftiallcard-text">All Gift Cards in the UAE</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
+      <div className="slideclass" >
+      <Swiper
+      spaceBetween={1}
+      slidesPerView={10}
+      navigation
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+                {
+            !isEmpty(categories) && map(categories, (category, i) => (
+              <>
+                {
+                   <SwiperSlide>
+                  <button class="transparentButton" onClick={() => getCardsWithCategory(category)}>
+                  <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false}/>
+                  </button>
+                  </SwiperSlide>
+                }
+              </>
+            ))
+          }
+    
+ 
+    </Swiper>
+    </div>
 
-      <div className="mt-5" >
-        <div className="scroll"  >
+
+   
+        {/* <div className="scroll"  >
           
           <div className="box" >
             <a href="#/">
@@ -96,20 +132,8 @@ function AllGiftCard() {
               <p className="products_icons">All Gift Cards</p>
             </a>
           </div>
-          {
-            !isEmpty(categories) && map(categories, (category, i) => (
-              <>
-                {
-                  category.active &&
-                  <button class="transparentButton" onClick={() => getCardsWithCategory(category)}>
-                  <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false}/>
-                  </button>
-                }
-              </>
-            ))
-          }
-      
-      </div>
+
+      </div> */}
 
 
       <div className="gificards mt-5 ">
@@ -141,8 +165,9 @@ function AllGiftCard() {
         <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
       </div>
+      <div class="text-center"><button type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
     </div>
-</div >
+
     )
 }
 

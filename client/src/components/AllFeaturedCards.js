@@ -10,8 +10,8 @@ import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
 import {featureBrandsAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
-import React, { useDebugValue } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import React, { useDebugValue } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import {get} from 'lodash'
 
 
