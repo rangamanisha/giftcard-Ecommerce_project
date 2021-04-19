@@ -27,7 +27,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginAction.pending, (state, action) => {
+      .addCase(loginAction.pending, (state) => {
         state.errors = null;
         state.user = null;
       })
@@ -51,7 +51,7 @@ export const authSlice = createSlice({
       .addCase(loginAction.rejected, (state, action) => {
         state.errors = [action.error.message || ''];
       })
-      .addCase(signupAction.pending, (state, action) => {
+      .addCase(signupAction.pending, (state) => {
         state.errors = null;
         state.signupSuccess = false;
       })

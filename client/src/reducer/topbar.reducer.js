@@ -16,7 +16,7 @@ export const topbarSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCountriesListAction.pending, (state, action) => {
+      .addCase(getCountriesListAction.pending, (state) => {
         state.countries = [];
         state.loading = true;
       })
@@ -29,7 +29,7 @@ export const topbarSlice = createSlice({
           state.countries = [];
         }
       })
-      .addCase(getCountriesListAction.rejected, (state, action) => {
+      .addCase(getCountriesListAction.rejected, (state) => {
         state.countries = [];
         state.loading = false;
       });
