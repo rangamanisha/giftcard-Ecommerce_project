@@ -28,6 +28,7 @@ import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../ac
 import {getBrandsState} from '../reducer/brands.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
 import {getGiftcardsState} from '../reducer/giftCards.reducer'
+import {getTopBarState} from '../reducer/topbar.reducer'
 
 
 import Pagination from 'react-js-pagination';
@@ -35,6 +36,7 @@ function AllGiftCard() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
+  const topbarState = useSelector(getTopBarState)
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
@@ -107,7 +109,7 @@ function AllGiftCard() {
 
     <div class="allGiftCard">
       <div>
-        <p className="giftiallcard-text">All Gift Cards in the UAE</p>
+        <p className="giftiallcard-text">{`All Gift Cards in the ${topbarState.selectedCountry}`}</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
 

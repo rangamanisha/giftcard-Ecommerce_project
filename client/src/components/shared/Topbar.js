@@ -7,12 +7,12 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useHistory } from 'react-router-dom';
+import {isEmpty} from 'lodash';
 
 import './Topbar.scss';
 
 const Topbar = (props) => {
     const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
-
     const history = useHistory();
 
     const getProfile = () => {
@@ -33,7 +33,7 @@ const Topbar = (props) => {
                 <Nav className="pl-3">
                     <span className="location"><small>I am gifting to</small></span>
                     <img src={locationIcon} alt="Icon" />
-                    <NavDropdown title={country || countriesList[0]} id="basic-nav-dropdown" onClick={(val) => onCountrySelected(val)}>
+                    <NavDropdown  title={isEmpty(country) ?  countriesList[0] : country} id="basic-nav-dropdown" onClick={(val) => onCountrySelected(val)}>
                         {getCountriesDD()}
                     </NavDropdown>
                 </Nav>

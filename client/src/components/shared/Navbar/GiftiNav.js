@@ -36,7 +36,7 @@ const GiftiNav = () => {
             variant={variant}
             logoIcon={Logo}
             locationIcon={Location}
-            country={selectedCountry}
+            country={topbarState.selectedCountry}
             countriesList={countries}
             searchIcon={Search}
             userLoginIcon={UserLogin}
