@@ -6,7 +6,7 @@ import {
   Container,
   Row,
 } from "react-bootstrap";
-import * as Scroll from 'react-scroll';
+import {useHistory } from 'react-router-dom'
 import {Link} from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,7 @@ import Giftcard from "../assets/gift-card.svg";
 
 
 const Cards = () => {
+  const history = useHistory();
   return (
     <Container fluid>
     <React.Fragment>
@@ -31,11 +32,10 @@ const Cards = () => {
           selection of +4,000 brands in +100 countries
         </p>
         <div>
-          <Link to="allGiftCard" smooth={true} offset={50} duration={500}><Button className="custom-button mr-sm-3" >
+          <Button className="custom-button mr-sm-3" onClick={() => history.push('allfeaturedcards')}>
             Start Gifiting&nbsp;
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>
-          </Link>
           <Button variant="outline-secondary">How it works</Button>
         </div>
       </Col>

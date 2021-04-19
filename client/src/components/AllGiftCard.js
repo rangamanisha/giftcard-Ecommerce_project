@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -23,11 +23,14 @@ import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
-import { get, map, isEmpty } from 'lodash';
+import { get, map, isEmpty, filter } from 'lodash';
 import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
 import {getGiftcardsState} from '../reducer/giftCards.reducer'
+
+
+import Pagination from 'react-js-pagination';
 function AllGiftCard() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState)
@@ -35,6 +38,7 @@ function AllGiftCard() {
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
+  
   const [activeCategory, setActiveCategory] = React.useState()
   React.useEffect(() => {
     dispatch(categoryAction({
@@ -53,7 +57,7 @@ function AllGiftCard() {
 
   }, [])
   React.useEffect(() => {
-    console.log("hello");
+
     dispatch(featureBrandsAction({ 
       currency: 1,
       program_id:1
@@ -72,6 +76,32 @@ function AllGiftCard() {
     }))
     setActiveCategory(id)
   }
+    
+    const allGifts = 
+    map(brandsWithCategory, (category, i) =>
+        <>  {
+    map(get(category, 'brands'), (brand, i)  => (
+      <>
+        <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+      </>
+    ))
+    }
+    </>
+         
+         )
+  const giftsPerPage = 3;
+  const [activePage, setCurrentPage] = useState(1);
+  const indexOfLastGift = activePage * giftsPerPage;
+  const indexOfFirstGift = indexOfLastGift - giftsPerPage;
+  const currentGiftCards = allGifts.slice(indexOfFirstGift, indexOfLastGift);
+  const renderGifts = currentGiftCards.map((allGifts, index) => {
+    return <li key ={index}>{allGifts}</li>
+  })
+  const handlePageChange = (pageNumber) => {
+    console.log(`Active page ${pageNumber}`)
+    setCurrentPage(pageNumber)
+
+  };
 
   return (
 
@@ -113,7 +143,26 @@ function AllGiftCard() {
 
       <div className="gificards mt-5 ">
         {
-          map(brandsWithCategory, (category, i) =>(
+          
+          map(brandsWithCategory, (category, i) =>
+          {
+
+            if(!isEmpty(activeCategory) ){
+             let cat =  filter(brandsWithCategory, {category_id:activeCategory})
+             console.log(cat)
+
+             
+              return (
+                
+                map(get(cat, 'brands'), (brand, i)  => (
+                  <>
+                    <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+                  </>
+                ))
+              )
+
+            }
+            else return (
             <>{
             map(get(category, 'brands'), (brand, i)  => (
               <>
@@ -122,8 +171,13 @@ function AllGiftCard() {
             ))
           }
             </>
+        
 
-          ))
+          )
+          
+         
+        
+        })
         }
 
         
@@ -139,6 +193,22 @@ function AllGiftCard() {
         <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
         <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
+      <div>
+        <div className="result">
+          {renderGifts}
+
+        </div>
+        <div className="Pagination">
+          <Pagination 
+          activePage={activePage}
+          itemsCountPerPage={3}
+          totalItemsCount={allGifts.length}
+          pageRangeDisplayed={3}
+          onChange={handlePageChange}
+
+          />
+        </div>
+      </div>
       </div>
     </div>
 </div >

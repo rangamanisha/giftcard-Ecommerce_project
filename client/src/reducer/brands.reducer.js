@@ -54,7 +54,7 @@ export const brandsSlice = createSlice({
         })
         .addCase(featureBrandsAction.pending, (state, action) => {
             state.errors = null;
-            state.featured_brands = null;
+            state.brands = null;
         })
         .addCase(featureBrandsAction.fulfilled, (state, action) => {
             const response = action.payload;
@@ -70,7 +70,7 @@ export const brandsSlice = createSlice({
         })
         .addCase(brandsByCategoryAction.pending, (state, action) => {
             state.errors = null;
-            state.featured_brands = null;
+            state.brands = null;
         })
         .addCase(brandsByCategoryAction.fulfilled, (state, action) => {
             const response = action.payload;
