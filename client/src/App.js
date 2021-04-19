@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.scss';
 import Home from './components/Home';
 import Login from './components/Login';

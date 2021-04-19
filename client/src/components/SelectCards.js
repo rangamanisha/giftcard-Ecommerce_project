@@ -9,7 +9,7 @@ const SelectCards = () => {
     <>
       <div className="row">
         <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 " />
-        <div class="col ml-5 mt-5">
+        <div className="col ml-5 mt-5">
           <h1 className="select-card-text">Amazon eGift Card</h1>
           <h5 className="select-card-text mt-3">Select Card Value (AED)</h5>
           <div className="mt-3">

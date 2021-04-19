@@ -1,3 +1,4 @@
+import React from 'react';
 import Technology from '../assets/technology.svg';
 import Toys from '../assets/toys.svg';
 import Suitcase from '../assets/suitcase.svg';

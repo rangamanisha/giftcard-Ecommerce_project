@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/eslint-plugin": "^7.13.15",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
@@ -14,10 +15,16 @@
     "@types/react-transition-group": "^4.4.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "formik": "^2.2.6",
     "i18next": "^20.1.0",
     "node-sass": "^5.0.0",
     "poppins-font": "^1.0.1",
+    "prettier": "^2.1.2",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^6.2.1",
@@ -33,12 +40,7 @@
     "typeface-open-sans": "^1.1.13",
     "typeface-poppins": "^1.1.13",
     "web-vitals": "^1.1.1",
-    "yup": "^0.32.9",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.3",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "prettier": "^2.1.2"
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",

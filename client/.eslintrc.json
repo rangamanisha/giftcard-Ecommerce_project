@@ -1,98 +1,63 @@
 {
     "root": true,
     "extends": [
-        "airbnb-base",
-        "plugin:eslint-plugin/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "prettier/react"
     ],
     "plugins": [
-        "eslint-plugin"
+        "react",
+        "@babel"
     ],
     "env": {
-        "es6": true,
-        "node": true
+        "browser": true,
+        "es2020": true
     },
     "parserOptions": {
-        "ecmaVersion": 6,
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "experimentalObjectRestSpread": true
         },
-        "sourceType": "script"
+        "ecmaVersion": 2020,
+        "sourceType": "module"
     },
+    "globals": {
+        "process": true
+    },
+    "ignorePatterns": [
+        "build/*",
+        "node_modules/*"
+    ],
     "rules": {
-        "comma-dangle": [
-            2,
-            "never"
-        ],
-        "object-curly-spacing": [
-            2,
-            "never"
-        ],
-        "object-shorthand": [
-            2,
-            "always"
-        ],
-        "array-bracket-spacing": [
-            2,
-            "never"
-        ],
-        "max-len": [
-            2,
-            120,
+        "react/prop-types": 0,
+        "import/prefer-default-export": 0,
+        "no-shadow": "warn",
+        "no-underscore-dangle": 0,
+        "react/jsx-filename-extension": 0,
+        "react/jsx-props-no-spreading": 0,
+        "no-case-declarations": "warn",
+        "no-fallthrough": 0,
+        "no-unused-vars": "warn",
+        "react/no-unescaped-entities": "warn",
+        "import/no-webpack-loader-syntaxz": 0
+    },
+    "settings": {
+        "react": {
+            "createClass": "createReactClass",
+            "pragma": "React",
+            "fragment": "Fragment",
+            "version": "detect",
+            "flowVersion": "0.53"
+        },
+        "propWrapperFunctions": [
+            "forbidExtraProps",
             {
-                "ignoreStrings": true,
-                "ignoreTemplateLiterals": true,
-                "ignoreComments": true
-            }
-        ],
-        "consistent-return": 0,
-        "prefer-destructuring": [
-            2,
-            {
-                "array": false,
-                "object": false
+                "property": "freeze",
+                "object": "Object"
             },
             {
-                "enforceForRenamedProperties": false
-            }
-        ],
-        "prefer-object-spread": 0, // until node 8 is required
-        "prefer-rest-params": 0, // until node 6 is required
-        "prefer-spread": 0, // until node 6 is required
-        "function-paren-newline": 0,
-        "no-plusplus": 1,
-        "no-param-reassign": 1,
-        "no-restricted-syntax": [
-            2,
-            {
-                "selector": "ObjectPattern",
-                "message": "Object destructuring is not compatible with Node v4"
-            }
-        ],
-        "strict": [
-            2,
-            "safe"
-        ],
-        "valid-jsdoc": [
-            2,
-            {
-                "requireReturn": false,
-                "requireParamDescription": false,
-                "requireReturnDescription": false
+                "property": "myFavoriteWrapper"
             }
         ]
-    },
-    "overrides": [
-        {
-            "files": "tests/**",
-            "rules": {
-                "no-template-curly-in-string": 1
-            }
-        },
-        {
-            "files": "markdown.config.js",
-            "rules": {
-                "no-console": 0
-            }
-        }
-    ]
+    }
 }
