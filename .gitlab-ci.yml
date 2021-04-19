@@ -33,7 +33,7 @@ build:giftiglobal_ui:
     - cd client && npm install
     - npm run build
   only:
-    - merge_requests
+    - dev-old
 
 deploy:giftiglobal_ui:
   image: node:14
@@ -49,46 +49,6 @@ deploy:giftiglobal_ui:
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
     - npm run build
-    - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
+    - aws s3 sync build/ s3://$GIFTI_GLOBAL_OLD_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
   only:
-    - master
-    - development
-
-build:giftiglobal_server:
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: "/certs"
-  script:
-   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-   - cd server && docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
-   - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-   - docker push $CI_REGISTRY_IMAGE:latest
-  only:
-   - merge_requests
-
-deploy:giftiglobal_server:
-  stage: deploy
-  before_script:
-    - apt-get update
-    - export IMAGE=$CI_REGISTRY_IMAGE
-  script:
-    - mkdir -p ~/.ssh
-    - echo $CI_REGISTRY_IMAGE
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
-    - chmod 700 ~/.ssh/id_rsa
-    - eval "$(ssh-agent -s)"
-    - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-    - chmod +x ./setup_env.sh
-    - chmod +x ./deploy.sh
-    - bash ./setup_env.sh
-    - scp  -o StrictHostKeyChecking=no -r ./.env ec2-user@$EC2_PUBLIC_IP_ADDRESS:/home/ec2-user/giftiglobal
-    - bash ./deploy.sh
-  only:
-   - master
-   - development
+    - dev-old
