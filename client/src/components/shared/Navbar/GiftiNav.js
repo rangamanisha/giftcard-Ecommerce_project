@@ -10,40 +10,38 @@ import { getTopBarState } from '../../../reducer/topbar.reducer';
 import { getCountriesListAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
 
-
 const GiftiNav = () => {
-    const bg = 'white';
-    const variant = 'white';
-    const authState = useSelector(getAuthState);
-    const topbarState = useSelector(getTopBarState);
-    const dispatch = useDispatch()
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const countries = topbarState.countries.map(country => country['country_name']);
+  const bg = 'white';
+  const variant = 'white';
+  const authState = useSelector(getAuthState);
+  const topbarState = useSelector(getTopBarState);
+  const dispatch = useDispatch();
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const countries = topbarState.countries.map((country) => country['country_name']);
 
-    useEffect(() => {
-        dispatch(getCountriesListAction());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCountriesListAction());
+  }, [dispatch]);
 
+  const countryChanged = (event) => {
+    setSelectedCountry(event.target.outerText);
+  };
 
-    const countryChanged = (event) => {
-        setSelectedCountry(event.target.outerText);
-    }
-
-    return (
-        <Topbar
-            bg={bg}
-            variant={variant}
-            logoIcon={Logo}
-            locationIcon={Location}
-            country={selectedCountry}
-            countriesList={countries}
-            searchIcon={Search}
-            userLoginIcon={UserLogin}
-            shoppingCartIcon={Shoppingcart}
-            showLogin={!authState.isAuthenticated}
-            onCountrySelected={countryChanged}
-        />
-    );
-}
+  return (
+    <Topbar
+      bg={bg}
+      variant={variant}
+      logoIcon={Logo}
+      locationIcon={Location}
+      country={selectedCountry}
+      countriesList={countries}
+      searchIcon={Search}
+      userLoginIcon={UserLogin}
+      shoppingCartIcon={Shoppingcart}
+      showLogin={!authState.isAuthenticated}
+      onCountrySelected={countryChanged}
+    />
+  );
+};
 
 export default GiftiNav;
