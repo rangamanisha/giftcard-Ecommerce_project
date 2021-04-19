@@ -9,17 +9,25 @@ import Beauty from "../assets/Beauty.svg";
 import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
 import {featureBrandsAction} from '../actions/brands.action';
+import {getBrandsState} from '../reducer/brands.reducer';
+import React, { useDebugValue } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {get} from 'lodash'
+
+
 
 const AllFeaturedCards = () => {
-  const dispatch = useDispatch();
-  
+const dispatch = useDispatch();
+const state = useSelector(getBrandsState);
+const fetaured_brands = get(state, 'data')
   React.useEffect(() => {
-    dispatch(featureBrandsAction({
-      currency: 33,
-      program_id: 1
+    console.log("hello");
+    dispatch(featureBrandsAction({ 
+      currency: 1,
+      program_id:1
     }))
-  }, [])
 
+  }, [])
   return (
     <div>
     <div className="cardgifiti-card">

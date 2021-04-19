@@ -31,8 +31,8 @@ export const brandsSlice = createSlice({
         })
         .addCase(termBrandAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
+            const {data, code} = response;
+            if(200 == code){
                 state.brands = data;
             }
             state.brands = response
@@ -46,56 +46,53 @@ export const brandsSlice = createSlice({
         })
         .addCase(productDescriptionAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
+            const {data, code} = response;
+            if(200 == code){
                 state.brands = data;
             }
             state.brands = response;
         })
         .addCase(featureBrandsAction.pending, (state, action) => {
             state.errors = null;
-            state.brands = null;
+            state.featured_brands = null;
         })
         .addCase(featureBrandsAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
+            const {data, code} = response;
+            if(200 == code){
                 state.brands = data;
+                state.featured_brands = data;
             }
-            state.brands = response
+            state.featured_brands = response
         })
         .addCase(featureBrandsAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
         .addCase(brandsByCategoryAction.pending, (state, action) => {
             state.errors = null;
-            state.brands = null;
+            state.featured_brands = null;
         })
         .addCase(brandsByCategoryAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status) {
+            const {data, code} = response;
+            if(200 == code) {
                 state.brands = data;
             }
             state.brands = response
         })
         .addCase(brandsByCategoryAction.rejected, (state, action) => {
-            const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
-                state.brands = data;
-            }
-            state.brands = response
+           state.errors = [action.error.message || ''] 
         })
         .addCase(allBrandAction.pending, (state, action) => {
             state.errors = null;
             state.brands = null;
+            state.allBrands = null;
         })
         .addCase(allBrandAction.fulfilled, (state, action) => {
             const response = action.payload;
-            const {data, status} = response;
-            if(200 == status){
-                state.brands = data;
+            const {data, code} = response;
+            if(200 == code){
+                state.allBrands = data.categories;
             }
             state.brands = response
         })

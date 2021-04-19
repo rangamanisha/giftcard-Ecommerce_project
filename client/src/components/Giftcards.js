@@ -16,6 +16,8 @@ import Toys from '../assets/toys.svg';
 import Hypermarket from '../assets/Hypermarket.svg';
 import Flowersandgift from '../assets/flowersandgift.svg';
 import Beauty from '../assets/Beauty.svg';
+import {isEmpty, map, get} from 'lodash';
+import { getBrandsState } from '../reducer/brands.reducer';
 
 
 const Giftcards = () =>{
@@ -37,7 +39,8 @@ const Giftcards = () =>{
               <p className="giftiallcard-text">All Gift Cards in the UAE</p>
         </div>
             <div className="gificards">
-            <img src={Appleitunes} className="mr-sm-5 imgcards" alt="Appleitunes" />
+                
+            {/* <img src={Appleitunes} className="mr-sm-5 imgcards" alt="Appleitunes" />
             <img src={Asec} className="mr-sm-5 imgcards" alt="Asec" />
             <img src={Ace} className="mr-sm-5 imgcards" alt="Ace" />
             <img src={Careem} className="imgcards" alt="Careem" />
@@ -48,7 +51,7 @@ const Giftcards = () =>{
             <img src={Ballooncard} className="mr-sm-5 imgcards mt-5" alt="Ballooncard" />
             <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
             <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
-            <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" />
+            <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
             </div>
         </div>
     )

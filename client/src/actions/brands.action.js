@@ -21,6 +21,7 @@ export const productDescriptionAction = createAsyncThunk('brands/listProductDesc
 });
 
 export const featureBrandsAction = createAsyncThunk('brands/listfeatureBrands', async(payload, thunkAPI) => {
+    
     const request = {
         program_id:payload.program_id,
         currency:payload.currency

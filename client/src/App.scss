@@ -385,17 +385,31 @@ opacity: 1;
   border-radius: 10px;
 }
 
+
 .allgiftcard-text{
 margin-left: 129px;
 font-family: 'Open Sans';
 font-weight: 500;
 font-size: 14px;
+
+}
+.scroll{
+  margin-left: 130px ;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  
+
 }
 
 .box {
   width: 130px;
   height: 100px;
   background-color: #f6f6f6;
+  
+
+  #{&}__active {
+  }
 }
 
 .box a{
@@ -406,6 +420,7 @@ font-size: 14px;
 
 .box:hover{
   color:#fff;
+
   background-color: #00B2AE;
 }
 
@@ -516,4 +531,14 @@ font-family: Cairo-Bold;
 .startgiftingimg{
   padding: 0px 65px;
 }
-
+.transparentButton {
+  border: none !important;
+  background-color: transparent;
+  margin: 0 !important;
+  padding: 0;
+  cursor: default;
+}
+.active {
+  background-color: map-get($theme-colors, info);
+  color: #fff !important;
+}
