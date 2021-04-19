@@ -39,7 +39,13 @@
         "no-fallthrough": 0,
         "no-unused-vars": "warn",
         "react/no-unescaped-entities": "warn",
-        "import/no-webpack-loader-syntaxz": 0
+        "import/no-webpack-loader-syntaxz": 0,
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
     },
     "settings": {
         "react": {
