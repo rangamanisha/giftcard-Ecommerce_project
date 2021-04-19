@@ -6,7 +6,7 @@ export const CATEGORY_INIT_STATE = {
     message:"",
     errors:null,
     data:null,
-    currency:"1",
+    currency:226,
     program_id:"1",
     image_size:null,
     image_type:false,

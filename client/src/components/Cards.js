@@ -7,7 +7,6 @@ import {
   Row,
 } from "react-bootstrap";
 import {useHistory } from 'react-router-dom'
-import {Link} from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";

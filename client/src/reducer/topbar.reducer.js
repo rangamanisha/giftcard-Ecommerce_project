@@ -1,9 +1,11 @@
 import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
 import { getCountriesListAction, selectCountryAction } from "../actions/topbar.actions";
+import {filter} from 'lodash';
 
 export const TOPBAR_INITIAL_STATE = {
     countries: [],
     countriesLoading: false,
+    currency_code:1,
     selectedCountry: ''
 }
 
@@ -18,6 +20,8 @@ export const topbarSlice = createSlice({
     initialState: TOPBAR_INITIAL_STATE,
     reducers: {
        selectCountry(state, action){
+           let id = filter(state.countries, {country_name:action.payload})[0].id
+           state.currency_code = id;
            state.selectedCountry = action.payload;
        } 
         

@@ -23,17 +23,17 @@ import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
-import { get, map, isEmpty, filter } from 'lodash';
+import { get, map, isEmpty, filter, isUndefined } from 'lodash';
 import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
+import {getTopBarState} from '../reducer/topbar.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
-import {getGiftcardsState} from '../reducer/giftCards.reducer'
-import {getTopBarState} from '../reducer/topbar.reducer'
 
 
-import Pagination from 'react-js-pagination';
+
 function AllGiftCard() {
   const dispatch = useDispatch();
+  const [currency, setCurrency] = useState(1);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
   const topbarState = useSelector(getTopBarState)
@@ -44,72 +44,52 @@ function AllGiftCard() {
   const [activeCategory, setActiveCategory] = React.useState()
   React.useEffect(() => {
     dispatch(categoryAction({
-      currency: 1,
+      currency: topbarState.currency_code,
       program_id: 1
     }))
-  }, [])
+  }, [topbarState.currency_code])
   React.useEffect(() => {
     dispatch(allBrandAction({
-      currency: 1,
+      currency: topbarState.currency_code,
       program_id:1,
       image_size: "medium_rectangle",
       image_type:"Color",
       list_type:"group"
     }))
+    
 
-  }, [])
+  }, [topbarState.currency_code])
   React.useEffect(() => {
 
     dispatch(featureBrandsAction({ 
-      currency: 1,
+      currency: topbarState.currency_code,
       program_id:1
     }))
 
-  }, [])
+  }, [topbarState.currency_code])
 
   
   const getCardsWithCategory = (category) => {
     const {id, name} = category
     //dispatch action to get cards by category
     dispatch(brandsByCategoryAction({
-      currency:1,
+      currency:topbarState.currency_code,
       program_id:1,
       category_id:id
     }))
     setActiveCategory(id)
   }
     
-    const allGifts = 
-    map(brandsWithCategory, (category, i) =>
-        <>  {
-    map(get(category, 'brands'), (brand, i)  => (
-      <>
-        <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
-      </>
-    ))
-    }
-    </>
+    
          
-         )
-  const giftsPerPage = 3;
-  const [activePage, setCurrentPage] = useState(1);
-  const indexOfLastGift = activePage * giftsPerPage;
-  const indexOfFirstGift = indexOfLastGift - giftsPerPage;
-  const currentGiftCards = allGifts.slice(indexOfFirstGift, indexOfLastGift);
-  const renderGifts = currentGiftCards.map((allGifts, index) => {
-    return <li key ={index}>{allGifts}</li>
-  })
-  const handlePageChange = (pageNumber) => {
-    console.log(`Active page ${pageNumber}`)
-    setCurrentPage(pageNumber)
-
-  };
-
+  
+  const nowCountry = isEmpty(get(topbarState, 'selectedCountry')) ? get(topbarState, 'countries[0].country_name') : get(topbarState, 'selectedCountry')
+  
   return (
 
     <div class="allGiftCard">
       <div>
-        <p className="giftiallcard-text">{`All Gift Cards in the ${topbarState.selectedCountry}`}</p>
+        <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
 
@@ -195,22 +175,7 @@ function AllGiftCard() {
         <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
         <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
-      <div>
-        <div className="result">
-          {renderGifts}
-
-        </div>
-        <div className="Pagination">
-          <Pagination 
-          activePage={activePage}
-          itemsCountPerPage={3}
-          totalItemsCount={allGifts.length}
-          pageRangeDisplayed={3}
-          onChange={handlePageChange}
-
-          />
-        </div>
-      </div>
+      
       </div>
     </div>
 </div >
