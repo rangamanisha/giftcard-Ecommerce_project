@@ -5,3 +5,7 @@ export const getCountriesListAction = createAsyncThunk('topbar/countrylist/get',
     const response = await getCountriesAPI();
     return response;
 });
+
+export const selectCountryAction = (payload) => {
+    return {type:'topbar/selectCountry' , payload}
+}

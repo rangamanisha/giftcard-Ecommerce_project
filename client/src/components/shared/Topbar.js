@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useHistory } from 'react-router-dom';
+
 import './Topbar.scss';
 
 const Topbar = (props) => {

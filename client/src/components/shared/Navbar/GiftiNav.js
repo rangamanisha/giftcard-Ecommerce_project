@@ -6,8 +6,8 @@ import Search from '../../../assets/search.svg';
 import Shoppingcart from '../../../assets/shopping-cart.svg';
 import UserLogin from '../../../assets/User-login.svg';
 import Location from '../../../assets/location.svg';
-import { getTopBarState } from '../../../reducer/topbar.reducer';
-import { getCountriesListAction } from '../../../actions/topbar.actions';
+import { getTopBarState, topbarActions } from '../../../reducer/topbar.reducer';
+import { getCountriesListAction, selectCountryAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
 
 
@@ -26,7 +26,8 @@ const GiftiNav = () => {
 
 
     const countryChanged = (event) => {
-        setSelectedCountry(event.target.outerText);
+        
+        dispatch(topbarActions.selectCountry(event.target.outerText));
     }
 
     return (
