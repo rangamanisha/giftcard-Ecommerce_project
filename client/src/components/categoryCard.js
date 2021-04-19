@@ -13,7 +13,7 @@ function categoryCard({category, nowActive}){
               <img
                 src={normal_square}
                 alt="Icon"
-                style={{ width: "30px", height: "30px" }}
+                style={{ width: "130px", height: "80px" }}
               />
               <br />
               <p className="products_icons">{name}</p>

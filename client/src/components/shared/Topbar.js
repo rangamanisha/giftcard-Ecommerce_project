@@ -26,17 +26,17 @@ const Topbar = (props) => {
     }
 
     return (
-        <Navbar bg={bg} variant={variant}>
-            <Form inline className="mx-auto">
-                <Navbar.Brand className="pl-3"><img src={logoIcon} alt="Icon" /></Navbar.Brand>
-                <Nav className="pl-3">
+        <Navbar bg={bg} variant={variant} className ="d-flex">
+            <Form inline className="mx-auto d-flex">
+                <Navbar.Brand className="pl-2"><img src={logoIcon} alt="Icon" /></Navbar.Brand>
+                <Nav className="pl-2">
                     <span className="location"><small>I am gifting to</small></span>
                     <img src={locationIcon} alt="Icon" />
                     <NavDropdown title={country || countriesList[0]} id="basic-nav-dropdown" onClick={(val) => onCountrySelected(val)}>
                         {getCountriesDD()}
                     </NavDropdown>
                 </Nav>
-                <InputGroup className="pl-3">
+                <InputGroup className="pl-2">
                     <FormControl
                         className="search-button"
                         placeholder="What are you looking for ?"

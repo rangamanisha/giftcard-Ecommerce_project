@@ -1,4 +1,8 @@
 import React from 'react';
+import ReactDOM from "react-dom";
+import Carousel from "react-elastic-carousel";
+// import styled from "styled-component";
+import Item from "./item";
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -10,12 +14,13 @@ import Allmenu from "../assets/allmenu.svg";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from "styled-components";
 
 // Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
+// import 'swiper/swiper.scss';
+// import 'swiper/components/navigation/navigation.scss';
+// import 'swiper/components/pagination/pagination.scss';
+// import 'swiper/components/scrollbar/scrollbar.scss';
 import Appleitunes from "../assets/Appleitunes.png";
 import Carrefour from "../assets/Carrefour.png";
 import Careem from "../assets/Careem.png";
@@ -47,6 +52,12 @@ function AllGiftCard() {
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
   const [activeCategory, setActiveCategory] = React.useState()
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 768, itemsToShow: 8 },
+    { width: 1200, itemsToShow: 10 }
+  ];
   React.useEffect(() => {
     dispatch(categoryAction({
       currency: 1,
@@ -92,29 +103,46 @@ function AllGiftCard() {
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
       <div className="slideclass" >
-      <Swiper
+      {/* <Swiper
       spaceBetween={1}
-      slidesPerView={10}
+      slidesPerView={9}
       navigation
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
-    >
+    >   <SwiperSlide> */}
+   <Carousel breakPoints={breakPoints}>
+   <Item>
+                <div className="box" >
+            <a href="#/">
+              <img
+                src={Allmenu}
+                alt="Icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+              <br />
+              <p className="products_icons">All Gift Cards</p>
+            </a>
+          </div>
+          </Item>
+        
                 {
             !isEmpty(categories) && map(categories, (category, i) => (
               <>
+                <Item>
                 {
-                   <SwiperSlide>
-                  <button class="transparentButton" onClick={() => getCardsWithCategory(category)}>
+                  
+                  <button className="transparentButton" onClick={() => getCardsWithCategory(category)}>
                   <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false}/>
                   </button>
-                  </SwiperSlide>
+                 
                 }
+              </Item>
               </>
             ))
           }
     
- 
-    </Swiper>
+    </Carousel>
+    {/* </Carousel> */}
     </div>
 
 

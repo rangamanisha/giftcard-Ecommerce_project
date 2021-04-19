@@ -16,10 +16,10 @@ const Footer = () => {
           <img
             src={Logo}
             className="mt-5"
-            style={{ marginLeft: "150px" }}
+            style={{ marginLeft: "120px" }}
             alt="Icon"
           />
-          <p className="mt-4 Footer-text" style={{ marginLeft: "150px" }}>
+          <p className="mt-4 Footer-text" style={{ marginLeft: "120px" }}>
             {" "}
             The ONLY Global Digital Gift Card, that can be used for all
             <br /> CURRENCIES, all denominations, across 86 COUNTRIES and
