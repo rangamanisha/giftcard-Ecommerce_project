@@ -39,24 +39,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 // import { giftcardUnitAction } from '../actions/category.actions'
 import { getCategoryState } from '../reducer/category.reducer'
-import { get, map, isEmpty, filter, isUndefined } from 'lodash';
+import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
 import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
 import {getTopBarState} from '../reducer/topbar.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
 
-
-
 function AllGiftCard() {
   const dispatch = useDispatch();
   const [currency, setCurrency] = useState(1);
+  const[items, setitems] = useState([]);
+  const[visible,setvisible] = useState(3);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
   const topbarState = useSelector(getTopBarState)
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
-  
   const [activeCategory, setActiveCategory] = React.useState()
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -64,6 +63,7 @@ function AllGiftCard() {
     { width: 768, itemsToShow: 7 },
     { width: 1200, itemsToShow: 8 }
   ];
+  
   React.useEffect(() => {
     dispatch(categoryAction({
       currency: topbarState.currency_code,
@@ -92,6 +92,7 @@ function AllGiftCard() {
 
   
   const getCardsWithCategory = (category) => {
+  
     const {id, name} = category
     //dispatch action to get cards by category
     dispatch(brandsByCategoryAction({
@@ -102,7 +103,9 @@ function AllGiftCard() {
     setActiveCategory(id)
   }
     
-    
+    const Shormoreitems =()=>{
+      setvisible((prevValue) => prevValue+3)
+    }
          
   
   const nowCountry = isEmpty(get(topbarState, 'selectedCountry')) ? get(topbarState, 'countries[0].country_name') : get(topbarState, 'selectedCountry')
@@ -115,14 +118,7 @@ function AllGiftCard() {
         <p className="giftiallcard-text-a">Browse by Category</p>
       </div>
       <div className="slideclass" >
-      {/* <Swiper
-      spaceBetween={1}
-      slidesPerView={9}
-      navigation
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
-    >   <SwiperSlide> */}
-   <Carousel breakPoints={breakPoints}>
+   <Carousel pagination  = {0} breakPoints={breakPoints}>
    <Item>
                 <div className="box" >
             <a href="#/">
@@ -186,7 +182,6 @@ function AllGiftCard() {
              let cat =  filter(brandsWithCategory, {category_id:activeCategory})
              console.log(cat)
 
-             
               return (
                 
                 map(get(cat, 'brands'), (brand, i)  => (
@@ -198,8 +193,15 @@ function AllGiftCard() {
 
             }
             else return (
-            <>{
-            map(get(category, 'brands'), (brand, i)  => (
+            <>
+            {/* {
+            
+              filtercat = map(get(category, 'brands'),(brand, i)=>{
+                items = items.add(brand);
+              })
+            } */}
+            {
+              map(get(category, 'brands'), (brand, i)  => (
               <>
                 <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
               </>
@@ -230,7 +232,7 @@ function AllGiftCard() {
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
       
       </div>
-      <div class="text-center"><button type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
+      <div class="text-center"><button  onClick = {Shormoreitems} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
     </div>
 
     )

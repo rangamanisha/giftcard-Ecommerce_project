@@ -30,7 +30,7 @@ const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2, itemsToScroll: 1 },
   { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 3 }
+  { width: 1200, itemsToShow: 4 }
 ];
 
   React.useEffect(() => {
@@ -51,22 +51,26 @@ const breakPoints = [
         Personalized gift vouchers delivered online & redeemable at popular
         Brands
       </p>
-      
+    
       <div className="gificards">
-        {<Carousel breakPoints={breakPoints}>
-          
-            <>{
+        {
+                  <>
+            <Carousel pagination = {0} breakPoints={breakPoints}>
+            {
             map(get(fetaured_brands1, 'brands'), (brand, i)  => (
+              <Item>
               <>
-              <Item> <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /></Item> 
+                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
               </>
+                         </Item>               
             ))
-          }
+            }   
+          </Carousel>
             </>
-            </Carousel>
         
         }
         </div>
+     
         </div>
         </div>
   );

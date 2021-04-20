@@ -86,7 +86,7 @@ $theme-colors: (
   margin-top:85px;
   width: auto;
   height: 427px;
-  background-color:#F2FBFB !important;
+  background-color:#e8f8f8 !important;
 }
 
 .custom-card{
@@ -164,7 +164,8 @@ $theme-colors: (
 }
 
 .gificards{
-  margin-left: 130px;
+  margin-left: 100px;
+  margin-right:100px;
 }
 
 .imgcards{
@@ -559,4 +560,25 @@ font-family: Cairo-Bold;
   width: 147px;
   height: 60px;
   border-radius: 5px;
+}
+
+/* square buttons */
+.rec.rec-arrow {
+  background-image: url(./assets/catgeory_arrows/arrow_left_green.png);
+
+  color: #0000;
+ 
+}
+.rec .rec-arrow-right{
+  background-image: url(./assets/catgeory_arrows/Group2020.png);
+  color: #0000;
+}
+/* round buttons on hover */
+.rec.rec-arrow:hover {
+  background-image: url(./assets/catgeory_arrows/left_arrow_gray.png);
+  color: #0000;
+}
+.rec .rec-arrow-right:hover{
+  background-image: url(./assets/catgeory_arrows/arrow_right_gray.png);
+  color: #0000;
 }
