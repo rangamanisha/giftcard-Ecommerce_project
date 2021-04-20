@@ -7,8 +7,10 @@ import Shoppingcart from '../../../assets/shopping-cart.svg';
 import UserLogin from '../../../assets/User-login.svg';
 import Location from '../../../assets/location.svg';
 import { getTopBarState, topbarActions } from '../../../reducer/topbar.reducer';
+import {getGiftcardsState, giftCardsAction} from '../../../reducer/giftCards.reducer'
 import { getCountriesListAction, selectCountryAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
+import {giftCardsUnitAction} from '../../../actions/gitCards.actions'
 
 
 const GiftiNav = () => {
@@ -16,18 +18,19 @@ const GiftiNav = () => {
     const variant = 'white';
     const authState = useSelector(getAuthState);
     const topbarState = useSelector(getTopBarState);
+    const giftunitState = useSelector(getGiftcardsState);
     const dispatch = useDispatch()
     const [selectedCountry, setSelectedCountry] = useState(null);
-    const countries = topbarState.countries.map(country => country['country_name']);
+    const countries = giftunitState.countries.map(country => country['country_name']);
 
     useEffect(() => {
-        dispatch(getCountriesListAction());
+        dispatch((giftCardsUnitAction));
     }, [dispatch]);
 
 
     const countryChanged = (event) => {
         
-        dispatch(topbarActions.selectCountry(event.target.outerText));
+        dispatch(giftCardsAction.selectCountry(event.target.outerText));
     }
 
     return (
@@ -36,7 +39,7 @@ const GiftiNav = () => {
             variant={variant}
             logoIcon={Logo}
             locationIcon={Location}
-            country={topbarState.selectedCountry}
+            country={giftunitState.selectedCountry}
             countriesList={countries}
             searchIcon={Search}
             userLoginIcon={UserLogin}

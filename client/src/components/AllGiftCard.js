@@ -44,6 +44,8 @@ import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../ac
 import {getBrandsState} from '../reducer/brands.reducer';
 import {getTopBarState} from '../reducer/topbar.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
+import { getGiftcardsState } from '../reducer/giftCards.reducer';
+
 
 function AllGiftCard() {
   const dispatch = useDispatch();
@@ -52,7 +54,8 @@ function AllGiftCard() {
   const[visible,setvisible] = useState(3);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState)
+  // const topbarState = useSelector(getTopBarState)
+  const giftunitState = useSelector(getGiftcardsState);
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
@@ -66,39 +69,47 @@ function AllGiftCard() {
   
   React.useEffect(() => {
     dispatch(categoryAction({
-      currency: topbarState.currency_code,
+      currency: giftunitState.giftunit_id,
       program_id: 1
     }))
-  }, [topbarState.currency_code])
+  }, [giftunitState.giftunit_id])
   React.useEffect(() => {
     dispatch(allBrandAction({
-      currency: topbarState.currency_code,
-      program_id:1,
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
       image_size: "medium_rectangle",
-      image_type:"Color",
-      list_type:"group"
+      image_type: "Color",
+      list_type: "group"
     }))
-    
 
-  }, [topbarState.currency_code])
+
+  }, [giftunitState.giftunit_id])
+  React.useEffect(() => {
+    dispatch(giftCardsUnitAction({
+      currency: 1,
+      program_id: 1,
+      giftunit_id: giftunitState.giftunit_id
+    }))
+
+  }, [giftunitState.giftunit_id])
   React.useEffect(() => {
 
-    dispatch(featureBrandsAction({ 
-      currency: topbarState.currency_code,
-      program_id:1
+    dispatch(featureBrandsAction({
+      currency: giftunitState.giftunit_id,
+      program_id: 1
     }))
 
-  }, [topbarState.currency_code])
+  }, [giftunitState.giftunit_id])
 
-  
+
   const getCardsWithCategory = (category) => {
   
     const {id, name} = category
     //dispatch action to get cards by category
     dispatch(brandsByCategoryAction({
-      currency:topbarState.currency_code,
-      program_id:1,
-      category_id:id
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
+      category_id: id
     }))
     setActiveCategory(id)
   }
@@ -152,73 +163,33 @@ function AllGiftCard() {
     </Carousel>
     {/* </Carousel> */}
     </div>
-
-
-   
-        {/* <div className="scroll"  >
-          
-          <div className="box" >
-            <a href="#/">
-              <img
-                src={Allmenu}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">All Gift Cards</p>
-            </a>
-          </div>
-
-      </div> */}
-
-
-      <div className="gificards mt-5 ">
-        {
-          
-          map(brandsWithCategory, (category, i) =>
+  
+        <div className="gificards mt-5 ">
           {
+            isEmpty(get(brandState, 'brands')) ? 
 
-            if(!isEmpty(activeCategory) ){
-             let cat =  filter(brandsWithCategory, {category_id:activeCategory})
-             console.log(cat)
-
-              return (
-                
-                map(get(cat, 'brands'), (brand, i)  => (
+            map(brandsWithCategory, (category, i) =>
+              <>{
+                map(get(category, 'brands'), (brand, i) => (
                   <>
                     <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
                   </>
                 ))
-              )
-
-            }
-            else return (
-            <>
-            {/* {
-            
-              filtercat = map(get(category, 'brands'),(brand, i)=>{
-                items = items.add(brand);
-              })
-            } */}
-            {
-              map(get(category, 'brands'), (brand, i)  => (
-              <>
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+              }
               </>
-            ))
-          }
-            </>
-        
+            ) : 
+            
+              
+              map(get(brandState, 'brands'), (brand, i) => (
+                <>
+                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
+                </>
+              ) )
+            }
+            
 
-          )
-          
-         
-        
-        })
-        }
 
-        
-        {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
+          {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
         <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
         <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
         <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
@@ -230,11 +201,10 @@ function AllGiftCard() {
         <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
         <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
-      
-      </div>
-      <div class="text-center"><button  onClick = {Shormoreitems} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
-    </div>
 
+        </div>
+      <div class="text-center"><button  onClick = {Shormoreitems} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
+</div>
     )
 }
 
