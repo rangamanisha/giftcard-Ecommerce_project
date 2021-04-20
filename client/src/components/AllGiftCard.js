@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -24,10 +24,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty, filter, isUndefined } from 'lodash';
-import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../actions/brands.action';
-import {getBrandsState} from '../reducer/brands.reducer';
-import {getTopBarState} from '../reducer/topbar.reducer';
-import {giftCardsUnitAction} from '../actions/gitCards.actions';
+import { brandsByCategoryAction, allBrandAction, featureBrandsAction } from '../actions/brands.action';
+import { getBrandsState } from '../reducer/brands.reducer';
+import { getTopBarState } from '../reducer/topbar.reducer';
+import { getGiftcardsState } from '../reducer/giftCards.reducer';
+import { giftCardsUnitAction } from '../actions/gitCards.actions'
 
 
 
@@ -36,55 +37,64 @@ function AllGiftCard() {
   const [currency, setCurrency] = useState(1);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState)
+  // const topbarState = useSelector(getTopBarState)
+  const giftunitState = useSelector(getGiftcardsState);
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')
   const brandsWithCategory = get(brandState, 'allBrands')
-  
-  const [activeCategory, setActiveCategory] = React.useState()
+
+  const [activeCategory, setActiveCategory] = React.useState('')
   React.useEffect(() => {
     dispatch(categoryAction({
-      currency: topbarState.currency_code,
+      currency: giftunitState.giftunit_id,
       program_id: 1
     }))
-  }, [topbarState.currency_code])
+  }, [giftunitState.giftunit_id])
   React.useEffect(() => {
     dispatch(allBrandAction({
-      currency: topbarState.currency_code,
-      program_id:1,
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
       image_size: "medium_rectangle",
-      image_type:"Color",
-      list_type:"group"
+      image_type: "Color",
+      list_type: "group"
     }))
-    
 
-  }, [topbarState.currency_code])
+
+  }, [giftunitState.giftunit_id])
+  React.useEffect(() => {
+    dispatch(giftCardsUnitAction({
+      currency: 1,
+      program_id: 1,
+      giftunit_id: giftunitState.giftunit_id
+    }))
+
+  }, [giftunitState.giftunit_id])
   React.useEffect(() => {
 
-    dispatch(featureBrandsAction({ 
-      currency: topbarState.currency_code,
-      program_id:1
+    dispatch(featureBrandsAction({
+      currency: giftunitState.giftunit_id,
+      program_id: 1
     }))
 
-  }, [topbarState.currency_code])
+  }, [giftunitState.giftunit_id])
 
-  
+
   const getCardsWithCategory = (category) => {
-    const {id, name} = category
+    const { id, name } = category
     //dispatch action to get cards by category
     dispatch(brandsByCategoryAction({
-      currency:topbarState.currency_code,
-      program_id:1,
-      category_id:id
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
+      category_id: id
     }))
     setActiveCategory(id)
   }
-    
-    
-         
-  
-  const nowCountry = isEmpty(get(topbarState, 'selectedCountry')) ? get(topbarState, 'countries[0].country_name') : get(topbarState, 'selectedCountry')
-  
+
+
+
+
+  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
+
   return (
 
     <div class="allGiftCard">
@@ -95,7 +105,7 @@ function AllGiftCard() {
 
       <div className="mt-5" >
         <div className="scroll"  >
-          
+
           <div className="box" >
             <a href="#/">
               <img
@@ -113,57 +123,31 @@ function AllGiftCard() {
                 {
                   category.active &&
                   <button class="transparentButton" onClick={() => getCardsWithCategory(category)}>
-                  <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false}/>
+                    <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false} />
                   </button>
                 }
               </>
             ))
           }
-      
-      </div>
+
+        </div>
 
 
-      <div className="gificards mt-5 ">
-        {
-          
-          map(brandsWithCategory, (category, i) =>
+        <div className="gificards mt-5 ">
           {
-
-            if(!isEmpty(activeCategory) ){
-             let cat =  filter(brandsWithCategory, {category_id:activeCategory})
-             console.log(cat)
-
-             
-              return (
-                
-                map(get(cat, 'brands'), (brand, i)  => (
+            isEmpty(activeCategory) ? 
+            map(brandsWithCategory, (category, i) =>
+              <>{
+                map(get(category, 'brands'), (brand, i) => (
                   <>
                     <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
                   </>
                 ))
-              )
-
-            }
-            else return (
-            <>{
-            map(get(category, 'brands'), (brand, i)  => (
-              <>
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+              }
               </>
-            ))
-          }
-            </>
-        
+            ) :null}
 
-          )
-          
-         
-        
-        })
-        }
-
-        
-        {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
+          {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
         <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
         <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
         <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
@@ -175,11 +159,11 @@ function AllGiftCard() {
         <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
         <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
         <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
-      
+
+        </div>
       </div>
-    </div>
-</div >
-    )
+    </div >
+  )
 }
 
 export default AllGiftCard;
