@@ -18,7 +18,6 @@ const Home = () => {
 
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
-
   const [message, setMessage] = useState('');
 
   useEffect(() => {

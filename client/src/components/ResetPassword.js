@@ -38,13 +38,12 @@ const ResetPassword = () => {
       });
 
       useEffect(() => {
-        localStorage.setItem("access_token",history.location['search'].split("=",2)[1]);
         debugger;
         if (state.reset) {
+          localStorage.setItem("access_token",history.location['search'].split("=",2)[1]);
           history.push({ pathname: '/auth/login' })
         }
-      }
-      );
+      }, [state.reset, history]);
   
 
   return (
