@@ -1,6 +1,6 @@
 import {termBrandAction, productDescriptionAction, featureBrandsAction, brandsByCategoryAction, allBrandAction} from '../actions/brands.action';
 import constants from '../constants/brands.constants';
-import _ from 'lodash';
+import {get} from 'lodash';
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 
 export const BRANDS_INIT_STATE = {
@@ -60,25 +60,21 @@ export const brandsSlice = createSlice({
             const response = action.payload;
             const {data, code} = response;
             if(200 == code){
-                state.brands = data;
                 state.featured_brands = data;
             }
-            state.featured_brands = response
         })
         .addCase(featureBrandsAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
         .addCase(brandsByCategoryAction.pending, (state, action) => {
             state.errors = null;
-            state.brands = null;
         })
         .addCase(brandsByCategoryAction.fulfilled, (state, action) => {
             const response = action.payload;
             const {data, code} = response;
             if(200 == code) {
-                state.brands = data;
+                state.brands = get(data, 'brands');
             }
-            state.brands = response
         })
         .addCase(brandsByCategoryAction.rejected, (state, action) => {
            state.errors = [action.error.message || ''] 
@@ -94,7 +90,6 @@ export const brandsSlice = createSlice({
             if(200 == code){
                 state.allBrands = data.categories;
             }
-            state.brands = response
         })
         .addCase(allBrandAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']

@@ -135,7 +135,8 @@ function AllGiftCard() {
 
         <div className="gificards mt-5 ">
           {
-            isEmpty(activeCategory) ? 
+            isEmpty(get(brandState, 'brands')) ? 
+
             map(brandsWithCategory, (category, i) =>
               <>{
                 map(get(category, 'brands'), (brand, i) => (
@@ -145,7 +146,17 @@ function AllGiftCard() {
                 ))
               }
               </>
-            ) :null}
+            ) : 
+            
+              
+              map(get(brandState, 'brands'), (brand, i) => (
+                <>
+                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
+                </>
+              ) )
+            }
+            
+
 
           {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
         <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
