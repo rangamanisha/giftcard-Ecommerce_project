@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
-import { loginAction, signupAction, resetpasswordAction } from "../actions/auth.actions";
+import { loginAction, signupAction, resetpasswordAction, forgotpasswordAction } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
     user:null,
@@ -14,7 +14,8 @@ export const AUTH_INITIAL_STATE_LOGIN = {
     status: false,
     success: false,
     alert: false,
-    signupSuccess: false
+    signupSuccess: false,
+    reset: false
 }
 
 
@@ -35,6 +36,7 @@ export const authSlice = createSlice({
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
+            debugger;
             if(response.code === 200) {
                 state.user = response.data.user;
                 state.accessToken = response.data.user.access_token;
@@ -77,6 +79,17 @@ export const authSlice = createSlice({
 
             
         .addCase(resetpasswordAction.fulfilled, (state, action) => {
+            const response = action.payload;
+            if(response.code === 200) {
+                state.message = [response.message]
+                state.reset = true;
+                state.errors = null;
+            }
+            if(response.code === 400) {
+                state.errors = [response.message]
+            }
+        })
+        .addCase(forgotpasswordAction.fulfilled, (state, action) => {
             const response = action.payload;
             if(response.code === 200) {
                 state.status = true;

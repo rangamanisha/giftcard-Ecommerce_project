@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Col';
 
 const Topbar = (props) => {
 
-    const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
+    const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected, profileIcon, coinsIcon, exitIcon, cartIcon } = props;
     
     const user = localStorage.getItem("first_name");
     const history = useHistory();
@@ -32,6 +32,9 @@ const Topbar = (props) => {
                 <img src={userLoginIcon} alt="Icon" className="mr-3" />Log in</Button>
             );
         }
+
+        
+       const handleClick = () => history.push("/profile");
         return (
 
             <Dropdown className="pt-1">
@@ -42,12 +45,12 @@ const Topbar = (props) => {
                   {user}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
-                  <Dropdown.Item eventKey="2">
-                    Gifti Global Points
+                  <Dropdown.Item className="userfont-dropdown" onClick={handleClick}><img src={profileIcon} alt="Icon" className="mr-2"/>Profile</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown">
+                  <img src={coinsIcon} alt="Icon" className="mr-2"/>Gifti Global Points
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="1">Orders</Dropdown.Item>
-                  <Dropdown.Item onClick={clearsession}>Logout</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown"><img src={cartIcon} alt="Icon" className="mr-2"/>Orders</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown"onClick={clearsession}><img src={exitIcon} alt="Icon" className="mr-2"/>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
          

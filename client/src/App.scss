@@ -273,6 +273,18 @@ width: 430px;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
+
+.profile-card{
+  top: 40px;
+  width: auto;
+  height: 640px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
 .forgot-password{
   top: 40px;
   left: 130px;
@@ -326,9 +338,21 @@ margin-left: 77px;
 width: 179px ! important;
 }
 
+.profile-input{
+margin-left:75px;
+}
+
+.profile{
+padding-top: 78px;
+}
 .singup-inputfield{
   width: 179px ! important; 
 }
+
+.profile-inputfield{
+  width: 190px ! important; 
+}
+
 
 input::-webkit-input-placeholder {
 font-family: Open Sans;
@@ -351,6 +375,22 @@ opacity: 1;
  padding-left: 30px;
 }
 
+.profile-iconsfields{
+  margin:0;
+  padding-left:60px;
+  height: 46px;
+}
+
+.profile-iconsfields-a{
+  height: 46px;
+  padding-left: 30px;
+}
+
+.profile_icon{
+  position:absolute;
+  bottom:15px;
+  left:24px;
+}
 
 .icon_img {
   position:absolute;
@@ -441,6 +481,7 @@ opacity: 1;
 .validation-messages{
 color: red;
 text-align: center;
+font-size: 80%;
 }
 
 .select-card-button {
@@ -533,6 +574,15 @@ font-family: Cairo-Bold;
   border-color: #EEEEF2;
   font-family: Cairo-semibold;
   text-align: center;
-  font-size: larger;
+  font-size: 20px;
 }
 
+.profile-btn{
+  font-family: Cairo-semibold;
+  font-size: 90%;
+}
+
+.userfont-dropdown{
+  font-family: Cairo-semibold;
+  font-size: 14px;
+}

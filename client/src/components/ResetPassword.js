@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Button, Form } from "react-bootstrap";
 import Passwordicon from '../assets/Password-icon.svg';
-import Footer from "./Footer";
 import * as Yup from 'yup';
 import { getAuthState } from '../reducer/auth.reducer';
 import { useFormik } from 'formik';
@@ -40,8 +39,9 @@ const ResetPassword = () => {
 
       useEffect(() => {
         localStorage.setItem("access_token",history.location['search'].split("=",2)[1]);
-        if (state.status) {
-          history.push({ pathname: '/' })
+        debugger;
+        if (state.reset) {
+          history.push({ pathname: '/auth/login' })
         }
       }
       );
@@ -76,7 +76,6 @@ const ResetPassword = () => {
           </Button>
         </Form>
       </div>
-      <Footer />
     </>
   )
 }

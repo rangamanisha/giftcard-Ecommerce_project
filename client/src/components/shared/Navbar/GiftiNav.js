@@ -6,6 +6,10 @@ import Search from '../../../assets/search.svg';
 import Shoppingcart from '../../../assets/shopping-cart.svg';
 import UserLogin from '../../../assets/User-login.svg';
 import Location from '../../../assets/location.svg';
+import Profile from '../../../assets/uprofile.svg';
+import Cart from '../../../assets/cart.svg';
+import Exit from '../../../assets/exit.svg';
+import Coins from '../../../assets/coins.svg';
 import { getTopBarState } from '../../../reducer/topbar.reducer';
 import { getCountriesListAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
@@ -35,6 +39,10 @@ const GiftiNav = () => {
             variant={variant}
             logoIcon={Logo}
             locationIcon={Location}
+            cartIcon={Cart}
+            exitIcon={Exit}
+            coinsIcon={Coins}
+            profileIcon={Profile}
             country={selectedCountry}
             countriesList={countries}
             searchIcon={Search}

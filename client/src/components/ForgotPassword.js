@@ -1,7 +1,6 @@
 import React from 'react';
 import Emailicon from '../assets/Email-icon.svg';
 import { Button, Form } from "react-bootstrap";
-import Footer from "./Footer";
 import { getAuthState } from '../reducer/auth.reducer'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -30,7 +29,7 @@ const ForgotPassword = () => {
       });
 
       useEffect(() => {
-        if (state.success) {
+        if (state.status) {
           history.push({ pathname: '/' })
         }
       }
@@ -56,13 +55,16 @@ const ForgotPassword = () => {
             />
           </Form.Group>
 
+          {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
+          {state.errors && state.errors.length ? (
+            <p className="validation-messages">{state.errors.join('\n')}</p>
+          ) : null}
 
           <Button className="btn-custom mt-3" variant="info" size="lg" type="Submit">
             Reset my Password
           </Button>
         </Form>
       </div>
-      <Footer />
     </>
   )
 }

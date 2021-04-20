@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Footer from "./Footer";
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
@@ -44,11 +43,11 @@ const Signup = () => {
 
 
   useEffect(() => {
-    if (state.status) {
+    if (state.signupSuccess) {
       history.push({ pathname: '/' })
     }
   },
-[state.status, history]);
+[state.signupSuccess, history]);
 
   return (
     <>
@@ -74,6 +73,8 @@ const Signup = () => {
               </Form.Group>
             </div>
 
+            {formik.errors.first_name ? (<p className="validation-messages">{formik.errors.first_name}</p>) : null}
+
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
               <Form.Control size="md" type="email" placeholder="Enter email" className="icons_fields" value={formik.values.email} onChange={formik.handleChange} name="email" />
               <img
@@ -92,7 +93,7 @@ const Signup = () => {
                 className="icon_img"
               />
           </Form.Group>
-
+          {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
           <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
             <Form.Control size="lg" type="password" placeholder="Confirm Password" className="icons_fields" value={formik.values.confirm_password} onChange={formik.handleChange} name="confirm_password"/>
             <img
@@ -101,6 +102,7 @@ const Signup = () => {
                 className="icon_img"
               />
           </Form.Group>
+          {formik.errors.confirm_password ? (<p className="validation-messages">{formik.errors.confirm_password}</p>) : null}
             <Button
             className="btn-custom mt-3"
             variant="info"
@@ -136,7 +138,6 @@ const Signup = () => {
           </Form>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

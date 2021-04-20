@@ -1,6 +1,5 @@
 import React from "react";
 import Cards from "./Cards";
-import Footer from "./Footer";
 import StartGifting from "./StartGifting";
 import RecommandedCards from './RecommandedCards';
 import AllGiftCard from "./AllGiftCard";
@@ -29,9 +28,25 @@ const Home = () => {
       window.setTimeout(()=>{
         setVisible(false)
       },3000)
+
+    }
+    if (state.signupSuccess) {
+      setIsValid(true);
+      setMessage('A verification link has been sent to your provided email address. Check your mailbox');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },3000)
+    }
+
+    if (state.status) {
+      setIsValid(true);
+      setMessage('A verification link has been sent to your provided email address. Check your mailbox');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },3000)
     }
   },
-  [state.isAuthenticated]);
+  [state.isAuthenticated, state.signupSuccess, state.status]);
 
   return (
     <>
@@ -50,7 +65,6 @@ const Home = () => {
       <StartGifting />
       <RecommandedCards />
       <AllGiftCard />
-      <Footer />
     </>
   );
 }

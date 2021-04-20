@@ -2,7 +2,6 @@ import React, { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Footer from "./Footer";
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
 import Googleicon from '../assets/Google-icon.svg';
@@ -15,6 +14,8 @@ import { loginAction } from '../actions/auth.actions';
 import { useHistory } from 'react-router';
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
+import checkbox from '../assets/checkbox.svg';
+
 
 
 
@@ -24,8 +25,11 @@ const Login = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
   
+  
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
+
+  const [message, setMessage] = useState('');
 
 
   const formik = useFormik({
@@ -46,20 +50,29 @@ const Login = () => {
     if (state.isAuthenticated) {
       history.push({ pathname: '/' })
     }
-    else{
-      setIsValid('no');
+
+
+    if (state.reset) {
+      setIsValid(true);
+      setMessage('Your Password has been successfully updated.');
       window.setTimeout(()=>{
         setVisible(false)
-      },1000000)
+      },3000)
     }
-  }, [state.isAuthenticated, history])
+
+  }, [state.isAuthenticated,state.reset, history])
 
 
   return (
     <>
     <div>
-     {isValid === "yes"
-      ? <Fade><Alert variant="danger" text="center" transition={visible}>test.</Alert></Fade>
+     {isValid
+      ? <Fade><Alert variant="info" transition={visible}><img
+      src={checkbox}
+      className="mr-3"
+      style={{ width: "30px"}}
+      alt="Icon"
+    />{message}</Alert></Fade>
       : <></>
     }
     </div>
@@ -91,6 +104,8 @@ const Login = () => {
             />
           </Form.Group>
 
+          {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
+
           <div className="row">
             <Form.Group style={{ marginLeft: "77px" }}>
               <Form.Check
@@ -101,7 +116,7 @@ const Login = () => {
               />
             </Form.Group>
             <Form.Group style={{ marginLeft: "162px" }}>
-              <Link className="link-color" to="/forgotpassword">Forgot me?</Link>
+              <Link className="link-color" to="/auth/forgotpassword">Forgot me?</Link>
             </Form.Group>
           </div>
           {state.errors && state.errors.length ? (
@@ -115,7 +130,7 @@ const Login = () => {
           >
              Login to Continue
           </Button>
-
+        
 
           <p className="login-bottom-text text-center mt-4">Don’t have an account ? <Link to="/auth/signup">Sign up</Link></p>
 
@@ -168,7 +183,6 @@ const Login = () => {
           </div>
         </Form>
       </div>
-      <Footer />
     </>
   );
 };

@@ -11,6 +11,8 @@ import ResetPassword from './components/ResetPassword';
 import AllFeaturedCards from './components/AllFeaturedCards';
 import SelectCards from './components/SelectCards';
 import GiftiNav from './components/shared/Navbar/GiftiNav';
+import EditProfile from './components/EditProfile';
+import Footer from './components/shared/Footer';
 
 
 function App() {
@@ -22,14 +24,16 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/auth/login" component={Login} exact />
           <Route path="/auth/signup" component={Signup} exact />
-          <Route path="/forgotpassword" component={ForgotPassword} exact />
+          <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
+          <Route path="/profile" component={EditProfile} exact />
           <Route path="/" exact>
             <Redirect to={{ pathname: '/' }} />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );
