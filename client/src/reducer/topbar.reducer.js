@@ -1,9 +1,12 @@
 import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
-import { getCountriesListAction } from "../actions/topbar.actions";
+import { getCountriesListAction, selectCountryAction } from "../actions/topbar.actions";
+import {filter} from 'lodash';
 
 export const TOPBAR_INITIAL_STATE = {
     countries: [],
-    countriesLoading: false
+    countriesLoading: false,
+    currency_code:1,
+    selectedCountry: ''
 }
 
 
@@ -15,7 +18,14 @@ export const initialTopBarState = topbarAdapter.getInitialState(TOPBAR_INITIAL_S
 export const topbarSlice = createSlice({
     name: TOPBAR_FEATURE_KEY,
     initialState: TOPBAR_INITIAL_STATE,
-    reducers: {},
+    reducers: {
+       selectCountry(state, action){
+           let id = filter(state.countries, {country_name:action.payload})[0].id
+           state.currency_code = id;
+           state.selectedCountry = action.payload;
+       } 
+        
+    },
     extraReducers: (builder) => {
         builder.addCase(getCountriesListAction.pending, (state, action) => {
             state.countries = [];
@@ -34,6 +44,7 @@ export const topbarSlice = createSlice({
             state.countries = [];
             state.loading = false;
         })
+         
     }
 });
 
@@ -44,4 +55,5 @@ export const { selectAll, selectEntities} = topbarAdapter.getSelectors();
 export const getTopBarState = (rootState) => rootState[TOPBAR_FEATURE_KEY];
 export const selectAllTopBar = createSelector(getTopBarState, selectAll);
 export const selectTopBarEntities = createSelector(getTopBarState, selectEntities);
+ 
 

@@ -16,6 +16,10 @@ import {getBrandsState} from '../reducer/brands.reducer';
 import {get} from 'lodash'
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
+import AllGiftCard from './AllGiftCard';
+
+
+
 const AllFeaturedCards = () => {
 const dispatch = useDispatch();
 const state = useSelector(getBrandsState);
