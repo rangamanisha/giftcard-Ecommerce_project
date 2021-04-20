@@ -55,8 +55,8 @@ function AllGiftCard() {
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 8 },
-    { width: 1200, itemsToShow: 10 }
+    { width: 768, itemsToShow: 7 },
+    { width: 1200, itemsToShow: 8 }
   ];
   React.useEffect(() => {
     dispatch(categoryAction({
