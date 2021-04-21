@@ -1,10 +1,7 @@
 import React from "react";
-import ReactBootstrap, {
-  Card,
+import {
   Button,
   Col,
-  Image,
-  Container,
   Row,
   Form,
 } from "react-bootstrap";
