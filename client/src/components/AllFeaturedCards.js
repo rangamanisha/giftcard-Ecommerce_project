@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { map } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import { featureBrandsAction } from '../actions/brands.action';
 import { getBrandsState } from '../reducer/brands.reducer';
-import { Link } from 'react-router-dom';
 
 import { get } from 'lodash'
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
-
+import {Link } from 'react-router-dom';
 
 
 const AllFeaturedCards = () => {
@@ -25,7 +24,6 @@ const AllFeaturedCards = () => {
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 }
   ];
-
   React.useEffect(() => {
     console.log("hello");
     dispatch(featureBrandsAction({
@@ -68,6 +66,7 @@ const AllFeaturedCards = () => {
 
       </div>
     </div>
+    
   );
 };
 

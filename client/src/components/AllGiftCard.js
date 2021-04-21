@@ -88,14 +88,14 @@ function AllGiftCard() {
     }))
     setActiveCategory(id)
   }
-
-  const Shormoreitems = () => {
-    setvisible((prevValue) => prevValue + 3)
-  }
-
-
-  const nowCountry = isEmpty(get(topbarState, 'selectedCountry')) ? get(topbarState, 'countries[0].country_name') : get(topbarState, 'selectedCountry')
-
+    
+    const Shormoreitems =()=>{
+      setvisible((prevValue) => prevValue+3)
+    }
+         
+  
+  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
+  
   return (
 
     <div class="allGiftCard">
