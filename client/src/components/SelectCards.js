@@ -26,7 +26,7 @@ const SelectCards = () => {
                         <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" />
                     </div>
                     <div>
-                        <div>
+                        <div className="nav">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li class="nav-item">
