@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ReactDOM from "react-dom";
 import Carousel from "react-elastic-carousel";
 // import styled from "styled-component";
 import Item from "./item";
-import { useState } from 'react';
+import {useState, useRef} from 'react';
 import Allmenu from "../assets/allmenu.svg";
-import { Link } from 'react-router-dom';
-
-// Import Swiper styles
-// import 'swiper/swiper.scss';
-// import 'swiper/components/navigation/navigation.scss';
-// import 'swiper/components/pagination/pagination.scss';
-// import 'swiper/components/scrollbar/scrollbar.scss';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from "styled-components";
 import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
-// import { giftcardUnitAction } from '../actions/category.actions'
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty } from 'lodash';
 import { brandsByCategoryAction, allBrandAction, featureBrandsAction } from '../actions/brands.action';
@@ -22,13 +18,13 @@ import { getBrandsState } from '../reducer/brands.reducer';
 import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
+import {useHistory, Link} from 'react-router-dom';
+import AllFeaturedCards from './AllFeaturedCards';
 
 
 function AllGiftCard() {
   const dispatch = useDispatch();
-  const [currency, setCurrency] = useState(1);
-  const [items, setitems] = useState([]);
-  const [visible, setvisible] = useState(3);
+  const history = useHistory();
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
   const topbarState = useSelector(getTopBarState)
@@ -89,14 +85,21 @@ function AllGiftCard() {
     setActiveCategory(id)
   }
     
-    const Shormoreitems =()=>{
-      setvisible((prevValue) => prevValue+3)
-    }
          
   
   const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
-  
+  const allTheBrands = [];
+  map(brandsWithCategory, (category) => {
+      map(get(category, 'brands'), brand => {
+        if(allTheBrands.length <= 14){
+          allTheBrands.push(brand)
+        }
+        else return null
+      })
+  })
+
   return (
+    
 
     <div class="allGiftCard">
       <div>
@@ -131,36 +134,40 @@ function AllGiftCard() {
               </>
             ))
           }
+    
+    </Carousel>
+    </div>
+  
+        <div className="gificards mt-5 ">
+          {
+            isEmpty(get(brandState, 'brands')) ? 
 
-        </Carousel>
-      </div>
-      <div className="gificards mt-5 ">
-        {
-          isEmpty(get(brandState, 'brands')) ?
-
-            map(brandsWithCategory, (category) =>
-              <>{
-                map(get(category, 'brands'), (brand) => (
+              
+                map(allTheBrands, (brand, i) => (
                   <>
                     <Link to="/selectcard">
                       <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
                     </Link>
                   </>
                 ))
-              }
-              </>
-            ) :
-            map(get(brandState, 'brands'), (brand) => (
-              <>
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
-              </>
-            ))
-        }
-      </div>
-      <div class="text-center">
-        <button onClick={Shormoreitems} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
-    </div>
-  )
+              
+              
+            : 
+            
+              
+              map(get(brandState, 'brands'), (brand, i) => (
+                
+                <>
+                {i <= 16 ? 
+                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
+                    : null} 
+                </>
+              ) )
+            }
+        </div>
+      <div class="text-center"><button  onClick={() => history.push('AllCards')} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
+</div>
+    )
 }
 
 export default AllGiftCard;

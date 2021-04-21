@@ -17,7 +17,7 @@ const Home = () => {
     <>
       <Cards />
       <StartGifting />
-      <AllFeaturedCards/>
+      {/* <AllFeaturedCards/> */}
       {/* <RecommandedCards /> */}
       <AllGiftCard />
       <Footer />

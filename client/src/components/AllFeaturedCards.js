@@ -9,6 +9,7 @@ import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {Link } from 'react-router-dom';
+import AllGiftCard from './AllGiftCard'
 
 
 const AllFeaturedCards = () => {
@@ -34,6 +35,9 @@ const AllFeaturedCards = () => {
   }, [giftunitState.giftunit_id])
   return (
     <div>
+      <div>
+      {<AllGiftCard/>}
+    </div>
       <div className="cardgifiti-card">
         <p className="giftiallcard-text">Featured Cards</p>
         <p className="allgiftcard-text">
