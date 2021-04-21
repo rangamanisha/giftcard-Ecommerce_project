@@ -1,16 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from "react-dom";
 import Carousel from "react-elastic-carousel";
 // import styled from "styled-component";
 import Item from "./item";
 import {useState, useRef} from 'react';
+import Technology from "../assets/technology.svg";
+import Toys from "../assets/toys.svg";
+import Suitcase from "../assets/suitcase.svg";
+import Hypermarket from "../assets/Hypermarket.svg";
+import Flowersandgift from "../assets/flowersandgift.svg";
+import Beauty from "../assets/Beauty.svg";
+import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styled from "styled-components";
+
+// Import Swiper styles
+// import 'swiper/swiper.scss';
+// import 'swiper/components/navigation/navigation.scss';
+// import 'swiper/components/pagination/pagination.scss';
+// import 'swiper/components/scrollbar/scrollbar.scss';
+import Appleitunes from "../assets/Appleitunes.png";
+import Carrefour from "../assets/Carrefour.png";
+import Careem from "../assets/Careem.png";
+import Ace from "../assets/Ace.png";
+import Asec from "../assets/5asec.png";
+import Biobox from "../assets/biobox.png";
+import Amazon from "../assets/amazon.png";
+import GiftGlobalCard from "../assets/GiftiGlobalcard.png";
+import Ballooncard from "../assets/Ballooncard.png";
+import Bollywoodparks from "../assets/bollywoodparks.png";
+import Deliveroo from "../assets/deliveroo.png";
+import Mylist from "../assets/mylist.png";
 import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
+// import { giftcardUnitAction } from '../actions/category.actions'
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
 import {brandsByCategoryAction, allBrandAction, featureBrandsAction} from '../actions/brands.action';
@@ -18,13 +45,13 @@ import {getBrandsState} from '../reducer/brands.reducer';
 import {getTopBarState} from '../reducer/topbar.reducer';
 import {giftCardsUnitAction} from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
-import {useHistory} from 'react-router-dom';
-import AllFeaturedCards from './AllFeaturedCards';
 
 
-function AllGiftCard({}) {
+function AllCards() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const [currency, setCurrency] = useState(1);
+  const[items, setitems] = useState([]);
+  const[visible,setvisible] = useState(3);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
   const topbarState = useSelector(getTopBarState)
@@ -65,14 +92,14 @@ function AllGiftCard({}) {
     }))
 
   }, [giftunitState.giftunit_id])
-  React.useEffect(() => {
+//   React.useEffect(() => {
 
-    dispatch(featureBrandsAction({
-      currency: giftunitState.giftunit_id,
-      program_id: 1
-    }))
+//     dispatch(featureBrandsAction({
+//       currency: giftunitState.giftunit_id,
+//       program_id: 1
+//     }))
 
-  }, [giftunitState.giftunit_id])
+//   }, [giftunitState.giftunit_id])
 
 
   const getCardsWithCategory = (category) => {
@@ -87,21 +114,12 @@ function AllGiftCard({}) {
     setActiveCategory(id)
   }
     
+    
          
   
   const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
-  const allTheBrands = [];
-  map(brandsWithCategory, (category) => {
-      map(get(category, 'brands'), brand => {
-        if(allTheBrands.length <= 14){
-          allTheBrands.push(brand)
-        }
-        else return null
-      })
-  })
-
+  
   return (
-    
 
     <div class="allGiftCard">
       <div>
@@ -141,36 +159,51 @@ function AllGiftCard({}) {
           }
     
     </Carousel>
+    {/* </Carousel> */}
     </div>
   
         <div className="gificards mt-5 ">
           {
             isEmpty(get(brandState, 'brands')) ? 
 
-              
-                map(allTheBrands, (brand, i) => (
+            map(brandsWithCategory, (category, i) =>
+              <>{
+                map(get(category, 'brands'), (brand, i) => (
                   <>
                     <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
                   </>
                 ))
-              
-              
-            : 
+              }
+              </>
+            ) : 
             
               
               map(get(brandState, 'brands'), (brand, i) => (
-                
                 <>
-                {i <= 16 ? 
                 <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
-                    : null} 
                 </>
               ) )
             }
+            
+
+
+          {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
+        <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
+        <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
+        <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
+        <img src={Carrefour} className="mr-sm-5 imgcards mt-5" alt="Carrefour" />
+        <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
+        <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
+        <img src={GiftGlobalCard} className="mr-sm-5 imgcards mt-5" alt="GiftGlobalCard" />
+        <img src={Ballooncard} className="mr-sm-5 imgcards mt-5" alt="Ballooncard" />
+        <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
+        <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
+        <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
+
         </div>
-      <div class="text-center"><button  onClick={() => history.push('AllCards')} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
 </div>
     )
 }
 
-export default AllGiftCard;
+export default AllCards;
+

@@ -43,6 +43,9 @@ const AllFeaturedCards = () => {
   }, [giftunitState.giftunit_id])
   return (
     <div>
+      <div>
+      {<AllGiftCard/>}
+    </div>
       <div className="cardgifiti-card">
         <p className="giftiallcard-text">Featured Cards</p>
         <p className="allgiftcard-text">

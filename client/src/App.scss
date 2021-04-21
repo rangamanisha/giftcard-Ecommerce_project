@@ -549,19 +549,7 @@ font-family: Cairo-Bold;
   background-color: map-get($theme-colors, info);
   color: #fff !important;
 }
-.Pagination{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: solid 1px #F0F0F0;
-  background: #F0F0F0 0% 0% no-repeat padding-box;
-  border-radius: 14px;
-  top: 2672px;
-  left: 1289px;
-  width: 147px;
-  height: 60px;
-  border-radius: 5px;
-}
+
 
 /* square buttons */
 .rec.rec-arrow {
