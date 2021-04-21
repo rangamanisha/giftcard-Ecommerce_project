@@ -54,7 +54,7 @@ function AllGiftCard() {
   const[visible,setvisible] = useState(3);
   const state = useSelector(getCategoryState)
   const brandState = useSelector(getBrandsState);
-  // const topbarState = useSelector(getTopBarState)
+  const topbarState = useSelector(getTopBarState)
   const giftunitState = useSelector(getGiftcardsState);
   const categories = get(state, 'data')
   const category_brands = get(brandState, 'category_brands')

@@ -11,21 +11,22 @@ import Shipped from "../assets/shipped.svg";
 import Allmenu from "../assets/allmenu.svg";
 import {featureBrandsAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
-// import React, { useDebugValue } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+
 import {get} from 'lodash'
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import AllGiftCard from './AllGiftCard';
+import { getGiftcardsState } from '../reducer/giftCards.reducer';
 
 
 
 const AllFeaturedCards = () => {
 const dispatch = useDispatch();
 const state = useSelector(getBrandsState);
+const giftunitState = useSelector(getGiftcardsState);
 const fetaured_brands = get(state, 'data')
 const brandsWithfeatutre = get(state, 'featured_brands')
-const fetaured_brands1 = get(brandsWithfeatutre,'data')
+// const fetaured_brands1 = get(brandsWithfeatutre,'data')
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2, itemsToScroll: 1 },
@@ -36,11 +37,11 @@ const breakPoints = [
   React.useEffect(() => {
     console.log("hello");
     dispatch(featureBrandsAction({ 
-      currency: 1,
+      currency: giftunitState.giftunit_id,
       program_id:1
     }))
 
-  }, [])
+  }, [giftunitState.giftunit_id])
   return (
     <div>
       <div className="cardgifiti-card">
@@ -55,12 +56,12 @@ const breakPoints = [
       <div className="gificards">
         {
                   <>
-            <Carousel pagination = {0} breakPoints={breakPoints}>
+            <Carousel pagination ={0} breakPoints={breakPoints}>
             {
-            map(get(fetaured_brands1, 'brands'), (brand, i)  => (
+            map(get(brandsWithfeatutre, 'brands'), (brand, i)  => (
               <Item>
               <>
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards" alt={brand.name} />
               </>
                          </Item>               
             ))
