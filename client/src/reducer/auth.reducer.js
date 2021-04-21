@@ -36,7 +36,6 @@ export const authSlice = createSlice({
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
-            debugger;
             if(response.code === 200) {
                 state.user = response.data.user;
                 state.accessToken = response.data.user.access_token;
@@ -51,6 +50,9 @@ export const authSlice = createSlice({
             else if(response.code === 401) {
             state.user = null;
             state.errors = [response.message || response.detail || '']
+            }
+            if(response.code === undefined){
+                state.errors = [response.message || response.detail || '']
             }
         })
         .addCase(loginAction.rejected, (state, action) => {
@@ -70,6 +72,9 @@ export const authSlice = createSlice({
             if(response.code === 400) {
                 state.signupSuccess = false;
                 state.errors = [response.message]
+            }
+            if(response.code === undefined){
+                state.errors = [response.email]
             }
         })
         .addCase(signupAction.rejected, (state, action) => {
@@ -97,6 +102,9 @@ export const authSlice = createSlice({
             }
             if(response.code === 400) {
                 state.errors = [response.message]
+            }
+            if(response.code === undefined){
+                state.errors = [response.email]
             }
         })
     }

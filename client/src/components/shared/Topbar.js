@@ -45,12 +45,12 @@ const Topbar = (props) => {
                   {user}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item className="userfont-dropdown" onClick={handleClick}><img src={profileIcon} alt="Icon" className="mr-2"/>Profile</Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown">
+                  <Dropdown.Item className="userfont-dropdown border-line" onClick={handleClick}><img src={profileIcon} alt="Icon" className="mr-2"/>Profile</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown border-line">
                   <img src={coinsIcon} alt="Icon" className="mr-2"/>Gifti Global Points
                   </Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown"><img src={cartIcon} alt="Icon" className="mr-2"/>Orders</Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown"onClick={clearsession}><img src={exitIcon} alt="Icon" className="mr-2"/>Logout</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown border-line"><img src={cartIcon} alt="Icon" className="mr-2"/>Orders</Dropdown.Item>
+                  <Dropdown.Item className="userfont-dropdown border-line"onClick={clearsession}><img src={exitIcon} alt="Icon" className="mr-2"/>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
          

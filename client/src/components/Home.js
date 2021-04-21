@@ -12,9 +12,10 @@ import Fade from 'react-bootstrap/Fade';
 
 
 const Home = () => {
-
+debugger;
   const state = useSelector(getAuthState);
 
+  console.log(state.first_name);
 
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);

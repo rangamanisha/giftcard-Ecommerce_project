@@ -103,6 +103,10 @@ const Signup = () => {
               />
           </Form.Group>
           {formik.errors.confirm_password ? (<p className="validation-messages">{formik.errors.confirm_password}</p>) : null}
+          {state.errors && state.errors.length ? (
+            <p className="validation-messages">{state.errors.join('\n')}</p>
+          ) : null}
+
             <Button
             className="btn-custom mt-3"
             variant="info"

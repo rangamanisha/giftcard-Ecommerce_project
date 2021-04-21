@@ -16,9 +16,6 @@ const ResetPassword = () => {
    const state = useSelector(getAuthState);
    const history = useHistory();
 
-
-
-
    const value = localStorage.getItem("access_token");
   
     const formik = useFormik({
@@ -38,8 +35,8 @@ const ResetPassword = () => {
       });
 
       useEffect(() => {
-        debugger;
         if (state.reset) {
+          debugger;
           localStorage.setItem("access_token",history.location['search'].split("=",2)[1]);
           history.push({ pathname: '/auth/login' })
         }
