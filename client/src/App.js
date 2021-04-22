@@ -15,7 +15,6 @@ import Contact from './components/shared/Contact/Contact';
 import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
 import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 
-
 function App() {
   return (
     <div className="body">
@@ -29,10 +28,10 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
-          <Route path='/ConditionsPage' component={ConditionsPage} exact />
-          <Route path='/Contact' component={Contact} exact />
-          <Route path='/EnquiryPage' component={EnquiryPage} exact />
-          <Route path='/PrivacypolicyPage' component={PrivacypolicyPage} exact />
+          <Route path="/ConditionsPage" component={ConditionsPage} exact />
+          <Route path="/Contact" component={Contact} exact />
+          <Route path="/EnquiryPage" component={EnquiryPage} exact />
+          <Route path="/PrivacypolicyPage" component={PrivacypolicyPage} exact />
           <Route path="/" exact>
             <Redirect to={{ pathname: '/' }} />
           </Route>
