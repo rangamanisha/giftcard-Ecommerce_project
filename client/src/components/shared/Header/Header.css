@@ -1,0 +1,15 @@
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-left: 560px solid #cff8ffb8;
+    border-bottom: 91px solid transparent;
+}
+.triangle-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 1059px solid #00b2ae;
+    border-bottom: 79px solid transparent;
+    right: 0;
+}
