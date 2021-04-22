@@ -4,9 +4,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AmazonMedium from "../assets/amazon_medium.png";
 import Footer1 from './Stikyfooter';
+import {useDispatch, useSelector} from 'react-redux';
+import {productDescriptionAction, termBrandAction} from '../actions/brands.action';
+import {getBrandsState} from '../reducer/brands.reducer';
 
 
 const SelectCards = () => {
+const dispatch = useDispatch();
+const productAndTermState = useSelector(getBrandsState);
+React.useEffect(() => {
+    dispatch(productDescriptionAction({
+        currency:1,
+        program_id:1,
+
+
+    }))
+    dispatch(termBrandAction({
+
+    }))
+
+}, [])
+ 
     return (
         <>
             <div className="row">
