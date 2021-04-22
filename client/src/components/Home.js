@@ -22,9 +22,17 @@ const Home = () => {
   const [message, setMessage] = useState('');
   
 
+
   useEffect(() => {
         dispatch(getuseractiveAction({}));
-    }, [dispatch]);
+        if(useractive.verified){
+          setIsValid(true);
+          setMessage('Your account has been successfully created. Go to profile !');
+          window.setTimeout(()=>{
+            setVisible(false)
+          },3000)    
+        }
+    }, [dispatch, useractive.verified]);
 
 
   useEffect(() => {
