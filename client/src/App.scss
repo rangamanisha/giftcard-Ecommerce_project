@@ -474,12 +474,14 @@ input::-webkit-input-placeholder {
 
 .selects-card-button-a {
   width: 180px;
-  border-radius: 10px;
+    border-radius: 10px;
+    height: 60px;
 }
 
 .selects-card-button-b {
   width: 150px;
   border-radius: 10px;
+  height: 60px;
 }
 
 .select-card-size {
@@ -554,19 +556,6 @@ input::-webkit-input-placeholder {
   color: #fff !important;
 }
 
-.Pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: solid 1px #F0F0F0;
-  background: #F0F0F0 0% 0% no-repeat padding-box;
-  border-radius: 14px;
-  top: 2672px;
-  left: 1289px;
-  width: 147px;
-  height: 60px;
-  border-radius: 5px;
-}
 
 /* square buttons */
 .rec.rec-arrow {

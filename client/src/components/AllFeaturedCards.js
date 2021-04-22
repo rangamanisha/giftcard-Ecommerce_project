@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { map, isEmpty } from 'lodash';
 import { featureBrandsAction } from '../actions/brands.action';
 import { getBrandsState } from '../reducer/brands.reducer';
+import AllGiftCard from "./AllGiftCard";
 
 import { get } from 'lodash'
 import Carousel from "react-elastic-carousel";
@@ -34,6 +35,9 @@ const AllFeaturedCards = () => {
   }, [giftunitState.giftunit_id])
   return (
     <div>
+      <div>
+      {/* {<AllGiftCard/>} */}
+    </div>
       <div className="cardgifiti-card">
         <p className="giftiallcard-text">Featured Cards</p>
         <p className="allgiftcard-text">
