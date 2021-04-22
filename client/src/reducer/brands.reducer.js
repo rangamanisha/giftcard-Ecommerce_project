@@ -50,7 +50,6 @@ export const brandsSlice = createSlice({
             if(200 == code){
                 state.brands = data;
             }
-            state.brands = response;
         })
         .addCase(featureBrandsAction.pending, (state, action) => {
             state.errors = null;

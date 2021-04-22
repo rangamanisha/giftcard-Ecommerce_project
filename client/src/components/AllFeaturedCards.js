@@ -12,6 +12,7 @@ import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {Link } from 'react-router-dom';
 
 
+
 const AllFeaturedCards = () => {
   const dispatch = useDispatch();
   const state = useSelector(getBrandsState);

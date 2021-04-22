@@ -450,6 +450,7 @@ input::-webkit-input-placeholder {
   opacity: 1 !important;
   letter-spacing: 0px;
   font-family: Cairo-Bold;
+  
 }
 
 .login-bottom-text {
@@ -475,13 +476,13 @@ input::-webkit-input-placeholder {
 .selects-card-button-a {
   width: 180px;
     border-radius: 10px;
-    height: 60px;
+    // height: 60px;
 }
 
 .selects-card-button-b {
   width: 150px;
   border-radius: 10px;
-  height: 60px;
+  // height: 60px;
 }
 
 .select-card-size {
@@ -648,4 +649,12 @@ input::-webkit-input-placeholder {
   letter-spacing: 0px;
   color: #000000;
   opacity: 0.7;
+}
+.nav{
+    border: solid 2px #E1E1EA;;
+    border-radius: 5px;
+    background-color: #E1E1EA;
+}
+.nav a{
+  color: black;
 }

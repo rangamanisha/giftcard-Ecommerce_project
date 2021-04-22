@@ -4,7 +4,7 @@ import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import { useState } from 'react';
 import Allmenu from "../assets/allmenu.svg";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // Import Swiper styles
 // import 'swiper/swiper.scss';
@@ -21,11 +21,11 @@ import { getBrandsState } from '../reducer/brands.reducer';
 import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import AllFeaturedCards from './AllFeaturedCards';
 
 
-function AllGiftCard({}) {
+function AllGiftCard() {
   const dispatch = useDispatch();
   const history = useHistory();
   const state = useSelector(getCategoryState)

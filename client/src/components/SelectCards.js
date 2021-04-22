@@ -4,9 +4,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AmazonMedium from "../assets/amazon_medium.png";
 import Footer1 from './Stikyfooter';
+import {useDispatch, useSelector} from 'react-redux';
+import {productDescriptionAction, termBrandAction} from '../actions/brands.action';
+import {getBrandsState} from '../reducer/brands.reducer';
 
 
 const SelectCards = () => {
+const dispatch = useDispatch();
+const productAndTermState = useSelector(getBrandsState);
+React.useEffect(() => {
+    dispatch(productDescriptionAction({
+        currency:1,
+        program_id:1,
+
+
+    }))
+    dispatch(termBrandAction({
+
+    }))
+
+}, [])
+ 
     return (
         <>
             <div className="row">
@@ -26,7 +44,7 @@ const SelectCards = () => {
                         <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" />
                     </div>
                     <div>
-                        <div>
+                        <div className="nav">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li class="nav-item">
@@ -64,7 +82,11 @@ const SelectCards = () => {
                     <small className="mr-sm-5 ml-33">Total Amount</small>
                     <h4 className="mr-sm-5 select-card-text">AED 250</h4>
                     <div class="row">
-                        <div className="custom-input">
+
+                    </div>
+
+                    <div className="col">
+                    <div className="custom-input">
                             <div class="input-group">
                                 <div className="d-flex">
                                     <span class="input-group-btn">
@@ -77,11 +99,8 @@ const SelectCards = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="col">
-                        <Button variant="info" className="mr-sm-5 selects-card-button-a">Add to cart</Button>
-                        <Button variant="primary" className="mr-sm-5 selects-card-button-b">Buy Now</Button>
+                    <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
+                    <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
             </Footer1>
