@@ -82,10 +82,6 @@ React.useEffect(() => {
                     <small className="mr-sm-5 ml-33">Total Amount</small>
                     <h4 className="mr-sm-5 select-card-text">AED 250</h4>
                     <div class="row">
-
-                    </div>
-
-                    <div className="col">
                     <div className="custom-input">
                             <div class="input-group">
                                 <div className="d-flex">
@@ -99,6 +95,10 @@ React.useEffect(() => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="col">
+
                     <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
                     <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
                     </div>
