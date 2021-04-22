@@ -65,11 +65,11 @@ React.useEffect(() => {
                         <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" />
                     </div>
                     <div>
-                    <Nav  activeKey="1" onSelect={handleSelect}>
-                        <Nav.Item>
+                    <Nav activeKey="1" onSelect={handleSelect}>
+                        <Nav.Item id="product" >
                             <Nav.Link eventKey="1" >Description</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item ClassName="product" >
                             <Nav.Link eventKey="2">Terms & Condtions</Nav.Link>
                         </Nav.Item>
                         </Nav>

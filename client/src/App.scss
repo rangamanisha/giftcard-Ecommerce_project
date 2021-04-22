@@ -724,7 +724,7 @@ input::-webkit-input-placeholder {
 // }
 
 /* Large viewport navbar */
-.nav-link {
+#product .nav-link {
   font-family: 'Open Sans';
   font-size: 18px;
   margin-right: 27px;
@@ -734,12 +734,12 @@ input::-webkit-input-placeholder {
   opacity: 40%;
 }
 
-.nav-link:hover {
+#product .nav-link:hover {
   border-bottom: 5px solid black !important;
   color:black !important;
   opacity: 100%
 }
-a.nav-link.active {
+#product a.nav-link.active {
   border-bottom: 5px solid black !important;
   color:black !important;
   opacity: 100%;

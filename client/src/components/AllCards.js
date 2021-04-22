@@ -11,7 +11,7 @@ import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import AllFeaturedCards from './AllFeaturedCards';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function AllCards() {
@@ -65,9 +65,11 @@ function AllCards() {
   return (
 
     <div class="allGiftCard">
+      <p className="giftiallcard-text-a">Browse by Category</p>
+      <AllCategoryCards />
       <div>
 
-      <AllFeaturedCards/>
+        <AllFeaturedCards />
       </div>
       <div>
         <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
@@ -77,7 +79,6 @@ function AllCards() {
         Personalized gift vouchers delivered online & redeemable at popular Brands
       </p>
       </div>
-      <AllCategoryCards />
       <div className="gificards mt-5 ">
         {
           isEmpty(get(brandState, 'brands')) ?
@@ -86,8 +87,8 @@ function AllCards() {
               <>{
                 map(get(category, 'brands'), (brand, i) => (
                   <>
-                        <Link to="/selectcard">
-                    <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
+                    <Link to="/selectcard">
+                      <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
                     </Link>
                   </>
                 ))
@@ -98,8 +99,8 @@ function AllCards() {
 
             map(get(brandState, 'brands'), (brand, i) => (
               <>
-                        <Link to="/selectcard">
-                <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
+                <Link to="/selectcard">
+                  <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
                 </Link>
               </>
             ))
