@@ -37,7 +37,6 @@ export const authSlice = createSlice({
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
-            debugger;
             if(response.code === 200) {
                 state.user = response.data.user;
                 state.accessToken = response.data.user.access_token;

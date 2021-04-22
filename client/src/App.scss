@@ -31,6 +31,12 @@ $theme-colors: (
   src: local('OpenSans-Bold'), url(./assets/fonts/OpenSans-Bold.ttf) format('truetype');
 }
 
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: local('OpenSans-SemiBold'), url(./assets/fonts/OpenSans-SemiBold.ttf) format('truetype');
+}
+
 @font-face {
   font-family: 'OpenSans-Regular';
   src: local('OpenSans-Regular'), url(./assets/fonts/OpenSans-Regular.ttf) format('truetype');
@@ -631,4 +637,44 @@ font-size: 25px;
 
 .dropdown-menu {
   padding: 0;
+}
+.rewardspoints-font{
+  font-family:OpenSans-Bold;
+}
+
+
+.redeem-button{
+height: 35%;
+}
+
+.redeem-button-a{
+  height: 85%;
+  border-radius: 8px;
+}
+
+.redeem-button-b{
+  height: 85%;
+  width: 100px;
+  border-radius: 8px;
+}
+
+.cardpoints {
+  width: 94%;
+  height: 215px;
+  background-color: #EFEFF3 !important;
+  border-radius: 8px;
+}
+
+.font-points{
+  font-family:OpenSans-SemiBold;
+}
+
+.point-a{
+  font-family:OpenSans-Bold;
+  color:#00B2AE;
+  font-size:39px;
+}
+
+.points-b{
+  font-family: Cairo-SemiBold;
 }

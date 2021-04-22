@@ -6,19 +6,26 @@ import AllGiftCard from "./AllGiftCard";
 import Alert from 'react-bootstrap/Alert';
 import checkbox from '../assets/checkbox.svg';
 import {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
 import { getAuthState } from '../reducer/auth.reducer';
+import { getUserActiveState } from '../reducer/useractive.reducer';
+import { getuseractiveAction } from '../actions/useractive.actions';
 import Fade from 'react-bootstrap/Fade';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = () => {
-  const state = useSelector(getAuthState);
-
-  console.log(state.first_name);
-
+  const state = useSelector(getAuthState);  
+  const useractive = useSelector(getUserActiveState);
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState('');
+  
+
+  useEffect(() => {
+        dispatch(getuseractiveAction({}));
+    }, [dispatch]);
+
 
   useEffect(() => {
     if (state.isAuthenticated) {

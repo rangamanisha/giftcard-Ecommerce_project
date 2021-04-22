@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const UserProfile = () => {
   debugger;
   const profilestate = useSelector(getProfileState);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   
 
   const data = profilestate;

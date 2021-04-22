@@ -27,11 +27,9 @@ export const profileSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getprofileListAction.pending, (state, action) => {
             state.is_active = true;
-            
         })
         .addCase(getprofileListAction.fulfilled, (state, action) => {
             const response = action.payload;
-            debugger;
             if(response.code === 200) {
                 state.is_active = true;
                 state.first_name = response.data.profile.first_name;
