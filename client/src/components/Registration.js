@@ -25,7 +25,7 @@ const Signup = () => {
       last_name: '',
       email: '',
       password : '',
-      confirm_password: '',
+      password_confirmation: '',
     },
 
     validationSchema: Yup.object({
@@ -33,7 +33,7 @@ const Signup = () => {
       last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
       password: Yup.string().min(2).max(200).required(),
-      confirm_password: Yup.string().min(2).max(200).required(),
+      password_confirmation: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
       console.log('data ', data);
@@ -68,7 +68,7 @@ const Signup = () => {
                   className="icon_img"
                 />
               </Form.Group> 
-              <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
+              <Form.Group controlId="formBasiclast-name" className="singup-inputfield mr-sm-3">
                 <Form.Control size="lg" type="text" placeholder="Last Name" className="icons_fields_b" value={formik.values.last_name} onChange={formik.handleChange} name="last_name" />
               </Form.Group>
             </div>
@@ -94,15 +94,15 @@ const Signup = () => {
               />
           </Form.Group>
           {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
-          <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="password" placeholder="Confirm Password" className="icons_fields" value={formik.values.confirm_password} onChange={formik.handleChange} name="confirm_password"/>
+          <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
+            <Form.Control size="lg" type="password" placeholder="password confirmation" className="icons_fields" value={formik.values.password_confirmation} onChange={formik.handleChange} name="password_confirmation"/>
             <img
                 src={Passwordicon}
                 alt="Icon"
                 className="icon_img"
               />
           </Form.Group>
-          {formik.errors.confirm_password ? (<p className="validation-messages">{formik.errors.confirm_password}</p>) : null}
+          {formik.errors.password_confirmation ? (<p className="validation-messages">{formik.errors.password_confirmation}</p>) : null}
           {state.errors && state.errors.length ? (
             <p className="validation-messages">{state.errors.join('\n')}</p>
           ) : null}

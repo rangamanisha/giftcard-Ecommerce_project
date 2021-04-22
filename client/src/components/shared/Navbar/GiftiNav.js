@@ -37,6 +37,7 @@ const GiftiNav = () => {
         <Topbar
             bg={bg}
             variant={variant}
+            first_name={authState.first_name}
             logoIcon={Logo}
             locationIcon={Location}
             cartIcon={Cart}

@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
-import Passwordicon from '../assets/Password-icon.svg';
+import Calendericon from '../assets/calendar-alt.svg';
+import Phoneicon from '../assets/phone-alt.svg';
 import Col from 'react-bootstrap/Col';
 import { getProfileState } from '../reducer/profile.reducer';
 import { getprofileListAction } from '../actions/profile.actions';
@@ -21,8 +22,6 @@ const UserProfile = () => {
   useEffect(() => {
         dispatch(getprofileListAction({}));
     }, [dispatch]);
-
-
 
 
     return (
@@ -47,7 +46,7 @@ const UserProfile = () => {
           <Form.Group  controlId="formGridEmail" className="w-75 mt-2 mx-auto icons_login">
             <Form.Control size="sm" type="date" id="example-date-input" className="profile-iconsfields" name="date" />
             <img
-              src={Emailicon}
+              src={Calendericon}
               alt="Icon"
               className="profile_icon"
             />
@@ -65,7 +64,7 @@ const UserProfile = () => {
         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto icons_login">
           <Form.Control size="sm" type="text" placeholder="phone number" className="profile-iconsfields"  name="confirm_password"/>
           <img
-              src={Passwordicon}
+              src={Phoneicon}
               alt="Icon"
               className="profile_icon"
             />

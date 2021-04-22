@@ -32,13 +32,15 @@ export const profileSlice = createSlice({
         .addCase(getprofileListAction.fulfilled, (state, action) => {
             const response = action.payload;
             debugger;
+            if(response.code === 200) {
                 state.is_active = true;
-                state.first_name = response.first_name;
-                state.last_name = response.last_name;
-                state.language = response.language;
-                state.email = response.email;
+                state.first_name = response.data.profile.first_name;
+                state.last_name = response.data.profile.last_name;
+                state.language = response.data.profile.language;
+                state.email = response.data.profile.email;
                 state.date_of_birth = response.date_of_birth;
-                state.country = response.country;
+                state.country = response.data.profile.nationality;
+            }
         })
         .addCase(getprofileListAction.rejected, (state, action) => {
             state.is_active = true;

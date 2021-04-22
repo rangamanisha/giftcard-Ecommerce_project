@@ -7,6 +7,7 @@ export const AUTH_INITIAL_STATE_LOGIN = {
     message:null,
     errors:null,
     isAuthenticated: false,
+    first_name: null,
     accessToken: null,
     idToken: null,
     refreshToken: null,
@@ -36,10 +37,12 @@ export const authSlice = createSlice({
         })
         .addCase(loginAction.fulfilled, (state, action) => {
             const response = action.payload;
+            debugger;
             if(response.code === 200) {
                 state.user = response.data.user;
                 state.accessToken = response.data.user.access_token;
                 state.isAuthenticated = true;
+                state.first_name = response.data.user.first_name;
                 localStorage.setItem('access_token', response.data.user.access_token);
                 localStorage.setItem('first_name', response.data.user.first_name);
             }
@@ -50,9 +53,6 @@ export const authSlice = createSlice({
             else if(response.code === 401) {
             state.user = null;
             state.errors = [response.message || response.detail || '']
-            }
-            if(response.code === undefined){
-                state.errors = [response.message || response.detail || '']
             }
         })
         .addCase(loginAction.rejected, (state, action) => {

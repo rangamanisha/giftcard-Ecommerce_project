@@ -25,7 +25,6 @@ const Login = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
   
-  
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -93,6 +92,7 @@ const Login = () => {
           </Form.Group>
 
           {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
+    
 
           <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
 
@@ -119,9 +119,11 @@ const Login = () => {
               <Link className="link-color" to="/auth/forgotpassword">Forgot me?</Link>
             </Form.Group>
           </div>
+
           {state.errors && state.errors.length ? (
             <p className="validation-messages">{state.errors.join('\n')}</p>
           ) : null}
+
           <Button
             className="btn-custom mt-3"
             variant="info"

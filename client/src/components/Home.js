@@ -12,7 +12,6 @@ import Fade from 'react-bootstrap/Fade';
 
 
 const Home = () => {
-debugger;
   const state = useSelector(getAuthState);
 
   console.log(state.first_name);
