@@ -493,10 +493,11 @@ input::-webkit-input-placeholder {
 }
 
 .select-card-button {
-  width: 100px;
+  width: 104px;
   border-radius: 5px;
   border-color: #B2B2C9;
   color: #11142D;
+  font-size: 20px;
 }
 
 .selects-card-button-a {
@@ -519,12 +520,12 @@ input::-webkit-input-placeholder {
 .select-card-text {
   font-family: Cairo;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 22px;
 }
 .select-card-text-lg {
   font-family: Cairo;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 34px;
 }
 
 .nav-btn-link {
@@ -648,8 +649,8 @@ input::-webkit-input-placeholder {
   margin: 4px 4px 33px 16px;
   padding: -0.5% 0.5%;
   font-size: 19px;
-  padding: 7px 23px;
-  width: 176px;
+  padding: 5px 38px;
+  width: 204px;
   height: 41px;
   text-align: left;
   border: 0.800000011920929px solid #B2B2C9;
@@ -744,4 +745,12 @@ input::-webkit-input-placeholder {
   color:black !important;
   opacity: 100%;
   background: none;
+}
+img.templatetheme.ml-5 {
+  height: 119px;
+  width: 121px;
+  margin: 36px 0px;
+}
+img.templatetheme.ml-5:hover{
+border: 1px solid #00B2AE !important;
 }
