@@ -31,7 +31,7 @@ const Cards = () => {
           selection of +4,000 brands in +100 countries
         </p>
         <div>
-          <Button className="custom-button mr-sm-3" onClick={() => history.push('allfeaturedcards')}>
+          <Button className="custom-button mr-sm-3" onClick={() => history.push('allcards')}>
             Start Gifiting&nbsp;
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>

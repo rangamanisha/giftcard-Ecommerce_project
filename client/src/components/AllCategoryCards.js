@@ -1,5 +1,8 @@
 import React from 'react';
-import AllCategoryCards from './AllCategoryCards';
+import Carousel from "react-elastic-carousel";
+import Item from "./item";
+import Allmenu from "../assets/allmenu.svg";
+import CategoryCard from './categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
@@ -12,7 +15,7 @@ import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {useHistory, Link} from 'react-router-dom';
 
 
-function AllGiftCard() {
+function AllCategoryCards() {
   const dispatch = useDispatch();
   const history = useHistory();
   const state = useSelector(getCategoryState)
@@ -92,39 +95,39 @@ function AllGiftCard() {
     
 
     <div class="allGiftCard">
-      <div>
-        <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
-        <p className="giftiallcard-text-a">Browse by Category</p>
-        <AllCategoryCards/>
-      </div>
-        <div className="gificards ">
+      <div className="slideclass" >
+        <Carousel pagination={0} breakPoints={breakPoints}>
+          <Item>
+          <div className="box">
+            <a href="#/">
+              <img
+                src={Allmenu}
+                alt="Icon"
+                style={{ width: "100%", height: "30px" }}
+              />
+              <br />
+              <p className="products_icons">All Gift Cards</p>
+            </a>
+          </div>
+          </Item>
           {
-            isEmpty(get(brandState, 'brands')) ? 
-                map(allTheBrands, (brand, i) => (
-                  <>
-                    <Link to="/selectcard">
-                      <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
-                    </Link>
-                  </>
-                ))
-              
-              
-            : 
-            
-              
-              map(get(brandState, 'brands'), (brand, i) => (
-                
-                <>
-                {i <= 16 ? 
-                <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> 
-                    : null} 
-                </>
-              ) )
-            }
-        </div>
-      <div class="text-center"><button  onClick={() => history.push('AllCards')} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
-</div>
+            !isEmpty(categories) && map(categories, (category) => (
+              <>
+                <Item>
+                  {
+                    <button className="transparentButton" onClick={() => getCardsWithCategory(category)}>
+                      <CategoryCard category={category} key={category.id} nowActive={category.id === activeCategory ? true : false} />
+                    </button>
+                  }
+                </Item>
+              </>
+            ))
+          }
+    
+    </Carousel>
+    </div>
+  </div>
     )
 }
 
-export default AllGiftCard;
+export default AllCategoryCards;

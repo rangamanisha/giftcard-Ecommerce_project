@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { map, isEmpty } from 'lodash';
 import { featureBrandsAction } from '../actions/brands.action';
 import { getBrandsState } from '../reducer/brands.reducer';
-import AllGiftCard from "./AllGiftCard";
-
 import { get } from 'lodash'
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
@@ -19,7 +17,6 @@ const AllFeaturedCards = () => {
   const giftunitState = useSelector(getGiftcardsState);
   const fetaured_brands = get(state, 'data')
   const brandsWithfeatutre = get(state, 'featured_brands')
-  // const fetaured_brands1 = get(brandsWithfeatutre,'data')
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2, itemsToScroll: 1 },
@@ -37,7 +34,6 @@ const AllFeaturedCards = () => {
   return (
     <div>
       <div>
-      {/* {<AllGiftCard/>} */}
     </div>
       <div className="cardgifiti-card">
         <p className="giftiallcard-text">Brands recommended for you in the UAE</p>
@@ -46,7 +42,6 @@ const AllFeaturedCards = () => {
         <br />
         Personalized gift vouchers delivered online & redeemable at popular Brands
       </p>
-
         <div className="gificards">
           {
             <>
