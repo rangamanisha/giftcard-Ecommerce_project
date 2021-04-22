@@ -1,38 +1,53 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Footer from "./Footer";
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
+import Passwordicon from '../assets/Password-icon.svg';
 import { signupAction } from '../actions/auth.actions';
+import { getAuthState } from '../reducer/auth.reducer'
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const state = useSelector(getAuthState);
+  const history = useHistory();
+
 
   const formik = useFormik({
     initialValues: {
       first_name: '',
       last_name: '',
       email: '',
-      country_name: '',
-      phone: '',
-      lang_key: 'en'
+      password : '',
+      password_confirmation: '',
     },
+
     validationSchema: Yup.object({
       first_name: Yup.string().min(2).max(200).required(),
       last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
-      country_name: Yup.string().min(2).max(200).required(),
-      phone: Yup.string().min(10).max(10).required()
+      password: Yup.string().min(2).max(200).required(),
+      password_confirmation: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
       console.log('data ', data);
       dispatch(signupAction(data));
     }
   });
+
+
+  useEffect(() => {
+    if (state.signupSuccess) {
+      history.push({ pathname: '/' })
+    }
+  },
+[state.signupSuccess, history]);
 
   return (
     <>
@@ -46,35 +61,51 @@ const Signup = () => {
           <Form onSubmit={formik.handleSubmit} className="user" >
             <div className="row">
               <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
-                <Form.Control size="lg" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={formik.handleChange} name="first_name" />
+                <Form.Control size="md" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={formik.handleChange} name="first_name" />
                 <img
                   src={Usericon}
                   alt="Icon"
                   className="icon_img"
                 />
               </Form.Group> 
-              <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
+              <Form.Group controlId="formBasiclast-name" className="singup-inputfield mr-sm-3">
                 <Form.Control size="lg" type="text" placeholder="Last Name" className="icons_fields_b" value={formik.values.last_name} onChange={formik.handleChange} name="last_name" />
               </Form.Group>
             </div>
 
+            {formik.errors.first_name ? (<p className="validation-messages">{formik.errors.first_name}</p>) : null}
+
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-              <Form.Control size="lg" type="email" placeholder="Enter email" className="icons_fields" value={formik.values.email} onChange={formik.handleChange} name="email" />
+              <Form.Control size="md" type="email" placeholder="Enter email" className="icons_fields" value={formik.values.email} onChange={formik.handleChange} name="email" />
               <img
                 src={Emailicon}
                 alt="Icon"
                 className="icon_img"
               />
             </Form.Group>
+            {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
 
-            <Form.Group controlId="formBasictel" className="w-75 mx-auto icons_login">
-              <Form.Control size="lg" type="tel" placeholder="Phone" className="icons_fields" value={formik.values.phone} onChange={formik.handleChange} name="phone" />
-            </Form.Group>
-
-
-            <Form.Group controlId="formBasictext" className="w-75 mx-auto icons_login">
-              <Form.Control size="lg" type="text" placeholder="Country name" className="icons_fields" value={formik.values.country_name} onChange={formik.handleChange} name="country_name" />
-            </Form.Group>
+            <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
+            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={formik.handleChange} name="password"/>
+            <img
+                src={Passwordicon}
+                alt="Icon"
+                className="icon_img"
+              />
+          </Form.Group>
+          {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
+          <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
+            <Form.Control size="lg" type="password" placeholder="password confirmation" className="icons_fields" value={formik.values.password_confirmation} onChange={formik.handleChange} name="password_confirmation"/>
+            <img
+                src={Passwordicon}
+                alt="Icon"
+                className="icon_img"
+              />
+          </Form.Group>
+          {formik.errors.password_confirmation ? (<p className="validation-messages">{formik.errors.password_confirmation}</p>) : null}
+          {state.errors && state.errors.length ? (
+            <p className="validation-messages">{state.errors.join('\n')}</p>
+          ) : null}
 
             <Button
             className="btn-custom mt-3"
@@ -85,7 +116,7 @@ const Signup = () => {
             Sign up
           </Button>
 
-            <p className="text-center mt-3">Already have an account ? Log in</p>
+            <p className="text-center mt-3">Already have an account ? <Link to="/auth/login">Log in</Link></p>
 
             <table width="100%">
               <tbody>
@@ -111,7 +142,6 @@ const Signup = () => {
           </Form>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

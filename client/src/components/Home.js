@@ -1,18 +1,84 @@
 import React from "react";
 import Cards from "./Cards";
-import Footer from "./Footer";
 import StartGifting from "./StartGifting";
 import RecommandedCards from './RecommandedCards';
 import AllGiftCard from "./AllGiftCard";
+import Alert from 'react-bootstrap/Alert';
+import checkbox from '../assets/checkbox.svg';
+import {useState, useEffect} from 'react';
+import { getAuthState } from '../reducer/auth.reducer';
+import { getUserActiveState } from '../reducer/useractive.reducer';
+import { getuseractiveAction } from '../actions/useractive.actions';
+import Fade from 'react-bootstrap/Fade';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Home = () => {
+  const state = useSelector(getAuthState);  
+  const useractive = useSelector(getUserActiveState);
+  const dispatch = useDispatch();
+  const [isValid, setIsValid] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [message, setMessage] = useState('');
+  
+
+
+  useEffect(() => {
+        dispatch(getuseractiveAction({}));
+        if(useractive.verified){
+          setIsValid(true);
+          setMessage('Your account has been successfully created. Go to profile !');
+          window.setTimeout(()=>{
+            setVisible(false)
+          },3000)    
+        }
+    }, [dispatch, useractive.verified]);
+
+
+  useEffect(() => {
+    if (state.isAuthenticated) {
+      setIsValid(true);
+      setMessage('Login Successfully !');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },3000)
+
+    }
+    if (state.signupSuccess) {
+      setIsValid(true);
+      setMessage('A verification link has been sent to your provided email address. Check your mailbox');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },3000)
+    }
+
+    if (state.status) {
+      setIsValid(true);
+      setMessage('A verification link has been sent to your provided email address. Check your mailbox');
+      window.setTimeout(()=>{
+        setVisible(false)
+      },3000)
+    }
+  },
+  [state.isAuthenticated, state.signupSuccess, state.status]);
+
   return (
     <>
+    <div>
+     {isValid
+      ? <Fade><Alert variant="info" transition={visible}><img
+      src={checkbox}
+      className="mr-3"
+      style={{ width: "30px"}}
+      alt="Icon"
+    />{message}</Alert></Fade>
+      : <></>
+    }
+    </div>
       <Cards />
       <StartGifting />
       <RecommandedCards />
       <AllGiftCard />
-      <Footer />
     </>
   );
 }
