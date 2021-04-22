@@ -61,7 +61,7 @@ function AllGiftCard() {
   }, [giftunitState.giftunit_id])
   React.useEffect(() => {
     dispatch(giftCardsUnitAction({
-      currency: 1,
+      currency: giftunitState.giftunit_id,
       program_id: 1,
       giftunit_id: giftunitState.giftunit_id
     }))

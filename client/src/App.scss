@@ -486,12 +486,24 @@ input::-webkit-input-placeholder {
 }
 
 .select-card-size {
-  width: 344px;
-  height: 217px;
+  width: 50%;
+  height: 50%;
+}
+
+.giftslabs{
+  padding-left: 10px;
+}
+
+.row{
+  padding-left: 10px;
 }
 
 .select-card-text {
   font-family: Cairo-Bold;
+}
+
+.giftslabs{
+  padding-left: 10px;
 }
 
 .nav-btn-link {

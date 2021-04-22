@@ -7,10 +7,13 @@ import Footer1 from './Stikyfooter';
 import {useDispatch, useSelector} from 'react-redux';
 import {productDescriptionAction, termBrandAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
+import {giftCardsUnitAction} from '../actions/gitCards.actions';
+import {getGiftcardsState} from '../reducer/giftCards.reducer';
 
 
 const SelectCards = () => {
 const dispatch = useDispatch();
+const giftunitState = useSelector(getGiftcardsState);
 const productAndTermState = useSelector(getBrandsState);
 React.useEffect(() => {
     dispatch(productDescriptionAction({
@@ -24,12 +27,20 @@ React.useEffect(() => {
     }))
 
 }, [])
+
+React.useEffect(() => {
+    dispatch(giftCardsUnitAction({
+        currency: giftunitState.giftunit_id,
+        program_id: 1,
+        giftunit_id: giftunitState.giftunit_id
+    }))
+}, [giftunitState.giftunit_id])
  
     return (
         <>
             <div className="row">
-                <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 " />
-                <div class="col ml-5 mt-5">
+                <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
+                <div class="col ml-5 mt-5 col-6">
                     <h1 className="select-card-text">Amazon eGift Card</h1>
                     <h5 className="select-card-text mt-3">Select Card Value (AED)</h5>
                     <div className="mt-3">
@@ -39,7 +50,7 @@ React.useEffect(() => {
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">500</Button>
                     </div>
                     <h5 className="select-card-text mt-3">Gifting for</h5>
-                    <div className="row mr-sm-3 mt-3">
+                    <div className="row mr-sm-3 mt-3 ">
                         <Form.Check type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" />
                         <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" />
                     </div>
@@ -82,11 +93,7 @@ React.useEffect(() => {
                     <small className="mr-sm-5 ml-33">Total Amount</small>
                     <h4 className="mr-sm-5 select-card-text">AED 250</h4>
                     <div class="row">
-
-                    </div>
-
-                    <div className="col">
-                    <div className="custom-input">
+                        <div className="custom-input">
                             <div class="input-group">
                                 <div className="d-flex">
                                     <span class="input-group-btn">
@@ -99,8 +106,11 @@ React.useEffect(() => {
                                 </div>
                             </div>
                         </div>
-                    <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
-                    <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
+                    </div>
+
+                    <div className="col">
+                        <Button variant="info" className="mr-sm-5 selects-card-button-a">Add to cart</Button>
+                        <Button variant="primary" className="mr-sm-5 selects-card-button-b">Buy Now</Button>
                     </div>
                 </div>
             </Footer1>
