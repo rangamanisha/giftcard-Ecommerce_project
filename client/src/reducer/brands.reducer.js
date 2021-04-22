@@ -13,7 +13,8 @@ export const BRANDS_INIT_STATE = {
     image_type:false,
     list_type:false,
     category_id:"",
-    id:''
+    id:'',
+    brand_id:""
 }
 
 export const BRAND_REDUCER = "brands";

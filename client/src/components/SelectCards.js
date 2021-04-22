@@ -19,10 +19,15 @@ React.useEffect(() => {
     dispatch(productDescriptionAction({
         currency:1,
         program_id:1,
+        brand_id:451
 
 
     }))
     dispatch(termBrandAction({
+        currency:1,
+        program_id:1,
+        brand_id:451
+
 
     }))
 

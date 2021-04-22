@@ -1,5 +1,5 @@
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
-import {giftCardsUnitAction} from '../actions/gitCards.actions';
+import {giftCardsUnitAction, getPaymentCurrencyAction, getConversionRateAction} from '../actions/gitCards.actions';
 import {filter, get} from 'lodash'
 
 
@@ -45,6 +45,35 @@ export const giftcardSlice = createSlice({
         .addCase(giftCardsUnitAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
+        .addCase(getPaymentCurrencyAction.pending, (state, action) => {
+            state.errors = null;
+            state.data = null;
+        })
+        .addCase(getPaymentCurrencyAction.fullfilled, (state, action) => {
+            const response = action.payload;
+            const {data, code} = response;
+            if(200 === code){
+                state.giftcards = data
+            }
+        })
+        .addCase(getPaymentCurrencyAction.rejected, (stata, action) => {
+            state.errors = [actions.error.message || '']
+        })
+        .addCase(getConversionRateAction.pending, (state, action) => {
+            state.errors = null;
+            state.data = null;
+        })
+        .addCase(getConversionRateAction.fullfilled, (state, action) => {
+            const response = action.payload;
+            const {data, code} = response;
+            if(200 === code){
+                state.giftcards = data;
+            }
+        })
+        .addCase(getConversionRateAction.rejected, (state, action) => {
+            state.errors = [actions.error.message || '']
+        })
+        
     }
 })
 
