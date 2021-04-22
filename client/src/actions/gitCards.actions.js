@@ -7,7 +7,7 @@ export const giftCardsUnitAction = createAsyncThunk('gitfcards/listGiftCards', a
     return resposne;
 });
 
-export const getConversionRateAction = createAsyncThunk('giftcards/listGiftCards', async(payload, thunkAPI) => {
+export const getConversionRateAction = createAsyncThunk('giftcards/listPaymentConversions', async(payload, thunkAPI) => {
     const request = {
         currency:payload.currency
     }
@@ -15,7 +15,7 @@ export const getConversionRateAction = createAsyncThunk('giftcards/listGiftCards
     return response;
 })
 
-export const getPaymentCurrencyAction = createAsyncThunk('giftcards/listGiftCards', async(payload, thunkAPI) => {
+export const getPaymentCurrencyAction = createAsyncThunk('giftcards/listPaymentCurrency', async(payload, thunkAPI) => {
     const response = await getPaymentCurrencyService();
     return response;
 })
