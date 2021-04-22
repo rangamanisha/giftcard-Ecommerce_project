@@ -19,3 +19,4 @@ export const getPaymentCurrencyAction = createAsyncThunk('giftcards/listPaymentC
     const response = await getPaymentCurrencyService();
     return response;
 })
+

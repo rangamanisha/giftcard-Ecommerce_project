@@ -8,14 +8,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {productDescriptionAction, termBrandAction} from '../actions/brands.action';
 import {getBrandsState} from '../reducer/brands.reducer';
 import {giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction} from '../actions/gitCards.actions';
-import {getGiftcardsState} from '../reducer/giftCards.reducer';
-
+import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
+import {get} from 'lodash';
 
 
 const SelectCards = () => {
 const dispatch = useDispatch();
 const giftunitState = useSelector(getGiftcardsState);
 const productAndTermState = useSelector(getBrandsState);
+const card = giftunitState.selectedBrand;
+const payment = giftunitState.selectedCountry;
 React.useEffect(() => {
     dispatch(productDescriptionAction({
         currency:1,
@@ -60,10 +62,10 @@ React.useEffect(() => {
     return (
         <>
             <div className="row">
-                <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
+                <img src={get(card, 'images.color.medium_rectangle' )} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
                 <div class="col ml-5 mt-5 col-6">
-                    <h1 className="select-card-text">Amazon eGift Card </h1>
-                    <h5 className="select-card-text mt-3">Select Card Value (AED)</h5>
+                    <h1 className="select-card-text">{get(card, 'name')} </h1>
+                    <h5 className="select-card-text mt-3">{`Select Card Value (${get(payment, 'unit_name_short')})`}</h5>
                     <div className="mt-3">
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">50</Button>
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>

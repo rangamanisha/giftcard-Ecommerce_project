@@ -11,7 +11,7 @@ import './Topbar.scss';
 
 const Topbar = (props) => {
     const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
-
+debugger
     const history = useHistory();
 
     const getProfile = () => {
