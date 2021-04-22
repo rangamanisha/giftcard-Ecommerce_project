@@ -47,7 +47,7 @@ export const giftcardSlice = createSlice({
         })
         .addCase(getPaymentCurrencyAction.pending, (state, action) => {
             state.errors = null;
-            state.data = null;
+            state.giftcards = null;
         })
         .addCase(getPaymentCurrencyAction.fullfilled, (state, action) => {
             const response = action.payload;
@@ -61,7 +61,7 @@ export const giftcardSlice = createSlice({
         })
         .addCase(getConversionRateAction.pending, (state, action) => {
             state.errors = null;
-            state.data = null;
+            state.giftcards = null;
         })
         .addCase(getConversionRateAction.fullfilled, (state, action) => {
             const response = action.payload;
