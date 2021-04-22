@@ -16,7 +16,7 @@ const Product = () => {
              <div className = "row">
 <div className ="col-4">
     
-    <img src={GiftGlobalCard} className="mr-sm-5 mt-5" alt="GiftGlobalCard" />
+    <img src={GiftGlobalCard} className="ml-sm-5 mt-5" alt="GiftGlobalCard" />
    
 </div>
 <div className ="col-8" style = {{paddingLeft:"10px"}}>

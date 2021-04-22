@@ -5,6 +5,8 @@ import {categoryReducer,CATEGORY_REDUCER} from './category.reducer';
 import {brandsReducer, BRAND_REDUCER} from './brands.reducer'
 import { giftCardsReducer, GIFTCARD_REDUCER } from "./giftCards.reducer";
 
+
+
 const store = configureStore({
   reducer: {
     [AUTH_FEATURE_KEY]: authReducer,
@@ -15,7 +17,7 @@ const store = configureStore({
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-  preloadedState: {},
+  preloadedState: {}
 });
 
 export default store;

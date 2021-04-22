@@ -3,7 +3,7 @@ import Footer from './Footer';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import plusicon from '../assets/+.svg';
-import minusicon  from '../assets/minus.svg';
+import minusicon from '../assets/minus.svg';
 import radio from '../assets/radio.svg';
 import AmazonMedium from "../assets/amazon_medium.png";
 import Footer1 from './Stikyfooter';
@@ -30,7 +30,7 @@ const SelectCards = () => {
 
     return (
         <>
-            <div className="row">
+            <div className="row ml-5 mr-9">
                 <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 " />
                 <div class="col ml-5 mt-5">
                     <h1 className="select-card-text">Amazon eGift Card</h1>
@@ -43,8 +43,8 @@ const SelectCards = () => {
                     </div>
                     <h5 className="select-card-text mt-3">Gifting for</h5>
                     <div className="row mr-sm-3 mt-3 mb-3 ">
-                    <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  MySelf</Button>
-                    <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  SomeoneElse</Button>
+                        <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  MySelf</Button>
+                        <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  SomeoneElse</Button>
                     </div>
                     <div>
                         <div className="nav">
@@ -82,12 +82,12 @@ const SelectCards = () => {
             </div>
             <Footer1>
                 <div className="row">
-                    <small className="mr-sm-5 ml-33">Total Amount</small>
-                    <h4 className="mr-sm-5 select-card-text">AED 250</h4>
-                    <div className="col">
+                    <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
+                    <h4 className="ml-sm-2 amttext2">AED 250</h4>
+                    <div className="col mr-5">
                         <ButtonGroup className="mr-3" aria-label="Second group">
-                                <Button variant="light"> <img src={minusicon} /></Button> <Button variant="light">1</Button> <Button variant="light"> <img src={plusicon}  /></Button>
-                            </ButtonGroup>
+                            <Button variant="light"> <img src={minusicon} /></Button> <Button variant="light">1</Button> <Button variant="light"> <img src={plusicon} /></Button>
+                        </ButtonGroup>
                         <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
                     </div>

@@ -40,12 +40,11 @@ const AllFeaturedCards = () => {
       {/* {<AllGiftCard/>} */}
     </div>
       <div className="cardgifiti-card">
-        <p className="giftiallcard-text">Featured Cards</p>
+        <p className="giftiallcard-text">Brands recommended for you in the UAE</p>
         <p className="allgiftcard-text">
           Buy Most Popular eGift Cards in UAE
         <br />
-        Personalized gift vouchers delivered online & redeemable at popular
-        Brands
+        Personalized gift vouchers delivered online & redeemable at popular Brands
       </p>
 
         <div className="gificards">
@@ -57,7 +56,7 @@ const AllFeaturedCards = () => {
                     <Item>
                       <>
                         <Link to="/selectcard">
-                          <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards" alt={brand.name} />
+                          <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards" alt={brand.name} />
                         </Link>
                       </>
                     </Item>

@@ -108,21 +108,22 @@ function AllGiftCard() {
       <div>
         <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
+        
       </div>
       <div className="slideclass" >
         <Carousel pagination={0} breakPoints={breakPoints}>
           <Item>
-            <div className="box" >
-
+          <div className="box">
+            <a href="#/">
               <img
                 src={Allmenu}
                 alt="Icon"
-                style={{ width: "30px", height: "30px" }}
+                style={{ width: "100%", height: "30px" }}
               />
               <br />
               <p className="products_icons">All Gift Cards</p>
-
-            </div>
+            </a>
+          </div>
           </Item>
           {
             !isEmpty(categories) && map(categories, (category) => (
@@ -140,8 +141,7 @@ function AllGiftCard() {
     
     </Carousel>
     </div>
-    {<AllFeaturedCards/>}
-        <div className="gificards mt-5 ">
+        <div className="gificards ">
           {
             isEmpty(get(brandState, 'brands')) ? 
 
@@ -149,7 +149,7 @@ function AllGiftCard() {
                 map(allTheBrands, (brand, i) => (
                   <>
                     <Link to="/selectcard">
-                      <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+                      <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
                     </Link>
                   </>
                 ))
@@ -162,7 +162,7 @@ function AllGiftCard() {
                 
                 <>
                 {i <= 16 ? 
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
+                <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> 
                     : null} 
                 </>
               ) )

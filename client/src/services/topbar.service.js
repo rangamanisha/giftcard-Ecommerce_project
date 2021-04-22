@@ -1,6 +1,6 @@
-import { apiCall } from "./api"
+import { apiCall, API_URL } from './api';
 
 export const getCountriesAPI = () => {
-    const url = `${process.env.REACT_APP_API_URL_OLD}/countries`;
-    return apiCall(url, 'GET', null, null, false);
-}
+  const url = `${API_URL}/v1/countries`;
+  return apiCall(url, 'GET', null, null, false);
+};

@@ -170,7 +170,7 @@ function AllCards() {
               <>{
                 map(get(category, 'brands'), (brand, i) => (
                   <>
-                    <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} />
+                    <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
                   </>
                 ))
               }
@@ -180,25 +180,25 @@ function AllCards() {
               
               map(get(brandState, 'brands'), (brand, i) => (
                 <>
-                <img src={get(brand, 'images.color.medium_rectangle')} className="mr-sm-5 imgcards mt-5" alt={brand.name} /> 
+                <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> 
                 </>
               ) )
             }
             
 
 
-          {/* <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
-        <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
-        <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
-        <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
-        <img src={Carrefour} className="mr-sm-5 imgcards mt-5" alt="Carrefour" />
-        <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
-        <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
-        <img src={GiftGlobalCard} className="mr-sm-5 imgcards mt-5" alt="GiftGlobalCard" />
-        <img src={Ballooncard} className="mr-sm-5 imgcards mt-5" alt="Ballooncard" />
-        <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
-        <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
-        <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" /> */}
+          {/* <img src={Appleitunes} className="ml-sm-5 imgcards mt-5" alt="Appleitunes" />
+        <img src={Asec} className="ml-sm-5 imgcards mt-5" alt="Asec" />
+        <img src={Ace} className="ml-sm-5 imgcards mt-5" alt="Ace" />
+        <img src={Careem} className="ml-sm-5 imgcards mt-5" alt="Careem" />
+        <img src={Carrefour} className="ml-sm-5 imgcards mt-5" alt="Carrefour" />
+        <img src={Biobox} className="ml-sm-5 imgcards mt-5" alt="Biobox" />
+        <img src={Amazon} className="ml-sm-5 imgcards mt-5" alt="Amazon" />
+        <img src={GiftGlobalCard} className="ml-sm-5 imgcards mt-5" alt="GiftGlobalCard" />
+        <img src={Ballooncard} className="ml-sm-5 imgcards mt-5" alt="Ballooncard" />
+        <img src={Bollywoodparks} className="ml-sm-5 imgcards mt-5" alt="Bollywoodparks" />
+        <img src={Deliveroo} className="ml-sm-5 imgcards mt-5" alt="Deliveroo" />
+        <img src={Mylist} className="ml-sm-5 imgcards mt-5" alt="Mylist" /> */}
 
         </div>
 </div>

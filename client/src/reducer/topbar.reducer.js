@@ -14,7 +14,6 @@ export const TOPBAR_FEATURE_KEY = 'topbar';
 export const topbarAdapter = createEntityAdapter();
 export const initialTopBarState = topbarAdapter.getInitialState(TOPBAR_INITIAL_STATE);
 
-
 export const topbarSlice = createSlice({
     name: TOPBAR_FEATURE_KEY,
     initialState: TOPBAR_INITIAL_STATE,
@@ -48,12 +47,9 @@ export const topbarSlice = createSlice({
     }
 });
 
-
 export const topbarReducer = topbarSlice.reducer;
 export const topbarActions = topbarSlice.actions;
-export const { selectAll, selectEntities} = topbarAdapter.getSelectors();
+export const { selectAll, selectEntities } = topbarAdapter.getSelectors();
 export const getTopBarState = (rootState) => rootState[TOPBAR_FEATURE_KEY];
 export const selectAllTopBar = createSelector(getTopBarState, selectAll);
 export const selectTopBarEntities = createSelector(getTopBarState, selectEntities);
- 
-

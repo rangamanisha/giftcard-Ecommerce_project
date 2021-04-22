@@ -1,5 +1,5 @@
 import {apiCall} from './api';
-export const API_URL = process.env.REACT_APP_API_URL_OLD;
+export const API_URL = process.env.REACT_APP_API_URL;
 
 export const giftCardsUnitService = (giftcards) => {
     const url = `${API_URL}/giftcard_units`;

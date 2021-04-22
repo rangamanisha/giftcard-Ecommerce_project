@@ -12,7 +12,6 @@ import { getCountriesListAction, selectCountryAction } from '../../../actions/to
 import Topbar from '../Topbar';
 import {giftCardsUnitAction} from '../../../actions/gitCards.actions'
 
-
 const GiftiNav = () => {
     const bg = 'white';
     const variant = 'white';
@@ -27,6 +26,9 @@ const GiftiNav = () => {
         dispatch((giftCardsUnitAction));
     }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getCountriesListAction());
+  }, [dispatch]);
 
     const countryChanged = (event) => {
         

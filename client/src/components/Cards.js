@@ -44,46 +44,54 @@ const Cards = () => {
       </Col>
       </Row>
 
-    <Row className="mt-5 icon-margin">
+        <Row className="mt-5 icon-margin">
+          <Col sm>
+            <div className="widgets_div">
+              <div className="icon_div">
+                <span>
+                  <Image src={Country} className="mr-sm-3" fluid />
+                </span>
+              </div>
+              <div className="text_div">
+                <span> Select a country and browse e-gift cards within</span>
+                <br />
+                <span>4,000+ brands</span>
+              </div>
+            </div>
+          </Col>
 
-      <Col sm>
-      <div className="widgets_div">
-        <div className="icon_div">
-          <span><Image src={Country} className="mr-sm-3" fluid/></span>
-        </div>
-        <div className="text_div">
-          <span> Select a country and browse e-gift cards within</span><br />
-          <span>4,000+ brands</span>
-        </div>
-      </div>
-      </Col>
+          <Col sm>
+            <div className="widgets_div">
+              <div className="icon_div">
+                <span>
+                  <Image src={Target} className="mr-sm-3" />
+                </span>
+              </div>
+              <div className="text_div">
+                <span>Treat yourself or send an e-gift with a </span>
+                <br />
+                <span>personalised message by email, sms or whatsapp</span>
+              </div>
+            </div>
+          </Col>
 
-      <Col sm>
-      <div className="widgets_div">
-        <div className="icon_div">
-          <span><Image src={Target} className="mr-sm-3"/></span>
-        </div>
-        <div className="text_div">
-          <span>Treat yourself or send an e-gift with a </span><br />
-          <span>personalised message by email, sms or whatsapp</span>
-        </div>
-      </div>
-      </Col>
-
-     <Col sm>
-      <div className="widgets_div">
-        <div className="icon_div">
-          <span><Image src={Giftcard} className="mr-sm-3"/></span>
-        </div>
-        <div className="text_div">
-          <span>Buy with your credit or debit card or</span><br />
-          <span>using your Gifti Global card or points</span>
-        </div>
-      </div>
-      </Col>
-      </Row>
+          <Col sm>
+            <div className="widgets_div">
+              <div className="icon_div">
+                <span>
+                  <Image src={Giftcard} className="mr-sm-3" />
+                </span>
+              </div>
+              <div className="text_div">
+                <span>Buy with your credit or debit card or</span>
+                <br />
+                <span>using your Gifti Global card or points</span>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </React.Fragment>
-      </Container>
+    </Container>
   );
 };
 
