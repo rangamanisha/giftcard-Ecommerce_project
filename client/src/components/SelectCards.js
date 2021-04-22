@@ -1,30 +1,33 @@
 import React from 'react';
 import Footer from './Footer';
-import Button from 'react-bootstrap/Button';
+import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import plusicon from '../assets/+.svg';
+import minusicon  from '../assets/minus.svg';
+import radio from '../assets/radio.svg';
 import AmazonMedium from "../assets/amazon_medium.png";
 import Footer1 from './Stikyfooter';
-import {useDispatch, useSelector} from 'react-redux';
-import {productDescriptionAction, termBrandAction} from '../actions/brands.action';
-import {getBrandsState} from '../reducer/brands.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { productDescriptionAction, termBrandAction } from '../actions/brands.action';
+import { getBrandsState } from '../reducer/brands.reducer';
 
 
 const SelectCards = () => {
-const dispatch = useDispatch();
-const productAndTermState = useSelector(getBrandsState);
-React.useEffect(() => {
-    dispatch(productDescriptionAction({
-        currency:1,
-        program_id:1,
+    const dispatch = useDispatch();
+    const productAndTermState = useSelector(getBrandsState);
+    React.useEffect(() => {
+        dispatch(productDescriptionAction({
+            currency: 1,
+            program_id: 1,
 
 
-    }))
-    dispatch(termBrandAction({
+        }))
+        dispatch(termBrandAction({
 
-    }))
+        }))
 
-}, [])
- 
+    }, [])
+
     return (
         <>
             <div className="row">
@@ -39,9 +42,9 @@ React.useEffect(() => {
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">500</Button>
                     </div>
                     <h5 className="select-card-text mt-3">Gifting for</h5>
-                    <div className="row mr-sm-3 mt-3">
-                        <Form.Check type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" />
-                        <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" />
+                    <div className="row mr-sm-3 mt-3 mb-3 ">
+                    <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  MySelf</Button>
+                    <Button variant="outline-info" className="mr-sm-3 select-card-button"><img src={radio} />  SomeoneElse</Button>
                     </div>
                     <div>
                         <div className="nav">
@@ -81,26 +84,12 @@ React.useEffect(() => {
                 <div className="row">
                     <small className="mr-sm-5 ml-33">Total Amount</small>
                     <h4 className="mr-sm-5 select-card-text">AED 250</h4>
-                    <div class="row">
-                    <div className="custom-input">
-                            <div class="input-group">
-                                <div className="d-flex">
-                                    <span class="input-group-btn">
-                                        <Button variant="outline-info" className="plusbtn"> +</Button>
-                                    </span>
-                                    <input type="text" name="quant[1]" class="plusbtn" value="1" min="1" max="10" />
-                                    <span class="input-group-btn">
-                                        <Button variant="outline-info" className="plusbtn">-</Button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div className="col">
-
-                    <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
-                    <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
+                        <ButtonGroup className="mr-3" aria-label="Second group">
+                                <Button variant="light"> <img src={minusicon} /></Button> <Button variant="light">1</Button> <Button variant="light"> <img src={plusicon}  /></Button>
+                            </ButtonGroup>
+                        <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
             </Footer1>
