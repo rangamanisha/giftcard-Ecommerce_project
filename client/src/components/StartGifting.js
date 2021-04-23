@@ -5,12 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import StartingGift from "../assets/starting-gift.svg";
 import StartingGift2 from "../assets/start-giftting2.svg";
-import { useHistory  } from 'react-router-dom';
 
 
 const StartGifting = () => {
-    let history = useHistory();
-    const handleClick = () => history.push("/allfeaturedcards");
     return (
   <Row>
       <div className="cardgifiti-startgf custom-card row mx-auto mt-5">
@@ -73,7 +70,6 @@ const StartGifting = () => {
             variant="info"
             size="md"
             className="mt-3 startgf-fields-button"
-            onClick={handleClick}
           >
             Browse Gifts
           </Button>
@@ -86,11 +82,6 @@ const StartGifting = () => {
     </Col>
     </div>
     </Row>
-
-
-
-
-           
     )
 }
 

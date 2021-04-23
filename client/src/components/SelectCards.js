@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './Footer';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AmazonMedium from "../assets/amazon_medium.png";
@@ -40,7 +39,6 @@ const SelectCards = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
 
     )
