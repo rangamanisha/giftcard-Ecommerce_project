@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getBrandsState} from '../reducer/brands.reducer';
 import {giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction} from '../actions/gitCards.actions';
 import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
-import {get} from 'lodash';
+import {get, map} from 'lodash';
 
 
 const SelectCards = () => {
@@ -91,10 +91,11 @@ const SelectCards = () => {
                     <p className="select-card-text-lg">{get(card, 'name')}</p>
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
-                        <Button variant="outline-info" className="mr-sm-3 select-card-button">50</Button>
-                        <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>
+                        {map(get(card, 'denominations'), d => 
+                        <Button variant="outline-info" className="mr-sm-3 select-card-button">{d}</Button>)}
+                        {/* <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">250</Button>
-                        <Button variant="outline-info" className="mr-sm-3 select-card-button">500</Button>
+                        <Button variant="outline-info" className="mr-sm-3 select-card-button">500</Button> */}
                     </div>
                     <p className="select-card-text mt-5">Gifting for</p>
                     <div className="row mr-sm-3 mt-3 mb-3">
