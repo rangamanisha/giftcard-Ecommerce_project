@@ -11,7 +11,7 @@ import SelectCards from './components/SelectCards';
 import GiftiNav from './components/shared/Navbar/GiftiNav';
 
 import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
-import Contact from './components/shared/Contact/Contact';
+import Contact from './components/shared/ContactPage/Contact';
 import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
 import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 

@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import './EnquiryPage.css';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { FaTimes } from 'react-icons/fa';
 import { IoIosAdd } from 'react-icons/io';
 import { MdSearch } from 'react-icons/md';
 import { IoIosClose } from 'react-icons/io';
-
-import Header from '../Header/Header';
+import Header from '../HeaderPage/Header';
 
 function EnquiryPage() {
   return (
@@ -29,14 +27,6 @@ function EnquiryPage() {
                   <MdSearch />
                 </span>
               </div>
-
-              {/* <div class="input-group">
-                                <input type="text" class="form-control frequently-asked-input searchbar" placeholder="What are you looking for?" />
-                                
-
-                                <MdSearch style={serachStyle}/>
-                                
-                            </div> */}
             </div>
           </div>
           <div className="my-2">
@@ -71,21 +61,6 @@ function EnquiryPage() {
                 <IoIosClose style={{ position: 'absolute', right: '24px', top: '10px' }} />
               </div>
 
-              {/* <div className='d-flex flex-column justify-content-between p-2 account-container'>
-                                <p className='parah-style'>How do i change my password?</ p>
-                                <div>
-                                <p>Click on ‘Sign In’. Click on ‘Reset password’ next to your password.</p> Once you change your password, you will receive an email with a link to prompt you to change your password. Remember to check your spam folder if you don’t receive an email.
-                                </div>
-
-                            </div> */}
-
-              {/* <div class="input-group">
-                                <textarea class="form-control message-field" id="exampleTextarea" rows="3" placeholder="" /> 
-                                <p>How do i change my password?</p>
-                                <p>Click on Sign In:click on Reset password next to your password.</p>
-                                <p>once you change your password,you will receive an email with a link to prompt you to change your password.Remember to check your span folder if you don't receive an email</p>
-                                <FaTimes style={{ position: "absolute", right: "20px", top: "6px" }} />
-                            </div> */}
               <div className="input-group mt-4">
                 <input
                   type="text"
