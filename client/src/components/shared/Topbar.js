@@ -13,22 +13,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Topbar = (props) => {
-  const {
-    bg,
-    variant,
-    logoIcon,
-    locationIcon,
-    country,
-    countriesList,
-    searchIcon,
-    userLoginIcon,
-    shoppingCartIcon,
-    showLogin,
-    onCountrySelected
-  } = props;
+    const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
+const user = localStorage.getItem('first_name');
+const history = useHistory();
 
-  const user = localStorage.getItem('first_name');
-  const history = useHistory();
 
   const clearsession = () => {
     localStorage.clear();

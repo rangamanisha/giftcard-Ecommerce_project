@@ -9,12 +9,13 @@ import radio from '../assets/radio.svg';
 import AmazonMedium from "../assets/amazon_medium.png";
 import Footer1 from './Stikyfooter';
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { productDescriptionAction, termBrandAction } from '../actions/brands.action';
-import { getBrandsState } from '../reducer/brands.reducer';
-import { giftCardsUnitAction } from '../actions/gitCards.actions';
-import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import GiftGiftCard from './GiftGiftCard';
+import {useDispatch, useSelector} from 'react-redux';
+import {getBrandsState} from '../reducer/brands.reducer';
+import {giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction} from '../actions/gitCards.actions';
+import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
+import {get} from 'lodash';
 
 
 const SelectCards = () => {
@@ -25,6 +26,8 @@ const SelectCards = () => {
     const[count,setcount] = useState(1);
     const giftunitState = useSelector(getGiftcardsState);
     const productAndTermState = useSelector(getBrandsState);
+    const card = giftunitState.selectedBrand;
+    const payment = giftunitState.selectedCountry;
     const handleSelect = (eventKey1) => {
         seteventkey(eventKey1);
     }
@@ -37,14 +40,39 @@ const SelectCards = () => {
     const decrement = () => {
         count >1 ?setcount(count-1):setcount(1)
     }
-
     React.useEffect(() => {
         dispatch(productDescriptionAction({
-            currency: 1,
-            program_id: 1,
+            currency:1,
+            brand_id:451
+    
+    
         }))
+    
+    }, [productAndTermState.brand_id])
+    
+    React.useEffect(() => {
+        dispatch(termBrandAction({
+            currency:1,
+            brand_id:451
+    
+        }))
+    } , [productAndTermState.brand_id])
+    
+    React.useEffect(() => {
+        dispatch(getConversionRateAction({
+            brand_id:451
+        }))
+    
     }, [])
-
+    
+    React.useEffect(() => {
+        dispatch(getPaymentCurrencyAction({
+            currency:1,
+            brand_id: 451
+        }))
+    
+    }, [])
+    
     React.useEffect(() => {
         dispatch(giftCardsUnitAction({
             currency: giftunitState.giftunit_id,
@@ -53,14 +81,15 @@ const SelectCards = () => {
         }))
     }, [giftunitState.giftunit_id])
 
+    
     return (
 
         <>
             <div className="row">
-                <img src={AmazonMedium} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
+                <img src={get(card, 'images.color.medium_rectangle' )} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
                 <div class="col ml-5 mt-5 col-6">
-                    <p className="select-card-text-lg">Amazon eGift Card</p>
-                    <p className="select-card-text">Select Card Value (AED)</p>
+                    <p className="select-card-text-lg">{get(card, 'name')}</p>
+                    <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">50</Button>
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>

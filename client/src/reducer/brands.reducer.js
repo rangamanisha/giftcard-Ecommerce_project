@@ -13,7 +13,8 @@ export const BRANDS_INIT_STATE = {
     image_type:false,
     list_type:false,
     category_id:"",
-    id:''
+    id:'',
+    brand_id:""
 }
 
 export const BRAND_REDUCER = "brands";
@@ -27,13 +28,13 @@ export const brandsSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(termBrandAction.pending, (state,action) => {
             state.errors = null;
-            state.brands = null;
+            state.terms = null;
         })
         .addCase(termBrandAction.fulfilled, (state, action) => {
             const response = action.payload;
             const {data, code} = response;
             if(200 == code){
-                state.brands = data;
+                state.terms = data;
             }
             state.brands = response
         })
@@ -42,14 +43,17 @@ export const brandsSlice = createSlice({
         })
         .addCase(productDescriptionAction.pending, (state, action) => {
             state.errors = null;
-            state.brands = null;
+            state.description = null;
         })
         .addCase(productDescriptionAction.fulfilled, (state, action) => {
             const response = action.payload;
             const {data, code} = response;
             if(200 == code){
-                state.brands = data;
+                state.description = data;
             }
+        })
+        .addCase(productDescriptionAction.rejected, (state, action) => {
+            state.errors = [action.error.message || '']
         })
         .addCase(featureBrandsAction.pending, (state, action) => {
             state.errors = null;

@@ -8,9 +8,7 @@ import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {Link } from 'react-router-dom';
-
-
-
+import Giftcard from './Giftcard';
 const AllFeaturedCards = () => {
   const dispatch = useDispatch();
   const state = useSelector(getBrandsState);
@@ -51,7 +49,7 @@ const AllFeaturedCards = () => {
                     <Item>
                       <>
                         <Link to="/selectcard">
-                          <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards" alt={brand.name} />
+                          <Giftcard brand={brand}/>
                         </Link>
                       </>
                     </Item>

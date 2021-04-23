@@ -1,5 +1,5 @@
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
-import {giftCardsUnitAction} from '../actions/gitCards.actions';
+import {giftCardsUnitAction, getPaymentCurrencyAction, getConversionRateAction} from '../actions/gitCards.actions';
 import {filter, get} from 'lodash'
 
 
@@ -12,7 +12,8 @@ export const GIFTCARDS_INIT_STATE = {
     source_currency:"",
     giftunit_id: 1,
     countries: [],
-    selectedCountry: ''
+    selectedCountry: '',
+    selectedBrand:''
 }
 
 export const GIFTCARD_REDUCER = 'giftCards';
@@ -24,10 +25,14 @@ export const giftcardSlice = createSlice({
     initialState: GIFTCARDS_INIT_STATE,
     reducers: {
         selectCountry(state, action){
-            let id = filter(state.countries, {country_name:action.payload})[0].id
-            state.giftunit_id = id;
-            state.selectedCountry = action.payload;
-        } 
+            let country = filter(state.countries, {country_name:action.payload})[0]
+            state.giftunit_id = country.id;
+            state.selectedCountry = country;
+        },
+        selectBrand(state, action){
+            state.selectedBrand = action.payload;
+        }
+
     },
     extraReducers: (builder) => {
         builder.addCase(giftCardsUnitAction.pending, (state, action) => {
@@ -45,6 +50,36 @@ export const giftcardSlice = createSlice({
         .addCase(giftCardsUnitAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
+        .addCase(getPaymentCurrencyAction.pending, (state, action) => {
+            state.errors = null;
+            state.paymentCurrency = null;
+        })
+        .addCase(getPaymentCurrencyAction.fulfilled, (state, action) => {
+            const response = action.payload;
+            const {data, code} = response;
+            if(200 === code){
+                state.paymentCurrency = data
+            }
+        })
+        .addCase(getPaymentCurrencyAction.rejected, (state, action) => {
+            state.errors = [action.error.message || '']
+        })
+        .addCase(getConversionRateAction.pending, (state, action) => {
+            state.errors = null;
+            state.conversion = null;
+        })
+        .addCase(getConversionRateAction.fulfilled, (state, action) => {
+            const response = action.payload;
+            const {data, code} = response;
+            if(200 === code){
+                state.conversion = data;
+            }
+        })
+        .addCase(getConversionRateAction.rejected, (state, action) => {
+            state.errors = [action.error.message || '']
+        })
+        
+        
     }
 })
 

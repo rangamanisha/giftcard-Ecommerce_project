@@ -1,6 +1,10 @@
 import React from 'react';
-import AllCategoryCards from './AllCategoryCards';
+import Carousel from "react-elastic-carousel";
+import Item from "./item";
+import Allmenu from "../assets/allmenu.svg";
+import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
+import AllCategoryCards from './AllCategoryCards';
 import { categoryAction } from '../actions/category.actions';
 import { getCategoryState } from '../reducer/category.reducer'
 import { get, map, isEmpty } from 'lodash';
@@ -10,6 +14,8 @@ import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {useHistory, Link} from 'react-router-dom';
+import AllFeaturedCards from './AllFeaturedCards';
+import Giftcard from './Giftcard';
 
 
 function AllGiftCard() {
@@ -77,11 +83,11 @@ function AllGiftCard() {
     
          
   
-  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
+  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry.country_name')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry.country_name')
   const allTheBrands = [];
   map(brandsWithCategory, (category) => {
       map(get(category, 'brands'), brand => {
-        if(allTheBrands.length <= 14){
+        if(allTheBrands.length <= 15){
           allTheBrands.push(brand)
         }
         else return null
@@ -102,9 +108,9 @@ function AllGiftCard() {
             isEmpty(get(brandState, 'brands')) ? 
                 map(allTheBrands, (brand, i) => (
                   <>
-                    <Link to="/selectcard">
-                      <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
-                    </Link>
+                    
+                      <Giftcard brand={brand}/>
+                    
                   </>
                 ))
               
@@ -115,8 +121,8 @@ function AllGiftCard() {
               map(get(brandState, 'brands'), (brand, i) => (
                 
                 <>
-                {i <= 16 ? 
-                <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> 
+                {i <= 15 ?
+                   <Giftcard brand={brand}/> 
                     : null} 
                 </>
               ) )
