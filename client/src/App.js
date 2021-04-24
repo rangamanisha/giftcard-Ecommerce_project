@@ -14,6 +14,7 @@ import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
 import Contact from './components/shared/ContactPage/Contact';
 import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
 import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
+import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
 
 function App() {
   return (
@@ -28,10 +29,11 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
-          <Route path="/ConditionsPage" component={ConditionsPage} exact />
-          <Route path="/Contact" component={Contact} exact />
-          <Route path="/EnquiryPage" component={EnquiryPage} exact />
-          <Route path="/PrivacypolicyPage" component={PrivacypolicyPage} exact />
+          <Route path="/conditionsPage" component={ConditionsPage} exact />
+          <Route path="/contact" component={Contact} exact />
+          <Route path="/enquiryPage" component={EnquiryPage} exact />
+          <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact />
+          <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/" exact>
             <Redirect to={{ pathname: '/' }} />
           </Route>

@@ -379,11 +379,11 @@ function ConditionsPage() {
             <article>
               <h6 id="conaffiliates">8. giftiglobal.com AFFILIATES & ADDITIONAL FUNCTIONS</h6>
               <p className="mb-3">
-                8.1. giftiglobal.com by MYLIST FZ LLC and/or its affiliates ("MyList Affiliates")
-                provide website features and other products and services to you when you use or
-                sign-up as a buyer on the Site. “Affiliate” means, with respect to a particular
-                person, any entity that directly or indirectly controls, is controlled by, or is
-                under common control with such person.
+                8.1. giftiglobal.com by MYLIST FZ LLC and/or its affiliates (&quot;MyList
+                Affiliates&quot;) provide website features and other products and services to you
+                when you use or sign-up as a buyer on the Site. “Affiliate” means, with respect to a
+                particular person, any entity that directly or indirectly controls, is controlled
+                by, or is under common control with such person.
               </p>
               <p className="mb-3">
                 8.2. To enhance your experience across the Site and with MyList Affiliates, you

@@ -23,20 +23,21 @@ function PrivacypolicyPage() {
               <p className="mb-3">
                 This Privacy Policy sets out the basis on which any personal data, including but not
                 limited to payment details and other information we collect from you or other
-                sources or that you provide to us ("Information") will be handled by us in
+                sources or that you provide to us (&quot;Information&quot;) will be handled by us in
                 connection with your access and use of www.giftiglobal.com, and/or the mobile
-                application (collectively, the "Platform"), services and applications (collectively,
-                the "Services"). We understand the importance you place on the Information, and we
-                are committed to protecting and respecting your privacy. Please read the following
-                carefully to understand our practices regarding your Information. By using our
-                Services, you agree to the handling of your Information in accordance with this
-                Privacy Policy.
+                application (collectively, the &quot;Platform&quot;), services and applications
+                (collectively, the &quot;Services&quot;). We understand the importance you place on
+                the Information, and we are committed to protecting and respecting your privacy.
+                Please read the following carefully to understand our practices regarding your
+                Information. By using our Services, you agree to the handling of your Information in
+                accordance with this Privacy Policy.
               </p>
 
               <p className="mb-4">
-                References in this Privacy Policy to "we", "our" or "us" (or similar) are references
-                to giftiglobal.com owned by MYLIST FZ LLC. References to "user" or "you" (or
-                similar) are references to you as an individual or legal entity as the case may be.
+                References in this Privacy Policy to &quot;we&quot;, &quot;our&quot; or
+                &quot;us&quot; (or similar) are references to giftiglobal.com owned by MYLIST FZ
+                LLC. References to &quot;user&quot; or &quot;you&quot; (or similar) are references
+                to you as an individual or legal entity as the case may be.
               </p>
             </article>
 
@@ -75,7 +76,8 @@ function PrivacypolicyPage() {
                 details about your computer, including but not limited to your IP address, operating
                 system and browser type, as well as information about your general internet usage
                 (e.g. by using technology that stores information on or gains access to your device,
-                such as cookies, tracking pixels, web beacons, etc., (together, "Cookies");
+                such as cookies, tracking pixels, web beacons, etc., (together,
+                &quot;Cookies&quot;);
               </p>
               <p>
                 your email address from a third party if you indicate that you have consented to
@@ -281,7 +283,7 @@ function PrivacypolicyPage() {
                 Our business changes constantly, and our Privacy Policy may therefore also need to
                 change. We will post the current version of this Privacy Policy on the Platform and
                 each such change will be effective upon posting on the Platform or upon the date
-                designated by us as the "effective date".
+                designated by us as the &quot;effective date&quot;.
               </p>
               <p className="mb-3">
                 We may e-mail periodic reminders of our notices and conditions, but you should check
@@ -307,7 +309,7 @@ function PrivacypolicyPage() {
               <p>
                 You can access and amend your data base at any time by simply accessing you
                 giftiglobal.com account or sending an email to care@giftiglobal.com (please make
-                sure to insert "Privacy" in the object field)
+                sure to insert &quot;Privacy&quot; in the object field)
               </p>
             </article>
           </div>

@@ -20,7 +20,7 @@ const Topbar = (props) => {
     searchIcon,
     userLoginIcon,
     shoppingCartIcon,
-    showLogin,
+
     onCountrySelected
   } = props;
 

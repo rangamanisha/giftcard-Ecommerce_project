@@ -20,10 +20,10 @@ function EnquiryPage() {
               <div className="input-group">
                 <input
                   type="text"
-                  className="form-control frequently-asked-input searchbar"
+                  className="form-control frequently-asked-input enquiry-searchbar"
                   placeholder="What are you looking for?"
                 />
-                <span className="input-group-text frequently-asked-input enqpage-search enqpage-border">
+                <span className="frequently-asked-input enqpage-search enqpage-border">
                   <MdSearch />
                 </span>
               </div>
@@ -32,8 +32,8 @@ function EnquiryPage() {
           <div className="my-2">
             <h4 className="help-question">Help with your questions...</h4>
             <p className="help-content">
-              if you have any questions take a look at your FAQ section below .If you can't find the
-              answer,please contact us{' '}
+              if you have any questions take a look at your FAQ section below .If you can&apos;t
+              find the answer,please contact us{' '}
             </p>
           </div>
           <div className="row mt-5">

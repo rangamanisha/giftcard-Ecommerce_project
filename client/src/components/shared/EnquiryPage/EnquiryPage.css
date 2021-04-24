@@ -24,7 +24,6 @@
 
 .account-options {
   margin-left: 10px;
-  
 }
 
 .account-options-item {
@@ -53,22 +52,23 @@
   color: #333333;
   opacity: 1;
 }
-.searchbar {
-  background: #ffffff 0% 0% no-repeat padding-box;
+.enquiry-searchbar {
+  /* background: #ffffff 0% 0% no-repeat padding-box; */
+
   border: 0.800000011920929px solid #b2b2c9;
   border-radius: 10px;
   opacity: 1;
 }
 .help-question {
   text-align: left;
-  font: normal normal 600 18px/26px Semiblod, "Open Sans";
+  font: normal normal 600 18px/26px Semiblod, 'Open Sans';
   letter-spacing: 0.68px;
   color: #1e2022;
   opacity: 1;
 }
 .help-content {
   text-align: left;
-  font: normal normal normal 18px/26px "Open Sans";
+  font: normal normal normal 18px/26px 'Open Sans';
   letter-spacing: 0.68px;
   color: #1e2022;
   opacity: 1;
@@ -76,12 +76,11 @@
 
 .account-container {
   border: 1px solid #b2b2c9;
-  border-radius: 8px
-  
+  border-radius: 8px;
 }
 .parah-style {
   text-align: left;
-  font: normal normal bold 18px/24px "Open Sans";
+  font: normal normal bold 18px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #636d79;
   opacity: 1;
@@ -93,9 +92,19 @@
 }
 .enqpage-search {
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 0.800000011920929px solid #b2b2c9;
-  color: #3A72EC;
+
+  /* border: 0.700000011920929px solid #b2b2c9; */
+  border: 0.5px solid #b2b2c9;
+  color: #3a72ec;
   border-left: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 
+  text-align: center;
+  white-space: nowrap;
 }
-
