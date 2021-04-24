@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import Allmenu from "../assets/allmenu.svg";
 import CategoryCard from '../components/categoryCard'

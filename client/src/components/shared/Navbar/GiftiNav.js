@@ -10,6 +10,8 @@ import { getTopBarState, topbarActions } from '../../../reducer/topbar.reducer';
 import {getGiftcardsState, giftCardsAction} from '../../../reducer/giftCards.reducer'
 import { getCountriesListAction, selectCountryAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
+import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
+
 import {giftCardsUnitAction} from '../../../actions/gitCards.actions'
 
 const GiftiNav = () => {
@@ -21,6 +23,8 @@ const GiftiNav = () => {
     const dispatch = useDispatch()
     const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = giftunitState.countries.map(country => country['country_name']);
+    // const countries = countries1[...countries];
+ 
 
     useEffect(() => {
         dispatch((giftCardsUnitAction));
@@ -30,9 +34,9 @@ const GiftiNav = () => {
     dispatch(getCountriesListAction());
   }, [dispatch]);
 
-    const countryChanged = (event) => {
+    const countryChanged = (value) => {
         
-        dispatch(giftCardsAction.selectCountry(event.target.outerText));
+        dispatch(giftCardsAction.selectCountry(value));
     }
 
     return (

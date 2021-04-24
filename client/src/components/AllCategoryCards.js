@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from "react-elastic-carousel";
+
 import Item from "./item";
 import Allmenu from "../assets/allmenu.svg";
 import CategoryCard from './categoryCard'
@@ -13,6 +13,7 @@ import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {useHistory, Link} from 'react-router-dom';
+import Carousel from 'react-elastic-carousel';
 
 
 function AllCategoryCards() {

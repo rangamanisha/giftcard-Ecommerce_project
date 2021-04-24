@@ -3,20 +3,26 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useHistory } from 'react-router-dom';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { useState, useRef } from 'react';
+import { Dropdown } from 'primereact/dropdown';
 import './Topbar.scss';
+import 'primereact/resources/themes/saga-blue/theme.css';
+
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Topbar = (props) => {
-    const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
-const user = localStorage.getItem('first_name');
-const history = useHistory();
-
+  const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
+  const user = localStorage.getItem('first_name');
+  const history = useHistory();
+  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates');
 
   const clearsession = () => {
     localStorage.clear();
@@ -54,10 +60,34 @@ const history = useHistory();
     );
   };
 
-  const getCountriesDD = () => {
-    return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
+  // const getCountriesDD = () => {
+  //   return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
+  // };
+  const onCountryChange = (e) => {
+    setSelectedCountry(e.value);
+    onCountrySelected(e.value);
   };
-
+  const selectedCountryTemplate = (option, props) => {
+    if (option) {
+      return (
+        <div className="country-item country-item-value">
+          <div>{option}</div>
+        </div>
+      );
+    }
+    return (
+      <span>
+        {props.placeholder}
+      </span>
+    );
+  };
+  const countryOptionTemplate = (option) => {
+    return (
+      <div className="country-item">
+        <div>{option}</div>
+      </div>
+    );
+  };
   return (
     <Navbar bg={bg} variant={variant}>
       <Form inline className="mx-auto">
@@ -67,16 +97,22 @@ const history = useHistory();
           </Button>
         </Navbar.Brand>
         <Nav className="pl-3">
-          <span className="location">
+        <span className="location">
             <small>I am gifting to</small>
           </span>
-          <img src={locationIcon} alt="Icon" />
-          <NavDropdown
-            title={country || countriesList[0]}
-            id="basic-nav-dropdown"
-            onClick={(val) => onCountrySelected(val)}>
-            {getCountriesDD()}
-          </NavDropdown>
+        <span className="location">
+          <small>I am gifting to</small>
+        </span>
+        <img src={locationIcon} alt="Icon" />
+        <Dropdown value={selectedCountry}
+          options={countriesList}
+          onChange={onCountryChange}
+          filter
+          filterBy='value'
+          placeholder="Select a Country"
+        //  optionLabel="name" 
+          valueTemplate={selectedCountryTemplate}
+          itemTemplate={countryOptionTemplate} />
         </Nav>
         <InputGroup className="pl-3">
           <FormControl

@@ -4,11 +4,11 @@ import { map, isEmpty } from 'lodash';
 import { featureBrandsAction } from '../actions/brands.action';
 import { getBrandsState } from '../reducer/brands.reducer';
 import { get } from 'lodash'
-import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {Link } from 'react-router-dom';
 import Giftcard from './Giftcard';
+import Carousel from 'react-elastic-carousel';
 const AllFeaturedCards = () => {
   const dispatch = useDispatch();
   const state = useSelector(getBrandsState);

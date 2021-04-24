@@ -448,6 +448,7 @@ input::-webkit-input-placeholder {
   // padding: 20% 15px 0px 20px;
   padding: 0% 5% 5% 5%;
   text-align: center;
+  // width:100%
 }
 
 .box:hover {
@@ -461,6 +462,7 @@ input::-webkit-input-placeholder {
 .box:hover a {
   color: #fff;
   text-decoration: none;
+  // width: 100%;
 }
 
 
@@ -607,6 +609,10 @@ input::-webkit-input-placeholder {
   color: #0000;
 
 }
+
+// .rec .rec-item-wrapper {
+//   width: 100% !important;
+// }
 
 .rec .rec-arrow-right {
   background-image: url(./assets/catgeory_arrows/Group2020.png);
