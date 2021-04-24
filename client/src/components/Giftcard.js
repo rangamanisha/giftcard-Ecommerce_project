@@ -14,7 +14,7 @@ const Giftcard = ({brand}) =>{
     }
     return (
         <>
-        <img src={get(brand, 'images.color.medium_rectangle')} onClick={() => handleClick()} className="mr-sm-2 imgcards mt-5" alt={brand.name} /> 
+        <img src={get(brand, 'images.color.medium_rectangle')} onClick={() => handleClick()} className="imgcards" alt={brand.name} /> 
         </>
     
         

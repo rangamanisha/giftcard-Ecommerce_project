@@ -99,6 +99,7 @@ function AllCategoryCards() {
       <div className="slideclass" >
         <Carousel pagination={0} breakPoints={breakPoints}>
           <Item>
+            <div className = "transparentButton">
           <div className="box">
             <a href="#/">
               <img
@@ -109,6 +110,7 @@ function AllCategoryCards() {
               <br />
               <p className="products_icons">All Gift Cards</p>
             </a>
+          </div>
           </div>
           </Item>
           {

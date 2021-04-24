@@ -105,7 +105,7 @@ const Topbar = (props) => {
         </span>
         <img src={locationIcon} alt="Icon" />
         <Dropdown value={selectedCountry}
-          options={countriesList}
+          options={countriesList.sort()}
           onChange={onCountryChange}
           filter
           filterBy='value'

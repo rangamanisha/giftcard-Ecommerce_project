@@ -167,7 +167,8 @@ $theme-colors: (
 
 .gificards {
   margin-left: 150px;
-  margin-right: 100px;
+  margin-right: 150px;
+  margin-top: 34px;
 }
 .amttext
 {
@@ -194,6 +195,7 @@ opacity: 1;
 .imgcards {
   height: 180px;
   width: 270px;
+  margin:18px 25px!important;
 }
 
 .home-footer {
@@ -434,7 +436,8 @@ input::-webkit-input-placeholder {
 }
 
 .box {
-  width: 100%;
+
+width: 100%;
   height: 100%;
   background-color: #f6f6f6;
 
@@ -445,10 +448,10 @@ input::-webkit-input-placeholder {
 
 .box a {
   display: block;
-  // padding: 20% 15px 0px 20px;
+  padding: 20% 15px 0px 20px;
   padding: 0% 5% 5% 5%;
   text-align: center;
-  // width:100%
+  width:100%
 }
 
 .box:hover {
@@ -462,7 +465,14 @@ input::-webkit-input-placeholder {
 .box:hover a {
   color: #fff;
   text-decoration: none;
-  // width: 100%;
+  width: 100%;
+}
+.uoaLY {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 4em;
+  text-align: center !important;
 }
 
 
@@ -580,7 +590,7 @@ input::-webkit-input-placeholder {
 }
 
 .icon-margin {
-  padding: 0rem 1rem 0rem 7rem;
+  padding: 0rem 0rem 0rem 50px
 }
 
 
@@ -591,8 +601,9 @@ input::-webkit-input-placeholder {
 .transparentButton {
   border: none !important;
   background-color: transparent;
-  margin: 0 !important;
-  padding: 5%;
+  margin: 0px auto !important;
+ 
+  width:129px;
   cursor: default;
 }
 
@@ -605,7 +616,7 @@ input::-webkit-input-placeholder {
 /* square buttons */
 .rec.rec-arrow {
   background-image: url(./assets/catgeory_arrows/arrow_left_green.png);
-
+align-self: center !important;
   color: #0000;
 
 }
@@ -616,12 +627,14 @@ input::-webkit-input-placeholder {
 
 .rec .rec-arrow-right {
   background-image: url(./assets/catgeory_arrows/Group2020.png);
+  align-self: center !important;
   color: #0000;
 }
 
 /* round buttons on hover */
 .rec.rec-arrow:hover {
   background-image: url(./assets/catgeory_arrows/left_arrow_gray.png);
+  align-self: center;
   color: #0000;
 }
 
