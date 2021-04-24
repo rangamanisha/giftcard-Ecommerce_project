@@ -29,7 +29,7 @@ const GiftiNav = () => {
         dispatch(giftCardsAction.selectCountry(countries[0]));
       }
       dispatch(getCountriesListAction());
-  }, [dispatch]);
+  }, [dispatch, countries]);
 
     const countryChanged = (event) => {
         
