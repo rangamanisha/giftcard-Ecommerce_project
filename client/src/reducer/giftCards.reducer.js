@@ -26,7 +26,7 @@ export const giftcardSlice = createSlice({
     reducers: {
         selectCountry(state, action){
             let country = filter(state.countries, {country_name:action.payload})[0]
-            state.giftunit_id = country.id;
+            state.giftunit_id = get(country, 'id');
             state.selectedCountry = country;
         },
         selectBrand(state, action){

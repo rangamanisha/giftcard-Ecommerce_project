@@ -1,10 +1,10 @@
 import {apiCall } from './api';
-export const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL = process.env.REACT_APP_API_URL_OLD;
 
 export const termBrand = (brands) => {
     const {id, currency, program_id} = brands;
-    const url = `${API_URL}/brands/1/terms?currency=${currency}&id=${id}&&program_id=${program_id}`;
-    return apiCall(url, 'GET', brands, null, null, false);
+    const url = `${API_URL}/brands/${id}/terms?currency=${currency}`;
+    return apiCall(url, 'GET', null, null, false);
 }
 
 export const product_description = (brands) => {

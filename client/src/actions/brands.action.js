@@ -3,7 +3,7 @@ import {termBrand, product_description, featured_brands, brands_by_category, all
 
 export const termBrandAction = createAsyncThunk('brands/listtermBrand', async(payload, thunkAPI) => {
     const request = {
-        brand_id:payload.brand_id,
+        id:payload.id,
         currency:payload.currency
     }
     const response = await termBrand(request);

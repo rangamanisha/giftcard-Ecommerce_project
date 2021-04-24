@@ -1,6 +1,6 @@
 import {termBrandAction, productDescriptionAction, featureBrandsAction, brandsByCategoryAction, allBrandAction} from '../actions/brands.action';
 import constants from '../constants/brands.constants';
-import {get} from 'lodash';
+import {get, filter} from 'lodash';
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 
 export const BRANDS_INIT_STATE = {
@@ -14,7 +14,9 @@ export const BRANDS_INIT_STATE = {
     list_type:false,
     category_id:"",
     id:'',
-    brand_id:""
+    brand_id:'',
+    terms: []
+
 }
 
 export const BRAND_REDUCER = "brands";
@@ -33,10 +35,11 @@ export const brandsSlice = createSlice({
         .addCase(termBrandAction.fulfilled, (state, action) => {
             const response = action.payload;
             const {data, code} = response;
-            if(200 == code){
-                state.terms = data;
+            if(200 === code){
+                let terms = get(data, 'terms');
+                debugger
+                state.terms = terms
             }
-            state.brands = response
         })
         .addCase(termBrandAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
