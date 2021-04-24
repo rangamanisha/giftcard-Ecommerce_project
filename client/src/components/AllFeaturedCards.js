@@ -29,14 +29,16 @@ const AllFeaturedCards = () => {
     }))
 
   }, [giftunitState.giftunit_id])
+  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry.country_name')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry.country_name')
+
   return (
     <div>
       <div>
     </div>
       <div className="cardgifiti-card">
-        <p className="giftiallcard-text">Brands recommended for you in the UAE</p>
+        <p className="giftiallcard-text">{`Brands recommended for you in the ${nowCountry}`}</p>
         <p className="allgiftcard-text">
-          Buy Most Popular eGift Cards in UAE
+          {`Buy Most Popular eGift Cards in ${nowCountry}`}
         <br />
         Personalized gift vouchers delivered online & redeemable at popular Brands
       </p>

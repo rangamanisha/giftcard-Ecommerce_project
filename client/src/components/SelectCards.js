@@ -140,7 +140,7 @@ const SelectCards = () => {
             <Footer1>
                 <div className="row">
                     <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
-                    <h4 className="ml-sm-2 amttext2">AED 250</h4>
+                    <h4 className="ml-sm-2 amttext2">{get(card, 'rates')}</h4>
                     <div className="col mr-5">
                         <ButtonGroup className="mr-3" aria-label="Second group">
                             <Button variant="light" onClick ={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick ={increment}> <img src={plusicon} /></Button>
