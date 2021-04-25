@@ -17,12 +17,13 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { get } from 'lodash';
 
 const Topbar = (props) => {
   const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
   const user = localStorage.getItem('first_name');
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates');
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const clearsession = () => {
     localStorage.clear();
@@ -104,15 +105,14 @@ const Topbar = (props) => {
           <small>I am gifting to</small>
         </span>
         <img src={locationIcon} alt="Icon" />
-        <Dropdown value={selectedCountry}
-          options={countriesList.sort()}
+          <Dropdown value={selectedCountry}
+          options = {countriesList.sort()}
           onChange={onCountryChange}
           filter
-          filterBy='value'
           placeholder="Select a Country"
-        //  optionLabel="name" 
+          optionLabel="name"
           valueTemplate={selectedCountryTemplate}
-          itemTemplate={countryOptionTemplate} />
+          itemTemplate={countryOptionTemplate}/>
         </Nav>
         <InputGroup className="pl-3">
           <FormControl
