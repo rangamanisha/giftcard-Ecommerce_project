@@ -1,7 +1,4 @@
 import React from 'react';
-import Item from "./item";
-import Allmenu from "../assets/allmenu.svg";
-import CategoryCard from '../components/categoryCard'
 import { useDispatch, useSelector } from 'react-redux';
 import AllCategoryCards from './AllCategoryCards';
 import { categoryAction } from '../actions/category.actions';
@@ -13,7 +10,6 @@ import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import {useHistory, Link} from 'react-router-dom';
-import AllFeaturedCards from './AllFeaturedCards';
 import Giftcard from './Giftcard';
 
 
@@ -92,7 +88,6 @@ function AllGiftCard() {
         else return null
       })
   })
-
   return (
     
 

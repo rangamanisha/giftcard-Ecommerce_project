@@ -3,13 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import StartingGift from '../assets/starting-gift.svg';
 // import {getGiftcardsState, giftCardsAction} from '../..reducer/giftCards.reducer'
 import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
 
 import StartingGift2 from '../assets/start-giftting2.svg';
+import {useHistory} from 'react-router-dom';
 
 const StartGifting = () => {
   const giftunitState = useSelector(getGiftcardsState);

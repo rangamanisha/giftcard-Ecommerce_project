@@ -12,6 +12,7 @@ import Appleitunes from '../assets/Appleitunes.png';
 import Asec from '../assets/5asec.png';
 import Careem from '../assets/Careem.png';
 import Ace from '../assets/Ace.png';
+import {useHistory} from 'react-router-dom';
 
 const card = () => {
   return (
@@ -68,7 +69,7 @@ const card = () => {
               <Form.Control placeholder="" />
             </Col>
           </Row>
-          <Button variant="info" size="md" className="mt-5" style={{ marginLeft: '330px' }}>
+          <Button variant="info" size="md" className="mt-5" style={{ marginLeft: '330px' }} onClick={() => history.pushState('/allcards')}>
             Browse Gifts
           </Button>{' '}
         </Form>

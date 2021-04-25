@@ -6,22 +6,20 @@ import Search from '../../../assets/search.svg';
 import Shoppingcart from '../../../assets/shopping-cart.svg';
 import UserLogin from '../../../assets/User-login.svg';
 import Location from '../../../assets/location.svg';
-import { getTopBarState, topbarActions } from '../../../reducer/topbar.reducer';
 import {getGiftcardsState, giftCardsAction} from '../../../reducer/giftCards.reducer'
-import { getCountriesListAction, selectCountryAction } from '../../../actions/topbar.actions';
+import { getCountriesListAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
-import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
+// import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
 
 import {giftCardsUnitAction} from '../../../actions/gitCards.actions'
+import { isEmpty, get } from 'lodash';
 
 const GiftiNav = () => {
     const bg = 'white';
     const variant = 'white';
     const authState = useSelector(getAuthState);
-    const topbarState = useSelector(getTopBarState);
     const giftunitState = useSelector(getGiftcardsState);
     const dispatch = useDispatch()
-    const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = giftunitState.countries.map(country => country['country_name']);
     // const countries = countries1[...countries];
  
@@ -31,8 +29,11 @@ const GiftiNav = () => {
     }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getCountriesListAction());
-  }, [dispatch]);
+      if(isEmpty(get(giftunitState, 'selectedCountry'))){
+        dispatch(giftCardsAction.selectCountry(countries[0]));
+      }
+      dispatch(getCountriesListAction());
+  }, [dispatch, countries]);
 
     const countryChanged = (value) => {
         
@@ -45,7 +46,7 @@ const GiftiNav = () => {
             variant={variant}
             logoIcon={Logo}
             locationIcon={Location}
-            country={giftunitState.selectedCountry.country_name}
+            country={get(giftunitState.selectedCountry, 'country_name')}
             countriesList={countries}
             searchIcon={Search}
             userLoginIcon={UserLogin}

@@ -3,7 +3,6 @@ import './App.scss';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Registration';
-import Product from './components/Product'
 import AllCards from './components/AllCards';
 import {BrowserRouter as Router, Redirect, Route,Switch } from "react-router-dom";
 import ForgotPassword from './components/ForgotPassword';
