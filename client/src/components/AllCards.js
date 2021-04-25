@@ -60,7 +60,7 @@ function AllCards() {
 
   }, [giftunitState.giftunit_id])
 
-  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry')
+  const nowCountry = isEmpty(get(giftunitState, 'selectedCountry.country_name')) ? get(giftunitState, 'countries[0].country_name') : get(giftunitState, 'selectedCountry.country_name')
 
   return (
 

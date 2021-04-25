@@ -4,15 +4,21 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useHistory } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 import StartingGift from '../assets/starting-gift.svg';
 // import {getGiftcardsState, giftCardsAction} from '../..reducer/giftCards.reducer'
+import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
+
 import StartingGift2 from '../assets/start-giftting2.svg';
 
 const StartGifting = () => {
-  // const giftunitState = useSelector(getGiftcardsState);
+  const giftunitState = useSelector(getGiftcardsState);
   // const dispatch = useDispatch()
   // const [selectedCountry, setSelectedCountry] = useState(null);
-  // const countries = giftunitState.countries.map(country => country['country_name']);
+  const countries = giftunitState.countries.map(country => country['country_name']).sort();
+   const getCountriesDD = () => {
+    return 
+  };
   const history = useHistory();
   return (
     <Row>
@@ -51,8 +57,8 @@ const StartGifting = () => {
                         id="inlineFormCustomSelect"
                         custom
                       >
-                        <option>UAE</option>
-                        <option></option>
+ 
+ {countries.map((c, i) => <option key={i}>{c}</option>)}
                       </Form.Control>
                     </Form.Group>
                   </Col>
