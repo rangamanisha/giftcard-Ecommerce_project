@@ -17,7 +17,6 @@ import {
   getConvertCreditsAction
 } from "../actions/rewardpoints.actions";
 import { useDispatch, useSelector } from "react-redux";
-import Moment from 'react-moment';
 import Modal from './modal';
 
 const RewardPoints = (props) => {
@@ -126,9 +125,7 @@ const RewardPoints = (props) => {
                 transactions.map((transaction) => {
                     return (
                       <tr className="table-body-font">
-                        <td className="font-date">
-                          <Moment format="MMM Do,YYYY">{transaction.created_at}</Moment><br/>
-                          <Moment format="h:mm:ss a">{transaction.created_at}</Moment></td>
+                        <td className="font-date">transaction.created_at</td>
                         <td>{transaction.type}</td>
                         <td>{transaction.card_number}</td>
                         <td className="amount-color">{transaction.original_amount}</td>
@@ -141,7 +138,6 @@ const RewardPoints = (props) => {
                   <td style={{ color: "red" }}>No results</td>
                 </tr>
               )}
-              
             </tbody>
           </Table>
         </Col>

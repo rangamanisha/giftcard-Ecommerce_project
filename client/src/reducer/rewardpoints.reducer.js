@@ -80,8 +80,7 @@ export const rewardpointsSlice = createSlice({
            
         })
         .addCase(getConvertCreditsAction.rejected, (state, action) => {
-            debugger;
-            const response = action.payload;
+           
         })
     }
 });
