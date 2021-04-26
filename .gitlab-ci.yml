@@ -48,6 +48,7 @@ deploy:giftiglobal_ui:
   script: 
     - export PATH=./node_modules/.bin:$PATH
     - cd client && npm install
+    - npm install react-moment
     - npm run build
     - aws s3 sync build/ s3://$GIFTI_GLOBAL_BUCKET_NAME --exclude ".DS_Store/*" --cache-control "max-age=120000" --delete
   only:
