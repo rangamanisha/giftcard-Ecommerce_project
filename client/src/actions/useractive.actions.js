@@ -4,7 +4,7 @@ import { userActiveAPI } from "../services/useractive.service";
 export const getuseractiveAction = createAsyncThunk('useractive/put', async (payload, thunkAPI) => {
     const request = 
         {
-            token: ''
+            token: payload.token
         }
     const response = await userActiveAPI(request);
     return response;

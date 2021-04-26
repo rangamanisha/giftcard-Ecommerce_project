@@ -12,7 +12,7 @@ export const AUTH_INITIAL_STATE_LOGIN = {
     idToken: null,
     refreshToken: null,
     expiresIn: null,
-    status: false,
+    status: null,
     success: false,
     alert: false,
     signupSuccess: false,
@@ -96,7 +96,7 @@ export const authSlice = createSlice({
         .addCase(forgotpasswordAction.fulfilled, (state, action) => {
             const response = action.payload;
             if(response.code === 200) {
-                state.status = true;
+                state.status = response.status;
                 state.errors = null;
             }
             if(response.code === 400) {

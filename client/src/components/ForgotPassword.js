@@ -29,7 +29,7 @@ const ForgotPassword = () => {
       });
 
       useEffect(() => {
-        if (state.status) {
+        if (state.status === "OK") {
           history.push({ pathname: '/' })
         }
       }

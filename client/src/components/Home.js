@@ -11,6 +11,7 @@ import { getUserActiveState } from '../reducer/useractive.reducer';
 import { getuseractiveAction } from '../actions/useractive.actions';
 import Fade from 'react-bootstrap/Fade';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 
 const Home = () => {
@@ -20,19 +21,24 @@ const Home = () => {
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState('');
+  const history = useHistory();
   
+  const value = localStorage.getItem("token");
+  const data = { token: value }
+  dispatch(getuseractiveAction(data));
 
 
   useEffect(() => {
-        dispatch(getuseractiveAction({}));
-        if(useractive.verified){
+    dispatch(getuseractiveAction());
+    localStorage.setItem("token",history.location['search'].split("?",2)[1]);
+        if(useractive.verified === true){
           setIsValid(true);
           setMessage('Your account has been successfully created. Go to profile !');
           window.setTimeout(()=>{
             setVisible(false)
           },3000)    
         }
-    }, [dispatch, useractive.verified]);
+    }, [dispatch, useractive.verified, history] );
 
 
   useEffect(() => {
@@ -52,9 +58,9 @@ const Home = () => {
       },3000)
     }
 
-    if (state.status) {
+    if (state.status === "OK") {
       setIsValid(true);
-      setMessage('A verification link has been sent to your provided email address. Check your mailbox');
+      setMessage('A verification link has been sent to your provided email address. To Reset your Password.');
       window.setTimeout(()=>{
         setVisible(false)
       },3000)
