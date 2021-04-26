@@ -44,6 +44,11 @@ letter-spacing: 0.49px;
   color: #77838f;
   opacity: 1;
   font: normal 10px "Nunito-SemiBold", sans-serif;
-  margin-bottom: 15px;
+
+  position: relative;
+    display: block;
+    padding: .5rem 0rem;
+    background-color: #fff;
+  /* margin-bottom: 15px; */
 }
 
