@@ -648,12 +648,12 @@ height: 35%;
 }
 
 .redeem-button-a{
-  height: 85%;
+  height: 65px;
   border-radius: 8px;
 }
 
 .redeem-button-b{
-  height: 85%;
+  height: 65px;
   width: 100px;
   border-radius: 8px;
 }
@@ -677,4 +677,40 @@ height: 35%;
 
 .points-b{
   font-family: Cairo-SemiBold;
+}
+
+
+.border{
+ border-radius: 10px ! important;
+}
+
+.table-head{
+  background-color: #EFEFF3;
+  opacity: 1;
+  font-family: Cairo-Bold;
+}
+
+.trans-detail{
+  font-family: Cairo-Bold;
+}
+
+
+.table-body-font{
+  font-family:OpenSans-SemiBold;
+  color: #393939;
+}
+
+.font-date{
+  font-family:OpenSans-Regular;
+  font-size: 14px;
+}
+
+.amount-color{
+  color:#00B2AE;
+  font-family:OpenSans-Bold;
+}
+
+.font-balance{
+  font-family:OpenSans-Bold;
+  font-weight: lighter;
 }

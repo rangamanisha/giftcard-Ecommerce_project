@@ -31,10 +31,12 @@ export const signupAction = createAsyncThunk('auth/signup', async (payload, thun
 export const resetpasswordAction = createAsyncThunk('auth/resetpassword', async (payload, thunkAPI) => {
     const request = 
         {
-            new_password: payload.new_password,
-            confirm_password: payload.confirm_password,
-            token: payload.token
+          "change_password":{
+              password: payload.password, 
+              password_confirmation: payload.password_confirmation },
+              token: payload.token 
         }
+        
     
     const response = await resetpasswordAPI(request);
     return response;
