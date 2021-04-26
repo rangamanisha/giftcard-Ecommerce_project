@@ -72,11 +72,16 @@ export const rewardpointsSlice = createSlice({
             if(response.code === 200) {
                 state.total_credits =  response.data.total_credits;
                 state.gc_value = response.data.gc_value;
+                state.message = response.message;
             }     
-            
+           else if(response.code === 400) {
+            state.message = response.message;
+            }     
+           
         })
         .addCase(getConvertCreditsAction.rejected, (state, action) => {
-           
+            debugger;
+            const response = action.payload;
         })
     }
 });

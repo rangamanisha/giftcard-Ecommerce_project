@@ -24,8 +24,8 @@ const RewardPoints = (props) => {
   const points = useSelector(getRewardPointsState);
   const dispatch = useDispatch();
   const points_data = points;
+ 
   const transactions = points_data.credits;
-
   const [modalShow, setModalShow] = React.useState(false);
 
 
@@ -33,10 +33,11 @@ const RewardPoints = (props) => {
   useEffect(() => {
     dispatch(getRewardPointsAction({}));
     dispatch(getTransactionsAction({}));
-    dispatch(getConvertAction({}));
-    dispatch(getRemainingAction({}));
-    dispatch(getConvertCreditsAction({}));
-  }, [dispatch]);
+    if (points_data.message === "Gift card successfully converted to points."){
+      setModalShow(true);
+    }
+  }, [dispatch, points_data.message]);
+
 
   const formik = useFormik({
     initialValues: {
@@ -52,6 +53,8 @@ const RewardPoints = (props) => {
       dispatch(getConvertCreditsAction(data));
     },
   });
+
+
 
   return (
     <>
