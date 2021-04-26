@@ -2,6 +2,7 @@ import React from 'react';
 import EmptyCartImage from '../../../assets/empty-state-cart.svg';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import FigureImage from 'react-bootstrap/esm/FigureImage';
+import Footer from '../../Footer';
 
 export default function EmptyCart() {
   return (
@@ -37,6 +38,7 @@ export default function EmptyCart() {
             </Row>
           </Col>
         </Row>
+        <Footer />
       </Container>
     </>
   );

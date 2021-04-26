@@ -5,6 +5,7 @@ import { IoIosAdd } from 'react-icons/io';
 import { MdSearch } from 'react-icons/md';
 import { IoIosClose } from 'react-icons/io';
 import Header from '../HeaderPage/Header';
+import Footer from '../../Footer';
 
 function EnquiryPage() {
   return (
@@ -74,6 +75,7 @@ function EnquiryPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
       <div className="footer-enquiry-page"></div>
     </>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './ConditionsPage.css';
 import Header from '../HeaderPage/Header';
+import Footer from '../../Footer';
 
 function ConditionsPage() {
   return (
@@ -611,6 +612,7 @@ function ConditionsPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
