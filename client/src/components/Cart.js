@@ -15,7 +15,7 @@ const CartPage = () => {
     const history = useHistory();
     return (
         <>
-            <div className="row ml-5 mt-5 ">
+            <div className="row mt-5 ">
                 <div className="col-md-4 col-sm-12 cartcolor">
                     <div id ="cart" className="d-flex mt-4">
                         <p className="col select-card-text">Total Pay</p>

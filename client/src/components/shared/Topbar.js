@@ -23,18 +23,18 @@ const Topbar = (props) => {
   const user = localStorage.getItem('first_name');
   const history = useHistory();
   const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates' );
-  const countries = [
-    {name: 'Australia', code: 'AU'},
-    {name: 'Brazil', code: 'BR'},
-    {name: 'China', code: 'CN'},
-    {name: 'Egypt', code: 'EG'},
-    {name: 'France', code: 'FR'},
-    {name: 'Germany', code: 'DE'},
-    {name: 'India', code: 'IN'},
-    {name: 'Japan', code: 'JP'},
-    {name: 'Spain', code: 'ES'},
-    {name: 'United States', code: 'US'}
-];
+//   const countries = [
+//     {name: 'Australia', code: 'AU'},
+//     {name: 'Brazil', code: 'BR'},
+//     {name: 'China', code: 'CN'},
+//     {name: 'Egypt', code: 'EG'},
+//     {name: 'France', code: 'FR'},
+//     {name: 'Germany', code: 'DE'},
+//     {name: 'India', code: 'IN'},
+//     {name: 'Japan', code: 'JP'},
+//     {name: 'Spain', code: 'ES'},
+//     {name: 'United States', code: 'US'}
+// ];
 
   const clearsession = () => {
     localStorage.clear();
@@ -78,7 +78,7 @@ const Topbar = (props) => {
   const onCountryChange = (e) => {
     console.log('e ', e);
     setSelectedCountry(e.value);
-    onCountrySelected(e.value);
+    onCountrySelected(e.value.country_name);
   };
   const selectedCountryTemplate = (option, props) => {
     if (option) {
@@ -103,7 +103,7 @@ const Topbar = (props) => {
   };
   return (
     <Navbar bg={bg} variant={variant}>
-      <Form inline className="mx-auto">
+      <Form inline >
         <Navbar.Brand className="pl-3" onClick={() => history.push({ pathname: '/' })}>
           <Button variant="white">
             <img src={logoIcon} alt="Icon" />
@@ -122,7 +122,7 @@ const Topbar = (props) => {
           onChange={onCountryChange}
           filter
           filterBy="country_name"
-          placeholder="Select a Country"
+          placeholder="United Arab Emirates"
           optionLabel="country_name"
           valueTemplate={selectedCountryTemplate}
           itemTemplate={countryOptionTemplate}/>

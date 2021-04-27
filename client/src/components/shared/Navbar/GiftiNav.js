@@ -20,8 +20,11 @@ const GiftiNav = () => {
     const authState = useSelector(getAuthState);
     const giftunitState = useSelector(getGiftcardsState);
     const dispatch = useDispatch()
-    const countries = giftunitState.countries;
-    // const countries = countries1[...countries];
+    const countries = giftunitState.countries.map(country => country['country_name']);
+    const countries1 = giftunitState.countries;
+    // console.log(countries1[0].sort('country_name'))
+    // .sort((a, b) => (a.country_name > b.country_name) ? 1 : -1);
+    const countries11 = [...countries1].sort();
  
 
     useEffect(() => {
@@ -46,7 +49,7 @@ const GiftiNav = () => {
             logoIcon={Logo}
             locationIcon={Location}
             country={get(giftunitState.selectedCountry, 'country_name')}
-            countriesList={countries}
+            countriesList={countries1}
             searchIcon={Search}
             userLoginIcon={UserLogin}
             shoppingCartIcon={Shoppingcart}

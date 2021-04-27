@@ -53,6 +53,9 @@ const SelectCards = () => {
         setRate(d);
         
     }
+    const handleCartCount = (t) =>{
+        setcount(t)
+    }
     useEffect(() => {
         setcount(1)
 
@@ -119,11 +122,11 @@ const SelectCards = () => {
         <>
             <div className="row">
                 <img src={get(card, 'images.color.medium_rectangle' )} alt="AmazonMedium" className="select-card-size1 ml-5 mt-5 col-4" />
-                <div class="col ml-5 mt-5 col-6">
+                <div class="col mt-5 col-6">
                     <p className="select-card-text-lg">{get(card, 'name')}</p>
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
-                        {map(get(card, 'denominations'), d => 
+                        {map(get(productAndTermState, 'description.brand.denominations'), d => 
                         <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{d}</Button>)}
                         {/* <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>
                         <Button variant="outline-info" className="mr-sm-3 select-card-button">250</Button>
@@ -171,7 +174,7 @@ const SelectCards = () => {
                         <ButtonGroup className="mr-3" aria-label="Second group">
                             <Button variant="light" onClick ={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick ={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
-                        <Button className="nav-btn mr-2 text-white" >Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2 text-white" onClick={() => handleCartCount({count})}>Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2"  onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>

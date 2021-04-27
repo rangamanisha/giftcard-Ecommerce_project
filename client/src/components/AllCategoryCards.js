@@ -29,8 +29,8 @@ function AllCategoryCards() {
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 7 },
-    { width: 1200, itemsToShow: 8 }
+    { width: 768, itemsToShow: 6 },
+    { width: 1200, itemsToShow: 7 }
   ];
 
   React.useEffect(() => {
@@ -96,7 +96,7 @@ function AllCategoryCards() {
     
 
     <div class="allGiftCard">
-      <div className="slideclass" >
+      <div className="slideclass" id ="categorycarousel" >
         <Carousel pagination={0} breakPoints={breakPoints}>
           <Item>
             <div className = "transparentButton">
