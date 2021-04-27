@@ -176,7 +176,7 @@ const SelectCards = () => {
                     </div>
                 </div>
             </Footer1>
-            <Footer />
+     
 
         </>
 
