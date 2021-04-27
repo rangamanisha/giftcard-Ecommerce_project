@@ -15,6 +15,7 @@ import Contact from './components/shared/ContactPage/Contact';
 import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
 import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
+import Cart from './components/shared/Cart/Cart';
 
 function App() {
   return (
@@ -34,9 +35,11 @@ function App() {
           <Route path="/enquiryPage" component={EnquiryPage} exact />
           <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact />
           <Route path="/emptycart" component={EmptyCart} exact />
-          <Route path="/" exact>
+          <Route path="/cart" component={Cart} exact />
+          {/* <Route path="/" exact>
             <Redirect to={{ pathname: '/' }} />
-          </Route>
+          </Route> */}
+          <Route render={() => <Redirect to={{ pathName: '/' }} />} />
         </Switch>
       </Router>
     </div>

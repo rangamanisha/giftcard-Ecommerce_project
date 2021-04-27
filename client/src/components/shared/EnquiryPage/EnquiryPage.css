@@ -9,6 +9,10 @@
   width: 200px !important;
   height: 100px !important;
 } */
+.faq-col {
+  font-family: Cairo;
+  line-height: 180%;
+}
 
 .frequently-asked-container {
   width: 100%;

@@ -4,20 +4,39 @@ import './EnquiryPage.css';
 import { IoIosAdd } from 'react-icons/io';
 import { MdSearch } from 'react-icons/md';
 import { IoIosClose } from 'react-icons/io';
+import { Col, Row } from 'react-bootstrap';
+
 import Header from '../HeaderPage/Header';
 import Footer from '../../Footer';
 
 function EnquiryPage() {
   return (
     <>
-      <div className="container-fluid">
+      <Row className="justify-content-center m-5">
+        <Col lg="4">
+          <h3 className="font-weight-bold faq-col">Frequently Asked Questions</h3>
+        </Col>
+        <Col lg="7">
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control frequently-asked-input enquiry-searchbar"
+              placeholder="What are you looking for?"
+            />
+            <span className="frequently-asked-input enqpage-search enqpage-border">
+              <MdSearch />
+            </span>
+          </div>
+        </Col>
+      </Row>
+      <div className="container">
         <Header />
         <div className="frequently-asked-container">
-          <div className="row">
-            <div className="col-5 align-self-start">
-              <h2 className="faqbox">Frequently Asked Questions</h2>
+          <div className="row justify-content-between">
+            <div className="col-4 align-self-start">
+              <h3 className="faqbox">Frequently Asked Questions</h3>
             </div>
-            <div className="col-7 align-self-center">
+            <div className="col-8 align-self-center">
               <div className="input-group">
                 <input
                   type="text"
