@@ -102,7 +102,7 @@ const SelectCards = () => {
 
         <>
             <div className="row">
-                <img src={get(card, 'images.color.medium_rectangle' )} alt="AmazonMedium" className="select-card-size ml-5 mt-5 col-4" />
+                <img src={get(card, 'images.color.medium_rectangle' )} alt="AmazonMedium" className="select-card-size1 ml-5 mt-5 col-4" />
                 <div class="col ml-5 mt-5 col-6">
                     <p className="select-card-text-lg">{get(card, 'name')}</p>
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
