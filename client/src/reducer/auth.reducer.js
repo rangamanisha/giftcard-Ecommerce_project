@@ -113,16 +113,6 @@ export const authSlice = createSlice({
           state.errors = [response.email];
         }
       })
-      .addCase(resetpasswordAction.fulfilled, (state, action) => {
-        const response = action.payload;
-        if (response.code === 200) {
-          state.status = true;
-          state.errors = null;
-        }
-        if (response.code === 400) {
-          state.errors = [response.message];
-        }
-      });
   },
 });
 
