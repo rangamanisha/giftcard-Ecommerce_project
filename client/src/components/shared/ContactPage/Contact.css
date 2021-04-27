@@ -1,0 +1,130 @@
+.details {
+  background: #ffff;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 6px 0px #5d5c5c;
+}
+
+.button-icon {
+  width: 50px;
+  height: 44px;
+}
+/* .contactdetails {
+  padding: 25px 60px 40px 60px;
+  margin-top: -71px;
+} */
+/* .contact-info-details {
+  padding: 0px 55px 0px 0px;
+} */
+
+/* .ml1 {
+  margin-left: 10px ​ !important;
+} */
+
+/* .contact-info {
+  margin-top: 125px;
+} */
+
+/* .button-contact-type {
+  background-color: #24a274d1 ​ !important ;
+  border: none ​ !important;
+  width: 50px;
+  height: 44px;
+} */
+
+.btn-send {
+  background-color: #00b2ae !important;
+  border-color: #00b2ae !important;
+  display: inline-block;
+  font-weight: 400;
+  color: #ffff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-icons-phone {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  display: inline-block;
+  font-weight: 400;
+  color: #ffff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* .flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+} */
+/* .addressbox {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -35px;
+} */
+
+.account-options {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 0.25rem;
+}
+
+.account-options-item {
+  position: relative;
+  display: block;
+  padding: 1rem 1rem;
+  color: #212529;
+  text-decoration: none;
+  background-color: #fff;
+  border: none;
+}
+
+/* custom defined css properties as per the xd adobe */
+.lableStyle {
+  
+  text-align: left;
+  font: normal 14px 'Open Sans', Regular;
+  letter-spacing: 0px;
+  color: #77808b;
+  opacity: 1;
+  
+  
+}
+.textContent {
+  text-align: left;
+  font: normal bold 18px/22px Cairo;
+  letter-spacing: 0px;
+  color: #283646;
+  opacity: 1;
+  
+}
+
+ul h2 {
+  margin-bottom: 8%;
+}
+p {
+    margin-bottom: 0rem;
+}

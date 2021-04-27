@@ -1,7 +1,6 @@
-import { apiCall } from "./api"
+import { apiCall, API_URL } from './api';
 
 export const getCountriesAPI = () => {
-    const url = `https://api-giftiglobal.meritincentives.com/v1/countries`;
-    return apiCall(url, 'GET', null, null, false);
-}
-
+  const url = `${API_URL}/v1/countries`;
+  return apiCall(url, 'GET', null, null, false);
+};

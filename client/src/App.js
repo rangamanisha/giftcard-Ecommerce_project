@@ -1,11 +1,9 @@
+import React from 'react';
 import './App.scss';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Registration';
-import {
-  BrowserRouter as Router, Redirect, Route,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AllFeaturedCards from './components/AllFeaturedCards';
@@ -15,6 +13,10 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/shared/Footer';
 import RewardPoints from './components/RewardPoints';
 
+import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
+import Contact from './components/shared/ContactPage/Contact';
+import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
+import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 
 function App() {
   return (

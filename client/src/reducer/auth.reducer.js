@@ -24,7 +24,6 @@ export const AUTH_FEATURE_KEY = 'auth';
 export const authAdapter = createEntityAdapter();
 export const initialAuthState = authAdapter.getInitialState(AUTH_INITIAL_STATE_LOGIN);
 
-
 export const authSlice = createSlice({
     name: AUTH_FEATURE_KEY,
     initialState: AUTH_INITIAL_STATE_LOGIN,
@@ -109,11 +108,22 @@ export const authSlice = createSlice({
     }
 });
 
+      .addCase(resetpasswordAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if (response.code === 200) {
+          state.status = true;
+          state.errors = null;
+        }
+        if (response.code === 400) {
+          state.errors = [response.message];
+        }
+      });
+  }
+});
 
 export const authReducer = authSlice.reducer;
 export const authActions = authSlice.actions;
-export const { selectAll, selectEntities} = authAdapter.getSelectors();
+export const { selectAll, selectEntities } = authAdapter.getSelectors();
 export const getAuthState = (rootState) => rootState[AUTH_FEATURE_KEY];
 export const selectAllAuth = createSelector(getAuthState, selectAll);
 export const selectAuthEntities = createSelector(getAuthState, selectEntities);
-

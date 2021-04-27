@@ -1,27 +1,24 @@
-import Technology from "../assets/technology.svg";
-import Toys from "../assets/toys.svg";
-import Suitcase from "../assets/suitcase.svg";
-import Hypermarket from "../assets/Hypermarket.svg";
-import Flowersandgift from "../assets/flowersandgift.svg";
-import Beauty from "../assets/Beauty.svg";
-import Shipped from "../assets/shipped.svg";
-import Allmenu from "../assets/allmenu.svg";
+import React from 'react';
+import Technology from '../assets/technology.svg';
+import Toys from '../assets/toys.svg';
+import Suitcase from '../assets/suitcase.svg';
+import Hypermarket from '../assets/Hypermarket.svg';
+import Flowersandgift from '../assets/flowersandgift.svg';
+import Beauty from '../assets/Beauty.svg';
+import Shipped from '../assets/shipped.svg';
+import Allmenu from '../assets/allmenu.svg';
 
 const AllFeaturedCards = () => {
   return (
     <>
       <div className="mt-5 ">
-        <div className="row" style={{ marginLeft: "130px" }}>
+        <div className="row" style={{ marginLeft: '130px' }}>
           <div className="box">
             <a href="#/">Arrow</a>
           </div>
           <div className="box">
             <a href="#/">
-              <img
-                src={Allmenu}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Allmenu} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">All Gift Cards</p>
             </a>
@@ -29,11 +26,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Flowersandgift}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Flowersandgift} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Flowers & Gifts</p>
             </a>
@@ -41,11 +34,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Beauty}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Beauty} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Beauty</p>
             </a>
@@ -53,11 +42,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Hypermarket}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Hypermarket} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Hypermarket</p>
             </a>
@@ -65,11 +50,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Technology}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Technology} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Technology</p>
             </a>
@@ -77,11 +58,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Toys}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Toys} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Kids & toys</p>
             </a>
@@ -89,11 +66,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Suitcase}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Suitcase} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Travel & hotels</p>
             </a>
@@ -101,11 +74,7 @@ const AllFeaturedCards = () => {
 
           <div className="box">
             <a href="#/">
-              <img
-                src={Shipped}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <img src={Shipped} alt="Icon" style={{ width: '30px', height: '30px' }} />
               <br />
               <p className="products_icons">Transportation</p>
             </a>
@@ -119,10 +88,9 @@ const AllFeaturedCards = () => {
           <p className="allgiftcard-text">
             Buy Most Popular eGift Cards in UAE
             <br />
-            Personalized gift vouchers delivered online & redeemable at popular
-            Brands
+            Personalized gift vouchers delivered online & redeemable at popular Brands
           </p>
-          <div style={{ marginLeft: "130px", marginTop: "-35px" }}>
+          <div style={{ marginLeft: '130px', marginTop: '-35px' }}>
             <div></div>
             <div className="mr-sm-5 row"></div>
           </div>

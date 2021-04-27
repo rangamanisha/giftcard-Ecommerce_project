@@ -62,9 +62,9 @@ const Topbar = (props) => {
         );
     }
 
-    const getCountriesDD = () => {
-        return countriesList.map((c, i) => (<NavDropdown.Item key={i}>{c}</NavDropdown.Item>));
-    }
+  const getCountriesDD = () => {
+    return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
+  };
 
     return (
         <Navbar bg={bg} variant={variant}>

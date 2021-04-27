@@ -20,7 +20,6 @@ import checkbox from '../assets/checkbox.svg';
 
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
@@ -31,6 +30,9 @@ const Login = () => {
   const [message, setMessage] = useState('');
 
 
+  const [isValid, setIsValid] = useState(false);
+  const [visible, setVisible] = useState(true);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -38,7 +40,7 @@ const Login = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string().min(2).max(200).email().required(),
-      password: Yup.string().min(2).max(200).required(),
+      password: Yup.string().min(2).max(200).required()
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
@@ -47,7 +49,12 @@ const Login = () => {
 
   useEffect(() => {
     if (state.isAuthenticated) {
-      history.push({ pathname: '/' })
+      history.push({ pathname: '/' });
+    } else {
+      setIsValid('no');
+      window.setTimeout(() => {
+        setVisible(false);
+      }, 1000000);
     }
 
 
@@ -89,6 +96,7 @@ const Login = () => {
               alt="Icon"
               className="icon_img"
             />
+            <img src={Usericon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
@@ -102,12 +110,13 @@ const Login = () => {
               alt="Icon"
               className="icon_img"
             />
+            <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
 
           <div className="row">
-            <Form.Group style={{ marginLeft: "77px" }}>
+            <Form.Group style={{ marginLeft: '77px' }}>
               <Form.Check
                 type="radio"
                 label="Remember Me"
@@ -144,12 +153,11 @@ const Login = () => {
                 </td>
                 <td
                   style={{
-                    width: "1px",
-                    padding: "0 10px",
-                    whiteSpace: "nowrap",
+                    width: '1px',
+                    padding: '0 10px',
+                    whiteSpace: 'nowrap'
                   }}
-                  className="login-bottom-text"
-                >
+                  className="login-bottom-text">
                   or sign in with
                 </td>
                 <td>

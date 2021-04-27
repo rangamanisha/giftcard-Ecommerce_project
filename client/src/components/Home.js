@@ -87,6 +87,6 @@ const Home = () => {
       <AllGiftCard />
     </>
   );
-}
+};
 
 export default Home;

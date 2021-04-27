@@ -43,7 +43,7 @@ reducer: {
   persistedState,
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-  preloadedState: {},
+  preloadedState: {}
 });
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;

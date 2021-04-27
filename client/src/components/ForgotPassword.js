@@ -53,6 +53,7 @@ const ForgotPassword = () => {
               alt="Icon"
               className="icon_img"
             />
+            <img src={Emailicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
@@ -66,7 +67,7 @@ const ForgotPassword = () => {
         </Form>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default ForgotPassword;

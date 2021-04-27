@@ -9,7 +9,6 @@ export const loginAction = createAsyncThunk('auth/login', async (payload, thunkA
     return response;
 });
 
-
 export const signupAction = createAsyncThunk('auth/signup', async (payload, thunkAPI) => {
     console.log('signup action ');
     const request = 
@@ -25,8 +24,15 @@ export const signupAction = createAsyncThunk('auth/signup', async (payload, thun
     
     const response = await signupAPI(request);
     return response;
-});
+  }
+);
 
+export const forgotpasswordAction = createAsyncThunk(
+  'auth/resetpassword',
+  async (payload, thunkAPI) => {
+    const request = {
+      email: payload.email
+    };
 
 export const resetpasswordAction = createAsyncThunk('auth/resetpassword', async (payload, thunkAPI) => {
     const request = 

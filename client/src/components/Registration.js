@@ -18,7 +18,6 @@ const Signup = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
 
-
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -58,7 +57,7 @@ const Signup = () => {
             <small>Enter to continue and explore within your grasp</small>
           </p>
 
-          <Form onSubmit={formik.handleSubmit} className="user" >
+          <Form onSubmit={formik.handleSubmit} className="user">
             <div className="row">
               <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
                 <Form.Control size="md" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={formik.handleChange} name="first_name" />
@@ -82,6 +81,7 @@ const Signup = () => {
                 alt="Icon"
                 className="icon_img"
               />
+              <img src={Emailicon} alt="Icon" className="icon_img" />
             </Form.Group>
             {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
 
@@ -126,13 +126,12 @@ const Signup = () => {
                   </td>
                   <td
                     style={{
-                      width: "1px",
-                      padding: "0 10px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                      width: '1px',
+                      padding: '0 10px',
+                      whiteSpace: 'nowrap'
+                    }}>
                     or sign up with
-                </td>
+                  </td>
                   <td>
                     <hr />
                   </td>
@@ -143,7 +142,7 @@ const Signup = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Signup;
