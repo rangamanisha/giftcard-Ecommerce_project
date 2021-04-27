@@ -12,6 +12,13 @@ import AllFeaturedCards from './components/AllFeaturedCards';
 import SelectCards from './components/SelectCards';
 import GiftiNav from './components/shared/Navbar/GiftiNav';
 
+import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
+import Contact from './components/shared/ContactPage/Contact';
+import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
+import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
+import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
+import Cart from './components/shared/Cart/Cart';
+
 function App() {
   return (
     <div className="body">
@@ -27,9 +34,16 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
-          <Route path="/" exact>
+          <Route path="/conditionsPage" component={ConditionsPage} exact />
+          <Route path="/contact" component={Contact} exact />
+          <Route path="/enquiryPage" component={EnquiryPage} exact />
+          <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact />
+          <Route path="/emptycart" component={EmptyCart} exact />
+          <Route path="/cart" component={Cart} exact />
+          {/* <Route path="/" exact>
             <Redirect to={{ pathname: '/' }} />
-          </Route>
+          </Route> */}
+          <Route render={() => <Redirect to={{ pathName: '/' }} />} />
         </Switch>
       </Router>
     </div>
