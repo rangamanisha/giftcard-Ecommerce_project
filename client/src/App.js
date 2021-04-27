@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Signup from './components/Registration';
 import AllCards from './components/AllCards';
 import {BrowserRouter as Router, Redirect, Route,Switch } from "react-router-dom";
-import Cart from './components/Cart';
+// import Cart from './components/Cart';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AllFeaturedCards from './components/AllFeaturedCards';
