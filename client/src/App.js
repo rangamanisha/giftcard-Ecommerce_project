@@ -13,10 +13,10 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/shared/Footer';
 import RewardPoints from './components/RewardPoints';
 
-import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
-import Contact from './components/shared/ContactPage/Contact';
-import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
-import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
+// import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
+// import Contact from './components/shared/ContactPage/Contact';
+// import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
+// import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 
 function App() {
   return (

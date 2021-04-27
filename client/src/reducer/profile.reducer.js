@@ -24,7 +24,7 @@ export const profileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getprofileListAction.pending, (state, action) => {
+      .addCase(getprofileListAction.pending, (state) => {
         state.is_active = true;
       })
       .addCase(getprofileListAction.fulfilled, (state, action) => {
@@ -39,7 +39,7 @@ export const profileSlice = createSlice({
           state.country = response.data.profile.nationality;
         }
       })
-      .addCase(getprofileListAction.rejected, (state, action) => {
+      .addCase(getprofileListAction.rejected, (state) => {
         state.is_active = true;
       });
   }

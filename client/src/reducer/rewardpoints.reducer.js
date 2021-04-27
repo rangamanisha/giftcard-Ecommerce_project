@@ -32,7 +32,7 @@ export const rewardpointsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getRewardPointsAction.pending, (state, action) => {
+      .addCase(getRewardPointsAction.pending, (state) => {
         state.code = true;
       })
       .addCase(getRewardPointsAction.fulfilled, (state, action) => {
@@ -42,7 +42,7 @@ export const rewardpointsSlice = createSlice({
           state.total_credits = response.data.total_credits;
         }
       })
-      .addCase(getRewardPointsAction.rejected, (state, action) => {
+      .addCase(getRewardPointsAction.rejected, (state) => {
         state.code = true;
       })
       .addCase(getTransactionsAction.fulfilled, (state, action) => {
@@ -51,14 +51,12 @@ export const rewardpointsSlice = createSlice({
           state.credits = response.data.credits;
         }
       })
-      .addCase(getTransactionsAction.rejected, (state, action) => {})
       .addCase(getConvertAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.conversion_limit = response.data.conversion_limit;
         }
       })
-      .addCase(getConvertAction.rejected, (state, action) => {})
       .addCase(getRemainingAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
@@ -66,7 +64,6 @@ export const rewardpointsSlice = createSlice({
           state.remaining_value = response.data.giftcard.remaining_value;
         }
       })
-      .addCase(getRemainingAction.rejected, (state, action) => {})
       .addCase(getConvertCreditsAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
@@ -76,8 +73,7 @@ export const rewardpointsSlice = createSlice({
         } else if (response.code === 400) {
           state.message = response.message;
         }
-      })
-      .addCase(getConvertCreditsAction.rejected, (state, action) => {});
+      });
   }
 });
 

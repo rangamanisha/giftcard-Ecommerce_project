@@ -79,7 +79,6 @@ const SelectCards = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

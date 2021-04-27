@@ -21,9 +21,6 @@ const Login = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
 
-  const [isValid, setIsValid] = useState(false);
-  const [visible, setVisible] = useState(true);
-
   const [message, setMessage] = useState('');
 
   const [isValid, setIsValid] = useState(false);

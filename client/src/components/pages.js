@@ -1,3 +1,4 @@
+import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 
 const Pages = ({ totalRecords, setCurrentPage, currentPage, perPage }) => {
@@ -13,9 +14,9 @@ const Pages = ({ totalRecords, setCurrentPage, currentPage, perPage }) => {
             <i className="bi bi-caret-left-fill"></i>
           </button>
         </li>
-        {pageNumber.map((number) => {
+        {pageNumber.map((number, i) => {
           return (
-            <li className="page-item">
+            <li className="page-item" key={i}>
               <button className="page-link" onClick={() => setCurrentPage((number - 1) * perPage)}>
                 {number}
               </button>
