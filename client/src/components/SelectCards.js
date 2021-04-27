@@ -7,7 +7,7 @@ import plusicon from '../assets/+.svg';
 import minusicon from '../assets/minus.svg';
 import Footer1 from './Stikyfooter';
 import { useState, useRef } from 'react';
-import { productDescriptionAction, termBrandAction } from '../actions/brands.action';
+import {descriptionBrandAction, termBrandAction } from '../actions/brands.action';
 import GiftGiftCard from './GiftGiftCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {getBrandsState} from '../reducer/brands.reducer';
@@ -28,11 +28,15 @@ const SelectCards = () => {
     const productAndTermState = useSelector(getBrandsState);
     const card = giftunitState.selectedBrand;
     const payment = giftunitState.selectedCountry;
+    // const carddata = 
     const [denomination, setDenomination] = useState(0);
     const [rate, setRate] = useState(0);
     const handleSelect = (eventKey1) => {
         seteventkey(eventKey1);
     }
+    // const addtocart=()=>{
+
+    // }
     const changeHandler = () =>{
         setTempVisible(!tempvisible)
     }
@@ -53,23 +57,35 @@ const SelectCards = () => {
         setcount(1)
 
     }, [denomination])
-    React.useEffect(() => {
-        if(isEmpty(card)){
-            history.push('/')
-        }
-        dispatch(productDescriptionAction({
-            currency:1,
-            brand_id:451
+    // React.useEffect(() => {
+    //     if(isEmpty(card)){
+    //         history.push('/')
+    //     }
+    //     dispatch(productDescriptionAction({
+    //         currency:1,
+    //         brand_id:451
     
     
-        }))
+    //     }))
     
-    }, [productAndTermState.brand_id])
+    // }, [productAndTermState.brand_id])
     
     React.useEffect(() => {
         dispatch(termBrandAction({
             currency:1,
             id:get(card, 'id')
+    
+        }))
+    } , [get(card, 'id')])
+
+    React.useEffect(() => {
+        dispatch(descriptionBrandAction({
+            currency:1,
+            program_id:1,
+            id:get(card, 'id'),
+            image_size: "medium_rectangle",
+            image_type: "Color",
+            
     
         }))
     } , [get(card, 'id')])
@@ -130,18 +146,13 @@ const SelectCards = () => {
                         </Nav>
                         {eventKey11 == "1" ? (
                             <div className="mt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <p className="mt-4">{get(card, 'description')}</p>
-                                {/* <p className="mt-4">Your giftee can use their Amazon.com Gift Card towards books, electronics, music, and more. The Amazon.com.au website is the place to find and discover almost anything you want to buy online at a great price.</p>
-                                <p>spend hours thinking about whether to buy your recipient something for their home, their wardrobe or for their travels. Or you could open their doors of possibility by treating them to an Amazon.com.au gift card from Prezzee, which will give them a world of choice and save you a lot of time! What’s more, by choosing a Amazon.com.au eGift Card from Prezzee, your gift card is ready to send in moments after your order, so they’re absolutely perfect for last minute gifts. Choose from SMS or email delivery – all gift cards are stored and managed digitally, meaning no lost or worse still, gift cards that have expired because you’ve forgotten all about them. Your giftee will have 24/7 access to their wonderful gift right on their mobile phone – how thoughtful is that!? Amazon.com.au Gift Cards carry no fees and do not expire.</p> */}
-
+                                <p className="mt-4">{get(productAndTermState, 'description.brand.product_description')}</p>
                             </div>
                         ) : (
                             <div className="mt-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
                                 <p>{get(productAndTermState, 'terms[0].terms_text')}<br />
     </p>
-                                {/* <p className="mt-4">Your giftee can use their Amazon.com Gift Card towards books, electronics, music, and more. The Amazon.com.au website is the place to find and discover almost anything you want to buy online at a great price.</p>
-                                <p>spend hours thinking about whether to buy your recipient something for their home, their wardrobe or for their travels. Or you could open their doors of possibility by treating them to an Amazon.com.au gift card from Prezzee, which will give them a world of choice and save you a lot of time! What’s more, by choosing a Amazon.com.au eGift Card from Prezzee, your gift card is ready to send in moments after your order, so they’re absolutely perfect for last minute gifts. Choose from SMS or email delivery – all gift cards are stored and managed digitally, meaning no lost or worse still, gift cards that have expired because you’ve forgotten all about them. Your giftee will have 24/7 access to their wonderful gift right on their mobile phone – how thoughtful is that!? Amazon.com.au Gift Cards carry no fees and do not expire.</p> */}
 
                             </div>
                         )}
@@ -160,8 +171,8 @@ const SelectCards = () => {
                         <ButtonGroup className="mr-3" aria-label="Second group">
                             <Button variant="light" onClick ={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick ={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
-                        <Button className="nav-btn mr-2 text-white">Add to cart</Button>{' '}
-                        <Button className="nav-btn mr-2" variant="info">Buy Now</Button>{' '}
+                        <Button className="nav-btn mr-2 text-white" >Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2"  onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
             </Footer1>

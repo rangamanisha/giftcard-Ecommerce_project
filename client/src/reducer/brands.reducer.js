@@ -1,4 +1,4 @@
-import {termBrandAction, productDescriptionAction, featureBrandsAction, brandsByCategoryAction, allBrandAction} from '../actions/brands.action';
+import {termBrandAction, descriptionBrandAction, featureBrandsAction, brandsByCategoryAction, allBrandAction} from '../actions/brands.action';
 import constants from '../constants/brands.constants';
 import {get, filter} from 'lodash';
 import {createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
@@ -37,25 +37,24 @@ export const brandsSlice = createSlice({
             const {data, code} = response;
             if(200 === code){
                 let terms = get(data, 'terms');
-                debugger
                 state.terms = terms
             }
         })
         .addCase(termBrandAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
-        .addCase(productDescriptionAction.pending, (state, action) => {
+        .addCase(descriptionBrandAction.pending, (state, action) => {
             state.errors = null;
             state.description = null;
         })
-        .addCase(productDescriptionAction.fulfilled, (state, action) => {
+        .addCase(descriptionBrandAction.fulfilled, (state, action) => {
             const response = action.payload;
             const {data, code} = response;
             if(200 == code){
                 state.description = data;
             }
         })
-        .addCase(productDescriptionAction.rejected, (state, action) => {
+        .addCase(descriptionBrandAction.rejected, (state, action) => {
             state.errors = [action.error.message || '']
         })
         .addCase(featureBrandsAction.pending, (state, action) => {
