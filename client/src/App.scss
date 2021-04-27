@@ -31,6 +31,12 @@ $theme-colors: (
   src: local('OpenSans-Bold'), url(./assets/fonts/OpenSans-Bold.ttf) format('truetype');
 }
 
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: local('OpenSans-SemiBold'), url(./assets/fonts/OpenSans-SemiBold.ttf) format('truetype');
+}
+
 @font-face {
   font-family: 'OpenSans-Regular';
   src: local('OpenSans-Regular'), url(./assets/fonts/OpenSans-Regular.ttf) format('truetype');
@@ -273,6 +279,18 @@ width: 430px;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
+
+.profile-card{
+  top: 40px;
+  width: auto;
+  height: 640px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
 .forgot-password{
   top: 40px;
   left: 130px;
@@ -326,9 +344,21 @@ margin-left: 77px;
 width: 179px ! important;
 }
 
+.profile-input{
+margin-left:75px;
+}
+
+.profile{
+padding-top: 78px;
+}
 .singup-inputfield{
   width: 179px ! important; 
 }
+
+.profile-inputfield{
+  width: 190px ! important; 
+}
+
 
 input::-webkit-input-placeholder {
 font-family: Open Sans;
@@ -351,6 +381,26 @@ opacity: 1;
  padding-left: 30px;
 }
 
+.profile-iconsfields{
+  padding-left:60px;
+  height: 46px;
+}
+
+.profile-iconsfields-a{
+  height: 46px;
+  padding-left: 30px;
+}
+
+.profile-iconsfields-b{
+  padding-left:24px;
+  height: 46px;
+}
+
+.profile_icon{
+  position:absolute;
+  bottom:15px;
+  left:24px;
+}
 
 .icon_img {
   position:absolute;
@@ -441,6 +491,7 @@ opacity: 1;
 .validation-messages{
 color: red;
 text-align: center;
+font-size: 80%;
 }
 
 .select-card-button {
@@ -533,6 +584,137 @@ font-family: Cairo-Bold;
   border-color: #EEEEF2;
   font-family: Cairo-semibold;
   text-align: center;
-  font-size: larger;
+  font-size: 20px;
 }
 
+.profile-btn{
+  font-family: Cairo-semibold;
+  font-size: 90%;
+}
+
+.userfont-dropdown{
+  font-family: Cairo-semibold;
+  font-size: 14px;
+}
+
+.nav-userprofile{
+color:#808080;
+font-family:OpenSans-Bold;
+font-size: 25px;
+}
+
+.nav-userprofile:hover{
+  color:#000000;
+}
+
+.active{
+  color:#000000;
+}
+
+
+.userprofile-box-info {
+    background-color: #EEEEF2;
+    border-color: #EEEEF2;
+    font-family: Cairo-semibold;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+.userprofile-box {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+
+.border-line{
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+}
+
+.dropdown-menu {
+  padding: 0;
+}
+.rewardspoints-font{
+  font-family:OpenSans-Bold;
+}
+
+
+.redeem-button{
+height: 35%;
+}
+
+.redeem-button-a{
+  height: 65px;
+  border-radius: 8px;
+}
+
+.redeem-button-b{
+  height: 65px;
+  width: 100px;
+  border-radius: 8px;
+}
+
+.cardpoints {
+  width: 94%;
+  height: 215px;
+  background-color: #EFEFF3 !important;
+  border-radius: 8px;
+}
+
+.font-points{
+  font-family:OpenSans-SemiBold;
+}
+
+.point-a{
+  font-family:OpenSans-Bold;
+  color:#00B2AE;
+  font-size:39px;
+}
+
+.points-b{
+  font-family: Cairo-SemiBold;
+}
+
+
+.border{
+ border-radius: 10px ! important;
+}
+
+.table-head{
+  background-color: #EFEFF3;
+  opacity: 1;
+  font-family: Cairo-Bold;
+}
+
+.trans-detail{
+  font-family: Cairo-Bold;
+}
+
+
+.table-body-font{
+  font-family:OpenSans-SemiBold;
+  color: #393939;
+}
+
+.font-date{
+  font-family:OpenSans-Regular;
+  font-size: 14px;
+}
+
+.amount-color{
+  color:#00B2AE;
+  font-family:OpenSans-Bold;
+}
+
+.font-balance{
+  font-family:OpenSans-Bold;
+  font-weight: lighter;
+}
+
+.popup-btn{
+  width: 55%;
+}

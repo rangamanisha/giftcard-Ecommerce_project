@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import StartingGift from '../assets/starting-gift.svg';
-import StartingGift2 from '../assets/start-giftting2.svg';
+import StartingGift from "../assets/starting-gift.svg";
+import StartingGift2 from "../assets/start-giftting2.svg";
+
 
 const StartGifting = () => {
-  return (
-    <Row>
+    return (
+  <Row>
       <div className="cardgifiti-startgf custom-card row mx-auto mt-5">
         <Col xs={3}>
           <img src={StartingGift} className="startgiftingimg" alt="startgiftingimg" />
@@ -57,10 +58,14 @@ const StartGifting = () => {
             </Row>
           </Form>
 
-          <div className="text-center">
-            <Button variant="info" size="md" className="mt-3 startgf-fields-button">
-              Browse Gifts
-            </Button>
+ <div className="text-center">
+     <Button
+            variant="info"
+            size="md"
+            className="mt-3 startgf-fields-button"
+          >
+            Browse Gifts
+          </Button>
           </div>
         </Col>
 
@@ -69,7 +74,7 @@ const StartGifting = () => {
         </Col>
       </div>
     </Row>
-  );
-};
+    )
+}
 
 export default StartGifting;
