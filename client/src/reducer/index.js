@@ -4,6 +4,7 @@ import { topbarReducer, TOPBAR_FEATURE_KEY } from "./topbar.reducer";
 import {categoryReducer,CATEGORY_REDUCER} from './category.reducer';
 import {brandsReducer, BRAND_REDUCER} from './brands.reducer'
 import { giftCardsReducer, GIFTCARD_REDUCER } from "./giftCards.reducer";
+import {cartItemReducer, CART_ITEMS_REDUCER} from './cart.reducer';
 
 
 
@@ -13,7 +14,8 @@ const store = configureStore({
     [TOPBAR_FEATURE_KEY]: topbarReducer,
     [CATEGORY_REDUCER]: categoryReducer,
     [BRAND_REDUCER]: brandsReducer,
-    [GIFTCARD_REDUCER]: giftCardsReducer
+    [GIFTCARD_REDUCER]: giftCardsReducer,
+    [CART_ITEMS_REDUCER]: cartItemReducer
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
