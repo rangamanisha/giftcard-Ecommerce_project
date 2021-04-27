@@ -1,17 +1,22 @@
 import {apiCall } from './api';
-export const API_URL = process.env.REACT_APP_API_URL_OLD;
+export const API_URL = process.env.REACT_APP_API_URL;
 
+export const descriptionBrand = (brands) => {
+    const {id, currency,image_size,image_type, program_id} = brands;
+    const url = `${API_URL}/brands/855?currency=${currency}&&image_size=${image_size}&&image_type=${image_type}&&program_id=${program_id}`;
+    return apiCall(url, 'GET', null, null, false);
+}
 export const termBrand = (brands) => {
     const {id, currency, program_id} = brands;
     const url = `${API_URL}/brands/${id}/terms?currency=${currency}`;
     return apiCall(url, 'GET', null, null, false);
 }
 
-export const product_description = (brands) => {
-    const {id, currency, program_id} = brands;
-    const url = `${API_URL}/brands/451/product_description?currency=${currency}&&id=${id}&&program_id=${program_id}`;
-    return apiCall(url, 'GET', null, null, false);
-}
+// export const product_description = (brands) => {
+//     const {id, currency, program_id} = brands;
+//     const url = `${API_URL}/brands/451/product_description?currency=${currency}&&id=${id}&&program_id=${program_id}`;
+//     return apiCall(url, 'GET', null, null, false);
+// }
 
 export const featured_brands = (brands) => {
     const {program_id, currency} = brands;

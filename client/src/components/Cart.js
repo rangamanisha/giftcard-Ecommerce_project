@@ -10,14 +10,14 @@ import {
     DropdownButton,
 } from "react-bootstrap";
 import AmazonMedium from "../assets/amazon_medium.png";
-
-
+import {useHistory} from 'react-router-dom';
 const CartPage = () => {
+    const history = useHistory();
     return (
         <>
             <div className="row ml-5 mt-5 ">
                 <div className="col-md-4 col-sm-12 cartcolor">
-                    <div className="d-flex mt-4">
+                    <div id ="cart" className="d-flex mt-4">
                         <p className="col select-card-text">Total Pay</p>
                         <span>
                             <ButtonGroup classname="btngroup">
@@ -42,7 +42,7 @@ const CartPage = () => {
                     <h6 className ="m-4">You can also use your Gifti Global Points, Login or Sign up to use your Gift Global Points</h6>
                     <div className =" m-auto giftipoints">{<>Gifti Global Points  <h4>0</h4></>}</div>
                     <div className = "row mt-5 mr-4 ml-4">
-                    <Button variant="light" size="lg" className="login">Log in</Button> 
+                    <Button variant="light" size="lg"  onClick={() => history.push({ pathname: '/auth/login' })} className="login">Log in</Button> 
                     <Button className="nav-btn ml-2" variant="info">
               Checkout as Guest
             </Button>{' '}

@@ -487,7 +487,7 @@ width: 100%;
   margin-left: 40px;
   align-items: center;
 }
-button.btn.btn-primary {
+#cart .btn-primary {
   height: 48px;
   background-color: white;
   border: 1px solid white;
@@ -830,4 +830,24 @@ img.templatetheme1 {
 }
 img.templatetheme.ml-5:hover{
 border: 1px solid #00B2AE !important;
+}
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 18px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px; 
 }

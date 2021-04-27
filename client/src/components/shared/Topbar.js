@@ -12,7 +12,6 @@ import { useState, useRef } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Topbar.scss';
 import 'primereact/resources/themes/saga-blue/theme.css';
-
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
@@ -22,7 +21,19 @@ const Topbar = (props) => {
   const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
   const user = localStorage.getItem('first_name');
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates');
+  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates' );
+//   const countries = [
+//     {name: 'Australia', code: 'AU'},
+//     {name: 'Brazil', code: 'BR'},
+//     {name: 'China', code: 'CN'},
+//     {name: 'Egypt', code: 'EG'},
+//     {name: 'France', code: 'FR'},
+//     {name: 'Germany', code: 'DE'},
+//     {name: 'India', code: 'IN'},
+//     {name: 'Japan', code: 'JP'},
+//     {name: 'Spain', code: 'ES'},
+//     {name: 'United States', code: 'US'}
+// ];
 
   const clearsession = () => {
     localStorage.clear();
@@ -138,6 +149,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" />
+           <span class='badge badge-warning' id='lblCartCount'> 1 </span>
           </Button>
         </Row>
       </Form>
