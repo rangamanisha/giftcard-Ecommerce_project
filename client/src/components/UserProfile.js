@@ -17,7 +17,7 @@ const UserProfile = () => {
   const data = profilestate;
 
   useEffect(() => {
-    dispatch(getprofileListAction({}));
+    dispatch(getprofileListAction());
   }, [dispatch]);
 
   return (

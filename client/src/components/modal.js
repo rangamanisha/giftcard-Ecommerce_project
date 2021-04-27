@@ -1,3 +1,4 @@
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import checkbox from '../assets/checkbox.svg';

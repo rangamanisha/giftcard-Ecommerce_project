@@ -19,7 +19,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from './modal';
 
-const RewardPoints = (props) => {
+const RewardPoints = () => {
   const points = useSelector(getRewardPointsState);
   const dispatch = useDispatch();
   const points_data = points;
@@ -28,8 +28,8 @@ const RewardPoints = (props) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
-    dispatch(getRewardPointsAction({}));
-    dispatch(getTransactionsAction({}));
+    dispatch(getRewardPointsAction());
+    dispatch(getTransactionsAction());
     if (points_data.message === 'Gift card successfully converted to points.') {
       setModalShow(true);
     }
@@ -101,9 +101,9 @@ const RewardPoints = (props) => {
             </thead>
             <tbody>
               {transactions && transactions.length > 0 ? (
-                transactions.map((transaction) => {
+                transactions.map((transaction, i) => {
                   return (
-                    <tr className="table-body-font">
+                    <tr className="table-body-font" key={i}>
                       <td className="font-date">transaction.created_at</td>
                       <td>{transaction.type}</td>
                       <td>{transaction.card_number}</td>
