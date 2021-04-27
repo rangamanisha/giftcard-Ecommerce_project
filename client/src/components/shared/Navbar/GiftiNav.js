@@ -31,26 +31,26 @@ const GiftiNav = () => {
     setSelectedCountry(event.target.outerText);
   };
 
-    return (
-        <Topbar
-            bg={bg}
-            variant={variant}
-            first_name={authState.first_name}
-            logoIcon={Logo}
-            locationIcon={Location}
-            cartIcon={Cart}
-            exitIcon={Exit}
-            coinsIcon={Coins}
-            profileIcon={Profile}
-            country={selectedCountry}
-            countriesList={countries}
-            searchIcon={Search}
-            userLoginIcon={UserLogin}
-            shoppingCartIcon={Shoppingcart}
-            showLogin={!authState.isAuthenticated}
-            onCountrySelected={countryChanged}
-        />
-    );
-}
+  return (
+    <Topbar
+      bg={bg}
+      variant={variant}
+      first_name={authState.first_name}
+      logoIcon={Logo}
+      locationIcon={Location}
+      cartIcon={Cart}
+      exitIcon={Exit}
+      coinsIcon={Coins}
+      profileIcon={Profile}
+      country={selectedCountry}
+      countriesList={countries}
+      searchIcon={Search}
+      userLoginIcon={UserLogin}
+      shoppingCartIcon={Shoppingcart}
+      showLogin={!authState.isAuthenticated}
+      onCountrySelected={countryChanged}
+    />
+  );
+};
 
 export default GiftiNav;

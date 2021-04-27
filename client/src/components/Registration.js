@@ -7,7 +7,7 @@ import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
 import { signupAction } from '../actions/auth.actions';
-import { getAuthState } from '../reducer/auth.reducer'
+import { getAuthState } from '../reducer/auth.reducer';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router';
 import * as Yup from 'yup';
@@ -23,8 +23,8 @@ const Signup = () => {
       first_name: '',
       last_name: '',
       email: '',
-      password : '',
-      password_confirmation: '',
+      password: '',
+      password_confirmation: ''
     },
 
     validationSchema: Yup.object({
@@ -32,7 +32,7 @@ const Signup = () => {
       last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
       password: Yup.string().min(2).max(200).required(),
-      password_confirmation: Yup.string().min(2).max(200).required(),
+      password_confirmation: Yup.string().min(2).max(200).required()
     }),
     onSubmit: (data) => {
       console.log('data ', data);
@@ -40,13 +40,11 @@ const Signup = () => {
     }
   });
 
-
   useEffect(() => {
     if (state.signupSuccess) {
-      history.push({ pathname: '/' })
+      history.push({ pathname: '/' });
     }
-  },
-[state.signupSuccess, history]);
+  }, [state.signupSuccess, history]);
 
   return (
     <>
@@ -60,63 +58,92 @@ const Signup = () => {
           <Form onSubmit={formik.handleSubmit} className="user">
             <div className="row">
               <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
-                <Form.Control size="md" type="text" placeholder="First Name" className="icons_fields" value={formik.values.first_name} onChange={formik.handleChange} name="first_name" />
-                <img
-                  src={Usericon}
-                  alt="Icon"
-                  className="icon_img"
+                <Form.Control
+                  size="md"
+                  type="text"
+                  placeholder="First Name"
+                  className="icons_fields"
+                  value={formik.values.first_name}
+                  onChange={formik.handleChange}
+                  name="first_name"
                 />
-              </Form.Group> 
+                <img src={Usericon} alt="Icon" className="icon_img" />
+              </Form.Group>
               <Form.Group controlId="formBasiclast-name" className="singup-inputfield mr-sm-3">
-                <Form.Control size="lg" type="text" placeholder="Last Name" className="icons_fields_b" value={formik.values.last_name} onChange={formik.handleChange} name="last_name" />
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Last Name"
+                  className="icons_fields_b"
+                  value={formik.values.last_name}
+                  onChange={formik.handleChange}
+                  name="last_name"
+                />
               </Form.Group>
             </div>
 
-            {formik.errors.first_name ? (<p className="validation-messages">{formik.errors.first_name}</p>) : null}
+            {formik.errors.first_name ? (
+              <p className="validation-messages">{formik.errors.first_name}</p>
+            ) : null}
 
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-              <Form.Control size="md" type="email" placeholder="Enter email" className="icons_fields" value={formik.values.email} onChange={formik.handleChange} name="email" />
-              <img
-                src={Emailicon}
-                alt="Icon"
-                className="icon_img"
+              <Form.Control
+                size="md"
+                type="email"
+                placeholder="Enter email"
+                className="icons_fields"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                name="email"
               />
               <img src={Emailicon} alt="Icon" className="icon_img" />
+              <img src={Emailicon} alt="Icon" className="icon_img" />
             </Form.Group>
-            {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
+            {formik.errors.email ? (
+              <p className="validation-messages">{formik.errors.email}</p>
+            ) : null}
 
             <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={formik.handleChange} name="password"/>
-            <img
-                src={Passwordicon}
-                alt="Icon"
-                className="icon_img"
+              <Form.Control
+                size="lg"
+                type="password"
+                placeholder="Password"
+                className="icons_fields"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                name="password"
               />
-          </Form.Group>
-          {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
-          <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
-            <Form.Control size="lg" type="password" placeholder="password confirmation" className="icons_fields" value={formik.values.password_confirmation} onChange={formik.handleChange} name="password_confirmation"/>
-            <img
-                src={Passwordicon}
-                alt="Icon"
-                className="icon_img"
+              <img src={Passwordicon} alt="Icon" className="icon_img" />
+            </Form.Group>
+            {formik.errors.password ? (
+              <p className="validation-messages">{formik.errors.password}</p>
+            ) : null}
+            <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
+              <Form.Control
+                size="lg"
+                type="password"
+                placeholder="password confirmation"
+                className="icons_fields"
+                value={formik.values.password_confirmation}
+                onChange={formik.handleChange}
+                name="password_confirmation"
               />
-          </Form.Group>
-          {formik.errors.password_confirmation ? (<p className="validation-messages">{formik.errors.password_confirmation}</p>) : null}
-          {state.errors && state.errors.length ? (
-            <p className="validation-messages">{state.errors.join('\n')}</p>
-          ) : null}
+              <img src={Passwordicon} alt="Icon" className="icon_img" />
+            </Form.Group>
+            {formik.errors.password_confirmation ? (
+              <p className="validation-messages">{formik.errors.password_confirmation}</p>
+            ) : null}
+            {state.errors && state.errors.length ? (
+              <p className="validation-messages">{state.errors.join('\n')}</p>
+            ) : null}
 
-            <Button
-            className="btn-custom mt-3"
-            variant="info"
-            size="lg"
-            type="submit"
-          >
-            Sign up
-          </Button>
+            <Button className="btn-custom mt-3" variant="info" size="lg" type="submit">
+              Sign up
+            </Button>
 
-            <p className="text-center mt-3">Already have an account ? <Link to="/auth/login">Log in</Link></p>
+            <p className="text-center mt-3">
+              Already have an account ? <Link to="/auth/login">Log in</Link>
+            </p>
 
             <table width="100%">
               <tbody>
