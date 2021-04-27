@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Footer from './Footer';
 import Emailicon from '../assets/Email-icon.svg';
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
@@ -25,7 +24,7 @@ const Signup = () => {
       last_name: '',
       email: '',
       password: '',
-      confirm_password: ''
+      password_confirmation: ''
     },
 
     validationSchema: Yup.object({
@@ -33,7 +32,7 @@ const Signup = () => {
       last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
       password: Yup.string().min(2).max(200).required(),
-      confirm_password: Yup.string().min(2).max(200).required()
+      password_confirmation: Yup.string().min(2).max(200).required()
     }),
     onSubmit: (data) => {
       console.log('data ', data);
@@ -42,10 +41,10 @@ const Signup = () => {
   });
 
   useEffect(() => {
-    if (state.status) {
+    if (state.signupSuccess) {
       history.push({ pathname: '/' });
     }
-  }, [state.status, history]);
+  }, [state.signupSuccess, history]);
 
   return (
     <>
@@ -70,7 +69,7 @@ const Signup = () => {
                 />
                 <img src={Usericon} alt="Icon" className="icon_img" />
               </Form.Group>
-              <Form.Group controlId="formBasicText" className="singup-inputfield mr-sm-3">
+              <Form.Group controlId="formBasiclast-name" className="singup-inputfield mr-sm-3">
                 <Form.Control
                   size="lg"
                   type="text"
@@ -83,6 +82,10 @@ const Signup = () => {
               </Form.Group>
             </div>
 
+            {formik.errors.first_name ? (
+              <p className="validation-messages">{formik.errors.first_name}</p>
+            ) : null}
+
             <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
               <Form.Control
                 size="md"
@@ -93,6 +96,7 @@ const Signup = () => {
                 onChange={formik.handleChange}
                 name="email"
               />
+              <img src={Emailicon} alt="Icon" className="icon_img" />
               <img src={Emailicon} alt="Icon" className="icon_img" />
             </Form.Group>
             {formik.errors.email ? (
@@ -111,19 +115,28 @@ const Signup = () => {
               />
               <img src={Passwordicon} alt="Icon" className="icon_img" />
             </Form.Group>
-
-            <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
+            {formik.errors.password ? (
+              <p className="validation-messages">{formik.errors.password}</p>
+            ) : null}
+            <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
               <Form.Control
                 size="lg"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="password confirmation"
                 className="icons_fields"
-                value={formik.values.confirm_password}
+                value={formik.values.password_confirmation}
                 onChange={formik.handleChange}
-                name="confirm_password"
+                name="password_confirmation"
               />
               <img src={Passwordicon} alt="Icon" className="icon_img" />
             </Form.Group>
+            {formik.errors.password_confirmation ? (
+              <p className="validation-messages">{formik.errors.password_confirmation}</p>
+            ) : null}
+            {state.errors && state.errors.length ? (
+              <p className="validation-messages">{state.errors.join('\n')}</p>
+            ) : null}
+
             <Button className="btn-custom mt-3" variant="info" size="lg" type="submit">
               Sign up
             </Button>
@@ -155,7 +168,6 @@ const Signup = () => {
           </Form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

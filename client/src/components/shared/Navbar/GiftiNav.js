@@ -7,6 +7,11 @@ import Shoppingcart from '../../../assets/shopping-cart.svg';
 import UserLogin from '../../../assets/User-login.svg';
 import Location from '../../../assets/location.svg';
 import {getGiftcardsState, giftCardsAction} from '../../../reducer/giftCards.reducer'
+import Profile from '../../../assets/uprofile.svg';
+import Cart from '../../../assets/cart.svg';
+import Exit from '../../../assets/exit.svg';
+import Coins from '../../../assets/coins.svg';
+import { getTopBarState } from '../../../reducer/topbar.reducer';
 import { getCountriesListAction } from '../../../actions/topbar.actions';
 import Topbar from '../Topbar';
 // import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
@@ -21,6 +26,7 @@ const GiftiNav = () => {
     const giftunitState = useSelector(getGiftcardsState);
     const dispatch = useDispatch()
     const countries = giftunitState.countries.map(country => country['country_name']);
+    const countries1 = [...countries].sort()
     // const countries = countries1[...countries];
  
 
@@ -46,7 +52,7 @@ const GiftiNav = () => {
             logoIcon={Logo}
             locationIcon={Location}
             country={get(giftunitState.selectedCountry, 'country_name')}
-            countriesList={countries}
+            countriesList={countries1}
             searchIcon={Search}
             userLoginIcon={UserLogin}
             shoppingCartIcon={Shoppingcart}

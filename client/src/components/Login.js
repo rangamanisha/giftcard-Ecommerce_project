@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Footer from './Footer';
 import Usericon from '../assets/User-icon.svg';
 import Passwordicon from '../assets/Password-icon.svg';
 import Googleicon from '../assets/Google-icon.svg';
@@ -15,11 +14,14 @@ import { loginAction } from '../actions/auth.actions';
 import { useHistory } from 'react-router';
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
+import checkbox from '../assets/checkbox.svg';
 
 const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
+
+  const [message, setMessage] = useState('');
 
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -47,15 +49,24 @@ const Login = () => {
         setVisible(false);
       }, 1000000);
     }
-  }, [state.isAuthenticated, history]);
+
+    if (state.reset) {
+      setIsValid(true);
+      setMessage('Your Password has been successfully updated.');
+      window.setTimeout(() => {
+        setVisible(false);
+      }, 3000);
+    }
+  }, [state.isAuthenticated, state.reset, history]);
 
   return (
     <>
       <div>
-        {isValid === 'yes' ? (
+        {isValid ? (
           <Fade>
-            <Alert variant="danger" text="center" transition={visible}>
-              test.
+            <Alert variant="info" transition={visible}>
+              <img src={checkbox} className="mr-3" style={{ width: '30px' }} alt="Icon" />
+              {message}
             </Alert>
           </Fade>
         ) : (
@@ -80,6 +91,7 @@ const Login = () => {
               name="email"
             />
             <img src={Usericon} alt="Icon" className="icon_img" />
+            <img src={Usericon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (
@@ -97,7 +109,12 @@ const Login = () => {
               name="password"
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
+            <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
+
+          {formik.errors.password ? (
+            <p className="validation-messages">{formik.errors.password}</p>
+          ) : null}
 
           <div className="row">
             <Form.Group style={{ marginLeft: '77px' }}>
@@ -109,14 +126,16 @@ const Login = () => {
               />
             </Form.Group>
             <Form.Group style={{ marginLeft: '162px' }}>
-              <Link className="link-color" to="/forgotpassword">
+              <Link className="link-color" to="/auth/forgotpassword">
                 Forgot me?
               </Link>
             </Form.Group>
           </div>
+
           {state.errors && state.errors.length ? (
             <p className="validation-messages">{state.errors.join('\n')}</p>
           ) : null}
+
           <Button className="btn-custom mt-3" variant="info" size="lg" type="Submit">
             Login to Continue
           </Button>
@@ -158,7 +177,6 @@ const Login = () => {
           </div>
         </Form>
       </div>
-      <Footer />
     </>
   );
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import Passwordicon from '../assets/Password-icon.svg';
-import Footer from './Footer';
 import * as Yup from 'yup';
 import { getAuthState } from '../reducer/auth.reducer';
 import { useFormik } from 'formik';
@@ -15,17 +14,18 @@ const ResetPassword = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
 
-  const value = localStorage.getItem('access_token');
+  const value = localStorage.getItem('token');
+  console.log(value);
 
   const formik = useFormik({
     initialValues: {
-      new_password: '',
-      confirm_password: '',
+      password: '',
+      password_confirmation: '',
       token: value
     },
     validationSchema: Yup.object({
-      new_password: Yup.string().min(2).max(200).required(),
-      confirm_password: Yup.string().min(2).max(200).required()
+      password: Yup.string().min(2).max(200).required(),
+      password_confirmation: Yup.string().min(2).max(200).required()
     }),
     onSubmit: (data) => {
       console.log(data);
@@ -34,11 +34,11 @@ const ResetPassword = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem('access_token', history.location['search'].split('=', 2)[1]);
-    if (state.status) {
-      history.push({ pathname: '/' });
+    localStorage.setItem('token', history.location['search'].split('?', 2)[1]);
+    if (state.reset) {
+      history.push({ pathname: '/auth/login' });
     }
-  });
+  }, [state.reset, history]);
 
   return (
     <>
@@ -51,37 +51,36 @@ const ResetPassword = () => {
               type="password"
               placeholder="new password"
               className="icons_fields"
-              value={formik.values.new_password}
+              value={formik.values.password}
               onChange={formik.handleChange}
-              name="new_password"
+              name="password"
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
-          {formik.errors.new_password ? (
-            <p className="validation-messages">{formik.errors.new_password}</p>
+          {formik.errors.password ? (
+            <p className="validation-messages">{formik.errors.password}</p>
           ) : null}
 
           <Form.Group controlId="formBasicconfirm_password" className="w-75 mx-auto icons_login">
             <Form.Control
               size="lg"
               type="password"
-              placeholder="Confirm Password"
+              placeholder="ConfirmPassword"
               className="icons_fields"
-              value={formik.values.confirm_password}
+              value={formik.values.password_confirmation}
               onChange={formik.handleChange}
-              name="confirm_password"
+              name="password_confirmation"
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
-          {formik.errors.confirm_password ? (
-            <p className="validation-messages">{formik.errors.confirm_password}</p>
+          {formik.errors.password_confirmation ? (
+            <p className="validation-messages">{formik.errors.password_confirmation}</p>
           ) : null}
           <Button className="btn-custom mt-3" variant="info" size="lg" type="submit">
             ok
           </Button>
         </Form>
       </div>
-      <Footer />
     </>
   );
 };
