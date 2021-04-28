@@ -9,6 +9,7 @@ const Giftcard = ({brand}) =>{
     const history = useHistory();
     const dispatch = useDispatch();
     const handleClick = () => {
+        debugger
         dispatch(giftCardsAction.selectBrand(brand))
         history.push('/selectcard')
     }

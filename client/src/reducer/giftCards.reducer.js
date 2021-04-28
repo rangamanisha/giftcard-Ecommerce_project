@@ -31,7 +31,11 @@ export const giftcardSlice = createSlice({
         },
         selectBrand(state, action){
             state.selectedBrand = action.payload;
+        },
+        removeSelectedCard(state, action){
+            state.selectedBrand = null;
         }
+
 
     },
     extraReducers: (builder) => {

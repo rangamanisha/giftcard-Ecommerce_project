@@ -79,6 +79,10 @@ const SelectCards = () => {
             id:get(card, 'id')
     
         }))
+        const unSubscribe = () => {
+            dispatch(giftCardsAction.removeSelectedCard())
+        }
+        return unSubscribe
     } , [get(card, 'id')])
 
     React.useEffect(() => {
