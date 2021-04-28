@@ -25,7 +25,7 @@ const giftGiftCard = () => {
         </Form.Group>
       </Form>
       <p className="select-card-text mt-5">Choose A Template</p>
-      <div class="row">
+      <div className="row">
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />

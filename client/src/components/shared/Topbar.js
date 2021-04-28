@@ -151,7 +151,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-           <span class='badge badge-warning' id='lblCartCount'> 1 </span>
+           <span className='badge badge-warning' id='lblCartCount'> 1 </span>
           </Button>
         </Row>
       </Form>

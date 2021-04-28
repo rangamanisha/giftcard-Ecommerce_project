@@ -95,7 +95,7 @@ function AllCategoryCards() {
   return (
     
 
-    <div class="allGiftCard">
+    <div className="allGiftCard">
       <div className="slideclass" id ="categorycarousel" >
         <Carousel pagination={0} breakPoints={breakPoints}>
           <Item>

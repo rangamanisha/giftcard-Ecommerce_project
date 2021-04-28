@@ -91,7 +91,7 @@ function AllGiftCard() {
   return (
     
 
-    <div class="allGiftCard">
+    <div className="allGiftCard">
       <div>
         <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
         <p className="giftiallcard-text-a">Browse by Category</p>
@@ -122,7 +122,7 @@ function AllGiftCard() {
               ) )
             }
         </div>
-      <div class="text-center"><button  onClick={() => history.push('AllCards')} type="button" class="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
+      <div className="text-center"><button  onClick={() => history.push('AllCards')} type="button" className="mt-3 startgf-fields-button btn btn-info btn-md">Load More</button></div>
 </div>
     )
 }
