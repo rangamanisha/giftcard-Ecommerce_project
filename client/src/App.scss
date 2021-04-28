@@ -1009,5 +1009,50 @@ label.form-check-label {
   opacity: 100%;
   background: none;
 }
+.navbar-brand button {
+  padding-left: 0px;
+  padding-right: 30px;
+}
+
+.navbar-brand {
+  margin: 0;
+  padding: 0 !important;
+}
+
+.navbar {
+  padding: 20px 40px;
+}
+body {
+  overflow-x: hidden;
+}
+.navbar button.nav-btn-link img {
+  width: 32px;
+}
+@media screen and (max-width: 1600px) {
+  .pl-3.navbar-nav {
+      padding: 0 !important;
+  }
+  nav.navbar .btn {
+      font-size: 14px;
+  }
+  .search-button {
+      width: 300px !important;
+  }
+  .navbar-brand img {
+      max-width: 170px;
+  }
+}
+@media screen and (max-width: 1400px) {
+
+  .navbar .p-dropdown-trigger {
+      width: auto !important;
+  }
+  .navbar-brand button {
+      padding-right: 10px;
+  }
+  .search-button {
+      width: 220px !important;
+  }
+}
 
 
