@@ -38,8 +38,7 @@ const card = () => {
       <div className="row mt-5" style={{ marginLeft: '112px' }}>
         <Country className="mr-sm-3"></Country>
         <small className="custom-font">
-          Select a country and browse e-gift cards within
-          <br /> 4,000+ brands
+          Select a country and browse e-gift cards within 4,000+ brands
         </small>
         <Target className="mr-sm-3 icons"></Target>
         <small className="custom-font">
