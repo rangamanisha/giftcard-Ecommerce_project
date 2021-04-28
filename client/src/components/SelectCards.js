@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBrandsState } from '../reducer/brands.reducer';
 import { giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction } from '../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../reducer/giftCards.reducer';
-import { get, map, isEmpty } from 'lodash';
+import { get, map, isEmpty, isUndefined } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import { cartTotalCountAction } from '../actions/cart.actions';
+import { cartTotalCountAction, cartItemAction } from '../actions/cart.actions';
 import { getCartItemsState } from '../reducer/cart.reducer';
 
 
@@ -25,14 +25,15 @@ const SelectCards = () => {
     const history = useHistory();
     const [eventKey11, seteventkey] = useState(1);
     const [tempvisible, setTempVisible] = useState(true);
-    const [count, setcount] = useState(1);
+    const [count, setcount] = useState(0);
     const giftunitState = useSelector(getGiftcardsState);
     const productAndTermState = useSelector(getBrandsState);
     const cartState = useSelector(getCartItemsState);
     const card = giftunitState.selectedBrand;
     const payment = giftunitState.selectedCountry;
     // const carddata = 
-    const [denomination, setDenomination] = useState(0);
+    // const [denomination, setDenomination] = useState(0);
+
     const [rate, setRate] = useState(0);
     const handleSelect = (eventKey1) => {
         seteventkey(eventKey1);
@@ -45,14 +46,17 @@ const SelectCards = () => {
     }
     const increment = () => {
         count >= 5 ? setcount(5) : setcount(count + 1);
-        setRate(denomination * (count + 1))
+        const inc = parseInt(card.selectedDenomination * (count + 1))
+        setRate(inc)
     }
     const decrement = () => {
         count > 1 ? setcount(count - 1) : setcount(1)
-        setRate(denomination * (count - 1))
+        const dec = parseInt(card.selectedDenomination * (count - 1))
+        debugger
+        setRate(dec)
     }
     const handleDenomination = (d) => {
-        setDenomination(d);
+        dispatch(giftCardsAction.selectDenomination(d));
         setRate(d);
 
     }
@@ -60,7 +64,7 @@ const SelectCards = () => {
     useEffect(() => {
         setcount(1)
 
-    }, [denomination])
+    }, [card.denominations])
     // React.useEffect(() => {
     //     if(isEmpty(card)){
     //         history.push('/')
@@ -80,10 +84,10 @@ const SelectCards = () => {
             id: get(card, 'id')
 
         }))
-        const unSubscribe = () => {
-            dispatch(giftCardsAction.removeSelectedCard())
-        }
-        return unSubscribe
+        // const unSubscribe = () => {
+        //     dispatch(giftCardsAction.removeSelectedCard())
+        // }
+        // return unSubscribe
     }, [get(card, 'id')])
 
     React.useEffect(() => {
@@ -111,7 +115,7 @@ const SelectCards = () => {
             brand_id: 451
         }))
 
-    }, [])
+    }, [dispatch])
 
     React.useEffect(() => {
         dispatch(giftCardsUnitAction({
@@ -119,7 +123,27 @@ const SelectCards = () => {
             program_id: 1,
             giftunit_id: giftunitState.giftunit_id
         }))
-    }, [giftunitState.giftunit_id])
+    }, [giftunitState.giftunit_id, dispatch])
+
+    const handleCart = () => {
+        const accessToken = localStorage.getItem('access_token');
+        if (accessToken === 'undefined') {
+            return history.push('auth/login')
+
+        }
+        else {
+            dispatch(cartItemAction({
+                "brand_id": card.id,
+                "quantity": 1,
+                "currency": "AED",
+                "giftcard_value": 2000,
+                "card_value_aed": 2000,
+                "isforself": true,
+                "country_id": payment.id
+
+            }))
+        }
+    }
 
 
 
@@ -180,11 +204,7 @@ const SelectCards = () => {
                         <ButtonGroup className="mr-3" aria-label="Second group">
                             <Button variant="light" onClick={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
-                        <Button className="nav-btn mr-2 text-white" onClick={ React.useEffect(() => {
-                            dispatch(cartTotalCountAction({
-                                currency: "AED"
-                            }))
-                        }, [])}>Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2 text-white" onClick={handleCart}>Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2" onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>

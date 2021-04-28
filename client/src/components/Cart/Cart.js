@@ -1,11 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Cart.css';
-import { Button, Col, Image, Row } from 'react-bootstrap';
-import exclamation from '../../../assets/Group4790.svg';
-import amazon from '../../../assets/amazon_medium.png';
-import ButtunDelete from '../../../assets/Button-Delete.svg';
+import {  Col, Image, Row } from 'react-bootstrap';
+import exclamation from '../../assets/Group4790.svg';
+import amazon from '../../assets/amazon_medium.png';
+import ButtunDelete from '../../assets/Button-Delete.svg';
+import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
+import {useDispatch, useSelector} from 'react-redux';
+import {giftCardsUnitAction} from '../../actions/gitCards.actions';
+import {getGiftcardsState} from '../../reducer/giftCards.reducer';
+import {get} from 'lodash';
 
 function Cart() {
+  const dispatch = useDispatch();
+  const giftunitState = useSelector(getGiftcardsState);
+  const card = giftunitState.selectedBrand;
+  const payment = giftunitState.selectedCountry;
+  const [rate, setRate] = useState(0);
+  React.useEffect(() => {
+    dispatch(giftCardsUnitAction({
+        currency: giftunitState.giftunit_id,
+        program_id: 1,
+        giftunit_id: giftunitState.giftunit_id
+    }))
+}, [giftunitState.giftunit_id, dispatch])
+
+
   return (
     <>
       <Row className="m-4">
@@ -16,13 +35,13 @@ function Cart() {
               <div className="flex-shrink-1 cart-currency p-1">
                 <small>Select Payment Currency</small>
                 <span className="mx-2">|</span>
-                <small>AED</small>
+                <small>{get(payment, 'unit_symbol')}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">AED1,050</h4>
+            <h4 className="mt-2 mb-3">{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
-              <span>AED1,050</span>
+              <span>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</span>
             </div>
             <hr />
             <div className="d-flex justify-content-between mb-5">
@@ -30,7 +49,7 @@ function Cart() {
                 <strong>Total</strong>
               </span>
               <span>
-                <strong>AED1,050</strong>
+                <strong>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</strong>
               </span>
             </div>
 
@@ -90,12 +109,12 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image src={get(card, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
                   <small>
-                    <b>Amazon eGift Card</b>
+                    <b>{get(card, 'name')}</b>
                   </small>
                   <small>Gifting for: Someone else</small>
                   <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
@@ -103,9 +122,10 @@ function Cart() {
                       <span>-</span>
                       <span className="mx-4">1</span>
                       <span>+</span>
+                      
                     </div>
-                    <span>UAE</span>
-                    <span>AED 500</span>
+                    <span>{get(payment, 'country_name')}</span>
+                    <span>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</span>
                     <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
                   </div>
                 </div>
@@ -116,7 +136,7 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image src={get(card, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
@@ -130,8 +150,8 @@ function Cart() {
                       <span className="mx-4">1</span>
                       <span>+</span>
                     </div>
-                    <span>UAE</span>
-                    <span>AED 500</span>
+                    <span>{get(payment, 'country_name')}</span>
+                    <span>{get(payment, 'unit_symbol')} 500</span>
                     <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
                   </div>
                 </div>

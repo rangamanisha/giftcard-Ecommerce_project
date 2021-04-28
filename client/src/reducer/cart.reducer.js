@@ -1,20 +1,21 @@
 import {cartItemAction, fetchItemsByCartAction, addRemoveQuantityAction, cartTotalCountAction} from '../actions/cart.actions';
 import {createEntityAdapter, createSelector, createSlice} from '@reduxjs/toolkit';
 import { cartItemsService } from '../services/cart.service';
+import { getPaymentCurrencyAction } from '../actions/gitCards.actions';
 
 export const CART_ITEMS_INIT_STATE = {
     message: '',
     errors: null,
     cart_items: null,
-    brand_id: 845,
-    quantity: 1,
+    brand_id: '',
+    quantity: null,
     currency: '',
-    gifycard_value:200,
-    card_value_aed:2000,
+    giftcard_value:null,
+    card_value_aed:null,
     isforself:'',
-    country_id:6,
-    id:9,
-    cart_id:346,
+    country_id:null,
+    id:null,
+    cart_id:null,
     product_name:'',
     giftcard_style_id: null,
     contact_email:null,

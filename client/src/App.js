@@ -20,7 +20,7 @@ import RewardPoints from './components/RewardPoints';
 // import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
 // import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
 import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
-import Cart from './components/shared/Cart/Cart';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (

@@ -12,8 +12,8 @@ export const GIFTCARDS_INIT_STATE = {
     source_currency:"",
     giftunit_id: 1,
     countries: [],
-    selectedCountry: '',
-    selectedBrand:''
+    selectedCountry: {},
+    selectedBrand:[]
 }
 
 export const GIFTCARD_REDUCER = 'giftCards';
@@ -34,6 +34,9 @@ export const giftcardSlice = createSlice({
         },
         removeSelectedCard(state, action){
             state.selectedBrand = null;
+        },
+        selectDenomination(state, action){
+            state.selectedBrand.selectedDenomination = action.payload
         }
 
 
