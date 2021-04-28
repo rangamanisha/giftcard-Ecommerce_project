@@ -1,18 +1,15 @@
-from django.conf import settings
 from mail_templated import EmailMessage
-from rest_framework_simplejwt.tokens import RefreshToken
-
+import random
 from user.models import User, UserForGetPassword
 
-
-def send_email_to_reset_forget_password(email):
+def send_otp_email(email):
     user = User.objects.filter(email=email)
     if user:
-        refresh = RefreshToken.for_user(user[0])
+        user_otp, _ = UserForGetPassword.objects.get_or_create(user=user[0])
+        code = random.randint(100000,999999)
+        user_otp.code = code
+        user_otp.save()
+
         message = EmailMessage('email/otp.html', 
-            {
-                'user': user[0], 
-                'link' : settings.FRONTEND_RESET_PASSWORD_URL,
-                'token' : str(refresh.access_token),
-            }, '',to=[email])
+        {'user': user[0], 'code' : code}, 'test@ducduc.com',to=[email])
         message.send()

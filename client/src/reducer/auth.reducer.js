@@ -1,10 +1,14 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import {
   loginAction,
   signupAction,
   resetpasswordAction,
-  forgotpasswordAction
-} from '../actions/auth.actions';
+  forgotpasswordAction,
+} from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
   user: null,
@@ -21,12 +25,14 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   success: false,
   alert: false,
   signupSuccess: false,
-  reset: false
+  reset: false,
 };
 
-export const AUTH_FEATURE_KEY = 'auth';
+export const AUTH_FEATURE_KEY = "auth";
 export const authAdapter = createEntityAdapter();
-export const initialAuthState = authAdapter.getInitialState(AUTH_INITIAL_STATE_LOGIN);
+export const initialAuthState = authAdapter.getInitialState(
+  AUTH_INITIAL_STATE_LOGIN
+);
 
 export const authSlice = createSlice({
   name: AUTH_FEATURE_KEY,
@@ -45,19 +51,19 @@ export const authSlice = createSlice({
           state.accessToken = response.data.user.access_token;
           state.isAuthenticated = true;
           state.first_name = response.data.user.first_name;
-          localStorage.setItem('access_token', response.data.user.access_token);
-          localStorage.setItem('first_name', response.data.user.first_name);
+          localStorage.setItem("access_token", response.data.user.access_token);
+          localStorage.setItem("first_name", response.data.user.first_name);
         }
         if (response.code === 400) {
           state.user = null;
           state.errors = [response.message];
         } else if (response.code === 401) {
           state.user = null;
-          state.errors = [response.message || response.detail || ''];
+          state.errors = [response.message || response.detail || ""];
         }
       })
       .addCase(loginAction.rejected, (state, action) => {
-        state.errors = [action.error.message || ''];
+        state.errors = [action.error.message || ""];
       })
       .addCase(signupAction.pending, (state) => {
         state.errors = null;
@@ -80,7 +86,7 @@ export const authSlice = createSlice({
       })
       .addCase(signupAction.rejected, (state, action) => {
         state.status = null;
-        state.errors = [action.error.message || ''];
+        state.errors = [action.error.message || ""];
       })
 
       .addCase(resetpasswordAction.fulfilled, (state, action) => {
@@ -107,17 +113,7 @@ export const authSlice = createSlice({
           state.errors = [response.email];
         }
       })
-      .addCase(resetpasswordAction.fulfilled, (state, action) => {
-        const response = action.payload;
-        if (response.code === 200) {
-          state.status = true;
-          state.errors = null;
-        }
-        if (response.code === 400) {
-          state.errors = [response.message];
-        }
-      });
-  }
+  },
 });
 
 export const authReducer = authSlice.reducer;

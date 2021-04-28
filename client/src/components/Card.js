@@ -12,6 +12,7 @@ import Appleitunes from '../assets/Appleitunes.png';
 import Asec from '../assets/5asec.png';
 import Careem from '../assets/Careem.png';
 import Ace from '../assets/Ace.png';
+import {useHistory} from 'react-router-dom';
 
 const card = () => {
   return (
@@ -68,7 +69,7 @@ const card = () => {
               <Form.Control placeholder="" />
             </Col>
           </Row>
-          <Button variant="info" size="md" className="mt-5" style={{ marginLeft: '330px' }}>
+          <Button variant="info" size="md" className="mt-5" style={{ marginLeft: '330px' }} onClick={() => history.pushState('/allcards')}>
             Browse Gifts
           </Button>{' '}
         </Form>
@@ -77,10 +78,10 @@ const card = () => {
       <div className="cardgifiti-card mt-5">
         <p className="giftiallcard-text mt-5">Brands recommended for you in the UAE</p>
         <div style={{ marginLeft: '130px' }}>
-          <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
-          <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
-          <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
-          <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
+          <img src={Careem} className="ml-sm-5 imgcards mt-5" alt="Careem" />
+          <img src={Asec} className="ml-sm-5 imgcards mt-5" alt="Asec" />
+          <img src={Appleitunes} className="ml-sm-5 imgcards mt-5" alt="Appleitunes" />
+          <img src={Ace} className="ml-sm-5 imgcards mt-5" alt="Ace" />
         </div>
       </div>
     </div>

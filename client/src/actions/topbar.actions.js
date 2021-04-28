@@ -8,5 +8,8 @@ export const getCountriesListAction = createAsyncThunk(
   async (payload, thunkAPI) => {
     const response = await getCountriesAPI();
     return response;
-  }
-);
+});
+
+export const selectCountryAction = (payload) => {
+    return {type:'topbar/selectCountry' , payload}
+}

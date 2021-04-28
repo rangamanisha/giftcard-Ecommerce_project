@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   faFacebookF,
   faYoutube,
@@ -21,11 +22,11 @@ const Footer = () => {
             <br /> redeemed over 4,000+ BRANDS
           </p>
           <div style={{ marginLeft: '150px' }}>
-            <FontAwesomeIcon icon={faFacebookF} className="mr-sm-5" />
-            <FontAwesomeIcon icon={faYoutube} className="mr-sm-5" />
-            <FontAwesomeIcon icon={faTwitter} className="mr-sm-5" />
-            <FontAwesomeIcon icon={faLinkedin} className="mr-sm-5" />
-            <FontAwesomeIcon icon={faInstagram} className="mr-sm-5" />
+            <FontAwesomeIcon icon={faFacebookF} className="ml-sm-5" />
+            <FontAwesomeIcon icon={faYoutube} className="ml-sm-5" />
+            <FontAwesomeIcon icon={faTwitter} className="ml-sm-5" />
+            <FontAwesomeIcon icon={faLinkedin} className="ml-sm-5" />
+            <FontAwesomeIcon icon={faInstagram} className="ml-sm-5" />
           </div>
         </div>
         <div className="Gifti_Global_is mt-5">
@@ -40,10 +41,18 @@ const Footer = () => {
         <div className="Gifti_Global_is mt-5">
           <ul style={{ listStyleType: 'none' }}>
             <span>About</span>
-            <li className="footer-text-list mt-3">Terms & Conditions</li>
-            <li className="footer-text-list mt-3">FAQS</li>
-            <li className="footer-text-list mt-3">Privacy Policy</li>
-            <li className="footer-text-list mt-3">Contact us</li>
+            <li className="footer-text-list mt-3">
+              <Link to="/conditionsPage">Terms & Conditions</Link>
+            </li>
+            <li className="footer-text-list mt-3">
+              <Link to="/enquiryPage">FAQS</Link>
+            </li>
+            <li className="footer-text-list mt-3">
+              <Link to="/privacypolicyPage">Privacy Policy</Link>
+            </li>
+            <li className="footer-text-list mt-3">
+              <Link to="/contact">Contact us</Link>
+            </li>
           </ul>
         </div>
         <div className="Gifti_Global_is mt-5">

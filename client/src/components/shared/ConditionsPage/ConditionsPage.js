@@ -1,6 +1,7 @@
 import React from 'react';
 import './ConditionsPage.css';
 import Header from '../HeaderPage/Header';
+import Footer from '../../Footer';
 
 function ConditionsPage() {
   return (
@@ -379,11 +380,11 @@ function ConditionsPage() {
             <article>
               <h6 id="conaffiliates">8. giftiglobal.com AFFILIATES & ADDITIONAL FUNCTIONS</h6>
               <p className="mb-3">
-                8.1. giftiglobal.com by MYLIST FZ LLC and/or its affiliates ("MyList Affiliates")
-                provide website features and other products and services to you when you use or
-                sign-up as a buyer on the Site. “Affiliate” means, with respect to a particular
-                person, any entity that directly or indirectly controls, is controlled by, or is
-                under common control with such person.
+                8.1. giftiglobal.com by MYLIST FZ LLC and/or its affiliates (&quot;MyList
+                Affiliates&quot;) provide website features and other products and services to you
+                when you use or sign-up as a buyer on the Site. “Affiliate” means, with respect to a
+                particular person, any entity that directly or indirectly controls, is controlled
+                by, or is under common control with such person.
               </p>
               <p className="mb-3">
                 8.2. To enhance your experience across the Site and with MyList Affiliates, you
@@ -551,59 +552,59 @@ function ConditionsPage() {
           <div className="col-3 offset-1 sticky-top condition-container">
             <div className="d-flex flex-column justify-content-between p-2">
               <ul className="list-group list-group-flush ">
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conwelcome">Welcome to Gifti Global</a>
                   {/* <Link to='#welc'>Welcome to Gifti Global</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conabout">ABOUT OUR SITE</a>
                   {/* <Link>ABOUT OUR SITE</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#coneligibilty">ELIGIBILITY AND REGISTRATION REQUIREMENTS</a>
                   {/* <Link>ELIGIBILITY AND REGISTRATION REQUIREMENTS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conobliation">YOUR OBLIGATIONS</a>
                   {/* <Link>YOUR OBLIGATIONS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conintellectual">INTELLECTUAL PROPERTY RIGHTS</a>
                   {/* <Link>INTELLECTUAL PROPERTY RIGHTS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conwarranties">WARRANTIES, REPRESENTATIONS & UNDERTAKINGS</a>
                   {/* <Link>WARRANTIES, REPRESENTATIONS & UNDERTAKINGS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conliability">LIABILITY & INDEMNITIES</a>
                   {/* <Link>LIABILITY & INDEMNITIES</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#consuspension">SUSPENSION, TERMINATION & CANCELLATION</a>
                   {/* <Link>SUSPENSION, TERMINATION & CANCELLATION</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conreporting">REPORTING VIOLATIONS OF THESE TERMS OF USE</a>
                   {/* <Link>REPORTING VIOLATIONS OF THESE TERMS OF USE</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conaffiliates">AFFILIATES & ADDITIONAL FUNCTIONS</a>
                   {/* <Link>AFFILIATES & ADDITIONAL FUNCTIONS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#congift">GIFT CARD INFORMATION</a>
                   {/* <Link>GIFT CARD INFORMATION</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#conpayments">PAYMENT METHODS AND PROTECTING YOUR SECURITY</a>
                   {/* <Link>PAYMENT METHODS AND PROTECTING YOUR SECURITY</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#confulfil">FULFILLMENT OF GIFT CARDS</a>
                   {/* <Link>FULFILLMENT OF GIFT CARDS</Link> */}
                 </li>
-                <li className="list-group-item border-0 condition-item-style">
+                <li className="border-0 condition-item-style">
                   <a href="#congeneral">GENERAL</a>
                   {/* <Link>GENERAL</Link> */}
                 </li>
@@ -611,6 +612,7 @@ function ConditionsPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

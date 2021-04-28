@@ -3,36 +3,38 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useHistory } from 'react-router-dom';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { useState, useRef } from 'react';
+import { Dropdown } from 'primereact/dropdown';
 import './Topbar.scss';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { get } from 'lodash';
 
 const Topbar = (props) => {
-  const {
-    bg,
-    variant,
-    logoIcon,
-    locationIcon,
-    country,
-    countriesList,
-    searchIcon,
-    userLoginIcon,
-    shoppingCartIcon,
-    showLogin,
-    onCountrySelected,
-    profileIcon,
-    coinsIcon,
-    exitIcon,
-    cartIcon,
-    first_name
-  } = props;
-
+  const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
+  const user = localStorage.getItem('first_name');
   const history = useHistory();
+  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates' );
+//   const countries = [
+//     {name: 'Australia', code: 'AU'},
+//     {name: 'Brazil', code: 'BR'},
+//     {name: 'China', code: 'CN'},
+//     {name: 'Egypt', code: 'EG'},
+//     {name: 'France', code: 'FR'},
+//     {name: 'Germany', code: 'DE'},
+//     {name: 'India', code: 'IN'},
+//     {name: 'Japan', code: 'JP'},
+//     {name: 'Spain', code: 'ES'},
+//     {name: 'United States', code: 'US'}
+// ];
 
   const clearsession = () => {
     localStorage.clear();
@@ -52,67 +54,78 @@ const Topbar = (props) => {
         </Button>
       );
     }
-
-    const handleClick = () => {
-      history.push('/profile');
-    };
-
-    const rewardpoints = () => {
-      history.push('/reward-points');
-    };
     return (
       <Dropdown className="pt-1">
         <Dropdown.Toggle variant="info" className="nav-btn">
           <span>
             <img src={userLoginIcon} alt="Icon" className="mr-2" />
           </span>
-          {first_name}
+          {user}
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item className="userfont-dropdown border-line" onClick={handleClick}>
-            <img src={profileIcon} alt="Icon" className="mr-2" />
-            Profile
-          </Dropdown.Item>
-          <Dropdown.Item className="userfont-dropdown border-line" onClick={rewardpoints}>
-            <img src={coinsIcon} alt="Icon" className="mr-2" />
-            Gifti Global Points
-          </Dropdown.Item>
-          <Dropdown.Item className="userfont-dropdown border-line">
-            <img src={cartIcon} alt="Icon" className="mr-2" />
-            Orders
-          </Dropdown.Item>
-          <Dropdown.Item className="userfont-dropdown border-line" onClick={clearsession}>
-            <img src={exitIcon} alt="Icon" className="mr-2" />
-            Logout
-          </Dropdown.Item>
+          <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
+          <Dropdown.Item eventKey="2">Gifti Global Points</Dropdown.Item>
+          <Dropdown.Item eventKey="1">Orders</Dropdown.Item>
+          <Dropdown.Item onClick={clearsession}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     );
   };
 
-  const getCountriesDD = () => {
-    return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
+  // const getCountriesDD = () => {
+  //   return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
+  // };
+  const onCountryChange = (e) => {
+    console.log('e ', e);
+    setSelectedCountry(e.value);
+    onCountrySelected(e.value.country_name);
   };
-
+  const selectedCountryTemplate = (option, props) => {
+    if (option) {
+      return (
+        <div className="country-item country-item-value">
+          <div>{option.country_name}</div>
+        </div>
+      );
+    }
+    return (
+      <span>
+        {props.placeholder}
+      </span>
+    );
+  };
+  const countryOptionTemplate = (option) => {
+    return (
+      <div className="country-item">
+        <div>{option.country_name}</div>
+      </div>
+    );
+  };
   return (
     <Navbar bg={bg} variant={variant}>
-      <Form inline className="mx-auto">
+      <Form inline >
         <Navbar.Brand className="pl-3" onClick={() => history.push({ pathname: '/' })}>
           <Button variant="white">
             <img src={logoIcon} alt="Icon" />
           </Button>
         </Navbar.Brand>
         <Nav className="pl-3">
-          <span className="location">
+        <span className="location">
             <small>I am gifting to</small>
           </span>
-          <img src={locationIcon} alt="Icon" />
-          <NavDropdown
-            title={country || countriesList[0]}
-            id="basic-nav-dropdown"
-            onClick={(val) => onCountrySelected(val)}>
-            {getCountriesDD()}
-          </NavDropdown>
+        <span className="location">
+          <small>I am gifting to</small>
+        </span>
+        <img src={locationIcon} alt="Icon" />
+          <Dropdown value={selectedCountry}
+          options = {countriesList}
+          onChange={onCountryChange}
+          filter
+          filterBy="country_name"
+          placeholder="United Arab Emirates"
+          optionLabel="country_name"
+          valueTemplate={selectedCountryTemplate}
+          itemTemplate={countryOptionTemplate}/>
         </Nav>
         <InputGroup className="pl-3">
           <FormControl
@@ -134,9 +147,11 @@ const Topbar = (props) => {
               Redeem Your Gifti Global Card
             </Button>{' '}
           </Col>
+
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" />
+           <span class='badge badge-warning' id='lblCartCount'> 1 </span>
           </Button>
         </Row>
       </Form>

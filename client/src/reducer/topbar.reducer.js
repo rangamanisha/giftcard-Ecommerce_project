@@ -1,39 +1,50 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { getCountriesListAction } from '../actions/topbar.actions';
+import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
+import { getCountriesListAction, selectCountryAction } from "../actions/topbar.actions";
+import {filter} from 'lodash';
 
 export const TOPBAR_INITIAL_STATE = {
-  countries: [],
-  countriesLoading: false
-};
+    countries: [],
+    countriesLoading: false,
+    currency_code:1,
+    selectedCountry: ''
+}
+
 
 export const TOPBAR_FEATURE_KEY = 'topbar';
 export const topbarAdapter = createEntityAdapter();
 export const initialTopBarState = topbarAdapter.getInitialState(TOPBAR_INITIAL_STATE);
 
 export const topbarSlice = createSlice({
-  name: TOPBAR_FEATURE_KEY,
-  initialState: TOPBAR_INITIAL_STATE,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getCountriesListAction.pending, (state) => {
-        state.countries = [];
-        state.loading = true;
-      })
-      .addCase(getCountriesListAction.fulfilled, (state, action) => {
-        const response = action.payload;
-        state.loading = false;
-        if (response.code === 200) {
-          state.countries = response.data.countries;
-        } else {
-          state.countries = [];
-        }
-      })
-      .addCase(getCountriesListAction.rejected, (state) => {
-        state.countries = [];
-        state.loading = false;
-      });
-  }
+    name: TOPBAR_FEATURE_KEY,
+    initialState: TOPBAR_INITIAL_STATE,
+    reducers: {
+       selectCountry(state, action){
+           let id = filter(state.countries, {country_name:action.payload})[0].id
+           state.currency_code = id;
+           state.selectedCountry = action.payload;
+       } 
+        
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getCountriesListAction.pending, (state, action) => {
+            state.countries = [];
+            state.loading = true;
+        })
+        .addCase(getCountriesListAction.fulfilled, (state, action) => {
+            const response = action.payload;
+            state.loading = false;
+            if(response.code === 200) {
+                state.countries = response.data.countries;
+            } else {
+                state.countries = [];
+            }
+        })
+        .addCase(getCountriesListAction.rejected, (state, action) => {
+            state.countries = [];
+            state.loading = false;
+        })
+         
+    }
 });
 
 export const topbarReducer = topbarSlice.reducer;
