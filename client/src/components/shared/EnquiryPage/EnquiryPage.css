@@ -13,6 +13,18 @@
   font-family: Cairo;
   line-height: 180%;
 }
+.help-faq {
+  font-family: 'Open Sans';
+}
+.help-faq > h5 {
+  font-weight: 600;
+  font-size:medium;
+}
+.help-faq > P {
+  font-weight: 400;
+  font-size:90%;
+
+}
 
 .frequently-asked-container {
   width: 100%;
@@ -33,9 +45,11 @@
 .account-options-item {
   position: relative;
   display: block;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
+  padding-right: 0px;
+  padding-left: 0px;
   color: #636d79;
-  font: 16px Roboto-Regular;
+  font: 16px 'Roboto-Regular';
   text-decoration: none;
   background-color: #fff;
   border: none;
@@ -88,6 +102,8 @@
   letter-spacing: 0px;
   color: #636d79;
   opacity: 1;
+  font-weight: 700;
+  font-size: medium;
 }
 
 .enqpage-border {
@@ -111,4 +127,10 @@
 
   text-align: center;
   white-space: nowrap;
+}
+
+.faq-list {
+  font-family:'Roboto-Regular';
+  font-size: small;
+  opacity: 0.6; 
 }
