@@ -13,13 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBrandsState } from '../reducer/brands.reducer';
 import { giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction } from '../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../reducer/giftCards.reducer';
-import { get, map, isEmpty, isUndefined, includes } from 'lodash';
+import { get, map, isEmpty, isUndefined, filter, assign, isEqual } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { getCartItemsState, cartAction } from '../reducer/cart.reducer';
 
 
 const SelectCards = () => {
-
     const dispatch = useDispatch();
     const history = useHistory();
     const [eventKey11, seteventkey] = useState(1);
@@ -31,39 +30,41 @@ const SelectCards = () => {
     const payment = giftunitState.selectedCountry;
     const count = get(cartState, 'count')
     const [rate, setRate] = useState(0);
+    const [gift_to, setGiftTo] = useState("myself")
+    const selectedDenomination = get(card, 'selectedDenomination')
     const handleSelect = (eventKey1) => {
         seteventkey(eventKey1);
     }
-    const changeHandler = () => {
-        setTempVisible(!tempvisible)
+    const handleGiftTo = (e) => {
+        setGiftTo(e.target.value)
     }
     const increment = () => {
-        if(count >= 5) {
+        if (count >= 5) {
             return null
         }
         else {
-        dispatch(cartAction.increaseCount())
-        const inc = parseFloat(card.selectedDenomination * (count + 1)).toFixed(2)
-        setRate(inc)
+            dispatch(cartAction.increaseCount())
+            const inc = parseFloat(card.selectedDenomination * (count + 1))
+            setRate(inc)
         }
     }
     const decrement = () => {
-        if(count ==0) {
-            return null 
+        if (count == 0) {
+            return null
         }
         else {
-        dispatch(cartAction.decreaseCount())
-        const dec = parseFloat(card.selectedDenomination * (count - 1)).toFixed(2)
-        setRate(dec)
+            dispatch(cartAction.decreaseCount())
+            const dec = parseFloat(card.selectedDenomination * (count - 1))
+            setRate(dec)
         }
     }
     const handleDenomination = (d) => {
-        dispatch(giftCardsAction.selectDenomination(parseFloat(d).toFixed(2)));
+        dispatch(giftCardsAction.selectDenomination(parseFloat(d)));
         setRate(d);
 
     }
     React.useEffect(() => {
-        if(isEmpty(card) || isUndefined(card)) {
+        if (isEmpty(card) || isUndefined(card)) {
             history.push('/')
         }
         dispatch(cartAction.setCountZero())
@@ -104,13 +105,18 @@ const SelectCards = () => {
     }, [giftunitState.giftunit_id, dispatch])
 
     const saveTocart = () => {
-        const list_items = map(get(cartState, 'lineItems'), _ => _.id)
-        const selectedBrandId = get(card, 'id')
-        if (includes(list_items, selectedBrandId) && !isEmpty(list_items)) {
+        const itemInCart = filter(get(cartState, 'lineItems'), { id: get(card, 'id') })[0]
+        const selectedBrand = assign({}, card, { quantity: count })
+        if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
+            dispatch(
+                dispatch(cartAction.updateLineItem(selectedBrand))
+            )
+        }
+        else if (isEqual(itemInCart, selectedBrand)) {
             return null
         }
         else {
-            dispatch(cartAction.saveItemsToCart(card))
+            dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count })))
         }
     }
     return (
@@ -122,13 +128,12 @@ const SelectCards = () => {
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
                         {map(get(productAndTermState, 'description.brand.denominations'), d =>
-                            <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{parseFloat(d).toFixed
-                            (2)}</Button>)}
+                            <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{parseFloat(d)}</Button>)}
                     </div>
                     <p className="select-card-text mt-5">Gifting for</p>
                     <div className="row mr-sm-3 mt-3 mb-3">
-                        <Form.Check type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" onClick={changeHandler} checked={tempvisible == true} />
-                        <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" onClick={changeHandler} />
+                        <Form.Check value="myself" type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" checked={gift_to === "myself"} />
+                        <Form.Check value="others" type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" checked={gift_to === "others"} />
                     </div>
                     {tempvisible == false ? (<GiftGiftCard />) : ''}
                     <div>
@@ -165,7 +170,7 @@ const SelectCards = () => {
                     <h4 className="ml-sm-2 amttext2">{rate} {get(payment, 'unit_name_short')}</h4>
                     <div className="col mr-5">
                         <ButtonGroup className="mr-3" aria-label="Second group">
-                            <Button variant="light" onClick={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick={increment}> <img src={plusicon} /></Button>
+                            <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={decrement}> <img src={minusicon} /></Button> <Button disabled variant="light">{count}</Button> <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
                         <Button className="nav-btn mr-2 text-white" onClick={saveTocart}>Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2" onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}

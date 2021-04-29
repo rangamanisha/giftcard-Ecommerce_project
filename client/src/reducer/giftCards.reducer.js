@@ -6,6 +6,7 @@ import {filter, get} from 'lodash'
 export const GIFTCARDS_INIT_STATE = {
     message: "",
     errors: null,
+    giftingTo: '',
     currency: "1",
     amount: null,
     dest_currency: "",
@@ -24,6 +25,9 @@ export const giftcardSlice = createSlice({
     name: GIFTCARD_REDUCER,
     initialState: GIFTCARDS_INIT_STATE,
     reducers: {
+        setGiftingTo(state, action) {
+            state.giftingTo = action.payload
+        },
         selectCountry(state, action){
             let country = filter(state.countries, {country_name:action.payload})[0]
             state.giftunit_id = get(country, 'id');
@@ -36,7 +40,7 @@ export const giftcardSlice = createSlice({
             state.selectedBrand = null;
         },
         selectDenomination(state, action){
-            state.selectedBrand.selectedDenomination = parseFloat(action.payload).toFixed(2)
+            state.selectedBrand.selectedDenomination = parseFloat(action.payload)
         }
 
 

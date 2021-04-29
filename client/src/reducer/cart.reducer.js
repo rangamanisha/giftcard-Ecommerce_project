@@ -1,7 +1,6 @@
 import { cartItemAction, fetchItemsByCartAction, addRemoveQuantityAction, cartTotalCountAction } from '../actions/cart.actions';
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { cartItemsService } from '../services/cart.service';
-import { getPaymentCurrencyAction } from '../actions/gitCards.actions';
+import { indexOf, map } from 'lodash';
 
 export const CART_ITEMS_INIT_STATE = {
     message: '',
@@ -22,14 +21,23 @@ export const cartItemsSlice = createSlice({
     name: CART_ITEMS_REDUCER,
     initialState: CART_ITEMS_INIT_STATE,
     reducers: {
-        increaseCount(state, action) {
+        increaseCount(state) {
             state.count = state.count + 1;
+        },
+        updateLineItem(state, action) {
+            const lineItem = action.payload
+            const index = indexOf(map(state.lineItems, _ => _.id), lineItem.id)
+            const {count} = lineItem
+            if(count < 1) {
+                state.lineItems.splice(index, 1)
+            }
+            else state.lineItems[index] = lineItem
         },
         decreaseCount(state, action) {
             state.count = state.count - 1;
         },
         setCountZero(state, action) {
-            state.count = 0;
+            state.count = 1;
         },
         saveItemsToCart(state, action) {
             state.lineItems.push(action.payload)
