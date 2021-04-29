@@ -22,19 +22,7 @@ const Topbar = (props) => {
   const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
   const user = localStorage.getItem('first_name');
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates' );
-//   const countries = [
-//     {name: 'Australia', code: 'AU'},
-//     {name: 'Brazil', code: 'BR'},
-//     {name: 'China', code: 'CN'},
-//     {name: 'Egypt', code: 'EG'},
-//     {name: 'France', code: 'FR'},
-//     {name: 'Germany', code: 'DE'},
-//     {name: 'India', code: 'IN'},
-//     {name: 'Japan', code: 'JP'},
-//     {name: 'Spain', code: 'ES'},
-//     {name: 'United States', code: 'US'}
-// ];
+  const [selectedCountry, setSelectedCountry] = useState('United Arab Emirates');
 
   const clearsession = () => {
     localStorage.clear();
@@ -71,10 +59,6 @@ const Topbar = (props) => {
       </Dropdown>
     );
   };
-
-  // const getCountriesDD = () => {
-  //   return countriesList.map((c, i) => <NavDropdown.Item key={i}>{c}</NavDropdown.Item>);
-  // };
   const onCountryChange = (e) => {
     console.log('e ', e);
     setSelectedCountry(e.value);
@@ -110,22 +94,22 @@ const Topbar = (props) => {
           </Button>
         </Navbar.Brand>
         <Nav className="pl-3">
-        <span className="location">
+          <span className="location">
             <small>I am gifting to</small>
           </span>
-        <span className="location">
-          <small>I am gifting to</small>
-        </span>
-        <img src={locationIcon} alt="Icon" />
+          <span className="location">
+            <small>I am gifting to</small>
+          </span>
+          <img src={locationIcon} alt="Icon" />
           <Dropdown value={selectedCountry}
-          options = {countriesList}
-          onChange={onCountryChange}
-          filter
-          filterBy="country_name"
-          placeholder="United Arab Emirates"
-          optionLabel="country_name"
-          valueTemplate={selectedCountryTemplate}
-          itemTemplate={countryOptionTemplate}/>
+            options={countriesList}
+            onChange={onCountryChange}
+            filter
+            filterBy="country_name"
+            placeholder="United Arab Emirates"
+            optionLabel="country_name"
+            valueTemplate={selectedCountryTemplate}
+            itemTemplate={countryOptionTemplate} />
         </Nav>
         <InputGroup className="pl-3">
           <FormControl
@@ -151,7 +135,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-           <span className='badge badge-warning' id='lblCartCount'> 1 </span>
+            <span class='badge badge-warning' id='lblCartCount'> 1 </span>
           </Button>
         </Row>
       </Form>

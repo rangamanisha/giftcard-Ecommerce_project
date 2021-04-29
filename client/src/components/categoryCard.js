@@ -13,7 +13,7 @@ function categoryCard({category, nowActive}){
               <img
                 src={normal_square}
                 alt="Icon"
-                style={{ width: "100%", height: "80px" }}
+                className ="rounded img-thumbnail"
               />
               <br />
               <p className="products_icons">{name}</p>

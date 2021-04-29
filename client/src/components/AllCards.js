@@ -11,7 +11,7 @@ import { getTopBarState } from '../reducer/topbar.reducer';
 import { giftCardsUnitAction } from '../actions/gitCards.actions';
 import { getGiftcardsState } from '../reducer/giftCards.reducer';
 import AllFeaturedCards from './AllFeaturedCards';
-import { Link } from 'react-router-dom';
+import Giftcard from './Giftcard'
 
 
 function AllCards() {
@@ -87,9 +87,10 @@ function AllCards() {
               <>{
                 map(get(category, 'brands'), (brand, i) => (
                   <>
-                    <Link to="/selectcard">
+                    {/* <Link to="/selectcard">
                       <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
-                    </Link>
+                    </Link> */}
+                    <Giftcard brand={brand}/>
                   </>
                 ))
               }
@@ -99,9 +100,8 @@ function AllCards() {
 
             map(get(brandState, 'brands'), (brand, i) => (
               <>
-                <Link to="/selectcard">
-                  <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
-                </Link>
+                  {/* <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> */}
+                  <Giftcard brand={brand}/>
               </>
             ))
         }

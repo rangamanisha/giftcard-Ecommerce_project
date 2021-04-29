@@ -105,7 +105,7 @@ function AllCategoryCards() {
               <img
                 src={Allmenu}
                 alt="Icon"
-                style={{ width: "100%", height: "30px" }}
+                className ="rounded img-thumbnail"
               />
               <br />
               <p className="products_icons">All Gift Cards</p>
