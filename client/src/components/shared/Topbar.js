@@ -139,7 +139,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')}/>
-            <span class='badge badge-warning' id='lblCartCount'> {cartState.count}</span>
+            <span class='badge badge-warning' id='lblCartCount'> {get(cartState, 'lineItems').length}</span>
           </Button>
         </Row>
       </Form>
