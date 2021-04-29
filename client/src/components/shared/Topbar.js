@@ -18,7 +18,7 @@ import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useSelector} from 'react-redux'
-import { get } from 'lodash';
+import { get, reduce } from 'lodash';
 import {getCartItemsState, cartAction} from '../../reducer/cart.reducer'
 
 const Topbar = (props) => {
@@ -33,7 +33,9 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
-
+  const cartLineCount = reduce(get(cartState, 'lineItems'), (sum, i) => {
+    return sum + i.quantity
+  }, 0) 
   const getProfile = () => {
     if (showLogin) {
       return (
@@ -64,7 +66,6 @@ const Topbar = (props) => {
     );
   };
   const onCountryChange = (e) => {
-    console.log('e ', e);
     setSelectedCountry(e.value);
     onCountrySelected(e.value.country_name);
   };
@@ -139,7 +140,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')}/>
-            <span class='badge badge-warning' id='lblCartCount'> {get(cartState, 'lineItems').length}</span>
+            <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
           </Button>
         </Row>
       </Form>

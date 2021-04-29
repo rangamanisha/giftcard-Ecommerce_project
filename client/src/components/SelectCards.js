@@ -106,7 +106,7 @@ const SelectCards = () => {
 
     const saveTocart = () => {
         const itemInCart = filter(get(cartState, 'lineItems'), { id: get(card, 'id') })[0]
-        const selectedBrand = assign({}, card, { quantity: count, gitftingTo: gift_to})
+        const selectedBrand = assign({}, card, { quantity: count, giftingTo: gift_to})
         if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
             dispatch(
                 dispatch(cartAction.updateLineItem(selectedBrand))
@@ -116,7 +116,7 @@ const SelectCards = () => {
             return null
         }
         else {
-            dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count })))
+            dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count, giftingTo: gift_to })))
         }
     }
     return (
@@ -133,7 +133,7 @@ const SelectCards = () => {
                     <p className="select-card-text mt-5">Gifting for</p>
                     <div className="row mr-sm-3 mt-3 mb-3">
                         <Form.Check value="myself" type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" checked={gift_to === "myself"} onClick={e => handleGiftTo(e)}/>
-                        <Form.Check value="others" type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" checked={gift_to === "others"} onClick={e => handleGiftTo(e)}/>
+                        <Form.Check value="someone else" type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" checked={gift_to === "someone else"} onClick={e => handleGiftTo(e)}/>
                     </div>
                     {tempvisible == false ? (<GiftGiftCard />) : ''}
                     <div>
@@ -173,7 +173,7 @@ const SelectCards = () => {
                             <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={decrement}> <img src={minusicon} /></Button> <Button disabled variant="light">{count}</Button> <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
                         <Button className="nav-btn mr-2 text-white" onClick={saveTocart}>Add to cart</Button>{' '}
-                        <Button className="nav-btn mr-2" onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}
+                        <Button className="nav-btn mr-2" onClick={() => {saveTocart();history.push('cart')}} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
             </Footer1>

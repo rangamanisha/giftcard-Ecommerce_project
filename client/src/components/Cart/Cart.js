@@ -1,33 +1,57 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Cart.css';
-import {  Col, Image, Row } from 'react-bootstrap';
+import { Col, Image, Row } from 'react-bootstrap';
+import {useHistory} from 'react-router-dom'
 import exclamation from '../../assets/Group4790.svg';
-import amazon from '../../assets/amazon_medium.png';
 import ButtunDelete from '../../assets/Button-Delete.svg';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
-import {useDispatch, useSelector} from 'react-redux';
-import {giftCardsUnitAction} from '../../actions/gitCards.actions';
-import {getGiftcardsState} from '../../reducer/giftCards.reducer';
-import {get} from 'lodash';
-import { getCartItemsState } from '../../reducer/cart.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { giftCardsUnitAction } from '../../actions/gitCards.actions';
+import { getGiftcardsState } from '../../reducer/giftCards.reducer';
+import { get, isEmpty, map, reduce} from 'lodash';
+import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
 
 
 function Cart() {
   const dispatch = useDispatch();
-  const cartState  = useSelector(getCartItemsState);
+  const history = useHistory();
+  const cartState = useSelector(getCartItemsState);
   const giftunitState = useSelector(getGiftcardsState);
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
   const [rate, setRate] = useState(0);
+  const lineItems = get(cartState, 'lineItems')
+
+  React.useEffect(() => {
+    if(isEmpty(lineItems)){
+      history.push('/')
+    }
+  }, [lineItems])
+
   React.useEffect(() => {
     dispatch(giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
+      giftunit_id: giftunitState.giftunit_id
     }))
-}, [giftunitState.giftunit_id, dispatch])
-
-
+  }, [giftunitState.giftunit_id, dispatch])
+ 
+  const handleUpdate = (item, operation) => {
+    const {quantity} = item
+    if (operation === "add" && quantity >=5 ) {
+      return null
+    }
+    else if (operation === "add") {
+      
+    }
+  }
+  const handleRemove = item => {
+    debugger
+      dispatch(cartAction.removeLineItem(item))
+  }
+  const lineValue = reduce(lineItems, (sum, i) => {
+    return sum + (i.selectedDenomination * i.quantity)
+  }, 0)
   return (
     <>
       <Row className="m-4">
@@ -41,10 +65,10 @@ function Cart() {
                 <small>{get(payment, 'unit_symbol')}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</h4>
+            <h4 className="mt-2 mb-3">{get(payment, 'unit_symbol')} {lineValue}</h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
-              <span>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</span>
+              <span>{get(payment, 'unit_symbol')} {lineValue}</span>
             </div>
             <hr />
             <div className="d-flex justify-content-between mb-5">
@@ -52,27 +76,9 @@ function Cart() {
                 <strong>Total</strong>
               </span>
               <span>
-                <strong>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</strong>
+                <strong>{get(payment, 'unit_symbol')} {lineValue}</strong>
               </span>
             </div>
-
-            {/* <Col className="border 3 points-column">
-            <Row>
-              <Image src={exclamation} rounded />
-            </Row>
-            <Row>
-              <p>
-                You can also use your Gifti Global Points, Login or Sign up to use your Gift Global
-                Points
-              </p>
-            </Row>
-            <Row className="justify-content-center">
-              <div className="p-2">
-                <p className="text-center">Gifti Global Points</p>
-                <p className="text-center">0</p>
-              </div>
-            </Row>
-          </Col> */}
             <div className="d-flex flex-column justify-content-center align-content-between border border-2 ggp-parent-box rounded p-2 mb-4">
               <Image src={exclamation} rounded style={{ width: '4%', height: '4%' }} />
               <p>
@@ -107,87 +113,36 @@ function Cart() {
             <span>Cart</span>
             <span>Continue Shopping</span>
           </div>
-          <div>
-            {/* Rightside First Column of second col */}
+          {!isEmpty(lineItems) &&
+            map(lineItems, (item, i) =>(
+            <div key={i}>
+              <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
+                <Col sm={3} lg={3}>
+                  <Image src={get(item, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
+                </Col>
+                <Col>
+                  <div className="d-flex flex-column pt-2">
+                    <small>
+                      <b>{get(item, 'name')}</b>
+                    </small>
+                    <small>Gifting for: {get(item, 'giftingTo')} </small>
+                    <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
+                      <div className="cart-inc-dec-box px-1">
+                        <span onClick={handleUpdate}>-</span>
+                        <span className="mx-4">{get(item, 'quantity')}</span>
+                        <span onClick={handleUpdate}>+</span>
 
-            <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
-              <Col sm={3} lg={3}>
-                <Image src={get(card, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
-              </Col>
-              <Col>
-                <div className="d-flex flex-column pt-2">
-                  <small>
-                    <b>{get(card, 'name')}</b>
-                  </small>
-                  <small>Gifting for: Someone else</small>
-                  <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
-                    <div className="cart-inc-dec-box px-1">
-                      <span>-</span>
-                      <span className="mx-4">{cartState.count}</span>
-                      <span>+</span>
-                      
+                      </div>
+                      <span>{get(payment, 'country_name')}</span>
+                      <span>{get(payment, 'unit_symbol')} {get(item, 'selectedDenomination') * get(item, 'quantity')}</span>
+                      <Image src={ButtunDelete} style={{ width: '4%', height: '4%', cursor: 'pointer' }} onClick={() => handleRemove(item)}/>
                     </div>
-                    <span>{get(payment, 'country_name')}</span>
-                    <span>{get(payment, 'unit_symbol')} {get(card, 'selectedDenomination')}</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
                   </div>
-                </div>
-              </Col>
-            </Row>
-
-            {/* Rightside Second Column */}
-
-            {/* <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
-              <Col sm={3} lg={3}>
-                <Image src={get(card, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
-              </Col>
-              <Col>
-                <div className="d-flex flex-column pt-2">
-                  <small>
-                    <b>Amazon eGift Card</b>
-                  </small>
-                  <small>Gifting for: Someone else</small>
-                  <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
-                    <div className="cart-inc-dec-box px-1">
-                      <span>-</span>
-                      <span className="mx-4">1</span>
-                      <span>+</span>
-                    </div>
-                    <span>{get(payment, 'country_name')}</span>
-                    <span>{get(payment, 'unit_symbol')} 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-
-            {/* Rightside third Column */}
-
-            {/* <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
-              <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
-              </Col>
-              <Col>
-                <div className="d-flex flex-column pt-2">
-                  <small>
-                    <b>Amazon eGift Card</b>
-                  </small>
-                  <small>Gifting for: Someone else</small>
-                  <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
-                    <div className="cart-inc-dec-box px-1">
-                      <span>-</span>
-                      <span className="mx-4">1</span>
-                      <span>+</span>
-                    </div>
-                    <span>UAE</span>
-                    <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-            {/* Rightside fourth Column */}
-          </div>
+                </Col>
+              </Row>
+            </div>
+            ))
+          }
         </Col>
       </Row>
     </>

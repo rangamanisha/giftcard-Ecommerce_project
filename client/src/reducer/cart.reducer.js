@@ -1,6 +1,6 @@
 import { cartItemAction, fetchItemsByCartAction, addRemoveQuantityAction, cartTotalCountAction } from '../actions/cart.actions';
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { indexOf, map } from 'lodash';
+import { indexOf, map, remove } from 'lodash';
 
 export const CART_ITEMS_INIT_STATE = {
     message: '',
@@ -41,6 +41,10 @@ export const cartItemsSlice = createSlice({
         },
         saveItemsToCart(state, action) {
             state.lineItems.push(action.payload)
+        },
+        removeLineItem(state, action){
+            const line_item = action.payload
+            remove(state.lineItems, line_item)
         }
 
     },
