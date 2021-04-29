@@ -4,8 +4,10 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Registration';
 import AllCards from './components/AllCards';
+import AllOrder from './components/Orders/AllOrder';
 import {BrowserRouter as Router, Redirect, Route,Switch } from "react-router-dom";
 // import Cart from './components/Cart';
+
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AllFeaturedCards from './components/AllFeaturedCards';
@@ -37,12 +39,14 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
+          <Route path="/order/allorder" component ={AllOrder} exact/>
+          <Route path="/emptycart" component={EmptyCart} exact />
+          <Route path="/cart" component={Cart} exact />
           {/* <Route path="/conditionsPage" component={ConditionsPage} exact />
           <Route path="/contact" component={Contact} exact /> */}
           {/* <Route path="/enquiryPage" component={EnquiryPage} exact />
           <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact /> */}
-          <Route path="/emptycart" component={EmptyCart} exact />
-          <Route path="/cart" component={Cart} exact />
+  
           {/* <Route path="/" exact>
           <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
           <Route path="/auth/resetpassword" component={ResetPassword} exact />

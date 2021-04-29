@@ -54,7 +54,7 @@ const Topbar = (props) => {
         <Dropdown1.Menu>
           <Dropdown1.Item eventKey="1">Profile</Dropdown1.Item>
           <Dropdown1.Item eventKey="2">Gifti Global Points</Dropdown1.Item>
-          <Dropdown1.Item eventKey="1">Orders</Dropdown1.Item>
+          <Dropdown1.Item onClick={() => history.push({ pathname: '/order/allorder' })}>Orders</Dropdown1.Item>
           <Dropdown1.Item onClick={clearsession}>Logout</Dropdown1.Item>
         </Dropdown1.Menu>
       </Dropdown1>
