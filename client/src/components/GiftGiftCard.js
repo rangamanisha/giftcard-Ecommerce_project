@@ -22,10 +22,12 @@ const giftGiftCard = () => {
         <Form.Group controlId="formBasicEmail">
           <Form.Control type="text" placeholder="Name" className="mt-3" />
           <Form.Control type="email" placeholder="Enter email" className="mt-3" />
+          <Form.Control as="textarea" className="mt-3" rows={3} />
+  
         </Form.Group>
       </Form>
       <p className="select-card-text mt-5">Choose A Template</p>
-      <div class="row">
+      <div className="row">
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />
         <img src={AmazonMedium} alt="AmazonMedium" className="templatetheme ml-5" />

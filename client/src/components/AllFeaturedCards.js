@@ -42,7 +42,7 @@ const AllFeaturedCards = () => {
         <br />
         Personalized gift vouchers delivered online & redeemable at popular Brands
       </p>
-        <div className="gificards">
+        <div className ="carosel_images">
           {
             <>
               <Carousel pagination={0} breakPoints={breakPoints}>

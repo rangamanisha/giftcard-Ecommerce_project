@@ -53,9 +53,7 @@ const Cards = () => {
                 </span>
               </div>
               <div className="text_div">
-                <span> Select a country and browse e-gift cards within</span>
-                <br />
-                <span>4,000+ brands</span>
+                <span> Select a country and browse e-gift cards within 4,000+ brands</span>
               </div>
             </div>
           </Col>

@@ -13,9 +13,9 @@ const Giftcard = ({brand}) =>{
         history.push('/selectcard')
     }
     return (
-        <>
+        <div className ="card_images">
         <img src={get(brand, 'images.color.medium_rectangle')} onClick={() => handleClick()} className="imgcards" alt={brand.name} /> 
-        </>
+        </div>
     
         
     )

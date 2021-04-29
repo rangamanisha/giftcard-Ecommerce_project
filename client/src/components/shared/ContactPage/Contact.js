@@ -16,7 +16,7 @@ function Contact() {
             <h2>Get in Touch</h2>
             <li className="account-options-item ">
               <div className="row">
-                <div className="col-1 btn-icons-phone button-icon mt-2">
+                <div className="col-2 btn-icons-phone button-icon mt-2">
                   <FaPhoneAlt />
                 </div>
                 <div className="col mt-1">
@@ -28,7 +28,7 @@ function Contact() {
 
             <li className="account-options-item ">
               <div className="row">
-                <div className="col-1 btn-icons-phone button-icon mt-2">
+                <div className="col-2 btn-icons-phone button-icon mt-2">
                   <HiOutlineMail />
                 </div>
                 <div className="col mt-1">
@@ -42,7 +42,7 @@ function Contact() {
 
             <li className="account-options-item ">
               <div className="row">
-                <div className="col-1 btn-icons-phone button-icon mt-2">
+                <div className="col-2 btn-icons-phone button-icon mt-2">
                   <GoLocation />
                 </div>
                 <div className="col mt-1">

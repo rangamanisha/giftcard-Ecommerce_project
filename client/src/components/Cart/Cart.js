@@ -9,9 +9,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {giftCardsUnitAction} from '../../actions/gitCards.actions';
 import {getGiftcardsState} from '../../reducer/giftCards.reducer';
 import {get} from 'lodash';
+import { getCartItemsState } from '../../reducer/cart.reducer';
+
 
 function Cart() {
   const dispatch = useDispatch();
+  const cartState  = useSelector(getCartItemsState);
   const giftunitState = useSelector(getGiftcardsState);
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
@@ -120,7 +123,7 @@ function Cart() {
                   <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
                     <div className="cart-inc-dec-box px-1">
                       <span>-</span>
-                      <span className="mx-4">1</span>
+                      <span className="mx-4">{cartState.count}</span>
                       <span>+</span>
                       
                     </div>

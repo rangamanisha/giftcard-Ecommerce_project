@@ -36,7 +36,7 @@ export const giftcardSlice = createSlice({
             state.selectedBrand = null;
         },
         selectDenomination(state, action){
-            state.selectedBrand.selectedDenomination = action.payload
+            state.selectedBrand.selectedDenomination = parseFloat(action.payload).toFixed(2)
         }
 
 

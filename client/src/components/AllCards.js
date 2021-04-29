@@ -64,7 +64,7 @@ function AllCards() {
 
   return (
 
-    <div class="allGiftCard">
+    <div className="allGiftCard">
       <p className="giftiallcard-text-a">Browse by Category</p>
       <AllCategoryCards />
       <div>
