@@ -16,9 +16,12 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {useSelector} from 'react-redux'
 import { get } from 'lodash';
+import {getCartItemsState, cartAction} from '../../reducer/cart.reducer'
 
 const Topbar = (props) => {
+  const cartState = useSelector(getCartItemsState);
   const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected } = props;
   const user = localStorage.getItem('first_name');
   const history = useHistory();
@@ -135,7 +138,7 @@ const Topbar = (props) => {
           {getProfile()}
           <Button className="nav-btn-link " variant="link">
             <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')}/>
-            <span class='badge badge-warning' id='lblCartCount'> 0</span>
+            <span class='badge badge-warning' id='lblCartCount'> {cartState.count}</span>
           </Button>
         </Row>
       </Form>

@@ -16,7 +16,7 @@ import { getGiftcardsState, giftCardsAction } from '../reducer/giftCards.reducer
 import { get, map, isEmpty, isUndefined } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { cartTotalCountAction, cartItemAction } from '../actions/cart.actions';
-import { getCartItemsState } from '../reducer/cart.reducer';
+import { getCartItemsState, cartAction } from '../reducer/cart.reducer';
 
 
 const SelectCards = () => {
@@ -45,14 +45,15 @@ const SelectCards = () => {
         setTempVisible(!tempvisible)
     }
     const increment = () => {
+        dispatch(cartAction.increaseCount())
         count >= 5 ? setcount(5) : setcount(count + 1);
         const inc = parseInt(card.selectedDenomination * (count + 1))
         setRate(inc)
     }
     const decrement = () => {
+        dispatch(cartAction.decreaseCount())
         count > 1 ? setcount(count - 1) : setcount(1)
         const dec = parseInt(card.selectedDenomination * (count - 1))
-        debugger
         setRate(dec)
     }
     const handleDenomination = (d) => {
@@ -62,9 +63,10 @@ const SelectCards = () => {
     }
 
     useEffect(() => {
-        setcount(1)
+        setcount(0)
+        dispatch(cartAction.setCountZero())
 
-    }, [card.denominations])
+    }, [card.selectedDenomination, dispatch])
     // React.useEffect(() => {
     //     if(isEmpty(card)){
     //         history.push('/')
@@ -146,7 +148,7 @@ const SelectCards = () => {
     }
 
 
-
+debugger
     return (
 
         <>
@@ -202,7 +204,7 @@ const SelectCards = () => {
                     <h4 className="ml-sm-2 amttext2">{rate} {get(payment, 'unit_name_short')}</h4>
                     <div className="col mr-5">
                         <ButtonGroup className="mr-3" aria-label="Second group">
-                            <Button variant="light" onClick={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick={increment}> <img src={plusicon} /></Button>
+                            <Button variant="light" onClick={decrement}> <img src={minusicon} /></Button> <Button variant="light">{cartState.count}</Button> <Button variant="light" onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
                         <Button className="nav-btn mr-2 text-white" onClick={handleCart}>Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2" onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}

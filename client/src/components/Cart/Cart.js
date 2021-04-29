@@ -134,7 +134,7 @@ function Cart() {
 
             {/* Rightside Second Column */}
 
-            <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
+            {/* <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
                 <Image src={get(card, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
               </Col>
@@ -160,7 +160,7 @@ function Cart() {
 
             {/* Rightside third Column */}
 
-            <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
+            {/* <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
                 <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
               </Col>
@@ -184,30 +184,6 @@ function Cart() {
               </Col>
             </Row>
             {/* Rightside fourth Column */}
-
-            <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
-              <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
-              </Col>
-              <Col>
-                <div className="d-flex flex-column pt-2">
-                  <small>
-                    <b>Amazon eGift Card</b>
-                  </small>
-                  <small>Gifting for: Someone else</small>
-                  <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
-                    <div className="cart-inc-dec-box px-1">
-                      <span>-</span>
-                      <span className="mx-4">1</span>
-                      <span>+</span>
-                    </div>
-                    <span>UAE</span>
-                    <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
           </div>
         </Col>
       </Row>

@@ -21,7 +21,8 @@ export const CART_ITEMS_INIT_STATE = {
     contact_email:null,
     contact_phone:null,
     gift_message: null,
-    country_name:''
+    country_name:'',
+    count: 0
 }
 
 export const CART_ITEMS_REDUCER = 'cart_items';
@@ -31,7 +32,18 @@ export const initialCartItemState = cartItemsAdaptor.getInitialState(CART_ITEMS_
 export const cartItemsSlice = createSlice({
     name: CART_ITEMS_REDUCER,
     initialState: CART_ITEMS_INIT_STATE,
-    reducers: {},
+    reducers: {
+        increaseCount(state, action){
+           state.count = state.count + 1;
+        },
+        decreaseCount(state, action){
+           state.count = state.count - 1;
+        },
+        setCountZero(state, action){
+          state.count = 0;
+        }
+
+    },
     extraReducers: (builder) => {
         builder.addCase(cartItemAction.pending, (state, action) => {
             state.errros = null;
@@ -93,6 +105,7 @@ export const cartItemsSlice = createSlice({
 });
 
 export const cartItemReducer = cartItemsSlice.reducer;
+export const cartAction = cartItemsSlice.actions
 export const {selectAll, selectEntities} = cartItemsAdaptor.getInitialState();
 export const getCartItemsState = (rootState) => rootState[CART_ITEMS_REDUCER];
 export const selectAllCartItems = createSelector(getCartItemsState, selectAll);
