@@ -9,6 +9,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useHistory } from 'react-router-dom';
 import { useState, useRef } from 'react';
+import {Dropdown as Dropdown1} from 'react-bootstrap';
 import { Dropdown } from 'primereact/dropdown';
 import './Topbar.scss';
 import 'primereact/resources/themes/saga-blue/theme.css';
@@ -43,20 +44,20 @@ const Topbar = (props) => {
       );
     }
     return (
-      <Dropdown className="pt-1">
-        <Dropdown.Toggle variant="info" className="nav-btn">
+      <Dropdown1 className="pt-1">
+        <Dropdown1.Toggle variant="info" className="nav-btn">
           <span>
             <img src={userLoginIcon} alt="Icon" className="mr-2" />
           </span>
           {user}
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
-          <Dropdown.Item eventKey="2">Gifti Global Points</Dropdown.Item>
-          <Dropdown.Item eventKey="1">Orders</Dropdown.Item>
-          <Dropdown.Item onClick={clearsession}>Logout</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+        </Dropdown1.Toggle>
+        <Dropdown1.Menu>
+          <Dropdown1.Item eventKey="1">Profile</Dropdown1.Item>
+          <Dropdown1.Item eventKey="2">Gifti Global Points</Dropdown1.Item>
+          <Dropdown1.Item eventKey="1">Orders</Dropdown1.Item>
+          <Dropdown1.Item onClick={clearsession}>Logout</Dropdown1.Item>
+        </Dropdown1.Menu>
+      </Dropdown1>
     );
   };
   const onCountryChange = (e) => {

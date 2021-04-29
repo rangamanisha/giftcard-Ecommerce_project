@@ -8,14 +8,14 @@ import {useSelector} from 'react-redux'
 import StartingGift from '../assets/starting-gift.svg';
 // import {getGiftcardsState, giftCardsAction} from '../..reducer/giftCards.reducer'
 import {getGiftcardsState, giftCardsAction} from '../reducer/giftCards.reducer';
-
+import { useState, useEffect } from 'react';
 import StartingGift2 from '../assets/start-giftting2.svg';
 import {useHistory} from 'react-router-dom';
 
 const StartGifting = () => {
   const giftunitState = useSelector(getGiftcardsState);
   // const dispatch = useDispatch()
-  // const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const countries = giftunitState.countries.map(country => country['country_name']).sort();
 
    const getCountriesDD = () => {

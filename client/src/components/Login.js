@@ -24,7 +24,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
 
   const [isValid, setIsValid] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const formik = useFormik({
     initialValues: {
