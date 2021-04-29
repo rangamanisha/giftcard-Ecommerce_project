@@ -8,7 +8,7 @@ import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { giftCardsUnitAction } from '../../actions/gitCards.actions';
 import { getGiftcardsState } from '../../reducer/giftCards.reducer';
-import { get, isEmpty, map, reduce} from 'lodash';
+import { get, isEmpty, map, assign, reduce, remove} from 'lodash';
 import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
 
 
@@ -37,12 +37,35 @@ function Cart() {
   }, [giftunitState.giftunit_id, dispatch])
  
   const handleUpdate = (item, operation) => {
-    const {quantity} = item
-    if (operation === "add" && quantity >=5 ) {
-      return null
-    }
-    else if (operation === "add") {
+    let {quantity} = item
+    switch (operation) {
+      case "add":
+        {
+          if (quantity === 5) {
+            return null;
+          }
+          else {
+            let new_quantity= quantity+1;
+            let _item = item
+            remove(_item, 'quantity')
+            dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
+          }
+        }
+      case "sub":
+        {
+          if(quantity==0){
+            return null
+          }
+          else {
+            let new_quantity = quantity-1;
+            let _item = item
+            remove(_item, 'quantity')
+            dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
+          }
+        }
       
+      default:
+        return null
     }
   }
   const handleRemove = item => {
@@ -128,9 +151,13 @@ function Cart() {
                     <small>Gifting for: {get(item, 'giftingTo')} </small>
                     <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
                       <div className="cart-inc-dec-box px-1">
-                        <span onClick={handleUpdate}>-</span>
+                        <button className="btn btn-link" onClick={() => handleUpdate(item, "sub")}>
+                        <span>-</span>
+                        </button>
                         <span className="mx-4">{get(item, 'quantity')}</span>
-                        <span onClick={handleUpdate}>+</span>
+                        <button className="btn btn-link" onClick={() => handleUpdate(item, "add")}>
+                        <span>+</span>
+                        </button>
 
                       </div>
                       <span>{get(payment, 'country_name')}</span>
