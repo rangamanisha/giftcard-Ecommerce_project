@@ -16,9 +16,8 @@ import AllFeaturedCards from "./components/AllFeaturedCards";
 import SelectCards from "./components/SelectCards";
 import GiftiNav from "./components/shared/Navbar/GiftiNav";
 import Footer from "./components/shared/Footer";
-
-import EmptyCart from "./components/shared/EmptyCartPage/EmptyCart";
-import Cart from "./components/shared/Cart/Cart";
+import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (

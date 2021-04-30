@@ -11,17 +11,19 @@ import {
 import { filter, get } from "lodash";
 
 export const GIFTCARDS_INIT_STATE = {
-  message: "",
-  errors: null,
-  currency: "1",
-  amount: null,
-  dest_currency: "",
-  source_currency: "",
-  giftunit_id: 1,
-  countries: [],
-  selectedCountry: "",
-  selectedBrand: "",
-};
+    message: "",
+    errors: null,
+    giftingTo: '',
+    currency: "1",
+    amount: null,
+    dest_currency: "",
+    source_currency:"",
+    giftunit_id: 1,
+    countries: [],
+    selectedCountry: {},
+    selectedBrand:[],
+    selectedCurrency: null
+}
 
 export const GIFTCARD_REDUCER = "giftCards";
 export const giftcardsAdaptor = createEntityAdapter();
@@ -30,23 +32,36 @@ export const initialGiftcardState = giftcardsAdaptor.getInitialState(
 );
 
 export const giftcardSlice = createSlice({
-  name: GIFTCARD_REDUCER,
-  initialState: GIFTCARDS_INIT_STATE,
-  reducers: {
-    selectCountry(state, action) {
-      let country = filter(state.countries, {
-        country_name: action.payload,
-      })[0];
-      state.giftunit_id = get(country, "id");
-      state.selectedCountry = country;
-    },
-    selectBrand(state, action) {
-      state.selectedBrand = action.payload;
+    name: GIFTCARD_REDUCER,
+    initialState: GIFTCARDS_INIT_STATE,
+    reducers: {
+        setSelectCurreny(state, action){
+            state.selectedCurrency = action.payload
+        },
+        setGiftingTo(state, action) {
+            state.giftingTo = action.payload
+        },
+        selectCountry(state, action){
+            let country = filter(state.countries, {country_name:action.payload})[0]
+            state.giftunit_id = get(country, 'id');
+            state.selectedCountry = country;
+        },
+        selectBrand(state, action){
+            state.selectedBrand = action.payload;
+        },
+        removeSelectedCard(state, action){
+            state.selectedBrand = null;
+        },
+        selectDenomination(state, action){
+            state.selectedBrand.selectedDenomination = parseFloat(action.payload)
+        }
+
+
     },
     removeSelectedCard(state, action) {
       state.selectedBrand = null;
     },
-  },
+  
   extraReducers: (builder) => {
     builder
       .addCase(giftCardsUnitAction.pending, (state, action) => {

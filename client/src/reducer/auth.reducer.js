@@ -48,6 +48,7 @@ export const authSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.user = response.data.user;
+          debugger
           state.accessToken = response.data.user.access_token;
           state.isAuthenticated = true;
           state.first_name = response.data.user.first_name;

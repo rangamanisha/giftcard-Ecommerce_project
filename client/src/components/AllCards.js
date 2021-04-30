@@ -92,18 +92,14 @@ function AllCards() {
               <>
                 {map(get(category, "brands"), (brand, i) => (
                   <>
-                    {/* <Link to="/selectcard">
-                      <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} />
-                    </Link> */}
-                    <Giftcard brand={brand} />
+                    <Giftcard brand={brand} key={i}/>
                   </>
                 ))}
               </>
             ))
           : map(get(brandState, "brands"), (brand, i) => (
               <>
-                {/* <img src={get(brand, 'images.color.medium_rectangle')} className="ml-sm-5 imgcards mt-5" alt={brand.name} /> */}
-                <Giftcard brand={brand} />
+                  <Giftcard brand={brand} key={i}/>
               </>
             ))}
       </div>
