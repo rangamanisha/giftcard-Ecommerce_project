@@ -6,10 +6,9 @@ export const giftCardsUnitService = (giftcards) => {
     return apiCall(url, 'GET', giftcards, null, null, false);
 }
 
-export const getConversionRateService = (giftcards) => {
-    const {currency } = giftcards;
+export const getConversionRateService = (currency) => {
     const url = `${API_URL}/giftcard_units/get_conversion_rate?currency=${currency}`;
-    return apiCall(url, 'GET', giftcards, null, null, false);
+    return apiCall(url, 'GET', null, null, null, false);
 
 }
 

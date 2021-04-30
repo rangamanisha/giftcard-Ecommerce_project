@@ -14,7 +14,8 @@ export const GIFTCARDS_INIT_STATE = {
     giftunit_id: 1,
     countries: [],
     selectedCountry: {},
-    selectedBrand:[]
+    selectedBrand:[],
+    selectedCurrency: null
 }
 
 export const GIFTCARD_REDUCER = 'giftCards';
@@ -25,6 +26,9 @@ export const giftcardSlice = createSlice({
     name: GIFTCARD_REDUCER,
     initialState: GIFTCARDS_INIT_STATE,
     reducers: {
+        setSelectCurreny(state, action){
+            state.selectedCurrency = action.payload
+        },
         setGiftingTo(state, action) {
             state.giftingTo = action.payload
         },

@@ -6,20 +6,40 @@ import exclamation from '../../assets/Group4790.svg';
 import ButtunDelete from '../../assets/Button-Delete.svg';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { giftCardsUnitAction } from '../../actions/gitCards.actions';
-import { getGiftcardsState } from '../../reducer/giftCards.reducer';
+import { getConversionRateAction, getPaymentCurrencyAction, giftCardsUnitAction } from '../../actions/gitCards.actions';
+import { getGiftcardsState, giftCardsAction } from '../../reducer/giftCards.reducer';
 import { get, isEmpty, map, assign, reduce, remove} from 'lodash';
 import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
-
+import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { Dropdown } from 'react-bootstrap';
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+import { RiArrowDownSLine } from 'react-icons/ri';
 
 function Cart() {
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}>
+      {children}
+      <RiArrowDownSLine />
+    </a>
+  ));
+  CustomToggle.displayName = 'CustomToggle';
+
   const dispatch = useDispatch();
   const history = useHistory();
   const cartState = useSelector(getCartItemsState);
   const giftunitState = useSelector(getGiftcardsState);
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const [rate, setRate] = useState(0);
+  const currencies = get(giftunitState, 'paymentCurrency.currencies');
+  const selectedCurrency = get(giftunitState, 'selectedCurrency')
+  const [currencyIndex, setCurrencyIndex] = useState(0);
   const lineItems = get(cartState, 'lineItems')
 
   React.useEffect(() => {
@@ -27,7 +47,6 @@ function Cart() {
       history.push('/')
     }
   }, [lineItems])
-
   React.useEffect(() => {
     dispatch(giftCardsUnitAction({
       currency: giftunitState.giftunit_id,
@@ -35,7 +54,10 @@ function Cart() {
       giftunit_id: giftunitState.giftunit_id
     }))
   }, [giftunitState.giftunit_id, dispatch])
- 
+  React.useEffect(() => {
+    let id = get(selectedCurrency, 'id')
+    dispatch(getConversionRateAction(id))
+  }, [selectedCurrency])
   const handleUpdate = (item, operation) => {
     let {quantity} = item
     switch (operation) {
@@ -75,6 +97,10 @@ function Cart() {
   const lineValue = reduce(lineItems, (sum, i) => {
     return sum + (i.selectedDenomination * i.quantity)
   }, 0)
+  const handleChangeCurreny = currency => {
+    setCurrencyIndex(parseInt(currency))
+    dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]))
+  }
   return (
     <>
       <Row className="m-4">
@@ -85,7 +111,19 @@ function Cart() {
               <div className="flex-shrink-1 cart-currency p-1">
                 <small>Select Payment Currency</small>
                 <span className="mx-2">|</span>
-                <small>{get(payment, 'unit_symbol')}</small>
+                <Dropdown className="d-inline" onSelect={e => handleChangeCurreny(e)}>
+                  <DropdownToggle
+                    as={CustomToggle}
+                    id="dropdown-custom-components"></DropdownToggle>
+                  <DropdownMenu align="right" style={{ overflow: 'auto' }}>
+                   {
+                    map(currencies, (c, i) => (
+                      <DropdownItem key={i} eventKey={i} value={c.unit_name_short} active={currencyIndex === i}>{c.unit_name_short}</DropdownItem>
+                    ))
+                   } 
+                  </DropdownMenu>
+                </Dropdown>
+                <small>{get(selectedCurrency, 'unit_name_short')}</small>
               </div>
             </div>
             <h4 className="mt-2 mb-3">{get(payment, 'unit_symbol')} {lineValue}</h4>

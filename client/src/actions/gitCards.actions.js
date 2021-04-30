@@ -8,10 +8,7 @@ export const giftCardsUnitAction = createAsyncThunk('gitfcards/listGiftCards', a
 });
 
 export const getConversionRateAction = createAsyncThunk('giftcards/listPaymentConversions', async(payload, thunkAPI) => {
-    const request = {
-        currency:payload.currency
-    }
-    const response = await getConversionRateService(request);
+    const response = await getConversionRateService(payload);
     return response;
 })
 
