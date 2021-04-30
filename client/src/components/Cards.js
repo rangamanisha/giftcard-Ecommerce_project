@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Col,
-  Image,
-  Container,
-  Row,
-} from "react-bootstrap";
-import {useHistory } from 'react-router-dom'
+import { Button, Col, Image, Container, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
@@ -14,35 +8,36 @@ import Country from "../assets/country.svg";
 import Target from "../assets/target.svg";
 import Giftcard from "../assets/gift-card.svg";
 
-
 const Cards = () => {
   const history = useHistory();
   return (
     <Container fluid>
-    <React.Fragment>
+      <React.Fragment>
+        <Row className="cardgifiti mt-5 mx-auto">
+          <Col sm={5} className="card-text-align">
+            <p className="gifticard-text">
+              Gifti Global Makes Every Gift Meaningful
+            </p>
+            <p>
+              Treat yourself or send customisable e-gift cards with a selection
+              of +4,000 brands in +100 countries
+            </p>
+            <div>
+              <Button
+                className="custom-button mr-sm-3"
+                onClick={() => history.push("allcards")}
+              >
+                Start Gifiting&nbsp;
+                <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+              </Button>
+              <Button variant="outline-secondary">How it works</Button>
+            </div>
+          </Col>
 
-      <Row className="cardgifiti mt-5 mx-auto">
-      <Col sm={5} className="card-text-align">
-        <p className="gifticard-text">
-          Gifti Global Makes Every Gift Meaningful
-        </p>
-        <p>
-          Treat yourself or send customisable e-gift cards with a
-          selection of +4,000 brands in +100 countries
-        </p>
-        <div>
-          <Button className="custom-button mr-sm-3" onClick={() => history.push('allcards')}>
-            Start Gifiting&nbsp;
-            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
-          </Button>
-          <Button variant="outline-secondary">How it works</Button>
-        </div>
-      </Col>
-
-      <Col sm={7}>
-      <Image src={GiftiGlobal} fluid/>
-      </Col>
-      </Row>
+          <Col sm={7}>
+            <Image src={GiftiGlobal} fluid />
+          </Col>
+        </Row>
 
         <Row className="mt-5 icon-margin">
           <Col sm>
@@ -53,7 +48,10 @@ const Cards = () => {
                 </span>
               </div>
               <div className="text_div">
-                <span> Select a country and browse e-gift cards within 4,000+ brands</span>
+                <span>
+                  {" "}
+                  Select a country and browse e-gift cards within 4,000+ brands
+                </span>
               </div>
             </div>
           </Col>

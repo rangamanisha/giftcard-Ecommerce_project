@@ -1,10 +1,10 @@
-import React from 'react';
-import './Contact.css';
-import { FaPhoneAlt } from 'react-icons/fa';
-import { HiOutlineMail } from 'react-icons/hi';
-import { GoLocation } from 'react-icons/go';
-import Header from '../HeaderPage/Header';
-import Footer from '../../Footer';
+import React from "react";
+import "./Contact.css";
+import { FaPhoneAlt } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+import { GoLocation } from "react-icons/go";
+import Header from "../HeaderPage/Header";
+import Footer from "../../Footer";
 
 function Contact() {
   return (
@@ -21,7 +21,9 @@ function Contact() {
                 </div>
                 <div className="col mt-1">
                   <label className="lableStyle">phone Number</label>
-                  <p className="textContent" /*style={{ marginTop: "-10px"}}*/>+971(0)4 872 8418</p>
+                  <p className="textContent" /*style={{ marginTop: "-10px"}}*/>
+                    +971(0)4 872 8418
+                  </p>
                 </div>
               </div>
             </li>
@@ -48,7 +50,8 @@ function Contact() {
                 <div className="col mt-1">
                   <label className="lableStyle">Location</label>
                   <p className="textContent" /*style={{ marginTop: "-10px"}}*/>
-                    Grosvenor Business Tower Office 1102 Barsha Heights TecomDubai, UAE
+                    Grosvenor Business Tower Office 1102 Barsha Heights
+                    TecomDubai, UAE
                   </p>
                 </div>
               </div>
@@ -82,7 +85,8 @@ function Contact() {
                   className="form-control"
                   id="Message"
                   rows="3"
-                  placeholder="Enter your message"></textarea>
+                  placeholder="Enter your message"
+                ></textarea>
               </div>
               <button type="button" className="col-4 btn-send">
                 send

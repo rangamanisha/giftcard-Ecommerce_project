@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import './EnquiryPage.css';
-import { IoIosAdd } from 'react-icons/io';
-import { MdSearch } from 'react-icons/md';
-import { IoIosClose } from 'react-icons/io';
-import { Col, Row } from 'react-bootstrap';
+import "./EnquiryPage.css";
+import { IoIosAdd } from "react-icons/io";
+import { MdSearch } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
+import { Col, Row } from "react-bootstrap";
 
-import Header from '../HeaderPage/Header';
-import Footer from '../../Footer';
+import Header from "../HeaderPage/Header";
+import Footer from "../../Footer";
 
 function EnquiryPage() {
   return (
@@ -15,7 +15,9 @@ function EnquiryPage() {
       <Header />
       <Row className="justify-content-center m-5 mx-5">
         <Col lg="4">
-          <h3 className="font-weight-bold faq-col">Frequently Asked Questions</h3>
+          <h3 className="font-weight-bold faq-col">
+            Frequently Asked Questions
+          </h3>
         </Col>
         <Col lg="7" className="align-self-center">
           <div className="input-group">
@@ -33,8 +35,8 @@ function EnquiryPage() {
           <div className="help-faq mt-3">
             <h5>Help with your questions…</h5>
             <p>
-              If you have any questions take a look at our FAQs section below. If you can’t find the
-              answer, please contact us
+              If you have any questions take a look at our FAQs section below.
+              If you can’t find the answer, please contact us
             </p>
           </div>
         </Col>
@@ -42,7 +44,7 @@ function EnquiryPage() {
         <Col lg="4" className="mt-5">
           <ul className="list-unstyled ml-5">
             <li className="mb-3 faq-list">Account Creation</li>
-            <li className="mb-3 faq-list" style={{ color: '#3A86FF' }}>
+            <li className="mb-3 faq-list" style={{ color: "#3A86FF" }}>
               Account Management
             </li>
             <li className="mb-3 faq-list">How does it work?</li>
@@ -52,23 +54,25 @@ function EnquiryPage() {
         </Col>
         <Col lg="7" className="align-self-center mt-4">
           <div className="d-flex flex-column justify-content-between p-2 account-container">
-            <div className="mb-3 parah-style help-faq">How do i change my password?</div>
-            <div className="mb-3" style={{ opacity: '0.5' }}>
-              Click on <strong>‘Sign In’</strong>. Click on <strong>‘Reset password’</strong> next
-              to your password.
+            <div className="mb-3 parah-style help-faq">
+              How do i change my password?
             </div>
-            <div style={{ opacity: '0.5' }}>
-              Once you change your password, you will receive an email with a link to prompt you to
-              change your password. Remember to check your spam folder if you don’t receive an
-              email.
+            <div className="mb-3" style={{ opacity: "0.5" }}>
+              Click on <strong>‘Sign In’</strong>. Click on{" "}
+              <strong>‘Reset password’</strong> next to your password.
+            </div>
+            <div style={{ opacity: "0.5" }}>
+              Once you change your password, you will receive an email with a
+              link to prompt you to change your password. Remember to check your
+              spam folder if you don’t receive an email.
             </div>
             <IoIosClose
               style={{
-                position: 'absolute',
-                right: '24px',
-                top: '10px',
-                width: '5%',
-                height: '15%'
+                position: "absolute",
+                right: "24px",
+                top: "10px",
+                width: "5%",
+                height: "15%",
               }}
             />
           </div>
@@ -83,12 +87,12 @@ function EnquiryPage() {
             />
             <IoIosAdd
               style={{
-                position: 'absolute',
-                right: '10px',
-                top: '6px',
-                color: '#3A72EC',
-                width: '5%',
-                height: '60%'
+                position: "absolute",
+                right: "10px",
+                top: "6px",
+                color: "#3A72EC",
+                width: "5%",
+                height: "60%",
               }}
             />
           </div>

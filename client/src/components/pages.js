@@ -1,5 +1,5 @@
-import React from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+import React from "react";
+import Pagination from "react-bootstrap/Pagination";
 
 const Pages = ({ totalRecords, setCurrentPage, currentPage, perPage }) => {
   const pageNumber = [];
@@ -9,22 +9,37 @@ const Pages = ({ totalRecords, setCurrentPage, currentPage, perPage }) => {
   return (
     <nav>
       <ul className="Pagination">
-        <li className={currentPage === 0 ? 'page-item disabled' : 'page-item'}>
-          <button className="page-link" onClick={() => setCurrentPage(currentPage - perPage)}>
+        <li className={currentPage === 0 ? "page-item disabled" : "page-item"}>
+          <button
+            className="page-link"
+            onClick={() => setCurrentPage(currentPage - perPage)}
+          >
             <i className="bi bi-caret-left-fill"></i>
           </button>
         </li>
         {pageNumber.map((number, i) => {
           return (
             <li className="page-item" key={i}>
-              <button className="page-link" onClick={() => setCurrentPage((number - 1) * perPage)}>
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage((number - 1) * perPage)}
+              >
                 {number}
               </button>
             </li>
           );
         })}
-        <li className={currentPage >= totalRecords - perPage ? 'page-item disabled' : 'page-item'}>
-          <button className="page-link" onClick={() => setCurrentPage(currentPage + perPage)}>
+        <li
+          className={
+            currentPage >= totalRecords - perPage
+              ? "page-item disabled"
+              : "page-item"
+          }
+        >
+          <button
+            className="page-link"
+            onClick={() => setCurrentPage(currentPage + perPage)}
+          >
             <i className="bi bi-caret-right-fill"></i>
           </button>
         </li>

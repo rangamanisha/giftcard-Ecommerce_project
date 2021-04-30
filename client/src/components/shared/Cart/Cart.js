@@ -1,9 +1,9 @@
-import React from 'react';
-import './Cart.css';
-import { Button, Col, Image, Row } from 'react-bootstrap';
-import exclamation from '../../../assets/Group4790.svg';
-import amazon from '../../../assets/amazon_medium.png';
-import ButtunDelete from '../../../assets/Button-Delete.svg';
+import React from "react";
+import "./Cart.css";
+import { Button, Col, Image, Row } from "react-bootstrap";
+import exclamation from "../../../assets/Group4790.svg";
+import amazon from "../../../assets/amazon_medium.png";
+import ButtunDelete from "../../../assets/Button-Delete.svg";
 
 function Cart() {
   return (
@@ -52,11 +52,15 @@ function Cart() {
             </Row>
           </Col> */}
             <div className="d-flex flex-column justify-content-center align-content-between border border-2 ggp-parent-box rounded p-2 mb-4">
-              <Image src={exclamation} rounded style={{ width: '4%', height: '4%' }} />
+              <Image
+                src={exclamation}
+                rounded
+                style={{ width: "4%", height: "4%" }}
+              />
               <p>
                 <small>
-                  You can also use your Gifti Global Points, Login or Sign up to use your Gift
-                  Global Points
+                  You can also use your Gifti Global Points, Login or Sign up to
+                  use your Gift Global Points
                 </small>
               </p>
               <div className="p-2 ggp-box mx-auto">
@@ -90,7 +94,11 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image
+                  src={amazon}
+                  rounded
+                  style={{ width: "100%", height: "90%" }}
+                />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
@@ -106,7 +114,10 @@ function Cart() {
                     </div>
                     <span>UAE</span>
                     <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
+                    <Image
+                      src={ButtunDelete}
+                      style={{ width: "4%", height: "4%" }}
+                    />
                   </div>
                 </div>
               </Col>
@@ -116,7 +127,11 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image
+                  src={amazon}
+                  rounded
+                  style={{ width: "100%", height: "90%" }}
+                />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
@@ -132,7 +147,10 @@ function Cart() {
                     </div>
                     <span>UAE</span>
                     <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
+                    <Image
+                      src={ButtunDelete}
+                      style={{ width: "4%", height: "4%" }}
+                    />
                   </div>
                 </div>
               </Col>
@@ -142,7 +160,11 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image
+                  src={amazon}
+                  rounded
+                  style={{ width: "100%", height: "90%" }}
+                />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
@@ -158,7 +180,10 @@ function Cart() {
                     </div>
                     <span>UAE</span>
                     <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
+                    <Image
+                      src={ButtunDelete}
+                      style={{ width: "4%", height: "4%" }}
+                    />
                   </div>
                 </div>
               </Col>
@@ -167,7 +192,11 @@ function Cart() {
 
             <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2">
               <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image
+                  src={amazon}
+                  rounded
+                  style={{ width: "100%", height: "90%" }}
+                />
               </Col>
               <Col>
                 <div className="d-flex flex-column pt-2">
@@ -183,7 +212,10 @@ function Cart() {
                     </div>
                     <span>UAE</span>
                     <span>AED 500</span>
-                    <Image src={ButtunDelete} style={{ width: '4%', height: '4%' }} />
+                    <Image
+                      src={ButtunDelete}
+                      style={{ width: "4%", height: "4%" }}
+                    />
                   </div>
                 </div>
               </Col>

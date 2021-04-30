@@ -1,27 +1,32 @@
-import React from 'react';
-import Logo from '../../assets/logo.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import Logo from "../../assets/logo.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faYoutube,
   faTwitter,
   faLinkedin,
-  faInstagram
-} from '@fortawesome/free-brands-svg-icons';
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
     <footer className="home-footer">
       <div className="row">
         <div>
-          <img src={Logo} className="mt-5" style={{ marginLeft: '150px' }} alt="Icon" />
-          <p className="mt-4 Footer-text" style={{ marginLeft: '150px' }}>
-            {' '}
+          <img
+            src={Logo}
+            className="mt-5"
+            style={{ marginLeft: "150px" }}
+            alt="Icon"
+          />
+          <p className="mt-4 Footer-text" style={{ marginLeft: "150px" }}>
+            {" "}
             The ONLY Global Digital Gift Card, that can be used for all
             <br /> CURRENCIES, all denominations, across 86 COUNTRIES and
             <br /> redeemed over 4,000+ BRANDS
           </p>
-          <div style={{ marginLeft: '150px' }}>
+          <div style={{ marginLeft: "150px" }}>
             <FontAwesomeIcon icon={faFacebookF} className="mr-sm-5" />
             <FontAwesomeIcon icon={faYoutube} className="mr-sm-5" />
             <FontAwesomeIcon icon={faTwitter} className="mr-sm-5" />
@@ -30,7 +35,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="Gifti_Global_is mt-5">
-          <ul style={{ listStyleType: 'none' }}>
+          <ul style={{ listStyleType: "none" }}>
             <span>Gifti Global</span>
             <li className="footer-text-list mt-3">Featured Cards</li>
             <li className="footer-text-list mt-2">All Gift cards</li>
@@ -39,7 +44,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="Gifti_Global_is mt-5">
-          <ul style={{ listStyleType: 'none' }}>
+          <ul style={{ listStyleType: "none" }}>
             <span>About</span>
             <li className="footer-text-list mt-3">Terms & Conditions</li>
             <li className="footer-text-list mt-3">FAQS</li>
@@ -48,7 +53,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="Gifti_Global_is mt-5">
-          <ul style={{ listStyleType: 'none' }}>
+          <ul style={{ listStyleType: "none" }}>
             <span>Get in Touch with Us</span>
             <li className="footer-text-list mt-3">
               Grosvenor Business Tower Office 1102 <br />

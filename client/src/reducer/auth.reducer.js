@@ -112,7 +112,7 @@ export const authSlice = createSlice({
         if (response.code === undefined) {
           state.errors = [response.email];
         }
-      })
+      });
   },
 });
 

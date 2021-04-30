@@ -1,11 +1,15 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import {
   getRewardPointsAction,
   getTransactionsAction,
   getConvertAction,
   getRemainingAction,
-  getConvertCreditsAction
-} from '../actions/rewardpoints.actions';
+  getConvertCreditsAction,
+} from "../actions/rewardpoints.actions";
 
 export const REWARDS_POINTS_INITIAL_STATE = {
   total_credits: null,
@@ -17,10 +21,10 @@ export const REWARDS_POINTS_INITIAL_STATE = {
   original_value: null,
   remaining_value: null,
   credits: [],
-  errors: []
+  errors: [],
 };
 
-export const REWARDS_POINTS_FEATURE_KEY = 'rewardpoints';
+export const REWARDS_POINTS_FEATURE_KEY = "rewardpoints";
 export const rewardpointsAdapter = createEntityAdapter();
 export const initialRewardPointsState = rewardpointsAdapter.getInitialState(
   REWARDS_POINTS_INITIAL_STATE
@@ -74,12 +78,19 @@ export const rewardpointsSlice = createSlice({
           state.message = response.message;
         }
       });
-  }
+  },
 });
 
 export const rewardpointsReducer = rewardpointsSlice.reducer;
 export const rewardpointsActions = rewardpointsSlice.actions;
 export const { selectAll, selectEntities } = rewardpointsAdapter.getSelectors();
-export const getRewardPointsState = (rootState) => rootState[REWARDS_POINTS_FEATURE_KEY];
-export const selectAllRewardPoints = createSelector(getRewardPointsState, selectAll);
-export const selectRewardPointsEntities = createSelector(getRewardPointsState, selectEntities);
+export const getRewardPointsState = (rootState) =>
+  rootState[REWARDS_POINTS_FEATURE_KEY];
+export const selectAllRewardPoints = createSelector(
+  getRewardPointsState,
+  selectAll
+);
+export const selectRewardPointsEntities = createSelector(
+  getRewardPointsState,
+  selectEntities
+);

@@ -38,12 +38,12 @@
 
   color: #77838f;
   opacity: 1;
-  font: normal 10px 'Nunito-SemiBold', sans-serif;
+  font: normal 10px "Nunito-SemiBold", sans-serif;
   margin-bottom: 15px;
 }
 article p {
   text-align: left;
-  font: normal normal normal 14px 'Open Sans';
+  font: normal normal normal 14px "Open Sans";
   color: #77838f;
   opacity: 1;
 }

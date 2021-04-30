@@ -1,5 +1,9 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { getprofileListAction } from '../actions/profile.actions';
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { getprofileListAction } from "../actions/profile.actions";
 
 export const PROFILE_INITIAL_STATE = {
   first_name: null,
@@ -11,12 +15,14 @@ export const PROFILE_INITIAL_STATE = {
   date_joined: null,
   language: null,
   date_of_birth: null,
-  country: null
+  country: null,
 };
 
-export const PROFILE__FEATURE_KEY = 'profile';
+export const PROFILE__FEATURE_KEY = "profile";
 export const ProfileAdapter = createEntityAdapter();
-export const initialProfileState = ProfileAdapter.getInitialState(PROFILE_INITIAL_STATE);
+export const initialProfileState = ProfileAdapter.getInitialState(
+  PROFILE_INITIAL_STATE
+);
 
 export const profileSlice = createSlice({
   name: PROFILE__FEATURE_KEY,
@@ -42,7 +48,7 @@ export const profileSlice = createSlice({
       .addCase(getprofileListAction.rejected, (state) => {
         state.is_active = true;
       });
-  }
+  },
 });
 
 export const profileReducer = profileSlice.reducer;
@@ -50,4 +56,7 @@ export const profileActions = profileSlice.actions;
 export const { selectAll, selectEntities } = ProfileAdapter.getSelectors();
 export const getProfileState = (rootState) => rootState[PROFILE__FEATURE_KEY];
 export const selectAllProfile = createSelector(getProfileState, selectAll);
-export const selectProfileEntities = createSelector(getProfileState, selectEntities);
+export const selectProfileEntities = createSelector(
+  getProfileState,
+  selectEntities
+);

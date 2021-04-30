@@ -1,25 +1,24 @@
-import {apiCall} from './api';
+import { apiCall } from "./api";
 export const API_URL = process.env.REACT_APP_API_URL;
 
 export const cartItemsService = (cart_items) => {
-    const url = `${API_URL}/cart_items/`;
-    return apiCall(url, 'POST', cart_items, null, false );
-}
+  const url = `${API_URL}/cart_items/`;
+  return apiCall(url, "POST", cart_items, null, false);
+};
 
 export const fetchItemsByCartService = (cart_items) => {
-    const {currency, currency_id} = cart_items;
-    const url = `${API_URL}/cart_items/fetch_items_by_cart?currency=${currency}&&currency_id=${currency_id}`;
-    return apiCall(url, 'GET', null, null, false);
-}
+  const { currency, currency_id } = cart_items;
+  const url = `${API_URL}/cart_items/fetch_items_by_cart?currency=${currency}&&currency_id=${currency_id}`;
+  return apiCall(url, "GET", null, null, false);
+};
 
 export const addRemoveQuantityService = (cart_items) => {
-    const url = `${API_URL}/cart_items/add_or_remove_quantity/`;
-    return apiCall(url, 'PUT', cart_items, null, false);
-
-}
+  const url = `${API_URL}/cart_items/add_or_remove_quantity/`;
+  return apiCall(url, "PUT", cart_items, null, false);
+};
 
 export const cartTotalCountService = (cart_items) => {
-    const {currency} = cart_items;
-    const url = `${API_URL}/cart_items/cart_total_count?currency=${currency}`;
-    return apiCall(url, 'GET', null, null, false);
-}
+  const { currency } = cart_items;
+  const url = `${API_URL}/cart_items/cart_total_count?currency=${currency}`;
+  return apiCall(url, "GET", null, null, false);
+};

@@ -1,5 +1,9 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { getuseractiveAction } from '../actions/useractive.actions';
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { getuseractiveAction } from "../actions/useractive.actions";
 
 export const USER_ACTIVE_INITIAL_STATE = {
   email: null,
@@ -8,12 +12,14 @@ export const USER_ACTIVE_INITIAL_STATE = {
   status: null,
   code: null,
   message: null,
-  errors: []
+  errors: [],
 };
 
-export const USER_ACTIVE_FEATURE_KEY = 'useractive';
+export const USER_ACTIVE_FEATURE_KEY = "useractive";
 export const useractiveAdapter = createEntityAdapter();
-export const initialUserActiveState = useractiveAdapter.getInitialState(USER_ACTIVE_INITIAL_STATE);
+export const initialUserActiveState = useractiveAdapter.getInitialState(
+  USER_ACTIVE_INITIAL_STATE
+);
 
 export const useractiveSlice = createSlice({
   name: USER_ACTIVE_FEATURE_KEY,
@@ -34,12 +40,19 @@ export const useractiveSlice = createSlice({
       .addCase(getuseractiveAction.rejected, (state) => {
         state.default = true;
       });
-  }
+  },
 });
 
 export const useractiveReducer = useractiveSlice.reducer;
 export const useractiveActions = useractiveSlice.actions;
 export const { selectAll, selectEntities } = useractiveAdapter.getSelectors();
-export const getUserActiveState = (rootState) => rootState[USER_ACTIVE_FEATURE_KEY];
-export const selectAllUserActive = createSelector(getUserActiveState, selectAll);
-export const selectUserActiveEntities = createSelector(getUserActiveState, selectEntities);
+export const getUserActiveState = (rootState) =>
+  rootState[USER_ACTIVE_FEATURE_KEY];
+export const selectAllUserActive = createSelector(
+  getUserActiveState,
+  selectAll
+);
+export const selectUserActiveEntities = createSelector(
+  getUserActiveState,
+  selectEntities
+);
