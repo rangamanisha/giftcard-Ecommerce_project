@@ -1,23 +1,18 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 
-import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useHistory } from "react-router-dom";
-import { useState, useRef } from "react";
-import { Dropdown as Dropdown1 } from "react-bootstrap";
+import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import UserProfileDropDown from "../UserProfileDropDown";
 
 const Topbar = (props) => {
   const {
@@ -49,7 +44,7 @@ const Topbar = (props) => {
     if (showLogin) {
       return (
         <Button
-          className="nav-login mr-2"
+          className="nav-btn"
           variant="info"
           onClick={() => history.push({ pathname: "/auth/login" })}
         >
@@ -59,24 +54,14 @@ const Topbar = (props) => {
       );
     }
     return (
-      <Dropdown1 className="pt-1">
-        <Dropdown1.Toggle variant="info" className="nav-btn">
-          <span>
-            <img src={userLoginIcon} alt="Icon" className="mr-2" />
-          </span>
-          {user}
-        </Dropdown1.Toggle>
-        <Dropdown1.Menu>
-          <Dropdown1.Item eventKey="1">Profile</Dropdown1.Item>
-          <Dropdown1.Item eventKey="2">Gifti Global Points</Dropdown1.Item>
-          <Dropdown1.Item eventKey="1">Orders</Dropdown1.Item>
-          <Dropdown1.Item onClick={clearsession}>Logout</Dropdown1.Item>
-        </Dropdown1.Menu>
-      </Dropdown1>
+      <UserProfileDropDown
+        user={user}
+        userLoginIcon={userLoginIcon}
+        clearSession={clearsession}
+      />
     );
   };
   const onCountryChange = (e) => {
-    console.log("e ", e);
     setSelectedCountry(e.value);
     onCountrySelected(e.value.country_name);
   };
@@ -98,24 +83,22 @@ const Topbar = (props) => {
     );
   };
   return (
-    <Navbar bg={bg} variant={variant}>
+    <Navbar bg={bg} variant={variant} className="gifti-nav">
       <Container fluid>
-        <Form inline>
-          <Navbar.Brand
-            className="pl-3"
-            onClick={() => history.push({ pathname: "/" })}
-          >
-            <Button variant="white">
-              <img src={logoIcon} alt="Icon" />
-            </Button>
-          </Navbar.Brand>
-          <Nav className="pl-3">
-            <span className="location">
+        <div className="navbar-nav flex-row order-first mb-2">
+          <div className="nav-item">
+            <Navbar.Brand
+              onClick={() => history.push({ pathname: "/" })}
+            >
+              <Button variant="white">
+                <img src={logoIcon} alt="Icon" />
+              </Button>
+            </Navbar.Brand>
+          </div>
+          <div className="nav-item mt-2">
+            <p className="location">
               <small>I am gifting to</small>
-            </span>
-            <span className="location">
-              <small>I am gifting to</small>
-            </span>
+            </p>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
               value={selectedCountry}
@@ -128,38 +111,46 @@ const Topbar = (props) => {
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}
             />
-          </Nav>
-          <InputGroup className="pl-3">
-            <FormControl
-              className="search-button"
-              placeholder="What are you looking for ?"
-              aria-label="Recipient's username"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append>
-              <Button className="search-button-b" variant="light">
-                <img src={searchIcon} alt="search-icon" />
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-          <Row className="pl-3">
-            <Col className="mt-1">
-              <Button className="nav-btn mr-2 text-white">For Business</Button>{" "}
-              <Button className="nav-btn" variant="info">
-                Redeem Your Gifti Global Card
+          </div>
+          <div className="nav-item ml-4 mt-2">
+            <InputGroup>
+              <FormControl
+                className="search-button"
+                placeholder="What are you looking for ?"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+                size="40"
+              />
+              <InputGroup.Append>
+                <Button className="search-button-b" variant="light">
+                  <img src={searchIcon} alt="search-icon" />
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </div>
+        </div>
+        <div className="navbar-nav flex-lg-row gifti-nav-flex">
+          <div className="nav-item mr-2">
+            <Button className="nav-btn text-white">For Business</Button>{" "}
+          </div>
+          <div className="nav-item mr-2">
+            <Button className="nav-btn" variant="info">
+              Redeem Your Gifti Global Card
               </Button>{" "}
-            </Col>
-
+          </div>
+          <div className="nav-item mr-2">
             {getProfile()}
-            <Button className="nav-btn-link " variant="link">
+          </div>
+          <div className="nav-item mr-2">
+            <Button className="nav-btn btn-cart" variant="link">
               <img src={shoppingCartIcon} alt="shoppingcart-icon" />
               <span class="badge badge-warning" id="lblCartCount">
                 {" "}
                 1{" "}
               </span>
             </Button>
-          </Row>
-        </Form>
+          </div>
+        </div>
       </Container>
     </Navbar>
   );
