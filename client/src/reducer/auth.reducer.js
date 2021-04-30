@@ -119,8 +119,8 @@ export const authSlice = createSlice({
       .addCase(googlesigninAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
-          state.status = response.status;
           state.isAuthenticated = true;
+          state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
         }

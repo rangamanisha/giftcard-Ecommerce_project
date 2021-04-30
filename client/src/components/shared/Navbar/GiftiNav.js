@@ -18,6 +18,7 @@ const GiftiNav = () => {
   const bg = "white";
   const variant = "white";
   const authState = useSelector(getAuthState);
+  console.log(authState);
   const topbarState = useSelector(getTopBarState);
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState(null);

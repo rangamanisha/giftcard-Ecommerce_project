@@ -44,11 +44,6 @@ const Login = () => {
     if (state.isAuthenticated) {
       history.push({ pathname: "/" });
     }
-    debugger;
-
-    if (state.message === "Login successful!") {
-      history.push({ pathname: "/" });
-    }
 
     if (state.reset) {
       setIsValid(true);
