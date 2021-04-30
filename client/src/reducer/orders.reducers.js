@@ -2,23 +2,8 @@ import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolk
 import { AllorderAction } from '../actions/orders.action';
 
 export const ORDER_INITIAL_STATE = {
-
         orderid: null,
-        order_status: null, 
-        brand_name: null, 
-        unit_name: null,
-        giftcard_value: null,
-        order_total: null, 
-        total_amount: null, 
-        order_total_aed: null, 
-        payment_currency_amount: null,
-        credit_debit_amount: null,
-        payment_currency: null,
-        payable_amount: null,
-        credits_used: null,
-        points_used: null,
-        date: null,
-        isgift: null
+        data:[]
 }
 
 
@@ -40,7 +25,7 @@ export const orderSlice = createSlice({
       const response = action.payload;
       if (response.code === 200) {
         state.code = true;
-        state.total_credits = response.data.total_credits;
+        state.data = response.data.orders;
       }
     })
     .addCase(AllorderAction.rejected, (state) => {

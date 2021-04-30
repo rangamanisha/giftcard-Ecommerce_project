@@ -1,10 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {allOrderApiCall} from '../services/orders.service';
 
-export const AllorderAction = createAsyncThunk('brands/listtermBrand', async(payload, thunkAPI) => {
+export const AllorderAction = createAsyncThunk('orders', async(payload, thunkAPI) => {
     const request = {
         currency:payload.currency,
-        image : payload.image
+        image_size : payload.image_size,
+        limit:payload.limit,
+        offset:payload.offset
+
     }
     const response = await allOrderApiCall(request);
     console.log(response);

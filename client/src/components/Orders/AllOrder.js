@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../../services/ProductService';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory, Link} from 'react-router-dom';
 import {AllorderAction} from '../../actions/orders.action';
@@ -11,24 +10,25 @@ import './orders.css';
 const AllOrder = ()=>{
     const dispatch = useDispatch();
     const history = useHistory();
+    const orderState = useSelector(getOrderState);
 
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-    React.useEffect(() => {
+
+   useEffect(() => {
         dispatch(AllorderAction({
           currency: 1,
-          image: "medium_rectangle"
+          image_size: "medium_rectangle",
+          limit: 10,
+          offset: 0
         }))
-      },[])
-    useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      },[dispatch])
+
 
     const codeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
                 <span className="p-column-title">Gift Cards</span>
-                {rowData.code}
+                <img src={rowData.images.medium_rectangle} className="mr-5 rounded img-thumbnail" alt="Icon" />
+                
             </React.Fragment>
         );
     }
@@ -37,7 +37,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Date</span>
-                {rowData.name}
+                {rowData.date}
             </React.Fragment>
         );
     }
@@ -46,7 +46,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Order No</span>
-                {rowData.category}
+                {rowData.orderid}
             </React.Fragment>
         );
     }
@@ -55,7 +55,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Amount Paid</span>
-                {rowData.quantity}
+                {rowData.payment_currency_amount}
             </React.Fragment>
         );
     }
@@ -63,7 +63,8 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Status</span>
-                {rowData.quantity}
+
+               <p className="status">{rowData.order_status}</p> 
             </React.Fragment>
         );
     }
@@ -73,7 +74,7 @@ const AllOrder = ()=>{
             <div className ="container mt-4">
             <p className ="order mb-5">Your Orders</p>
             <div className="card">
-                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10}>
+                <DataTable value={orderState.data} className="p-datatable-responsive-demo" paginator rows={10}>
                     <Column field="Giftcards" header="Gift Cards" body={codeBodyTemplate} />
                     <Column field="Date" header="Date" body={nameBodyTemplate} />
                     <Column field="Order No" header="Order No" body={categoryBodyTemplate} />
