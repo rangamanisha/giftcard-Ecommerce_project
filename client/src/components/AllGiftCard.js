@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Technology from "../assets/technology.svg";
 import Toys from "../assets/toys.svg";
 import Suitcase from "../assets/suitcase.svg";
@@ -20,24 +20,18 @@ import Bollywoodparks from "../assets/bollywoodparks.png";
 import Deliveroo from "../assets/deliveroo.png";
 import Mylist from "../assets/mylist.png";
 
-
-
 function AllGiftCard() {
-    return (
-     
-<div>
-        <div>
-          <p className="giftiallcard-text">All Gift Cards in the UAE</p>
-          <p className="giftiallcard-text-a">Browse by Category</p>
-        </div>
+  return (
+    <div>
+      <div>
+        <p className="giftiallcard-text">All Gift Cards in the UAE</p>
+        <p className="giftiallcard-text-a">Browse by Category</p>
+      </div>
 
-        <div className="mt-5 ">
-
+      <div className="mt-5 ">
         <div className="row" style={{ marginLeft: "130px" }}>
           <div className="box">
-            <a href="#/">
-              Arrow
-            </a>
+            <a href="#/">Arrow</a>
           </div>
           <div className="box">
             <a href="#/">
@@ -139,25 +133,48 @@ function AllGiftCard() {
             <a href="#/">Arrow</a>
           </div>
         </div>
-     
 
         <div className="gificards mt-5 row">
-            <img src={Appleitunes} className="mr-sm-5 imgcards" alt="Appleitunes" />
-            <img src={Asec} className="mr-sm-5 imgcards" alt="Asec" />
-            <img src={Ace} className="mr-sm-5 imgcards" alt="Ace" />
-            <img src={Careem} className="imgcards" alt="Careem" />
-            <img src={Carrefour} className="mr-sm-5 imgcards mt-5" alt="Carrefour" />
-            <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
-            <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
-            <img src={GiftGlobalCard} className="mr-sm-5 imgcards mt-5" alt="GiftGlobalCard" />
-            <img src={Ballooncard} className="mr-sm-5 imgcards mt-5" alt="Ballooncard" />
-            <img src={Bollywoodparks} className="mr-sm-5 imgcards mt-5" alt="Bollywoodparks" />
-            <img src={Deliveroo} className="mr-sm-5 imgcards mt-5" alt="Deliveroo" />
-            <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" />
+          <img
+            src={Appleitunes}
+            className="mr-sm-5 imgcards"
+            alt="Appleitunes"
+          />
+          <img src={Asec} className="mr-sm-5 imgcards" alt="Asec" />
+          <img src={Ace} className="mr-sm-5 imgcards" alt="Ace" />
+          <img src={Careem} className="imgcards" alt="Careem" />
+          <img
+            src={Carrefour}
+            className="mr-sm-5 imgcards mt-5"
+            alt="Carrefour"
+          />
+          <img src={Biobox} className="mr-sm-5 imgcards mt-5" alt="Biobox" />
+          <img src={Amazon} className="mr-sm-5 imgcards mt-5" alt="Amazon" />
+          <img
+            src={GiftGlobalCard}
+            className="mr-sm-5 imgcards mt-5"
+            alt="GiftGlobalCard"
+          />
+          <img
+            src={Ballooncard}
+            className="mr-sm-5 imgcards mt-5"
+            alt="Ballooncard"
+          />
+          <img
+            src={Bollywoodparks}
+            className="mr-sm-5 imgcards mt-5"
+            alt="Bollywoodparks"
+          />
+          <img
+            src={Deliveroo}
+            className="mr-sm-5 imgcards mt-5"
+            alt="Deliveroo"
+          />
+          <img src={Mylist} className="mr-sm-5 imgcards mt-5" alt="Mylist" />
         </div>
-</div>
-</div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default AllGiftCard;

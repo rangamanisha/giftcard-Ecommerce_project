@@ -1,20 +1,23 @@
-import './App.scss';
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Registration';
+import "./App.scss";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Registration";
 import {
-  BrowserRouter as Router, Redirect, Route,
-  Switch
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
 } from "react-router-dom";
-import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
-import AllFeaturedCards from './components/AllFeaturedCards';
-import SelectCards from './components/SelectCards';
-import GiftiNav from './components/shared/Navbar/GiftiNav';
-import EditProfile from './components/EditProfile';
-import Footer from './components/shared/Footer';
-import RewardPoints from './components/RewardPoints';
-
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+import AllFeaturedCards from "./components/AllFeaturedCards";
+import SelectCards from "./components/SelectCards";
+import GiftiNav from "./components/shared/Navbar/GiftiNav";
+import EditProfile from "./components/EditProfile";
+import Footer from "./components/shared/Footer";
+import RewardPoints from "./components/RewardPoints";
+import Checkout from "./components/checkout";
+import StepsDemo from "./components/payment";
 
 function App() {
   return (
@@ -31,8 +34,10 @@ function App() {
           <Route path="/selectcard" component={SelectCards} exact />
           <Route path="/profile" component={EditProfile} exact />
           <Route path="/reward-points" component={RewardPoints} exact />
+          <Route path="/checkout" component={Checkout} exact />
+          <Route path="/payment" component={StepsDemo} exact />
           <Route path="/" exact>
-            <Redirect to={{ pathname: '/' }} />
+            <Redirect to={{ pathname: "/" }} />
           </Route>
         </Switch>
         <Footer />

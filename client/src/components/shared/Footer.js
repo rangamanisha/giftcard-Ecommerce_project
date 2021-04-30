@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from '../../assets/logo.svg';
+import Logo from "../../assets/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -8,7 +8,6 @@ import {
   faLinkedin,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-
 
 const Footer = () => {
   return (
@@ -36,37 +35,40 @@ const Footer = () => {
           </div>
         </div>
         <div className="Gifti_Global_is mt-5">
-          <ul style={{ listStyleType:'none' }}>
-          <span>Gifti Global</span>
-              <li className="footer-text-list mt-3">Featured Cards</li>
-              <li className="footer-text-list mt-2">All Gift cards</li>
-              <li className="footer-text-list mt-2">For Business</li>
-              <li className="footer-text-list mt-2">About us</li>
+          <ul style={{ listStyleType: "none" }}>
+            <span>Gifti Global</span>
+            <li className="footer-text-list mt-3">Featured Cards</li>
+            <li className="footer-text-list mt-2">All Gift cards</li>
+            <li className="footer-text-list mt-2">For Business</li>
+            <li className="footer-text-list mt-2">About us</li>
           </ul>
         </div>
         <div className="Gifti_Global_is mt-5">
-        <ul style={{ listStyleType:'none' }}>
-          <span>About</span>
-          <li className="footer-text-list mt-3">Terms & Conditions</li>
-              <li className="footer-text-list mt-3">FAQS</li>
-              <li className="footer-text-list mt-3">Privacy Policy</li>
-              <li className="footer-text-list mt-3">Contact us</li>
-           </ul>   
+          <ul style={{ listStyleType: "none" }}>
+            <span>About</span>
+            <li className="footer-text-list mt-3">Terms & Conditions</li>
+            <li className="footer-text-list mt-3">FAQS</li>
+            <li className="footer-text-list mt-3">Privacy Policy</li>
+            <li className="footer-text-list mt-3">Contact us</li>
+          </ul>
         </div>
         <div className="Gifti_Global_is mt-5">
-        <ul style={{ listStyleType:'none' }}>
-          <span>Get in Touch with Us</span>
-          <li className="footer-text-list mt-3">Grosvenor Business Tower Office 1102 <br />Barsha Heights TecomDubai, UAE</li>
-              <li className="footer-text-list mt-3">All Gift cards</li>
-              <li className="footer-text-list mt-3">For Business</li>
-              <li className="footer-text-list mt-3">About us</li>
-              </ul>
+          <ul style={{ listStyleType: "none" }}>
+            <span>Get in Touch with Us</span>
+            <li className="footer-text-list mt-3">
+              Grosvenor Business Tower Office 1102 <br />
+              Barsha Heights TecomDubai, UAE
+            </li>
+            <li className="footer-text-list mt-3">All Gift cards</li>
+            <li className="footer-text-list mt-3">For Business</li>
+            <li className="footer-text-list mt-3">About us</li>
+          </ul>
         </div>
       </div>
-      <hr/>
+      <hr />
       <p className="text-center">Gifti Global - © 2020 All Rights Reserved</p>
     </footer>
   );
-}
+};
 
 export default Footer;

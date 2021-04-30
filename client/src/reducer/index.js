@@ -2,10 +2,14 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { AUTH_FEATURE_KEY, authReducer } from "./auth.reducer";
 import { topbarReducer, TOPBAR_FEATURE_KEY } from "./topbar.reducer";
 import { profileReducer, PROFILE__FEATURE_KEY } from "./profile.reducer";
-import { useractiveReducer, USER_ACTIVE_FEATURE_KEY } from "./useractive.reducer";
-import { rewardpointsReducer, REWARDS_POINTS_FEATURE_KEY } from "./rewardpoints.reducer";
-
-
+import {
+  useractiveReducer,
+  USER_ACTIVE_FEATURE_KEY,
+} from "./useractive.reducer";
+import {
+  rewardpointsReducer,
+  REWARDS_POINTS_FEATURE_KEY,
+} from "./rewardpoints.reducer";
 
 const saveToLocalStorage = (state) => {
   try {
@@ -31,14 +35,12 @@ const loadFromLocalStorage = () => {
 const persistedState = loadFromLocalStorage();
 
 const store = configureStore({
-reducer: {
+  reducer: {
     [AUTH_FEATURE_KEY]: authReducer,
     [TOPBAR_FEATURE_KEY]: topbarReducer,
     [PROFILE__FEATURE_KEY]: profileReducer,
     [USER_ACTIVE_FEATURE_KEY]: useractiveReducer,
-    [REWARDS_POINTS_FEATURE_KEY]: rewardpointsReducer
-
-
+    [REWARDS_POINTS_FEATURE_KEY]: rewardpointsReducer,
   },
   persistedState,
   middleware: [...getDefaultMiddleware()],

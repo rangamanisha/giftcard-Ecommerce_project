@@ -8,8 +8,8 @@ import ReactBootstrap, {
   Row,
   Form,
 } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
 import { ReactComponent as Country } from "../assets/country.svg";
 import { ReactComponent as Target } from "../assets/target.svg";
@@ -35,7 +35,10 @@ const card = () => {
           selection of +4,000 brands in +100 countries
         </p>
         <div className="row" style={{ marginLeft: "75px" }}>
-          <Button className="custom-button mr-sm-3">Start Gifiting&nbsp;<FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Button>
+          <Button className="custom-button mr-sm-3">
+            Start Gifiting&nbsp;
+            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+          </Button>
           <Button variant="outline-secondary">How it works</Button>
         </div>
         <img src={GiftiGlobal} className="card-image" alt="Gifti-Global" />
@@ -86,16 +89,22 @@ const card = () => {
         <img src={StartingGift2} className="startgiftimg" alt="Icon" />
       </div>
       <div className="cardgifiti-card mt-5">
-        <p className="giftiallcard-text mt-5">Brands recommended for you in the UAE</p>
-        <div style={{marginLeft: '130px'}}>
-        <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
-        <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
-        <img src={Appleitunes} className="mr-sm-5 imgcards mt-5" alt="Appleitunes" />
-        <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
-      </div>
+        <p className="giftiallcard-text mt-5">
+          Brands recommended for you in the UAE
+        </p>
+        <div style={{ marginLeft: "130px" }}>
+          <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
+          <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
+          <img
+            src={Appleitunes}
+            className="mr-sm-5 imgcards mt-5"
+            alt="Appleitunes"
+          />
+          <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default card;

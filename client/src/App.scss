@@ -7,8 +7,6 @@ $theme-colors: (
 
 @import "~bootstrap/scss/bootstrap";
 
-
-
 @font-face {
   font-family: 'Cairo';
   src: local('Cairo'), url(./assets/fonts/Cairo-Black.ttf) format('truetype');
@@ -278,6 +276,21 @@ width: 430px;
   color:#03014C;
   box-shadow: 0px 2px 28px #3e357824;
 }
+
+
+.Guestform-card{
+  margin-top: 65px;
+  top: 40px;
+  left: 130px;
+  width: 500px;
+  height: 450px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
 
 
 .profile-card{
@@ -717,4 +730,46 @@ height: 35%;
 
 .popup-btn{
   width: 55%;
+}
+
+.payment-card{
+  margin-top: 100px;
+  padding-top: 40px;
+  left: 130px;
+  width: 700px;
+  height: 400px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color: #03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
+
+._2Jtxm._35Ago ._2kL0S{
+ background-color: #000000 ! important;
+}
+
+._2Jtxm._2ZUAI ._2JvrO{
+  background-color: #000000 ! important;
+}
+
+._2Jtxm::before{
+  background: linear-gradient(to left, #e7eaf3 50%, #e7eaf3 50%) ! important;
+}
+
+
+._2Jtxm::before{
+  background: linear-gradient(to left, #e7eaf3 50%, #e7eaf3 50%) ! important;
+}
+
+
+.cc-card {
+  margin: 0;
+  padding-left: 40px;
+  height: 42px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: monospace;
+  border-color: black;
 }

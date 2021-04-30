@@ -14,30 +14,27 @@ import {
   getTransactionsAction,
   getConvertAction,
   getRemainingAction,
-  getConvertCreditsAction
+  getConvertCreditsAction,
 } from "../actions/rewardpoints.actions";
 import { useDispatch, useSelector } from "react-redux";
-import Moment from 'react-moment';
-import Modal from './modal';
+import Moment from "react-moment";
+import Modal from "./modal";
+import GiftModal from "./giftcardmodal";
+import LoadingBar from "react-top-loading-bar";
 
 const RewardPoints = (props) => {
   const points = useSelector(getRewardPointsState);
   const dispatch = useDispatch();
   const points_data = points;
- 
+
   const transactions = points_data.credits;
   const [modalShow, setModalShow] = React.useState(false);
-
-
+  const [progress, setProgress] = React.useState(0);
 
   useEffect(() => {
     dispatch(getRewardPointsAction({}));
     dispatch(getTransactionsAction({}));
-    if (points_data.message === "Gift card successfully converted to points."){
-      setModalShow(true);
-    }
   }, [dispatch, points_data.message]);
-
 
   const formik = useFormik({
     initialValues: {
@@ -49,22 +46,32 @@ const RewardPoints = (props) => {
     onSubmit: (data) => {
       dispatch(getConvertAction(data));
       dispatch(getRemainingAction(data));
-      dispatch(getRemainingAction(data));
       dispatch(getConvertCreditsAction(data));
+      if (
+        points_data.message === "Gift card successfully converted to points."
+      ) {
+        setModalShow(true);
+      } else if (
+        points_data.message === "Your gift card has already been redeemed"
+      ) {
+        console.log(points_data.message);
+        setModalShow(true);
+      }
     },
   });
-
-
 
   return (
     <>
       <Row>
-      <Modal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+        <Modal show={modalShow} onHide={() => setModalShow(false)} />
+        <GiftModal show={modalShow} onHide={() => setModalShow(false)} />
         <Col sm="7" className="pl-5 mt-5">
-          <Form onSubmit={formik.handleSubmit}>
+          <LoadingBar
+            color="#00807d"
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+          />
+          <Form onSubmit={formik.handleSubmit} onClick={() => setProgress(100)}>
             <p className="rewardspoints-font">
               Redeem your Mylist, Gifti Global or Hasaad Card
             </p>
@@ -124,24 +131,33 @@ const RewardPoints = (props) => {
             <tbody>
               {transactions && transactions.length > 0 ? (
                 transactions.map((transaction) => {
-                    return (
-                      <tr className="table-body-font">
-                        <td className="font-date">
-                          <Moment format="MMM Do,YYYY">{transaction.created_at}</Moment><br/>
-                          <Moment format="h:mm:ss a">{transaction.created_at}</Moment></td>
-                        <td>{transaction.type}</td>
-                        <td>{transaction.card_number}</td>
-                        <td className="amount-color">{transaction.original_amount}</td>
-                        <td className="font-balance">{transaction.current_balance}</td>
-                      </tr>
-                    );
-                  })
+                  return (
+                    <tr className="table-body-font">
+                      <td className="font-date">
+                        <Moment format="MMM Do,YYYY">
+                          {transaction.created_at}
+                        </Moment>
+                        <br />
+                        <Moment format="h:mm a">
+                          {transaction.created_at}
+                        </Moment>
+                      </td>
+                      <td>{transaction.type}</td>
+                      <td>{transaction.card_number}</td>
+                      <td className="amount-color">
+                        {transaction.original_amount}
+                      </td>
+                      <td className="font-balance">
+                        {transaction.current_balance}
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td style={{ color: "red" }}>No results</td>
                 </tr>
               )}
-              
             </tbody>
           </Table>
         </Col>

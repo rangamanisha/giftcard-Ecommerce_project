@@ -1,4 +1,4 @@
-import Pagination from 'react-bootstrap/Pagination';
+import Pagination from "react-bootstrap/Pagination";
 
 const Pages = ({ totalRecords, setCurrentPage, currentPage, perPage }) => {
   const pageNumber = [];
