@@ -1,21 +1,18 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 
-import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useHistory } from "react-router-dom";
-import { useState, useRef } from "react";
-import { Dropdown as Dropdown1 } from "react-bootstrap";
+import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import Container from "react-bootstrap/Container";
+import UserProfileDropDown from "../UserProfileDropDown";
 
 const Topbar = (props) => {
   const {
@@ -57,20 +54,11 @@ const Topbar = (props) => {
       );
     }
     return (
-      <Dropdown1>
-        <Dropdown1.Toggle variant="info" className="nav-btn">
-          <span>
-            <img src={userLoginIcon} alt="Icon" className="mr-2" />
-          </span>
-          {user}
-        </Dropdown1.Toggle>
-        <Dropdown1.Menu>
-          <Dropdown1.Item eventKey="1">Profile</Dropdown1.Item>
-          <Dropdown1.Item eventKey="2">Gifti Global Points</Dropdown1.Item>
-          <Dropdown1.Item eventKey="1">Orders</Dropdown1.Item>
-          <Dropdown1.Item onClick={clearsession}>Logout</Dropdown1.Item>
-        </Dropdown1.Menu>
-      </Dropdown1>
+      <UserProfileDropDown
+        user={user}
+        userLoginIcon={userLoginIcon}
+        clearSession={clearsession}
+      />
     );
   };
   const onCountryChange = (e) => {
