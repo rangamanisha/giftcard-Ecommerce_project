@@ -148,7 +148,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'giftiglobal',
         'CLIENT': {
-            'host': 'localhost',
+            'host': 'db',
             'port': 27017,
             'username': 'root',
             'password': 'root',
@@ -228,5 +228,3 @@ DEFAULT_FROM_EMAIL = 'default from email'
 
 
 CORS_ORIGIN_ALLOW_ALL=True
-
-FRONTEND_RESET_PASSWORD_URL="http://localhost:3000/reset-forget-password/"

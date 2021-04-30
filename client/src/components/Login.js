@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Usericon from "../assets/User-icon.svg";
 import Passwordicon from "../assets/Password-icon.svg";
-import Googleicon from "../assets/Google-icon.svg";
 import Facebookicon from "../assets/Facebook-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";

@@ -20,6 +20,7 @@ import Appleitunes from "../assets/Appleitunes.png";
 import Asec from "../assets/5asec.png";
 import Careem from "../assets/Careem.png";
 import Ace from "../assets/Ace.png";
+import { useHistory } from "react-router-dom";
 
 const card = () => {
   return (
@@ -46,8 +47,7 @@ const card = () => {
       <div className="row mt-5" style={{ marginLeft: "112px" }}>
         <Country className="mr-sm-3"></Country>
         <small className="custom-font">
-          Select a country and browse e-gift cards within
-          <br /> 4,000+ brands
+          Select a country and browse e-gift cards within 4,000+ brands
         </small>
         <Target className="mr-sm-3 icons"></Target>
         <small className="custom-font">
@@ -82,6 +82,7 @@ const card = () => {
             size="md"
             className="mt-5"
             style={{ marginLeft: "330px" }}
+            onClick={() => history.pushState("/allcards")}
           >
             Browse Gifts
           </Button>{" "}
@@ -93,14 +94,14 @@ const card = () => {
           Brands recommended for you in the UAE
         </p>
         <div style={{ marginLeft: "130px" }}>
-          <img src={Careem} className="mr-sm-5 imgcards mt-5" alt="Careem" />
-          <img src={Asec} className="mr-sm-5 imgcards mt-5" alt="Asec" />
+          <img src={Careem} className="ml-sm-5 imgcards mt-5" alt="Careem" />
+          <img src={Asec} className="ml-sm-5 imgcards mt-5" alt="Asec" />
           <img
             src={Appleitunes}
-            className="mr-sm-5 imgcards mt-5"
+            className="ml-sm-5 imgcards mt-5"
             alt="Appleitunes"
           />
-          <img src={Ace} className="mr-sm-5 imgcards mt-5" alt="Ace" />
+          <img src={Ace} className="ml-sm-5 imgcards mt-5" alt="Ace" />
         </div>
       </div>
     </div>

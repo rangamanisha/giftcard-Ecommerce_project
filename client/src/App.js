@@ -1,7 +1,9 @@
+import React from "react";
 import "./App.scss";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Registration";
+import AllCards from "./components/AllCards";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -17,11 +19,12 @@ import EditProfile from "./components/EditProfile";
 import Footer from "./components/shared/Footer";
 import RewardPoints from "./components/RewardPoints";
 import Checkout from "./components/checkout";
-import StepsDemo from "./components/payment";
+import StepsDemo from "./components/stepper";
+import EmptyCart from "./components/shared/EmptyCartPage/EmptyCart";
+import Cart from "./components/shared/Cart/Cart";
 
 function App() {
   return (
-    <div className="body">
       <Router>
         <GiftiNav />
         <Switch>
@@ -39,10 +42,14 @@ function App() {
           <Route path="/" exact>
             <Redirect to={{ pathname: "/" }} />
           </Route>
+          <Route path="/allcards" component={AllCards} exact />
+          <Route path="/cart" component={Cart} exact />
+          <Route path="/emptycart" component={EmptyCart} exact />
+          <Route path="/cart" component={Cart} exact />
+          <Route render={() => <Redirect to={{ pathName: "/" }} />} />
         </Switch>
         <Footer />
       </Router>
-    </div>
   );
 }
 

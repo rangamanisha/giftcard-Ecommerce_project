@@ -3,6 +3,7 @@ import Cards from "./Cards";
 import StartGifting from "./StartGifting";
 import RecommandedCards from "./RecommandedCards";
 import AllGiftCard from "./AllGiftCard";
+import AllFeaturedCards from "./AllFeaturedCards";
 import Alert from "react-bootstrap/Alert";
 import checkbox from "../assets/checkbox.svg";
 import { useState, useEffect } from "react";
@@ -88,7 +89,8 @@ const Home = () => {
       </div>
       <Cards />
       <StartGifting />
-      <RecommandedCards />
+      <AllFeaturedCards />
+      {/* <RecommandedCards /> */}
       <AllGiftCard />
     </>
   );

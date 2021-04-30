@@ -3,11 +3,17 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { getCountriesListAction } from "../actions/topbar.actions";
+import {
+  getCountriesListAction,
+  selectCountryAction,
+} from "../actions/topbar.actions";
+import { filter } from "lodash";
 
 export const TOPBAR_INITIAL_STATE = {
   countries: [],
   countriesLoading: false,
+  currency_code: 1,
+  selectedCountry: "",
 };
 
 export const TOPBAR_FEATURE_KEY = "topbar";

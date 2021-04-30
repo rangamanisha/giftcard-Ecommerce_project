@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Col, Image, Container, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
@@ -8,6 +9,7 @@ import Target from "../assets/target.svg";
 import Giftcard from "../assets/gift-card.svg";
 
 const Cards = () => {
+  const history = useHistory();
   return (
     <Container fluid>
       <React.Fragment>
@@ -21,7 +23,10 @@ const Cards = () => {
               of +4,000 brands in +100 countries
             </p>
             <div>
-              <Button className="custom-button mr-sm-3">
+              <Button
+                className="custom-button mr-sm-3"
+                onClick={() => history.push("allcards")}
+              >
                 Start Gifiting&nbsp;
                 <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
               </Button>
@@ -43,9 +48,10 @@ const Cards = () => {
                 </span>
               </div>
               <div className="text_div">
-                <span> Select a country and browse e-gift cards within</span>
-                <br />
-                <span>4,000+ brands</span>
+                <span>
+                  {" "}
+                  Select a country and browse e-gift cards within 4,000+ brands
+                </span>
               </div>
             </div>
           </Col>

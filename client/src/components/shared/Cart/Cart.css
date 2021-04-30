@@ -1,0 +1,44 @@
+.cart-first-column {
+  position: -webkit-sticky;
+  background: #ededf1 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 40px #0000000a;
+  border-radius: 10px;
+  height: 50%;
+  position: sticky;
+  top: 0;
+}
+.cart-currency {
+  /* background-image: url('../../../assets/Rectangle-63.svg'); */
+  /* background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png) repeat; */
+  background: url(../../../assets/Rectangle-63.svg);
+  border-radius: 5px;
+}
+
+.ggp-parent-box {
+  background-color: #cecece;
+  border-radius: 6px;
+}
+.ggp-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #00b2ae;
+}
+.btn-persianGreen {
+  background-color: #00b2ae;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-family: "Cairo-Bold";
+}
+.btn-white {
+  background-color: #ffffff;
+  color: #00b2ae;
+  font-size: 0.8rem;
+  font-family: "Cairo-Bold";
+  padding: 0 3rem;
+}
+
+.cart-inc-dec-box {
+  border: 0.800000011920929px solid #b2b2c9;
+  border-radius: 10px;
+  opacity: 1;
+}

@@ -1,5 +1,3 @@
-import jwt
-from django.conf import settings
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
@@ -9,15 +7,14 @@ from rest_framework.views import APIView
 
 from django.contrib.auth import get_user_model
 from .serializers import (UserRegistrationSerializer, UserUpdateSerializer, 
-    UserRestPasswordSerializer, SendEmailForForgetPasswordSerializer, 
-    UserForgetPasswordSerializer,
+    UserRestPasswordSerializer, SendOTPForForgetPasswordSerializer, UserForgetPasswordSerializer,
     LoginSerializer)
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 User = get_user_model()
 
 from rest_framework import permissions
-from user.utils import send_email_to_reset_forget_password
+from user.utils import send_otp_email
 
 
 class ReadOnly(permissions.BasePermission):
@@ -92,14 +89,14 @@ class UserResetPassword(APIView):
         )
 
 
-class SendEmailForForgetPassword(APIView):
-    serializer_class = SendEmailForForgetPasswordSerializer
+class SendOTPForForgetPassword(APIView):
+    serializer_class = SendOTPForForgetPasswordSerializer
 
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = SendOTPForForgetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         email = request.data['email']
-        send_email_to_reset_forget_password(email)
+        send_otp_email(email)
         user = User.objects.get(email=email)
         
         message = "Password reset instructions were sent to {}".format(user.email)
@@ -177,43 +174,3 @@ class MyTokenObtainPairView(TokenObtainPairView):
         )
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
-
-class ActivateUserAccount(APIView):
-
-    def get(self, request):
-        token = request.GET.get('token')
-        if token:
-            try:
-                token = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-            except Exception as e:
-                return Response({
-                    "errors" : ["token is not valid"]
-                },status.HTTP_400_BAD_REQUEST)
-
-            user_id = token['user_id']
-            user = User.objects.get(id=user_id)
-            user.is_active = True
-            user.save()
-
-            return Response(
-                {
-                        "data": { 
-                            "user" : {
-                                "name" : user.get_full_name(),
-                                "email" : user.email,
-                                "verified" : user.is_active,
-                            } 
-                        },
-                        "status" : "ok",
-                        "code" : 200,
-                        "message" : "Successfully verified user account!",
-                        "errors" : []
-                },
-                status.HTTP_200_OK
-            )
-        return Response(
-            {
-                "errors" : ["Token is not found."]
-            },
-            status.HTTP_400_BAD_REQUEST
-        )

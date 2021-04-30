@@ -18,7 +18,6 @@ const GiftiNav = () => {
   const bg = "white";
   const variant = "white";
   const authState = useSelector(getAuthState);
-  console.log(authState);
   const topbarState = useSelector(getTopBarState);
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -47,9 +46,6 @@ const GiftiNav = () => {
       profileIcon={Profile}
       country={selectedCountry}
       countriesList={countries}
-      searchIcon={Search}
-      userLoginIcon={UserLogin}
-      shoppingCartIcon={Shoppingcart}
       showLogin={!authState.isAuthenticated}
       onCountrySelected={countryChanged}
     />
