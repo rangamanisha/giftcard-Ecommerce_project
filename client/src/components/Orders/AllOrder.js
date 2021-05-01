@@ -3,6 +3,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory, Link} from 'react-router-dom';
+import Moment from "react-moment";
 import {AllorderAction} from '../../actions/orders.action';
 import {getOrderState} from '../../reducer/orders.reducers';
 import './orders.css';
@@ -37,7 +38,14 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Date</span>
-               <p className ="text_order"> {rowData.date}</p>
+               <p className ="text_order">                         
+               <Moment format="MMM Do,YYYY">
+                          {rowData.date}
+                        </Moment>
+                        <br />
+                        <Moment format="h:mm a">
+                          {rowData.date}
+                        </Moment></p>
             </React.Fragment>
         );
     }
