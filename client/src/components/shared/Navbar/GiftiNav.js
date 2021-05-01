@@ -21,9 +21,7 @@ const GiftiNav = () => {
   const topbarState = useSelector(getTopBarState);
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const countries = topbarState.countries.map(
-    (country) => country["country_name"]
-  );
+  const countries = topbarState.countries
 
   useEffect(() => {
     dispatch(getCountriesListAction());

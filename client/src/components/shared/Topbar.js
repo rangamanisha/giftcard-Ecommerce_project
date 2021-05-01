@@ -1,10 +1,7 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
-import "./Topbar.scss";
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
+
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
@@ -21,20 +18,11 @@ const Topbar = (props) => {
     variant,
     logoIcon,
     locationIcon,
-    country,
     countriesList,
-    searchIcon,
     userLoginIcon,
     shoppingCartIcon,
     showLogin,
     onCountrySelected,
-    profileIcon,
-    coinsIcon,
-    exitIcon,
-    cartIcon,
-    first_name,
-    handleClick,
-    rewardpoints
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
@@ -48,11 +36,11 @@ const Topbar = (props) => {
     window.location.reload();
   };
 
+
   const getProfile = () => {
     if (showLogin) {
       return (
         <Button
-          className="nav-login mr-2"
           className="nav-btn"
           variant="info"
           onClick={() => history.push({ pathname: "/auth/login" })}
@@ -67,11 +55,6 @@ const Topbar = (props) => {
         user={user}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
-        profileIcon={profileIcon}
-        coinsIcon={coinsIcon}
-        exitIcon={exitIcon}
-        cartIcon={cartIcon}
-        first_name={first_name}
       />
     );
   };
@@ -98,7 +81,7 @@ const Topbar = (props) => {
   };
   return (
     <Navbar bg={bg} variant={variant} className="gifti-nav">
-      <Container fluid>
+      <Container fluid className="flex-wrap">
         <div className="navbar-nav flex-row order-first mb-2">
           <div className="nav-item">
             <Navbar.Brand
@@ -126,24 +109,8 @@ const Topbar = (props) => {
               itemTemplate={countryOptionTemplate}
             />
           </div>
-          <div className="nav-item ml-4 mt-2">
-            <InputGroup>
-              <FormControl
-                className="search-button"
-                placeholder="What are you looking for ?"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                size="40"
-              />
-              <InputGroup.Append>
-                <Button className="search-button-b" variant="light">
-                  <img src={searchIcon} alt="search-icon" />
-                </Button>
-              </InputGroup.Append>
-            </InputGroup>
-          </div>
         </div>
-        <div className="navbar-nav flex-lg-row gifti-nav-flex">
+        <div className="navbar-nav flex-lg-row gifti-nav-flex order-lg-last">
           <div className="nav-item mr-2">
             <Button className="nav-btn text-white">For Business</Button>{" "}
           </div>
@@ -155,10 +122,10 @@ const Topbar = (props) => {
           <div className="nav-item mr-2">
             {getProfile()}
           </div>
-          <div className="nav-item mr-2">
+          <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
               <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-              <span class="badge badge-warning" id="lblCartCount">
+              <span className="badge badge-warning" id="lblCartCount">
                 {" "}
                 1{" "}
               </span>
