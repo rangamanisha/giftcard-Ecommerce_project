@@ -10,7 +10,3 @@ export const getCountriesListAction = createAsyncThunk(
     return response;
   }
 );
-
-export const selectCountryAction = (payload) => {
-  return { type: "topbar/selectCountry", payload };
-};

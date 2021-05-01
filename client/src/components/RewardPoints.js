@@ -17,22 +17,23 @@ import {
   getConvertCreditsAction,
 } from "../actions/rewardpoints.actions";
 import { useDispatch, useSelector } from "react-redux";
+import Moment from "react-moment";
 import Modal from "./modal";
+import GiftModal from "./giftcardmodal";
+import LoadingBar from "react-top-loading-bar";
 
-const RewardPoints = () => {
+const RewardPoints = (props) => {
   const points = useSelector(getRewardPointsState);
   const dispatch = useDispatch();
   const points_data = points;
 
   const transactions = points_data.credits;
   const [modalShow, setModalShow] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
 
   useEffect(() => {
-    dispatch(getRewardPointsAction());
-    dispatch(getTransactionsAction());
-    if (points_data.message === "Gift card successfully converted to points.") {
-      setModalShow(true);
-    }
+    dispatch(getRewardPointsAction({}));
+    dispatch(getTransactionsAction({}));
   }, [dispatch, points_data.message]);
 
   const formik = useFormik({
@@ -45,8 +46,17 @@ const RewardPoints = () => {
     onSubmit: (data) => {
       dispatch(getConvertAction(data));
       dispatch(getRemainingAction(data));
-      dispatch(getRemainingAction(data));
       dispatch(getConvertCreditsAction(data));
+      if (
+        points_data.message === "Gift card successfully converted to points."
+      ) {
+        setModalShow(true);
+      } else if (
+        points_data.message === "Your gift card has already been redeemed"
+      ) {
+        console.log(points_data.message);
+        setModalShow(true);
+      }
     },
   });
 
@@ -54,8 +64,14 @@ const RewardPoints = () => {
     <>
       <Row>
         <Modal show={modalShow} onHide={() => setModalShow(false)} />
+        <GiftModal show={modalShow} onHide={() => setModalShow(false)} />
         <Col sm="7" className="pl-5 mt-5">
-          <Form onSubmit={formik.handleSubmit}>
+          <LoadingBar
+            color="#00807d"
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+          />
+          <Form onSubmit={formik.handleSubmit} onClick={() => setProgress(100)}>
             <p className="rewardspoints-font">
               Redeem your Mylist, Gifti Global or Hasaad Card
             </p>
@@ -114,10 +130,18 @@ const RewardPoints = () => {
             </thead>
             <tbody>
               {transactions && transactions.length > 0 ? (
-                transactions.map((transaction, i) => {
+                transactions.map((transaction) => {
                   return (
-                    <tr className="table-body-font" key={i}>
-                      <td className="font-date">transaction.created_at</td>
+                    <tr className="table-body-font">
+                      <td className="font-date">
+                        <Moment format="MMM Do,YYYY">
+                          {transaction.created_at}
+                        </Moment>
+                        <br />
+                        <Moment format="h:mm a">
+                          {transaction.created_at}
+                        </Moment>
+                      </td>
                       <td>{transaction.type}</td>
                       <td>{transaction.card_number}</td>
                       <td className="amount-color">

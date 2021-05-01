@@ -19,3 +19,8 @@ export const forgotpasswordAPI = (userData) => {
   const url = `${API_URL}/accounts/passwords/new/`;
   return apiCall(url, "POST", userData, null, false);
 };
+
+export const googleloginAPI = (userData) => {
+  const url = `${API_URL}/accounts/sessions/signin`;
+  return apiCall(url, "POST", userData, null, false);
+};

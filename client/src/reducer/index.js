@@ -1,12 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { AUTH_FEATURE_KEY, authReducer } from "./auth.reducer";
 import { topbarReducer, TOPBAR_FEATURE_KEY } from "./topbar.reducer";
+import { profileReducer, PROFILE__FEATURE_KEY } from "./profile.reducer";
 import { categoryReducer, CATEGORY_REDUCER } from "./category.reducer";
 import { brandsReducer, BRAND_REDUCER } from "./brands.reducer";
 import { giftCardsReducer, GIFTCARD_REDUCER } from "./giftCards.reducer";
-import { cartItemReducer, CART_ITEMS_REDUCER } from "./cart.reducer";
-
-import { profileReducer, PROFILE__FEATURE_KEY } from "./profile.reducer";
 import {
   useractiveReducer,
   USER_ACTIVE_FEATURE_KEY,
@@ -46,15 +44,13 @@ const store = configureStore({
     [CATEGORY_REDUCER]: categoryReducer,
     [BRAND_REDUCER]: brandsReducer,
     [GIFTCARD_REDUCER]: giftCardsReducer,
-    [CART_ITEMS_REDUCER]: cartItemReducer,
     [PROFILE__FEATURE_KEY]: profileReducer,
     [USER_ACTIVE_FEATURE_KEY]: useractiveReducer,
     [REWARDS_POINTS_FEATURE_KEY]: rewardpointsReducer,
   },
-  persistedState,
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-  preloadedState: {},
+  preloadedState: loadFromLocalStorage(),
 });
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;

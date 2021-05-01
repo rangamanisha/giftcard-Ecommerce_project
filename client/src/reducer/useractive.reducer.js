@@ -27,7 +27,7 @@ export const useractiveSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getuseractiveAction.pending, (state) => {
+      .addCase(getuseractiveAction.pending, (state, action) => {
         state.default = true;
       })
       .addCase(getuseractiveAction.fulfilled, (state, action) => {
@@ -37,7 +37,7 @@ export const useractiveSlice = createSlice({
           state.verified = response.data.user_email.verified;
         }
       })
-      .addCase(getuseractiveAction.rejected, (state) => {
+      .addCase(getuseractiveAction.rejected, (state, action) => {
         state.default = true;
       });
   },

@@ -36,7 +36,7 @@ export const rewardpointsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getRewardPointsAction.pending, (state) => {
+      .addCase(getRewardPointsAction.pending, (state, action) => {
         state.code = true;
       })
       .addCase(getRewardPointsAction.fulfilled, (state, action) => {
@@ -46,7 +46,7 @@ export const rewardpointsSlice = createSlice({
           state.total_credits = response.data.total_credits;
         }
       })
-      .addCase(getRewardPointsAction.rejected, (state) => {
+      .addCase(getRewardPointsAction.rejected, (state, action) => {
         state.code = true;
       })
       .addCase(getTransactionsAction.fulfilled, (state, action) => {
@@ -55,29 +55,33 @@ export const rewardpointsSlice = createSlice({
           state.credits = response.data.credits;
         }
       })
+      .addCase(getTransactionsAction.rejected, (state, action) => {})
       .addCase(getConvertAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.conversion_limit = response.data.conversion_limit;
         }
       })
+      .addCase(getConvertAction.rejected, (state, action) => {})
       .addCase(getRemainingAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.original_value = response.data.giftcard.original_value;
           state.remaining_value = response.data.giftcard.remaining_value;
+        } else if (response.code === 400) {
+          state.message = response.message;
         }
       })
+      .addCase(getRemainingAction.rejected, (state, action) => {})
       .addCase(getConvertCreditsAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.total_credits = response.data.total_credits;
           state.gc_value = response.data.gc_value;
           state.message = response.message;
-        } else if (response.code === 400) {
-          state.message = response.message;
         }
-      });
+      })
+      .addCase(getConvertCreditsAction.rejected, (state, action) => {});
   },
 });
 
