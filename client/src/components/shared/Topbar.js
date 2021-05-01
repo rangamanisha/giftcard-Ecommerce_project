@@ -111,9 +111,6 @@ const Topbar = (props) => {
             <span className="location">
               <small>I am gifting to</small>
             </span>
-            <span className="location">
-              <small>I am gifting to</small>
-            </span>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
               value={selectedCountry}
