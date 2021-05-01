@@ -6,3 +6,17 @@ export const allOrderApiCall = (order) => {
     return apiCall(url, 'GET');
 }
 
+export const processOrderApiCall =(order)=>{
+    const url = `${API_URL}/payments/process_order_after_redirect?order_id=${order.order_id}`;
+    return apiCall(url, 'POST',order);
+}
+
+export const orderDetailsApiCall = (order) =>{
+    const url = `${API_URL}/orders/${order.order_id}?image_size=${order.image_size}`;
+    return apiCall(url,'GET');
+}
+
+export const failedOrderApiCall = (order) =>{
+    const url = `${API_URL}/payments/failed_order_after_redirect ?order_id=${order.order_id}`;
+    return apiCall(url,'POST',order)
+}

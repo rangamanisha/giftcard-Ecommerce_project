@@ -7,7 +7,7 @@ import AllCards from './components/AllCards';
 import AllOrder from './components/Orders/AllOrder';
 import {BrowserRouter as Router, Redirect, Route,Switch } from "react-router-dom";
 // import Cart from './components/Cart';
-
+import Confirm_Order from './components/Orders/confirm_order';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AllFeaturedCards from './components/AllFeaturedCards';
@@ -42,6 +42,7 @@ function App() {
           <Route path="/order/allorder" component ={AllOrder} exact/>
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
+          <Route path ="/order/confirm_order" component ={Confirm_Order} exact/>
           {/* <Route path="/conditionsPage" component={ConditionsPage} exact />
           <Route path="/contact" component={Contact} exact /> */}
           {/* <Route path="/enquiryPage" component={EnquiryPage} exact />

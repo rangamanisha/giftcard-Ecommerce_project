@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {allOrderApiCall} from '../services/orders.service';
+import {allOrderApiCall, orderDetailsApiCall,failedOrderApiCall,processOrderApiCall } from '../services/orders.service';
 
 export const AllorderAction = createAsyncThunk('orders', async(payload, thunkAPI) => {
     const request = {
@@ -7,9 +7,33 @@ export const AllorderAction = createAsyncThunk('orders', async(payload, thunkAPI
         image_size : payload.image_size,
         limit:payload.limit,
         offset:payload.offset
-
     }
     const response = await allOrderApiCall(request);
+    console.log(response);
+    return response;
+});
+export const ProcessOrderAction = createAsyncThunk('ProcessOrder', async(payload, thunkAPI) => {
+    const request = {
+        order_id:payload.order_id
+    }
+    const response = await processOrderApiCall(request);
+    console.log(response);
+    return response;
+});
+export const OrderDetailsAction = createAsyncThunk('OrderDetail', async(payload, thunkAPI) => {
+    const request = {
+        order_id:payload.order_id,
+        image_size:payload.image_size
+    }
+    const response = await orderDetailsApiCall(request);
+    console.log(response);
+    return response;
+});
+export const FailedOrderAction = createAsyncThunk('FailedOrder', async(payload, thunkAPI) => {
+    const request = {
+        order_id:payload.order_id
+    }
+    const response = await failedOrderApiCall(request);
     console.log(response);
     return response;
 });

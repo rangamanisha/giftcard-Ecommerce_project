@@ -37,7 +37,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Date</span>
-                {rowData.date}
+               <p className ="text_order"> {rowData.date}</p>
             </React.Fragment>
         );
     }
@@ -46,7 +46,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Order No</span>
-                {rowData.orderid}
+                <p className ="text_order">{rowData.orderid}</p> 
             </React.Fragment>
         );
     }
@@ -55,7 +55,7 @@ const AllOrder = ()=>{
         return (
             <React.Fragment>
                 <span className="p-column-title">Amount Paid</span>
-                {rowData.payment_currency_amount}
+                <p className ="text_order">{rowData.payment_currency} {rowData.payment_currency_amount}</p>
             </React.Fragment>
         );
     }
