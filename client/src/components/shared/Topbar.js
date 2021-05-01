@@ -11,6 +11,10 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import Container from "react-bootstrap/Container";
 import UserProfileDropDown from "../UserProfileDropDown";
+import exitIcon from '../../assets/exit.svg';
+import coinsIcon from '../../assets/coins.svg';
+import cartIcon from '../../assets/cart.svg';
+import userIcon from '../../assets/uprofile.svg';
 
 const Topbar = (props) => {
   const {
@@ -55,6 +59,10 @@ const Topbar = (props) => {
         user={user}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
+        profileIcon={userIcon}
+        coinsIcon={coinsIcon}
+        exitIcon={exitIcon}
+        cartIcon={cartIcon}
       />
     );
   };

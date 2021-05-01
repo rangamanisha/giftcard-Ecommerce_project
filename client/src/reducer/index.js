@@ -48,10 +48,9 @@ const store = configureStore({
     [USER_ACTIVE_FEATURE_KEY]: useractiveReducer,
     [REWARDS_POINTS_FEATURE_KEY]: rewardpointsReducer,
   },
-  persistedState,
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-  preloadedState: {},
+  preloadedState: loadFromLocalStorage(),
 });
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;

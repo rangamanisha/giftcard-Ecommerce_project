@@ -17,7 +17,7 @@ const UserProfileDropDown = (props) => {
   
 
     return (
-      <Dropdown className="pt-1">
+      <Dropdown>
       <Dropdown.Toggle variant="info" className="nav-btn">
         <span>
           <img src={userLoginIcon} alt="Icon" className="mr-2" />
