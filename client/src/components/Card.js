@@ -1,18 +1,26 @@
-import React from 'react';
-import ReactBootstrap, { Card, Button, Col, Image, Container, Row, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import GiftiGlobal from '../assets/Gifti-Global.png';
-import { ReactComponent as Country } from '../assets/country.svg';
-import { ReactComponent as Target } from '../assets/target.svg';
-import { ReactComponent as Giftcard } from '../assets/gift-card.svg';
-import StartingGift from '../assets/starting-gift.svg';
-import StartingGift2 from '../assets/start-giftting2.svg';
-import Appleitunes from '../assets/Appleitunes.png';
-import Asec from '../assets/5asec.png';
-import Careem from '../assets/Careem.png';
-import Ace from '../assets/Ace.png';
-import {useHistory} from 'react-router-dom';
+import React from "react";
+import ReactBootstrap, {
+  Card,
+  Button,
+  Col,
+  Image,
+  Container,
+  Row,
+  Form,
+} from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import GiftiGlobal from "../assets/Gifti-Global.png";
+import { ReactComponent as Country } from "../assets/country.svg";
+import { ReactComponent as Target } from "../assets/target.svg";
+import { ReactComponent as Giftcard } from "../assets/gift-card.svg";
+import StartingGift from "../assets/starting-gift.svg";
+import StartingGift2 from "../assets/start-giftting2.svg";
+import Appleitunes from "../assets/Appleitunes.png";
+import Asec from "../assets/5asec.png";
+import Careem from "../assets/Careem.png";
+import Ace from "../assets/Ace.png";
+import { useHistory } from "react-router-dom";
 
 const card = () => {
   return (
@@ -23,19 +31,20 @@ const card = () => {
           <br />
           Every Gift Meaningful
         </p>
-        <p style={{ marginLeft: '75px' }}>
+        <p style={{ marginLeft: "75px" }}>
           Treat yourself or send customisable e-gift cards with a<br />
           selection of +4,000 brands in +100 countries
         </p>
-        <div className="row" style={{ marginLeft: '75px' }}>
+        <div className="row" style={{ marginLeft: "75px" }}>
           <Button className="custom-button mr-sm-3">
-            Start Gifiting&nbsp;<FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+            Start Gifiting&nbsp;
+            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>
           <Button variant="outline-secondary">How it works</Button>
         </div>
         <img src={GiftiGlobal} className="card-image" alt="Gifti-Global" />
       </div>
-      <div className="row mt-5" style={{ marginLeft: '112px' }}>
+      <div className="row mt-5" style={{ marginLeft: "112px" }}>
         <Country className="mr-sm-3"></Country>
         <small className="custom-font">
           Select a country and browse e-gift cards within 4,000+ brands
@@ -68,18 +77,30 @@ const card = () => {
               <Form.Control placeholder="" />
             </Col>
           </Row>
-          <Button variant="info" size="md" className="mt-5" style={{ marginLeft: '330px' }} onClick={() => history.pushState('/allcards')}>
+          <Button
+            variant="info"
+            size="md"
+            className="mt-5"
+            style={{ marginLeft: "330px" }}
+            onClick={() => history.pushState("/allcards")}
+          >
             Browse Gifts
-          </Button>{' '}
+          </Button>{" "}
         </Form>
         <img src={StartingGift2} className="startgiftimg" alt="Icon" />
       </div>
       <div className="cardgifiti-card mt-5">
-        <p className="giftiallcard-text mt-5">Brands recommended for you in the UAE</p>
-        <div style={{ marginLeft: '130px' }}>
+        <p className="giftiallcard-text mt-5">
+          Brands recommended for you in the UAE
+        </p>
+        <div style={{ marginLeft: "130px" }}>
           <img src={Careem} className="ml-sm-5 imgcards mt-5" alt="Careem" />
           <img src={Asec} className="ml-sm-5 imgcards mt-5" alt="Asec" />
-          <img src={Appleitunes} className="ml-sm-5 imgcards mt-5" alt="Appleitunes" />
+          <img
+            src={Appleitunes}
+            className="ml-sm-5 imgcards mt-5"
+            alt="Appleitunes"
+          />
           <img src={Ace} className="ml-sm-5 imgcards mt-5" alt="Ace" />
         </div>
       </div>

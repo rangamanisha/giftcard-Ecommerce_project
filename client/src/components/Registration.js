@@ -1,17 +1,17 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Emailicon from '../assets/Email-icon.svg';
-import Usericon from '../assets/User-icon.svg';
-import Passwordicon from '../assets/Password-icon.svg';
-import { signupAction } from '../actions/auth.actions';
-import { getAuthState } from '../reducer/auth.reducer';
-import { useFormik } from 'formik';
-import { useHistory } from 'react-router';
-import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Emailicon from "../assets/Email-icon.svg";
+import Usericon from "../assets/User-icon.svg";
+import Passwordicon from "../assets/Password-icon.svg";
+import { signupAction } from "../actions/auth.actions";
+import { getAuthState } from "../reducer/auth.reducer";
+import { useFormik } from "formik";
+import { useHistory } from "react-router";
+import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      password_confirmation: ''
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
     },
 
     validationSchema: Yup.object({
@@ -32,17 +32,17 @@ const Signup = () => {
       last_name: Yup.string().min(2).max(200).required(),
       email: Yup.string().min(2).max(200).email().required(),
       password: Yup.string().min(2).max(200).required(),
-      password_confirmation: Yup.string().min(2).max(200).required()
+      password_confirmation: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
-      console.log('data ', data);
+      console.log("data ", data);
       dispatch(signupAction(data));
-    }
+    },
   });
 
   useEffect(() => {
     if (state.signupSuccess) {
-      history.push({ pathname: '/' });
+      history.push({ pathname: "/" });
     }
   }, [state.signupSuccess, history]);
 
@@ -57,7 +57,10 @@ const Signup = () => {
 
           <Form onSubmit={formik.handleSubmit} className="user">
             <div className="row">
-              <Form.Group controlId="formBasicText" className="singup-input mr-sm-3 icons_login">
+              <Form.Group
+                controlId="formBasicText"
+                className="singup-input mr-sm-3 icons_login"
+              >
                 <Form.Control
                   size="md"
                   type="text"
@@ -69,7 +72,10 @@ const Signup = () => {
                 />
                 <img src={Usericon} alt="Icon" className="icon_img" />
               </Form.Group>
-              <Form.Group controlId="formBasiclast-name" className="singup-inputfield mr-sm-3">
+              <Form.Group
+                controlId="formBasiclast-name"
+                className="singup-inputfield mr-sm-3"
+              >
                 <Form.Control
                   size="lg"
                   type="text"
@@ -86,7 +92,10 @@ const Signup = () => {
               <p className="validation-messages">{formik.errors.first_name}</p>
             ) : null}
 
-            <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
+            <Form.Group
+              controlId="formBasicEmail"
+              className="w-75 mx-auto icons_login"
+            >
               <Form.Control
                 size="md"
                 type="email"
@@ -97,13 +106,15 @@ const Signup = () => {
                 name="email"
               />
               <img src={Emailicon} alt="Icon" className="icon_img" />
-              <img src={Emailicon} alt="Icon" className="icon_img" />
             </Form.Group>
             {formik.errors.email ? (
               <p className="validation-messages">{formik.errors.email}</p>
             ) : null}
 
-            <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
+            <Form.Group
+              controlId="formBasicPassword"
+              className="w-75 mx-auto icons_login"
+            >
               <Form.Control
                 size="lg"
                 type="password"
@@ -118,7 +129,10 @@ const Signup = () => {
             {formik.errors.password ? (
               <p className="validation-messages">{formik.errors.password}</p>
             ) : null}
-            <Form.Group controlId="formBasic-confirmPassword" className="w-75 mx-auto icons_login">
+            <Form.Group
+              controlId="formBasic-confirmPassword"
+              className="w-75 mx-auto icons_login"
+            >
               <Form.Control
                 size="lg"
                 type="password"
@@ -131,13 +145,20 @@ const Signup = () => {
               <img src={Passwordicon} alt="Icon" className="icon_img" />
             </Form.Group>
             {formik.errors.password_confirmation ? (
-              <p className="validation-messages">{formik.errors.password_confirmation}</p>
+              <p className="validation-messages">
+                {formik.errors.password_confirmation}
+              </p>
             ) : null}
             {state.errors && state.errors.length ? (
-              <p className="validation-messages">{state.errors.join('\n')}</p>
+              <p className="validation-messages">{state.errors.join("\n")}</p>
             ) : null}
 
-            <Button className="btn-custom mt-3" variant="info" size="lg" type="submit">
+            <Button
+              className="btn-custom mt-3"
+              variant="info"
+              size="lg"
+              type="submit"
+            >
               Sign up
             </Button>
 
@@ -153,10 +174,11 @@ const Signup = () => {
                   </td>
                   <td
                     style={{
-                      width: '1px',
-                      padding: '0 10px',
-                      whiteSpace: 'nowrap'
-                    }}>
+                      width: "1px",
+                      padding: "0 10px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
                     or sign up with
                   </td>
                   <td>

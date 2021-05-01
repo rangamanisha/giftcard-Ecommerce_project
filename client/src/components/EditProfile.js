@@ -1,9 +1,9 @@
-import React from 'react';
-import Tab from 'react-bootstrap/Tab';
-import UserProfile from './UserProfile';
-import ResetPassword from './ResetPassword';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
+import React from "react";
+import Tab from "react-bootstrap/Tab";
+import UserProfile from "./UserProfile";
+import ResetPassword from "./ResetPassword";
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
 
 const Editprofile = () => {
   return (

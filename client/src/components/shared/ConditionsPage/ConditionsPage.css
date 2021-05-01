@@ -46,8 +46,8 @@
   font: normal 10px "Nunito-SemiBold", sans-serif;
 
   position: relative;
-    display: block;
-    padding: .5rem 0rem;
-    background-color: #fff;
+  display: block;
+  padding: 0.5rem 0rem;
+  background-color: #fff;
   /* margin-bottom: 15px; */
 }

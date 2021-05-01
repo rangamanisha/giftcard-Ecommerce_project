@@ -1,6 +1,6 @@
-import { apiCall, API_URL } from './api';
+import { apiCall, API_URL } from "./api";
 
 export const getprofileAPI = () => {
   const url = `${API_URL}/user`;
-  return apiCall(url, 'GET');
+  return apiCall(url, "GET");
 };

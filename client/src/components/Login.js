@@ -1,63 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Usericon from '../assets/User-icon.svg';
-import Passwordicon from '../assets/Password-icon.svg';
-import Googleicon from '../assets/Google-icon.svg';
-import Facebookicon from '../assets/Facebook-icon.svg';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import Alert from 'react-bootstrap/Alert';
-import { getAuthState } from '../reducer/auth.reducer';
-import { loginAction } from '../actions/auth.actions';
-import { useHistory } from 'react-router';
-import Fade from 'react-bootstrap/Fade';
-import { Link } from 'react-router-dom';
-import checkbox from '../assets/checkbox.svg';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Usericon from "../assets/User-icon.svg";
+import Passwordicon from "../assets/Password-icon.svg";
+import Facebookicon from "../assets/Facebook-icon.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Alert from "react-bootstrap/Alert";
+import { getAuthState } from "../reducer/auth.reducer";
+import { loginAction, googlesigninAction } from "../actions/auth.actions";
+import { useHistory } from "react-router";
+import Fade from "react-bootstrap/Fade";
+import { Link } from "react-router-dom";
+import checkbox from "../assets/checkbox.svg";
+import GoogleLogin from "react-google-login";
 
 const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
-
-  const [message, setMessage] = useState('');
-
   const [isValid, setIsValid] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  const [message, setMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().min(2).max(200).email().required(),
-      password: Yup.string().min(2).max(200).required()
+      password: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
-    }
+    },
   });
 
   useEffect(() => {
     if (state.isAuthenticated) {
-      history.push({ pathname: '/' });
-    } else {
-      setIsValid('no');
-      window.setTimeout(() => {
-        setVisible(false);
-      }, 1000000);
+      history.push({ pathname: "/" });
     }
 
     if (state.reset) {
       setIsValid(true);
-      setMessage('Your Password has been successfully updated.');
+      setMessage("Your Password has been successfully updated.");
       window.setTimeout(() => {
         setVisible(false);
       }, 3000);
     }
   }, [state.isAuthenticated, state.reset, history]);
+
+
+  const responseGoogle = (response) => {
+    debugger;
+    const accessToken = response.accessToken;
+     console.log(accessToken);
+      dispatch(googlesigninAction({accessToken}));
+    };
 
   return (
     <>
@@ -65,7 +67,12 @@ const Login = () => {
         {isValid ? (
           <Fade>
             <Alert variant="info" transition={visible}>
-              <img src={checkbox} className="mr-3" style={{ width: '30px' }} alt="Icon" />
+              <img
+                src={checkbox}
+                className="mr-3"
+                style={{ width: "30px" }}
+                alt="Icon"
+              />
               {message}
             </Alert>
           </Fade>
@@ -80,7 +87,10 @@ const Login = () => {
         </p>
 
         <Form onSubmit={formik.handleSubmit} className="user">
-          <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
+          <Form.Group
+            controlId="formBasicEmail"
+            className="w-75 mx-auto icons_login"
+          >
             <Form.Control
               size="md"
               type="email"
@@ -91,14 +101,16 @@ const Login = () => {
               name="email"
             />
             <img src={Usericon} alt="Icon" className="icon_img" />
-            <img src={Usericon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (
             <p className="validation-messages">{formik.errors.email}</p>
           ) : null}
 
-          <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
+          <Form.Group
+            controlId="formBasicPassword"
+            className="w-75 mx-auto icons_login"
+          >
             <Form.Control
               size="md"
               type="password"
@@ -109,7 +121,6 @@ const Login = () => {
               name="password"
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
-            <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.password ? (
@@ -117,7 +128,7 @@ const Login = () => {
           ) : null}
 
           <div className="row">
-            <Form.Group style={{ marginLeft: '77px' }}>
+            <Form.Group style={{ marginLeft: "77px" }}>
               <Form.Check
                 type="radio"
                 label="Remember Me"
@@ -125,7 +136,7 @@ const Login = () => {
                 id="formHorizontalRadios1"
               />
             </Form.Group>
-            <Form.Group style={{ marginLeft: '162px' }}>
+            <Form.Group style={{ marginLeft: "162px" }}>
               <Link className="link-color" to="/auth/forgotpassword">
                 Forgot me?
               </Link>
@@ -133,10 +144,15 @@ const Login = () => {
           </div>
 
           {state.errors && state.errors.length ? (
-            <p className="validation-messages">{state.errors.join('\n')}</p>
+            <p className="validation-messages">{state.errors.join("\n")}</p>
           ) : null}
 
-          <Button className="btn-custom mt-3" variant="info" size="lg" type="Submit">
+          <Button
+            className="btn-custom mt-3"
+            variant="info"
+            size="lg"
+            type="Submit"
+          >
             Login to Continue
           </Button>
 
@@ -152,11 +168,12 @@ const Login = () => {
                 </td>
                 <td
                   style={{
-                    width: '1px',
-                    padding: '0 10px',
-                    whiteSpace: 'nowrap'
+                    width: "1px",
+                    padding: "0 10px",
+                    whiteSpace: "nowrap",
                   }}
-                  className="login-bottom-text">
+                  className="login-bottom-text"
+                >
                   or sign in with
                 </td>
                 <td>
@@ -167,12 +184,17 @@ const Login = () => {
           </table>
 
           <div className="row mt-4">
-            <Button variant="outline-light" className="google-button mr-sm-3">
-              <img src={Googleicon} style={{ width: '24px', height: '50px' }} alt="Icon" />
-            </Button>
-            <Button variant="outline-light" className="facebook-button mr-sm-3">
-              {' '}
-              <img src={Facebookicon} style={{ width: '50px', height: '50px' }} alt="Icon" />
+            <GoogleLogin variant="outline-light" className="google-button mr-sm-3" clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}>
+            </GoogleLogin>
+            <Button variant="outline-light" className="facebook-button mr-sm-3" provider='facebook'
+              appId='512745573060985'>
+              <img
+                src={Facebookicon}
+                style={{ width: "50px", height: "50px" }}
+                alt="Icon"
+              />
             </Button>
           </div>
         </Form>

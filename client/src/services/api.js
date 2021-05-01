@@ -6,31 +6,31 @@ export const apiCall = async (url, method, data, headers, isAuthenticatedReq = t
   if (isAuthenticatedReq && !accessToken) {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = '/';
+    window.location.href = "/";
   }
 
   const requestHeaders = isAuthenticatedReq
     ? new Headers({
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
-        ...headers
+        ...headers,
       })
-    : new Headers({ 'Content-Type': 'application/json', ...headers });
+    : new Headers({ "Content-Type": "application/json", ...headers });
 
   const config = {
     method,
     headers: requestHeaders,
-    body: data && JSON.stringify(data)
+    body: data && JSON.stringify(data),
   };
 
   const result = await fetch(url, config);
 
   if (result.status === 404) {
-    throw new Error('Not Found');
+    throw new Error("Not Found");
   }
 
   if (result.status === 403) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   if (result.status === 401) {

@@ -1,7 +1,10 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getprofileAPI } from '../services/profile.service';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getprofileAPI } from "../services/profile.service";
 
-export const getprofileListAction = createAsyncThunk('profile/get', async () => {
-  const response = await getprofileAPI();
-  return response;
-});
+export const getprofileListAction = createAsyncThunk(
+  "profile/get",
+  async (payload, thunkAPI) => {
+    const response = await getprofileAPI();
+    return response;
+  }
+);

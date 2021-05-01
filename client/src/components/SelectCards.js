@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import Footer from './Footer';
-import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
+import React from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import plusicon from '../assets/+.svg';
@@ -13,100 +12,80 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBrandsState } from '../reducer/brands.reducer';
 import { giftCardsUnitAction, getConversionRateAction, getPaymentCurrencyAction } from '../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../reducer/giftCards.reducer';
-import { get, map, isEmpty, isUndefined } from 'lodash';
+import { get, map, isEmpty, isUndefined, filter, assign, isEqual } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import { cartTotalCountAction, cartItemAction } from '../actions/cart.actions';
-import { getCartItemsState } from '../reducer/cart.reducer';
+import { getCartItemsState, cartAction } from '../reducer/cart.reducer';
 
 
 const SelectCards = () => {
-
     const dispatch = useDispatch();
     const history = useHistory();
     const [eventKey11, seteventkey] = useState(1);
     const [tempvisible, setTempVisible] = useState(true);
-    const [count, setcount] = useState(0);
     const giftunitState = useSelector(getGiftcardsState);
     const productAndTermState = useSelector(getBrandsState);
     const cartState = useSelector(getCartItemsState);
     const card = giftunitState.selectedBrand;
     const payment = giftunitState.selectedCountry;
-    // const carddata = 
-    // const [denomination, setDenomination] = useState(0);
-
+    const count = get(cartState, 'count')
     const [rate, setRate] = useState(0);
+    const [gift_to, setGiftTo] = useState("myself")
+    const selectedDenomination = get(card, 'selectedDenomination')
     const handleSelect = (eventKey1) => {
         seteventkey(eventKey1);
     }
-    // const addtocart=()=>{
-
-    // }
-    const changeHandler = () => {
-        setTempVisible(!tempvisible)
+    const handleGiftTo = (e) => {
+        setGiftTo(e.target.value)
     }
     const increment = () => {
-        count >= 5 ? setcount(5) : setcount(count + 1);
-        const inc = parseInt(card.selectedDenomination * (count + 1))
-        setRate(inc)
+        if (count >= 5) {
+            return null
+        }
+        else {
+            dispatch(cartAction.increaseCount())
+            const inc = parseFloat(card.selectedDenomination * (count + 1))
+            setRate(inc)
+        }
     }
     const decrement = () => {
-        count > 1 ? setcount(count - 1) : setcount(1)
-        const dec = parseInt(card.selectedDenomination * (count - 1))
-        setRate(dec)
+        if (count == 0) {
+            return null
+        }
+        else {
+            dispatch(cartAction.decreaseCount())
+            const dec = parseFloat(card.selectedDenomination * (count - 1))
+            setRate(dec)
+        }
     }
     const handleDenomination = (d) => {
-        dispatch(giftCardsAction.selectDenomination(d));
+        dispatch(giftCardsAction.selectDenomination(parseFloat(d)));
         setRate(d);
 
     }
+    React.useEffect(() => {
+        if (isEmpty(card) || isUndefined(card)) {
+            history.push('/')
+        }
+        dispatch(cartAction.setCountZero())
 
-    useEffect(() => {
-        setcount(1)
-
-    }, [card.denominations])
-    // React.useEffect(() => {
-    //     if(isEmpty(card)){
-    //         history.push('/')
-    //     }
-    //     dispatch(productDescriptionAction({
-    //         currency:1,
-    //         brand_id:451
-
-
-    //     }))
-
-    // }, [productAndTermState.brand_id])
+    }, [get(card, 'id'), get(card, 'selectedDenomination'), dispatch])
 
     React.useEffect(() => {
         dispatch(termBrandAction({
             currency: 1,
             id: get(card, 'id')
-
         }))
-        // const unSubscribe = () => {
-        //     dispatch(giftCardsAction.removeSelectedCard())
-        // }
-        // return unSubscribe
-    }, [get(card, 'id')])
-
-    React.useEffect(() => {
         dispatch(descriptionBrandAction({
             currency: 1,
             program_id: 1,
             id: get(card, 'id'),
             image_size: "medium_rectangle",
             image_type: "Color",
-
-
+        }))
+        dispatch(getConversionRateAction({
+            brand_id: get(card, 'id')
         }))
     }, [get(card, 'id')])
-
-    React.useEffect(() => {
-        dispatch(getConversionRateAction({
-            brand_id: 451
-        }))
-
-    }, [])
 
     React.useEffect(() => {
         dispatch(getPaymentCurrencyAction({
@@ -124,30 +103,22 @@ const SelectCards = () => {
         }))
     }, [giftunitState.giftunit_id, dispatch])
 
-    const handleCart = () => {
-        const accessToken = localStorage.getItem('access_token');
-        if (accessToken === 'undefined') {
-            return history.push('auth/login')
-
+    const saveTocart = () => {
+        const itemInCart = filter(get(cartState, 'lineItems'), { id: get(card, 'id') })[0]
+        const selectedBrand = assign({}, card, { quantity: count, giftingTo: gift_to})
+        if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
+            dispatch(
+                dispatch(cartAction.updateLineItem(selectedBrand))
+            )
+        }
+        else if (isEqual(itemInCart, selectedBrand)) {
+            return null
         }
         else {
-            dispatch(cartItemAction({
-                "brand_id": card.id,
-                "quantity": 1,
-                "currency": "AED",
-                "giftcard_value": 2000,
-                "card_value_aed": 2000,
-                "isforself": true,
-                "country_id": payment.id
-
-            }))
+            dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count, giftingTo: gift_to })))
         }
     }
-
-
-
     return (
-
         <>
             <div className="row">
                 <img src={get(card, 'images.color.medium_rectangle')} alt="AmazonMedium" className="select-card-size1 ml-5 mt-5 col-4" />
@@ -156,15 +127,12 @@ const SelectCards = () => {
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
                         {map(get(productAndTermState, 'description.brand.denominations'), d =>
-                            <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{d}</Button>)}
-                        {/* <Button variant="outline-info" className="mr-sm-3 select-card-button">100</Button>
-                        <Button variant="outline-info" className="mr-sm-3 select-card-button">250</Button>
-                        <Button variant="outline-info" className="mr-sm-3 select-card-button">500</Button> */}
+                            <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{parseFloat(d)}</Button>)}
                     </div>
                     <p className="select-card-text mt-5">Gifting for</p>
                     <div className="row mr-sm-3 mt-3 mb-3">
-                        <Form.Check type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" onClick={changeHandler} checked={tempvisible == true} />
-                        <Form.Check type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" onClick={changeHandler} />
+                        <Form.Check value="myself" type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" checked={gift_to === "myself"} onClick={e => handleGiftTo(e)}/>
+                        <Form.Check value="someone else" type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" checked={gift_to === "someone else"} onClick={e => handleGiftTo(e)}/>
                     </div>
                     {tempvisible == false ? (<GiftGiftCard />) : ''}
                     <div>
@@ -201,10 +169,10 @@ const SelectCards = () => {
                     <h4 className="ml-sm-2 amttext2">{rate} {get(payment, 'unit_name_short')}</h4>
                     <div className="col mr-5">
                         <ButtonGroup className="mr-3" aria-label="Second group">
-                            <Button variant="light" onClick={decrement}> <img src={minusicon} /></Button> <Button variant="light">{count}</Button> <Button variant="light" onClick={increment}> <img src={plusicon} /></Button>
+                            <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={decrement}> <img src={minusicon} /></Button> <Button disabled variant="light">{count}</Button> <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
-                        <Button className="nav-btn mr-2 text-white" onClick={handleCart}>Add to cart</Button>{' '}
-                        <Button className="nav-btn mr-2" onClick={() => history.push('cart')} variant="info">Buy Now</Button>{' '}
+                        <Button className="nav-btn mr-2 text-white" onClick={saveTocart}>Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2" onClick={() => {saveTocart();history.push('cart')}} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
             </Footer1>

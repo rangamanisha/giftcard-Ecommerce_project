@@ -14,16 +14,15 @@
   line-height: 180%;
 }
 .help-faq {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 }
 .help-faq > h5 {
   font-weight: 600;
-  font-size:medium;
+  font-size: medium;
 }
 .help-faq > P {
   font-weight: 400;
-  font-size:90%;
-
+  font-size: 90%;
 }
 
 .frequently-asked-container {
@@ -49,7 +48,7 @@
   padding-right: 0px;
   padding-left: 0px;
   color: #636d79;
-  font: 16px 'Roboto-Regular';
+  font: 16px "Roboto-Regular";
   text-decoration: none;
   background-color: #fff;
   border: none;
@@ -79,14 +78,14 @@
 }
 .help-question {
   text-align: left;
-  font: normal normal 600 18px/26px Semiblod, 'Open Sans';
+  font: normal normal 600 18px/26px Semiblod, "Open Sans";
   letter-spacing: 0.68px;
   color: #1e2022;
   opacity: 1;
 }
 .help-content {
   text-align: left;
-  font: normal normal normal 18px/26px 'Open Sans';
+  font: normal normal normal 18px/26px "Open Sans";
   letter-spacing: 0.68px;
   color: #1e2022;
   opacity: 1;
@@ -98,7 +97,7 @@
 }
 .parah-style {
   text-align: left;
-  font: normal normal bold 18px/24px 'Open Sans';
+  font: normal normal bold 18px/24px "Open Sans";
   letter-spacing: 0px;
   color: #636d79;
   opacity: 1;
@@ -130,7 +129,7 @@
 }
 
 .faq-list {
-  font-family:'Roboto-Regular';
+  font-family: "Roboto-Regular";
   font-size: small;
-  opacity: 0.6; 
+  opacity: 0.6;
 }
