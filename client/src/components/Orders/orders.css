@@ -51,6 +51,21 @@ color: #000000;
 opacity: 1;
 font-size: 30px;
 }
+.text_card
+{
+    letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+letter-spacing: 0px;
+color: #111111;
+opacity: 1;
+font:11px;
+padding: 11px;
+}
+.image_style
+{
+    border-radius: 20px 20px 0px 0px !important;
+    width:100%;
+}
 .send_to {
 
     text-align: left;

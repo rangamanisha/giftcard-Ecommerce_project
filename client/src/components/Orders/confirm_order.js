@@ -33,7 +33,8 @@ const Confirm_Order = ()=>{
             <hr></hr>
             <Row>
                 <Col sm={3} lg={3}>
-                <Image src={amazon} rounded style={{ width: '100%', height: '90%' }} />
+                <Image src={amazon} rounded className ="image_style"/>
+                <p className ="text_card">Amazon eGift Card</p>
               </Col>
                 <Col sm={6}>
                     <div className="d-flex flex-column pt-2">
