@@ -6,17 +6,18 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
-import "primereact/resources/themes/saga-blue/theme.css";
-import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
-import Container from "react-bootstrap/Container";
 import UserProfileDropDown from "../UserProfileDropDown";
 import exitIcon from '../../assets/exit.svg';
 import coinsIcon from '../../assets/coins.svg';
 import cartIcon from '../../assets/cart.svg';
 import userIcon from '../../assets/uprofile.svg';
 
+import Container from "react-bootstrap/Container";
+import {getCartItemsState} from '../../reducer/cart.reducer'
+import { useSelector } from "react-redux";
+
 const Topbar = (props) => {
+  const cartState = useSelector(getCartItemsState)
   const {
     bg,
     variant,

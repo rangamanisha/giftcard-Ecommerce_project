@@ -20,8 +20,8 @@ import Footer from "./components/shared/Footer";
 import RewardPoints from "./components/RewardPoints";
 import Checkout from "./components/checkout";
 import StepsDemo from "./components/stepper";
-import EmptyCart from "./components/shared/EmptyCartPage/EmptyCart";
-import Cart from "./components/shared/Cart/Cart";
+import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (
