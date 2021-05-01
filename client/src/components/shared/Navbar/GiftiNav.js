@@ -5,11 +5,11 @@ import Logo from "../../../assets/logo.svg";
 import Search from "../../../assets/search.svg";
 import Shoppingcart from "../../../assets/shopping-cart.svg";
 import UserLogin from "../../../assets/User-login.svg";
-import Location from "../../../assets/location.svg";
-import Profile from "../../../assets/uprofile.svg";
 import Cart from "../../../assets/cart.svg";
 import Exit from "../../../assets/exit.svg";
 import Coins from "../../../assets/coins.svg";
+import Location from "../../../assets/location.svg";
+import Profile from "../../../assets/uprofile.svg";
 import { getTopBarState } from "../../../reducer/topbar.reducer";
 import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
@@ -35,19 +35,22 @@ const GiftiNav = () => {
 
   return (
     <Topbar
-      bg={bg}
-      variant={variant}
-      first_name={authState.first_name}
-      logoIcon={Logo}
-      locationIcon={Location}
-      cartIcon={Cart}
-      exitIcon={Exit}
-      coinsIcon={Coins}
-      profileIcon={Profile}
-      country={selectedCountry}
-      countriesList={countries}
-      showLogin={!authState.isAuthenticated}
-      onCountrySelected={countryChanged}
+    bg={bg}
+    variant={variant}
+    first_name={authState.first_name}
+    logoIcon={Logo}
+    locationIcon={Location}
+    cartIcon={Cart}
+    exitIcon={Exit}
+    coinsIcon={Coins}
+    profileIcon={Profile}
+    country={selectedCountry}
+    countriesList={countries}
+    searchIcon={Search}
+    userLoginIcon={UserLogin}
+    shoppingCartIcon={Shoppingcart}
+    showLogin={!authState.isAuthenticated}
+    onCountrySelected={countryChanged}
     />
   );
 };

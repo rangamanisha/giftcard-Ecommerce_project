@@ -28,6 +28,13 @@ const Topbar = (props) => {
     shoppingCartIcon,
     showLogin,
     onCountrySelected,
+    profileIcon,
+    coinsIcon,
+    exitIcon,
+    cartIcon,
+    first_name,
+    handleClick,
+    rewardpoints
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
@@ -60,6 +67,11 @@ const Topbar = (props) => {
         user={user}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
+        profileIcon={profileIcon}
+        coinsIcon={coinsIcon}
+        exitIcon={exitIcon}
+        cartIcon={cartIcon}
+        first_name={first_name}
       />
     );
   };
