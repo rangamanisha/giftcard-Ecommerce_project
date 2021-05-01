@@ -2,11 +2,8 @@ import React from "react";
 import Cards from "./Cards";
 import StartGifting from "./StartGifting";
 import RecommandedCards from "./RecommandedCards";
-import { useHistory } from "react-router";
 import AllGiftCard from "./AllGiftCard";
 import AllFeaturedCards from "./AllFeaturedCards";
-import { giftcardUnitAction } from "../actions/category.actions";
-import { useDispatch, useSelector } from "react-redux";
 import Alert from "react-bootstrap/Alert";
 import checkbox from "../assets/checkbox.svg";
 import { useState, useEffect } from "react";
@@ -14,6 +11,9 @@ import { getAuthState } from "../reducer/auth.reducer";
 import { getUserActiveState } from "../reducer/useractive.reducer";
 import { getuseractiveAction } from "../actions/useractive.actions";
 import Fade from "react-bootstrap/Fade";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+
 const Home = () => {
   const state = useSelector(getAuthState);
   const useractive = useSelector(getUserActiveState);
@@ -22,9 +22,7 @@ const Home = () => {
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState("");
   const history = useHistory();
-  React.useEffect(() => {
-    dispatch(giftcardUnitAction());
-  }, [dispatch]);
+
   const value = localStorage.getItem("token");
   const data = { token: value };
   dispatch(getuseractiveAction(data));

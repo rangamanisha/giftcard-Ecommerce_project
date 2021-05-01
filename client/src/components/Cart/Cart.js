@@ -15,6 +15,8 @@ import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Dropdown } from 'react-bootstrap';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import {getRewardPointsState} from '../../reducer/rewardpoints.reducer';
+import {getRewardPointsAction} from '../../actions/rewardpoints.actions';
 
 function Cart() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -34,7 +36,9 @@ function Cart() {
   const dispatch = useDispatch();
   const history = useHistory();
   const cartState = useSelector(getCartItemsState);
+  const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
+  const giftGlobalPoints = rewardState.rewardpoints;
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
   const currencies = get(giftunitState, 'paymentCurrency.currencies');
@@ -50,6 +54,9 @@ function Cart() {
       history.push('/')
     }
   }, [lineItems])
+  React.useEffect(() => {
+    dispatch(getRewardPointsAction())
+  }, [rewardState, dispatch])
   React.useEffect(() => {
     dispatch(giftCardsUnitAction({
       currency: giftunitState.giftunit_id,
@@ -183,15 +190,15 @@ function Cart() {
                 <span className=" fs-6 text-center d-block">
                   <small>Gifti Global Points</small>
                 </span>
-                <span className="text-center d-block">0</span>
+                <span className="text-center d-block">{get(rewardState, 'total_credits')}</span>
               </div>
             </div>
 
             <div className="d-flex justify-content-around">
-              <Button type="button" variant="white">
+              <Button type="button" variant="white" onClick={() => history.push('auth/login')}>
                 Log In
               </Button>
-              <Button type="button" variant="persianGreen">
+              <Button type="button" variant="persianGreen" onClick={() => history.push('payment')}>
                 Checkout as guest
               </Button>
             </div>

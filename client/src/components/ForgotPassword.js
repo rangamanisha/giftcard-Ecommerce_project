@@ -56,7 +56,6 @@ const ForgotPassword = () => {
               name="email"
             />
             <img src={Emailicon} alt="Icon" className="icon_img" />
-            <img src={Emailicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (

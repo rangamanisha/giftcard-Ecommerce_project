@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import Footer from './Footer';
-import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
+import React from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import plusicon from '../assets/+.svg';

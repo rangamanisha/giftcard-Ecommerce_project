@@ -1,28 +1,21 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
 import { useHistory } from "react-router-dom";
-import { useState, useRef } from "react";
-import { Dropdown as Dropdown1 } from "react-bootstrap";
+import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
-import "primereact/resources/themes/saga-blue/theme.css";
-import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
 import UserProfileDropDown from "../UserProfileDropDown";
+import exitIcon from '../../assets/exit.svg';
+import coinsIcon from '../../assets/coins.svg';
+import cartIcon from '../../assets/cart.svg';
+import userIcon from '../../assets/uprofile.svg';
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import {get, reduce} from 'lodash';
 import {getCartItemsState} from '../../reducer/cart.reducer'
 import { useSelector } from "react-redux";
+import {get, reduce} from 'lodash'
 
 const Topbar = (props) => {
   const cartState = useSelector(getCartItemsState)
@@ -31,9 +24,7 @@ const Topbar = (props) => {
     variant,
     logoIcon,
     locationIcon,
-    country,
     countriesList,
-    searchIcon,
     userLoginIcon,
     shoppingCartIcon,
     showLogin,
@@ -50,9 +41,8 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
-  const cartLineCount = reduce(get(cartState, 'lineItems'), (sum, i) => {
-    return sum + i.quantity
-  }, 0) 
+
+
   const getProfile = () => {
     if (showLogin) {
       return (
@@ -71,9 +61,17 @@ const Topbar = (props) => {
         user={user}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
+        profileIcon={userIcon}
+        coinsIcon={coinsIcon}
+        exitIcon={exitIcon}
+        cartIcon={cartIcon}
       />
     );
   };
+  const cartLineCount = reduce(get(cartState, 'lineItems'), (sum, i) => {
+    return sum + i.quantity
+  }, 0) 
+
   const onCountryChange = (e) => {
     setSelectedCountry(e.value);
     onCountrySelected(e.value.country_name);
@@ -96,21 +94,22 @@ const Topbar = (props) => {
     );
   };
   return (
-    <Navbar bg={bg} variant={variant}>
-      <Container fluid>
-        <Form inline>
-          <Navbar.Brand
-            className="pl-3"
-            onClick={() => history.push({ pathname: "/" })}
-          >
-            <Button variant="white">
-              <img src={logoIcon} alt="Icon" />
-            </Button>
-          </Navbar.Brand>
-          <Nav className="pl-3">
-            <span className="location">
+    <Navbar bg={bg} variant={variant} className="gifti-nav">
+      <Container fluid className="flex-wrap">
+        <div className="navbar-nav flex-row order-first mb-2">
+          <div className="nav-item">
+            <Navbar.Brand
+              onClick={() => history.push({ pathname: "/" })}
+            >
+              <Button variant="white">
+                <img src={logoIcon} alt="Icon" />
+              </Button>
+            </Navbar.Brand>
+          </div>
+          <div className="nav-item mt-2">
+            <p className="location">
               <small>I am gifting to</small>
-            </span>
+            </p>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
               value={selectedCountry}
@@ -123,35 +122,30 @@ const Topbar = (props) => {
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}
             />
-          </Nav>
-          <InputGroup className="pl-3">
-            <FormControl
-              className="search-button"
-              placeholder="What are you looking for ?"
-              aria-label="Recipient's username"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append>
-              <Button className="search-button-b" variant="light">
-                <img src={searchIcon} alt="search-icon" />
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-          <Row className="pl-3">
-            <Col className="mt-1">
-              <Button className="nav-btn mr-2 text-white">For Business</Button>{" "}
-              <Button className="nav-btn" variant="info">
-                Redeem Your Gifti Global Card
+          </div>
+        </div>
+        <div className="navbar-nav flex-lg-row gifti-nav-flex order-lg-last">
+          <div className="nav-item mr-2">
+            <Button className="nav-btn text-white">For Business</Button>{" "}
+          </div>
+          <div className="nav-item mr-2">
+            <Button className="nav-btn" variant="info">
+              Redeem Your Gifti Global Card
               </Button>{" "}
-            </Col>
+          </div>
+          <div className="nav-item mr-2">
+            {getProfile()}
+          </div>
+          <div className="nav-item">
+            <Button className="nav-btn btn-cart" variant="link">
+              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')} />
+              <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
 
-          {getProfile()}
-          <Button className="nav-btn-link " variant="link">
-            <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')}/>
-            <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
-          </Button>
-        </Row>
-      </Form>
+
+                
+            </Button>
+          </div>
+        </div>
       </Container>
     </Navbar>
   );
