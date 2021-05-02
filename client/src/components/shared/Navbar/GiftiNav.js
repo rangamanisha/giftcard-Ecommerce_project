@@ -5,52 +5,63 @@ import Logo from "../../../assets/logo.svg";
 import Search from "../../../assets/search.svg";
 import Shoppingcart from "../../../assets/shopping-cart.svg";
 import UserLogin from "../../../assets/User-login.svg";
-import Cart from "../../../assets/cart.svg";
-import Exit from "../../../assets/exit.svg";
-import Coins from "../../../assets/coins.svg";
 import Location from "../../../assets/location.svg";
-import Profile from "../../../assets/uprofile.svg";
-import { getTopBarState } from "../../../reducer/topbar.reducer";
+import {
+  getGiftcardsState,
+  giftCardsAction,
+} from "../../../reducer/giftCards.reducer";
 import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
+// import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
 
+import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
+import { isEmpty, get } from "lodash";
+//Countries are comming from giftunitstate 
 const GiftiNav = () => {
   const bg = "white";
   const variant = "white";
   const authState = useSelector(getAuthState);
-  const topbarState = useSelector(getTopBarState);
+  const giftunitState = useSelector(getGiftcardsState);
   const dispatch = useDispatch();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const countries = topbarState.countries
+  const countries = giftunitState.countries.map(
+    (country) => country["country_name"]
+  );
+  const countries1 = giftunitState.countries;
+  // console.log(countries1[0].sort('country_name'))
+  // .sort((a, b) => (a.country_name > b.country_name) ? 1 : -1);
+  const countries11 = [...countries1].sort();
 
   useEffect(() => {
-    dispatch(getCountriesListAction());
+    dispatch(giftCardsUnitAction);
   }, [dispatch]);
 
-  const countryChanged = (event) => {
-    setSelectedCountry(event.target.outerText);
+  useEffect(() => {
+    if (isEmpty(get(giftunitState, "selectedCountry"))) {
+      dispatch(giftCardsAction.selectCountry(countries[0]));
+    }
+    dispatch(getCountriesListAction());
+  }, [dispatch, countries]);
+
+  const countryChanged = (value) => {
+    dispatch(giftCardsAction.selectCountry(value));
   };
 
   return (
     <Topbar
-    bg={bg}
-    variant={variant}
-    first_name={authState.first_name}
-    logoIcon={Logo}
-    locationIcon={Location}
-    cartIcon={Cart}
-    exitIcon={Exit}
-    coinsIcon={Coins}
-    profileIcon={Profile}
-    country={selectedCountry}
-    countriesList={countries}
-    searchIcon={Search}
-    userLoginIcon={UserLogin}
-    shoppingCartIcon={Shoppingcart}
-    showLogin={!authState.isAuthenticated}
-    onCountrySelected={countryChanged}
+      bg={bg}
+      variant={variant}
+      logoIcon={Logo}
+      locationIcon={Location}
+      country={get(giftunitState.selectedCountry, "country_name")}
+      countriesList={countries1}
+      searchIcon={Search}
+      userLoginIcon={UserLogin}
+      shoppingCartIcon={Shoppingcart}
+      showLogin={!authState.isAuthenticated}
+      onCountrySelected={countryChanged}
     />
   );
 };
 
 export default GiftiNav;
+
