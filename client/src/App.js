@@ -5,8 +5,8 @@ import Login from './components/Login';
 import Signup from './components/Registration';
 import AllCards from './components/AllCards';
 import AllOrder from './components/Orders/AllOrder';
+import Idc_Signin from './components/IDC/IdcSign';
 import {BrowserRouter as Router, Redirect, Route,Switch } from "react-router-dom";
-// import Cart from './components/Cart';
 import Confirm_Order from './components/Orders/confirm_order';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
@@ -16,7 +16,7 @@ import GiftiNav from './components/shared/Navbar/GiftiNav';
 import EditProfile from './components/EditProfile';
 import Footer from './components/shared/Footer';
 import RewardPoints from './components/RewardPoints';
-
+import Idc_Header from './components/IDC/IdcHeader';
 // import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
 // import Contact from './components/shared/ContactPage/Contact';
 // import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
@@ -25,10 +25,14 @@ import Checkout from "./components/checkout";
 import StepsDemo from "./components/stepper";
 import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
 import Cart from './components/Cart/Cart';
+import Idc_Order from './components/IDC/IdcOrder';
 
 function App() {
   return (
       <Router>
+          <Route path ="/idc" component={Idc_Header}/>
+          <Route path ="/idc/signin" component={Idc_Signin}/>
+          <Route path ="/idc/order" component={Idc_Order}/>
         <GiftiNav />
         <Switch>
           <Route path="/" component={Home} exact />
@@ -44,6 +48,7 @@ function App() {
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
           <Route path ="/order/confirm_order" component ={Confirm_Order}/>
+        
           {/* <Route path="/conditionsPage" component={ConditionsPage} exact /> */}
           {/* <Route path="/contact" component={Contact} exact /> */}
           {/* <Route path="/enquiryPage" component={EnquiryPage} exact /> */}
