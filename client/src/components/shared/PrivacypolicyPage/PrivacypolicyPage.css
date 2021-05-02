@@ -1,0 +1,65 @@
+/* .details{
+    box-shadow: 0px 1px 8px 3px #e6e6e6 !important;
+    height: auto;
+    padding: 20px 20px 20px 20px;
+    margin-top: 75px;
+    }
+
+.info-terms-content{
+    padding:2em 3em 2em 3em;
+}
+.mt1{
+    margin-top: 10px;
+}
+
+.giftglobal-info {
+    flex: 0 0 auto;
+    width: 21%;
+  }
+
+  .giftglobal-info-container{
+    margin-left: 3.3333333333%;
+  } */
+
+/* custom defined CSS */
+
+.privacy-container {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  height: 50%;
+  /* box-shadow: 0px 1px 8px 3px #e6e6e6 !important; */
+  box-shadow: 0px 2px 48px #0000000f;
+  border-radius: 4px;
+  opacity: 1;
+  margin-top: 75px;
+}
+.privacy-item-style {
+  text-align: left;
+  letter-spacing: 0.49px;
+
+  color: #77838f;
+  opacity: 1;
+  font: normal 10px "Nunito-SemiBold", sans-serif;
+  margin-bottom: 15px;
+}
+article p {
+  text-align: left;
+  font: normal normal normal 14px "Open Sans";
+  color: #77838f;
+  opacity: 1;
+}
+div a {
+  color: #77838f;
+}
+
+div a[tabIndex]:focus {
+  color: #3f7aec;
+  outline: none;
+}
+div a:hover {
+  text-decoration: none;
+  color: #3f7aec;
+}
+
+.active {
+  color: #3f7aec;
+}

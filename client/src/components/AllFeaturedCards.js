@@ -1,134 +1,69 @@
-import Technology from "../assets/technology.svg";
-import Toys from "../assets/toys.svg";
-import Suitcase from "../assets/suitcase.svg";
-import Hypermarket from "../assets/Hypermarket.svg";
-import Flowersandgift from "../assets/flowersandgift.svg";
-import Beauty from "../assets/Beauty.svg";
-import Shipped from "../assets/shipped.svg";
-import Allmenu from "../assets/allmenu.svg";
-
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { map, isEmpty } from "lodash";
+import { featureBrandsAction } from "../actions/brands.action";
+import { getBrandsState } from "../reducer/brands.reducer";
+import { get } from "lodash";
+import Item from "./item";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
+import { Link } from "react-router-dom";
+import Giftcard from "./Giftcard";
+import Carousel from "react-elastic-carousel";
 const AllFeaturedCards = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(getBrandsState);
+  const giftunitState = useSelector(getGiftcardsState);
+  const fetaured_brands = get(state, "data");
+  const brandsWithfeatutre = get(state, "featured_brands");
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 1 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 },
+  ];
+  React.useEffect(() => {
+    console.log("hello");
+    dispatch(
+      featureBrandsAction({
+        currency: giftunitState.giftunit_id,
+        program_id: 1,
+      })
+    );
+  }, [giftunitState.giftunit_id]);
+  const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
+    ? get(giftunitState, "countries[0].country_name")
+    : get(giftunitState, "selectedCountry.country_name");
+
   return (
-    <>
-      <div className="mt-5 ">
-        <div className="row" style={{ marginLeft: "130px" }}>
-          <div className="box">
-            <a href="#/">Arrow</a>
-          </div>
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Allmenu}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">All Gift Cards</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Flowersandgift}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Flowers & Gifts</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Beauty}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Beauty</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Hypermarket}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Hypermarket</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Technology}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Technology</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Toys}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Kids & toys</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Suitcase}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Travel & hotels</p>
-            </a>
-          </div>
-
-          <div className="box">
-            <a href="#/">
-              <img
-                src={Shipped}
-                alt="Icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-              <br />
-              <p className="products_icons">Transportation</p>
-            </a>
-          </div>
-          <div className="box">
-            <a href="#/">arrow</a>
-          </div>
-        </div>
-        <div className="cardgifiti-card">
-          <p className="giftiallcard-text">Featured Cards</p>
-          <p className="allgiftcard-text">
-            Buy Most Popular eGift Cards in UAE
-            <br />
-            Personalized gift vouchers delivered online & redeemable at popular
-            Brands
-          </p>
-          <div style={{ marginLeft: "130px", marginTop: "-35px" }}>
-            <div></div>
-            <div className="mr-sm-5 row"></div>
-          </div>
+    <div>
+      <div></div>
+      <div className="cardgifiti-card">
+        <p className="giftiallcard-text">{`Brands recommended for you in the ${nowCountry}`}</p>
+        <p className="allgiftcard-text">
+          {`Buy Most Popular eGift Cards in ${nowCountry}`}
+          <br />
+          Personalized gift vouchers delivered online & redeemable at popular
+          Brands
+        </p>
+        <div className="carosel_images">
+          {
+            <>
+              <Carousel pagination={0} breakPoints={breakPoints}>
+                {map(get(brandsWithfeatutre, "brands"), (brand, i) => (
+                  <Item>
+                    <>
+                      <Link to="/selectcard">
+                        <Giftcard brand={brand} />
+                      </Link>
+                    </>
+                  </Item>
+                ))}
+              </Carousel>
+            </>
+          }
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,40 +1,34 @@
-import React, { useState,useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Usericon from '../assets/User-icon.svg';
-import Passwordicon from '../assets/Password-icon.svg';
-import Googleicon from '../assets/Google-icon.svg';
-import Facebookicon from '../assets/Facebook-icon.svg';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import Alert from 'react-bootstrap/Alert';
-import { getAuthState } from '../reducer/auth.reducer'
-import { loginAction } from '../actions/auth.actions';
-import { useHistory } from 'react-router';
-import Fade from 'react-bootstrap/Fade';
-import { Link } from 'react-router-dom';
-import checkbox from '../assets/checkbox.svg';
-
-
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Usericon from "../assets/User-icon.svg";
+import Passwordicon from "../assets/Password-icon.svg";
+import Facebookicon from "../assets/Facebook-icon.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Alert from "react-bootstrap/Alert";
+import { getAuthState } from "../reducer/auth.reducer";
+import { loginAction, googlesigninAction } from "../actions/auth.actions";
+import { useHistory } from "react-router";
+import Fade from "react-bootstrap/Fade";
+import { Link } from "react-router-dom";
+import checkbox from "../assets/checkbox.svg";
+import GoogleLogin from "react-google-login";
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
-  
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
 
-  const [message, setMessage] = useState('');
-
+  const [message, setMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().min(2).max(200).email().required(),
@@ -42,39 +36,50 @@ const Login = () => {
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
-    }
+    },
   });
 
   useEffect(() => {
     if (state.isAuthenticated) {
-      history.push({ pathname: '/' })
+      history.push({ pathname: "/" });
     }
-
 
     if (state.reset) {
       setIsValid(true);
-      setMessage('Your Password has been successfully updated.');
-      window.setTimeout(()=>{
-        setVisible(false)
-      },3000)
+      setMessage("Your Password has been successfully updated.");
+      window.setTimeout(() => {
+        setVisible(false);
+      }, 3000);
     }
+  }, [state.isAuthenticated, state.reset, history]);
 
-  }, [state.isAuthenticated,state.reset, history])
 
+  const responseGoogle = (response) => {
+    debugger;
+    const accessToken = response.accessToken;
+     console.log(accessToken);
+      dispatch(googlesigninAction({accessToken}));
+    };
 
   return (
     <>
-    <div>
-     {isValid
-      ? <Fade><Alert variant="info" transition={visible}><img
-      src={checkbox}
-      className="mr-3"
-      style={{ width: "30px"}}
-      alt="Icon"
-    />{message}</Alert></Fade>
-      : <></>
-    }
-    </div>
+      <div>
+        {isValid ? (
+          <Fade>
+            <Alert variant="info" transition={visible}>
+              <img
+                src={checkbox}
+                className="mr-3"
+                style={{ width: "30px" }}
+                alt="Icon"
+              />
+              {message}
+            </Alert>
+          </Fade>
+        ) : (
+          <></>
+        )}
+      </div>
       <div className="login-card mx-auto">
         <p className="login-text text-center h3 pt-5">Login to your Account</p>
         <p className="login-sub-text text-center mt-0">
@@ -82,29 +87,45 @@ const Login = () => {
         </p>
 
         <Form onSubmit={formik.handleSubmit} className="user">
-          <Form.Group controlId="formBasicEmail" className="w-75 mx-auto icons_login">
-            <Form.Control size="md" type="email" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange} className="icons_fields" name="email" />
-            <img
-              src={Usericon}
-              alt="Icon"
-              className="icon_img"
+          <Form.Group
+            controlId="formBasicEmail"
+            className="w-75 mx-auto icons_login"
+          >
+            <Form.Control
+              size="md"
+              type="email"
+              placeholder="Enter email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              className="icons_fields"
+              name="email"
             />
+            <img src={Usericon} alt="Icon" className="icon_img" />
           </Form.Group>
 
-          {formik.errors.email ? (<p className="validation-messages">{formik.errors.email}</p>) : null}
-    
+          {formik.errors.email ? (
+            <p className="validation-messages">{formik.errors.email}</p>
+          ) : null}
 
-          <Form.Group controlId="formBasicPassword" className="w-75 mx-auto icons_login">
-
-            <Form.Control size="md" type="password" placeholder="Password" className="icons_fields" value={formik.values.password} onChange={formik.handleChange} name="password" />
-            <img
-              src={Passwordicon}
-              alt="Icon"
-              className="icon_img"
+          <Form.Group
+            controlId="formBasicPassword"
+            className="w-75 mx-auto icons_login"
+          >
+            <Form.Control
+              size="md"
+              type="password"
+              placeholder="Password"
+              className="icons_fields"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              name="password"
             />
+            <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
-          {formik.errors.password ? (<p className="validation-messages">{formik.errors.password}</p>) : null}
+          {formik.errors.password ? (
+            <p className="validation-messages">{formik.errors.password}</p>
+          ) : null}
 
           <div className="row">
             <Form.Group style={{ marginLeft: "77px" }}>
@@ -116,12 +137,14 @@ const Login = () => {
               />
             </Form.Group>
             <Form.Group style={{ marginLeft: "162px" }}>
-              <Link className="link-color" to="/auth/forgotpassword">Forgot me?</Link>
+              <Link className="link-color" to="/auth/forgotpassword">
+                Forgot me?
+              </Link>
             </Form.Group>
           </div>
 
           {state.errors && state.errors.length ? (
-            <p className="validation-messages">{state.errors.join('\n')}</p>
+            <p className="validation-messages">{state.errors.join("\n")}</p>
           ) : null}
 
           <Button
@@ -130,11 +153,12 @@ const Login = () => {
             size="lg"
             type="Submit"
           >
-             Login to Continue
+            Login to Continue
           </Button>
-        
 
-          <p className="login-bottom-text text-center mt-4">Don’t have an account ? <Link to="/auth/signup">Sign up</Link></p>
+          <p className="login-bottom-text text-center mt-4">
+            Don’t have an account ? <Link to="/auth/signup">Sign up</Link>
+          </p>
 
           <table width="100%">
             <tbody>
@@ -160,22 +184,12 @@ const Login = () => {
           </table>
 
           <div className="row mt-4">
-            <Button
-              variant="outline-light"
-              className="google-button mr-sm-3"
-            >
-              <img
-                src={Googleicon}
-                style={{ width: "24px", height: "50px" }}
-                alt="Icon"
-
-              />
-            </Button>
-            <Button
-              variant="outline-light"
-              className="facebook-button mr-sm-3"
-            >
-              {" "}
+            <GoogleLogin variant="outline-light" className="google-button mr-sm-3" clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}>
+            </GoogleLogin>
+            <Button variant="outline-light" className="facebook-button mr-sm-3" provider='facebook'
+              appId='512745573060985'>
               <img
                 src={Facebookicon}
                 style={{ width: "50px", height: "50px" }}

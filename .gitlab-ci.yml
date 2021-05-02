@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #
 # @title:  'Gifti Global: CI File'
 #
@@ -92,3 +93,5 @@ deploy:giftiglobal_server:
   only:
    - master
    - development
+=======
+>>>>>>> 21975e7177dbd6dd3932c05981d8bcdcd2c91679

@@ -1,106 +1,149 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { useHistory } from 'react-router-dom';
-import Dropdown from 'react-bootstrap/Dropdown';
-import './Topbar.scss';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+
+import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { Dropdown } from "primereact/dropdown";
+import "./Topbar.scss";
+import UserProfileDropDown from "../UserProfileDropDown";
+import exitIcon from '../../assets/exit.svg';
+import coinsIcon from '../../assets/coins.svg';
+import cartIcon from '../../assets/cart.svg';
+import userIcon from '../../assets/uprofile.svg';
+
+import Container from "react-bootstrap/Container";
+import {getCartItemsState} from '../../reducer/cart.reducer'
+import { useSelector } from "react-redux";
 
 const Topbar = (props) => {
+  const cartState = useSelector(getCartItemsState)
+  const {
+    bg,
+    variant,
+    logoIcon,
+    locationIcon,
+    countriesList,
+    userLoginIcon,
+    shoppingCartIcon,
+    showLogin,
+    onCountrySelected,
+  } = props;
+  const user = localStorage.getItem("first_name");
+  const history = useHistory();
+  const [selectedCountry, setSelectedCountry] = useState(
+    "United Arab Emirates"
+  );
 
-    const { bg, variant, logoIcon, locationIcon, country, countriesList, searchIcon, userLoginIcon, shoppingCartIcon, showLogin, onCountrySelected, profileIcon, coinsIcon, exitIcon, cartIcon, first_name } = props;
-    
-    const history = useHistory();
-         
-    const clearsession = () => {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
+  const clearsession = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
+
+  const getProfile = () => {
+    if (showLogin) {
+      return (
+        <Button
+          className="nav-btn"
+          variant="info"
+          onClick={() => history.push({ pathname: "/auth/login" })}
+        >
+          <img src={userLoginIcon} alt="Icon" className="mr-3" />
+          Log in
+        </Button>
+      );
     }
-
-    const getProfile = () => {
-        if (showLogin) {
-            return (
-                <Button className="nav-login mr-2" variant="info" onClick={() => history.push({ pathname: '/auth/login' })}>
-                <img src={userLoginIcon} alt="Icon" className="mr-3" />Log in</Button>
-            );
-        }
-
-        
-       const handleClick = () => {
-           history.push("/profile");
-       }
-
-       const rewardpoints = () =>{
-        history.push("/reward-points");
-       }
-        return (
-
-            <Dropdown className="pt-1">
-                <Dropdown.Toggle variant="info" className="nav-btn">
-                  <span>
-                    <img src={userLoginIcon} alt="Icon" className="mr-2" />
-                  </span>
-                  {first_name}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item className="userfont-dropdown border-line" onClick={handleClick}><img src={profileIcon} alt="Icon" className="mr-2"/>Profile</Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown border-line" onClick={rewardpoints}>
-                  <img src={coinsIcon} alt="Icon" className="mr-2"/>Gifti Global Points
-                  </Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown border-line"><img src={cartIcon} alt="Icon" className="mr-2"/>Orders</Dropdown.Item>
-                  <Dropdown.Item className="userfont-dropdown border-line" onClick={clearsession}><img src={exitIcon} alt="Icon" className="mr-2"/>Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-         
-        );
-    }
-
-    const getCountriesDD = () => {
-        return countriesList.map((c, i) => (<NavDropdown.Item key={i}>{c}</NavDropdown.Item>));
-    }
-
     return (
-        <Navbar bg={bg} variant={variant}>
-            <Form inline className="mx-auto">
-                <Navbar.Brand className="pl-3" onClick={() => history.push({ pathname: '/' })}><Button  variant="white"><img src={logoIcon} alt="Icon" /></Button></Navbar.Brand>
-                <Nav className="pl-3">
-                    <span className="location"><small>I am gifting to</small></span>
-                    <img src={locationIcon} alt="Icon" />
-                    <NavDropdown title={country || countriesList[0]} id="basic-nav-dropdown" onClick={(val) => onCountrySelected(val)}>
-                        {getCountriesDD()}
-                    </NavDropdown>
-                </Nav>
-                <InputGroup className="pl-3">
-                    <FormControl
-                        className="search-button"
-                        placeholder="What are you looking for ?"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                    />
-                    <InputGroup.Append>
-                        <Button className="search-button-b" variant="light"><img src={searchIcon} alt="search-icon" /></Button>
-                    </InputGroup.Append>
-                </InputGroup>
-                <Row className="pl-3"> 
-                    <Col className="mt-1">
-                    <Button className="nav-btn mr-2 text-white">For Business</Button>{' '}
-                    <Button className="nav-btn" variant="info">Redeem Your Gifti Global Card</Button>{' '}
-                    </Col>
-                      {getProfile()}
-                        <Button className="nav-btn-link " variant="link">
-                            <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-                        </Button>
-                </Row>
-            </Form>
-        </Navbar>
-    )
-}
+      <UserProfileDropDown
+        user={user}
+        userLoginIcon={userLoginIcon}
+        clearSession={clearsession}
+        profileIcon={userIcon}
+        coinsIcon={coinsIcon}
+        exitIcon={exitIcon}
+        cartIcon={cartIcon}
+      />
+    );
+  };
+  const onCountryChange = (e) => {
+    setSelectedCountry(e.value);
+    onCountrySelected(e.value.country_name);
+  };
+  const selectedCountryTemplate = (option, props) => {
+    if (option) {
+      return (
+        <div className="country-item country-item-value">
+          <div>{option.country_name}</div>
+        </div>
+      );
+    }
+    return <span>{props.placeholder}</span>;
+  };
+  const countryOptionTemplate = (option) => {
+    return (
+      <div className="country-item">
+        <div>{option.country_name}</div>
+      </div>
+    );
+  };
+  return (
+    <Navbar bg={bg} variant={variant} className="gifti-nav">
+      <Container fluid className="flex-wrap">
+        <div className="navbar-nav flex-row order-first mb-2">
+          <div className="nav-item">
+            <Navbar.Brand
+              onClick={() => history.push({ pathname: "/" })}
+            >
+              <Button variant="white">
+                <img src={logoIcon} alt="Icon" />
+              </Button>
+            </Navbar.Brand>
+          </div>
+          <div className="nav-item mt-2">
+            <p className="location">
+              <small>I am gifting to</small>
+            </p>
+            <img src={locationIcon} alt="Icon" />
+            <Dropdown
+              value={selectedCountry}
+              options={countriesList}
+              onChange={onCountryChange}
+              filter
+              filterBy="country_name"
+              placeholder="United Arab Emirates"
+              optionLabel="country_name"
+              valueTemplate={selectedCountryTemplate}
+              itemTemplate={countryOptionTemplate}
+            />
+          </div>
+        </div>
+        <div className="navbar-nav flex-lg-row gifti-nav-flex order-lg-last">
+          <div className="nav-item mr-2">
+            <Button className="nav-btn text-white">For Business</Button>{" "}
+          </div>
+          <div className="nav-item mr-2">
+            <Button className="nav-btn" variant="info">
+              Redeem Your Gifti Global Card
+              </Button>{" "}
+          </div>
+          <div className="nav-item mr-2">
+            {getProfile()}
+          </div>
+          <div className="nav-item">
+            <Button className="nav-btn btn-cart" variant="link">
+              <img src={shoppingCartIcon} alt="shoppingcart-icon" />
+              <span className="badge badge-warning" id="lblCartCount">
+                {" "}
+                1{" "}
+              </span>
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </Navbar>
+  );
+};
 
 export default Topbar;
