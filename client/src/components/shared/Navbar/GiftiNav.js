@@ -16,7 +16,7 @@ import Topbar from "../Topbar";
 
 import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
 import { isEmpty, get } from "lodash";
-
+//Countries are comming from giftunitstate 
 const GiftiNav = () => {
   const bg = "white";
   const variant = "white";

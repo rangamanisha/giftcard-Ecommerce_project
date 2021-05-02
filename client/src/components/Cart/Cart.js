@@ -101,14 +101,6 @@ function Cart() {
   //   }
   // }
 
-  const handleUpdate = (operation) => {
-    if(operation = 'add'){
-      lineItems = get(giftunitState, 'quantity') + 1;
-    }
-    else{
-      lineItems = get(giftunitState, 'quantity') - 1;
-    }
-  }
   const handleRemove = item => {
     
       dispatch(cartAction.removeLineItem(item))
@@ -227,11 +219,11 @@ function Cart() {
                     <small>Gifting for: {get(item, 'giftingTo')} </small>
                     <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
                       <div className="cart-inc-dec-box px-1">
-                        <button className="btn btn-link" onClick={() => handleUpdate}>
+                        <button className="btn btn-link" >
                         <span>-</span>
                         </button>
                         <span className="mx-4">{get(item, 'quantity')}</span>
-                        <button className="btn btn-link" onClick={() => handleUpdate}>
+                        <button className="btn btn-link" >
                         <span>+</span>
                         </button>
 
