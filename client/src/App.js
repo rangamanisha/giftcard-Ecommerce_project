@@ -36,14 +36,14 @@ function App() {
           <Route path="/auth/signup" component={Signup} exact />
           <Route path="/allcards" component={AllCards} exact/>
           <Route path="/forgotpassword" component={ForgotPassword} exact />
-          <Route path="/cart" component ={Cart} exact/>
+          {/* <Route path="/cart" component ={Cart} exact/> */}
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
           <Route path="/order/allorder" component ={AllOrder} exact/>
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
-          <Route path ="/order/confirm_order" component ={Confirm_Order} exact/>
+          <Route path ="/order/confirm_order" component ={Confirm_Order}/>
           {/* <Route path="/conditionsPage" component={ConditionsPage} exact /> */}
           {/* <Route path="/contact" component={Contact} exact /> */}
           {/* <Route path="/enquiryPage" component={EnquiryPage} exact /> */}
@@ -62,9 +62,9 @@ function App() {
             <Redirect to={{ pathname: "/" }} />
           </Route>
           <Route path="/allcards" component={AllCards} exact />
-          <Route path="/cart" component={Cart} exact />
+          {/* <Route path="/cart" component={Cart} exact /> */}
           <Route path="/emptycart" component={EmptyCart} exact />
-          <Route path="/cart" component={Cart} exact />
+          {/* <Route path="/cart" component={Cart} exact /> */}
         </Switch>
         <Footer />
       </Router>

@@ -91,7 +91,6 @@ function Cart() {
     }
   }
   const handleRemove = item => {
-    debugger
       dispatch(cartAction.removeLineItem(item))
   }
   const lineValue = reduce(lineItems, (sum, i) => {

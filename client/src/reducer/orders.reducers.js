@@ -2,9 +2,11 @@ import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolk
 import { AllorderAction,ProcessOrderAction,OrderDetailsAction,FailedOrderAction } from '../actions/orders.action';
 
 export const ORDER_INITIAL_STATE = {
-        orderid: null,
+        // orderid: null,
         data:[],
-        data1:[]
+        orders:[],
+        orderid:"",
+        order_status:""
 }
 
 export const ORDER__FEATURE_KEY = 'order';
@@ -38,7 +40,8 @@ export const orderSlice = createSlice({
       const response = action.payload;
       if (response.code === 200) {
         state.code = true;
-        state.data1 = response.data.orders;
+        console.log(response);
+        state.orders = response.data.order;
       }
     })
     .addCase(OrderDetailsAction.rejected, (state) => {
