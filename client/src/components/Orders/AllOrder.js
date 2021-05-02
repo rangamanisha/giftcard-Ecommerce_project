@@ -88,11 +88,11 @@ const AllOrder = ()=>{
             <div className="card">
                 <DataTable value={orderState.data}  resizableColumns columnResizeMode="fit" className="p-datatable-responsive-demo" paginator rows={4} selectionMode="single"
                 selection={selectedProduct1} onRowSelect={e => handleRowSelection(e)}>
-                    <Column field="Giftcards" header="Gift Cards"  style={{width:'40%'}} body={codeBodyTemplate}  />
-                    <Column field="Date"  header="Date"style={{width:'20%'}} body={nameBodyTemplate} />
-                    <Column field="Order No" header="Order No"style={{width:'25%'}}  body={categoryBodyTemplate} />
-                    <Column field="Amount paid" header="Amount Paid" style={{width:'25%'}}body={quantityBodyTemplate} />
-                    <Column field="Status" header="Status" style={{width:'20%'}} body={quantityBodyTemplate1} />
+                    <Column field="Giftcards" header="Gift Cards"   body={codeBodyTemplate}  />
+                    <Column field="Date"  header="Date" body={nameBodyTemplate} />
+                    <Column field="Order No" header="Order No" body={categoryBodyTemplate} />
+                    <Column field="Amount paid" header="Amount Paid" body={quantityBodyTemplate} />
+                    <Column field="Status" header="Status"  body={quantityBodyTemplate1} />
                 </DataTable>
             </div>
             </div>
