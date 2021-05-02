@@ -22,7 +22,6 @@ const AllFeaturedCards = () => {
     { width: 1200, itemsToShow: 4 },
   ];
   React.useEffect(() => {
-    console.log("hello");
     dispatch(
       featureBrandsAction({
         currency: giftunitState.giftunit_id,
