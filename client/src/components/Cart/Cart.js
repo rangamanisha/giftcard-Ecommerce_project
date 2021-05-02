@@ -45,15 +45,16 @@ function Cart() {
   const selectedCurrency = get(giftunitState, 'selectedCurrency')
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const conversionRate = get(giftunitState, 'conversion.currency_exchange_rate');
-  const lineItems = get(cartState, 'lineItems')
+  const lineItems = get(cartState, 'lineItems');
+  const [rate, setRate] = useState(0);
   
   
 
-  React.useEffect(() => {
-    if(isEmpty(lineItems)){
-      history.push('/')
-    }
-  }, [lineItems])
+  // React.useEffect(() => {
+  //   if(isEmpty(lineItems)){
+  //     history.push('/')
+  //   }
+  // }, [lineItems])
   React.useEffect(() => {
     dispatch(getRewardPointsAction())
   }, [rewardState, dispatch])
@@ -100,6 +101,39 @@ function Cart() {
   //       return null
   //   }
   // }
+  const handleUpdate = (item, operation) => {
+    let _item = item;
+    let {quantity} = _item;
+    if(operation === 'add' ){
+      if(quantity>= 5) {
+        return null;
+      }
+      else {
+        _item.quantity = quantity+1;
+         dispatch(cartAction.updateLineItem(assign({}, _item)))
+      }
+    }
+    else if(operation === 'sub'){
+      if(quantity <= 0) {
+        return null
+      }
+      else {
+        _item.quantity = quantity - 1;
+        dispatch(cartAction.updateLineItem(assign({},_item)))
+      }
+    }
+    if(quantity <= 0) {
+        dispatch(cartAction.updateLineItem(item.quantity = quantity + 1))
+        const inc = parseFloat(card.selectedDenomination * (quantity + 1))
+        setRate(inc)
+    }
+    else {
+        dispatch(cartAction.updateLineItem(item.quantity = quantity - 1))
+        const dec = parseFloat(card.selectedDenomination * (quantity - 1))
+        setRate(dec)
+    }
+  }
+
 
   const handleRemove = item => {
     
@@ -219,17 +253,17 @@ function Cart() {
                     <small>Gifting for: {get(item, 'giftingTo')} </small>
                     <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
                       <div className="cart-inc-dec-box px-1">
-                        <button className="btn btn-link" >
+                        <button className="btn btn-link" onClick={() => handleUpdate(item, 'sub')}>
                         <span>-</span>
                         </button>
                         <span className="mx-4">{get(item, 'quantity')}</span>
-                        <button className="btn btn-link" >
+                        <button className="btn btn-link" onClick={() => handleUpdate(item, 'add')}>
                         <span>+</span>
                         </button>
 
                       </div>
                       <span>{get(payment, 'country_name')}</span>
-                      <span>{get(payment, 'unit_symbol')} {get(item, 'selectedDenomination') * get(item, 'quantity')}</span>
+                      <span>{get(payment, 'unit_symbol')} {get(item, 'selectedDenomination') * get(item, 'quantity')}{rate}</span>
                       <Image src={ButtunDelete} style={{ width: '4%', height: '4%', cursor: 'pointer' }} onClick={() => handleRemove(item)}/>
                     </div>
                   </div>

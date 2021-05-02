@@ -43,7 +43,6 @@ function App() {
             <Redirect to={{ pathname: "/" }} />
           </Route>
           <Route path="/allcards" component={AllCards} exact />
-          <Route path="/cart" component={Cart} exact />
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
           <Route render={() => <Redirect to={{ pathName: "/" }} />} />

@@ -4,10 +4,9 @@ import { indexOf, map, remove } from 'lodash';
 
 export const CART_ITEMS_INIT_STATE = {
     message: '',
-    errors: null,
-    cart_items: null,
-    card_value_aed: null,
-    gift_message: null,
+    errors: '',
+    cart_items: [],
+    gift_message: '',
     country_name: '',
     count: 1,
     lineItems: []

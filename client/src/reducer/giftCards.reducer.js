@@ -12,17 +12,16 @@ import { filter, get } from "lodash";
 
 export const GIFTCARDS_INIT_STATE = {
     message: "",
-    errors: null,
+    errors: '',
     giftingTo: '',
     currency: "1",
-    amount: null,
     dest_currency: "",
     source_currency:"",
     giftunit_id: 1,
     countries: [],
     selectedCountry: {},
     selectedBrand:[],
-    selectedCurrency: null
+    selectedCurrency: undefined
 }
 
 export const GIFTCARD_REDUCER = "giftCards";

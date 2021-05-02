@@ -12,8 +12,6 @@ import {
 } from "../../../reducer/giftCards.reducer";
 import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
-// import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
-
 import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
 import { isEmpty, get, sortBy } from "lodash";
 //Countries are comming from giftunit
