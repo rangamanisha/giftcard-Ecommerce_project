@@ -20,7 +20,7 @@ const Checkout = () => {
   return (
     <Row className="mx-auto payment-card">
       <Col>
-        <div className="App mt-5">
+        <div className="mt-5 mx-auto custom">
         <Form.Group
             controlId="formBasicEmail"
             className="w-100 mx-auto icons_login"

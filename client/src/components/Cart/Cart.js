@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import './Cart.css';
+import './Cart.scss';
 import { Col, Image, Row } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
 import exclamation from '../../assets/Group4790.svg';

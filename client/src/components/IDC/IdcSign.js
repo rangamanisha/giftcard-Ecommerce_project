@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import './Idc.css';
+import './Idc.scss';
 import IDC_LOGO_white_icon_1 from '../../assets/IDC_LOGO_white_icon_1.svg';
 import Slider from '../../assets/Slider.png';
 import { useHistory } from "react-router";

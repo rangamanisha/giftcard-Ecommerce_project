@@ -47,7 +47,6 @@ const StartGifting = () => {
                   <Form.Label className="startgf-fields-text">I am</Form.Label>
                   <Col>
                     <Form.Control
-                      className="mb-2"
                       id="inlineFormInput"
                       placeholder="Enter your name"
                     />

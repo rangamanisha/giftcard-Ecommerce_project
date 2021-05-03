@@ -7,7 +7,7 @@ import { OrderDetailsAction } from '../../actions/orders.action';
 import { getOrderState } from '../../reducer/orders.reducers';
 import { Col, Image, Row, Container } from 'react-bootstrap';
 import { get, map } from "lodash";
-import './orders.css';
+import './orders.scss';
 import { deprecationHandler } from 'moment';
 
 const Confirm_Order = () => {

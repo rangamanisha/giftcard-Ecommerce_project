@@ -1,5 +1,5 @@
 import React from 'react';
-import './Idc.css';
+import './Idc.scss';
 import IDC_Send_Gift_Card_Page from '../../assets/IDC_Send_Gift_Card_Page.png';
 const Idc_Order = ()=>{
     return (
