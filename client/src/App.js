@@ -44,7 +44,7 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
-          {/* <Route path="/order/allorder" component ={AllOrder} exact/> */}
+          <Route path="/order/allorder" component ={AllOrder} exact/>
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
           <Route path ="/order/confirm_order" component ={Confirm_Order}/>
