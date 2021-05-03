@@ -35,7 +35,6 @@ const AllFeaturedCards = () => {
 
   return (
     <div>
-      <div></div>
       <div className="cardgifiti-card">
         <p className="giftiallcard-text">{`Brands recommended for you in the ${nowCountry}`}</p>
         <p className="allgiftcard-text">

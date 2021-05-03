@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cart.css";
+import "./Cart.scss";
 import { Button, Col, Image, Row } from "react-bootstrap";
 import exclamation from "../../../assets/Group4790.svg";
 import amazon from "../../../assets/amazon_medium.png";

@@ -83,8 +83,6 @@ $theme-colors: (
 }
 
 .cardgifiti-card {
-  top: 40px;
-  left: 130px;
   margin-top: 85px;
   width: auto;
   height: 400px;
@@ -165,10 +163,10 @@ $theme-colors: (
 }
 
 .gificards {
-  margin-left: 127px;
-  margin-right: 127px;
   margin-top: 34px;
   text-align: left;
+  margin-left: 112px;
+  margin-right: 112px;
 }
 .amttext
 {
@@ -486,6 +484,7 @@ border: 1px solid #00B2AE !important;
 }
 
 .startgf-fields-button {
+  box-shadow: 0px 2px 5px #00000033;
   padding: 10px 60px;
   border-radius: 10px;
 }
@@ -722,13 +721,8 @@ border-radius: 10px;
   font-size: 11px;
 }
 
-.icon-margin {
-  padding: 0rem 0rem 0rem 50px
-}
-
-
 .startgiftingimg {
-  padding: 0px 65px;
+  padding: 0px 20px;
 }
 
 .carosel_images{
@@ -1079,14 +1073,17 @@ body {
 .allGiftCard .products_icons {
   min-height: 38px;
 }
+
 .icon-margin .col-sm {
   DISPLAY: FLEX;
   JUSTIFY-CONTENT: CENTER;
 }
+
 .icon-margin {
-  padding: 0rem 0rem 0rem 0px;
+  padding: 0rem 4rem 0rem 4rem;
   JUSTIFY-CONTENT: SPACE-BETWEEN;
 }
+
 .card_images {
   display: contents;
   text-align: center;
@@ -1155,3 +1152,4 @@ body {
     width: 100%;
   }
 }
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Idc.css';
+import './Idc.scss';
 import Group1 from '../../assets/Group 1.svg';
 import userIcon1 from '../../assets/userIcon1.svg';
 import userIcon2 from '../../assets/userIcon2.svg';

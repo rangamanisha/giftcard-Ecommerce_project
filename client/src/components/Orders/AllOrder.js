@@ -6,7 +6,7 @@ import {useHistory, Link} from 'react-router-dom';
 import Moment from "react-moment";
 import {AllorderAction} from '../../actions/orders.action';
 import {getOrderState} from '../../reducer/orders.reducers';
-import './orders.css';
+import './orders.scss';
 
 const AllOrder = ()=>{
     const dispatch = useDispatch();

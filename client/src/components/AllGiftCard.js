@@ -101,7 +101,7 @@ function AllGiftCard() {
         <p className="giftiallcard-text-a">Browse by Category</p>
         <AllCategoryCards />
       </div>
-      <div className="gificards ">
+      <div className="gificards">
         {isEmpty(get(brandState, "brands"))
           ? map(allTheBrands, (brand, i) => (
               <>
