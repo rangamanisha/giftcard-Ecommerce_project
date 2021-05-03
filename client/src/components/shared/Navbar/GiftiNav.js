@@ -31,7 +31,7 @@ const GiftiNav = () => {
       dispatch(giftCardsAction.selectCountry(countries[0]));
     }
     dispatch(getCountriesListAction());
-  }, [dispatch, countries]);
+  }, [dispatch]);
 
   const countryChanged = (value) => {
     dispatch(giftCardsAction.selectCountry(value));
