@@ -14,6 +14,9 @@ const UserProfileDropDown = (props) => {
     const rewardpoints = () => {
       history.push("/reward-points");
     };
+    const orderPage =() =>{
+      history.push("/order/allorder");
+    }
   
 
     return (
@@ -39,7 +42,9 @@ const UserProfileDropDown = (props) => {
           <img src={coinsIcon} alt="Icon" className="mr-2" />
           Gifti Global Points
         </Dropdown.Item>
-        <Dropdown.Item className="userfont-dropdown border-line">
+        <Dropdown.Item className="userfont-dropdown border-line"
+          onClick={orderPage}
+          >
           <img src={cartIcon} alt="Icon" className="mr-2" />
           Orders
         </Dropdown.Item>
