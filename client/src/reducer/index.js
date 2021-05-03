@@ -44,6 +44,7 @@ const store = configureStore({
     [PROFILE__FEATURE_KEY]: profileReducer,
     [USER_ACTIVE_FEATURE_KEY]: useractiveReducer,
     [REWARDS_POINTS_FEATURE_KEY]: rewardpointsReducer,
+    [CART_ITEMS_REDUCER]: cartItemReducer,
     [ORDER__FEATURE_KEY]: orderReducer
   },
   middleware: [...getDefaultMiddleware()],

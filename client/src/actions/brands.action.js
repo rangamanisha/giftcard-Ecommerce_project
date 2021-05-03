@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   termBrand,
   descriptionBrand,
-  product_description,
   featured_brands,
   brands_by_category,
   allBrand,

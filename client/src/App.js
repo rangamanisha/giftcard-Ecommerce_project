@@ -30,9 +30,9 @@ import Idc_Order from './components/IDC/IdcOrder';
 function App() {
   return (
       <Router>
-          <Route path ="/idc" component={Idc_Header}/>
+          {/* <Route path ="/idc" component={Idc_Header}/>
           <Route path ="/idc/signin" component={Idc_Signin}/>
-          <Route path ="/idc/order" component={Idc_Order}/>
+          <Route path ="/idc/order" component={Idc_Order}/> */}
         <GiftiNav />
         <Switch>
           <Route path="/" component={Home} exact />
@@ -44,7 +44,7 @@ function App() {
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
-          <Route path="/order/allorder" component ={AllOrder} exact/>
+          {/* <Route path="/order/allorder" component ={AllOrder} exact/> */}
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
           <Route path ="/order/confirm_order" component ={Confirm_Order}/>

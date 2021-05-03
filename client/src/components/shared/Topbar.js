@@ -15,6 +15,7 @@ import userIcon from '../../assets/uprofile.svg';
 import Container from "react-bootstrap/Container";
 import {getCartItemsState} from '../../reducer/cart.reducer'
 import { useSelector } from "react-redux";
+import {get, reduce} from 'lodash'
 
 const Topbar = (props) => {
   const cartState = useSelector(getCartItemsState)
@@ -67,6 +68,10 @@ const Topbar = (props) => {
       />
     );
   };
+  const cartLineCount = reduce(get(cartState, 'lineItems'), (sum, i) => {
+    return sum + i.quantity
+  }, 0) 
+
   const onCountryChange = (e) => {
     setSelectedCountry(e.value);
     onCountrySelected(e.value.country_name);
@@ -133,11 +138,11 @@ const Topbar = (props) => {
           </div>
           <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
-              <img src={shoppingCartIcon} alt="shoppingcart-icon" />
-              <span className="badge badge-warning" id="lblCartCount">
-                {" "}
-                1{" "}
-              </span>
+              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')} />
+              <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
+
+
+                
             </Button>
           </div>
         </div>
