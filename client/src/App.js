@@ -40,12 +40,6 @@ function App() {
           {/* <Route path="/order/allorder" component ={AllOrder} exact/> */}
           <Route path="/emptycart" component={EmptyCart} exact />
           <Route path="/cart" component={Cart} exact />
-          {/* <Route path ="/order/confirm_order" component ={Confirm_Order}/> */}
-          {/* <Route path="/conditionsPage" component={ConditionsPage} exact /> */}
-          {/* <Route path="/contact" component={Contact} exact /> */}
-          {/* <Route path="/enquiryPage" component={EnquiryPage} exact /> */}
-          {/* <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact /> */}
-  
            <Route path="/" exact/>
           <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
@@ -59,9 +53,7 @@ function App() {
             <Redirect to={{ pathname: "/" }} />
           </Route>
           <Route path="/allcards" component={AllCards} exact />
-          {/* <Route path="/cart" component={Cart} exact /> */}
           <Route path="/emptycart" component={EmptyCart} exact />
-          {/* <Route path="/cart" component={Cart} exact /> */}
         </Switch>
         <Footer />
       </Router>
