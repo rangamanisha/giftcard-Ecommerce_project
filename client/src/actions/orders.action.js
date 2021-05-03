@@ -3,7 +3,7 @@ import {allOrderApiCall, orderDetailsApiCall,failedOrderApiCall,processOrderApiC
 
 export const AllorderAction = createAsyncThunk('orders', async(payload, thunkAPI) => {
     const request = {
-        currency:payload.currency,
+        // currency:payload.currency,
         image_size : payload.image_size,
         limit:payload.limit,
         offset:payload.offset

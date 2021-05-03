@@ -55,7 +55,6 @@ const Login = () => {
 
 
   const responseGoogle = (response) => {
-    debugger;
     const accessToken = response.accessToken;
      console.log(accessToken);
       dispatch(googlesigninAction({accessToken}));
