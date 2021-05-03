@@ -6,11 +6,12 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { getIdcState } from '../../reducer/idc.reducer';
 import {IdcSignInAction} from '../../actions/idc_action';
 
 const Idc_Signin = () => {
     const dispatch = useDispatch();
-    // const state = useSelector(getAuthState);
+    const state = useSelector(getIdcState);
     const history = useHistory();
     const [idcIsValid, setIdcIsValid] = useState(false);
     const [idcVisible, setIdcVisible] = useState(true);
@@ -28,7 +29,11 @@ const Idc_Signin = () => {
           dispatch(IdcSignInAction(data));
         },
       });
-
+      useEffect(() => {
+        if (state && state.isIdcAuthenticated) {
+          history.push({ pathname: "/idc/order" });
+        }
+    }, []);
 
 
 
@@ -55,8 +60,9 @@ const Idc_Signin = () => {
                                 <input type="email" placeholder="{{ 'Email address' | translate }}" className="form-control"
                                 autocomplete="off" value={formik.values.email}
                                 onChange={formik.handleChange} name="email" ng-required="true"/>
-                                <p className="help-block" ng-if="idc_order.username.$empty && idc_order.username.$dirty">Please enter a
-                                    valid Email Address </p>
+          {formik.errors.email ? (
+            <p className="validation-messages">{formik.errors.email}</p>
+          ) : null}
                             </div>
                             <div className="form-group">
                                 <label className="customL">

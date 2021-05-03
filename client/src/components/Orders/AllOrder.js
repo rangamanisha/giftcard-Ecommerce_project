@@ -17,9 +17,9 @@ const AllOrder = ()=>{
 
    useEffect(() => {
         dispatch(AllorderAction({
-          currency: 1,
+        //   currency: 1,
           image_size: "medium_rectangle",
-          limit: 10,
+          limit: 50,
           offset: 0
         }))
       },[dispatch])

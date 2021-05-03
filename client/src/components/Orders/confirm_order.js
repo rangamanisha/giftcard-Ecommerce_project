@@ -91,12 +91,12 @@ const Confirm_Order = () => {
                       <Col>  <Form>
                         <Form.Row>
                           <Col xs={5}>
-                            <Form.Control type="email" placeholder={detail.gift.recipient_email} style={{ border: "1px solid #B2B2C9" }} />
+                            <Form.Control type="email" placeholder={detail.gift.recipient_email} value ={detail.gift.recipient_email} style={{ border: "1px solid #B2B2C9",color:"none" ,fontWeight:"600" }} />
                           </Col>
                         </Form.Row>
                         <Form.Row>
                           <Col xs={5}>
-                            <Form.Control as="textarea" placeholder={detail.gift.gift_message} style={{ border: "1px solid #B2B2C9" }} className="mt-3" rows={3} />
+                            <Form.Control as="textarea" placeholder={detail.gift.gift_message} value ={detail.gift.gift_message} style={{ border: "1px solid #B2B2C9",color:"none" ,fontWeight:"600"}} className="mt-3" rows={3} />
                           </Col>
                         </Form.Row>
                       </Form>

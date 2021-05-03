@@ -6,7 +6,7 @@ const IDC_INITIAL_STATE = {
     state: null,
     message: null,
     errors: null,
-    isAuthenticated: false,
+    isIdcAuthenticated: false,
     first_name: null,
     accessToken: null,
     idToken: null,
@@ -38,11 +38,11 @@ export const idcSlice = createSlice({
             if (response.code === 200) {
               state.user = response.data.user;
               state.accessToken = response.data.user.access_token;
-              state.isAuthenticated = true;
+              state.isIdcAuthenticated = true;
               state.message = response.message;
               state.first_name = response.data.user.first_name;
-              localStorage.setItem("access_token", response.data.user.access_token);
-              localStorage.setItem("first_name", response.data.user.first_name);
+              localStorage.setItem("idc_access_token", response.data.user.access_token);
+              // localStorage.setItem("first_name", response.data.user.first_name);
             }
             if (response.code === 400) {
               state.user = null;
