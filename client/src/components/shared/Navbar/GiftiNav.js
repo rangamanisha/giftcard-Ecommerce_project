@@ -15,22 +15,15 @@ import Topbar from "../Topbar";
 // import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
 
 import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
-import { isEmpty, get } from "lodash";
-
+import { isEmpty, get, sortBy } from "lodash";
+//Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
   const variant = "white";
   const authState = useSelector(getAuthState);
   const giftunitState = useSelector(getGiftcardsState);
   const dispatch = useDispatch();
-  const countries = giftunitState.countries.map(
-    (country) => country["country_name"]
-  );
-  const countries1 = giftunitState.countries;
-  // console.log(countries1[0].sort('country_name'))
-  // .sort((a, b) => (a.country_name > b.country_name) ? 1 : -1);
-  const countries11 = [...countries1].sort();
-
+  const countries = isEmpty(giftunitState.countries) ? [] : sortBy(get(giftunitState, 'countries'), ['country_name']);
   useEffect(() => {
     dispatch(giftCardsUnitAction);
   }, [dispatch]);
@@ -53,7 +46,7 @@ const GiftiNav = () => {
       logoIcon={Logo}
       locationIcon={Location}
       country={get(giftunitState.selectedCountry, "country_name")}
-      countriesList={countries1}
+      countriesList={countries}
       searchIcon={Search}
       userLoginIcon={UserLogin}
       shoppingCartIcon={Shoppingcart}
@@ -64,3 +57,4 @@ const GiftiNav = () => {
 };
 
 export default GiftiNav;
+

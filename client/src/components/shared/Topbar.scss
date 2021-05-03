@@ -57,3 +57,21 @@
     width: 9em !important;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .search-button {
+    width: 20em !important;
+  }
+  .gifti-nav-flex {
+    margin-top: -10px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .search-button {
+    width: 15em !important;
+  }
+  .gifti-nav-flex {
+    margin-top: 10px;
+  }
+}

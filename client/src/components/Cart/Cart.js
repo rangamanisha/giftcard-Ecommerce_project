@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Cart.css';
 import { Col, Image, Row } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
@@ -8,13 +8,15 @@ import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getConversionRateAction, getPaymentCurrencyAction, giftCardsUnitAction } from '../../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../../reducer/giftCards.reducer';
-import { get, isEmpty, map, assign, reduce, remove} from 'lodash';
+import { get, isEmpty, map, assign, reduce, remove, isUndefined} from 'lodash';
 import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Dropdown } from 'react-bootstrap';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import {getRewardPointsState} from '../../reducer/rewardpoints.reducer';
+import {getRewardPointsAction} from '../../actions/rewardpoints.actions';
 
 function Cart() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -34,19 +36,27 @@ function Cart() {
   const dispatch = useDispatch();
   const history = useHistory();
   const cartState = useSelector(getCartItemsState);
+  const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
+  const giftGlobalPoints = rewardState.rewardpoints;
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
   const currencies = get(giftunitState, 'paymentCurrency.currencies');
   const selectedCurrency = get(giftunitState, 'selectedCurrency')
   const [currencyIndex, setCurrencyIndex] = useState(0);
+  const conversionRate = get(giftunitState, 'conversion.currency_exchange_rate');
   const lineItems = get(cartState, 'lineItems')
+  
+  
 
   React.useEffect(() => {
     if(isEmpty(lineItems)){
       history.push('/')
     }
   }, [lineItems])
+  React.useEffect(() => {
+    dispatch(getRewardPointsAction())
+  }, [rewardState, dispatch])
   React.useEffect(() => {
     dispatch(giftCardsUnitAction({
       currency: giftunitState.giftunit_id,
@@ -57,41 +67,42 @@ function Cart() {
   React.useEffect(() => {
     let id = get(selectedCurrency, 'id')
     dispatch(getConversionRateAction(id))
-  }, [selectedCurrency])
-  const handleUpdate = (item, operation) => {
-    let {quantity} = item
-    switch (operation) {
-      case "add":
-        {
-          if (quantity === 5) {
-            return null;
-          }
-          else {
-            let new_quantity= quantity+1;
-            let _item = item
-            remove(_item, 'quantity')
-            dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
-          }
-        }
-      case "sub":
-        {
-          if(quantity==0){
-            return null
-          }
-          else {
-            let new_quantity = quantity-1;
-            let _item = item
-            remove(_item, 'quantity')
-            dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
-          }
-        }
+  }, [get(selectedCurrency, 'id')])
+  // const handleUpdate = (item, operation) => {
+  //   let {quantity} = item
+  //   switch (operation) {
+  //     case "add":
+  //       {
+  //         if (quantity === 5) {
+  //           return null;
+  //         }
+  //         else {
+  //           let new_quantity= quantity+1;
+  //           let _item = item
+  //           remove(_item, 'quantity')
+  //           dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
+  //         }
+  //       }
+  //     case "sub":
+  //       {
+  //         if(quantity==0){
+  //           return null
+  //         }
+  //         else {
+  //           let new_quantity = quantity-1;
+  //           let _item = item
+  //           remove(_item, 'quantity')
+  //           dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
+  //         }
+  //       }
       
-      default:
-        return null
-    }
-  }
+  //     default:
+  //       return null
+  //   }
+  // }
+
   const handleRemove = item => {
-    debugger
+    
       dispatch(cartAction.removeLineItem(item))
   }
   const lineValue = reduce(lineItems, (sum, i) => {
@@ -101,6 +112,25 @@ function Cart() {
     setCurrencyIndex(parseInt(currency))
     dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]))
   }
+  const convertedAmount = React.useCallback((selectedCurrency) => {
+    if(!isUndefined(conversionRate) && conversionRate !== 0){
+      return lineValue * conversionRate;
+
+    }
+    else{
+      return lineValue
+    }
+
+
+  })
+  const currencyShort = React.useCallback((selectedCurrency) => {
+   if(!isUndefined(giftunitState.selectedCountry)){
+     return get(giftunitState, 'selectedCurrency.unit_name_short')
+   }
+   else{
+     return get(payment, 'unit_symbol')
+   }
+  })
   return (
     <>
       <Row className="m-4">
@@ -126,10 +156,10 @@ function Cart() {
                 <small>{get(selectedCurrency, 'unit_name_short')}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">{get(payment, 'unit_symbol')} {lineValue}</h4>
+            <h4 className="mt-2 mb-3">{currencyShort()} {convertedAmount()}</h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
-              <span>{get(payment, 'unit_symbol')} {lineValue}</span>
+              <span>{currencyShort()} {convertedAmount()}</span>
             </div>
             <hr />
             <div className="d-flex justify-content-between mb-5">
@@ -137,7 +167,7 @@ function Cart() {
                 <strong>Total</strong>
               </span>
               <span>
-                <strong>{get(payment, 'unit_symbol')} {lineValue}</strong>
+                <strong>{currencyShort()} {convertedAmount()}</strong>
               </span>
             </div>
             <div className="d-flex flex-column justify-content-center align-content-between border border-2 ggp-parent-box rounded p-2 mb-4">
@@ -152,15 +182,15 @@ function Cart() {
                 <span className=" fs-6 text-center d-block">
                   <small>Gifti Global Points</small>
                 </span>
-                <span className="text-center d-block">0</span>
+                <span className="text-center d-block">{get(rewardState, 'total_credits')}</span>
               </div>
             </div>
 
             <div className="d-flex justify-content-around">
-              <Button type="button" variant="white">
+              <Button type="button" variant="white" onClick={() => history.push('auth/login')}>
                 Log In
               </Button>
-              <Button type="button" variant="persianGreen">
+              <Button type="button" variant="persianGreen" onClick={() => history.push('payment')}>
                 Checkout as guest
               </Button>
             </div>
@@ -189,11 +219,11 @@ function Cart() {
                     <small>Gifting for: {get(item, 'giftingTo')} </small>
                     <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
                       <div className="cart-inc-dec-box px-1">
-                        <button className="btn btn-link" onClick={() => handleUpdate(item, "sub")}>
+                        <button className="btn btn-link" >
                         <span>-</span>
                         </button>
                         <span className="mx-4">{get(item, 'quantity')}</span>
-                        <button className="btn btn-link" onClick={() => handleUpdate(item, "add")}>
+                        <button className="btn btn-link" >
                         <span>+</span>
                         </button>
 

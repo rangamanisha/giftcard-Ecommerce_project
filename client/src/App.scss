@@ -1,9 +1,14 @@
 $theme-colors: (
-  primary: #3f7aec,
-  info: #00b2ae
-);
+  primary: #3F7AEC,
+  info: #00B2AE,
+   );
 
-@import '~bootstrap/scss/bootstrap';
+  
+
+@import "~bootstrap/scss/bootstrap";
+@import "~primereact/resources/themes/saga-blue/theme.css";
+@import "~primereact/resources/primereact.min.css";
+@import "~primeicons/primeicons.css";
 
 @font-face {
   font-family: 'Cairo';
@@ -286,6 +291,33 @@ opacity: 1;
   color: #03014c;
   box-shadow: 0px 2px 28px #3e357824;
 }
+
+
+.profile-card{
+  top: 40px;
+  width: auto;
+  height: 640px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
+
+.Guestform-card{
+  margin-top: 65px;
+  top: 40px;
+  left: 130px;
+  width: 500px;
+  height: 450px;
+  border-radius: 12px;
+  background-color: #FFFFFF !important;
+  font-family: Open Sans,bold;
+  color:#03014C;
+  box-shadow: 0px 2px 28px #3e357824;
+}
+
 
 
 .profile-card{

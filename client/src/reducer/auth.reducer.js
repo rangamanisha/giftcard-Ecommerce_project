@@ -1,13 +1,14 @@
 import {
   createEntityAdapter,
   createSelector,
-  createSlice,
+  createSlice
 } from "@reduxjs/toolkit";
 import {
   loginAction,
   signupAction,
   resetpasswordAction,
   forgotpasswordAction,
+  googlesigninAction
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -40,7 +41,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginAction.pending, (state) => {
+      .addCase(loginAction.pending, (state, action) => {
         state.errors = null;
         state.user = null;
       })
@@ -51,6 +52,7 @@ export const authSlice = createSlice({
           debugger
           state.accessToken = response.data.user.access_token;
           state.isAuthenticated = true;
+          state.message = response.message;
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
@@ -66,7 +68,7 @@ export const authSlice = createSlice({
       .addCase(loginAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
       })
-      .addCase(signupAction.pending, (state) => {
+      .addCase(signupAction.pending, (state, action) => {
         state.errors = null;
         state.signupSuccess = false;
       })
@@ -112,6 +114,19 @@ export const authSlice = createSlice({
         }
         if (response.code === undefined) {
           state.errors = [response.email];
+        }
+      })
+
+      .addCase(googlesigninAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if (response.code === 200) {
+          state.isAuthenticated = true;
+          state.first_name = response.data.user.first_name;
+          localStorage.setItem("access_token", response.data.user.access_token);
+          localStorage.setItem("first_name", response.data.user.first_name);
+        }
+        if (response.code === 400) {
+          state.errors = [response.message];
         }
       });
   },

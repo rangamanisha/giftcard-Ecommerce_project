@@ -9,7 +9,7 @@ import {
 
 export const getRewardPointsAction = createAsyncThunk(
   "rewardpoints/get",
-  async () => {
+  async (payload, thunkAPI) => {
     const response = await getRewardPointsAPI();
     return response;
   }
@@ -17,7 +17,7 @@ export const getRewardPointsAction = createAsyncThunk(
 
 export const getTransactionsAction = createAsyncThunk(
   "transcations/get",
-  async () => {
+  async (payload, thunkAPI) => {
     const response = await getTransactionsAPI();
     return response;
   }
@@ -25,7 +25,7 @@ export const getTransactionsAction = createAsyncThunk(
 
 export const getConvertAction = createAsyncThunk(
   "giftcardconvert/get",
-  async (payload) => {
+  async (payload, thunkAPI) => {
     const request = {
       giftcard_number: payload.giftcard_number,
     };
@@ -36,7 +36,7 @@ export const getConvertAction = createAsyncThunk(
 
 export const getRemainingAction = createAsyncThunk(
   "giftcardremaining/get",
-  async (payload) => {
+  async (payload, thunkAPI) => {
     const request = {
       giftcard_number: payload.giftcard_number,
     };
@@ -47,7 +47,7 @@ export const getRemainingAction = createAsyncThunk(
 
 export const getConvertCreditsAction = createAsyncThunk(
   "giftcardconvert/post",
-  async (payload) => {
+  async (payload, thunkAPI) => {
     const request = {
       mylist_card: {
         card_number: payload.giftcard_number,

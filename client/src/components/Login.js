@@ -4,27 +4,26 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Usericon from "../assets/User-icon.svg";
 import Passwordicon from "../assets/Password-icon.svg";
-import Googleicon from "../assets/Google-icon.svg";
 import Facebookicon from "../assets/Facebook-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState } from "../reducer/auth.reducer";
-import { loginAction } from "../actions/auth.actions";
+import { loginAction, googlesigninAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
+import GoogleLogin from "react-google-login";
 
 const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
+  const [isValid, setIsValid] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const [message, setMessage] = useState("");
-
-  const [isValid, setIsValid] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -43,11 +42,6 @@ const Login = () => {
   useEffect(() => {
     if (state.isAuthenticated) {
       history.push({ pathname: "/" });
-    } else {
-      setIsValid("no");
-      window.setTimeout(() => {
-        setVisible(false);
-      }, 1000000);
     }
 
     if (state.reset) {
@@ -58,6 +52,14 @@ const Login = () => {
       }, 3000);
     }
   }, [state.isAuthenticated, state.reset, history]);
+
+
+  const responseGoogle = (response) => {
+    debugger;
+    const accessToken = response.accessToken;
+     console.log(accessToken);
+      dispatch(googlesigninAction({accessToken}));
+    };
 
   return (
     <>
@@ -99,7 +101,6 @@ const Login = () => {
               name="email"
             />
             <img src={Usericon} alt="Icon" className="icon_img" />
-            <img src={Usericon} alt="Icon" className="icon_img" />
           </Form.Group>
 
           {formik.errors.email ? (
@@ -119,7 +120,6 @@ const Login = () => {
               onChange={formik.handleChange}
               name="password"
             />
-            <img src={Passwordicon} alt="Icon" className="icon_img" />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
 
@@ -184,15 +184,12 @@ const Login = () => {
           </table>
 
           <div className="row mt-4">
-            <Button variant="outline-light" className="google-button mr-sm-3">
-              <img
-                src={Googleicon}
-                style={{ width: "24px", height: "50px" }}
-                alt="Icon"
-              />
-            </Button>
-            <Button variant="outline-light" className="facebook-button mr-sm-3">
-              {" "}
+            <GoogleLogin variant="outline-light" className="google-button mr-sm-3" clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}>
+            </GoogleLogin>
+            <Button variant="outline-light" className="facebook-button mr-sm-3" provider='facebook'
+              appId='512745573060985'>
               <img
                 src={Facebookicon}
                 style={{ width: "50px", height: "50px" }}
