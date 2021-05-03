@@ -138,11 +138,8 @@ const Topbar = (props) => {
           </div>
           <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
-              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('cart')} />
+              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('/cart')} />
               <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
-
-
-                
             </Button>
           </div>
         </div>
