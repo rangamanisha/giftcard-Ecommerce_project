@@ -72,7 +72,11 @@ function Cart() {
             </div>
 
             <div className="d-flex justify-content-around">
-              <Button type="button" variant="white" onClick={() => history.push("/auth/login")}>
+              <Button
+                type="button"
+                variant="white"
+                onClick={() => history.push("/auth/login")}
+              >
                 Log In
               </Button>
               <Button type="button" variant="persianGreen">

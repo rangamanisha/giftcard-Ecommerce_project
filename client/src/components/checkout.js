@@ -21,7 +21,7 @@ const Checkout = () => {
     <Row className="mx-auto payment-card">
       <Col>
         <div className="mt-5 mx-auto custom">
-        <Form.Group
+          <Form.Group
             controlId="formBasicEmail"
             className="w-100 mx-auto icons_login"
           >
@@ -84,6 +84,6 @@ const Checkout = () => {
       </Col>
     </Row>
   );
-}
+};
 
 export default Checkout;

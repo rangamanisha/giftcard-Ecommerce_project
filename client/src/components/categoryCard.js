@@ -9,7 +9,12 @@ function categoryCard({ category, nowActive }) {
   return (
     <div className={classnames(["box", { active: nowActive }])}>
       <a>
-        <img src={normal_square} alt="Icon" className="rounded img-thumbnail" style={{maxWidth: '50px'}}/>
+        <img
+          src={normal_square}
+          alt="Icon"
+          className="rounded img-thumbnail"
+          style={{ maxWidth: "50px" }}
+        />
         <br />
         <p className="products_icons">{name}</p>
       </a>

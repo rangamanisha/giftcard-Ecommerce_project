@@ -14,37 +14,36 @@ const GuestForm = () => {
         </p>
 
         <Form className="user">
-
-        <div className="row">
-              <Form.Group
-                controlId="formBasicText"
-                className="singup-input mr-sm-3 icons_login"
-              >
-                <Form.Control
-                  size="md"
-                  type="text"
-                  placeholder="First Name"
-                  className="icons_fields"
-                  value=''
-                  name="first_name"
-                />
-                <img src={Usericon} alt="Icon" className="icon_img" />
-              </Form.Group>
-              <Form.Group
-                controlId="formBasiclast-name"
-                className="singup-inputfield mr-sm-3"
-              >
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Last Name"
-                  className="icons_fields_b"
-                  value=""
-                  onChange=""
-                  name="last_name"
-                />
-              </Form.Group>
-            </div>
+          <div className="row">
+            <Form.Group
+              controlId="formBasicText"
+              className="singup-input mr-sm-3 icons_login"
+            >
+              <Form.Control
+                size="md"
+                type="text"
+                placeholder="First Name"
+                className="icons_fields"
+                value=""
+                name="first_name"
+              />
+              <img src={Usericon} alt="Icon" className="icon_img" />
+            </Form.Group>
+            <Form.Group
+              controlId="formBasiclast-name"
+              className="singup-inputfield mr-sm-3"
+            >
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="Last Name"
+                className="icons_fields_b"
+                value=""
+                onChange=""
+                name="last_name"
+              />
+            </Form.Group>
+          </div>
 
           <Form.Group
             controlId="formBasicEmail"
@@ -54,8 +53,8 @@ const GuestForm = () => {
               size="md"
               type="email"
               placeholder="Enter email"
-              value=''
-              onChange=''
+              value=""
+              onChange=""
               className="icons_fields"
               name="email"
             />
@@ -68,9 +67,8 @@ const GuestForm = () => {
             size="lg"
             type="Submit"
           >
-           Next
+            Next
           </Button>
-
         </Form>
       </div>
     </>

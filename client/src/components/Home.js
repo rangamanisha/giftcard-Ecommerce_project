@@ -26,20 +26,20 @@ const Home = () => {
 
   useEffect(() => {
     const value = history.location["search"].split("?", 2)[1];
-    if(value !== undefined){
-    const data = { token: value };
-    dispatch(getuseractiveAction(data));
-    if (useractive.verified === true) {
-      setIsValid(true);
-      setMessage("Your account has been successfully created. Go to profile !");
-      window.setTimeout(() => {
-        setVisible(false);
-      }, 3000);
+    if (value !== undefined) {
+      const data = { token: value };
+      dispatch(getuseractiveAction(data));
+      if (useractive.verified === true) {
+        setIsValid(true);
+        setMessage(
+          "Your account has been successfully created. Go to profile !"
+        );
+        window.setTimeout(() => {
+          setVisible(false);
+        }, 3000);
+      }
     }
-  }
   }, [dispatch, useractive.verified, history]);
-
-  
 
   useEffect(() => {
     if (state.alertlogin) {

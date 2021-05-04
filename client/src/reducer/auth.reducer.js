@@ -1,14 +1,14 @@
 import {
   createEntityAdapter,
   createSelector,
-  createSlice
+  createSlice,
 } from "@reduxjs/toolkit";
 import {
   loginAction,
   signupAction,
   resetpasswordAction,
   forgotpasswordAction,
-  googlesigninAction
+  googlesigninAction,
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {

@@ -1,22 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './Cart.scss';
-import { Col, Image, Row } from 'react-bootstrap';
-import {useHistory} from 'react-router-dom'
-import exclamation from '../../assets/Group4790.svg';
-import ButtunDelete from '../../assets/Button-Delete.svg';
-import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getConversionRateAction, getPaymentCurrencyAction, giftCardsUnitAction } from '../../actions/gitCards.actions';
-import { getGiftcardsState, giftCardsAction } from '../../reducer/giftCards.reducer';
-import { get, isEmpty, map, assign, reduce, remove, isUndefined} from 'lodash';
-import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
-import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-import { Dropdown } from 'react-bootstrap';
-import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
-import { RiArrowDownSLine } from 'react-icons/ri';
-import {getRewardPointsState} from '../../reducer/rewardpoints.reducer';
-import {getRewardPointsAction} from '../../actions/rewardpoints.actions';
+import React, { useState, useEffect, useCallback } from "react";
+import "./Cart.scss";
+import { Col, Image, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import exclamation from "../../assets/Group4790.svg";
+import ButtunDelete from "../../assets/Button-Delete.svg";
+import { Button, ButtonToolbar, ButtonGroup } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getConversionRateAction,
+  getPaymentCurrencyAction,
+  giftCardsUnitAction,
+} from "../../actions/gitCards.actions";
+import {
+  getGiftcardsState,
+  giftCardsAction,
+} from "../../reducer/giftCards.reducer";
+import { get, isEmpty, map, assign, reduce, remove, isUndefined } from "lodash";
+import { cartAction, getCartItemsState } from "../../reducer/cart.reducer";
+import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import { Dropdown } from "react-bootstrap";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import { RiArrowDownSLine } from "react-icons/ri";
+import { getRewardPointsState } from "../../reducer/rewardpoints.reducer";
+import { getRewardPointsAction } from "../../actions/rewardpoints.actions";
 
 function Cart() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -26,12 +33,13 @@ function Cart() {
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}>
+      }}
+    >
       {children}
       <RiArrowDownSLine />
     </a>
   ));
-  CustomToggle.displayName = 'CustomToggle';
+  CustomToggle.displayName = "CustomToggle";
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,33 +49,36 @@ function Cart() {
   const giftGlobalPoints = rewardState.rewardpoints;
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const currencies = get(giftunitState, 'paymentCurrency.currencies');
-  const selectedCurrency = get(giftunitState, 'selectedCurrency')
+  const currencies = get(giftunitState, "paymentCurrency.currencies");
+  const selectedCurrency = get(giftunitState, "selectedCurrency");
   const [currencyIndex, setCurrencyIndex] = useState(0);
-  const conversionRate = get(giftunitState, 'conversion.currency_exchange_rate');
-  const lineItems = get(cartState, 'lineItems')
-  
-  
+  const conversionRate = get(
+    giftunitState,
+    "conversion.currency_exchange_rate"
+  );
+  const lineItems = get(cartState, "lineItems");
 
   React.useEffect(() => {
-    if(isEmpty(lineItems)){
-      history.push('/')
+    if (isEmpty(lineItems)) {
+      history.push("/");
     }
-  }, [lineItems])
+  }, [lineItems]);
   React.useEffect(() => {
-    dispatch(getRewardPointsAction())
-  }, [rewardState, dispatch])
+    dispatch(getRewardPointsAction());
+  }, [rewardState, dispatch]);
   React.useEffect(() => {
-    dispatch(giftCardsUnitAction({
-      currency: giftunitState.giftunit_id,
-      program_id: 1,
-      giftunit_id: giftunitState.giftunit_id
-    }))
-  }, [giftunitState.giftunit_id, dispatch])
+    dispatch(
+      giftCardsUnitAction({
+        currency: giftunitState.giftunit_id,
+        program_id: 1,
+        giftunit_id: giftunitState.giftunit_id,
+      })
+    );
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
-    let id = get(selectedCurrency, 'id')
-    dispatch(getConversionRateAction(id))
-  }, [get(selectedCurrency, 'id')])
+    let id = get(selectedCurrency, "id");
+    dispatch(getConversionRateAction(id));
+  }, [get(selectedCurrency, "id")]);
   // const handleUpdate = (item, operation) => {
   //   let {quantity} = item
   //   switch (operation) {
@@ -95,42 +106,40 @@ function Cart() {
   //           dispatch(cartAction.updateLineItem(assign(_item, {quantity: new_quantity})))
   //         }
   //       }
-      
+
   //     default:
   //       return null
   //   }
   // }
 
-  const handleRemove = item => {
-    
-      dispatch(cartAction.removeLineItem(item))
-  }
-  const lineValue = reduce(lineItems, (sum, i) => {
-    return sum + (i.selectedDenomination * i.quantity)
-  }, 0)
-  const handleChangeCurreny = currency => {
-    setCurrencyIndex(parseInt(currency))
-    dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]))
-  }
+  const handleRemove = (item) => {
+    dispatch(cartAction.removeLineItem(item));
+  };
+  const lineValue = reduce(
+    lineItems,
+    (sum, i) => {
+      return sum + i.selectedDenomination * i.quantity;
+    },
+    0
+  );
+  const handleChangeCurreny = (currency) => {
+    setCurrencyIndex(parseInt(currency));
+    dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]));
+  };
   const convertedAmount = React.useCallback((selectedCurrency) => {
-    if(!isUndefined(conversionRate) && conversionRate !== 0){
+    if (!isUndefined(conversionRate) && conversionRate !== 0) {
       return lineValue * conversionRate;
-
+    } else {
+      return lineValue;
     }
-    else{
-      return lineValue
-    }
-
-
-  })
+  });
   const currencyShort = React.useCallback((selectedCurrency) => {
-   if(!isUndefined(giftunitState.selectedCountry)){
-     return get(giftunitState, 'selectedCurrency.unit_name_short')
-   }
-   else{
-     return get(payment, 'unit_symbol')
-   }
-  })
+    if (!isUndefined(giftunitState.selectedCountry)) {
+      return get(giftunitState, "selectedCurrency.unit_name_short");
+    } else {
+      return get(payment, "unit_symbol");
+    }
+  });
   return (
     <>
       <Row className="m-4">
@@ -141,25 +150,38 @@ function Cart() {
               <div className="flex-shrink-1 cart-currency p-1">
                 <small>Select Payment Currency</small>
                 <span className="mx-2">|</span>
-                <Dropdown className="d-inline" onSelect={e => handleChangeCurreny(e)}>
+                <Dropdown
+                  className="d-inline"
+                  onSelect={(e) => handleChangeCurreny(e)}
+                >
                   <DropdownToggle
                     as={CustomToggle}
-                    id="dropdown-custom-components"></DropdownToggle>
-                  <DropdownMenu align="right" style={{ overflow: 'auto' }}>
-                   {
-                    map(currencies, (c, i) => (
-                      <DropdownItem key={i} eventKey={i} value={c.unit_name_short} active={currencyIndex === i}>{c.unit_name_short}</DropdownItem>
-                    ))
-                   } 
+                    id="dropdown-custom-components"
+                  ></DropdownToggle>
+                  <DropdownMenu align="right" style={{ overflow: "auto" }}>
+                    {map(currencies, (c, i) => (
+                      <DropdownItem
+                        key={i}
+                        eventKey={i}
+                        value={c.unit_name_short}
+                        active={currencyIndex === i}
+                      >
+                        {c.unit_name_short}
+                      </DropdownItem>
+                    ))}
                   </DropdownMenu>
                 </Dropdown>
-                <small>{get(selectedCurrency, 'unit_name_short')}</small>
+                <small>{get(selectedCurrency, "unit_name_short")}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">{currencyShort()} {convertedAmount()}</h4>
+            <h4 className="mt-2 mb-3">
+              {currencyShort()} {convertedAmount()}
+            </h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
-              <span>{currencyShort()} {convertedAmount()}</span>
+              <span>
+                {currencyShort()} {convertedAmount()}
+              </span>
             </div>
             <hr />
             <div className="d-flex justify-content-between mb-5">
@@ -167,22 +189,30 @@ function Cart() {
                 <strong>Total</strong>
               </span>
               <span>
-                <strong>{currencyShort()} {convertedAmount()}</strong>
+                <strong>
+                  {currencyShort()} {convertedAmount()}
+                </strong>
               </span>
             </div>
             <div className="d-flex flex-column justify-content-center align-content-between border border-2 ggp-parent-box rounded p-2 mb-4">
-              <Image src={exclamation} rounded style={{ width: '4%', height: '4%' }} />
+              <Image
+                src={exclamation}
+                rounded
+                style={{ width: "4%", height: "4%" }}
+              />
               <p>
                 <small>
-                  You can also use your Gifti Global Points, Login or Sign up to use your Gift
-                  Global Points
+                  You can also use your Gifti Global Points, Login or Sign up to
+                  use your Gift Global Points
                 </small>
               </p>
               <div className="p-2 ggp-box mx-auto">
                 <span className=" fs-6 text-center d-block">
                   <small>Gifti Global Points</small>
                 </span>
-                <span className="text-center d-block">{get(rewardState, 'total_credits')}</span>
+                <span className="text-center d-block">
+                  {get(rewardState, "total_credits")}
+                </span>
               </div>
             </div>
 
@@ -190,7 +220,11 @@ function Cart() {
               <Button type="button" variant="white">
                 Log In
               </Button>
-              <Button type="button" variant="persianGreen" onClick={() => history.push('payment')}>
+              <Button
+                type="button"
+                variant="persianGreen"
+                onClick={() => history.push("payment")}
+              >
                 Checkout as guest
               </Button>
             </div>
@@ -205,39 +239,53 @@ function Cart() {
             <span>Continue Shopping</span>
           </div>
           {!isEmpty(lineItems) &&
-            map(lineItems, (item, i) =>(
-            <div key={i}>
-              <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
-                <Col sm={3} lg={3}>
-                  <Image src={get(item, 'images.color.medium_rectangle')} rounded style={{ width: '100%', height: '90%' }} />
-                </Col>
-                <Col>
-                  <div className="d-flex flex-column pt-2">
-                    <small>
-                      <b>{get(item, 'name')}</b>
-                    </small>
-                    <small>Gifting for: {get(item, 'giftingTo')} </small>
-                    <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
-                      <div className="cart-inc-dec-box px-1">
-                        <button className="btn btn-link" >
-                        <span>-</span>
-                        </button>
-                        <span className="mx-4">{get(item, 'quantity')}</span>
-                        <button className="btn btn-link" >
-                        <span>+</span>
-                        </button>
-
+            map(lineItems, (item, i) => (
+              <div key={i}>
+                <Row className="border border-2 pt-3 pb-2 justify-content-between mb-2 rounded">
+                  <Col sm={3} lg={3}>
+                    <Image
+                      src={get(item, "images.color.medium_rectangle")}
+                      rounded
+                      style={{ width: "100%", height: "90%" }}
+                    />
+                  </Col>
+                  <Col>
+                    <div className="d-flex flex-column pt-2">
+                      <small>
+                        <b>{get(item, "name")}</b>
+                      </small>
+                      <small>Gifting for: {get(item, "giftingTo")} </small>
+                      <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
+                        <div className="cart-inc-dec-box px-1">
+                          <button className="btn btn-link">
+                            <span>-</span>
+                          </button>
+                          <span className="mx-4">{get(item, "quantity")}</span>
+                          <button className="btn btn-link">
+                            <span>+</span>
+                          </button>
+                        </div>
+                        <span>{get(payment, "country_name")}</span>
+                        <span>
+                          {get(payment, "unit_symbol")}{" "}
+                          {get(item, "selectedDenomination") *
+                            get(item, "quantity")}
+                        </span>
+                        <Image
+                          src={ButtunDelete}
+                          style={{
+                            width: "4%",
+                            height: "4%",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleRemove(item)}
+                        />
                       </div>
-                      <span>{get(payment, 'country_name')}</span>
-                      <span>{get(payment, 'unit_symbol')} {get(item, 'selectedDenomination') * get(item, 'quantity')}</span>
-                      <Image src={ButtunDelete} style={{ width: '4%', height: '4%', cursor: 'pointer' }} onClick={() => handleRemove(item)}/>
                     </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-            ))
-          }
+                  </Col>
+                </Row>
+              </div>
+            ))}
         </Col>
       </Row>
     </>
