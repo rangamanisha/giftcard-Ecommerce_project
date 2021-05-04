@@ -199,6 +199,12 @@ opacity: 1;
   margin:18px 25px!important;
 }
 
+.imgcards:hover {
+  transform: translateY(-0.166666666rem);
+  box-shadow: 0 0.25rem 1rem 0 rgba(33, 40, 50, 0.25);
+  cursor: pointer;
+}
+
 .home-footer {
   top: 40px;
   left: 130px;
@@ -494,9 +500,12 @@ border: 1px solid #00B2AE !important;
   font-family: 'Open Sans';
   font-weight: 500;
   font-size: 14px;
-
 }
 
+
+.allgiftcard{
+  background-color: #393939;
+}
 // .scroll {
 //   margin-left: 130px;
 //   overflow-x: auto;
@@ -821,9 +830,9 @@ align-self: center !important;
 .badge-warning[href] {
   background-color: #c67605 ;
 }
+
 #lblCartCount {
     font-size: 18px;
-    background: #ff0000 !important;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
@@ -1153,3 +1162,8 @@ body {
   }
 }
 
+@media screen and (max-width: 576px) {
+  .startgiftingimg {
+    display: none;
+  }
+}
