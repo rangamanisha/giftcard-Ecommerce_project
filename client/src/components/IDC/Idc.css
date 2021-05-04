@@ -38,6 +38,11 @@
     padding: 0 15px;
     border: 0;
 }
+select#product_select {
+    height: 53px !important;
+    border-radius: 4px !important;
+    transition:none !important
+}
 .headerLayout1 .accountInfoPoints ul.accountListing .btnDesign.greenBgBTN {
     background-color: #00B2AE;
 }

@@ -9,7 +9,6 @@ export const AllorderAction = createAsyncThunk('orders', async(payload, thunkAPI
         offset:payload.offset
     }
     const response = await allOrderApiCall(request);
-    console.log(response);
     return response;
 });
 export const ProcessOrderAction = createAsyncThunk('ProcessOrder', async(payload, thunkAPI) => {
@@ -17,7 +16,6 @@ export const ProcessOrderAction = createAsyncThunk('ProcessOrder', async(payload
         order_id:payload.order_id
     }
     const response = await processOrderApiCall(request);
-    console.log(response);
     return response;
 });
 export const OrderDetailsAction = createAsyncThunk('OrderDetail', async(payload, thunkAPI) => {
@@ -26,7 +24,6 @@ export const OrderDetailsAction = createAsyncThunk('OrderDetail', async(payload,
         image_size:payload.image_size
     }
     const response = await orderDetailsApiCall(request);
-    console.log(response);
     return response;
 });
 export const FailedOrderAction = createAsyncThunk('FailedOrder', async(payload, thunkAPI) => {
@@ -34,6 +31,5 @@ export const FailedOrderAction = createAsyncThunk('FailedOrder', async(payload, 
         order_id:payload.order_id
     }
     const response = await failedOrderApiCall(request);
-    console.log(response);
     return response;
 });

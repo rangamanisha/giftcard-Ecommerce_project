@@ -1,7 +1,70 @@
 import React from 'react';
 import './Idc.css';
+import { Form } from "react-bootstrap";
+import { RiArrowDownSLine } from 'react-icons/ri';
+import { useState, useEffect } from "react";
+import { map, isEmpty, get } from "lodash";
 import IDC_Send_Gift_Card_Page from '../../assets/IDC_Send_Gift_Card_Page.png';
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { getIdcState } from '../../reducer/idc.reducer';
+import {getTopBarState} from '../../reducer/topbar.reducer';
+import {IdcTotalCreditnAction,IdcProfileAction,IdcVaritiesAction,IdcCountryCode} from '../../actions/idc_action';
 const Idc_Order = ()=>{
+    const dispatch = useDispatch();
+    const formik = useFormik({
+        initialValues: {
+          first_name: "",
+          last_name: "",
+          email:"",
+          company:"",
+          designation:"",
+          mobile_number:"",
+          quantity :"",
+        },
+
+        validationSchema: Yup.object({
+          email: Yup.string().min(2).max(200).email().required(),
+          last_name: Yup.string().min(2).max(200).required(),
+          first_name: Yup.string().min(2).max(200).required(),
+          company: Yup.string().min(2).max(200).required(),
+          mobile_number: Yup.number().min(2).max(200).required(),
+          quantity: Yup.number().min(2).max(200).required(),
+        }),
+        // onSubmit: (data) => {
+        //   dispatch(IdcSignInAction(data));
+        // },
+      });
+     React.useEffect(() => {
+        dispatch(IdcTotalCreditnAction());
+      }, [dispatch]);
+     React.useEffect(() => {
+        dispatch(IdcVaritiesAction());
+      }, [dispatch]);
+      React.useEffect(() => {
+        dispatch(IdcProfileAction());
+      }, [dispatch]);
+      const countrycode =(e)=>{
+          console.log(e);
+          dispatch(IdcCountryCode({
+            country: "India"
+          }
+          ))
+      }
+
+      const idcState = useSelector(getIdcState);
+      const idcCountries = useSelector(getTopBarState);
+      const idc_varities = get(idcState, "idcProduct.idc_product");
+      const countries = get(idcCountries,"countries"); 
+      console.log("dbfjsdfjkdhd"+idc_varities)
+      const [selectedCountry, setSelectedCountry] = useState(null);
+
+    
+    
+
+
     return (
         <>
         <div className="IDC_orderP">
@@ -36,7 +99,7 @@ const Idc_Order = ()=>{
         </table>
     </div>
     <div className="container layout1">
-        <div className="row">
+        <div >
             <div className="col-xs-12">
                 <div className="top-tagline">
 
@@ -123,7 +186,7 @@ const Idc_Order = ()=>{
                 <div className="alert-box" style={{maxWidth: "493px"}}>
                     <p><span>Quickly send an IDC gift card of your choice to a single user.</span></p>
                 </div>
-                <form name="idc_submit_Form" role="form" novalidate>
+                <form name="idc_submit_Form" role="form" onSubmit={formik.handleSubmit} novalidate>
  
                 <div className="row">
                     <div className="col-xs-12 col-md-6">
@@ -132,12 +195,13 @@ const Idc_Order = ()=>{
                                 <span>First Name</span>
                             </label>
                             <input type="text" name="first_name" required
-                                placeholder="'First Name' " ng-model="forms.first_name"
-                                autocomplete="off" ng-pattern="/^[a-zA-Z\s]*$/" className="form-control"
+                                placeholder="'First Name' " value={formik.values.first_name}
+                                onChange={formik.handleChange}
+                                autocomplete="off"  className="form-control"
                                 />
-                            <p className="help-block text-danger"
-                                ng-if="(idc_submit_Form.first_name.$error.required && idc_submit_Form.first_name.$dirty) || idc_submit_Form.first_name.$error.pattern">
-                                'First Name is invalid' </p>
+         {formik.errors.first_name ? (
+            <p className="validation-messages">{formik.errors.first_name}</p>
+          ) : null}
                         </div>
                     </div>
                     <div className="col-xs-12 col-md-6">
@@ -147,11 +211,12 @@ const Idc_Order = ()=>{
                             </label>
                             <input type="text" name="last_name" required
                                 placeholder="'Last Name' " autocomplete="off"
-                                ng-model="forms.last_name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                value={formik.values.last_name}
+                                onChange={formik.handleChange}
                                 className="form-control"/>
-                            <p className="help-block text-danger"
-                                ng-if="(idc_submit_Form.last_name.$error.required && idc_submit_Form.last_name.$dirty) || idc_submit_Form.last_name.$error.pattern">
-                                'Last Name is invalid' </p>
+         {formik.errors.last_name ? (
+            <p className="validation-messages">{formik.errors.last_name}</p>
+          ) : null}
                         </div>
                     </div>
                 </div>
@@ -159,11 +224,15 @@ const Idc_Order = ()=>{
                     <label className="customL">
                         <span>Email</span>
                     </label>
-                    <input type="text" autocomplete="off" className="form-control" name="email" ng-model="forms.email" type="email"
+                    <input type="text" autocomplete="off" className="form-control" name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    type="email"
                         placeholder="Email"
-                        ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'/>
-
-
+                        pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'/>
+                                 {formik.errors.email ? (
+            <p className="validation-messages">{formik.errors.email}</p>
+          ) : null}
                 </div>
                 <div className="row">
                     <div className="col-xs-12 col-md-6">
@@ -173,10 +242,11 @@ const Idc_Order = ()=>{
                             </label>
                             <input type="text" name="company" 
                                 placeholder="'Company' " autocomplete="off"
-                                ng-model="forms.company" ng-pattern="/^[a-zA-Z\s]*$/" className="form-control" required/>
-                            <p className="help-block text-danger"
-                                ng-if="(idc_submit_Form.company.$error.required && idc_submit_Form.company.$dirty) || idc_submit_Form.company.$error.pattern">
-                                'Company' </p>
+                                value={formik.values.company}
+                                onChange={formik.handleChange} pattern="/^[a-zA-Z\s]*$/" className="form-control" required/>
+         {formik.errors.company ? (
+            <p className="validation-messages">{formik.errors.company}</p>
+          ) : null}
                         </div>
                     </div>
                     <div className="col-xs-12 col-md-6">
@@ -184,12 +254,14 @@ const Idc_Order = ()=>{
                             <label className="customL">
                                 <span>Designation</span>
                             </label>
-                            <input type="text" name="designation" required autocomplete="off"
+                            <input type="text" name="designation" value={formik.values.designation}
+                                onChange={formik.handleChange}
+                                required autocomplete="off"
                                 placeholder="'Designation' " ng-model="forms.designation"
-                                ng-pattern="/^[a-zA-Z\s]*$/" className="form-control"/>
-                            <p className="help-block text-danger"
-                                ng-if="(idc_submit_Form.designation.$error.required && idc_submit_Form.designation.$dirty) || idc_submit_Form.designation.$error.pattern">
-                                'Designation' </p>
+                                pattern="/^[a-zA-Z\s]*$/" className="form-control"/>
+         {formik.errors.designation ? (
+            <p className="validation-messages">{formik.errors.designation}</p>
+          ) : null}
                         </div>
                     </div>
                 </div>
@@ -201,16 +273,25 @@ const Idc_Order = ()=>{
                                     <label className="customL">
                                         <span>Country</span>
                                     </label>
-                                    <select className="form-control" style={{fontSize: "16px"}}
-                                        ng-options="country.country_name as country.country_name | translate for country in countries"
-                                        ng-model="forms.country_name"
-                                        ng-init="forms.country_name = 'United Arab Emirates'"
-                                        ng-change="setPhonePrefix(forms.country_name)">
-                                    </select>
+                                    <Form.Control
+          as="select"
+          custom
+          id = "product_select"
+          value={formik.values.country}
+          onChange={countrycode}
+          name = "country"
+
+        >
+            <option value ="Select Product">Select Country</option>
+            {map(countries,(c,i)=>(
+          <option value ={c.country_name}>{c.country_name}</option>
+            ))}
+
+        </Form.Control>
                                 </div>
-                                <p className="help-block text-danger"
-                                    ng-if="(gcvaForm.phone.$error.required && gcvaForm.phone.$dirty) || gcvaForm.phone.$error.pattern">
-                                    'A valid phone is required' </p>
+                                {formik.errors.country ? (
+            <p className="validation-messages">{formik.errors.country}</p>
+          ) : null}
                             </div>
                         </div>
 
@@ -221,8 +302,9 @@ const Idc_Order = ()=>{
                                 </label>
                                 <div className="input-group">
                                     <span className="input-group-addon">country_code</span>
-                                    <input type="text" name="mobile_number" ng-model="forms.mobile_number"
-                                        ng-required="true" placeholder="'Mobile Number' "
+                                    <input type="text" name="mobile_number" value={formik.values.mobile_number}
+                                        onChange={formik.handleChange}
+                                         placeholder="'Mobile Number' "
                                         autocomplete="off" className="form-control mobile-number-input"
                                         minlength="phone_min_length" maxlength="phone_max_length"
                                         numbers-only/>
@@ -238,11 +320,23 @@ const Idc_Order = ()=>{
                             <label className="customL">
                                 <span>Product</span>
                             </label>
-                            <select className="form-control" style={{fontSize: "16px"}}
-                                ng-options="products.product_name_to_display as products.product_name_to_display | translate for products in idc_products"
-                            ng-change = "setproduct()" ng-model="forms.product"/>
+                            <Form.Control
+          as="select"
+          custom
+          id = "product_select"
+          value={formik.values.product}
+          onChange={formik.handleChange}
+          name = "product"
 
+        >
+            <option value ="Select Product">Select Product</option>
+            {map(idc_varities,(c,i)=>(
+          <option value ={c.product_name_to_display}>{c.product_name_to_display}</option>
+            ))}
 
+        </Form.Control>
+
+ 
                         </div>
                     </div>
 
@@ -251,11 +345,14 @@ const Idc_Order = ()=>{
                             <label className="customL">
                                 <span>Quantity</span>
                             </label>
-                            <input type="number" name="quantity" placeholder="Enter Quantity"
-                                ng-model="forms.Quantity" min="1" value="1" autocomplete="off"
-                                className="form-control" ng-change="setQuantity(forms.Quantity)"
-                                onKeyPress="if(this.value.length >= 1) return false" ng-required="true"
-                                oninput="this.value=this.value.replace(/[^1-9]/g,'')"/>
+                            <input type="number" name="quantity" 
+                            value={formik.values.quantity}
+                            onChange={formik.handleChange}
+                            placeholder="Enter Quantity"
+                                min="1" max="10" autocomplete="off"
+                                className="form-control"
+                               required="true"
+                               />
                         </div>
                     </div>
 

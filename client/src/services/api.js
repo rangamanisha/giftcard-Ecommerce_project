@@ -2,12 +2,16 @@ export const API_URL = process.env.REACT_APP_API_URL;
 
 export const apiCall = async (url, method, data, headers, isAuthenticatedReq = true) => {
   const accessToken = localStorage.getItem('access_token');
-  if (isAuthenticatedReq && !accessToken) {
+  const idcAccessToken = localStorage.getItem('idc_access_token');
+
+ if (isAuthenticatedReq && !accessToken) {
     localStorage.clear();
     sessionStorage.clear();
     window.location.href = "/";
   }
-
+  // if(window.location.pathname("/idc/signin") && isAuthenticatedReq && !idcAccessToken  ){
+  //   window.location.href = "/idc/signin";
+  //  }
   const requestHeaders = isAuthenticatedReq
     ? new Headers({
         "Content-Type": "application/json",

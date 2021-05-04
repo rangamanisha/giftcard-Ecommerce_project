@@ -1,7 +1,8 @@
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import {IdcSignInAction} from '../actions/idc_action';
+import {IdcSignInAction,IdcTotalCreditnAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode} from '../actions/idc_action';
 
 const IDC_INITIAL_STATE = {
+
     user: null,
     state: null,
     message: null,
@@ -11,12 +12,16 @@ const IDC_INITIAL_STATE = {
     accessToken: null,
     idToken: null,
     refreshToken: null,
+    idcCredits:null,
     expiresIn: null,
+    idcProduct:[],
     status: null,
     success: false,
     alert: false,
     signupSuccess: false,
     reset: false,
+    country_code:null
+  
 }
 
 export const IDC_FEATURE_KEY = "idc_signin";
@@ -55,6 +60,66 @@ export const idcSlice = createSlice({
           .addCase(IdcSignInAction.rejected, (state, action) => {
             state.errors = [action.error.message || ""];
           })
+          .addCase(IdcTotalCreditnAction.pending,(state, action)=>{
+            state.idcCredits = 0.0;
+            state.errors = null;
+          })
+          .addCase(IdcTotalCreditnAction.fulfilled,(state, action)=>{
+            const response = action.payload;
+            if (response.code === 200) {
+              state.idcCredits = response.data.credits;
+              // state.errors = null;
+            }
+
+          })
+          .addCase(IdcTotalCreditnAction.rejected,(state, action)=>{
+            state.idcCredits = null;
+            state.errors = null;
+          })
+.addCase(IdcVaritiesAction.pending,(state, action)=>{
+  state.idcCredits = null;
+  state.errors = null;
+})
+.addCase(IdcVaritiesAction.fulfilled,(state, action)=>{
+  const response = action.payload;
+  if (response.code === 200) {
+    state.idcProduct = response.data;
+  }
+
+  state.errors = null;
+})
+.addCase(IdcVaritiesAction.rejected,(state, action)=>{
+  
+  state.idcCredits = null;
+  state.errors = null;
+})
+.addCase(IdcProfileAction.pending,(state, action)=>{
+
+  state.errors = null;
+})
+.addCase(IdcProfileAction.fulfilled,(state, action)=>{
+
+  state.errors = null;
+})
+.addCase(IdcProfileAction.rejected,(state, action)=>{
+  state.idcCredits = null;
+  state.errors = null;
+})
+.addCase(IdcCountryCode.pending,(state, action)=>{
+
+  state.errors = null;
+})
+.addCase(IdcCountryCode.fulfilled,(state, action)=>{
+  const response = action.payload;
+  if (response.code === 200) {
+    state.country_code = response.data.country_code;
+  }
+})
+.addCase(IdcCountryCode.rejected,(state, action)=>{
+
+  state.errors = null;
+})
+
         },
     });
 

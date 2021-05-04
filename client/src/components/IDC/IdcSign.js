@@ -33,7 +33,7 @@ const Idc_Signin = () => {
         if (state && state.isIdcAuthenticated) {
           history.push({ pathname: "/idc/order" });
         }
-    }, []);
+    }, [state.isIdcAuthenticated]);
 
 
 
