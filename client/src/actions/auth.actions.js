@@ -18,7 +18,6 @@ export const loginAction = createAsyncThunk(
   }
 );
 
-
 export const googlesigninAction = createAsyncThunk(
   "auth/googlelogin",
   async (payload, thunkAPI) => {

@@ -1,7 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { AUTH_FEATURE_KEY, authReducer } from "./auth.reducer";
 import { topbarReducer, TOPBAR_FEATURE_KEY } from "./topbar.reducer";
-
 import { categoryReducer, CATEGORY_REDUCER } from "./category.reducer";
 import { brandsReducer, BRAND_REDUCER } from "./brands.reducer";
 import { giftCardsReducer, GIFTCARD_REDUCER } from "./giftCards.reducer";

@@ -24,7 +24,7 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   expiresIn: null,
   status: null,
   success: false,
-  alert: false,
+  alertlogin: false,
   signupSuccess: false,
   reset: false,
 };
@@ -55,6 +55,7 @@ export const authSlice = createSlice({
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
+          state.alertlogin = true;
         }
         if (response.code === 400) {
           state.user = null;
