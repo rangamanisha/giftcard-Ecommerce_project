@@ -21,7 +21,8 @@ export const GIFTCARDS_INIT_STATE = {
     countries: [],
     selectedCountry: {},
     selectedBrand:[],
-    selectedCurrency: undefined
+    selectedCurrency: undefined,
+    conversion: undefined,
 }
 
 export const GIFTCARD_REDUCER = "giftCards";

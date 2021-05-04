@@ -172,7 +172,7 @@ const SelectCards = () => {
                         <ButtonGroup className="mr-3" aria-label="Second group">
                             <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={decrement}> <img src={minusicon} /></Button> <Button disabled variant="light">{count}</Button> <Button variant="light" disabled={isUndefined(selectedDenomination)} onClick={increment}> <img src={plusicon} /></Button>
                         </ButtonGroup>
-                        <Button className="nav-btn mr-2 text-white" onClick={saveTocart}>Add to cart</Button>{' '}
+                        <Button className="nav-btn mr-2 text-white" onClick={saveTocart} variant="primary">Add to cart</Button>{' '}
                         <Button className="nav-btn mr-2" onClick={() => {saveTocart();history.push('cart')}} variant="info">Buy Now</Button>{' '}
                     </div>
                 </div>
