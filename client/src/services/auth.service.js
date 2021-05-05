@@ -15,6 +15,11 @@ export const resetpasswordAPI = (userData) => {
   return apiCall(url, "PUT", userData, null, false);
 };
 
+export const updatepasswordAPI = (userData) => {
+  const url = `${API_URL}/accounts/passwords/change_password`;
+  return apiCall(url, "PUT", userData);
+};
+
 export const forgotpasswordAPI = (userData) => {
   const url = `${API_URL}/accounts/passwords/new/`;
   return apiCall(url, "POST", userData, null, false);
