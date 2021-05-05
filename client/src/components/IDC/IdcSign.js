@@ -30,7 +30,7 @@ const Idc_Signin = () => {
         },
       });
       useEffect(() => {
-        if (state && state.isIdcAuthenticated) {
+        if (state.isIdcAuthenticated) {
           history.push({ pathname: "/idc/order" });
         }
     }, [state.isIdcAuthenticated]);

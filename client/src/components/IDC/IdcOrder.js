@@ -1,19 +1,38 @@
 import React from 'react';
 import './Idc.css';
 import { Form } from "react-bootstrap";
-import { RiArrowDownSLine } from 'react-icons/ri';
-import { useState, useEffect } from "react";
-import { map, isEmpty, get } from "lodash";
+import { CSVLink, CSVDownload } from "react-csv";
+import { useState } from "react";
+import { map, get } from "lodash";
 import IDC_Send_Gift_Card_Page from '../../assets/IDC_Send_Gift_Card_Page.png';
-import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getIdcState } from '../../reducer/idc.reducer';
 import {getTopBarState} from '../../reducer/topbar.reducer';
-import {IdcTotalCreditnAction,IdcProfileAction,IdcVaritiesAction,IdcCountryCode} from '../../actions/idc_action';
+import {IdcTotalCreditnAction,IdcProfileAction,IdcVaritiesAction, IdcSignleOrderAction, IdcCountryCode} from '../../actions/idc_action';
+import { countryCodeApiCall } from '../../services/idc.service';
+
+
 const Idc_Order = ()=>{
     const dispatch = useDispatch();
+    const idcState = useSelector(getIdcState);
+    const idcCountries = useSelector(getTopBarState);
+    const idc_varities = get(idcState, "idcProduct.idc_product");
+    const countries = get(idcCountries,"countries"); 
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const[idcValid ,setIdcValid] = useState(null);
+    const [selectedFile, setSelectedFile] = useState('');
+	const [isFilePicked, setIsFilePicked] = useState(false);
+    const [isSelected, setIsSelected] = useState(null);
+    const [filename, setFilename] = useState('chhose a file');
+
+
+    const csvData = [
+        ["First_Name", "Last_Name", "Email","Company","Designation","Country","Phone","Product","Currency","Denomination","Quantity"],
+        ["John", "Nick", "john12@gmail.com","MIT","Software Developer","America","992236254","IDC","AED","100","2"],
+      ];
+
     const formik = useFormik({
         initialValues: {
           first_name: "",
@@ -23,20 +42,29 @@ const Idc_Order = ()=>{
           designation:"",
           mobile_number:"",
           quantity :"",
+          
         },
 
-        validationSchema: Yup.object({
-          email: Yup.string().min(2).max(200).email().required(),
-          last_name: Yup.string().min(2).max(200).required(),
-          first_name: Yup.string().min(2).max(200).required(),
-          company: Yup.string().min(2).max(200).required(),
-          mobile_number: Yup.number().min(2).max(200).required(),
-          quantity: Yup.number().min(2).max(200).required(),
-        }),
-        // onSubmit: (data) => {
-        //   dispatch(IdcSignInAction(data));
-        // },
+        // validationSchema: Yup.object({
+        //   email: Yup.string().min(2).max(200).email().required(),
+        //   last_name: Yup.string().min(2).max(200).required(),
+        //   first_name: Yup.string().min(2).max(200).required(),
+        //   company: Yup.string().min(2).max(200).required(),
+        //   mobile_number: Yup.number().min(2).max(200).required(),
+        //   quantity: Yup.number().min(2).max(200).required(),
+        // }),
+        onSubmit: (data) => {
+          dispatch(IdcSignleOrderAction(data));
+        },
       });
+      const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+        setFilename(event.target.files[0]);
+	};
+
+	const handleSubmission = () => {
+	};
+          
      React.useEffect(() => {
         dispatch(IdcTotalCreditnAction());
       }, [dispatch]);
@@ -46,58 +74,27 @@ const Idc_Order = ()=>{
       React.useEffect(() => {
         dispatch(IdcProfileAction());
       }, [dispatch]);
-      const countrycode =(e)=>{
-          console.log(e);
-          dispatch(IdcCountryCode({
-            country: "India"
-          }
-          ))
+      const countrycode =(name)=>{
+          console.log(name);
+        //   dispatch(IdcCountryCode({
+        //     country: "India"
+        //   }
+        //   ))
       }
 
-      const idcState = useSelector(getIdcState);
-      const idcCountries = useSelector(getTopBarState);
-      const idc_varities = get(idcState, "idcProduct.idc_product");
-      const countries = get(idcCountries,"countries"); 
-      console.log("dbfjsdfjkdhd"+idc_varities)
-      const [selectedCountry, setSelectedCountry] = useState(null);
 
     
+    //   const handleChange = (event) => {
+    //     this.setState({
+    //       csv: event.target.files[0]
+    //     })
+    //   }
     
 
 
     return (
         <>
         <div className="IDC_orderP">
-    <div style={{display: "none"}}>
-        <table>
-            <tr>
-                <th>First_Name</th>
-                <th>Last_Name</th>
-                <th>Email</th>
-                <th>Company</th>
-                <th>Designation</th>
-                <th>Country</th>
-                <th>Phone</th>
-                <th>Product</th>
-                <th>Currency</th>
-                <th>Denomination</th>
-                <th>Quantity</th>
-            </tr>
-            <tr>
-                <td>John</td>
-                <td>Nick</td>
-                <td>john12@gmail.com</td>
-                <td>MIT</td>
-                <td>Software Developer</td>
-                <td>America</td>
-                <td>92323323</td>
-                <td>IDC</td>
-                <td>AED</td>
-                <td>100</td>
-                <td>2</td>
-            </tr>
-        </table>
-    </div>
     <div className="container layout1">
         <div >
             <div className="col-xs-12">
@@ -117,11 +114,11 @@ const Idc_Order = ()=>{
                 <div className="alert-box">
                     <p><span>You can upload a</span> CSV file <span>with a total of</span> 25 IDC gift cards at a time <span>to bulk send gift cards to your users. Click on the</span> download sample button <span>to follow the correct format for your upload.</span></p>
                 </div>
-                <form name="idc_submit_Form" role="form"  ng-submit="bulk_upload_file($event)" novalidate>
+                <form  role="form"  onSubmit={handleSubmission} >
                 <div className="file-drop-box">
                         <div className="download-wrap text-right">
                             <span>Download Sample File</span>
-                            <a onclick="exportTableToCSV('Sample.csv')" className="btn btn-blue btn-radius">Download</a>
+                            <CSVLink data={csvData}filename={"Sample.csv"} className="btn btn-blue btn-radius">Download me</CSVLink>
                         </div>
                         <div className="drop-file-wrap">
                             <div className="drop-file-icon">+</div>
@@ -130,17 +127,19 @@ const Idc_Order = ()=>{
                                 <input type="file"
                                 accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                 name="uploadFile" size="40"
-                                onchange="angular.element(this).scope().getFileDetails(this);" id ="upload-filess"/>
+                                onChange={changeHandler}id ="upload-filess"/>
+
+                                	{/* <input type="file" name="file" onChange={changeHandler} /> */}
                             </div>
        
                         </div>
-                        <div ng-if = "filename">
+                        
                             <div className="field-block">
-                                <div className='label label-info' id="upload-file-info">filename</div>
+                                <div className='label label-info' id="upload-file-info">{filename}</div>
                                 <span><a className="delete-btn" onClick="delete_uploaded_file()">&times;</a> </span>
 
                             </div>
-                        </div>
+                        
                 </div>
                 <div className="col-xs-12 col-md-12" style ={{ marginTop: "15px"}}>
                     <div ng-show="new_card_value > 0 && show_bulk_amount == true" className="credit-values form-group">
@@ -151,8 +150,7 @@ const Idc_Order = ()=>{
                     <button ng-disabled="!filename || loading " className="btn"
                     type="submit">
                         
-                        'Send IDC Gift Card' |
-                        translate
+                        Send IDC Gift Card 
                         
                     </button>
                 </div>
@@ -195,7 +193,7 @@ const Idc_Order = ()=>{
                                 <span>First Name</span>
                             </label>
                             <input type="text" name="first_name" required
-                                placeholder="'First Name' " value={formik.values.first_name}
+                                placeholder="First Name " value={formik.values.first_name}
                                 onChange={formik.handleChange}
                                 autocomplete="off"  className="form-control"
                                 />
@@ -210,7 +208,7 @@ const Idc_Order = ()=>{
                                 <span>Last Name</span>
                             </label>
                             <input type="text" name="last_name" required
-                                placeholder="'Last Name' " autocomplete="off"
+                                placeholder="Last Name " autocomplete="off"
                                 value={formik.values.last_name}
                                 onChange={formik.handleChange}
                                 className="form-control"/>
@@ -241,9 +239,9 @@ const Idc_Order = ()=>{
                                 <span>Company</span>
                             </label>
                             <input type="text" name="company" 
-                                placeholder="'Company' " autocomplete="off"
+                                placeholder="Company " autocomplete="off"
                                 value={formik.values.company}
-                                onChange={formik.handleChange} pattern="/^[a-zA-Z\s]*$/" className="form-control" required/>
+                                onChange={formik.handleChange}  className="form-control" required/>
          {formik.errors.company ? (
             <p className="validation-messages">{formik.errors.company}</p>
           ) : null}
@@ -257,8 +255,8 @@ const Idc_Order = ()=>{
                             <input type="text" name="designation" value={formik.values.designation}
                                 onChange={formik.handleChange}
                                 required autocomplete="off"
-                                placeholder="'Designation' " ng-model="forms.designation"
-                                pattern="/^[a-zA-Z\s]*$/" className="form-control"/>
+                                placeholder="Designation " 
+                                className="form-control"/>
          {formik.errors.designation ? (
             <p className="validation-messages">{formik.errors.designation}</p>
           ) : null}
@@ -266,10 +264,10 @@ const Idc_Order = ()=>{
                     </div>
                 </div>
                 <div className="row">
-                    <div className="form-group">
-                        <div className="col-xs-12 col-md-6 col-lg-6">
+                
+                        <div className="col-xs-12 col-md-6">
                             <div className="form-group">
-                                <div className="input-group" style={{width: "100%"}}>
+              
                                     <label className="customL">
                                         <span>Country</span>
                                     </label>
@@ -277,34 +275,35 @@ const Idc_Order = ()=>{
           as="select"
           custom
           id = "product_select"
-          value={formik.values.country}
-          onChange={countrycode}
           name = "country"
+          value={formik.values.country}
+          onChange={countryCodeApiCall}
+         
 
         >
-            <option value ="Select Product">Select Country</option>
+            <option value ="Select Country">Select Country</option>
             {map(countries,(c,i)=>(
           <option value ={c.country_name}>{c.country_name}</option>
             ))}
 
         </Form.Control>
-                                </div>
+                                
                                 {formik.errors.country ? (
             <p className="validation-messages">{formik.errors.country}</p>
           ) : null}
                             </div>
                         </div>
 
-                        <div className="col-xs-12 col-md-6 col-lg-6">
-                            <div className="form-group mobileField">
+                        <div className="col-xs-12 col-md-6">
+                            <div className="form-group">
                                 <label className="customL">
                                     <span>Mobile Number</span>
                                 </label>
-                                <div className="input-group">
-                                    <span className="input-group-addon">country_code</span>
+                                <div >
+                                    {/* <span className="input-group-addon">{idcState.country_code}</span> */}
                                     <input type="text" name="mobile_number" value={formik.values.mobile_number}
                                         onChange={formik.handleChange}
-                                         placeholder="'Mobile Number' "
+                                         placeholder="Mobile Number "
                                         autocomplete="off" className="form-control mobile-number-input"
                                         minlength="phone_min_length" maxlength="phone_max_length"
                                         numbers-only/>
@@ -312,7 +311,7 @@ const Idc_Order = ()=>{
                             </div>
                         </div>
 
-                    </div>
+                
                 </div>
                 <div className="row">
                     <div className="col-xs-12 col-md-6">
@@ -365,10 +364,10 @@ const Idc_Order = ()=>{
                 </div>
                 <br/>
                 <div className="btn-layout1 text-center">
-                    <button ng-disabled="idc_submit_Form.$invalid || loading" className="btn"
-                   ng-click="order_idc_giftCard()" type="submit">
+                    <button  className="btn"
+                  type="submit">
                         
-                        'Send IDC Gift Card' 
+                        Send IDC Gift Card
                         
                     </button>
                 </div>

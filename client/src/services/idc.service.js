@@ -1,14 +1,21 @@
 import { apiCall } from "./api";
+import { apiCall1 } from "./idcApi";
 export const API_URL = process.env.REACT_APP_API_URL;
 
 export const idcSigninApiCall = (idcSignin) => {
   const url = `${API_URL}/accounts/sessions/idc_signin`;
-  return apiCall(url, "POST", idcSignin, null, null, false);
+  return apiCall1(url, "POST", idcSignin, null, null, null);
 };
+
+export const idcSingleOrderApiCall = (idcOrder) => {
+  const url = `${API_URL}/idc_orders`;
+  return apiCall1(url, "POST", idcOrder);
+};
+
 
 export const idcTotalCreditApiCall =()=>{
   const url = `${API_URL}/user/idc_user_credits/total`;
-  return apiCall(url,"GET");
+  return apiCall1(url,"GET");
 }
 
 export const idcVaritiesApiCall = () =>{

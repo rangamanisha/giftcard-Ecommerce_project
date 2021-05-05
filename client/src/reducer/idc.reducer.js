@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import {IdcSignInAction,IdcTotalCreditnAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode} from '../actions/idc_action';
+import {IdcSignInAction,IdcTotalCreditnAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode,IdcSignleOrderAction} from '../actions/idc_action';
 
 const IDC_INITIAL_STATE = {
 
@@ -20,7 +20,8 @@ const IDC_INITIAL_STATE = {
     alert: false,
     signupSuccess: false,
     reset: false,
-    country_code:null
+    country_code:71,
+    order_response:[]
   
 }
 
@@ -51,6 +52,7 @@ export const idcSlice = createSlice({
             }
             if (response.code === 400) {
               state.user = null;
+              state.isIdcAuthenticated = false;
               state.errors = [response.message];
             } else if (response.code === 401) {
               state.user = null;
@@ -58,6 +60,7 @@ export const idcSlice = createSlice({
             }
           })
           .addCase(IdcSignInAction.rejected, (state, action) => {
+            state.isIdcAuthenticated = false;
             state.errors = [action.error.message || ""];
           })
           .addCase(IdcTotalCreditnAction.pending,(state, action)=>{
@@ -119,6 +122,30 @@ export const idcSlice = createSlice({
 
   state.errors = null;
 })
+
+.addCase(IdcSignleOrderAction.pending, (state, action) => {
+  state.errors = null;
+  state.user = null;
+})
+.addCase(IdcSignleOrderAction.fulfilled, (state, action) => {
+    const response = action.payload;
+    if (response.code === 200) {
+      state.order_response = response;
+      // localStorage.setItem("first_name", response.data.user.first_name);
+    }
+    // if (response.code === 400) {
+    //   state.user = null;
+    //   state.isIdcAuthenticated = false;
+    //   state.errors = [response.message];
+    // } else if (response.code === 401) {
+    //   state.user = null;
+    //   state.errors = [response.message || response.detail || ""];
+    // }
+  })
+  .addCase(IdcSignleOrderAction.rejected, (state, action) => {
+    state.isIdcAuthenticated = false;
+    state.errors = [action.error.message || ""];
+  })
 
         },
     });
