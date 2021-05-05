@@ -11,19 +11,19 @@ import {
 import { filter, get } from "lodash";
 
 export const GIFTCARDS_INIT_STATE = {
-  message: "",
-  errors: null,
-  giftingTo: "",
-  currency: "1",
-  amount: null,
-  dest_currency: "",
-  source_currency: "",
-  giftunit_id: 1,
-  countries: [],
-  selectedCountry: {},
-  selectedBrand: [],
-  selectedCurrency: null,
-};
+    message: "",
+    errors: '',
+    giftingTo: '',
+    currency: "1",
+    dest_currency: "",
+    source_currency:"",
+    giftunit_id: 1,
+    countries: [],
+    selectedCountry: {},
+    selectedBrand:[],
+    selectedCurrency: undefined,
+    conversion: undefined,
+}
 
 export const GIFTCARD_REDUCER = "giftCards";
 export const giftcardsAdaptor = createEntityAdapter();

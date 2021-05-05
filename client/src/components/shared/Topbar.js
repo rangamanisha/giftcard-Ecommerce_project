@@ -137,15 +137,11 @@ const Topbar = (props) => {
           <div className="nav-item mr-2">{getProfile()}</div>
           <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
-              <img
-                src={shoppingCartIcon}
-                alt="shoppingcart-icon"
-                onClick={() => history.push("/cart")}
-              />
-              <span class="badge badge-danger" id="lblCartCount">
-                {" "}
-                {cartLineCount}
-              </span>
+              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('/cart')} />
+              <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
+
+
+                
             </Button>
           </div>
         </div>

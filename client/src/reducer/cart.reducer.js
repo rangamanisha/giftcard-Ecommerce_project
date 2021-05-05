@@ -12,15 +12,14 @@ import {
 import { indexOf, map, remove } from "lodash";
 
 export const CART_ITEMS_INIT_STATE = {
-  message: "",
-  errors: null,
-  cart_items: null,
-  card_value_aed: null,
-  gift_message: null,
-  country_name: "",
-  count: 1,
-  lineItems: [],
-};
+    message: '',
+    errors: '',
+    cart_items: [],
+    gift_message: '',
+    country_name: '',
+    count: 1,
+    lineItems: []
+}
 
 export const CART_ITEMS_REDUCER = "cart_items";
 export const cartItemsAdaptor = createEntityAdapter();
