@@ -1,26 +1,32 @@
-import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import React from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 import { useHistory } from "react-router-dom";
 
 const UserProfileDropDown = (props) => {
+  const {
+    userLoginIcon,
+    clearSession,
+    user,
+    profileIcon,
+    exitIcon,
+    cartIcon,
+    coinsIcon,
+  } = props;
 
-    const {userLoginIcon, clearSession, user, profileIcon, exitIcon, cartIcon, coinsIcon } = props;
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/profile");
+  };
 
-    const history = useHistory();
-    const handleClick = () => {
-      history.push("/profile");
-    };
-  
-    const rewardpoints = () => {
-      history.push("/reward-points");
-    };
-    const orderPage =() =>{
-      history.push("/order/allorder");
-    }
-  
+  const rewardpoints = () => {
+    history.push("/reward-points");
+  };
+  const orderPage = () => {
+    history.push("/order/allorder");
+  };
 
-    return (
-      <Dropdown>
+  return (
+    <Dropdown>
       <Dropdown.Toggle variant="info" className="nav-btn">
         <span>
           <img src={userLoginIcon} alt="Icon" className="mr-2" />
@@ -42,9 +48,10 @@ const UserProfileDropDown = (props) => {
           <img src={coinsIcon} alt="Icon" className="mr-2" />
           Gifti Global Points
         </Dropdown.Item>
-        <Dropdown.Item className="userfont-dropdown border-line"
+        <Dropdown.Item
+          className="userfont-dropdown border-line"
           onClick={orderPage}
-          >
+        >
           <img src={cartIcon} alt="Icon" className="mr-2" />
           Orders
         </Dropdown.Item>
@@ -57,7 +64,7 @@ const UserProfileDropDown = (props) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-    )
-}
+  );
+};
 
 export default UserProfileDropDown;

@@ -7,18 +7,18 @@ import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
 import UserProfileDropDown from "../UserProfileDropDown";
-import exitIcon from '../../assets/exit.svg';
-import coinsIcon from '../../assets/coins.svg';
-import cartIcon from '../../assets/cart.svg';
-import userIcon from '../../assets/uprofile.svg';
+import exitIcon from "../../assets/exit.svg";
+import coinsIcon from "../../assets/coins.svg";
+import cartIcon from "../../assets/cart.svg";
+import userIcon from "../../assets/uprofile.svg";
 
 import Container from "react-bootstrap/Container";
-import {getCartItemsState} from '../../reducer/cart.reducer'
+import { getCartItemsState } from "../../reducer/cart.reducer";
 import { useSelector } from "react-redux";
-import {get, reduce} from 'lodash'
+import { get, reduce } from "lodash";
 
 const Topbar = (props) => {
-  const cartState = useSelector(getCartItemsState)
+  const cartState = useSelector(getCartItemsState);
   const {
     bg,
     variant,
@@ -41,7 +41,6 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
-
 
   const getProfile = () => {
     if (showLogin) {
@@ -68,9 +67,13 @@ const Topbar = (props) => {
       />
     );
   };
-  const cartLineCount = reduce(get(cartState, 'lineItems'), (sum, i) => {
-    return sum + i.quantity
-  }, 0) 
+  const cartLineCount = reduce(
+    get(cartState, "lineItems"),
+    (sum, i) => {
+      return sum + i.quantity;
+    },
+    0
+  );
 
   const onCountryChange = (e) => {
     setSelectedCountry(e.value);
@@ -98,9 +101,7 @@ const Topbar = (props) => {
       <Container fluid className="flex-wrap">
         <div className="navbar-nav flex-row order-first mb-2">
           <div className="nav-item">
-            <Navbar.Brand
-              onClick={() => history.push({ pathname: "/" })}
-            >
+            <Navbar.Brand onClick={() => history.push({ pathname: "/" })}>
               <Button variant="white">
                 <img src={logoIcon} alt="Icon" />
               </Button>
@@ -131,15 +132,16 @@ const Topbar = (props) => {
           <div className="nav-item mr-2">
             <Button className="nav-btn" variant="info">
               Redeem Your Gifti Global Card
-              </Button>{" "}
+            </Button>{" "}
           </div>
-          <div className="nav-item mr-2">
-            {getProfile()}
-          </div>
+          <div className="nav-item mr-2">{getProfile()}</div>
           <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
               <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('/cart')} />
-              <span class='badge badge-danger' id='lblCartCount'> {cartLineCount}</span>
+              <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
+
+
+                
             </Button>
           </div>
         </div>

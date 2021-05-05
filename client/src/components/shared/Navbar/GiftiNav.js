@@ -12,8 +12,6 @@ import {
 } from "../../../reducer/giftCards.reducer";
 import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
-// import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from 'lodash';
-
 import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
 import { isEmpty, get, sortBy } from "lodash";
 //Countries are comming from giftunit
@@ -23,7 +21,9 @@ const GiftiNav = () => {
   const authState = useSelector(getAuthState);
   const giftunitState = useSelector(getGiftcardsState);
   const dispatch = useDispatch();
-  const countries = isEmpty(giftunitState.countries) ? [] : sortBy(get(giftunitState, 'countries'), ['country_name']);
+  const countries = isEmpty(giftunitState.countries)
+    ? []
+    : sortBy(get(giftunitState, "countries"), ["country_name"]);
   useEffect(() => {
     dispatch(giftCardsUnitAction);
   }, [dispatch]);
@@ -33,7 +33,7 @@ const GiftiNav = () => {
       dispatch(giftCardsAction.selectCountry(countries[0]));
     }
     dispatch(getCountriesListAction());
-  }, [dispatch, countries]);
+  }, [dispatch]);
 
   const countryChanged = (value) => {
     dispatch(giftCardsAction.selectCountry(value));
@@ -57,4 +57,3 @@ const GiftiNav = () => {
 };
 
 export default GiftiNav;
-

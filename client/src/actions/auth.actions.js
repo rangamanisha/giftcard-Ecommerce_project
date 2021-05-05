@@ -5,8 +5,6 @@ import {
   resetpasswordAPI,
   forgotpasswordAPI,
   googleloginAPI,
-  updatepasswordAPI
-
 } from "../services/auth.service";
 
 export const loginAction = createAsyncThunk(
@@ -24,17 +22,17 @@ export const googlesigninAction = createAsyncThunk(
   "auth/googlelogin",
   async (payload, thunkAPI) => {
     const request = {
-      signin: { email: payload.email,
+      signin: {
+        email: payload.email,
         provider: "Google",
         token_type: "access_token",
-        token: payload.accessToken
+        token: payload.accessToken,
       },
     };
     const response = await googleloginAPI(request);
     return response;
   }
 );
-
 
 export const signupAction = createAsyncThunk(
   "auth/signup",

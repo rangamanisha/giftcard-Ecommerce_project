@@ -1,7 +1,7 @@
 import {
   createEntityAdapter,
   createSelector,
-  createSlice
+  createSlice,
 } from "@reduxjs/toolkit";
 import {
   loginAction,

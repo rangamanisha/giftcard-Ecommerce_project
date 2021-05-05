@@ -1,7 +1,13 @@
 export const API_URL = process.env.REACT_APP_API_URL;
 
-export const apiCall = async (url, method, data, headers, isAuthenticatedReq = true) => {
-  const accessToken = localStorage.getItem('access_token');
+export const apiCall = async (
+  url,
+  method,
+  data,
+  headers,
+  isAuthenticatedReq = true
+) => {
+  const accessToken = localStorage.getItem("access_token");
   if (isAuthenticatedReq && !accessToken) {
     localStorage.clear();
     sessionStorage.clear();

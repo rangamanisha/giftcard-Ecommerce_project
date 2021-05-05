@@ -105,7 +105,12 @@ function AllCategoryCards() {
             <div className="transparentButton">
               <div className="box">
                 <a>
-                  <img src={Allmenu} alt="Icon" className="rounded img-thumbnail" style={{maxWidth: '50px'}}/>
+                  <img
+                    src={Allmenu}
+                    alt="Icon"
+                    className="rounded img-thumbnail"
+                    style={{ maxWidth: "50px" }}
+                  />
                   <br />
                   <p className="products_icons">All Gift Cards</p>
                 </a>

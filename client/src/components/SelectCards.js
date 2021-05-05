@@ -35,6 +35,7 @@ const SelectCards = () => {
         seteventkey(eventKey1);
     }
     const handleGiftTo = (e) => {
+        setTempVisible(e.target.value === 'myself' ? true : false)
         setGiftTo(e.target.value)
     }
     const increment = () => {
@@ -134,7 +135,7 @@ const SelectCards = () => {
                         <Form.Check value="myself" type="radio" className="giftslabs" label="Myself" name="formHorizontalRadios" id="formHorizontalRadios1" checked={gift_to === "myself"} onClick={e => handleGiftTo(e)}/>
                         <Form.Check value="someone else" type="radio" className="giftslabs" label="Someone else" name="formHorizontalRadios" id="formHorizontalRadios2" checked={gift_to === "someone else"} onClick={e => handleGiftTo(e)}/>
                     </div>
-                    {tempvisible == false ? (<GiftGiftCard />) : ''}
+                    {tempvisible === false ? (<GiftGiftCard />) : ''}
                     <div>
                         <Nav onSelect={handleSelect}>
                             <Nav.Item id="product" >

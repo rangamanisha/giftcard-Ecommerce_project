@@ -92,14 +92,14 @@ function AllCards() {
               <>
                 {map(get(category, "brands"), (brand, i) => (
                   <>
-                    <Giftcard brand={brand} key={i}/>
+                    <Giftcard brand={brand} key={i} />
                   </>
                 ))}
               </>
             ))
           : map(get(brandState, "brands"), (brand, i) => (
               <>
-                  <Giftcard brand={brand} key={i}/>
+                <Giftcard brand={brand} key={i} />
               </>
             ))}
       </div>
