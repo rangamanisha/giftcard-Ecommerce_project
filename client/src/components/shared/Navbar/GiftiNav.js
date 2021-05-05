@@ -23,7 +23,9 @@ const GiftiNav = () => {
   const authState = useSelector(getAuthState);
   const giftunitState = useSelector(getGiftcardsState);
   const dispatch = useDispatch();
-  const countries = isEmpty(giftunitState.countries) ? [] : sortBy(get(giftunitState, 'countries'), ['country_name']);
+  const countries = isEmpty(giftunitState.countries)
+    ? []
+    : sortBy(get(giftunitState, "countries"), ["country_name"]);
   useEffect(() => {
     dispatch(giftCardsUnitAction);
   }, [dispatch]);
@@ -57,4 +59,3 @@ const GiftiNav = () => {
 };
 
 export default GiftiNav;
-

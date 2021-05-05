@@ -72,7 +72,7 @@ function AllCards() {
 
   return (
     <div className="allGiftCard">
-      <p className="giftiallcard-text-a">Browse by Category</p>
+      <p className="giftiallcard-text-a mt-5">Browse by Category</p>
       <AllCategoryCards />
       <div>
         <AllFeaturedCards />
@@ -86,20 +86,20 @@ function AllCards() {
           Brands
         </p>
       </div>
-      <div className="gificards mt-5 ">
+      <div className="gificards mt-5">
         {isEmpty(get(brandState, "brands"))
           ? map(brandsWithCategory, (category, i) => (
               <>
                 {map(get(category, "brands"), (brand, i) => (
                   <>
-                    <Giftcard brand={brand} key={i}/>
+                    <Giftcard brand={brand} key={i} />
                   </>
                 ))}
               </>
             ))
           : map(get(brandState, "brands"), (brand, i) => (
               <>
-                  <Giftcard brand={brand} key={i}/>
+                <Giftcard brand={brand} key={i} />
               </>
             ))}
       </div>

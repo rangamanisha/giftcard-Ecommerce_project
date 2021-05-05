@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Frames, CardNumber, ExpiryDate, Cvv } from "frames-react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./Frame.css";
+import "./Frame.scss";
 import Form from "react-bootstrap/Form";
 import { getProfileState } from "../reducer/profile.reducer";
 import { getprofileListAction } from "../actions/profile.actions";
@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Checkout = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-
   const data = profilestate;
 
   useEffect(() => {
@@ -21,8 +20,8 @@ const Checkout = () => {
   return (
     <Row className="mx-auto payment-card">
       <Col>
-        <div className="App mt-5">
-        <Form.Group
+        <div className="mt-5 mx-auto custom">
+          <Form.Group
             controlId="formBasicEmail"
             className="w-100 mx-auto icons_login"
           >
@@ -85,6 +84,6 @@ const Checkout = () => {
       </Col>
     </Row>
   );
-}
+};
 
 export default Checkout;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ConditionsPage.css";
+import "./ConditionsPage.scss";
 import Header from "../HeaderPage/Header";
 import Footer from "../../Footer";
 

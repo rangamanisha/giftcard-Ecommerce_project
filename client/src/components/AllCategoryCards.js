@@ -1,5 +1,4 @@
 import React from "react";
-
 import Item from "./item";
 import Allmenu from "../assets/allmenu.svg";
 import CategoryCard from "./categoryCard";
@@ -105,11 +104,12 @@ function AllCategoryCards() {
           <Item>
             <div className="transparentButton">
               <div className="box">
-                <a href="#/">
+                <a>
                   <img
                     src={Allmenu}
                     alt="Icon"
                     className="rounded img-thumbnail"
+                    style={{ maxWidth: "50px" }}
                   />
                   <br />
                   <p className="products_icons">All Gift Cards</p>

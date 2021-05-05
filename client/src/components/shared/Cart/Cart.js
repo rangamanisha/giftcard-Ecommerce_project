@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cart.css";
+import "./Cart.scss";
 import { Button, Col, Image, Row } from "react-bootstrap";
 import exclamation from "../../../assets/Group4790.svg";
 import amazon from "../../../assets/amazon_medium.png";
@@ -72,7 +72,11 @@ function Cart() {
             </div>
 
             <div className="d-flex justify-content-around">
-              <Button type="button" variant="white">
+              <Button
+                type="button"
+                variant="white"
+                onClick={() => history.push("/auth/login")}
+              >
                 Log In
               </Button>
               <Button type="button" variant="persianGreen">

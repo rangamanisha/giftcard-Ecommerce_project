@@ -1,5 +1,5 @@
 import React from "react";
-import "./PrivacypolicyPage.css";
+import "./PrivacypolicyPage.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
 import Header from "../HeaderPage/Header";

@@ -1,10 +1,8 @@
-import react from 'react';
+import react from "react";
 
-function orderlist(){
-    <div className ="container">
-        <>
-        </>
-    </div>
-
+function orderlist() {
+  <div className="container">
+    <></>
+  </div>;
 }
 export default orderlist;

@@ -53,13 +53,11 @@ const Login = () => {
     }
   }, [state.isAuthenticated, state.reset, history]);
 
-
   const responseGoogle = (response) => {
-    debugger;
     const accessToken = response.accessToken;
-     console.log(accessToken);
-      dispatch(googlesigninAction({accessToken}));
-    };
+    console.log(accessToken);
+    dispatch(googlesigninAction({ accessToken }));
+  };
 
   return (
     <>
@@ -184,12 +182,19 @@ const Login = () => {
           </table>
 
           <div className="row mt-4">
-            <GoogleLogin variant="outline-light" className="google-button mr-sm-3" clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+            <GoogleLogin
+              variant="outline-light"
+              className="google-button mr-sm-3"
+              clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
               onSuccess={responseGoogle}
-              onFailure={responseGoogle}>
-            </GoogleLogin>
-            <Button variant="outline-light" className="facebook-button mr-sm-3" provider='facebook'
-              appId='512745573060985'>
+              onFailure={responseGoogle}
+            ></GoogleLogin>
+            <Button
+              variant="outline-light"
+              className="facebook-button mr-sm-3"
+              provider="facebook"
+              appId="512745573060985"
+            >
               <img
                 src={Facebookicon}
                 style={{ width: "50px", height: "50px" }}

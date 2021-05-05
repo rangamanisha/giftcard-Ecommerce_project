@@ -83,8 +83,6 @@ $theme-colors: (
 }
 
 .cardgifiti-card {
-  top: 40px;
-  left: 130px;
   margin-top: 85px;
   width: auto;
   height: 400px;
@@ -165,10 +163,10 @@ $theme-colors: (
 }
 
 .gificards {
-  margin-left: 127px;
-  margin-right: 127px;
   margin-top: 34px;
   text-align: left;
+  margin-left: 112px;
+  margin-right: 112px;
 }
 .amttext
 {
@@ -199,6 +197,12 @@ opacity: 1;
   height: 180px;
   width: 270px;
   margin:18px 25px!important;
+}
+
+.imgcards:hover {
+  transform: translateY(-0.166666666rem);
+  box-shadow: 0 0.25rem 1rem 0 rgba(33, 40, 50, 0.25);
+  cursor: pointer;
 }
 
 .home-footer {
@@ -486,6 +490,7 @@ border: 1px solid #00B2AE !important;
 }
 
 .startgf-fields-button {
+  box-shadow: 0px 2px 5px #00000033;
   padding: 10px 60px;
   border-radius: 10px;
 }
@@ -495,9 +500,12 @@ border: 1px solid #00B2AE !important;
   font-family: 'Open Sans';
   font-weight: 500;
   font-size: 14px;
-
 }
 
+
+.allgiftcard{
+  background-color: #393939;
+}
 // .scroll {
 //   margin-left: 130px;
 //   overflow-x: auto;
@@ -722,13 +730,8 @@ border-radius: 10px;
   font-size: 11px;
 }
 
-.icon-margin {
-  padding: 0rem 0rem 0rem 50px
-}
-
-
 .startgiftingimg {
-  padding: 0px 65px;
+  padding: 0px 20px;
 }
 
 .carosel_images{
@@ -827,9 +830,9 @@ align-self: center !important;
 .badge-warning[href] {
   background-color: #c67605 ;
 }
+
 #lblCartCount {
     font-size: 18px;
-    background: #ff0000 !important;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
@@ -1079,14 +1082,17 @@ body {
 .allGiftCard .products_icons {
   min-height: 38px;
 }
+
 .icon-margin .col-sm {
   DISPLAY: FLEX;
   JUSTIFY-CONTENT: CENTER;
 }
+
 .icon-margin {
-  padding: 0rem 0rem 0rem 0px;
+  padding: 0rem 4rem 0rem 4rem;
   JUSTIFY-CONTENT: SPACE-BETWEEN;
 }
+
 .card_images {
   display: contents;
   text-align: center;
@@ -1153,5 +1159,11 @@ body {
 @media screen and (max-width: 576px) {
   .gificards .card_images {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .startgiftingimg {
+    display: none;
   }
 }

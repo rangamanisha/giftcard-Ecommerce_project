@@ -9,6 +9,7 @@ import checkbox from "../assets/checkbox.svg";
 import { useState, useEffect } from "react";
 import { getAuthState } from "../reducer/auth.reducer";
 import { getUserActiveState } from "../reducer/useractive.reducer";
+import { alertloginAction } from "../actions/auth.actions";
 import { getuseractiveAction } from "../actions/useractive.actions";
 import Fade from "react-bootstrap/Fade";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,30 +24,32 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const history = useHistory();
 
-  const value = localStorage.getItem("token");
-  const data = { token: value };
-  dispatch(getuseractiveAction(data));
-
   useEffect(() => {
-    dispatch(getuseractiveAction());
-    localStorage.setItem("token", history.location["search"].split("?", 2)[1]);
-    if (useractive.verified === true) {
-      setIsValid(true);
-      setMessage("Your account has been successfully created. Go to profile !");
-      window.setTimeout(() => {
-        setVisible(false);
-      }, 3000);
+    const value = history.location["search"].split("?", 2)[1];
+    if (value !== undefined) {
+      const data = { token: value };
+      dispatch(getuseractiveAction(data));
+      if (useractive.verified === true) {
+        setIsValid(true);
+        setMessage(
+          "Your account has been successfully created. Go to profile !"
+        );
+        window.setTimeout(() => {
+          setVisible(false);
+        }, 3000);
+      }
     }
   }, [dispatch, useractive.verified, history]);
 
   useEffect(() => {
-    if (state.isAuthenticated) {
+    if (state.alertlogin) {
       setIsValid(true);
       setMessage("Login Successfully !");
       window.setTimeout(() => {
         setVisible(false);
       }, 3000);
     }
+
     if (state.signupSuccess) {
       setIsValid(true);
       setMessage(
