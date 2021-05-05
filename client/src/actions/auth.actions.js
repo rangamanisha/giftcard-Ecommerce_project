@@ -69,6 +69,22 @@ export const resetpasswordAction = createAsyncThunk(
   }
 );
 
+export const updatepasswordAction = createAsyncThunk(
+  "auth/updatepassword",
+  async (payload, thunkAPI) => {
+    const request = {
+      change_password: {
+        password: payload.password,
+        password_confirmation: payload.password_confirmation,
+      }
+    };
+
+    const response = await updatepasswordAPI(request);
+    return response;
+  }
+);
+
+
 export const forgotpasswordAction = createAsyncThunk(
   "auth/forgotpassword",
   async (payload, thunkAPI) => {

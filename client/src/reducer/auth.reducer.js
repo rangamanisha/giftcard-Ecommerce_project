@@ -9,6 +9,7 @@ import {
   resetpasswordAction,
   forgotpasswordAction,
   googlesigninAction,
+  updatepasswordAction
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -107,6 +108,19 @@ export const authSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.status = response.status;
+          state.errors = null;
+        }
+        if (response.code === 400) {
+          state.errors = [response.message];
+        }
+        if (response.code === undefined) {
+          state.errors = [response.email];
+        }
+      })
+      .addCase(updatepasswordAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if (response.code === 200) {
+          state.message = response.message;
           state.errors = null;
         }
         if (response.code === 400) {
