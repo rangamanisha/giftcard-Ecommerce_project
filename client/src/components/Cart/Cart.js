@@ -4,13 +4,14 @@ import { get, isEmpty, map, assign, reduce, isNull, isUndefined } from 'lodash';
 import { Col, Image, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getAuthState } from '../../reducer/auth.reducer';
 import { getConversionRateAction, giftCardsUnitAction } from '../../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../../reducer/giftCards.reducer';
 import { getRewardPointsState } from '../../reducer/rewardpoints.reducer';
 import { getRewardPointsAction } from '../../actions/rewardpoints.actions';
 import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
-import {cartItemAction, fetchItemsByCartAction} from '../../actions/cart.actions'
+
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Dropdown } from 'react-bootstrap';
@@ -28,13 +29,12 @@ function Cart() {
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}
-    >
+      }}>
       {children}
       <RiArrowDownSLine />
     </a>
   ));
-  CustomToggle.displayName = "CustomToggle";
+  CustomToggle.displayName = 'CustomToggle';
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -46,8 +46,8 @@ function Cart() {
   const giftGlobalPoints = parseFloat(get(rewardState, 'total_credits'))
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const currencies = get(giftunitState, "paymentCurrency.currencies");
-  const selectedCurrency = get(giftunitState, "selectedCurrency");
+  const currencies = get(giftunitState, 'paymentCurrency.currencies');
+  const selectedCurrency = get(giftunitState, 'selectedCurrency')
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const conversionRate = get(giftunitState, 'conversion.currency_exchange_rate');
   const lineItems = get(cartState, 'lineItems');
@@ -62,14 +62,12 @@ function Cart() {
     dispatch(getRewardPointsAction())
   }, [rewardState, dispatch])
   React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+    dispatch(giftCardsUnitAction({
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
+      giftunit_id: giftunitState.giftunit_id
+    }))
+  }, [giftunitState.giftunit_id, dispatch])
   React.useEffect(() => {
     let id = get(selectedCurrency, 'id')
     dispatch(getConversionRateAction(id))
@@ -105,14 +103,14 @@ function Cart() {
     setCurrencyIndex(parseInt(currency))
     dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]))
   }
-  const convertedAmount = React.useCallback((selectedCurrency) => {
-    if (!isUndefined(conversionrate) && conversionrate !== 0) {
-      return lineValue * conversionrate;
+  const convertedAmount = React.useCallback(() => {
+    if (!isUndefined(conversionRate) && conversionRate !== 0) {
+      return parseFloat(lineValue * conversionRate).toFixed(2);
     }
     else {
-      return lineValue
+      return parseFloat(lineValue).toFixed(2)
     }
-  })
+  }, [conversionRate])
   const totalLineAmount = React.useCallback(() => {
     const lineAmount = convertedAmount()
     if(!lineAmount) return 0
@@ -137,7 +135,7 @@ function Cart() {
     else {
       return lineAmount
     }
-  }, [useGiftiPoints, selectedCurrency, conversionrate])
+  }, [useGiftiPoints, selectedCurrency, conversionRate])
   const currencyShort = React.useCallback(() => {
     if (!isUndefined(giftunitState.selectedCountry)) {
       return get(giftunitState, 'selectedCurrency.unit_name_short')
@@ -153,14 +151,14 @@ function Cart() {
    */
   const convertedGiftiPoints = React.useCallback(() => {
     if (isNull(giftGlobalPoints)) return null
-    if(selectedCurrency && selectedCurrency.id && conversionrate){
-      let pointsToCurrency = giftGlobalPoints * conversionrate;
+    if(selectedCurrency && selectedCurrency.id && conversionRate){
+      let pointsToCurrency = giftGlobalPoints * conversionRate;
       return parseFloat(pointsToCurrency).toFixed(2)
     }
     else {
       return giftGlobalPoints
     }
-  },[useGiftiPoints, conversionrate])
+  },[useGiftiPoints, conversionRate])
 
   // let checkoutValue = 0;
   // let convertedUserCredits = get(giftunitState, 'selectedCurrency.id') !== 1  ? (convertedAmount * conversionRate) : convertedAmount;
@@ -177,10 +175,7 @@ function Cart() {
               <div className="flex-shrink-1 cart-currency p-1">
                 <small>Select Payment Currency</small>
                 <span className="mx-2">|</span>
-                <Dropdown
-                  className="d-inline"
-                  onSelect={(e) => handleChangeCurreny(e)}
-                >
+                <Dropdown className="d-inline" onSelect={e => handleChangeCurreny(e)}>
                   <DropdownToggle
                     as={CustomToggle}
                     id="dropdown-custom-components"></DropdownToggle>
@@ -195,9 +190,7 @@ function Cart() {
                 <small>{currencyShort()}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">
-              {currencyShort()} {convertedAmount()}
-            </h4>
+            <h4 className="mt-2 mb-3">{currencyShort()} {convertedAmount()}</h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
               <span>{currencyShort()} {lineValue ? convertedAmount(): 0}</span>
@@ -322,3 +315,5 @@ function Cart() {
 }
 
 export default Cart;
+
+

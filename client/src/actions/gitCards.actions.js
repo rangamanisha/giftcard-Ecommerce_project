@@ -17,7 +17,7 @@ export const getConversionRateAction = createAsyncThunk(
   "giftcards/listPaymentConversions",
   async (payload, thunkAPI) => {
     const request = {
-      currency: payload.currency,
+      currency: payload,
     };
     const response = await getConversionRateService(request);
     return response;
