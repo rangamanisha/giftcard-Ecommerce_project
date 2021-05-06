@@ -1,4 +1,7 @@
 import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import AllCategoryCards from "./AllCategoryCards";
 import { categoryAction } from "../actions/category.actions";
@@ -95,33 +98,37 @@ function AllGiftCard() {
     });
   });
   return (
-    <div className="allGiftCard">
-      <div>
-        <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
-        <p className="giftiallcard-text-a">Browse by Category</p>
-        <AllCategoryCards />
-      </div>
-      <div className="gificards">
-        {isEmpty(get(brandState, "brands"))
-          ? map(allTheBrands, (brand, i) => (
-              <>
-                <Giftcard brand={brand} />
-              </>
-            ))
-          : map(get(brandState, "brands"), (brand, i) => (
-              <>{i <= 15 ? <Giftcard brand={brand} /> : null}</>
-            ))}
-      </div>
-      <div className="text-center">
-        <button
-          onClick={() => history.push("AllCards")}
-          type="button"
-          className="mt-3 startgf-fields-button btn btn-info btn-md"
-        >
-          Load More
-        </button>
-      </div>
-    </div>
+    <Container>
+      <Row className="allGiftCard-box">
+        <Col>
+          <div>
+            <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
+            <p className="giftiallcard-text-a">Browse by Category</p>
+            <AllCategoryCards />
+          </div>
+          <div className="gificards ">
+            {isEmpty(get(brandState, "brands"))
+              ? map(allTheBrands, (brand, i) => (
+                  <>
+                    <Giftcard brand={brand} />
+                  </>
+                ))
+              : map(get(brandState, "brands"), (brand, i) => (
+                  <>{i <= 15 ? <Giftcard brand={brand} /> : null}</>
+                ))}
+          </div>
+          <div className="text-center">
+            <button
+              onClick={() => history.push("AllCards")}
+              type="button"
+              className="mt-3 startgf-fields-button btn btn-info btn-md"
+            >
+              Load More
+            </button>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

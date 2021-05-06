@@ -140,10 +140,12 @@ const Topbar = (props) => {
                 alt="shoppingcart-icon"
                 onClick={() => history.push("/cart")}
               />
-              <span class="badge badge-warning" id="lblCartCount">
-                {" "}
-                {cartLineCount}
-              </span>
+              {cartLineCount > 0 ? (
+                <span class="badge badge-danger" id="lblCartCount">
+                  {" "}
+                  {cartLineCount}
+                </span>
+              ) : null}
             </Button>
           </div>
         </div>

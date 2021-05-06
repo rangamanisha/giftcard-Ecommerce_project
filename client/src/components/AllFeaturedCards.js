@@ -1,4 +1,7 @@
 import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { map, isEmpty } from "lodash";
 import { featureBrandsAction } from "../actions/brands.action";
@@ -22,6 +25,7 @@ const AllFeaturedCards = () => {
     { width: 1200, itemsToShow: 4 },
   ];
   React.useEffect(() => {
+    console.log("hello");
     dispatch(
       featureBrandsAction({
         currency: giftunitState.giftunit_id,
@@ -35,31 +39,38 @@ const AllFeaturedCards = () => {
 
   return (
     <div>
+      <div></div>
       <div className="cardgifiti-card">
-        <p className="giftiallcard-text">{`Brands recommended for you in the ${nowCountry}`}</p>
-        <p className="allgiftcard-text">
-          {`Buy Most Popular eGift Cards in ${nowCountry}`}
-          <br />
-          Personalized gift vouchers delivered online & redeemable at popular
-          Brands
-        </p>
-        <div className="carosel_images">
-          {
-            <>
-              <Carousel pagination={0} breakPoints={breakPoints}>
-                {map(get(brandsWithfeatutre, "brands"), (brand, i) => (
-                  <Item>
-                    <>
-                      <Link to="/selectcard">
-                        <Giftcard brand={brand} />
-                      </Link>
-                    </>
-                  </Item>
-                ))}
-              </Carousel>
-            </>
-          }
-        </div>
+        <Container>
+          <Row>
+            <Col>
+              <p className="giftiallcard-text">{`Brands recommended for you in the ${nowCountry}`}</p>
+              <p className="allgiftcard-text">
+                {`Buy Most Popular eGift Cards in ${nowCountry}`}
+                <br />
+                Personalized gift vouchers delivered online & redeemable at
+                popular Brands
+              </p>
+              <div className="carosel_images">
+                {
+                  <>
+                    <Carousel pagination={0} breakPoints={breakPoints}>
+                      {map(get(brandsWithfeatutre, "brands"), (brand, i) => (
+                        <Item>
+                          <>
+                            <Link to="/selectcard">
+                              <Giftcard brand={brand} />
+                            </Link>
+                          </>
+                        </Item>
+                      ))}
+                    </Carousel>
+                  </>
+                }
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </div>
   );
