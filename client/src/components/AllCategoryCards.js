@@ -12,18 +12,14 @@ import {
   featureBrandsAction,
 } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
-import { getTopBarState } from "../reducer/topbar.reducer";
-import { giftCardsUnitAction } from "../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
-import { useHistory, Link } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 
 function AllCategoryCards() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const state = useSelector(getCategoryState);
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState);
   const giftunitState = useSelector(getGiftcardsState);
   const categories = get(state, "data");
   const brandsWithCategory = get(brandState, "allBrands");
@@ -42,7 +38,7 @@ function AllCategoryCards() {
         program_id: 1,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       allBrandAction({
@@ -53,7 +49,7 @@ function AllCategoryCards() {
         list_type: "group",
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       giftCardsUnitAction({
@@ -62,7 +58,7 @@ function AllCategoryCards() {
         giftunit_id: giftunitState.giftunit_id,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       featureBrandsAction({
@@ -70,7 +66,7 @@ function AllCategoryCards() {
         program_id: 1,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
 
   const getCardsWithCategory = (category) => {
     const { id, name } = category;
@@ -84,18 +80,6 @@ function AllCategoryCards() {
     );
     setActiveCategory(id);
   };
-
-  const nowCountry = isEmpty(get(giftunitState, "selectedCountry"))
-    ? get(giftunitState, "countries[0].country_name")
-    : get(giftunitState, "selectedCountry");
-  const allTheBrands = [];
-  map(brandsWithCategory, (category) => {
-    map(get(category, "brands"), (brand) => {
-      if (allTheBrands.length <= 14) {
-        allTheBrands.push(brand);
-      } else return null;
-    });
-  });
 
   return (
     <div className="allGiftCard">

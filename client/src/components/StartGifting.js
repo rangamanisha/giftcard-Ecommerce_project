@@ -89,7 +89,7 @@ const StartGifting = () => {
                       <Form.Control
                         as="select"
                         className="mr-sm-2"
-                        id="inlineFormCustomSelect"
+                        id="inlineFormCustomSelect2"
                         custom
                       >
                         <option value="0" selected="selected">

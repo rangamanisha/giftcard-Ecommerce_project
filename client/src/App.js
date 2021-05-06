@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import Signup from "./components/Registration";
 import AllCards from "./components/AllCards";
 import AllOrder from "./components/Orders/AllOrder";
-import Idc_Signin from "./components/IDC/IdcSign";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -21,7 +20,6 @@ import GiftiNav from "./components/shared/Navbar/GiftiNav";
 import EditProfile from "./components/EditProfile";
 import Footer from "./components/shared/Footer";
 import RewardPoints from "./components/RewardPoints";
-import Idc_Header from "./components/IDC/IdcHeader";
 // import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
 // import Contact from './components/shared/ContactPage/Contact';
 // import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
@@ -30,7 +28,6 @@ import Checkout from "./components/checkout";
 import StepsDemo from "./components/stepper";
 import EmptyCart from "./components/shared/EmptyCartPage/EmptyCart";
 import Cart from "./components/Cart/Cart";
-import Idc_Order from "./components/IDC/IdcOrder";
 
 function App() {
   return (

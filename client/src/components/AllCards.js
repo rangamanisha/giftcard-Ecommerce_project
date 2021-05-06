@@ -12,7 +12,7 @@ import {
 } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
 import { getTopBarState } from "../reducer/topbar.reducer";
-import { giftCardsUnitAction } from "../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import AllFeaturedCards from "./AllFeaturedCards";
 import Giftcard from "./Giftcard";

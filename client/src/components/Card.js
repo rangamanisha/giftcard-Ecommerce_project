@@ -25,7 +25,7 @@ import { useHistory } from "react-router-dom";
 const card = () => {
   return (
     <div className="container-fluid">
-      <div className="cardgifiti custom-card row mx-auto mt-5">
+      <div className="cardgifiti custom-card row mx-auto">
         <p className="gifticard-text">
           Gifti Global Makes
           <br />

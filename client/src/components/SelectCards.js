@@ -17,7 +17,7 @@ import {
   giftCardsUnitAction,
   getConversionRateAction,
   getPaymentCurrencyAction,
-} from "../actions/gitCards.actions";
+} from "../actions/giftcards.actions";
 import {
   getGiftcardsState,
   giftCardsAction,

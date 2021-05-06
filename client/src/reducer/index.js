@@ -37,7 +37,6 @@ const loadFromLocalStorage = () => {
     return undefined;
   }
 };
-const persistedState = loadFromLocalStorage();
 
 const store = configureStore({
   reducer: {

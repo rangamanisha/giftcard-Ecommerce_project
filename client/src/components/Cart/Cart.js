@@ -9,7 +9,7 @@ import { getAuthState } from "../../reducer/auth.reducer";
 import {
   getConversionRateAction,
   giftCardsUnitAction,
-} from "../../actions/gitCards.actions";
+} from "../../actions/giftcards.actions";
 import {
   getGiftcardsState,
   giftCardsAction,

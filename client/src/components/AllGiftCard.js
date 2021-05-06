@@ -14,27 +14,18 @@ import {
 } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
 import { getTopBarState } from "../reducer/topbar.reducer";
-import { giftCardsUnitAction } from "../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Giftcard from "./Giftcard";
 
 function AllGiftCard() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const state = useSelector(getCategoryState);
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState);
   const giftunitState = useSelector(getGiftcardsState);
-  const categories = get(state, "data");
   const brandsWithCategory = get(brandState, "allBrands");
   const [activeCategory, setActiveCategory] = React.useState();
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 7 },
-    { width: 1200, itemsToShow: 8 },
-  ];
 
   React.useEffect(() => {
     dispatch(

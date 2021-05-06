@@ -12,7 +12,7 @@ import {
 } from "../../../reducer/giftCards.reducer";
 import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
-import { giftCardsUnitAction } from "../../../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../../../actions/giftcards.actions";
 import { isEmpty, get, sortBy } from "lodash";
 //Countries are comming from giftunit
 const GiftiNav = () => {

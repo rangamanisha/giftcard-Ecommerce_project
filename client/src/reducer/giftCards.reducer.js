@@ -7,7 +7,7 @@ import {
   giftCardsUnitAction,
   getPaymentCurrencyAction,
   getConversionRateAction,
-} from "../actions/gitCards.actions";
+} from "../actions/giftcards.actions";
 
 export const GIFTCARDS_INIT_STATE = {
   message: "",
