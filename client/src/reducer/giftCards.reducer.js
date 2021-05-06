@@ -14,7 +14,7 @@ export const GIFTCARDS_INIT_STATE = {
     message: "",
     errors: '',
     giftingTo: '',
-    currency: "1",
+    currency: '',
     dest_currency: "",
     source_currency:"",
     giftunit_id: 1,

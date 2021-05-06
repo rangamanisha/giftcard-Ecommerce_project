@@ -15,16 +15,20 @@ import { getGiftcardsState, giftCardsAction } from '../reducer/giftCards.reducer
 import { get, map, isEmpty, isUndefined, filter, assign, isEqual } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { getCartItemsState, cartAction } from '../reducer/cart.reducer';
+import {cartItemAction, fetchItemsByCartAction} from '../actions/cart.actions';
+import {getAuthState} from '../reducer/auth.reducer'
 
 
 const SelectCards = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const state = useSelector(getAuthState)
     const [eventKey11, seteventkey] = useState(1);
     const [tempvisible, setTempVisible] = useState(true);
     const giftunitState = useSelector(getGiftcardsState);
     const productAndTermState = useSelector(getBrandsState);
     const cartState = useSelector(getCartItemsState);
+    let country = get(giftunitState, 'selectedCountry')
     const card = giftunitState.selectedBrand;
     const payment = giftunitState.selectedCountry;
     const count = get(cartState, 'count')
@@ -48,6 +52,7 @@ const SelectCards = () => {
             setRate(inc)
         }
     }
+    
     const decrement = () => {
         if (count == 0) {
             return null
@@ -73,18 +78,15 @@ const SelectCards = () => {
 
     React.useEffect(() => {
         dispatch(termBrandAction({
-            currency: 1,
+            currency: '1',
             id: get(card, 'id')
         }))
         dispatch(descriptionBrandAction({
-            currency: 1,
+            currency: '1',
             program_id: 1,
             id: get(card, 'id'),
             image_size: "medium_rectangle",
             image_type: "Color",
-        }))
-        dispatch(getConversionRateAction({
-            brand_id: get(card, 'id')
         }))
     }, [get(card, 'id')])
 
@@ -93,8 +95,13 @@ const SelectCards = () => {
             currency: 1,
             brand_id: 451
         }))
+        if(country.id && country.id) {
+        dispatch(getConversionRateAction({
+            brand_id: get(country, 'id')
+        }))
+        }
 
-    }, [dispatch])
+    }, [dispatch, country])
 
     React.useEffect(() => {
         dispatch(giftCardsUnitAction({
@@ -115,10 +122,15 @@ const SelectCards = () => {
         else if (isEqual(itemInCart, selectedBrand)) {
             return null
         }
+
         else {
+              if(state.isAuthenticated){
+              }
             dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count, giftingTo: gift_to })))
         }
+
     }
+    
     return (
         <>
             <div className="row">
@@ -127,7 +139,7 @@ const SelectCards = () => {
                     <p className="select-card-text-lg">{get(card, 'name')}</p>
                     <p className="select-card-text">{`Select Card Value (${get(payment, 'unit_name_short')})`}</p>
                     <div className="mt-3">
-                        {map(get(productAndTermState, 'description.brand.denominations'), d =>
+                        {map(get(giftunitState, 'selectedBrand.denominations'), d =>
                             <Button variant="outline-info" className="mr-sm-3 select-card-button mt-2" onClick={() => handleDenomination(d)}>{parseFloat(d)}</Button>)}
                     </div>
                     <p className="select-card-text mt-5">Gifting for</p>

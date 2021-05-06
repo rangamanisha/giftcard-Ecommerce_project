@@ -4,14 +4,13 @@ import { get, isEmpty, map, assign, reduce, isNull, isUndefined } from 'lodash';
 import { Col, Image, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getAuthState } from '../../reducer/auth.reducer';
 import { getConversionRateAction, giftCardsUnitAction } from '../../actions/gitCards.actions';
 import { getGiftcardsState, giftCardsAction } from '../../reducer/giftCards.reducer';
 import { getRewardPointsState } from '../../reducer/rewardpoints.reducer';
 import { getRewardPointsAction } from '../../actions/rewardpoints.actions';
 import { cartAction, getCartItemsState } from '../../reducer/cart.reducer';
-
+import {cartItemAction, fetchItemsByCartAction} from '../../actions/cart.actions'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Dropdown } from 'react-bootstrap';
@@ -153,7 +152,6 @@ function Cart() {
    * @returns 
    */
   const convertedGiftiPoints = React.useCallback(() => {
-    debugger
     if (isNull(giftGlobalPoints)) return null
     if(selectedCurrency && selectedCurrency.id && conversionrate){
       let pointsToCurrency = giftGlobalPoints * conversionrate;

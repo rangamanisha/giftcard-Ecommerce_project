@@ -1,7 +1,5 @@
-import { apiCall } from "./api";
 
-export const API_URL = process.env.REACT_APP_API_URL;
-
+import { apiCall, API_URL } from "./api";
 export const categorylistAPI = (categoryOptions) => {
   const {
     currency,
