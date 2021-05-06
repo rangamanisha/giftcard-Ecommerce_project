@@ -5,6 +5,7 @@ import {
   resetpasswordAPI,
   forgotpasswordAPI,
   googleloginAPI,
+  updatepasswordAPI,
 } from "../services/auth.service";
 
 export const loginAction = createAsyncThunk(
@@ -76,14 +77,13 @@ export const updatepasswordAction = createAsyncThunk(
       change_password: {
         password: payload.password,
         password_confirmation: payload.password_confirmation,
-      }
+      },
     };
 
     const response = await updatepasswordAPI(request);
     return response;
   }
 );
-
 
 export const forgotpasswordAction = createAsyncThunk(
   "auth/forgotpassword",

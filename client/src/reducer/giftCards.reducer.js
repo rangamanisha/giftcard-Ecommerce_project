@@ -8,22 +8,21 @@ import {
   getPaymentCurrencyAction,
   getConversionRateAction,
 } from "../actions/gitCards.actions";
-import { filter, get } from "lodash";
 
 export const GIFTCARDS_INIT_STATE = {
-    message: "",
-    errors: '',
-    giftingTo: '',
-    currency: "1",
-    dest_currency: "",
-    source_currency:"",
-    giftunit_id: 1,
-    countries: [],
-    selectedCountry: {},
-    selectedBrand:[],
-    selectedCurrency: undefined,
-    conversion: undefined,
-}
+  message: "",
+  errors: "",
+  giftingTo: "",
+  currency: "1",
+  dest_currency: "",
+  source_currency: "",
+  giftunit_id: 1,
+  countries: [],
+  selectedCountry: {},
+  selectedBrand: [],
+  selectedCurrency: undefined,
+  conversion: undefined,
+};
 
 export const GIFTCARD_REDUCER = "giftCards";
 export const giftcardsAdaptor = createEntityAdapter();
@@ -42,10 +41,8 @@ export const giftcardSlice = createSlice({
       state.giftingTo = action.payload;
     },
     selectCountry(state, action) {
-      let country = filter(state.countries, {
-        country_name: action.payload,
-      })[0];
-      state.giftunit_id = get(country, "id");
+      let country = action.payload;
+      state.giftunit_id = country?.id || "";
       state.selectedCountry = country;
     },
     selectBrand(state, action) {
@@ -72,7 +69,7 @@ export const giftcardSlice = createSlice({
         const response = action.payload;
         const { data, code } = response;
         if (200 === code) {
-          const gift_cards = get(data, "giftcard_units");
+          const gift_cards = data?.giftcard_units;
           state.countries = gift_cards;
         }
       })

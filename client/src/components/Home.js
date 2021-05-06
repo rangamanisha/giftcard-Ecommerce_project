@@ -41,8 +41,6 @@ const Home = () => {
     }
   }, [dispatch, useractive.verified, history]);
 
-  
-
   useEffect(() => {
     if (state.alertlogin) {
       setIsValid(true);

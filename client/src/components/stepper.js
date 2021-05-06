@@ -3,6 +3,8 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 import GuestFrom from "./guestform";
 import Checkout from "./checkout";
+import { useSelector } from "react-redux";
+import { getAuthState } from "../reducer/auth.reducer";
 
 const Stepper = () => {
   // setup step validators, will be called before proceeding to the next step
@@ -20,10 +22,12 @@ const Stepper = () => {
     // when the submit button (next button in the previous steps) is pressed
   }
 
+  const authState = useSelector(getAuthState);
+
   return (
     // render the progress bar
     <StepProgressBar
-      startingStep={0}
+      startingStep={authState.isAuthenticated ? 1 : 0}
       onSubmit={onFormSubmit}
       steps={[
         {

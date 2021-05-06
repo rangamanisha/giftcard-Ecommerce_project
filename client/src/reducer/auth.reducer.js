@@ -9,7 +9,7 @@ import {
   resetpasswordAction,
   forgotpasswordAction,
   googlesigninAction,
-  updatepasswordAction
+  updatepasswordAction,
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {

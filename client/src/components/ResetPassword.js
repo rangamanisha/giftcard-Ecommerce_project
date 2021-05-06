@@ -5,7 +5,10 @@ import Passwordicon from "../assets/Password-icon.svg";
 import * as Yup from "yup";
 import { getAuthState } from "../reducer/auth.reducer";
 import { useFormik } from "formik";
-import { resetpasswordAction, updatepasswordAction } from "../actions/auth.actions";
+import {
+  resetpasswordAction,
+  updatepasswordAction,
+} from "../actions/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 

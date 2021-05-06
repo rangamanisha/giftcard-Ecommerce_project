@@ -7,7 +7,6 @@ import {
   getCountriesListAction,
   selectCountryAction,
 } from "../actions/topbar.actions";
-import { filter } from "lodash";
 
 export const TOPBAR_INITIAL_STATE = {
   countries: [],
