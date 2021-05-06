@@ -112,22 +112,20 @@ const SelectCards = () => {
     }, [giftunitState.giftunit_id, dispatch])
 
     const saveTocart = () => {
-        const itemInCart = filter(get(cartState, 'lineItems'), { id: get(card, 'id') })[0]
-        const selectedBrand = assign({}, card, { quantity: count, giftingTo: gift_to})
-        if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
-            dispatch(
-                dispatch(cartAction.updateLineItem(selectedBrand))
-            )
-        }
-        else if (isEqual(itemInCart, selectedBrand)) {
-            return null
-        }
+        // const itemInCart = filter(get(cartState, 'lineItems'), { id: get(card, 'id') })[0]
+        // const selectedBrand = assign({}, card, { quantity: count, giftingTo: gift_to})
+        // if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
+        //     dispatch(
+        //         dispatch(cartAction.updateLineItem(selectedBrand))
+        //     )
+        // }
+        // else if (isEqual(itemInCart, selectedBrand)) {
+        //     return null
+        // }
 
-        else {
-              if(state.isAuthenticated){
-              }
+         
             dispatch(cartAction.saveItemsToCart(assign({}, card, { quantity: count, giftingTo: gift_to })))
-        }
+        
 
     }
     
