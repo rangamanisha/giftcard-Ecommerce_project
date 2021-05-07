@@ -89,7 +89,7 @@ function AllGiftCard() {
     });
   });
   return (
-    <Container>
+    <Container fluid className="all-gift-card-container">
       <Row className="allGiftCard-box">
         <Col>
           <div>

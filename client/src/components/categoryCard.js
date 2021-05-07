@@ -12,7 +12,7 @@ function categoryCard({ category, nowActive }) {
         <img
           src={normal_square}
           alt="Icon"
-          className="rounded img-thumbnail"
+          className="rounded"
           style={{ maxWidth: "50px" }}
         />
         <br />

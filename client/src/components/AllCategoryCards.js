@@ -86,20 +86,20 @@ function AllCategoryCards() {
       <div className="slideclass" id="categorycarousel">
         <Carousel pagination={0} breakPoints={breakPoints}>
           <Item>
-            <div className="transparentButton">
+            <button className="transparentButton">
               <div className="box">
                 <a>
                   <img
                     src={Allmenu}
                     alt="Icon"
-                    className="rounded img-thumbnail"
+                    className="rounded"
                     style={{ maxWidth: "50px" }}
                   />
                   <br />
                   <p className="products_icons">All Gift Cards</p>
                 </a>
               </div>
-            </div>
+            </button>
           </Item>
           {!isEmpty(categories) &&
             map(categories, (category) => (

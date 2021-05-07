@@ -293,14 +293,13 @@ opacity: 1;
 }
 
 .login-card {
-  margin-top: 65px;
-  top: 40px;
-  left: 130px;
-  width: 500px;
-  height: 640px;
+  padding: 0 25px;
+  font-family: Open Sans, bold;
+  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
   border-radius: 12px;
   background-color: #ffffff !important;
-  font-family: Open Sans, bold;
   color: #03014c;
   box-shadow: 0px 2px 28px #3e357824;
 }
@@ -344,22 +343,21 @@ opacity: 1;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
-.forgot-password{
-  top: 40px;
-  left: 130px;
-  width: 500px;
-  height: 450px;
-  margin-top: 100px;
+.forgot-password {
+  padding: 50px 25px;
+  font-family: Open Sans, bold;
+  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
   border-radius: 12px;
   background-color: #ffffff !important;
-  font-family: Open Sans, bold;
   color: #03014c;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
 .login-text {
   font-family: OpenSans-Bold;
-  font-size: 33.3079833984375px;
+  font-size: 27px;
   color: #03014c;
   opacity: 1;
 }
@@ -369,43 +367,66 @@ opacity: 1;
   color: #03014c;
   opacity: 0.6;
 }
-
+.google button.google-button span {
+  display: none;
+}
 .btn-custom {
-  width: 385px;
-  height: 60px;
-  margin-left: 58px;
+  width: 100%;
   font-family: Cairo-bold;
   font-size: 18px;
   color: white;
 }
 
-.google-button {
-  margin-left: 100px;
-  height: 65px;
-  width: 160px;
-  border-radius: 12px;
+button.google-button div {
+  margin-right: 0 !important;
+  background: unset !important;
+  padding: 0 !important;
+}
+button.google-button {
+  display: block !important;
+  box-shadow: unset !important;
+}
+.social-btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 25px 0 !important;
 }
 
-.facebook-button {
-  height: 65px;
-  width: 160px;
-  border-radius: 12px;
+.redio-forgot .form-group label,.redio-forgot .form-group a, td.login-bottom-text {
+  color: gray !important;
+  font-size: 14px;
 }
 
-.singup-input {
-  margin-left: 77px;
-  width: 179px !important;
+.social-btn button {
+  width: 150px !important;
+  height: 40px;
+  box-shadow: unset !important;
+  padding: 0 !important;
+  border: 1px solid #dfdfdf !important;
+  border-radius: 10px !important;
+}
+.facebook {
+  width: 50%;
+  text-align: right;
+}
+.google {
+  width: 50%;
+}
+.social-btn button:hover {
+  background: #e7e7e7 !important;
 }
 
+.social-btn button img {
+  width: 100% !important;
+  height: 100% !important;
+}
 .profile-input{
 margin-left:75px;
 }
 
 .profile{
 padding-top: 78px;
-}
-.singup-inputfield{
-  width: 179px ! important; 
 }
 
 .profile-inputfield{
@@ -440,12 +461,12 @@ border: 1px solid #00B2AE !important;
 .icons_fields {
   margin: 0;
   padding-left: 60px;
-  height: 60px;
+  height: 50px;
+  font-size: 13px;
 }
-
 .icons_fields_b {
-  height: 60px;
-  padding-left: 30px;
+  height: 50px;
+  font-size: 13px;
 }
 
 .profile-iconsfields{
@@ -471,7 +492,7 @@ border: 1px solid #00B2AE !important;
 
 .icon_img {
   position: absolute;
-  bottom: 21px;
+  bottom: 16px;
   left: 24px;
 }
 
@@ -547,7 +568,7 @@ border: 1px solid #00B2AE !important;
   width: 100%;
   min-height: max-content;
   // display: flex;
-  background-color: #00B2AE;
+  background-color: #e3e3e3;
 }
 
 .box:hover a {
@@ -617,7 +638,15 @@ button.login.btn.btn-light.btn-lg {
 .allGiftCard-box button.rec-arrow {
     position: initial;
 }
-
+.allgiftcards-sec .cardgifiti-card {
+  margin-top: 0 !important;
+}
+.giftiallcard-row-3 .gificards {
+  padding-top: 0;
+}
+.giftiallcard-row-3 {
+  padding: 40px 0;
+}
 #basic-nav-dropdown.dropdown-toggle.nav-link {
   color: #00B2AE !important;
   opacity: 1 !important;
@@ -1048,13 +1077,21 @@ height: 35%;
 .popup-btn{
   width: 55%;
 }
-input#formHorizontalRadios1,input#formHorizontalRadios2 {
-  width: 21px !important;
-  height: 19px !important;
+// input#formHorizontalRadios1,input#formHorizontalRadios2 {
+//   width: 21px !important;
+//   height: 19px !important;
+// }
+.redio-forgot {
+  display: flex;
+  width: 100%;
 }
-label.form-check-label {
-  padding-left: 11px !important;
+.redio-forgot .form-group{
+  width: 50%;
 }
+.forgot.form-group {
+  text-align: end;
+}
+
 #product .nav-link {
   font-family: 'Open Sans';
   font-size: 18px;
@@ -1205,4 +1242,14 @@ body {
 .giftiallcard-text {
   font-size: 20px;
 }
+.social-btn button {
+  width: 130px !important;
+}
+.login-text {
+  font-size: 22px;
+}
+}
+
+.all-gift-card-container {
+  padding: 0em 5em;
 }
