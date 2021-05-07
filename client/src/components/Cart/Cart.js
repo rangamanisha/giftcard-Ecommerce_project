@@ -90,6 +90,12 @@ function Cart() {
   const handleUpdate = (item, operation) => {
     const _item = assign({}, item);
     const { quantity } = _item;
+    const index = map(lineItems, (Item, index) => {
+      if(Item.id === _item.id && Item.selectedDenomination === _item.selectedDenomination){
+        return index
+      }
+    })
+    console.log(index)
     switch (operation) {
       case "add":
         if (quantity >= 5) return null;
