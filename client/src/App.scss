@@ -61,7 +61,9 @@ $theme-colors: (
   src: local('Poppins-Regular'), url(./assets/fonts/Poppins-Regular.ttf) format('truetype');
 }
 
-
+html {
+   padding: 0 !important ;
+  }
 
 #root {
   overflow: hidden;
@@ -70,22 +72,19 @@ $theme-colors: (
 .cardgifiti {
   background-color: #F2FBFB !important;
   border-radius: 1.25rem;
-  width: 85%;
 }
 
 .cardgifiti-startgf {
-  top: 40px;
-  left: 130px;
-  width: 1260px;
-  height: 340px;
+  
+  padding-bottom: 50px;
   background-color: #F2FBFB !important;
   box-shadow: 0px 2px 28px #3E357824;
 }
 
 .cardgifiti-card {
-  margin-top: 85px;
+  margin-top: 50px;
+  padding: 40px 0;
   width: auto;
-  height: 400px;
   background-color: #e8f8f8 !important;
 }
 
@@ -102,42 +101,66 @@ $theme-colors: (
   height: 500px;
   background-color: #f2fbfb !important;
 }
-
+.card-text-container {
+  padding-left: 50px;
+}
+.widgets_div .icon_div img {
+  width: 85px;
+  object-fit: none;
+}
+.card-text-btn button.custom-button svg {
+  margin-left: 10px;
+}
+.card-text-btn button.custom-button {
+  font-weight: 100;
+  box-shadow: 0 2px 6px -1px #808080;
+}
+.card-text-btn .btn-outline-secondary {
+  color: #000;
+}
 .gifticard-text {
   font-family: Cairo-Bold;
   font-style: normal;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 39px;
   color: #11142d;
   letter-spacing: 0px;
+  line-height: 45px;
 }
 
 .giftiallcard-text {
   font-family: Cairo-Bold;
-  margin-top: 50px;
-  margin-left: 130px;
-  padding-top: 28px;
   font-style: normal;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 30px;
   color: rgba(17, 20, 45, 1);
 }
 
 .giftiallcard-text-a {
   font-family: Cairo-Bold;
-  margin-left: 130px;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
   color: rgba(17, 20, 45, 1);
 }
+.allGiftCard-box {
+  padding: 40px 0;
+}
+.allGiftCard-box .box img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.allGiftCard-box .allGiftCard {
+  background: #f3f9f9;
+}
 
 .startgf-text {
-  margin-top: 50px;
+  margin-top: 40px;
   font-family: 'Cairo-Bold';
   font-style: normal;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 40px;
   color: #11142d;
   opacity: 1;
 }
@@ -162,12 +185,7 @@ $theme-colors: (
   margin-bottom: 45px;
 }
 
-.gificards {
-  margin-top: 34px;
-  text-align: left;
-  margin-left: 112px;
-  margin-right: 112px;
-}
+
 .amttext
 {
   font-style: Cairo-SemiBold;
@@ -197,20 +215,11 @@ opacity: 1;
   height: 180px;
   width: 270px;
   margin:18px 25px!important;
-}
-
-.imgcards:hover {
-  transform: translateY(-0.166666666rem);
-  box-shadow: 0 0.25rem 1rem 0 rgba(33, 40, 50, 0.25);
-  cursor: pointer;
+  border-radius: 12px;
 }
 
 .home-footer {
-  top: 40px;
-  left: 130px;
-  margin-top: 85px;
   width: auto;
-  height: 340px;
   background-color: #ffffff !important;
 }
 
@@ -218,17 +227,17 @@ opacity: 1;
   font-family: OpenSans-Regular;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
-  color: rgba(6, 4, 10, 1);
+  font-size: 13px;
+  color: #06040a;
+  line-height: 24px;
   opacity: 1;
 }
 
 .Gifti_Global_is {
-  margin-left: 32px;
   font-family: Cairo-SemiBold;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   color: rgba(6, 4, 10, 1);
   opacity: 1;
 }
@@ -238,7 +247,7 @@ opacity: 1;
   font-family: Cairo-Regular;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 13px;
   color: rgba(84, 78, 93, 1);
 }
 
@@ -284,14 +293,13 @@ opacity: 1;
 }
 
 .login-card {
-  margin-top: 65px;
-  top: 40px;
-  left: 130px;
-  width: 500px;
-  height: 640px;
+  padding: 0 25px;
+  font-family: Open Sans, bold;
+  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
   border-radius: 12px;
   background-color: #ffffff !important;
-  font-family: Open Sans, bold;
   color: #03014c;
   box-shadow: 0px 2px 28px #3e357824;
 }
@@ -335,22 +343,21 @@ opacity: 1;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
-.forgot-password{
-  top: 40px;
-  left: 130px;
-  width: 500px;
-  height: 450px;
-  margin-top: 100px;
+.forgot-password {
+  padding: 50px 25px;
+  font-family: Open Sans, bold;
+  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
   border-radius: 12px;
   background-color: #ffffff !important;
-  font-family: Open Sans, bold;
   color: #03014c;
   box-shadow: 0px 2px 28px #3e357824;
 }
 
 .login-text {
   font-family: OpenSans-Bold;
-  font-size: 33.3079833984375px;
+  font-size: 27px;
   color: #03014c;
   opacity: 1;
 }
@@ -360,43 +367,66 @@ opacity: 1;
   color: #03014c;
   opacity: 0.6;
 }
-
+.google button.google-button span {
+  display: none;
+}
 .btn-custom {
-  width: 385px;
-  height: 60px;
-  margin-left: 58px;
+  width: 100%;
   font-family: Cairo-bold;
   font-size: 18px;
   color: white;
 }
 
-.google-button {
-  margin-left: 100px;
-  height: 65px;
-  width: 160px;
-  border-radius: 12px;
+button.google-button div {
+  margin-right: 0 !important;
+  background: unset !important;
+  padding: 0 !important;
+}
+button.google-button {
+  display: block !important;
+  box-shadow: unset !important;
+}
+.social-btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 25px 0 !important;
 }
 
-.facebook-button {
-  height: 65px;
-  width: 160px;
-  border-radius: 12px;
+.redio-forgot .form-group label,.redio-forgot .form-group a, td.login-bottom-text {
+  color: gray !important;
+  font-size: 14px;
 }
 
-.singup-input {
-  margin-left: 77px;
-  width: 179px !important;
+.social-btn button {
+  width: 150px !important;
+  height: 40px;
+  box-shadow: unset !important;
+  padding: 0 !important;
+  border: 1px solid #dfdfdf !important;
+  border-radius: 10px !important;
+}
+.facebook {
+  width: 50%;
+  text-align: right;
+}
+.google {
+  width: 50%;
+}
+.social-btn button:hover {
+  background: #e7e7e7 !important;
 }
 
+.social-btn button img {
+  width: 100% !important;
+  height: 100% !important;
+}
 .profile-input{
 margin-left:75px;
 }
 
 .profile{
 padding-top: 78px;
-}
-.singup-inputfield{
-  width: 179px ! important; 
 }
 
 .profile-inputfield{
@@ -431,12 +461,12 @@ border: 1px solid #00B2AE !important;
 .icons_fields {
   margin: 0;
   padding-left: 60px;
-  height: 60px;
+  height: 50px;
+  font-size: 13px;
 }
-
 .icons_fields_b {
-  height: 60px;
-  padding-left: 30px;
+  height: 50px;
+  font-size: 13px;
 }
 
 .profile-iconsfields{
@@ -462,7 +492,7 @@ border: 1px solid #00B2AE !important;
 
 .icon_img {
   position: absolute;
-  bottom: 21px;
+  bottom: 16px;
   left: 24px;
 }
 
@@ -485,27 +515,24 @@ border: 1px solid #00B2AE !important;
 
 .startgf-fields-text {
   font-family: 'Cairo-SemiBold';
-  font-size: 20px;
+  font-size: 18px;
+  margin-top: 14px;
   color: #11142d;
 }
 
 .startgf-fields-button {
-  box-shadow: 0px 2px 5px #00000033;
+  box-shadow: 0 2px 6px -1px #808080;
   padding: 10px 60px;
   border-radius: 10px;
 }
 
 .allgiftcard-text {
-  margin-left: 129px;
   font-family: 'Open Sans';
   font-weight: 500;
   font-size: 14px;
+
 }
 
-
-.allgiftcard{
-  background-color: #393939;
-}
 // .scroll {
 //   margin-left: 130px;
 //   overflow-x: auto;
@@ -541,7 +568,7 @@ border: 1px solid #00B2AE !important;
   width: 100%;
   min-height: max-content;
   // display: flex;
-  background-color: #00B2AE;
+  background-color: #e3e3e3;
 }
 
 .box:hover a {
@@ -605,8 +632,21 @@ button.login.btn.btn-light.btn-lg {
   font-family: 'Open Sans';
   margin-top: 6px;
   text-align: center;
+  color: #000;
+  font-weight: 600;
 }
-
+.allGiftCard-box button.rec-arrow {
+    position: initial;
+}
+.allgiftcards-sec .cardgifiti-card {
+  margin-top: 0 !important;
+}
+.giftiallcard-row-3 .gificards {
+  padding-top: 0;
+}
+.giftiallcard-row-3 {
+  padding: 40px 0;
+}
 #basic-nav-dropdown.dropdown-toggle.nav-link {
   color: #00B2AE !important;
   opacity: 1 !important;
@@ -730,13 +770,12 @@ border-radius: 10px;
   font-size: 11px;
 }
 
-.startgiftingimg {
-  padding: 0px 20px;
+.icon-margin {
+  padding: 0rem 0rem 0rem 50px
 }
 
-.carosel_images{
-  margin: 0px 72px !important;
-}
+
+
 .transparentButton {
   border: none !important;
   background-color: transparent;
@@ -751,7 +790,18 @@ border-radius: 10px;
   min-height: max-content;
 }
 
-
+button.rec-arrow{
+  position: absolute;
+  z-index: 1;
+  background: #fff !important;
+  color: #000 !important;
+}
+.rec-arrow-left {
+  left: 22px;
+}
+.rec-arrow-right {
+  right: 66px;
+}
 /* square buttons */
 .rec.rec-arrow {
   background-image: url(./assets/catgeory_arrows/arrow_left_green.png);
@@ -830,9 +880,9 @@ align-self: center !important;
 .badge-warning[href] {
   background-color: #c67605 ;
 }
-
 #lblCartCount {
     font-size: 18px;
+    background: #ff0000 !important;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
@@ -1027,13 +1077,21 @@ height: 35%;
 .popup-btn{
   width: 55%;
 }
-input#formHorizontalRadios1,input#formHorizontalRadios2 {
-  width: 21px !important;
-  height: 19px !important;
+// input#formHorizontalRadios1,input#formHorizontalRadios2 {
+//   width: 21px !important;
+//   height: 19px !important;
+// }
+.redio-forgot {
+  display: flex;
+  width: 100%;
 }
-label.form-check-label {
-  padding-left: 11px !important;
+.redio-forgot .form-group{
+  width: 50%;
 }
+.forgot.form-group {
+  text-align: end;
+}
+
 #product .nav-link {
   font-family: 'Open Sans';
   font-size: 18px;
@@ -1082,26 +1140,20 @@ body {
 .allGiftCard .products_icons {
   min-height: 38px;
 }
-
 .icon-margin .col-sm {
   DISPLAY: FLEX;
   JUSTIFY-CONTENT: CENTER;
 }
-
 .icon-margin {
-  padding: 0rem 4rem 0rem 4rem;
+  padding: 0rem 0rem 0rem 0px;
   JUSTIFY-CONTENT: SPACE-BETWEEN;
 }
-
 .card_images {
   display: contents;
   text-align: center;
 }
-
 .gificards {
-  display: flex;
-  flex-wrap: wrap;
-  // justify-content: space-between;
+  padding-top: 25px;
 }
 
 .gificards .card_images {
@@ -1161,9 +1213,43 @@ body {
     width: 100%;
   }
 }
-
-@media screen and (max-width: 576px) {
-  .startgiftingimg {
-    display: none;
+@media screen and (max-width: 1365px) and (min-width:1024px) {
+  .gifticard-text {
+    font-size: 34px;
+}
+}
+@media screen and (max-width: 1200px) and (min-width:1024px){
+  .rec-arrow-right {
+    right: 8px;
   }
+}
+@media screen and (max-width: 667px){
+  .rec-arrow-right {
+    right: 10px;
+}
+.cardgifiti-startgf form .row {
+  display: block !important;
+}
+.startgf-fields-text {
+  padding: 0 15px;
+}
+.gifticard-text {
+  font-size: 30px;
+}
+.startgf-text {
+  font-size: 30px;
+}
+.giftiallcard-text {
+  font-size: 20px;
+}
+.social-btn button {
+  width: 130px !important;
+}
+.login-text {
+  font-size: 22px;
+}
+}
+
+.all-gift-card-container {
+  padding: 0em 5em !important;
 }

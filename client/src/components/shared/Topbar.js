@@ -32,9 +32,7 @@ const Topbar = (props) => {
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState(
-    "United Arab Emirates"
-  );
+  const [selectedCountry, setSelectedCountry] = useState({});
 
   const clearsession = () => {
     localStorage.clear();
@@ -77,7 +75,7 @@ const Topbar = (props) => {
 
   const onCountryChange = (e) => {
     setSelectedCountry(e.value);
-    onCountrySelected(e.value.country_name);
+    onCountrySelected(e.value);
   };
   const selectedCountryTemplate = (option, props) => {
     if (option) {
@@ -118,7 +116,7 @@ const Topbar = (props) => {
               onChange={onCountryChange}
               filter
               filterBy="country_name"
-              placeholder="United Arab Emirates"
+              placeholder={selectedCountry?.country_name || "Please select"}
               optionLabel="country_name"
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}
@@ -137,11 +135,17 @@ const Topbar = (props) => {
           <div className="nav-item mr-2">{getProfile()}</div>
           <div className="nav-item">
             <Button className="nav-btn btn-cart" variant="link">
-              <img src={shoppingCartIcon} alt="shoppingcart-icon" onClick={() => history.push('/cart')} />
-              <span class='badge badge-warning' id='lblCartCount'> {cartLineCount}</span>
-
-
-                
+              <img
+                src={shoppingCartIcon}
+                alt="shoppingcart-icon"
+                onClick={() => history.push("/cart")}
+              />
+              {cartLineCount > 0 ? (
+                <span class="badge badge-danger" id="lblCartCount">
+                  {" "}
+                  {cartLineCount}
+                </span>
+              ) : null}
             </Button>
           </div>
         </div>

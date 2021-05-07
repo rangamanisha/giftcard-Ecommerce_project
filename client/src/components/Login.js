@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -54,6 +57,7 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
+    debugger;
     const accessToken = response.accessToken;
     console.log(accessToken);
     dispatch(googlesigninAction({ accessToken }));
@@ -78,132 +82,147 @@ const Login = () => {
           <></>
         )}
       </div>
-      <div className="login-card mx-auto">
-        <p className="login-text text-center h3 pt-5">Login to your Account</p>
-        <p className="login-sub-text text-center mt-0">
-          <small>Enter to continue and explore within your grasp</small>
-        </p>
 
-        <Form onSubmit={formik.handleSubmit} className="user">
-          <Form.Group
-            controlId="formBasicEmail"
-            className="w-75 mx-auto icons_login"
-          >
-            <Form.Control
-              size="md"
-              type="email"
-              placeholder="Enter email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              className="icons_fields"
-              name="email"
-            />
-            <img src={Usericon} alt="Icon" className="icon_img" />
-          </Form.Group>
+      <Container>
+        <Row>
+          <Col>
+            <div className="login-card mx-auto">
+              <p className="login-text text-center h3 pt-5">
+                Login to your Account
+              </p>
+              <p className="login-sub-text text-center mt-0">
+                <small>Enter to continue and explore within your grasp</small>
+              </p>
 
-          {formik.errors.email ? (
-            <p className="validation-messages">{formik.errors.email}</p>
-          ) : null}
+              <Form onSubmit={formik.handleSubmit} className="user login-form">
+                <Form.Group controlId="formBasicEmail" className="icons_login">
+                  <Form.Control
+                    size="md"
+                    type="email"
+                    placeholder="Enter email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    className="icons_fields"
+                    name="email"
+                  />
+                  <img src={Usericon} alt="Icon" className="icon_img" />
+                </Form.Group>
 
-          <Form.Group
-            controlId="formBasicPassword"
-            className="w-75 mx-auto icons_login"
-          >
-            <Form.Control
-              size="md"
-              type="password"
-              placeholder="Password"
-              className="icons_fields"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              name="password"
-            />
-            <img src={Passwordicon} alt="Icon" className="icon_img" />
-          </Form.Group>
+                {formik.errors.email ? (
+                  <p className="validation-messages">{formik.errors.email}</p>
+                ) : null}
 
-          {formik.errors.password ? (
-            <p className="validation-messages">{formik.errors.password}</p>
-          ) : null}
-
-          <div className="row">
-            <Form.Group style={{ marginLeft: "77px" }}>
-              <Form.Check
-                type="radio"
-                label="Remember Me"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios1"
-              />
-            </Form.Group>
-            <Form.Group style={{ marginLeft: "162px" }}>
-              <Link className="link-color" to="/auth/forgotpassword">
-                Forgot me?
-              </Link>
-            </Form.Group>
-          </div>
-
-          {state.errors && state.errors.length ? (
-            <p className="validation-messages">{state.errors.join("\n")}</p>
-          ) : null}
-
-          <Button
-            className="btn-custom mt-3"
-            variant="info"
-            size="lg"
-            type="Submit"
-          >
-            Login to Continue
-          </Button>
-
-          <p className="login-bottom-text text-center mt-4">
-            Don’t have an account ? <Link to="/auth/signup">Sign up</Link>
-          </p>
-
-          <table width="100%">
-            <tbody>
-              <tr>
-                <td>
-                  <hr />
-                </td>
-                <td
-                  style={{
-                    width: "1px",
-                    padding: "0 10px",
-                    whiteSpace: "nowrap",
-                  }}
-                  className="login-bottom-text"
+                <Form.Group
+                  controlId="formBasicPassword"
+                  className="icons_login"
                 >
-                  or sign in with
-                </td>
-                <td>
-                  <hr />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <Form.Control
+                    size="md"
+                    type="password"
+                    placeholder="Password"
+                    className="icons_fields"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    name="password"
+                  />
+                  <img src={Passwordicon} alt="Icon" className="icon_img" />
+                </Form.Group>
 
-          <div className="row mt-4">
-            <GoogleLogin
-              variant="outline-light"
-              className="google-button mr-sm-3"
-              clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-            ></GoogleLogin>
-            <Button
-              variant="outline-light"
-              className="facebook-button mr-sm-3"
-              provider="facebook"
-              appId="512745573060985"
-            >
-              <img
-                src={Facebookicon}
-                style={{ width: "50px", height: "50px" }}
-                alt="Icon"
-              />
-            </Button>
-          </div>
-        </Form>
-      </div>
+                {formik.errors.password ? (
+                  <p className="validation-messages">
+                    {formik.errors.password}
+                  </p>
+                ) : null}
+
+                <div className="redio-forgot">
+                  <Form.Group className="redio">
+                    <Form.Check
+                      type="radio"
+                      label="Remember Me"
+                      name="formHorizontalRadios"
+                      id="formHorizontalRadios1"
+                    />
+                  </Form.Group>
+                  <Form.Group className="forgot">
+                    <Link className="link-color" to="/auth/forgotpassword">
+                      Forgot me?
+                    </Link>
+                  </Form.Group>
+                </div>
+
+                {state.errors && state.errors.length ? (
+                  <p className="validation-messages">
+                    {state.errors.join("\n")}
+                  </p>
+                ) : null}
+
+                <Button
+                  className="btn-custom"
+                  variant="info"
+                  size="lg"
+                  type="Submit"
+                >
+                  Login to Continue
+                </Button>
+
+                <p className="login-bottom-text text-center mt-3">
+                  Don’t have an account ? <Link to="/auth/signup">Sign up</Link>
+                </p>
+
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <hr />
+                      </td>
+                      <td
+                        style={{
+                          width: "1px",
+                          padding: "0 10px",
+                          whiteSpace: "nowrap",
+                        }}
+                        className="login-bottom-text"
+                      >
+                        or sign in with
+                      </td>
+                      <td>
+                        <hr />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div className="social-btn">
+                  <div className="google mr-3">
+                    <GoogleLogin
+                      style={{ display: "block" }}
+                      variant="outline-light"
+                      className="google-button"
+                      clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                    ></GoogleLogin>
+                  </div>
+                  <div className="facebook">
+                    <Button
+                      variant="outline-light"
+                      className="facebook-button"
+                      provider="facebook"
+                      appId="512745573060985"
+                    >
+                      <img
+                        src={Facebookicon}
+                        style={{ width: "50px", height: "50px" }}
+                        alt="Icon"
+                      />
+                    </Button>
+                  </div>
+                </div>
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

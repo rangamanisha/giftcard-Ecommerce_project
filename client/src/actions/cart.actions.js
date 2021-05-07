@@ -60,3 +60,22 @@ export const cartTotalCountAction = createAsyncThunk(
     return response;
   }
 );
+
+export const updateCartAction = createAsyncThunk(
+  "cart_items/update",
+  async (payload, thunkAPI) => {
+    const request = {
+      cart_item: {
+        brand_id: payload.brand_id,
+        quantity: payload.quantity,
+        currency: payload.currency,
+        giftcard_value: payload.giftcard_value,
+        card_value_aed: payload.card_value_aed,
+        isforself: payload.isforself,
+        country_id: payload.country_id,
+      },
+    };
+    const response = await cartItemsService(request);
+    return response;
+  }
+);

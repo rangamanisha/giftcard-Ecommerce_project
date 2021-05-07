@@ -1,4 +1,7 @@
 import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import AllCategoryCards from "./AllCategoryCards";
 import { categoryAction } from "../actions/category.actions";
@@ -11,27 +14,18 @@ import {
 } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
 import { getTopBarState } from "../reducer/topbar.reducer";
-import { giftCardsUnitAction } from "../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Giftcard from "./Giftcard";
 
 function AllGiftCard() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const state = useSelector(getCategoryState);
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState);
   const giftunitState = useSelector(getGiftcardsState);
-  const categories = get(state, "data");
   const brandsWithCategory = get(brandState, "allBrands");
   const [activeCategory, setActiveCategory] = React.useState();
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 7 },
-    { width: 1200, itemsToShow: 8 },
-  ];
 
   React.useEffect(() => {
     dispatch(
@@ -95,33 +89,37 @@ function AllGiftCard() {
     });
   });
   return (
-    <div className="allGiftCard">
-      <div>
-        <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
-        <p className="giftiallcard-text-a">Browse by Category</p>
-        <AllCategoryCards />
-      </div>
-      <div className="gificards">
-        {isEmpty(get(brandState, "brands"))
-          ? map(allTheBrands, (brand, i) => (
-              <>
-                <Giftcard brand={brand} />
-              </>
-            ))
-          : map(get(brandState, "brands"), (brand, i) => (
-              <>{i <= 15 ? <Giftcard brand={brand} /> : null}</>
-            ))}
-      </div>
-      <div className="text-center">
-        <button
-          onClick={() => history.push("AllCards")}
-          type="button"
-          className="mt-3 startgf-fields-button btn btn-info btn-md"
-        >
-          Load More
-        </button>
-      </div>
-    </div>
+    <Container fluid className="all-gift-card-container">
+      <Row className="allGiftCard-box">
+        <Col>
+          <div>
+            <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
+            <p className="giftiallcard-text-a">Browse by Category</p>
+            <AllCategoryCards />
+          </div>
+          <div className="gificards ">
+            {isEmpty(get(brandState, "brands"))
+              ? map(allTheBrands, (brand, i) => (
+                  <>
+                    <Giftcard brand={brand} />
+                  </>
+                ))
+              : map(get(brandState, "brands"), (brand, i) => (
+                  <>{i <= 15 ? <Giftcard brand={brand} /> : null}</>
+                ))}
+          </div>
+          <div className="text-center">
+            <button
+              onClick={() => history.push("AllCards")}
+              type="button"
+              className="mt-3 startgf-fields-button btn btn-info btn-md"
+            >
+              Load More
+            </button>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

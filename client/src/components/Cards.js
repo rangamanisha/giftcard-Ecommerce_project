@@ -11,10 +11,10 @@ import Giftcard from "../assets/gift-card.svg";
 const Cards = () => {
   const history = useHistory();
   return (
-    <Container fluid>
+    <Container>
       <React.Fragment>
-        <Row className="cardgifiti mt-5 mx-auto">
-          <Col sm={5} className="card-text-align">
+        <Row className="cardgifiti mt-5 align-items-center">
+          <Col sm={5} className="card-text-container">
             <p className="gifticard-text">
               Gifti Global Makes Every Gift Meaningful
             </p>
@@ -22,9 +22,9 @@ const Cards = () => {
               Treat yourself or send customisable e-gift cards with a selection
               of +4,000 brands in +100 countries
             </p>
-            <div>
+            <div className="card-text-btn">
               <Button
-                className="custom-button mr-sm-3"
+                className="custom-button mr-3"
                 onClick={() => history.push("allcards")}
               >
                 Start Gifiting&nbsp;
@@ -39,12 +39,12 @@ const Cards = () => {
           </Col>
         </Row>
 
-        <Row className="mt-5 icon-margin">
+        <Row className="mt-5 icon-box">
           <Col sm>
-            <div className="widgets_div">
+            <div className="widgets_div d-flex align-items-center">
               <div className="icon_div">
                 <span>
-                  <Image src={Country} className="mr-sm-3" fluid />
+                  <Image src={Country} className="mr-3" />
                 </span>
               </div>
               <div className="text_div">
@@ -57,31 +57,33 @@ const Cards = () => {
           </Col>
 
           <Col sm>
-            <div className="widgets_div">
+            <div className="widgets_div d-flex align-items-center">
               <div className="icon_div">
                 <span>
-                  <Image src={Target} className="mr-sm-3" />
+                  <Image src={Target} className="mr-3" />
                 </span>
               </div>
               <div className="text_div">
-                <span>Treat yourself or send an e-gift with a </span>
-                <br />
-                <span>personalised message by email, sms or whatsapp</span>
+                <span>
+                  Treat yourself or send an e-gift with a personalised message
+                  by email, sms or whatsapp
+                </span>
               </div>
             </div>
           </Col>
 
           <Col sm>
-            <div className="widgets_div">
+            <div className="widgets_div d-flex align-items-center">
               <div className="icon_div">
                 <span>
-                  <Image src={Giftcard} className="mr-sm-3" />
+                  <Image src={Giftcard} className="mr-3" />
                 </span>
               </div>
               <div className="text_div">
-                <span>Buy with your credit or debit card or</span>
-                <br />
-                <span>using your Gifti Global card or points</span>
+                <span>
+                  Buy with your credit or debit card or using your Gifti Global
+                  card or points
+                </span>
               </div>
             </div>
           </Col>
