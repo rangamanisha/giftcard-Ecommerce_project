@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import './Idc.css';
+import './Idc.scss';
 import Group1 from '../../assets/Group 1.svg';
 import userIcon1 from '../../assets/userIcon1.svg';
 import { map, get } from "lodash";
@@ -19,7 +19,7 @@ const Idc_Header = () =>{
     const history = useHistory();
     const[isvalid ,setIdcValid] = useState({valid});
     const handleClick = () => {
-      history.push("/profile");
+      history.push("/idc/profile");
     };
 
   const clearSession = () => {

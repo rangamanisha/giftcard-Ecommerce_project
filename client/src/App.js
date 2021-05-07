@@ -26,15 +26,18 @@ import StepsDemo from "./components/stepper";
 import EmptyCart from './components/shared/EmptyCartPage/EmptyCart';
 import Cart from './components/Cart/Cart';
 import Idc_Order from './components/IDC/IdcOrder';
+import Idc_Profile from './components/IDC/idcProfile';
 
 function App() {
   return (
-      <Router>
+      <Router>       
           <Route path ="/idc" component={Idc_Header}/>
           <Route path ="/idc/signin" component={Idc_Signin}/>
           <Route path ="/idc/order" component={Idc_Order}/>
-
-        <GiftiNav />
+          <Route path = "/idc/profile" component = {Idc_Profile}/>
+          {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <GiftiNav />}      
+          {/* {window.location.pathname == '/idc/signin'? null: <GiftiNav />}     
+          {window.location.pathname == '/idc/profile'? null: <GiftiNav />}         */}
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/auth/login" component={Login} exact />
@@ -73,7 +76,9 @@ function App() {
 
           {/* <Route path="/cart" component={Cart} exact /> */}
         </Switch>
-        <Footer />
+        {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <Footer />}      
+
+      
       </Router>
   );
 }

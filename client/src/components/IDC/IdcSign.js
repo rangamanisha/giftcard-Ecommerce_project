@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import './Idc.css';
+import './Idc.scss';
 import IDC_LOGO_white_icon_1 from '../../assets/IDC_LOGO_white_icon_1.svg';
 import Slider from '../../assets/Slider.png';
 import { useHistory } from "react-router";
@@ -52,14 +52,14 @@ const Idc_Signin = () => {
                     <h2>Welcome Back</h2>
                     <p>Login to manage your account.</p>
                     <div className="formLoginWrapper">
-                        <form name="idc_order" role="form" onSubmit={formik.handleSubmit} novalidate>
+                        <form name="idc_order" role="form" onSubmit={formik.handleSubmit} >
                             <div className="form-group">
                                 <label className="customL">
                                     <span>EMAIL ADDRESS</span>
                                 </label>
                                 <input type="email" placeholder="{{ 'Email address' | translate }}" className="form-control"
                                 autocomplete="off" value={formik.values.email}
-                                onChange={formik.handleChange} name="email" ng-required="true"/>
+                                onChange={formik.handleChange} name="email" />
           {formik.errors.email ? (
             <p className="validation-messages">{formik.errors.email}</p>
           ) : null}
@@ -69,7 +69,7 @@ const Idc_Signin = () => {
                                     <span>PASSWORD</span>
                                     <a ng-click="dialogForgotPassword1( )" className="forgotURL">Forgot Password</a>
                                 </label>
-                                <input type="password" ng-model="password" name="password" required
+                                <input type="password" ng-model="password" name="password" 
                                 autocomplete="off" value={formik.values.password}
                                 onChange={formik.handleChange} placeholder="Password" className="form-control"/>
                             </div>

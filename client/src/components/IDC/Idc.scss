@@ -4,12 +4,50 @@
     padding: 15px 0;
     font-family: 'Nunito', sans-serif;
 }
+.swal-button-container {
+    margin: 5px !important;
+     display: inherit !important;
+    text-align: center !important;
+     }
+     .swal-text {
+        font-size: 18px;
+        position: relative;
+        float: none;
+        line-height: normal;
+        vertical-align: top;
+        text-align: center;
+        display: inline-block;
+        margin: 0;
+        padding: 0 10px;
+        font-weight: 300;
+        color: rgba(0,0,0,.64);
+        max-width: calc(100% - 30px);
+        overflow-wrap: break-word;
+        box-sizing: border-box;
+    }
 .headerLayout1 .headerWrap {
     display: flex;
     display: -ms-flexbox;
     align-items: center;
     justify-content: space-between;
     position: relative;
+}
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: #00AF9A;
+    font-size: 12px;
+    border: 1px solid #3e549a;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  }
+.credit-values{
+    color: #000;
+    margin-bottom: 30px;
+    background: #f2f2f2;
+    padding: 7px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 #user_points{
     width: auto;
@@ -38,6 +76,37 @@
     padding: 0 15px;
     border: 0;
 }
+.field-block .delete-btn {
+    color: #fff;
+}
+.field-block {display: flex;align-items: baseline;}
+
+.field-block span {
+    background-color: #23c6c8;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    text-align: center;
+    margin-left: 5px;
+}
+.field-block .delete-btn:hover {
+    color: #fff !important;
+}
+.label {
+    font-family: gotham_prolight;
+    font-size: 10px;
+    /* font-weight: 600; */
+    padding: 3px 8px;
+    margin-top: 5px;
+}
+
+.badge-info, .label-info {
+    background-color: #23c6c8;
+    color: #FFF;
+    max-width: fit-content;
+}
 select#product_select {
     height: 53px !important;
     border-radius: 4px !important;
@@ -45,6 +114,43 @@ select#product_select {
 }
 .headerLayout1 .accountInfoPoints ul.accountListing .btnDesign.greenBgBTN {
     background-color: #00B2AE;
+}
+.profile-section nav.nav.nav-tabs {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.profile-section nav.nav.nav-tabs  a {
+    display: inline-block;
+    color: #9b9b9b;
+    font-size: 20px;
+    border-bottom: 2px solid transparent;
+}
+.profile-section .card-1 {
+    box-shadow: 0 0 0;
+    border: 1px solid #d2d2d2;
+}
+
+table.table.borderless.table-hover.pull-left.flip.profile-info {
+    width: 100%;
+    max-width: 360px;
+    color: #818181;
+    margin: 20px auto;
+}
+form#profileform {
+    max-width: 460px;
+}
+.profile-section nav.nav.nav-tabs a:hover {
+    border: 0;
+    border-bottom: 2px transparent;
+    color: #9b9b9b;
+}
+
+.profile-section nav.nav.nav-tabs a.active {
+    border: 0;
+    border-bottom: 2px solid;
+    color: #2bb2ae;
 }
 .headerLayout1 .accountInfoPoints ul.accountListing .btnDesign:focus,
 .headerLayout1 .accountInfoPoints ul.accountListing .btnDesign:active {
@@ -221,8 +327,33 @@ ul.social-Layout1 li a:hover {
     height: 50px;
     opacity: 1;
 }
+nav.nav.nav-tabs {
+    background: white;
+    border: 1px solid white;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    background: 0 0;
+    /* border-bottom: #05b2b0; */
+    // border-image: none;
+    // border-style: solid;
+    // border-width: 2px;
+    /* color: #05b2b0; */
+}
+
+
+.card-1 {
+    box-shadow: 0 1px 3px;
+}
+.table td{
+    border-top: 0px;
+}
 .btn-layout1 .btn:not([disabled="disabled"]):hover {
     background: #245575;
+}
+form#profileform input.form-control {
+    line-height: 35px;
+    height:max-content !important;
 }
 .signInLayout1 .formLoginWrapper label.customL {
     font-size: 15px;
@@ -266,6 +397,17 @@ ul.social-Layout1 li a:hover {
     min-height: 200px;
     margin: 0 auto;
 }
+.p-15{
+    padding: 15px;
+}
+.greenBgBTN{
+    background-color: #00B2AE;
+}
+.wrapper-container {
+    /*margin-top: 60px;*/
+    margin-top: 100px;
+    padding: 20px 10px 10px;
+  }
 .top-tagline {
     display: flex;
     display: -ms-flexbox;
@@ -617,6 +759,24 @@ label.customL {
         margin: auto;
     }
 }
+@media (max-width: 1200px) {
+    .wrapper-container.custom-sign.ng-scope {
+      padding-top: 60px;
+    }
+    }
+    
+    @media (max-width: 991px) {
+      .wrapper-container.custom-sign.ng-scope {
+        padding-top: 40px;
+      }
+      }
+    
+    
+      @media (max-width: 350px) {
+      .wrapper-container.custom-sign.ng-scope {
+        margin-top: 0;
+        }
+      }
 @media (max-width: 767.98px) {
     .headerLayout1 .accountInfoPoints ul.accountListing {
         flex-wrap: wrap;

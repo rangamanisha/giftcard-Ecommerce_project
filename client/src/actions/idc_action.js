@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {idcSigninApiCall ,idcTotalCreditApiCall ,idcVaritiesApiCall,idcProfileApiCall,idcSingleOrderApiCall,countryCodeApiCall} from '../services/idc.service';
+import {idcSigninApiCall ,idcConvertedCurrencyApiCall,idcTotalCreditApiCall ,idcVaritiesApiCall, idcChangePasswordApiCall,idcProfileApiCall,idcSingleOrderApiCall,countryCodeApiCall} from '../services/idc.service';
 
 export const IdcSignInAction = createAsyncThunk('idc_signin', async(payload, thunkAPI) => {
     const request = {
@@ -11,6 +11,28 @@ export const IdcSignInAction = createAsyncThunk('idc_signin', async(payload, thu
     const response = await idcSigninApiCall(request);
     return response;
 });
+export const IdcChangePasswordAction = createAsyncThunk('idc_password', async(payload, thunkAPI) => {
+    const request = {
+        change_password: {
+            current_password: payload.current_password,
+            password: payload.password,
+            password_confirmation:payload.password_confirmation
+          },
+    }
+    const response = await idcChangePasswordApiCall(request);
+    return response;
+});
+export const IdcConvertCurrencyAction = createAsyncThunk('idc_currency_change', async(payload, thunkAPI) => {
+    const request = {
+        source:payload.source.idccurrency,
+        amount:payload.amount,
+        dest:payload.dest,
+        margin:payload.margin
+    }
+    const response = await idcConvertedCurrencyApiCall(request);
+    return response;
+});
+
 
 export const IdcSignleOrderAction = createAsyncThunk('idc_order', async(payload, thunkAPI) => {
     const request = {
@@ -18,12 +40,14 @@ export const IdcSignleOrderAction = createAsyncThunk('idc_order', async(payload,
           first_name: payload.first_name,
           last_name: payload.last_name,
           email:payload.email,
-          company:payload.company,
-          designation:payload.designation,
-          mobile_number:payload.mobile_number,
+          company_title:payload.company_title,
+          company_name:payload.company_name,
+          country:payload.country,
+          phone:payload.phone,
+          product:payload.product,
           quantity :payload.quantity,
-          denomination:300,
-          giftcard_variety_id:1717
+          denomination:payload.denomination.denomination,
+          giftcard_variety_id:payload.giftcard_variety_id.giftcard_variety_id
           },
     }
     const response = await idcSingleOrderApiCall(request);

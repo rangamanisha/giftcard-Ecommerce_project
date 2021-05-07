@@ -1,5 +1,8 @@
+import React from 'react';
+import swal from 'sweetalert';
+import tick_circle from "../assets/tick_circle.svg";
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import {IdcSignInAction,IdcTotalCreditnAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode,IdcSignleOrderAction} from '../actions/idc_action';
+import {IdcSignInAction,IdcTotalCreditnAction,IdcConvertCurrencyAction,IdcChangePasswordAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode,IdcSignleOrderAction} from '../actions/idc_action';
 
 const IDC_INITIAL_STATE = {
 
@@ -8,7 +11,7 @@ const IDC_INITIAL_STATE = {
     message: null,
     errors: null,
     isIdcAuthenticated: false,
-    first_name: null,
+    first_name: "",
     accessToken: null,
     idToken: null,
     refreshToken: null,
@@ -16,8 +19,10 @@ const IDC_INITIAL_STATE = {
     expiresIn: null,
     idcProduct:[],
     status: null,
+    points:"",
     success: false,
-    alert: false,
+    denomination:"",
+    gift_cart_variety_id:"",
     signupSuccess: false,
     reset: false,
     country_code:71,
@@ -65,11 +70,13 @@ export const idcSlice = createSlice({
           })
           .addCase(IdcTotalCreditnAction.pending,(state, action)=>{
             state.idcCredits = 0.0;
+            state.points =null;
             state.errors = null;
           })
           .addCase(IdcTotalCreditnAction.fulfilled,(state, action)=>{
             const response = action.payload;
             if (response.code === 200) {
+              state.points =null;
               state.idcCredits = response.data.credits;
               // state.errors = null;
             }
@@ -86,6 +93,7 @@ export const idcSlice = createSlice({
 .addCase(IdcVaritiesAction.fulfilled,(state, action)=>{
   const response = action.payload;
   if (response.code === 200) {
+
     state.idcProduct = response.data;
   }
 
@@ -101,11 +109,17 @@ export const idcSlice = createSlice({
   state.errors = null;
 })
 .addCase(IdcProfileAction.fulfilled,(state, action)=>{
-
+  const response = action.payload;
+  if (response.code === 200) {
+    state.first_name = response.data.profile.first_name;
+    state.last_name = response.data.profile.last_name;
+    state.email = response.data.profile.email;
+  }
+ 
   state.errors = null;
 })
 .addCase(IdcProfileAction.rejected,(state, action)=>{
-  state.idcCredits = null;
+
   state.errors = null;
 })
 .addCase(IdcCountryCode.pending,(state, action)=>{
@@ -131,6 +145,20 @@ export const idcSlice = createSlice({
     const response = action.payload;
     if (response.code === 200) {
       state.order_response = response;
+      swal({
+        title: '',
+        icon: "success", 
+        text:"We've successfully received your details. The giftcard will be sent to the user soon.",
+        type: '',
+        button: {
+          text: "Go Back To Homepage",
+        },
+        allowEscapeKey: false,
+        showConfirmButton: true,
+        showCancelButton: false,
+        confirmButtonColor: "#00AF9A",
+
+      });
       // localStorage.setItem("first_name", response.data.user.first_name);
     }
     // if (response.code === 400) {
@@ -146,6 +174,60 @@ export const idcSlice = createSlice({
     state.isIdcAuthenticated = false;
     state.errors = [action.error.message || ""];
   })
+
+
+.addCase(IdcConvertCurrencyAction.pending, (state, action) => {
+  state.errors = null;
+
+  state.points =null;
+})
+.addCase(IdcConvertCurrencyAction.fulfilled, (state, action) => {
+    const response = action.payload;
+    if (response.code === 200) {
+      state.points = response.data.converted_amount;
+      // localStorage.setItem("first_name", response.data.user.first_name);
+    }
+    // if (response.code === 400) {
+    //   state.user = null;
+    //   state.isIdcAuthenticated = false;
+    //   state.errors = [response.message];
+    // } else if (response.code === 401) {
+    //   state.user = null;
+    //   state.errors = [response.message || response.detail || ""];
+    // }
+  })
+  .addCase(IdcConvertCurrencyAction.rejected, (state, action) => {
+    state.points =null;
+    // state.isIdcAuthenticated = false;
+    // state.errors = [action.error.message || ""];
+  })
+
+
+  .addCase(IdcChangePasswordAction.pending, (state, action) => {
+    state.errors = null;
+    state.user = null;
+  })
+
+  .addCase(IdcChangePasswordAction.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.code === 200) {
+
+        // localStorage.setItem("first_name", response.data.user.first_name);
+      }
+      if (response.code === 400) {
+        // state.user = null;
+        // state.isIdcAuthenticated = false;
+        // state.errors = [response.message];
+      } else if (response.code === 401) {
+        // state.user = null;
+        // state.errors = [response.message || response.detail || ""];
+      }
+    })
+    .addCase(IdcChangePasswordAction.rejected, (state, action) => {
+      // state.isIdcAuthenticated = false;
+      // state.errors = [action.error.message || ""];
+    })
+
 
         },
     });
