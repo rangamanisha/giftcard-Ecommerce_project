@@ -731,7 +731,7 @@ border-radius: 10px;
   opacity: 1;
   font-family: Cairo-semibold;
   height: 2.8rem;
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 .nav-login {
@@ -1251,5 +1251,5 @@ body {
 }
 
 .all-gift-card-container {
-  padding: 0em 5em;
+  padding: 0em 5em !important;
 }
