@@ -1,9 +1,8 @@
 import React from "react";
-import "./PrivacypolicyPage.scss";
+import "./PrivacypolicyPage.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 import Header from "../HeaderPage/Header";
-import Footer from "../../Footer";
 
 function PrivacypolicyPage() {
   return (
@@ -425,8 +424,6 @@ function PrivacypolicyPage() {
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
     </>
   );

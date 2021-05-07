@@ -20,10 +20,10 @@ import GiftiNav from "./components/shared/Navbar/GiftiNav";
 import EditProfile from "./components/EditProfile";
 import Footer from "./components/shared/Footer";
 import RewardPoints from "./components/RewardPoints";
-// import ConditionsPage from './components/shared/ConditionsPage/ConditionsPage';
-// import Contact from './components/shared/ContactPage/Contact';
-// import EnquiryPage from './components/shared/EnquiryPage/EnquiryPage';
-// import PrivacypolicyPage from './components/shared/PrivacypolicyPage/PrivacypolicyPage';
+import ConditionsPage from "./components/shared/ConditionsPage/ConditionsPage";
+import Contact from "./components/shared/ContactPage/Contact";
+import EnquiryPage from "./components/shared/EnquiryPage/EnquiryPage";
+import PrivacypolicyPage from "./components/shared/PrivacypolicyPage/PrivacypolicyPage";
 import Checkout from "./components/checkout";
 import StepsDemo from "./components/stepper";
 import EmptyCart from "./components/shared/EmptyCartPage/EmptyCart";
@@ -42,7 +42,6 @@ function App() {
         <Route path="/auth/signup" component={Signup} exact />
         <Route path="/allcards" component={AllCards} exact />
         <Route path="/forgotpassword" component={ForgotPassword} exact />
-        {/* <Route path="/cart" component ={Cart} exact/> */}
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
         <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
         <Route path="/selectcard" component={SelectCards} exact />
@@ -51,10 +50,10 @@ function App() {
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order" component={Confirm_Order} />
 
-        {/* <Route path="/conditionsPage" component={ConditionsPage} exact /> */}
-        {/* <Route path="/contact" component={Contact} exact /> */}
-        {/* <Route path="/enquiryPage" component={EnquiryPage} exact /> */}
-        {/* <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact /> */}
+        <Route path="/conditionsPage" component={ConditionsPage} exact />
+        <Route path="/contact" component={Contact} exact />
+        <Route path="/enquiryPage" component={EnquiryPage} exact />
+        <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact />
 
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
@@ -69,9 +68,7 @@ function App() {
           <Redirect to={{ pathname: "/" }} />
         </Route>
         <Route path="/allcards" component={AllCards} exact />
-        {/* <Route path="/cart" component={Cart} exact /> */}
         <Route path="/emptycart" component={EmptyCart} exact />
-        {/* <Route path="/cart" component={Cart} exact /> */}
       </Switch>
       <Footer />
     </Router>

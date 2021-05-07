@@ -1,13 +1,12 @@
 import React from "react";
 
-import "./EnquiryPage.css";
+import "./EnquiryPage.scss";
 import { IoIosAdd } from "react-icons/io";
 import { MdSearch } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 import { Col, Row } from "react-bootstrap";
 
 import Header from "../HeaderPage/Header";
-import Footer from "../../Footer";
 
 function EnquiryPage() {
   return (
