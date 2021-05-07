@@ -94,7 +94,7 @@ const Login = () => {
                 <small>Enter to continue and explore within your grasp</small>
               </p>
 
-              <Form onSubmit={formik.handleSubmit} className="user">
+              <Form onSubmit={formik.handleSubmit} className="user login-form">
                 <Form.Group controlId="formBasicEmail" className="icons_login">
                   <Form.Control
                     size="md"

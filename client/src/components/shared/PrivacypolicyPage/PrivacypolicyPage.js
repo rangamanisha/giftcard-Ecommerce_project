@@ -1,6 +1,6 @@
 import React from "react";
-import "./PrivacypolicyPage.css";
-import "bootstrap/dist/css/bootstrap.css";
+// import "./PrivacypolicyPage.css";
+// import "bootstrap/dist/css/bootstrap.css";
 
 import Header from "../HeaderPage/Header";
 
