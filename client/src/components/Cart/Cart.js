@@ -35,13 +35,12 @@ function Cart() {
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}
-    >
+      }}>
       {children}
       <RiArrowDownSLine />
     </a>
   ));
-  CustomToggle.displayName = "CustomToggle";
+  CustomToggle.displayName = 'CustomToggle';
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -53,8 +52,8 @@ function Cart() {
   const giftGlobalPoints = parseFloat(get(rewardState, "total_credits"));
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const currencies = get(giftunitState, "paymentCurrency.currencies");
-  const selectedCurrency = get(giftunitState, "selectedCurrency");
+  const currencies = get(giftunitState, 'paymentCurrency.currencies');
+  const selectedCurrency = get(giftunitState, 'selectedCurrency')
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const conversionRate = get(
     giftunitState,
@@ -78,14 +77,12 @@ function Cart() {
     dispatch(getRewardPointsAction());
   }, [rewardState, dispatch]);
   React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+    dispatch(giftCardsUnitAction({
+      currency: giftunitState.giftunit_id,
+      program_id: 1,
+      giftunit_id: giftunitState.giftunit_id
+    }))
+  }, [giftunitState.giftunit_id, dispatch])
   React.useEffect(() => {
     let id = get(selectedCurrency, "id");
     dispatch(getConversionRateAction(id));
@@ -199,10 +196,7 @@ function Cart() {
               <div className="flex-shrink-1 cart-currency p-1">
                 <small>Select Payment Currency</small>
                 <span className="mx-2">|</span>
-                <Dropdown
-                  className="d-inline"
-                  onSelect={(e) => handleChangeCurreny(e)}
-                >
+                <Dropdown className="d-inline" onSelect={e => handleChangeCurreny(e)}>
                   <DropdownToggle
                     as={CustomToggle}
                     id="dropdown-custom-components"
@@ -223,9 +217,7 @@ function Cart() {
                 <small>{currencyShort()}</small>
               </div>
             </div>
-            <h4 className="mt-2 mb-3">
-              {currencyShort()} {convertedAmount()}
-            </h4>
+            <h4 className="mt-2 mb-3">{currencyShort()} {convertedAmount()}</h4>
             <div className="d-flex justify-content-between">
               <span>Subtotal</span>
               <span>
@@ -409,3 +401,5 @@ function Cart() {
 }
 
 export default Cart;
+
+

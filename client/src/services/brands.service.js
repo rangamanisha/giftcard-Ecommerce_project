@@ -1,6 +1,4 @@
-import { apiCall } from "./api";
-export const API_URL = process.env.REACT_APP_API_URL;
-
+import { apiCall, API_URL } from "./api";
 export const descriptionBrand = (brands) => {
   const { id, currency, image_size, image_type, program_id } = brands;
   const url = `${API_URL}/brands/${id}?currency=${currency}&&image_size=${image_size}&&image_type=${image_type}&&program_id=${program_id}`;
