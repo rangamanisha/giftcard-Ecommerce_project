@@ -26,6 +26,7 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   status: null,
   success: false,
   alertlogin: false,
+  signupOrLoginActionClicked: false,
   signupSuccess: false,
   reset: false,
 };
@@ -39,7 +40,12 @@ export const initialAuthState = authAdapter.getInitialState(
 export const authSlice = createSlice({
   name: AUTH_FEATURE_KEY,
   initialState: AUTH_INITIAL_STATE_LOGIN,
-  reducers: {},
+  reducers: {
+    removeLoginOrSignUpMessage(state, action) {
+      console.log("check alret remove");
+      state.signupOrLoginActionClicked = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginAction.pending, (state, action) => {
@@ -57,6 +63,7 @@ export const authSlice = createSlice({
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
           state.alertlogin = true;
+          state.signupOrLoginActionClicked = true;
         }
         if (response.code === 400) {
           state.user = null;
@@ -77,8 +84,10 @@ export const authSlice = createSlice({
         const response = action.payload;
         console.log(response);
         if (response.code === 200) {
+          state.signupActionClicked = true;
           state.signupSuccess = true;
           state.is_active = true;
+          state.signupOrLoginActionClicked = true;
         }
         if (response.code === 400) {
           state.signupSuccess = false;

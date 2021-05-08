@@ -15,7 +15,7 @@ export const resetpasswordAPI = (userData) => {
   return apiCall(url, "PUT", userData, null, false);
 };
 
-export const updatepasswordAPI = (userData) => {
+export const updatepasswordAPI = async (userData) => {
   const url = `${API_URL}/accounts/passwords/change_password`;
   return apiCall(url, "PUT", userData);
 };

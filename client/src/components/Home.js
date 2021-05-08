@@ -7,7 +7,7 @@ import AllFeaturedCards from "./AllFeaturedCards";
 import Alert from "react-bootstrap/Alert";
 import checkbox from "../assets/checkbox.svg";
 import { useState, useEffect } from "react";
-import { getAuthState } from "../reducer/auth.reducer";
+import { getAuthState, authActions } from "../reducer/auth.reducer";
 import { getUserActiveState } from "../reducer/useractive.reducer";
 import { alertloginAction } from "../actions/auth.actions";
 import { getuseractiveAction } from "../actions/useractive.actions";
@@ -42,19 +42,26 @@ const Home = () => {
   }, [dispatch, useractive.verified, history]);
 
   useEffect(() => {
-    if (state.alertlogin) {
+    if (state.alertlogin && state.signupOrLoginActionClicked) {
       setIsValid(true);
       setMessage("Login Successfully !");
       window.setTimeout(() => {
         setVisible(false);
       }, 3000);
+      window.setTimeout(() => {
+        dispatch(authActions.removeLoginOrSignUpMessage(false));
+      }, 3000);
     }
 
-    if (state.signupSuccess) {
+    if (state.signupSuccess && state.signupOrLoginActionClicked) {
       setIsValid(true);
       setMessage(
         "A verification link has been sent to your provided email address. Check your mailbox"
       );
+      window.setTimeout(() => {
+        dispatch(authActions.removeLoginOrSignUpMessage(false));
+      }, 3000);
+
       window.setTimeout(() => {
         setVisible(false);
       }, 3000);

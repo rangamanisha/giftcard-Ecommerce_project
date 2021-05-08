@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Cart.css";
 import { get, isEmpty, map, assign, reduce, isNull, isUndefined } from "lodash";
-import { Col, Image, Row } from "react-bootstrap";
+import { Col, Image, Row, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
