@@ -19,7 +19,7 @@ export const cartItemAction = createAsyncThunk(
         card_value_aed: payload.card_value_aed,
         isforself: payload.isforself,
         country_id: payload.country_id,
-      }
+      },
     };
     const response = await cartItemsService(request);
     return response;
@@ -48,22 +48,22 @@ export const addRemoveQuantityAction = createAsyncThunk(
         giftcard_value: payload.data.giftcard_value,
         currency: payload.data.currency,
         action: payload.data.action,
-      }
+      },
     };
     const { dispatch } = thunkAPI;
     const { removeLineItem, updateLineItem } = cartAction;
     const response = await addRemoveQuantityService(request);
-    if (payload.data.action === 'CLEAR') {
+    if (payload.data.action === "CLEAR") {
       await dispatch(removeLineItem(payload.item));
     } else {
       const data = payload.item;
-      if (payload.data.action === 'ADD') {
+      if (payload.data.action === "ADD") {
         data.quantity = data.quantity + 1;
       }
-      if (payload.data.action === 'REMOVE') {
+      if (payload.data.action === "REMOVE") {
         data.quantity = data.quantity - 1;
       }
-      await dispatch(updateLineItem(data))
+      await dispatch(updateLineItem(data));
     }
     return response;
   }
@@ -92,7 +92,7 @@ export const updateCartAction = createAsyncThunk(
         card_value_aed: payload.card_value_aed,
         isforself: payload.isforself,
         country_id: payload.country_id,
-      }
+      },
     };
     const response = await cartItemsService(request);
     return response;

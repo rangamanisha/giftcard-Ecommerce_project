@@ -169,148 +169,151 @@ const SelectCards = () => {
   };
   return (
     <>
-    <Container fluid className="selected-card-box">
-      <Row>
-        <Col md={4}>
-          <div className="selected-img">
-        <img
-          src={get(card, "images.color.medium_rectangle")}
-          alt="AmazonMedium"
-          className="select-card-size1"
-        />
-        </div>
-        </Col>
-        <Col md={8}>
-        <div className="selected-card-details">
-          <p className="select-card-text-lg">{get(card, "name")}</p>
-          <p className="select-card-text">{`Select Card Value (${get(
-            payment,
-            "unit_name_short"
-          )})`}</p>
-          <div className="card-amnt mt-3">
-            {map(
-              get(productAndTermState, "description.brand.denominations"),
-              (d, i) => (
-                <Button
-                  variant="outline-info"
-                  className="mr-3 select-card-button mt-2"
-                  onClick={() => handleDenomination(d)}
-                  key={i}
-                >
-                  {parseFloat(d)}
-                </Button>
-              )
-            )}
-          </div>
-          <p className="select-card-text mt-5">Gifting for</p>
-          <div className="row">
-            <Form.Check
-              value="myself"
-              type="radio"
-              className="giftslabs"
-              label="Myself"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios1"
-              checked={gift_to === "myself"}
-              onClick={(e) => handleGiftTo(e)}
-            />
-            <Form.Check
-              value="someone else"
-              type="radio"
-              className="giftslabs"
-              label="Someone else"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios2"
-              checked={gift_to === "someone else"}
-              onClick={(e) => handleGiftTo(e)}
-            />
-          </div>
-          {tempvisible === false ? <GiftGiftCard /> : ""}
-          <div>
-            <Nav onSelect={handleSelect}>
-              <Nav.Item id="product">
-                <Nav.Link eventKey="1" active={eventKey11 == "1"}>
-                  Description
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item id="product">
-                <Nav.Link eventKey="2">Terms & Condtions</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            {eventKey11 == "1" ? (
-              <div
-                className="mt-4"
-                id="profile"
-                role="tabpanel"
-                aria-labelledby="profile-tab"
-              >
-                <p className="mt-4">
-                  {get(
-                    productAndTermState,
-                    "description.brand.product_description"
-                  )}
-                </p>
+      <Container fluid className="selected-card-box">
+        <Row>
+          <Col md={4}>
+            <div className="selected-img">
+              <img
+                src={get(card, "images.color.medium_rectangle")}
+                alt="AmazonMedium"
+                className="select-card-size1"
+              />
+            </div>
+          </Col>
+          <Col md={8}>
+            <div className="selected-card-details">
+              <p className="select-card-text-lg">{get(card, "name")}</p>
+              <p className="select-card-text">{`Select Card Value (${get(
+                payment,
+                "unit_name_short"
+              )})`}</p>
+              <div className="card-amnt mt-3">
+                {map(
+                  get(productAndTermState, "description.brand.denominations"),
+                  (d, i) => (
+                    <Button
+                      variant="outline-info"
+                      className="mr-3 select-card-button mt-2"
+                      onClick={() => handleDenomination(d)}
+                      key={i}
+                    >
+                      {parseFloat(d)}
+                    </Button>
+                  )
+                )}
               </div>
-            ) : (
-              <div
-                className="mt-4"
-                id="contact"
-                role="tabpanel"
-                aria-labelledby="contact-tab"
-              >
-                <p>
-                  {get(productAndTermState, "terms[0].terms_text")}
-                  <br />
-                </p>
+              <p className="select-card-text mt-5">Gifting for</p>
+              <div className="row">
+                <Form.Check
+                  value="myself"
+                  type="radio"
+                  className="giftslabs"
+                  label="Myself"
+                  name="formHorizontalRadios"
+                  id="formHorizontalRadios1"
+                  checked={gift_to === "myself"}
+                  onClick={(e) => handleGiftTo(e)}
+                />
+                <Form.Check
+                  value="someone else"
+                  type="radio"
+                  className="giftslabs"
+                  label="Someone else"
+                  name="formHorizontalRadios"
+                  id="formHorizontalRadios2"
+                  checked={gift_to === "someone else"}
+                  onClick={(e) => handleGiftTo(e)}
+                />
               </div>
-            )}
-          </div>
-        </div>
-        </Col>
-      </Row>
+              {tempvisible === false ? <GiftGiftCard /> : ""}
+              <div>
+                <Nav onSelect={handleSelect}>
+                  <Nav.Item id="product">
+                    <Nav.Link eventKey="1" active={eventKey11 == "1"}>
+                      Description
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item id="product">
+                    <Nav.Link eventKey="2">Terms & Condtions</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                {eventKey11 == "1" ? (
+                  <div
+                    className="mt-4"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                  >
+                    <p className="mt-4">
+                      {get(
+                        productAndTermState,
+                        "description.brand.product_description"
+                      )}
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    className="mt-4"
+                    id="contact"
+                    role="tabpanel"
+                    aria-labelledby="contact-tab"
+                  >
+                    <p>
+                      {get(productAndTermState, "terms[0].terms_text")}
+                      <br />
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Container>
       <div className="fix-footer">
-      <Footer1 className="">
-        <div className="fix-footer row">
-          <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
-          <h4 className="ml-sm-2 amttext2">
-            {rate} {get(payment, "unit_name_short")}
-          </h4>
-          <div className="col mr-5">
-            <ButtonGroup className="mr-3" aria-label="Second group">
+        <Footer1 className="">
+          <div className="fix-footer row">
+            <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
+            <h4 className="ml-sm-2 amttext2">
+              {rate} {get(payment, "unit_name_short")}
+            </h4>
+            <div className="col mr-5">
+              <ButtonGroup className="mr-3" aria-label="Second group">
+                <Button
+                  variant="light"
+                  disabled={isUndefined(selectedDenomination)}
+                  onClick={decrement}
+                >
+                  {" "}
+                  <img src={minusicon} />
+                </Button>{" "}
+                <Button disabled variant="light">
+                  {count}
+                </Button>{" "}
+                <Button
+                  variant="light"
+                  disabled={isUndefined(selectedDenomination)}
+                  onClick={increment}
+                >
+                  {" "}
+                  <img src={plusicon} />
+                </Button>
+              </ButtonGroup>
               <Button
-                variant="light"
-                disabled={isUndefined(selectedDenomination)}
-                onClick={decrement}
+                className="nav-btn mr-2 text-white"
+                onClick={(e) => saveToCart(false)}
               >
-                {" "}
-                <img src={minusicon} />
-              </Button>{" "}
-              <Button disabled variant="light">
-                {count}
+                Add to cart
               </Button>{" "}
               <Button
-                variant="light"
-                disabled={isUndefined(selectedDenomination)}
-                onClick={increment}
+                className="nav-btn mr-2"
+                onClick={() => saveToCart(true)}
+                variant="info"
               >
-                {" "}
-                <img src={plusicon} />
-              </Button>
-            </ButtonGroup>
-            <Button className="nav-btn mr-2 text-white" onClick={(e) => saveToCart(false)}>
-              Add to cart
-            </Button>{" "}
-            <Button
-              className="nav-btn mr-2"
-              onClick={() => saveToCart(true)}
-              variant="info"
-            >
-              Buy Now
-            </Button>{" "}
+                Buy Now
+              </Button>{" "}
+            </div>
           </div>
-        </div>
-      </Footer1>
+        </Footer1>
       </div>
     </>
   );

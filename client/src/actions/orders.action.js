@@ -57,16 +57,14 @@ export const FailedOrderAction = createAsyncThunk(
 );
 
 export const createOrderAction = createAsyncThunk(
-  'order/create',
+  "order/create",
   async (payload, thunkAPI) => {
     const response = await createOrderAPI(payload);
     return response;
   }
-)
+);
 
 export const createOrderCheckout = createAsyncThunk(
-  'order/checkout',
-  async (payload, thunkAPI) => {
-    
-  }
-)
+  "order/checkout",
+  async (payload, thunkAPI) => {}
+);

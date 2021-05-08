@@ -30,7 +30,7 @@ const StartGifting = () => {
   const history = useHistory();
   return (
     <Container>
-    <Row className="cardgifiti-startgf custom-card mt-5">
+      <Row className="cardgifiti-startgf custom-card mt-5">
         <Col md={2}>
           <img
             src={StartingGift}
@@ -123,7 +123,7 @@ const StartGifting = () => {
             alt="startgiftingimg"
           />
         </Col>
-    </Row>
+      </Row>
     </Container>
   );
 };

@@ -57,35 +57,37 @@ span.cart-head {
   font-weight: 600;
   font-size: 20px;
 }
-@media screen and (max-width: 1365px) and (min-width:768px) {
-  span.count-name, span.count-symbol {
+@media screen and (max-width: 1365px) and (min-width: 768px) {
+  span.count-name,
+  span.count-symbol {
     font-weight: 500;
     font-size: 12px;
-}
-.cart-inc-dec-box button.btn.btn-link {
-  padding: 2px 4px;
-}
-.item-details p {
-  margin-bottom: 0;
-  font-size: 13px;
-}
+  }
+  .cart-inc-dec-box button.btn.btn-link {
+    padding: 2px 4px;
+  }
+  .item-details p {
+    margin-bottom: 0;
+    font-size: 13px;
+  }
 }
 @media screen and (max-width: 768px) {
-  span.count-name, span.count-symbol {
+  span.count-name,
+  span.count-symbol {
     font-weight: 500;
     font-size: 13px;
-}
-.cart-inc-dec-box button.btn.btn-link {
-  padding: 2px 4px;
-}
-.item-details p {
-  margin-bottom: 0;
-  font-size: 15px;
-}
-.item-details {
-  padding-top: 20px;
-}
-.col-second {
-  padding-top: 50px;
-}
+  }
+  .cart-inc-dec-box button.btn.btn-link {
+    padding: 2px 4px;
+  }
+  .item-details p {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  .item-details {
+    padding-top: 20px;
+  }
+  .col-second {
+    padding-top: 50px;
+  }
 }

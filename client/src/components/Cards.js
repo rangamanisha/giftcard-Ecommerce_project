@@ -64,7 +64,10 @@ const Cards = () => {
                 </span>
               </div>
               <div className="text_div">
-                <span>Treat yourself or send an e-gift with a personalised message by email, sms or whatsapp</span>
+                <span>
+                  Treat yourself or send an e-gift with a personalised message
+                  by email, sms or whatsapp
+                </span>
               </div>
             </div>
           </Col>
@@ -77,7 +80,10 @@ const Cards = () => {
                 </span>
               </div>
               <div className="text_div">
-                <span>Buy with your credit or debit card or using your Gifti Global card or points</span>
+                <span>
+                  Buy with your credit or debit card or using your Gifti Global
+                  card or points
+                </span>
               </div>
             </div>
           </Col>

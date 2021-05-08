@@ -18,7 +18,7 @@ export const ORDER_INITIAL_STATE = {
   orderid: "",
   order_status: "",
   total: 0,
-  error: null
+  error: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -62,21 +62,21 @@ export const orderSlice = createSlice({
         state.code = true;
       })
       .addCase(createOrderAction.pending, (state) => {
-        state.orderid=null;
+        state.orderid = null;
       })
       .addCase(createOrderAction.fulfilled, (state, action) => {
         const response = action.payload;
-        if(response.code === 200) {
+        if (response.code === 200) {
           state.orderid = response.data.id;
           state.order_status = response.data.status;
           state.total = response.data.total;
         } else {
-          state.error = response.errors.join(',');
+          state.error = response.errors.join(",");
         }
       })
       .addCase(createOrderAction.rejected, (state, action) => {
         state.error = action.error.message;
-      })
+      });
   },
 });
 

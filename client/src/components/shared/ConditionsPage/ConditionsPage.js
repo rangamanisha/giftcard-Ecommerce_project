@@ -657,9 +657,8 @@ function ConditionsPage() {
           <div className="col-md-4 t-col-right">
             <div className="sticky-side p-3">
               <p>Welcome to Gifti Global</p>
-              <p style={{color:"#3F7AEC"}}>About our Site</p>
+              <p style={{ color: "#3F7AEC" }}>About our Site</p>
               <ul className="list-group list-group-flush ">
-                
                 <li className="border-0 condition-item-style">
                   <a href="#coneligibilty">
                     ELIGIBILITY AND REGISTRATION REQUIREMENTS

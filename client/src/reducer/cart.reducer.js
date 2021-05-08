@@ -19,7 +19,7 @@ export const CART_ITEMS_INIT_STATE = {
   country_name: "",
   count: 1,
   lineItems: [],
-  fetchedCartItems: [] 
+  fetchedCartItems: [],
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -82,7 +82,7 @@ export const cartItemsSlice = createSlice({
       })
       .addCase(fetchItemsByCartAction.fulfilled, (state, action) => {
         const response = action.payload;
-        console.log('response ', response);
+        console.log("response ", response);
         const { data, code } = response;
         if (code === 200) {
           state.fetchedCartItems = data.carts;
