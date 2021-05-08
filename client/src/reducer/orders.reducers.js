@@ -8,6 +8,7 @@ import {
   ProcessOrderAction,
   OrderDetailsAction,
   FailedOrderAction,
+  createOrderAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -16,6 +17,8 @@ export const ORDER_INITIAL_STATE = {
   orders: [],
   orderid: "",
   order_status: "",
+  total: 0,
+  error: null
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -57,7 +60,23 @@ export const orderSlice = createSlice({
       })
       .addCase(OrderDetailsAction.rejected, (state) => {
         state.code = true;
-      });
+      })
+      .addCase(createOrderAction.pending, (state) => {
+        state.orderid=null;
+      })
+      .addCase(createOrderAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if(response.code === 200) {
+          state.orderid = response.data.id;
+          state.order_status = response.data.status;
+          state.total = response.data.total;
+        } else {
+          state.error = response.errors.join(',');
+        }
+      })
+      .addCase(createOrderAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
   },
 });
 

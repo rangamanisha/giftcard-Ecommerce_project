@@ -30,7 +30,7 @@ const StartGifting = () => {
   const history = useHistory();
   return (
     <Container>
-      <Row className="cardgifiti-startgf custom-card mt-5">
+    <Row className="cardgifiti-startgf custom-card mt-5">
         <Col md={2}>
           <img
             src={StartingGift}
@@ -89,7 +89,7 @@ const StartGifting = () => {
                       <Form.Control
                         as="select"
                         className="mr-sm-2"
-                        id="inlineFormCustomSelect2"
+                        id="inlineFormCustomSelect"
                         custom
                       >
                         <option value="0" selected="selected">
@@ -123,7 +123,7 @@ const StartGifting = () => {
             alt="startgiftingimg"
           />
         </Col>
-      </Row>
+    </Row>
     </Container>
   );
 };

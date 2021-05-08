@@ -19,6 +19,7 @@ export const CART_ITEMS_INIT_STATE = {
   country_name: "",
   count: 1,
   lineItems: [],
+  fetchedCartItems: [] 
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -29,7 +30,7 @@ export const initialCartItemState = cartItemsAdaptor.getInitialState(
 
 export const cartItemsSlice = createSlice({
   name: CART_ITEMS_REDUCER,
-  initialState: CART_ITEMS_INIT_STATE,
+  initialState: initialCartItemState,
   reducers: {
     increaseCount(state) {
       state.count = state.count + 1;
@@ -77,17 +78,21 @@ export const cartItemsSlice = createSlice({
       })
       .addCase(fetchItemsByCartAction.pending, (state, action) => {
         state.errors = null;
-        state.fetch_items_by_cart = null;
+        state.fetchedCartItems = null;
       })
-      .addCase(fetchItemsByCartAction, (state, action) => {
+      .addCase(fetchItemsByCartAction.fulfilled, (state, action) => {
         const response = action.payload;
+        console.log('response ', response);
         const { data, code } = response;
-        if (200 === code) {
-          state.fetch_items_by_cart = data;
+        if (code === 200) {
+          state.fetchedCartItems = data.carts;
+        } else {
+          state.fetchedCartItems = [];
         }
       })
       .addCase(fetchItemsByCartAction.rejected, (state, action) => {
         state.errros = [action.error.message || ""];
+        state.fetchedCartItems = [];
       })
       .addCase(addRemoveQuantityAction.pending, (state, action) => {
         state.errors = null;

@@ -39,9 +39,9 @@ export const apiCall = async (
   }
 
   if (result.status === 401) {
-    // localStorage.clear();
-    // sessionStorage.clear();
-    // window.location.href = '/';
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = '/';
   }
 
   if (!result.ok) {

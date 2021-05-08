@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { cartAction } from "../reducer/cart.reducer";
 import {
   cartItemsService,
   fetchItemsByCartService,
@@ -10,13 +11,15 @@ export const cartItemAction = createAsyncThunk(
   "cart_items/listcartItem",
   async (payload, thunkAPI) => {
     const request = {
-      brand_id: payload.brand_id,
-      quantity: payload.quantity,
-      currency: payload.currency,
-      giftcard_value: payload.giftcard_value,
-      card_value_aed: payload.card_value_aed,
-      isforself: payload.isforself,
-      country_id: payload.country_id,
+      cart_item: {
+        brand_id: payload.brand_id,
+        quantity: payload.quantity,
+        currency: payload.currency,
+        giftcard_value: payload.giftcard_value,
+        card_value_aed: payload.card_value_aed,
+        isforself: payload.isforself,
+        country_id: payload.country_id,
+      }
     };
     const response = await cartItemsService(request);
     return response;
@@ -39,13 +42,29 @@ export const addRemoveQuantityAction = createAsyncThunk(
   "cart_items/listaddremove",
   async (payload, thunkAPI) => {
     const request = {
-      brand_id: payload.brand_id,
-      quantity: payload.quantity,
-      giftcard_value: payload.giftcard_value,
-      currency: payload.currency,
-      action: payload.action,
+      cart_item: {
+        brand_name: payload.data.brand_name,
+        quantity: payload.data.quantity,
+        giftcard_value: payload.data.giftcard_value,
+        currency: payload.data.currency,
+        action: payload.data.action,
+      }
     };
+    const { dispatch } = thunkAPI;
+    const { removeLineItem, updateLineItem } = cartAction;
     const response = await addRemoveQuantityService(request);
+    if (payload.data.action === 'CLEAR') {
+      await dispatch(removeLineItem(payload.item));
+    } else {
+      const data = payload.item;
+      if (payload.data.action === 'ADD') {
+        data.quantity = data.quantity + 1;
+      }
+      if (payload.data.action === 'REMOVE') {
+        data.quantity = data.quantity - 1;
+      }
+      await dispatch(updateLineItem(data))
+    }
     return response;
   }
 );
@@ -73,7 +92,7 @@ export const updateCartAction = createAsyncThunk(
         card_value_aed: payload.card_value_aed,
         isforself: payload.isforself,
         country_id: payload.country_id,
-      },
+      }
     };
     const response = await cartItemsService(request);
     return response;

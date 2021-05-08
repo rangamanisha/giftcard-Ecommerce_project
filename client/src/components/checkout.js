@@ -7,15 +7,45 @@ import Form from "react-bootstrap/Form";
 import { getProfileState } from "../reducer/profile.reducer";
 import { getprofileListAction } from "../actions/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { getOrderState } from "../reducer/orders.reducers";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
 
 const Checkout = () => {
   const profilestate = useSelector(getProfileState);
+  const orderState = useSelector(getOrderState);
+  const giftCardsState = useSelector(getGiftcardsState)
   const dispatch = useDispatch();
   const data = profilestate;
 
   useEffect(() => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
+
+
+  const createOrder = (event) => {
+    const payload = {
+      orders: {
+        "card_value_aed": null,
+        "order_total_aed": "2000.00",
+        "program_id": 1,
+        "use_credits": false,
+        "current_exchange_rate": 0,
+        "use_hassad_points": false,
+        "language_code": "en",
+        "isbuynow": false,
+        "isforself": 1,
+        "payment_currency": giftCardsState.selectedCurrency.unit_name_short || 'AED',
+        "currency": giftCardsState.selectedCurrency.id || 1
+
+      }
+    }
+    dispatch()
+  }
+
+
+  const processOrder = async (event) => {
+
+  }
 
   return (
     <Row className="mx-auto payment-card">
@@ -53,18 +83,21 @@ const Checkout = () => {
                 },
               },
             }}
-            ready={() => {}}
-            frameActivated={(e) => {}}
-            frameFocus={(e) => {}}
-            frameBlur={(e) => {}}
-            frameValidationChanged={(e) => {}}
-            paymentMethodChanged={(e) => {}}
-            cardValidationChanged={(e) => {}}
-            cardSubmitted={() => {}}
-            cardTokenized={(e) => {
-              alert(e.token);
+            ready={() => { }}
+            frameActivated={(e) => { }}
+            frameFocus={(e) => { }}
+            frameBlur={(e) => { }}
+            frameValidationChanged={(e) => { }}
+            paymentMethodChanged={(e) => { }}
+            cardValidationChanged={(e) => { }}
+            cardSubmitted={(e) => {
+              createOrder(e);
             }}
-            cardTokenizationFailed={(e) => {}}
+            cardTokenized={(e) => {
+              console.log('cart tokenized triggered');
+              processOrder(e)
+            }}
+            cardTokenizationFailed={(e) => { }}
           >
             <CardNumber />
             <div className="date-and-code">

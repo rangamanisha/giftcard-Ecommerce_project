@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
+import { Col, Image, Row, Container, Fluid } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import plusicon from "../assets/+.svg";
@@ -168,25 +169,31 @@ const SelectCards = () => {
   };
   return (
     <>
-      <div className="row">
+    <Container fluid className="selected-card-box">
+      <Row>
+        <Col md={4}>
+          <div className="selected-img">
         <img
           src={get(card, "images.color.medium_rectangle")}
           alt="AmazonMedium"
-          className="select-card-size1 ml-5 mt-5 col-4"
+          className="select-card-size1"
         />
-        <div className="col mt-5 col-6">
+        </div>
+        </Col>
+        <Col md={8}>
+        <div className="selected-card-details">
           <p className="select-card-text-lg">{get(card, "name")}</p>
           <p className="select-card-text">{`Select Card Value (${get(
             payment,
             "unit_name_short"
           )})`}</p>
-          <div className="mt-3">
+          <div className="card-amnt mt-3">
             {map(
               get(productAndTermState, "description.brand.denominations"),
               (d, i) => (
                 <Button
                   variant="outline-info"
-                  className="mr-sm-3 select-card-button mt-2"
+                  className="mr-3 select-card-button mt-2"
                   onClick={() => handleDenomination(d)}
                   key={i}
                 >
@@ -196,7 +203,7 @@ const SelectCards = () => {
             )}
           </div>
           <p className="select-card-text mt-5">Gifting for</p>
-          <div className="row mr-sm-3 mt-3 mb-3">
+          <div className="row">
             <Form.Check
               value="myself"
               type="radio"
@@ -259,9 +266,12 @@ const SelectCards = () => {
             )}
           </div>
         </div>
-      </div>
-      <Footer1>
-        <div className="row">
+        </Col>
+      </Row>
+      </Container>
+      <div className="fix-footer">
+      <Footer1 className="">
+        <div className="fix-footer row">
           <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
           <h4 className="ml-sm-2 amttext2">
             {rate} {get(payment, "unit_name_short")}
@@ -288,7 +298,7 @@ const SelectCards = () => {
                 <img src={plusicon} />
               </Button>
             </ButtonGroup>
-            <Button className="nav-btn mr-2 text-white" onClick={saveToCart}>
+            <Button className="nav-btn mr-2 text-white" onClick={(e) => saveToCart(false)}>
               Add to cart
             </Button>{" "}
             <Button
@@ -301,6 +311,7 @@ const SelectCards = () => {
           </div>
         </div>
       </Footer1>
+      </div>
     </>
   );
 };
