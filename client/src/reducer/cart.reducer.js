@@ -36,15 +36,22 @@ export const cartItemsSlice = createSlice({
       state.count = state.count + 1;
     },
     updateLineItem(state, action) {
-      const lineItem = action.payload;
-      const index = indexOf(
-        map(state.lineItems, (_) => _.id),
-        lineItem.id
-      );
-      const { count } = lineItem;
-      if (count < 1) {
-        state.lineItems.splice(index, 1);
-      } else state.lineItems[index] = lineItem;
+      const {item, index} = action.payload
+      state.lineItems[index] = item
+      // const lineItem = action.payload;
+      // const index = map(
+      //   state.lineItems, (item, index) => {
+      //     console.log(item)
+      //     if(item.id === lineItem.id && item.selectedDenomination === lineItem.selectedDenomination){
+      //       return index
+      //     }
+          
+      //   }
+      // )
+      // const { quantity } = lineItem;
+    //   if (count < 1) {
+    //     state.lineItems.splice(index, 1);
+    //   } else state.lineItems[index] = lineItem;
     },
     decreaseCount(state, action) {
       state.count = state.count - 1;

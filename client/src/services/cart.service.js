@@ -1,6 +1,4 @@
-import { apiCall } from "./api";
-export const API_URL = process.env.REACT_APP_API_URL;
-
+import { apiCall, API_URL } from "./api";
 export const cartItemsService = (cart_items) => {
   const url = `${API_URL}/cart_items`;
   return apiCall(url, "POST", cart_items);

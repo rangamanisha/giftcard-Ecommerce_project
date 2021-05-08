@@ -39,13 +39,12 @@ function Cart() {
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}
-    >
+      }}>
       {children}
       <RiArrowDownSLine />
     </a>
   ));
-  CustomToggle.displayName = "CustomToggle";
+  CustomToggle.displayName = 'CustomToggle';
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -57,8 +56,8 @@ function Cart() {
   const giftGlobalPoints = parseFloat(get(rewardState, "total_credits"));
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const currencies = get(giftunitState, "paymentCurrency.currencies");
-  const selectedCurrency = get(giftunitState, "selectedCurrency");
+  const currencies = get(giftunitState, 'paymentCurrency.currencies');
+  const selectedCurrency = get(giftunitState, 'selectedCurrency')
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const conversionRate = get(
     giftunitState,
@@ -111,6 +110,12 @@ function Cart() {
   const handleUpdate = (item, operation) => {
     const _item = assign({}, item);
     const { quantity } = _item;
+    // const index = map(lineItems, (Item, index) => {
+    //   if(Item.id === _item.id && Item.selectedDenomination === _item.selectedDenomination){
+    //     return index
+    //   }
+    // })
+    // console.log(index)
     const payload = {
       brand_name: item.name,
       quantity: item.quantity,
@@ -447,3 +452,5 @@ function Cart() {
 }
 
 export default Cart;
+
+
