@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 // import { useHistory } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import StartingGift from "../assets/starting-gift.svg";
@@ -28,9 +29,9 @@ const StartGifting = () => {
   };
   const history = useHistory();
   return (
-    <Row>
-      <div className="cardgifiti-startgf custom-card row mx-auto mt-5">
-        <Col xs={2}>
+    <Container>
+      <Row className="cardgifiti-startgf custom-card mt-5">
+        <Col md={2}>
           <img
             src={StartingGift}
             className="startgiftingimg"
@@ -38,9 +39,9 @@ const StartGifting = () => {
           />
         </Col>
 
-        <Col xs={8}>
+        <Col md={8}>
           <h1 className="startgf-text text-center">Start Gifting</h1>
-          <Form className="mt-5">
+          <Form className="mt-4">
             <Row>
               <Col>
                 <Form.Group as={Row}>
@@ -115,15 +116,15 @@ const StartGifting = () => {
           </div>
         </Col>
 
-        <Col xs={2}>
+        <Col md={2}>
           <img
             src={StartingGift2}
             className="startgiftingimg"
             alt="startgiftingimg"
           />
         </Col>
-      </div>
-    </Row>
+      </Row>
+    </Container>
   );
 };
 

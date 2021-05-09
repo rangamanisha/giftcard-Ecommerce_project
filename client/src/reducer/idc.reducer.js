@@ -36,15 +36,32 @@ export const idcAdapter = createEntityAdapter();
 export const initialIdcState = idcAdapter.getInitialState(IDC_INITIAL_STATE);
 
 export const idcSlice = createSlice({
-    name: IDC_FEATURE_KEY,
-    initialState:IDC_INITIAL_STATE ,
-    reducers: {},
-    extraReducers: (builder) => {
-      builder
-        .addCase(IdcSignInAction.pending, (state, action) => {
-          state.errors = null;
-          state.user = null;
-        })
+  name: IDC_FEATURE_KEY,
+  initialState: IDC_INITIAL_STATE,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(IdcSignInAction.pending, (state, action) => {
+        state.errors = null;
+        state.user = null;
+      })
+      // .addCase(IdcSignInAction.fulfilled, (state, action) => {
+      //   const response = action.payload;
+      //   if (response.code === 200) {
+      //     state.user = response.data.user;
+      //     state.accessToken = response.data.user.access_token;
+      //     state.isIdcAuthenticated = true;
+      //     state.message = response.message;
+      //     state.first_name = response.data.user.first_name;
+      //     localStorage.setItem(
+      //       "idc_access_token",
+      //       response.data.user.access_token
+      //     );
+      //     // localStorage.setItem("first_name", response.data.user.first_name);
+      //   }})
+        // if (response.code === 400) {
+        //   state.user = null;
+        // })
         .addCase(IdcCountriesAction.pending, (state, action) => {
           state.countries = [];
         })
@@ -264,4 +281,3 @@ export const { selectAll, selectEntities } = idcAdapter.getSelectors();
 export const getIdcState = (rootState) => rootState[IDC_FEATURE_KEY];
 export const selectAllAuth = createSelector(getIdcState, selectAll);
 export const selectIdcEntities = createSelector(getIdcState, selectEntities);
-

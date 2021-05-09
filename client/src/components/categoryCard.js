@@ -8,8 +8,13 @@ function categoryCard({ category, nowActive }) {
   //NOTE: create a default image to dispaly if normal image is null
   return (
     <div className={classnames(["box", { active: nowActive }])}>
-      <a href="#/">
-        <img src={normal_square} alt="Icon" className="rounded img-thumbnail" />
+      <a>
+        <img
+          src={normal_square}
+          alt="Icon"
+          className="rounded"
+          style={{ maxWidth: "50px" }}
+        />
         <br />
         <p className="products_icons">{name}</p>
       </a>

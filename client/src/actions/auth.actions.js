@@ -4,7 +4,8 @@ import {
   signupAPI,
   resetpasswordAPI,
   forgotpasswordAPI,
-  googleloginAPI
+  googleloginAPI,
+  updatepasswordAPI,
 } from "../services/auth.service";
 
 export const loginAction = createAsyncThunk(
@@ -18,22 +19,21 @@ export const loginAction = createAsyncThunk(
   }
 );
 
-
 export const googlesigninAction = createAsyncThunk(
   "auth/googlelogin",
   async (payload, thunkAPI) => {
     const request = {
-      signin: { email: payload.email,
+      signin: {
+        email: payload.email,
         provider: "Google",
         token_type: "access_token",
-        token: payload.accessToken
+        token: payload.accessToken,
       },
     };
     const response = await googleloginAPI(request);
     return response;
   }
 );
-
 
 export const signupAction = createAsyncThunk(
   "auth/signup",
@@ -66,6 +66,21 @@ export const resetpasswordAction = createAsyncThunk(
     };
 
     const response = await resetpasswordAPI(request);
+    return response;
+  }
+);
+
+export const updatepasswordAction = createAsyncThunk(
+  "auth/updatepassword",
+  async (payload, thunkAPI) => {
+    const request = {
+      change_password: {
+        password: payload.password,
+        password_confirmation: payload.password_confirmation,
+      },
+    };
+
+    const response = await updatepasswordAPI(request);
     return response;
   }
 );

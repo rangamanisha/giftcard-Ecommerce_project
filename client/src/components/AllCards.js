@@ -1,4 +1,7 @@
 import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { useState, useRef } from "react";
 import AllCategoryCards from "./AllCategoryCards";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +15,7 @@ import {
 } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
 import { getTopBarState } from "../reducer/topbar.reducer";
-import { giftCardsUnitAction } from "../actions/gitCards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import AllFeaturedCards from "./AllFeaturedCards";
 import Giftcard from "./Giftcard";
@@ -71,38 +74,55 @@ function AllCards() {
     : get(giftunitState, "selectedCountry.country_name");
 
   return (
-    <div className="allGiftCard">
-      <p className="giftiallcard-text-a">Browse by Category</p>
-      <AllCategoryCards />
-      <div>
-        <AllFeaturedCards />
-      </div>
-      <div>
-        <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
-        <p className="allgiftcard-text">
-          {`Buy Most Popular eGift Cards in ${nowCountry}`}
-          <br />
-          Personalized gift vouchers delivered online & redeemable at popular
-          Brands
-        </p>
-      </div>
-      <div className="gificards mt-5 ">
-        {isEmpty(get(brandState, "brands"))
-          ? map(brandsWithCategory, (category, i) => (
-              <>
-                {map(get(category, "brands"), (brand, i) => (
-                  <>
-                    <Giftcard brand={brand} key={i}/>
-                  </>
-                ))}
-              </>
-            ))
-          : map(get(brandState, "brands"), (brand, i) => (
-              <>
-                  <Giftcard brand={brand} key={i}/>
-              </>
-            ))}
-      </div>
+    <div className="allgiftcards-sec">
+      <Container>
+        <Row className="allGiftCard-box">
+          <Col>
+            <p className="giftiallcard-text-a">Browse by Category</p>
+            <AllCategoryCards />
+          </Col>
+        </Row>
+      </Container>
+      <Row>
+        <Col>
+          <div>
+            <AllFeaturedCards />
+          </div>
+        </Col>
+      </Row>
+
+      <Container>
+        <Row className="giftiallcard-row-3">
+          <Col>
+            <div>
+              <p className="giftiallcard-text">{`All Gift Cards in the ${nowCountry}`}</p>
+              <p className="allgiftcard-text">
+                {`Buy Most Popular eGift Cards in ${nowCountry}`}
+                <br />
+                Personalized gift vouchers delivered online & redeemable at
+                popular Brands
+              </p>
+            </div>
+            <div className="gificards">
+              {isEmpty(get(brandState, "brands"))
+                ? map(brandsWithCategory, (category, i) => (
+                    <>
+                      {map(get(category, "brands"), (brand, i) => (
+                        <>
+                          <Giftcard brand={brand} key={i} />
+                        </>
+                      ))}
+                    </>
+                  ))
+                : map(get(brandState, "brands"), (brand, i) => (
+                    <>
+                      <Giftcard brand={brand} key={i} />
+                    </>
+                  ))}
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

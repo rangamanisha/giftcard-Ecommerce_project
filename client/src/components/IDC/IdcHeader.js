@@ -119,11 +119,12 @@ const Idc_Header = () =>{
                         </ul>
                     </div>):''}
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-        </>
-    );
-}
+      
+    </>
+  );
+};
 export default Idc_Header;

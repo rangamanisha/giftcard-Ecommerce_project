@@ -10,7 +10,6 @@ import { useractiveReducer, USER_ACTIVE_FEATURE_KEY } from './useractive.reducer
 import { rewardpointsReducer, REWARDS_POINTS_FEATURE_KEY } from './rewardpoints.reducer';
 import { orderReducer, ORDER__FEATURE_KEY} from './orders.reducers';
 import { idcReducer, IDC_FEATURE_KEY} from './idc.reducer';
-
 const saveToLocalStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state);
@@ -32,7 +31,6 @@ const loadFromLocalStorage = () => {
     return undefined;
   }
 };
-const persistedState = loadFromLocalStorage();
 
 const store = configureStore({
   reducer: {

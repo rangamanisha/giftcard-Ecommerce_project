@@ -1,13 +1,15 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {idcSigninApiCall ,idcConvertedCurrencyApiCall, idcCountriesApiCall, idcTotalCreditApiCall ,idcVaritiesApiCall, idcChangePasswordApiCall,idcProfileApiCall,idcSingleOrderApiCall,countryCodeApiCall} from '../services/idc.service';
 
-export const IdcSignInAction = createAsyncThunk('idc_signin', async(payload, thunkAPI) => {
+export const IdcSignInAction = createAsyncThunk(
+  "idc_signin",
+  async (payload, thunkAPI) => {
     const request = {
-        signin: {
-            email: payload.email,
-            password: payload.password,
-          },
-    }
+      signin: {
+        email: payload.email,
+        password: payload.password,
+      },
+    };
     const response = await idcSigninApiCall(request);
     return response;
 });
@@ -75,4 +77,5 @@ export const IdcProfileAction = createAsyncThunk('idc_profile', async(payload, t
 export const IdcCountriesAction = createAsyncThunk('idc_countries', async(payload, thunkAPI) => {
     const response = await idcCountriesApiCall();
     return response;
-});
+  }
+);

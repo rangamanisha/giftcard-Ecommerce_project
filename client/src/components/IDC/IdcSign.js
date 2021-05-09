@@ -6,15 +6,15 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getIdcState } from '../../reducer/idc.reducer';
-import {IdcSignInAction} from '../../actions/idc_action';
+import { getIdcState } from "../../reducer/idc.reducer";
+import { IdcSignInAction } from "../../actions/idc_action";
 
 const Idc_Signin = () => {
-    const dispatch = useDispatch();
-    const state = useSelector(getIdcState);
-    const history = useHistory();
-    const [idcIsValid, setIdcIsValid] = useState(false);
-    const [idcVisible, setIdcVisible] = useState(true);
+  const dispatch = useDispatch();
+  const state = useSelector(getIdcState);
+  const history = useHistory();
+  const [idcIsValid, setIdcIsValid] = useState(false);
+  const [idcVisible, setIdcVisible] = useState(true);
 
     const formik = useFormik({
         initialValues: {
@@ -35,17 +35,15 @@ const Idc_Signin = () => {
         }
     }, [state.isIdcAuthenticated]);
 
-
-
-    return (
-        <div className="signInLayout1">
-    <div className="container-fluid px-0">
+  return (
+    <div className="signInLayout1">
+      <div className="container-fluid px-0">
         <div className="row no-gutter">
-            <div className="col-xs-12 col-md-4">
-                <div className="sidebarLoginImage">
-                    <img src={IDC_LOGO_white_icon_1} alt="" className="overlapImg" />
-                    <img src={Slider} alt="" className="biggerImg" />
-                </div>
+          <div className="col-xs-12 col-md-4">
+            <div className="sidebarLoginImage">
+              <img src={IDC_LOGO_white_icon_1} alt="" className="overlapImg" />
+              <img src={Slider} alt="" className="biggerImg" />
+            </div>
             </div>
             <div className="col-xs-12 col-md-8">
                 <div className="contentLoginRight">
@@ -100,11 +98,13 @@ const Idc_Signin = () => {
                 <div className="bottomFooterBar">
 
                 </div>
-            </div>
+
+
+      </div></div>
+          </div>
         </div>
-    </div>
- </div>
-    );
-}
+
+  );
+};
 
 export default Idc_Signin;

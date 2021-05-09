@@ -19,7 +19,7 @@ export const getConversionRateAction = createAsyncThunk(
     const request = {
       currency: payload,
     };
-    const response = await getConversionRateService(payload);
+    const response = await getConversionRateService(request);
     return response;
   }
 );

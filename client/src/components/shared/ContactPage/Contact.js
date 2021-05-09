@@ -1,10 +1,9 @@
 import React from "react";
-import "./Contact.css";
+// import "./Contact.scss";
 import { FaPhoneAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
 import Header from "../HeaderPage/Header";
-import Footer from "../../Footer";
 
 function Contact() {
   return (
@@ -94,7 +93,6 @@ function Contact() {
             </form>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

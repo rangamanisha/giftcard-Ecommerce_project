@@ -1,14 +1,15 @@
 import {
   createEntityAdapter,
   createSelector,
-  createSlice
+  createSlice,
 } from "@reduxjs/toolkit";
 import {
   loginAction,
   signupAction,
   resetpasswordAction,
   forgotpasswordAction,
-  googlesigninAction
+  googlesigninAction,
+  updatepasswordAction,
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -24,7 +25,8 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   expiresIn: null,
   status: null,
   success: false,
-  alert: false,
+  alertlogin: false,
+  signupOrLoginActionClicked: false,
   signupSuccess: false,
   reset: false,
 };
@@ -38,7 +40,12 @@ export const initialAuthState = authAdapter.getInitialState(
 export const authSlice = createSlice({
   name: AUTH_FEATURE_KEY,
   initialState: AUTH_INITIAL_STATE_LOGIN,
-  reducers: {},
+  reducers: {
+    removeLoginOrSignUpMessage(state, action) {
+      console.log("check alret remove");
+      state.signupOrLoginActionClicked = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginAction.pending, (state, action) => {
@@ -55,6 +62,8 @@ export const authSlice = createSlice({
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
+          state.alertlogin = true;
+          state.signupOrLoginActionClicked = true;
         }
         if (response.code === 400) {
           state.user = null;
@@ -75,8 +84,10 @@ export const authSlice = createSlice({
         const response = action.payload;
         console.log(response);
         if (response.code === 200) {
+          state.signupActionClicked = true;
           state.signupSuccess = true;
           state.is_active = true;
+          state.signupOrLoginActionClicked = true;
         }
         if (response.code === 400) {
           state.signupSuccess = false;
@@ -106,6 +117,19 @@ export const authSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.status = response.status;
+          state.errors = null;
+        }
+        if (response.code === 400) {
+          state.errors = [response.message];
+        }
+        if (response.code === undefined) {
+          state.errors = [response.email];
+        }
+      })
+      .addCase(updatepasswordAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if (response.code === 200) {
+          state.message = response.message;
           state.errors = null;
         }
         if (response.code === 400) {

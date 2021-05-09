@@ -7,23 +7,22 @@ import {
   giftCardsUnitAction,
   getPaymentCurrencyAction,
   getConversionRateAction,
-} from "../actions/gitCards.actions";
-import { filter, get } from "lodash";
+} from "../actions/giftcards.actions";
 
 export const GIFTCARDS_INIT_STATE = {
-    message: "",
-    errors: null,
-    giftingTo: '',
-    currency: "1",
-    amount: null,
-    dest_currency: "",
-    source_currency:"",
-    giftunit_id: 1,
-    countries: [],
-    selectedCountry: {},
-    selectedBrand:[],
-    selectedCurrency: null
-}
+  message: "",
+  errors: "",
+  giftingTo: "",
+  currency: "1",
+  dest_currency: "",
+  source_currency: "",
+  giftunit_id: 1,
+  countries: [],
+  selectedCountry: {},
+  selectedBrand: [],
+  selectedCurrency: undefined,
+  conversion: undefined,
+};
 
 export const GIFTCARD_REDUCER = "giftCards";
 export const giftcardsAdaptor = createEntityAdapter();
@@ -32,36 +31,34 @@ export const initialGiftcardState = giftcardsAdaptor.getInitialState(
 );
 
 export const giftcardSlice = createSlice({
-    name: GIFTCARD_REDUCER,
-    initialState: GIFTCARDS_INIT_STATE,
-    reducers: {
-        setSelectCurreny(state, action){
-            state.selectedCurrency = action.payload
-        },
-        setGiftingTo(state, action) {
-            state.giftingTo = action.payload
-        },
-        selectCountry(state, action){
-            let country = filter(state.countries, {country_name:action.payload})[0]
-            state.giftunit_id = get(country, 'id');
-            state.selectedCountry = country;
-        },
-        selectBrand(state, action){
-            state.selectedBrand = action.payload;
-        },
-        removeSelectedCard(state, action){
-            state.selectedBrand = null;
-        },
-        selectDenomination(state, action){
-            state.selectedBrand.selectedDenomination = parseFloat(action.payload)
-        }
-
-
+  name: GIFTCARD_REDUCER,
+  initialState: GIFTCARDS_INIT_STATE,
+  reducers: {
+    setSelectCurreny(state, action) {
+      state.selectedCurrency = action.payload;
+    },
+    setGiftingTo(state, action) {
+      state.giftingTo = action.payload;
+    },
+    selectCountry(state, action) {
+      let country = action.payload;
+      state.giftunit_id = country?.id || "";
+      state.selectedCountry = country;
+    },
+    selectBrand(state, action) {
+      state.selectedBrand = action.payload;
     },
     removeSelectedCard(state, action) {
       state.selectedBrand = null;
     },
-  
+    selectDenomination(state, action) {
+      state.selectedBrand.selectedDenomination = parseFloat(action.payload);
+    },
+  },
+  removeSelectedCard(state, action) {
+    state.selectedBrand = null;
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(giftCardsUnitAction.pending, (state, action) => {
@@ -72,7 +69,7 @@ export const giftcardSlice = createSlice({
         const response = action.payload;
         const { data, code } = response;
         if (200 === code) {
-          const gift_cards = get(data, "giftcard_units");
+          const gift_cards = data?.giftcard_units;
           state.countries = gift_cards;
         }
       })

@@ -1,15 +1,14 @@
 import React from "react";
-import "./ConditionsPage.css";
+// import "./ConditionsPage.scss";
 import Header from "../HeaderPage/Header";
-import Footer from "../../Footer";
 
 function ConditionsPage() {
   return (
     <>
-      <div className="container-fluid">
+      <div className="container">
         <Header />
-        <div className="row mx-5">
-          <div className="col-8">
+        <div className="row my-4">
+          <div className="col-md-8 t-col-left">
             <h3>Terms & Conditions</h3>
             <button type="button" className="btn btn-primary btn-sm">
               Last Updated: 1 January 2021
@@ -655,17 +654,11 @@ function ConditionsPage() {
             </article>
           </div>
 
-          <div className="col-3 offset-1 sticky-top condition-container">
-            <div className="d-flex flex-column justify-content-between p-2">
+          <div className="col-md-4 t-col-right">
+            <div className="sticky-side p-3">
+              <p>Welcome to Gifti Global</p>
+              <p style={{ color: "#3F7AEC" }}>About our Site</p>
               <ul className="list-group list-group-flush ">
-                <li className="border-0 condition-item-style">
-                  <a href="#conwelcome">Welcome to Gifti Global</a>
-                  {/* <Link to='#welc'>Welcome to Gifti Global</Link> */}
-                </li>
-                <li className="border-0 condition-item-style">
-                  <a href="#conabout">ABOUT OUR SITE</a>
-                  {/* <Link>ABOUT OUR SITE</Link> */}
-                </li>
                 <li className="border-0 condition-item-style">
                   <a href="#coneligibilty">
                     ELIGIBILITY AND REGISTRATION REQUIREMENTS
@@ -728,7 +721,6 @@ function ConditionsPage() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );
