@@ -14,6 +14,7 @@ import { getCountriesListAction } from "../../../actions/topbar.actions";
 import Topbar from "../Topbar";
 import { giftCardsUnitAction } from "../../../actions/giftcards.actions";
 import { isEmpty, get, sortBy } from "lodash";
+import { topbarActions } from "../../../reducer/topbar.reducer";
 //Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
@@ -37,6 +38,7 @@ const GiftiNav = () => {
 
   const countryChanged = (value) => {
     dispatch(giftCardsAction.selectCountry(value));
+    dispatch(topbarActions.updateSelectedCountry(value));
   };
 
   return (

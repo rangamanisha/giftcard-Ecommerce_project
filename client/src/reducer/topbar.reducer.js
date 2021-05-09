@@ -24,7 +24,11 @@ export const initialTopBarState = topbarAdapter.getInitialState(
 export const topbarSlice = createSlice({
   name: TOPBAR_FEATURE_KEY,
   initialState: TOPBAR_INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    updateSelectedCountry: (state, action) => {
+      state.selectedCountry = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCountriesListAction.pending, (state, action) => {

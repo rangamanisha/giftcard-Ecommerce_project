@@ -99,7 +99,7 @@ const SelectCards = () => {
     );
     dispatch(
       descriptionBrandAction({
-        currency: 1,
+        currency: giftunitState.selectedCountry?.id || 1,
         program_id: 1,
         id: get(card, "id"),
         image_size: "medium_rectangle",
