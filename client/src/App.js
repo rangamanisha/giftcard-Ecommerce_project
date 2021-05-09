@@ -41,7 +41,7 @@ function App() {
           <Route path ="/idc/signin" component={Idc_Signin}/>
           <Route path ="/idc/order" component={Idc_Order}/>
           <Route path = "/idc/profile" component = {Idc_Profile}/>
-          {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <GiftiNav />}      
+          {window.location.pathname === '/idc/order' || window.location.pathname === '/idc/signin' || window.location.pathname === '/idc/profile'? null:  <GiftiNav />}      
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/auth/login" component={Login} exact />
@@ -82,7 +82,7 @@ function App() {
           <Route path="/allcards" component={AllCards} exact />
           <Route path="/emptycart" component={EmptyCart} exact />
         </Switch>
-        {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <Footer />}      
+        {window.location.pathname === '/idc/order' || window.location.pathname === '/idc/signin' || window.location.pathname === '/idc/profile'? null:  <Footer />}      
 
 
       </Router>

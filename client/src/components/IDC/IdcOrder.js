@@ -20,9 +20,9 @@ export const API_URL = process.env.REACT_APP_API_URL;
 const Idc_Order = ()=>{
     const dispatch = useDispatch();
     const idcState = useSelector(getIdcState);
-    const idcCountries = useSelector(getTopBarState);
+    // const idcCountries = useSelector(getTopBarState);
     const idc_varities = get(idcState, "idcProduct.idc_product");
-    const countries = get(idcCountries,"countries"); 
+    const countries = get(idcState,"countries"); 
     const [selectedFile, setSelectedFile] = useState('');
     const [filename, setFilename] = useState();
     const [filecredit,setFilecredit] = useState();
@@ -153,7 +153,7 @@ const Idc_Order = ()=>{
         dispatch(IdcProfileAction());
       }, [dispatch]);
       React.useEffect(() => {
-        dispatch(  IdcCountriesAction());
+        dispatch(IdcCountriesAction());
       }, [dispatch]);
       
  
@@ -236,6 +236,11 @@ const Idc_Order = ()=>{
                     </div>
                 </div>
                 ):''}
+                                  {idcState.errors && idcState.errors.length ? (
+                    <p className="validation-messages">
+                      {idcState.errors.join("\n")}
+                    </p>
+                  ) : null}
                 <div className="btn-layout1 text-center">
                     <button  className="btn"
                     type="submit">
@@ -455,6 +460,11 @@ const Idc_Order = ()=>{
                     </div>
                 </div>):''}
                 <br/>
+                {idcState.errors && idcState.errors.length ? (
+                    <p className="validation-messages">
+                      {idcState.errors.join("\n")}
+                    </p>
+                  ) : null}
                 <div className="btn-layout1 text-center">
                     <button  className="btn"
                   type="submit">

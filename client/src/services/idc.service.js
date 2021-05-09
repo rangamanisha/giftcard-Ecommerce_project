@@ -1,4 +1,4 @@
-// import { apiCall } from "./api";
+
 import { apiCall1 } from "./idcApi";
 export const API_URL = process.env.REACT_APP_API_URL;
 
@@ -42,6 +42,6 @@ export const idcChangePasswordApiCall =(idc_user_data)=>{
 
 }
 export const idcCountriesApiCall = () => {
-  const url = `https://api-giftiglobal.meritincentives.com/v1/countries`;
+  const url = `${API_URL}/countries`;
   return apiCall1(url, "GET");
 };

@@ -1,6 +1,7 @@
 import React , { useState, useEffect } from 'react';
 import './Idc.scss';
 import IDC_LOGO_white_icon_1 from '../../assets/IDC_LOGO_white_icon_1.svg';
+import { Link } from "react-router-dom";
 import Slider from '../../assets/Slider.png';
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,12 +66,20 @@ const Idc_Signin = () => {
                             <div className="form-group">
                                 <label className="customL">
                                     <span>PASSWORD</span>
-                                    <a ng-click="dialogForgotPassword1( )" className="forgotURL">Forgot Password</a>
+                                    <Link className="link-color"  className="forgotURL" to="/auth/forgotpassword">
+                                    Forgot Password
+                    </Link>
+                                 
                                 </label>
                                 <input type="password" ng-model="password" name="password" 
                                 autocomplete="off" value={formik.values.password}
                                 onChange={formik.handleChange} placeholder="Password" className="form-control"/>
                             </div>
+                            {state.errors && state.errors.length ? (
+                    <p className="validation-messages">
+                      {state.errors.join("\n")}
+                    </p>
+                  ) : null}
                             <div className="btn-layout1 text-center">
                                 <button className="btn" type="submit"
                                     ng-disabled="idc_order.$invalid">Log in</button>

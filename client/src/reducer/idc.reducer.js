@@ -91,7 +91,7 @@ export const idcSlice = createSlice({
             if (response.code === 400) {
               state.user = null;
               state.isIdcAuthenticated = false;
-              state.errors = [response.message];
+              state.errors = [response.message || response.detail || ""];
             } else if (response.code === 401) {
               state.user = null;
               state.errors = [response.message || response.detail || ""];
@@ -135,7 +135,7 @@ export const idcSlice = createSlice({
 .addCase(IdcVaritiesAction.rejected,(state, action)=>{
   
   state.idcCredits = null;
-  state.errors = null;
+  state.errros = [action.error.message || '']
 })
 .addCase(IdcProfileAction.pending,(state, action)=>{
 
@@ -153,7 +153,7 @@ export const idcSlice = createSlice({
 })
 .addCase(IdcProfileAction.rejected,(state, action)=>{
 
-  state.errors = null;
+  state.errros = [action.error.message || '']
 })
 .addCase(IdcCountryCode.pending,(state, action)=>{
 
@@ -166,8 +166,7 @@ export const idcSlice = createSlice({
   }
 })
 .addCase(IdcCountryCode.rejected,(state, action)=>{
-
-  state.errors = null;
+  state.errros = [action.error.message || '']
 })
 
 .addCase(IdcSignleOrderAction.pending, (state, action) => {
@@ -194,14 +193,14 @@ export const idcSlice = createSlice({
       });
       // localStorage.setItem("first_name", response.data.user.first_name);
     }
-    // if (response.code === 400) {
-    //   state.user = null;
-    //   state.isIdcAuthenticated = false;
-    //   state.errors = [response.message];
-    // } else if (response.code === 401) {
-    //   state.user = null;
-    //   state.errors = [response.message || response.detail || ""];
-    // }
+    if (response.code === 400) {
+      // state.user = null;
+      // state.isIdcAuthenticated = false;
+      state.errors = [response.message];
+    } else if (response.code === 401) {
+      state.user = null;
+      state.errors = [response.message || response.detail || ""];
+    }
   })
   .addCase(IdcSignleOrderAction.rejected, (state, action) => {
     state.isIdcAuthenticated = false;
@@ -232,7 +231,7 @@ export const idcSlice = createSlice({
   .addCase(IdcConvertCurrencyAction.rejected, (state, action) => {
     state.points =null;
     // state.isIdcAuthenticated = false;
-    // state.errors = [action.error.message || ""];
+    state.errros = [action.error.message || '']
   })
 
 
@@ -268,7 +267,7 @@ export const idcSlice = createSlice({
     })
     .addCase(IdcChangePasswordAction.rejected, (state, action) => {
       // state.isIdcAuthenticated = false;
-      // state.errors = [action.error.message || ""];
+      state.errros = [action.error.message || '']
     })
 
 
