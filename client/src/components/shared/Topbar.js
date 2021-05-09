@@ -3,7 +3,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
 import UserProfileDropDown from "../UserProfileDropDown";
@@ -13,9 +12,6 @@ import cartIcon from "../../assets/cart.svg";
 import userIcon from "../../assets/uprofile.svg";
 
 import Container from "react-bootstrap/Container";
-import { getCartItemsState } from "../../reducer/cart.reducer";
-import { useSelector } from "react-redux";
-import { get, reduce } from "lodash";
 
 const Topbar = (props) => {
 
@@ -29,7 +25,8 @@ const Topbar = (props) => {
     shoppingCartIcon,
     showLogin,
     onCountrySelected,
-    state
+    state,
+    cartState
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
@@ -65,7 +62,6 @@ const Topbar = (props) => {
       />
     );
   };
-  const cartLineCount = 0;
 
   const onCountryChange = (e) => {
     onCountrySelected(e.value);
@@ -133,10 +129,10 @@ const Topbar = (props) => {
                 alt="shoppingcart-icon"
                 onClick={() => history.push("/cart")}
               />
-              {cartLineCount > 0 ? (
+              {cartState.totalCartItems > 0 ? (
                 <span class="badge badge-danger" id="lblCartCount">
                   {" "}
-                  {cartLineCount}
+                  {cartState.totalCartItems}
                 </span>
               ) : null}
             </Button>

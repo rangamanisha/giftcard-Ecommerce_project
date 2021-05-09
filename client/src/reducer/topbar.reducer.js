@@ -4,8 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import {
-  getCountriesListAction,
-  selectCountryAction,
+  getCountriesListAction
 } from "../actions/topbar.actions";
 
 export const TOPBAR_INITIAL_STATE = {
