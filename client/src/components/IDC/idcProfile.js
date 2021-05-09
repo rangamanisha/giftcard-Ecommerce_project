@@ -46,7 +46,7 @@ const history = useHistory();
     return(
 <>
 <div className="wrapper-container custom-sign mb-5">
-<div className="container-fluid animated fadeInRight profile-section">
+<div className="container-fluid animated fadeInRight profile-section mt-5">
 
         <div className="tabs-container vertical-buffer-10">
        

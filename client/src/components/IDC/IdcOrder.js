@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getIdcState } from '../../reducer/idc.reducer';
 import {getTopBarState} from '../../reducer/topbar.reducer';
-import {IdcTotalCreditnAction,IdcConvertCurrencyAction, IdcProfileAction,IdcVaritiesAction, IdcSignleOrderAction, IdcCountryCode} from '../../actions/idc_action';
+import {IdcTotalCreditnAction,IdcConvertCurrencyAction,  IdcCountriesAction, IdcProfileAction,IdcVaritiesAction, IdcSignleOrderAction, IdcCountryCode} from '../../actions/idc_action';
 import { countryCodeApiCall } from '../../services/idc.service';
 export const API_URL = process.env.REACT_APP_API_URL;
 
@@ -22,7 +22,7 @@ const Idc_Order = ()=>{
     const idcState = useSelector(getIdcState);
     const idcCountries = useSelector(getTopBarState);
     const idc_varities = get(idcState, "idcProduct.idc_product");
-    const countries = get(idcCountries,"countries"); 
+    const countries = get(idcState,"countries"); 
     const [selectedFile, setSelectedFile] = useState('');
     const [filename, setFilename] = useState();
     const [filecredit,setFilecredit] = useState();
@@ -88,7 +88,10 @@ const Idc_Order = ()=>{
                         showCancelButton: false,
                         confirmButtonColor: "#00AF9A",
 
+                      }).then(ok => {
+                        window.location.reload();
                       });
+                    
                   }
               })
           })
@@ -96,8 +99,9 @@ const Idc_Order = ()=>{
 
     const csvData = [
         ["First_Name", "Last_Name", "Email","Company","Designation","Country","Phone","Product","Currency","Denomination","Quantity"],
-        ["John", "Nick", "john12@gmail.com","MIT","Software Developer","America","992236254","IDC","AED","100","2"],
+        ["John", "Nick", "john12@gmail.com","MIT","Software Developer","America","92323323","IDC","AED","100","2"],
       ];
+      
  
 
     const formik = useFormik({
@@ -117,14 +121,17 @@ const Idc_Order = ()=>{
           
         },
 
-        // validationSchema: Yup.object({
-        //   email: Yup.string().min(2).max(200).email().required(),
-        //   last_name: Yup.string().min(2).max(200).required(),
-        //   first_name: Yup.string().min(2).max(200).required(),
-        //   company: Yup.string().min(2).max(200).required(),
-        //   mobile_number: Yup.number().min(2).max(200).required(),
-        //   quantity: Yup.number().min(2).max(200).required(),
-        // }),
+        validationSchema: Yup.object({
+          email: Yup.string().min(2).max(200).email().required(),
+          last_name: Yup.string().min(2).max(200).required(),
+          first_name: Yup.string().min(2).max(200).required(),
+          company_title: Yup.string().min(2).max(200).required(),
+          company_name: Yup.string().min(2).max(200).required(),
+          phone: Yup.number().required(),
+          quantity: Yup.number().min(2).max(200).required(),
+          product: Yup.string().min(2).max(200).required(),
+          country: Yup.string().min(2).max(200).required()
+        }),
         onSubmit: (data) => {
           dispatch(IdcSignleOrderAction({
               denomination:{denomination},
@@ -152,6 +159,10 @@ const Idc_Order = ()=>{
       React.useEffect(() => {
         dispatch(IdcProfileAction());
       }, [dispatch]);
+      React.useEffect(() => {
+        dispatch(IdcCountriesAction());
+      }, [dispatch]);
+   
  
     const handleOffence = (name)=>{
         let match = find(idc_varities, { 'product_name_to_display': name});   
@@ -313,7 +324,7 @@ const Idc_Order = ()=>{
                     onChange={formik.handleChange}
                     type="email"
                         placeholder="Email"
-                        pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'/>
+                    />
                                  {formik.errors.email ? (
             <p className="validation-messages">{formik.errors.email}</p>
           ) : null}
@@ -328,8 +339,8 @@ const Idc_Order = ()=>{
                                 placeholder="Company " 
                                 value={formik.values.company_name}
                                 onChange={formik.handleChange}  className="form-control" />
-         {formik.errors.company ? (
-            <p className="validation-messages">{formik.errors.company}</p>
+         {formik.errors.company_name ? (
+            <p className="validation-messages">{formik.errors.company_name}</p>
           ) : null}
                         </div>
                     </div>
@@ -343,9 +354,9 @@ const Idc_Order = ()=>{
                                  
                                 placeholder="Designation " 
                                 className="form-control"/>
-         {/* {formik.errors.designation ? (
-            <p className="validation-messages">{formik.errors.designation}</p>
-          ) : null} */}
+         {formik.errors.company_title ? (
+            <p className="validation-messages">{formik.errors.company_title}</p>
+          ) : null}
                         </div>
                     </div>
                 </div>
@@ -392,6 +403,9 @@ const Idc_Order = ()=>{
                                          placeholder="Mobile Number "
                                          className="form-control mobile-number-input"
                                         />
+                                        {formik.errors.phone ? (
+            <p className="validation-messages">{formik.errors.phone}</p>
+          ) : null}
                                 </div>
                             </div>
                         </div>
@@ -419,6 +433,9 @@ const Idc_Order = ()=>{
           <option  key={i} value ={c.product_name_to_display}>{c.product_name_to_display}</option>
             ))}
         </Form.Control>
+        {formik.errors.product ? (
+            <p className="validation-messages">{formik.errors.product}</p>
+          ) : null}
 
  
                         </div>
@@ -440,6 +457,9 @@ const Idc_Order = ()=>{
                                 className="form-control"
                              
                                />
+                                       {formik.errors.quantity ? (
+            <p className="validation-messages">{formik.errors.quantity}</p>
+          ) : null}
                         </div>
                     </div>
 

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {idcSigninApiCall ,idcConvertedCurrencyApiCall,idcTotalCreditApiCall ,idcVaritiesApiCall, idcChangePasswordApiCall,idcProfileApiCall,idcSingleOrderApiCall,countryCodeApiCall} from '../services/idc.service';
+import {idcSigninApiCall ,idcConvertedCurrencyApiCall, idcCountriesApiCall, idcTotalCreditApiCall ,idcVaritiesApiCall, idcChangePasswordApiCall,idcProfileApiCall,idcSingleOrderApiCall,countryCodeApiCall} from '../services/idc.service';
 
 export const IdcSignInAction = createAsyncThunk('idc_signin', async(payload, thunkAPI) => {
     const request = {
@@ -70,5 +70,9 @@ export const IdcVaritiesAction = createAsyncThunk('idc_varities', async(payload,
 });
 export const IdcProfileAction = createAsyncThunk('idc_profile', async(payload, thunkAPI) => {
     const response = await idcProfileApiCall();
+    return response;
+});
+export const IdcCountriesAction = createAsyncThunk('idc_countries', async(payload, thunkAPI) => {
+    const response = await idcCountriesApiCall();
     return response;
 });

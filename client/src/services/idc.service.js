@@ -1,4 +1,4 @@
-import { apiCall } from "./api";
+// import { apiCall } from "./api";
 import { apiCall1 } from "./idcApi";
 export const API_URL = process.env.REACT_APP_API_URL;
 
@@ -24,7 +24,7 @@ export const idcTotalCreditApiCall =()=>{
 
 export const idcVaritiesApiCall = () =>{
   const url = `${API_URL}/brands/idc_varities?program_id=1`;
-  return apiCall(url,"GET");
+  return apiCall1(url,"GET");
 }
 
 export const idcProfileApiCall =()=>{
@@ -34,10 +34,14 @@ export const idcProfileApiCall =()=>{
 
 export const countryCodeApiCall =(country)=>{
   const url = `${API_URL}/countries/set_phone_attributes?country_name=${country}`;
-  return apiCall(url,"GET")
+  return apiCall1(url,"GET")
 }
 export const idcChangePasswordApiCall =(idc_user_data)=>{
     const url = `${API_URL}/accounts/passwords/change_password`;
     return apiCall1(url, "PUT", idc_user_data);
 
 }
+export const idcCountriesApiCall = () => {
+  const url = `https://api-giftiglobal.meritincentives.com/v1/countries`;
+  return apiCall1(url, "GET");
+};

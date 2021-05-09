@@ -36,15 +36,14 @@ function App() {
           <Route path ="/idc/order" component={Idc_Order}/>
           <Route path = "/idc/profile" component = {Idc_Profile}/>
           {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <GiftiNav />}      
-          {/* {window.location.pathname == '/idc/signin'? null: <GiftiNav />}     
-          {window.location.pathname == '/idc/profile'? null: <GiftiNav />}         */}
+       
+          {/* <GiftiNav /> */}
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/auth/login" component={Login} exact />
           <Route path="/auth/signup" component={Signup} exact />
           <Route path="/allcards" component={AllCards} exact/>
           <Route path="/forgotpassword" component={ForgotPassword} exact />
-          {/* <Route path="/cart" component ={Cart} exact/> */}
           <Route path="/auth/resetpassword" component={ResetPassword} exact />
           <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
           <Route path="/selectcard" component={SelectCards} exact />
@@ -71,14 +70,11 @@ function App() {
             <Redirect to={{ pathname: "/" }} />
           </Route>
           <Route path="/allcards" component={AllCards} exact />
-          {/* <Route path="/cart" component={Cart} exact /> */}
           <Route path="/emptycart" component={EmptyCart} exact />
-
-          {/* <Route path="/cart" component={Cart} exact /> */}
         </Switch>
         {window.location.pathname == '/idc/order' || window.location.pathname == '/idc/signin' || window.location.pathname == '/idc/profile'? null:  <Footer />}      
 
-      
+      {/* <Footer/> */}
       </Router>
   );
 }

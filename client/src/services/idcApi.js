@@ -34,9 +34,9 @@ export const apiCall1 = async (url, method, data, headers, isAuthenticatedReq = 
   }
 
   if (result.status === 401) {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = '/idc/signin';
+    // localStorage.clear();
+    // sessionStorage.clear();
+    // window.location.href = '/idc/signin';
   }
 
   if (!result.ok) {

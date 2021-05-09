@@ -2,7 +2,7 @@ import React from 'react';
 import swal from 'sweetalert';
 import tick_circle from "../assets/tick_circle.svg";
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import {IdcSignInAction,IdcTotalCreditnAction,IdcConvertCurrencyAction,IdcChangePasswordAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode,IdcSignleOrderAction} from '../actions/idc_action';
+import {IdcSignInAction,IdcTotalCreditnAction,IdcCountriesAction, IdcConvertCurrencyAction,IdcChangePasswordAction,IdcVaritiesAction,IdcProfileAction,IdcCountryCode,IdcSignleOrderAction} from '../actions/idc_action';
 
 const IDC_INITIAL_STATE = {
 
@@ -15,6 +15,7 @@ const IDC_INITIAL_STATE = {
     accessToken: null,
     idToken: null,
     refreshToken: null,
+    countries:[],
     idcCredits:null,
     expiresIn: null,
     idcProduct:[],
@@ -44,6 +45,22 @@ export const idcSlice = createSlice({
           state.errors = null;
           state.user = null;
         })
+        .addCase(IdcCountriesAction.pending, (state, action) => {
+          state.countries = [];
+        })
+        .addCase(IdcCountriesAction.fulfilled, (state, action) => {
+          const response = action.payload;
+          if (response.code === 200) {
+            state.countries = response.data.countries;
+          } else {
+            state.countries = [];
+          }
+        })
+        .addCase(IdcCountriesAction.rejected, (state, action) => {
+          state.countries = [];
+          state.errros = [action.error.message || '']
+
+        })
         .addCase(IdcSignInAction.fulfilled, (state, action) => {
             const response = action.payload;
             if (response.code === 200) {
@@ -53,7 +70,6 @@ export const idcSlice = createSlice({
               state.message = response.message;
               state.first_name = response.data.user.first_name;
               localStorage.setItem("idc_access_token", response.data.user.access_token);
-              // localStorage.setItem("first_name", response.data.user.first_name);
             }
             if (response.code === 400) {
               state.user = null;
@@ -211,7 +227,17 @@ export const idcSlice = createSlice({
   .addCase(IdcChangePasswordAction.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.code === 200) {
-
+        swal({
+          title: '',
+          icon: "success", 
+          text:"Password updated successfully",
+          type: '',
+          allowEscapeKey: false,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#00AF9A",
+  
+        });
         // localStorage.setItem("first_name", response.data.user.first_name);
       }
       if (response.code === 400) {
