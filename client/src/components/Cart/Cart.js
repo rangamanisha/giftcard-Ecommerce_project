@@ -223,12 +223,6 @@ function Cart() {
       return giftGlobalPoints;
     }
   }, [useGiftiPoints, conversionrate]);
-
-  // let checkoutValue = 0;
-  // let convertedUserCredits = get(giftunitState, 'selectedCurrency.id') !== 1  ? (convertedAmount * conversionRate) : convertedAmount;
-  // let user_used_credits =   roundUpAtTwo(Math.min(convertedUserCredits, checkoutValue));
-  // let totalUserCredits = get(giftunitState, 'selectedCurrency.id') !== 1 ? (user_used_credits/ conversionRate).toFixed() : user_used_credits;
-  // let payableAmount = parseFloat((checkoutValue -user_used_credits).toFixed(2))
   return (
     <>
       <Container fluid>

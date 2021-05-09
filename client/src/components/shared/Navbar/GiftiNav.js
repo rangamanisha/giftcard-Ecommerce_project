@@ -30,15 +30,11 @@ const GiftiNav = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isEmpty(get(giftunitState, "selectedCountry"))) {
-      dispatch(giftCardsAction.selectCountry(countries[0]));
-    }
     dispatch(getCountriesListAction());
   }, [dispatch]);
 
   const countryChanged = (value) => {
     dispatch(giftCardsAction.selectCountry(value));
-    dispatch(topbarActions.updateSelectedCountry(value));
   };
 
   return (
@@ -47,7 +43,7 @@ const GiftiNav = () => {
       variant={variant}
       logoIcon={Logo}
       locationIcon={Location}
-      country={get(giftunitState.selectedCountry, "country_name")}
+      state={giftunitState}
       countriesList={countries}
       searchIcon={Search}
       userLoginIcon={UserLogin}

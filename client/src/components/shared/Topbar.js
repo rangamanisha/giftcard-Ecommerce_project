@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { get, reduce } from "lodash";
 
 const Topbar = (props) => {
-  const cartState = useSelector(getCartItemsState);
+
   const {
     bg,
     variant,
@@ -29,10 +29,10 @@ const Topbar = (props) => {
     shoppingCartIcon,
     showLogin,
     onCountrySelected,
+    state
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState({});
 
   const clearsession = () => {
     localStorage.clear();
@@ -65,16 +65,9 @@ const Topbar = (props) => {
       />
     );
   };
-  const cartLineCount = reduce(
-    get(cartState, "lineItems"),
-    (sum, i) => {
-      return sum + i.quantity;
-    },
-    0
-  );
+  const cartLineCount = 0;
 
   const onCountryChange = (e) => {
-    setSelectedCountry(e.value);
     onCountrySelected(e.value);
   };
   const selectedCountryTemplate = (option, props) => {
@@ -111,12 +104,12 @@ const Topbar = (props) => {
             </p>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
-              value={selectedCountry}
+              value={state.selectedCountry}
               options={countriesList}
               onChange={onCountryChange}
               filter
               filterBy="country_name"
-              placeholder={selectedCountry?.country_name || "Please select"}
+              placeholder={state.selectedCountry?.country_name || "Please select"}
               optionLabel="country_name"
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}
