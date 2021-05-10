@@ -25,6 +25,8 @@ const Idc_Order = ()=>{
     const countries = get(idcState,"countries"); 
     const [selectedFile, setSelectedFile] = useState('');
     const [filename, setFilename] = useState();
+    const [fileerrors, setFileerrors] = useState();
+    const [errorr,seterrorr] = useState();
     const [filecredit,setFilecredit] = useState();
     const [idccurrency,setidccurrency] = useState();
     const [denomination, setDenomination] = useState('');
@@ -34,8 +36,13 @@ const Idc_Order = ()=>{
         setFilename("");
         setFilecredit("");
         setSelectedFile("");
+        setFileerrors('');
+        seterrorr('');
     }
     const changeHandler = (event) => {
+        setFileerrors('');
+         seterrorr('');
+
 		setSelectedFile(event.target.files[0]);
         setFilename(event.target.files[0].name);
         event.preventDefault();
@@ -52,8 +59,13 @@ const Idc_Order = ()=>{
           })
           bulkapifile.then((resp)=>{
               resp.json().then((result)=>{
-                  if(result.data)
+                  console.log(result.code);
+                  if(result.code === 200 && result.data){
                 setFilecredit(result.data.order.total_credit_to_used)
+              } else if(result.code === 404 || result.code === 400 || result.code === 401)
+              {console.log(result);
+                setFileerrors(result.message);
+              }
               })
           })
 
@@ -62,7 +74,7 @@ const Idc_Order = ()=>{
         e.preventDefault();
         let file = e.target[0].files[0];
         let formData = new FormData();
-        formData.append('idc_order_file', file);
+        formData.append('idc_order_file', selectedFile);
         let url  = API_URL + '/idc_orders'
         let bulkapifile = fetch(url, {
             method: 'POST',
@@ -88,7 +100,13 @@ const Idc_Order = ()=>{
                         showCancelButton: false,
                         confirmButtonColor: "#00AF9A",
 
-                      });
+                      }).then(
+                        function () { window.location.reload()});
+                      
+                  }
+                  else if(result.code === 400|| result.code === 404 || result.code === 401)
+                  {console.log(result.code);
+                    seterrorr(result.message);
                   }
               })
           })
@@ -117,14 +135,17 @@ const Idc_Order = ()=>{
           
         },
 
-        // validationSchema: Yup.object({
-        //   email: Yup.string().min(2).max(200).email().required(),
-        //   last_name: Yup.string().min(2).max(200).required(),
-        //   first_name: Yup.string().min(2).max(200).required(),
-        //   company: Yup.string().min(2).max(200).required(),
-        //   mobile_number: Yup.number().min(2).max(200).required(),
-        //   quantity: Yup.number().min(2).max(200).required(),
-        // }),
+        validationSchema: Yup.object({
+          email: Yup.string().min(2).max(200).email().required(),
+          last_name: Yup.string().min(2).max(200).required(),
+          first_name: Yup.string().min(2).max(200).required(),
+          company_title: Yup.string().min(2).max(200).required(),
+          company_name:Yup.string().min(2).max(200).required(),
+          product:Yup.string().min(2).max(200).required(),
+          country:Yup.string().min(2).max(200).required(),
+          phone: Yup.number().required(),
+          quantity: Yup.number().min(1).max(25).required()
+        }),
         onSubmit: (data) => {
           dispatch(IdcSignleOrderAction({
               denomination:{denomination},
@@ -220,25 +241,28 @@ const Idc_Order = ()=>{
                         </div>
 
                       
-                    {filename ?(
+                    {filename  && !fileerrors ?(
                         <div>
                             <div className="field-block">
                                 <div className='label label-info' id="upload-file-info">{filename}</div>
                                 <span><a className="delete-btn" onClick={delete_uploaded_file}>&times;</a> </span>
                             </div>
                             </div>):''}
+                            {fileerrors?( <p className="validation-messages">{fileerrors}</p>):''}
                         
                 </div>
                 {filecredit ?(
                 <div className="col-xs-12 col-md-12" style ={{ marginTop: "15px"}}>
-                    <div ng-show="new_card_value > 0 && show_bulk_amount == true" className="credit-values form-group">
+                    <div className="credit-values form-group">
                         Total Value : {filecredit}
                     </div>
                 </div>
                 ):''}
-                                  {idcState.errors && idcState.errors.length ? (
+     
+       
+                                  {errorr ? (
                     <p className="validation-messages">
-                      {idcState.errors.join("\n")}
+                      {errorr}
                     </p>
                   ) : null}
                 <div className="btn-layout1 text-center">
@@ -337,8 +361,8 @@ const Idc_Order = ()=>{
                                 placeholder="Company " 
                                 value={formik.values.company_name}
                                 onChange={formik.handleChange}  className="form-control" />
-         {formik.errors.company ? (
-            <p className="validation-messages">{formik.errors.company}</p>
+         {formik.errors.company_name ? (
+            <p className="validation-messages">{formik.errors.company_name}</p>
           ) : null}
                         </div>
                     </div>
@@ -352,9 +376,9 @@ const Idc_Order = ()=>{
                                  
                                 placeholder="Designation " 
                                 className="form-control"/>
-         {/* {formik.errors.designation ? (
-            <p className="validation-messages">{formik.errors.designation}</p>
-          ) : null} */}
+         {formik.errors.company_title ? (
+            <p className="validation-messages">{formik.errors.company_title}</p>
+          ) : null}
                         </div>
                     </div>
                 </div>
@@ -401,6 +425,9 @@ const Idc_Order = ()=>{
                                          placeholder="Mobile Number "
                                          className="form-control mobile-number-input"
                                         />
+                                             {formik.errors.phone ? (
+            <p className="validation-messages">{formik.errors.phone}</p>
+          ) : null}
                                 </div>
                             </div>
                         </div>
@@ -428,6 +455,9 @@ const Idc_Order = ()=>{
           <option  key={i} value ={c.product_name_to_display}>{c.product_name_to_display}</option>
             ))}
         </Form.Control>
+             {formik.errors.product ? (
+            <p className="validation-messages">{formik.errors.product}</p>
+          ) : null}
 
  
                         </div>
@@ -449,6 +479,9 @@ const Idc_Order = ()=>{
                                 className="form-control"
                              
                                />
+                                                          {formik.errors.quantity ? (
+            <p className="validation-messages">{formik.errors.quantity}</p>
+          ) : null}
                         </div>
                     </div>
 

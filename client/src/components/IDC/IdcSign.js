@@ -56,7 +56,7 @@ const Idc_Signin = () => {
                                 <label className="customL">
                                     <span>EMAIL ADDRESS</span>
                                 </label>
-                                <input type="email" placeholder="{{ 'Email address' | translate }}" className="form-control"
+                                <input type="email" placeholder="Email address" className="form-control"
                                 autocomplete="off" value={formik.values.email}
                                 onChange={formik.handleChange} name="email" />
           {formik.errors.email ? (
