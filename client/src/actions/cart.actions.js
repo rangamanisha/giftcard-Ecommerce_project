@@ -6,6 +6,10 @@ import {
   addRemoveQuantityService,
   cartTotalCountService,
 } from "../services/cart.service";
+import {
+  getConversionRateService,
+  getPaymentCurrencyService,
+} from "../services/giftCards.service";
 
 export const cartItemAction = createAsyncThunk(
   "cart_items/listcartItem",
@@ -95,6 +99,28 @@ export const updateCartAction = createAsyncThunk(
       },
     };
     const response = await cartItemsService(request);
+    return response;
+  }
+);
+
+export const getPaymentCurrencyAction = createAsyncThunk(
+  "cart_items/listPaymentCurrency",
+  async (payload, thunkAPI) => {
+    const response = await getPaymentCurrencyService();
+    return response;
+  }
+);
+
+export const getConversionRateAction = createAsyncThunk(
+  "cart_items/listPaymentConversions",
+  async (payload, thunkAPI) => {
+    const request = {
+      currency: payload.id,
+    };
+    const { dispatch } = thunkAPI;
+    console.log("inside getConversionRateAction");
+    dispatch(cartAction.updateSelectedCartCurrency(payload));
+    const response = await getConversionRateService(request);
     return response;
   }
 );

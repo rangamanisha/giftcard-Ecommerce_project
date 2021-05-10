@@ -33,11 +33,7 @@ export const apiCall = async (
     throw new Error("Not Found");
   }
 
-  if (result.status === 403) {
-    throw new Error("Unauthorized");
-  }
-
-  if (result.status === 401) {
+  if (result.status === 403 || result.status === 401) {
     localStorage.clear();
     sessionStorage.clear();
     window.location.href = "/";

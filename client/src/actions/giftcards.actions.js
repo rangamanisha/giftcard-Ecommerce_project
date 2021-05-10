@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   giftCardsUnitService,
   getConversionRateService,
-  getPaymentCurrencyService,
 } from "../services/giftCards.service";
 
 export const giftCardsUnitAction = createAsyncThunk(
@@ -13,21 +12,21 @@ export const giftCardsUnitAction = createAsyncThunk(
   }
 );
 
-export const getConversionRateAction = createAsyncThunk(
-  "giftcards/listPaymentConversions",
-  async (payload, thunkAPI) => {
-    const request = {
-      currency: payload,
-    };
-    const response = await getConversionRateService(request);
-    return response;
-  }
-);
+// export const getConversionRateAction = createAsyncThunk(
+//   "giftcards/listPaymentConversions",
+//   async (payload, thunkAPI) => {
+//     const request = {
+//       currency: payload,
+//     };
+//     const response = await getConversionRateService(request);
+//     return response;
+//   }
+// );
 
-export const getPaymentCurrencyAction = createAsyncThunk(
-  "giftcards/listPaymentCurrency",
-  async (payload, thunkAPI) => {
-    const response = await getPaymentCurrencyService();
-    return response;
-  }
-);
+// export const getPaymentCurrencyAction = createAsyncThunk(
+//   "giftcards/listPaymentCurrency",
+//   async (payload, thunkAPI) => {
+//     const response = await getPaymentCurrencyService();
+//     return response;
+//   }
+// );

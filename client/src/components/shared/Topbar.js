@@ -14,7 +14,6 @@ import userIcon from "../../assets/uprofile.svg";
 import Container from "react-bootstrap/Container";
 
 const Topbar = (props) => {
-
   const {
     bg,
     variant,
@@ -26,7 +25,7 @@ const Topbar = (props) => {
     showLogin,
     onCountrySelected,
     state,
-    cartState
+    cartState,
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
@@ -105,7 +104,9 @@ const Topbar = (props) => {
               onChange={onCountryChange}
               filter
               filterBy="country_name"
-              placeholder={state.selectedCountry?.country_name || "Please select"}
+              placeholder={
+                state.selectedCountry?.country_name || "Please select"
+              }
               optionLabel="country_name"
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}

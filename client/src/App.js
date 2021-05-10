@@ -71,11 +71,14 @@ function App() {
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order" component={Confirm_Order} />
-
+        <Route path="/terms-and-conditions" component={ConditionsPage} exact />
+        <Route path="/contact-us" component={Contact} exact />
+        <Route path="/enquiry" component={EnquiryPage} exact />
+        <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/conditionsPage" component={ConditionsPage} exact />
-        <Route path="/contact" component={Contact} exact />
+        {/* <Route path="/contact" component={Contact} exact />
         <Route path="/enquiryPage" component={EnquiryPage} exact />
-        <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact />
+        <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact /> */}
           <Route path="/" exact>
             <Redirect to={{ pathname: "/" }} />
           </Route>
@@ -86,6 +89,7 @@ function App() {
 
 
       </Router>
+
 
 
   );

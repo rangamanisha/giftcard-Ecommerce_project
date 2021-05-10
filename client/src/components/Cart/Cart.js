@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, forwardRef } from "react";
 import "./Cart.css";
 import { get, isEmpty, map, assign, reduce, isNull, isUndefined } from "lodash";
 import { Col, Image, Row, Container } from "react-bootstrap";
@@ -6,10 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAuthState } from "../../reducer/auth.reducer";
-import {
-  getConversionRateAction,
-  giftCardsUnitAction,
-} from "../../actions/giftcards.actions";
+import { giftCardsUnitAction } from "../../actions/giftcards.actions";
 import {
   getGiftcardsState,
   giftCardsAction,
@@ -18,34 +15,17 @@ import { getRewardPointsState } from "../../reducer/rewardpoints.reducer";
 import { getRewardPointsAction } from "../../actions/rewardpoints.actions";
 import { cartAction, getCartItemsState } from "../../reducer/cart.reducer";
 
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import { Dropdown } from "react-bootstrap";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import { RiArrowDownSLine } from "react-icons/ri";
-import exclamation from "../../assets/Group4790.svg";
 import ButtunDelete from "../../assets/Button-Delete.svg";
-import { Button, ButtonToolbar, ButtonGroup } from "react-bootstrap";
+
 import {
   addRemoveQuantityAction,
   fetchItemsByCartAction,
+  getConversionRateAction,
+  getPaymentCurrencyAction,
 } from "../../actions/cart.actions";
+import CartWidget from "./CartWidget";
 
 function Cart() {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}>
-      {children}
-      <RiArrowDownSLine />
-    </a>
-  ));
-  CustomToggle.displayName = 'CustomToggle';
-
   const dispatch = useDispatch();
   const history = useHistory();
   const authState = useSelector(getAuthState);
@@ -56,8 +36,8 @@ function Cart() {
   const giftGlobalPoints = parseFloat(get(rewardState, "total_credits"));
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const currencies = get(giftunitState, 'paymentCurrency.currencies');
-  const selectedCurrency = get(giftunitState, 'selectedCurrency')
+  const currencies = get(giftunitState, "paymentCurrency.currencies");
+  const selectedCurrency = get(giftunitState, "selectedCurrency");
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const conversionRate = get(
     giftunitState,
@@ -66,7 +46,7 @@ function Cart() {
   const lineItems = get(cartState, "lineItems").length
     ? get(cartState, "lineItems")
     : get(cartState, "fetchedCartItems") || [];
-  const [useGiftiPoints, setUseGiftiPoints] = React.useState(
+  const [useGiftiPoints, setUseGiftiPoints] = useState(
     rewardState &&
       rewardState.total_credits &&
       !isNull(rewardState.total_credits)
@@ -74,7 +54,11 @@ function Cart() {
       : false
   );
   const [conversionrate, setconversion] = useState(conversionRate);
-  //const [activePoints, setActivePoint] = useState(giftGlobalPoints)
+
+  useEffect(() => {
+    dispatch(getPaymentCurrencyAction());
+  }, []);
+
   useEffect(() => {
     setconversion(conversionRate);
   }, [conversionRate]);
@@ -91,10 +75,6 @@ function Cart() {
       })
     );
   }, [giftunitState.giftunit_id, dispatch]);
-  useEffect(() => {
-    let id = get(selectedCurrency, "id");
-    dispatch(getConversionRateAction(id));
-  }, [get(selectedCurrency, "id")]);
 
   useEffect(() => {
     if (authState.isAuthenticated) {
@@ -185,14 +165,14 @@ function Cart() {
     setCurrencyIndex(parseInt(currency));
     dispatch(giftCardsAction.setSelectCurreny(currencies[parseInt(currency)]));
   };
-  const convertedAmount = React.useCallback((selectedCurrency) => {
+  const convertedAmount = useCallback((selectedCurrency) => {
     if (!isUndefined(conversionrate) && conversionrate !== 0) {
       return lineValue * conversionrate;
     } else {
       return lineValue;
     }
   });
-  const totalLineAmount = React.useCallback(() => {
+  const totalLineAmount = useCallback(() => {
     const lineAmount = convertedAmount();
     if (!lineAmount) return 0;
     else if (useGiftiPoints) {
@@ -202,7 +182,7 @@ function Cart() {
       return lineAmount;
     }
   }, [useGiftiPoints, selectedCurrency, conversionrate]);
-  const currencyShort = React.useCallback(() => {
+  const currencyShort = useCallback(() => {
     if (!isUndefined(giftunitState.selectedCountry)) {
       return get(giftunitState, "selectedCurrency.unit_name_short");
     } else {
@@ -214,7 +194,7 @@ function Cart() {
    * if selectedCurrency then we should multiply the points to exchange rate and return the points
    * @returns
    */
-  const convertedGiftiPoints = React.useCallback(() => {
+  const convertedGiftiPoints = useCallback(() => {
     if (isNull(giftGlobalPoints)) return null;
     if (selectedCurrency && selectedCurrency.id && conversionrate) {
       let pointsToCurrency = giftGlobalPoints * conversionrate;
@@ -223,133 +203,27 @@ function Cart() {
       return giftGlobalPoints;
     }
   }, [useGiftiPoints, conversionrate]);
+
+  const handleChangeCurrency = (event) => {
+    const selectedCurrency = JSON.parse(event);
+    if (selectedCurrency) {
+      dispatch(getConversionRateAction(selectedCurrency));
+    }
+  };
+
   return (
     <>
       <Container fluid>
         <Row className="my-5">
           <Col md={5}>
-            <div className="cart-first-column p-3">
-              <div className="d-flex align-items-end">
-                <h6 className="flex-grow-1">Total Pay</h6>
-                <div className="flex-shrink-1 cart-currency p-1">
-                  <small>Select Payment Currency</small>
-                  <span className="mx-2">|</span>
-                  <Dropdown
-                    className="d-inline"
-                    onSelect={(e) => handleChangeCurreny(e)}
-                  >
-                    <DropdownToggle
-                      as={CustomToggle}
-                      id="dropdown-custom-components"
-                    ></DropdownToggle>
-                    <DropdownMenu align="right" style={{ overflow: "auto" }}>
-                      {map(currencies, (c, i) => (
-                        <DropdownItem
-                          key={i}
-                          eventKey={i}
-                          value={c.unit_name_short}
-                          active={currencyIndex === i}
-                        >
-                          {c.unit_name_short}
-                        </DropdownItem>
-                      ))}
-                    </DropdownMenu>
-                  </Dropdown>
-                  <small>{currencyShort()}</small>
-                </div>
-              </div>
-              <h4 className="mt-2 mb-3">
-                {currencyShort()} {convertedAmount()}
-              </h4>
-              <div className="d-flex justify-content-between">
-                <span>Subtotal</span>
-                <span>
-                  {currencyShort()} {lineValue ? convertedAmount() : 0}
-                </span>
-              </div>
-              {useGiftiPoints && lineValue && (
-                <div className="d-flex justify-content-between">
-                  <span>Reward Points</span>
-                  <span>
-                    - {currencyShort()} {convertedGiftiPoints()}
-                  </span>
-                </div>
-              )}
-              <hr />
-              <div className="d-flex justify-content-between mb-5">
-                <span>
-                  <strong>Total</strong>
-                </span>
-                <span>
-                  <strong>
-                    {currencyShort()} {lineValue ? totalLineAmount() : 0}
-                  </strong>
-                </span>
-              </div>
-              <div className="d-flex flex-column justify-content-center align-content-between border border-2 ggp-parent-box rounded p-2 mb-4">
-                {!isAuthenticated && (
-                  <Image
-                    src={exclamation}
-                    rounded
-                    style={{ width: "4%", height: "4%" }}
-                  />
-                )}
-                {isAuthenticated && (
-                  <div className="row d-flex align-items-baseline">
-                    <div className="m-3">
-                      <input
-                        type="checkbox"
-                        id="giftpoint-checkbox"
-                        value="1"
-                        name="use giftipoints"
-                        onClick={() => {
-                          setUseGiftiPoints(!useGiftiPoints);
-                        }}
-                        checked={useGiftiPoints}
-                      />
-                    </div>
-                    <label>Use Gifti Global Points</label>
-                  </div>
-                )}
-                {!isAuthenticated && (
-                  <p>
-                    <small>
-                      You can also use your Gifti Global Points, Login or Sign
-                      up to use your Gift Global Points
-                    </small>
-                  </p>
-                )}
-                <div className="p-2 ggp-box mx-auto">
-                  <span className=" fs-6 text-center d-block">
-                    <small>Gifti Global Points</small>
-                  </span>
-                  <span className="text-center d-block">
-                    {useGiftiPoints ? 0 : giftGlobalPoints}
-                  </span>
-                </div>
-              </div>
-
-              <div className="d-flex justify-content-around">
-                {!isAuthenticated && (
-                  <Button
-                    type="button"
-                    variant="white"
-                    onClick={() =>
-                      history.push("auth/login", { redirectTo: "cart" })
-                    }
-                  >
-                    Log In
-                  </Button>
-                )}
-                <Button
-                  type="button"
-                  variant="persianGreen"
-                  onClick={() => history.push("payment")}
-                >
-                  {isAuthenticated ? "Checkout" : "Checkout as guest"}
-                </Button>
-              </div>
-            </div>
+            <CartWidget
+              state={cartState}
+              authState={authState}
+              rewardState={rewardState}
+              giftunitState={giftunitState}
+              handleChangeCurrency={handleChangeCurrency}
+              history={history}
+            />
           </Col>
 
           {/* Second Column of cart */}
@@ -446,5 +320,3 @@ function Cart() {
 }
 
 export default Cart;
-
-

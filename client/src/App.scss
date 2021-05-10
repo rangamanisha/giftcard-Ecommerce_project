@@ -516,10 +516,12 @@ border: 1px solid #00B2AE !important;
 .startgf-fields-text {
   font-family: 'Cairo-SemiBold';
   font-size: 18px;
-  margin-top: 14px;
+  margin-top: 5px;
   color: #11142d;
 }
-
+.giftslabs .form-check-input {
+  margin-top: 0.5rem;
+}
 .startgf-fields-button {
   box-shadow: 0 2px 6px -1px #808080;
   padding: 10px 60px;
@@ -1120,12 +1122,15 @@ ul.list-group.list-group-flush {
   margin-left: 20px;
   color: #77838F;
 }
-ul.list-group.list-group-flush li {
+ul.list-group.list-group-flush li,.t-col-right .privacy-item-style {
   margin-bottom: 10px;
 }
-ul.list-group.list-group-flush li a {
+ul.list-group.list-group-flush li a,.t-col-right .privacy-item-style a {
   color: #77838F;
   font-size: 12px;
+}
+ul.list-group.list-group-flush li a:active{
+  color: #3F7AEC;
 }
 .t-col-left p {
   color: #77838F;
@@ -1156,7 +1161,58 @@ ul.list-group.list-group-flush li a {
   margin: 0;
   padding: 0 !important;
 }
-
+.button-icon svg {
+  stroke: #d4d3d3 !important;
+  fill: #fff !important;
+  background: #3F7AEC;
+  height: 40px;
+  width: 40px;
+  padding: 6px;
+  border-radius: 5px;
+}
+.contact-adrs {
+  display: flex;
+  margin-bottom: 20px;
+}
+.contact-adrs .button-icon {
+  margin-right: 10px;
+  margin-top: 8px;
+}
+.contact-adrs .lableStyle {
+  font-size: 13px;
+  color: #77808B;
+  margin: 0;
+}
+.contact-form {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 20px #00000029;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+.contact-adrs .textContent {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.account-container {
+  padding: 10px;
+  border: 0.8px solid #B2B2C9;
+  border-radius: 8px;
+}
+span.frequently-asked-input.enqpage-search {
+  text-align: center;
+  position: relative;
+  right: 0;
+  border: 1px solid #ced4da;
+  padding-top: 6px;
+  border-left-color: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #fff;
+  border-radius: 0 5px 5px 0;
+}
 .navbar {
   padding: 20px 40px;
 }
