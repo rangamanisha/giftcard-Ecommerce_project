@@ -4,15 +4,13 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import {
-  getCountriesListAction,
-  selectCountryAction,
+  getCountriesListAction
 } from "../actions/topbar.actions";
 
 export const TOPBAR_INITIAL_STATE = {
   countries: [],
   countriesLoading: false,
   currency_code: 1,
-  selectedCountry: "",
 };
 
 export const TOPBAR_FEATURE_KEY = "topbar";
@@ -25,9 +23,6 @@ export const topbarSlice = createSlice({
   name: TOPBAR_FEATURE_KEY,
   initialState: TOPBAR_INITIAL_STATE,
   reducers: {
-    updateSelectedCountry: (state, action) => {
-      state.selectedCountry = action.payload;
-    }
   },
   extraReducers: (builder) => {
     builder

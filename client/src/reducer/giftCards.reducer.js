@@ -18,7 +18,7 @@ export const GIFTCARDS_INIT_STATE = {
   source_currency: "",
   giftunit_id: 1,
   countries: [],
-  selectedCountry: {},
+  selectedCountry: null,
   selectedBrand: [],
   selectedCurrency: undefined,
   conversion: undefined,
@@ -42,7 +42,8 @@ export const giftcardSlice = createSlice({
     },
     selectCountry(state, action) {
       let country = action.payload;
-      state.giftunit_id = country?.id || "";
+      console.log('country ', country);
+      state.giftunit_id = country?.id || 1;
       state.selectedCountry = country;
     },
     selectBrand(state, action) {
@@ -71,6 +72,9 @@ export const giftcardSlice = createSlice({
         if (200 === code) {
           const gift_cards = data?.giftcard_units;
           state.countries = gift_cards;
+          if (!state.selectedCountry) {
+            state.selectedCountry = gift_cards[0];
+          }
         }
       })
       .addCase(giftCardsUnitAction.rejected, (state, action) => {

@@ -3,7 +3,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import "./Topbar.scss";
 import UserProfileDropDown from "../UserProfileDropDown";
@@ -13,12 +12,9 @@ import cartIcon from "../../assets/cart.svg";
 import userIcon from "../../assets/uprofile.svg";
 
 import Container from "react-bootstrap/Container";
-import { getCartItemsState } from "../../reducer/cart.reducer";
-import { useSelector } from "react-redux";
-import { get, reduce } from "lodash";
 
 const Topbar = (props) => {
-  const cartState = useSelector(getCartItemsState);
+
   const {
     bg,
     variant,
@@ -29,10 +25,11 @@ const Topbar = (props) => {
     shoppingCartIcon,
     showLogin,
     onCountrySelected,
+    state,
+    cartState
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
-  const [selectedCountry, setSelectedCountry] = useState({});
 
   const clearsession = () => {
     localStorage.clear();
@@ -65,16 +62,8 @@ const Topbar = (props) => {
       />
     );
   };
-  const cartLineCount = reduce(
-    get(cartState, "lineItems"),
-    (sum, i) => {
-      return sum + i.quantity;
-    },
-    0
-  );
 
   const onCountryChange = (e) => {
-    setSelectedCountry(e.value);
     onCountrySelected(e.value);
   };
   const selectedCountryTemplate = (option, props) => {
@@ -111,12 +100,12 @@ const Topbar = (props) => {
             </p>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
-              value={selectedCountry}
+              value={state.selectedCountry}
               options={countriesList}
               onChange={onCountryChange}
               filter
               filterBy="country_name"
-              placeholder={selectedCountry?.country_name || "Please select"}
+              placeholder={state.selectedCountry?.country_name || "Please select"}
               optionLabel="country_name"
               valueTemplate={selectedCountryTemplate}
               itemTemplate={countryOptionTemplate}
@@ -140,10 +129,10 @@ const Topbar = (props) => {
                 alt="shoppingcart-icon"
                 onClick={() => history.push("/cart")}
               />
-              {cartLineCount > 0 ? (
+              {cartState.totalCartItems > 0 ? (
                 <span class="badge badge-danger" id="lblCartCount">
                   {" "}
-                  {cartLineCount}
+                  {cartState.totalCartItems}
                 </span>
               ) : null}
             </Button>

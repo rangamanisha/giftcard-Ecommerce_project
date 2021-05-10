@@ -28,6 +28,9 @@ const Login = () => {
 
   const [message, setMessage] = useState("");
 
+  const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ''}`;
+  const fbId = `${process.env.REACT_APP_FB_APP_ID || ''}`;
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -198,7 +201,7 @@ const Login = () => {
                       style={{ display: "block" }}
                       variant="outline-light"
                       className="google-button"
-                      clientId="842833238441-qn4rmnf4itvvhhr9h352abmvjt5k1f35.apps.googleusercontent.com"
+                      clientId={googleId}
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                     ></GoogleLogin>
@@ -208,7 +211,7 @@ const Login = () => {
                       variant="outline-light"
                       className="facebook-button"
                       provider="facebook"
-                      appId="512745573060985"
+                      appId={fbId}
                     >
                       <img
                         src={Facebookicon}

@@ -20,6 +20,7 @@ export const CART_ITEMS_INIT_STATE = {
   count: 1,
   lineItems: [],
   fetchedCartItems: [],
+  totalCartItems: 0
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -117,18 +118,18 @@ export const cartItemsSlice = createSlice({
       })
       .addCase(cartTotalCountAction.pending, (state, action) => {
         state.errors = null;
-        state.cart_total_count = null;
+        state.totalCartItems = 0;
       })
       .addCase(cartTotalCountAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
         if (200 === code) {
-          state.cart_total_count = data;
+          state.totalCartItems = data.count;
         }
       })
       .addCase(cartTotalCountAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
-      });
+      })
   },
 });
 
