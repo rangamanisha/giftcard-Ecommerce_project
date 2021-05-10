@@ -13,22 +13,13 @@ import {
 import GiftGiftCard from "./GiftGiftCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrandsState } from "../reducer/brands.reducer";
-import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import {
   getGiftcardsState,
   giftCardsAction,
 } from "../reducer/giftCards.reducer";
-import {
-  get,
-  map,
-  isEmpty,
-  isUndefined,
-  filter,
-  assign,
-  isEqual,
-} from "lodash";
+import { get, map, isUndefined } from "lodash";
 import { useHistory } from "react-router-dom";
-import { getCartItemsState, cartAction } from "../reducer/cart.reducer";
+import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
 
@@ -37,16 +28,17 @@ const SelectCards = () => {
   const history = useHistory();
   const [eventKey11, seteventkey] = useState(1);
   const [tempvisible, setTempVisible] = useState(true);
+  const [selectedDenomination, setSelectedDenomiation] = useState(null);
+  const [count, setCount] = useState(0);
   const giftunitState = useSelector(getGiftcardsState);
   const productAndTermState = useSelector(getBrandsState);
   const authState = useSelector(getAuthState);
   const cartState = useSelector(getCartItemsState);
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
-  const count = get(cartState, "count");
   const [rate, setRate] = useState(0);
-  const [gift_to, setGiftTo] = useState("myself");
-  const selectedDenomination = get(card, "selectedDenomination");
+  const [giftTo, setGiftTo] = useState("myself");
+
   const handleSelect = (eventKey1) => {
     seteventkey(eventKey1);
   };
@@ -58,8 +50,8 @@ const SelectCards = () => {
     if (count >= 5) {
       return null;
     } else {
-      dispatch(cartAction.increaseCount());
-      const inc = parseFloat(card.selectedDenomination * (count + 1));
+      const inc = parseFloat(selectedDenomination * (count + 1));
+      setCount(count + 1);
       setRate(inc);
     }
   };
@@ -67,21 +59,16 @@ const SelectCards = () => {
     if (count === 0) {
       return null;
     } else {
-      dispatch(cartAction.decreaseCount());
-      const dec = parseFloat(card.selectedDenomination * (count - 1));
+      const dec = parseFloat(selectedDenomination * (count - 1));
+      setCount(count - 1);
       setRate(dec);
     }
   };
   const handleDenomination = (d) => {
-    dispatch(giftCardsAction.selectDenomination(parseFloat(d)));
+    setSelectedDenomiation(parseFloat(d));
+    setCount(1);
     setRate(d);
   };
-  React.useEffect(() => {
-    if (isEmpty(card) || isUndefined(card)) {
-      history.push("/");
-    }
-    dispatch(cartAction.setCountZero());
-  }, [get(card, "id"), get(card, "selectedDenomination"), dispatch]);
 
   React.useEffect(() => {
     dispatch(
@@ -101,47 +88,56 @@ const SelectCards = () => {
     );
   }, [get(card, "id")]);
 
-  React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
-
   const saveToCart = (shouldRedirect) => {
-    const itemInCart = filter(get(cartState, "lineItems"), {
-      id: get(card, "id"),
-    })[0];
-    const selectedBrand = assign({}, card, {
+    const addToCartItem = {
       quantity: count,
-      giftingTo: gift_to,
-    });
-    if (!isEqual(itemInCart, selectedBrand) && !isEmpty(itemInCart)) {
-      dispatch(cartAction.updateLineItem(selectedBrand));
-    } else if (isEqual(itemInCart, selectedBrand)) {
-      return;
-    } else {
-      dispatch(
-        cartAction.saveItemsToCart(
-          assign({}, card, { quantity: count, giftingTo: gift_to })
-        )
-      );
-    }
+      brand_id: card.id,
+      currency: giftunitState.selectedCountry?.unit_symbol,
+      giftcard_value: selectedDenomination,
+      card_value_aed: selectedDenomination,
+      isforself: giftTo === "myself",
+      country_id: giftunitState.selectedCountry?.id,
+    };
     if (authState.isAuthenticated) {
-      const addToCartItem = {
-        quantity: selectedBrand.quantity,
-        brand_id: selectedBrand.id,
-        currency: giftunitState.selectedCountry?.unit_symbol,
-        giftcard_value: selectedBrand.selectedDenomination,
-        card_value_aed: selectedBrand.selectedDenomination,
-        isforself: selectedBrand.giftingTo === "myself",
-        country_id: giftunitState.selectedCountry?.id,
-      };
       dispatch(updateCartAction(addToCartItem));
+    } else {
+      const lineItems = cartState.lineItems;
+      if (!lineItems.length) {
+        dispatch(cartAction.saveItemsToCart([addToCartItem]));
+        dispatch(cartAction.updateTotalCartItems(addToCartItem.quantity));
+      } else {
+        const isItemPresent = lineItems.find(
+          (item) =>
+            item.brand_id === addToCartItem.brand_id &&
+            item.giftcard_value === addToCartItem.giftcard_value
+        );
+        let updatedLineItems = [];
+        if (isItemPresent) {
+          updatedLineItems = lineItems.map((item) => {
+            if (
+              item.brand_id === addToCartItem.brand_id &&
+              item.giftcard_value === addToCartItem.giftcard_value
+            ) {
+              return Object.assign({}, item, {
+                quantity: addToCartItem.quantity,
+              });
+            }
+            return item;
+          });
+          dispatch(cartAction.saveItemsToCart(updatedLineItems));
+        } else {
+          updatedLineItems = [addToCartItem, ...lineItems];
+          dispatch(cartAction.saveItemsToCart(updatedLineItems));
+        }
+        const totalCartItems = updatedLineItems
+          .map((updatedItem) => updatedItem.quantity)
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      }
     }
+    setCount(0);
+    setRate(0);
+    setSelectedDenomiation(null);
     if (shouldRedirect) {
       history.push("cart");
     }
@@ -190,7 +186,7 @@ const SelectCards = () => {
                   label="Myself"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
-                  checked={gift_to === "myself"}
+                  checked={giftTo === "myself"}
                   onClick={(e) => handleGiftTo(e)}
                 />
                 <Form.Check
@@ -200,7 +196,7 @@ const SelectCards = () => {
                   label="Someone else"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios2"
-                  checked={gift_to === "someone else"}
+                  checked={giftTo === "someone else"}
                   onClick={(e) => handleGiftTo(e)}
                 />
               </div>

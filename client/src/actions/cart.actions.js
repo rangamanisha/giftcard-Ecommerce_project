@@ -87,6 +87,7 @@ export const cartTotalCountAction = createAsyncThunk(
 export const updateCartAction = createAsyncThunk(
   "cart_items/update",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const request = {
       cart_item: {
         brand_id: payload.brand_id,
@@ -99,6 +100,7 @@ export const updateCartAction = createAsyncThunk(
       },
     };
     const response = await cartItemsService(request);
+    dispatch(cartTotalCountAction());
     return response;
   }
 );

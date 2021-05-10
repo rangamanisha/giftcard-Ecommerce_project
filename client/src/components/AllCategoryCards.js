@@ -11,7 +11,6 @@ import {
   allBrandAction,
   featureBrandsAction,
 } from "../actions/brands.action";
-import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import Carousel from "react-elastic-carousel";
 
@@ -47,15 +46,15 @@ function AllCategoryCards() {
       })
     );
   }, [giftunitState.giftunit_id, dispatch]);
-  React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+  // React.useEffect(() => {
+  //   dispatch(
+  //     giftCardsUnitAction({
+  //       currency: giftunitState.giftunit_id,
+  //       program_id: 1,
+  //       giftunit_id: giftunitState.giftunit_id,
+  //     })
+  //   );
+  // }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       featureBrandsAction({

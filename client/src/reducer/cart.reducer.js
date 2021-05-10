@@ -52,15 +52,17 @@ export const cartItemsSlice = createSlice({
       state.count = 1;
     },
     saveItemsToCart(state, action) {
-      state.lineItems.push(action.payload);
+      state.lineItems = action.payload;
     },
     removeLineItem(state, action) {
       const line_item = action.payload;
       remove(state.lineItems, line_item);
     },
     updateSelectedCartCurrency(state, action) {
-      console.log("action ", action);
       state.selectedCartCurrency = action.payload;
+    },
+    updateTotalCartItems(state, action) {
+      state.totalCartItems = action.payload;
     },
   },
   extraReducers: (builder) => {

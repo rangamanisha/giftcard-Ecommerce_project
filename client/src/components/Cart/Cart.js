@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAuthState } from "../../reducer/auth.reducer";
-import { giftCardsUnitAction } from "../../actions/giftcards.actions";
 import { getGiftcardsState } from "../../reducer/giftCards.reducer";
 import { getRewardPointsState } from "../../reducer/rewardpoints.reducer";
 import { getRewardPointsAction } from "../../actions/rewardpoints.actions";
@@ -29,6 +28,7 @@ function Cart() {
 
   useEffect(() => {
     if (authState.isAuthenticated) {
+      console.log("authState ", authState);
       dispatch(
         fetchItemsByCartAction({
           currency: giftunitState?.selectedCurrency?.unit_short_name || "AED",
@@ -40,21 +40,10 @@ function Cart() {
 
   useEffect(() => {
     dispatch(getPaymentCurrencyAction());
+    if (authState.isAuthenticated) {
+      dispatch(getRewardPointsAction());
+    }
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getRewardPointsAction());
-  }, [rewardState, dispatch]);
-
-  useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
 
   const handleChangeCurrency = (event) => {
     const selectedCurrency = JSON.parse(event);

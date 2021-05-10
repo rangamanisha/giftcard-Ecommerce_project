@@ -8,7 +8,7 @@ import { categoryAction } from "../actions/category.actions";
 import { get, map, isEmpty } from "lodash";
 import { allBrandAction } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
-import { giftCardsUnitAction } from "../actions/giftcards.actions";
+// import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import AllFeaturedCards from "./AllFeaturedCards";
 import Giftcard from "./Giftcard";
@@ -38,15 +38,15 @@ function AllCards() {
       })
     );
   }, [giftunitState.giftunit_id, dispatch]);
-  React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: 1,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+  // React.useEffect(() => {
+  //   dispatch(
+  //     giftCardsUnitAction({
+  //       currency: 1,
+  //       program_id: 1,
+  //       giftunit_id: giftunitState.giftunit_id,
+  //     })
+  //   );
+  // }, [giftunitState.giftunit_id, dispatch]);
 
   const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
     ? get(giftunitState, "countries[0].country_name")
