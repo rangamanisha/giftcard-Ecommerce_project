@@ -2,7 +2,7 @@ import React from "react";
 import CartItem from "./CartItem";
 
 const CartItemContainer = (props) => {
-  const { cartState, giftCartState, history } = props;
+  const { cartState, giftCardState, history } = props;
 
   return (
     <div className="col-second">
@@ -25,7 +25,7 @@ const CartItemContainer = (props) => {
       </div>
       {cartState.lineItems.map((item, key) => (
         <CartItem
-          payment={giftCartState.selectedCountry}
+          payment={giftCardState.selectedCountry}
           item={item}
           key={key}
         />

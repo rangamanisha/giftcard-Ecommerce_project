@@ -118,7 +118,7 @@ const CartWidget = (props) => {
         <span>
           <strong>
             {state.selectedCartCurrency?.unit_name_short}{" "}
-            {lineValue ? totalLineAmount() : 0}
+            {lineValue ? totalLineAmount : 0}
           </strong>
         </span>
       </div>
