@@ -28,8 +28,8 @@ const Login = () => {
 
   const [message, setMessage] = useState("");
 
-  const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ''}`;
-  const fbId = `${process.env.REACT_APP_FB_APP_ID || ''}`;
+  const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
+  const fbId = `${process.env.REACT_APP_FB_APP_ID || ""}`;
 
   const formik = useFormik({
     initialValues: {

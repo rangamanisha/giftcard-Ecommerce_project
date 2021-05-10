@@ -7,11 +7,11 @@ import Header from "../HeaderPage/Header";
 function PrivacypolicyPage() {
   return (
     <>
-      <div className="container-fluid">
+      <div className="container">
         <Header />
 
-        <div className="row mx-5">
-          <div className="col-8">
+        <div className="row my-4">
+          <div className="col-md-8 t-col-left">
             <h3>Privacy Policy</h3>
             <button type="button" className="btn btn-primary btn-sm">
               Last Updated: 1 January 2021
@@ -369,13 +369,9 @@ function PrivacypolicyPage() {
             </article>
           </div>
 
-          <div className="col-3 offset-1 sticky-top privacy-container">
-            <div className="d-flex flex-column justify-content-between p-2">
-              <div className="privacy-item-style">
-                <a href="#welcome" tabIndex="1">
-                  Welcome to Gifti Global
-                </a>
-              </div>
+          <div className="col-md-4 t-col-right">
+            <div className="sticky-side p-3">
+              <p>Welcome to Gifti Global</p>
               <div className="privacy-item-style">
                 <a href="#info" tabIndex="2">
                   WHAT INFORMATION WE MAY COLLECT FROM YOU

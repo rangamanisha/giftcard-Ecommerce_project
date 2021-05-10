@@ -5,8 +5,8 @@ import Header from "../HeaderPage/Header";
 function ConditionsPage() {
   return (
     <>
+      <Header />
       <div className="container">
-        <Header />
         <div className="row my-4">
           <div className="col-md-8 t-col-left">
             <h3>Terms & Conditions</h3>
@@ -657,8 +657,13 @@ function ConditionsPage() {
           <div className="col-md-4 t-col-right">
             <div className="sticky-side p-3">
               <p>Welcome to Gifti Global</p>
-              <p style={{ color: "#3F7AEC" }}>About our Site</p>
+              {/* <p style={{color:"#3F7AEC"}}>About our Site</p> */}
               <ul className="list-group list-group-flush ">
+                <li className="border-0 condition-item-style">
+                  <a href="#conabout">ABOUT OUR SITE</a>
+                  {/* <Link>About our Site</Link> */}
+                </li>
+
                 <li className="border-0 condition-item-style">
                   <a href="#coneligibilty">
                     ELIGIBILITY AND REGISTRATION REQUIREMENTS

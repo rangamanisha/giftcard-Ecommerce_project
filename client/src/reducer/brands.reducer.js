@@ -17,7 +17,7 @@ export const BRANDS_INIT_STATE = {
   message: "",
   errors: null,
   brands: null,
-  currency: '',
+  currency: "",
   program_id: "1",
   image_size: null,
   image_type: false,
@@ -26,7 +26,7 @@ export const BRANDS_INIT_STATE = {
   id: "",
   brand_id: "",
   terms: [],
-  allBrands: []
+  allBrands: [],
 };
 
 export const BRAND_REDUCER = "brands";

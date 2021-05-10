@@ -3,9 +3,7 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import {
-  getCountriesListAction
-} from "../actions/topbar.actions";
+import { getCountriesListAction } from "../actions/topbar.actions";
 
 export const TOPBAR_INITIAL_STATE = {
   countries: [],
@@ -22,8 +20,7 @@ export const initialTopBarState = topbarAdapter.getInitialState(
 export const topbarSlice = createSlice({
   name: TOPBAR_FEATURE_KEY,
   initialState: TOPBAR_INITIAL_STATE,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getCountriesListAction.pending, (state, action) => {

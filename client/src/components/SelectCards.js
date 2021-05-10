@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
-import { Col, Image, Row, Container, Fluid } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import plusicon from "../assets/+.svg";
 import minusicon from "../assets/minus.svg";
 import Footer1 from "./Stikyfooter";
-import { useState, useRef } from "react";
 import {
   descriptionBrandAction,
   termBrandAction,
@@ -14,11 +13,7 @@ import {
 import GiftGiftCard from "./GiftGiftCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrandsState } from "../reducer/brands.reducer";
-import {
-  giftCardsUnitAction,
-  getConversionRateAction,
-  getPaymentCurrencyAction,
-} from "../actions/giftcards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import {
   getGiftcardsState,
   giftCardsAction,
@@ -35,7 +30,6 @@ import {
 import { useHistory } from "react-router-dom";
 import { getCartItemsState, cartAction } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
-import { getTopBarState } from "../reducer/topbar.reducer";
 import { updateCartAction } from "../actions/cart.actions";
 
 const SelectCards = () => {
@@ -46,7 +40,6 @@ const SelectCards = () => {
   const giftunitState = useSelector(getGiftcardsState);
   const productAndTermState = useSelector(getBrandsState);
   const authState = useSelector(getAuthState);
-  const topbarState = useSelector(getTopBarState);
   const cartState = useSelector(getCartItemsState);
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
@@ -106,21 +99,7 @@ const SelectCards = () => {
         image_type: "Color",
       })
     );
-    dispatch(
-      getConversionRateAction({
-        brand_id: get(card, "id"),
-      })
-    );
   }, [get(card, "id")]);
-
-  React.useEffect(() => {
-    dispatch(
-      getPaymentCurrencyAction({
-        currency: 1,
-        brand_id: 451,
-      })
-    );
-  }, [dispatch]);
 
   React.useEffect(() => {
     dispatch(

@@ -28,7 +28,10 @@ const GiftiNav = () => {
     ? []
     : sortBy(get(giftunitState, "countries"), ["country_name"]);
 
-  const [isTotalCartCountActionCalled, setIsTotalCartCountActionCalled] = useState(false);
+  const [
+    isTotalCartCountActionCalled,
+    setIsTotalCartCountActionCalled,
+  ] = useState(false);
   useEffect(() => {
     dispatch(giftCardsUnitAction);
   }, [dispatch]);
@@ -40,9 +43,18 @@ const GiftiNav = () => {
   useEffect(() => {
     if (authState.isAuthenticated && !isTotalCartCountActionCalled) {
       setIsTotalCartCountActionCalled(true);
-      dispatch(cartTotalCountAction({ currency: giftunitState.selectedCountry?.unit_name_short || 'AED' }));
+      dispatch(
+        cartTotalCountAction({
+          currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+        })
+      );
     }
-  }, [authState.isAuthenticated, isTotalCartCountActionCalled, setIsTotalCartCountActionCalled, dispatch])
+  }, [
+    authState.isAuthenticated,
+    isTotalCartCountActionCalled,
+    setIsTotalCartCountActionCalled,
+    dispatch,
+  ]);
 
   const countryChanged = (value) => {
     dispatch(giftCardsAction.selectCountry(value));

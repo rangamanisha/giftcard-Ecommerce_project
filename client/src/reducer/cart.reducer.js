@@ -3,13 +3,15 @@ import {
   fetchItemsByCartAction,
   addRemoveQuantityAction,
   cartTotalCountAction,
+  getConversionRateAction,
 } from "../actions/cart.actions";
 import {
   createEntityAdapter,
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { indexOf, map, remove } from "lodash";
+import { remove } from "lodash";
+import { getPaymentCurrencyAction } from "../actions/cart.actions";
 
 export const CART_ITEMS_INIT_STATE = {
   message: "",
@@ -20,7 +22,10 @@ export const CART_ITEMS_INIT_STATE = {
   count: 1,
   lineItems: [],
   fetchedCartItems: [],
-  totalCartItems: 0
+  totalCartItems: 0,
+  selectedCartCurrency: null,
+  paymentCurrency: [],
+  conversion: null,
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -37,22 +42,8 @@ export const cartItemsSlice = createSlice({
       state.count = state.count + 1;
     },
     updateLineItem(state, action) {
-      const {item, index} = action.payload
-      state.lineItems[index] = item
-      // const lineItem = action.payload;
-      // const index = map(
-      //   state.lineItems, (item, index) => {
-      //     console.log(item)
-      //     if(item.id === lineItem.id && item.selectedDenomination === lineItem.selectedDenomination){
-      //       return index
-      //     }
-          
-      //   }
-      // )
-      // const { quantity } = lineItem;
-    //   if (count < 1) {
-    //     state.lineItems.splice(index, 1);
-    //   } else state.lineItems[index] = lineItem;
+      const { item, index } = action.payload;
+      state.lineItems[index] = item;
     },
     decreaseCount(state, action) {
       state.count = state.count - 1;
@@ -66,6 +57,10 @@ export const cartItemsSlice = createSlice({
     removeLineItem(state, action) {
       const line_item = action.payload;
       remove(state.lineItems, line_item);
+    },
+    updateSelectedCartCurrency(state, action) {
+      console.log("action ", action);
+      state.selectedCartCurrency = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -130,6 +125,36 @@ export const cartItemsSlice = createSlice({
       .addCase(cartTotalCountAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
       })
+      // Payment CUrrency Action
+      .addCase(getPaymentCurrencyAction.pending, (state) => {
+        state.errors = null;
+        state.paymentCurrency = [];
+      })
+      .addCase(getPaymentCurrencyAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        const { data, code } = response;
+        if (200 === code) {
+          state.paymentCurrency = data?.currencies || [];
+          state.selectedCartCurrency = data?.currencies[0] || null;
+        }
+      })
+      .addCase(getPaymentCurrencyAction.rejected, (state, action) => {
+        state.errors = [action.error.message || ""];
+      })
+      .addCase(getConversionRateAction.pending, (state, action) => {
+        state.errors = null;
+        state.conversion = null;
+      })
+      .addCase(getConversionRateAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        const { data, code } = response;
+        if (200 === code) {
+          state.conversion = data;
+        }
+      })
+      .addCase(getConversionRateAction.rejected, (state, action) => {
+        state.errors = [action.error.message || ""];
+      });
   },
 });
 
