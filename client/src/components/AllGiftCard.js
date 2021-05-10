@@ -12,6 +12,7 @@ import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import { useHistory } from "react-router-dom";
 import Giftcard from "./Giftcard";
+import { getTopBarState } from "../reducer/topbar.reducer";
 
 function AllGiftCard() {
   const dispatch = useDispatch();
@@ -19,57 +20,52 @@ function AllGiftCard() {
   const brandState = useSelector(getBrandsState);
   const giftunitState = useSelector(getGiftcardsState);
   const brandsWithCategory = get(brandState, "allBrands");
-  // const [activeCategory, setActiveCategory] = React.useState();
 
   React.useEffect(() => {
-    dispatch(
-      categoryAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+    if (giftunitState.selectedCountry?.id) {
+      dispatch(
+        categoryAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+        })
+      );
+    }
+  }, [giftunitState.selectedCountry?.id, dispatch]);
   React.useEffect(() => {
-    dispatch(
-      allBrandAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        image_size: "medium_rectangle",
-        image_type: "Color",
-        list_type: "group",
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
-  React.useEffect(() => {
-    dispatch(
-      giftCardsUnitAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-        giftunit_id: giftunitState.giftunit_id,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
-  React.useEffect(() => {
-    dispatch(
-      featureBrandsAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-      })
-    );
-  }, [giftunitState.giftunit_id, dispatch]);
+    if (giftunitState.selectedCountry?.id) {
+      dispatch(
+        allBrandAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+          image_size: "medium_rectangle",
+          image_type: "Color",
+          list_type: "group",
+        })
+      );
+    }
+  }, [giftunitState.selectedCountry?.id, dispatch]);
 
-  // const getCardsWithCategory = (category) => {
-  //   const { id, name } = category;
-  //   //dispatch action to get cards by category
-  //   dispatch(
-  //     brandsByCategoryAction({
-  //       currency: giftunitState.giftunit_id,
-  //       program_id: 1,
-  //       category_id: id,
-  //     })
-  //   );
-  //   setActiveCategory(id);
-  // };
+  React.useEffect(() => {
+    if (giftunitState.selectedCountry?.id) {
+      dispatch(
+        giftCardsUnitAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+          giftunit_id: giftunitState.selectedCountry.id,
+        })
+      );
+    }
+  }, [giftunitState.selectedCountry?.id, dispatch]);
+  React.useEffect(() => {
+    if (giftunitState.selectedCountry?.id) {
+      dispatch(
+        featureBrandsAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+        })
+      );
+    }
+  }, [giftunitState.selectedCountry?.id, dispatch]);
 
   const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
     ? get(giftunitState, "countries[0].country_name")

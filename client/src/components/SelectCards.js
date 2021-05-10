@@ -22,6 +22,7 @@ import { useHistory } from "react-router-dom";
 import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
+import { getTopBarState } from "../reducer/topbar.reducer";
 
 const SelectCards = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,15 @@ const SelectCards = () => {
   const payment = giftunitState.selectedCountry;
   const [rate, setRate] = useState(0);
   const [giftTo, setGiftTo] = useState("myself");
+
+  const topbarState = useSelector(getTopBarState);
+
+  const selectedCountry = giftunitState.selectedCountry;
+  const countryId = selectedCountry
+    ? topbarState.countries.find(
+        (country) => country.country_name === selectedCountry.country_name
+      )?.id || 0
+    : 0;
 
   const handleSelect = (eventKey1) => {
     seteventkey(eventKey1);
@@ -73,7 +83,7 @@ const SelectCards = () => {
   React.useEffect(() => {
     dispatch(
       termBrandAction({
-        currency: 1,
+        currency: countryId,
         id: get(card, "id"),
       })
     );
@@ -97,6 +107,7 @@ const SelectCards = () => {
       card_value_aed: selectedDenomination,
       isforself: giftTo === "myself",
       country_id: giftunitState.selectedCountry?.id,
+      name: card.name,
     };
     if (authState.isAuthenticated) {
       dispatch(updateCartAction(addToCartItem));

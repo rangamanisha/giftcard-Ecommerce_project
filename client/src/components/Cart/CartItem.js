@@ -13,11 +13,11 @@ const CartItem = (props) => {
     payment,
   } = props;
 
-  const deleteItem = () => {};
-
   const addQuantity = () => {};
 
   const deleteQuantity = () => {};
+
+  const getImageSrc = () => {};
 
   return (
     <div className="item-list">
@@ -38,7 +38,7 @@ const CartItem = (props) => {
             <p>
               <b>{item?.name || ""}</b>
             </p>
-            <p>Gifting for: {item?.giftingTo || ""} </p>
+            <p>Gifting for: {item?.isforself ? "My Self" : "Others"} </p>
             <div className="d-flex justify-content-between align-items-center mt-3 mr-2">
               <div className="cart-inc-dec-box px-1">
                 <button
@@ -55,10 +55,9 @@ const CartItem = (props) => {
                   <span>+</span>
                 </button>
               </div>
-              <span className="count-name">{payment?.country_name}</span>
+              <span className="count-name">{item?.country_name}</span>
               <span className="count-symbol">
-                {payment?.unit_symbol}{" "}
-                {item?.selectedDenomination * item?.quantity || 0}
+                {item?.currency} {item?.giftcard_value * item?.quantity || 0}
               </span>
               <Image
                 src={ButtunDelete}
@@ -67,7 +66,7 @@ const CartItem = (props) => {
                   height: "5%",
                   cursor: "pointer",
                 }}
-                onClick={deleteItem}
+                onClick={() => removeItem(item)}
               />
             </div>
           </div>

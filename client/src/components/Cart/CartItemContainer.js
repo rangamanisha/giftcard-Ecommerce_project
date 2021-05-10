@@ -2,7 +2,7 @@ import React from "react";
 import CartItem from "./CartItem";
 
 const CartItemContainer = (props) => {
-  const { cartState, giftCardState, history } = props;
+  const { cartState, giftCardState, history, removeItem } = props;
 
   return (
     <div className="col-second">
@@ -28,6 +28,7 @@ const CartItemContainer = (props) => {
           payment={giftCardState.selectedCountry}
           item={item}
           key={key}
+          removeItem={removeItem}
         />
       ))}
     </div>

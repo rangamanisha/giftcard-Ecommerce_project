@@ -21,7 +21,6 @@ export const CART_ITEMS_INIT_STATE = {
   country_name: "",
   count: 1,
   lineItems: [],
-  fetchedCartItems: [],
   totalCartItems: 0,
   selectedCartCurrency: null,
   paymentCurrency: [],
@@ -83,21 +82,20 @@ export const cartItemsSlice = createSlice({
       })
       .addCase(fetchItemsByCartAction.pending, (state, action) => {
         state.errors = null;
-        state.fetchedCartItems = null;
+        state.lineItems = [];
       })
       .addCase(fetchItemsByCartAction.fulfilled, (state, action) => {
         const response = action.payload;
-        console.log("response ", response);
         const { data, code } = response;
         if (code === 200) {
-          state.fetchedCartItems = data.carts;
+          state.lineItems = data.carts;
         } else {
-          state.fetchedCartItems = [];
+          state.lineItems = [];
         }
       })
       .addCase(fetchItemsByCartAction.rejected, (state, action) => {
         state.errros = [action.error.message || ""];
-        state.fetchedCartItems = [];
+        state.lineItems = [];
       })
       .addCase(addRemoveQuantityAction.pending, (state, action) => {
         state.errors = null;

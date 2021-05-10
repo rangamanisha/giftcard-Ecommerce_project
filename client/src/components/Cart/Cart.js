@@ -8,9 +8,10 @@ import { getAuthState } from "../../reducer/auth.reducer";
 import { getGiftcardsState } from "../../reducer/giftCards.reducer";
 import { getRewardPointsState } from "../../reducer/rewardpoints.reducer";
 import { getRewardPointsAction } from "../../actions/rewardpoints.actions";
-import { getCartItemsState } from "../../reducer/cart.reducer";
+import { cartAction, getCartItemsState } from "../../reducer/cart.reducer";
 
 import {
+  addRemoveQuantityAction,
   fetchItemsByCartAction,
   getConversionRateAction,
   getPaymentCurrencyAction,
@@ -52,6 +53,21 @@ function Cart() {
     }
   };
 
+  const removeItem = (item) => {
+    if (authState.isAuthenticated) {
+      dispatch(
+        addRemoveQuantityAction({
+          ...item,
+          action: "CLEAR",
+          country: giftunitState.selectedCountry,
+        })
+      );
+    } else {
+      dispatch(cartAction.saveItemsToCart([]));
+      dispatch(cartAction.updateTotalCartItems(0));
+    }
+  };
+
   return (
     <>
       <Container fluid>
@@ -67,13 +83,12 @@ function Cart() {
             />
           </Col>
 
-          {/* Second Column of cart */}
-
           <Col md={7}>
             <CartItemContainer
               cartState={cartState}
               giftCardState={giftunitState}
               history={history}
+              removeItem={removeItem}
             />
           </Col>
         </Row>

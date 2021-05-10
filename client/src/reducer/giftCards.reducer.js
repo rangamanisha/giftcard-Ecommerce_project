@@ -3,11 +3,7 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import {
-  giftCardsUnitAction,
-  getPaymentCurrencyAction,
-  getConversionRateAction,
-} from "../actions/giftcards.actions";
+import { giftCardsUnitAction } from "../actions/giftcards.actions";
 
 export const GIFTCARDS_INIT_STATE = {
   message: "",
@@ -42,8 +38,6 @@ export const giftcardSlice = createSlice({
     },
     selectCountry(state, action) {
       let country = action.payload;
-      console.log("country ", country);
-      state.giftunit_id = country?.id || 1;
       state.selectedCountry = country;
     },
     selectBrand(state, action) {
@@ -68,46 +62,18 @@ export const giftcardSlice = createSlice({
       })
       .addCase(giftCardsUnitAction.fulfilled, (state, action) => {
         const response = action.payload;
-        const { data, code } = response;
+        const { data, code, selectedCountry } = response;
         if (code === 200) {
           const gift_cards = data?.giftcard_units;
           state.countries = gift_cards;
           if (!state.selectedCountry) {
-            state.selectedCountry = gift_cards[0];
+            state.selectedCountry = selectedCountry || null;
           }
         }
       })
       .addCase(giftCardsUnitAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
       });
-    // .addCase(getPaymentCurrencyAction.pending, (state, action) => {
-    //   state.errors = null;
-    //   state.paymentCurrency = null;
-    // })
-    // .addCase(getPaymentCurrencyAction.fulfilled, (state, action) => {
-    //   const response = action.payload;
-    //   const { data, code } = response;
-    //   if (code === 200) {
-    //     state.paymentCurrency = data;
-    //   }
-    // })
-    // .addCase(getPaymentCurrencyAction.rejected, (state, action) => {
-    //   state.errors = [action.error.message || ""];
-    // })
-    // .addCase(getConversionRateAction.pending, (state, action) => {
-    //   state.errors = null;
-    //   state.conversion = null;
-    // })
-    // .addCase(getConversionRateAction.fulfilled, (state, action) => {
-    //   const response = action.payload;
-    //   const { data, code } = response;
-    //   if (code === 200) {
-    //     state.conversion = data;
-    //   }
-    // })
-    // .addCase(getConversionRateAction.rejected, (state, action) => {
-    //   state.errors = [action.error.message || ""];
-    // });
   },
 });
 

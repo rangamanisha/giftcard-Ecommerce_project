@@ -3,8 +3,17 @@ import { giftCardsUnitService } from "../services/giftCards.service";
 
 export const giftCardsUnitAction = createAsyncThunk(
   "gitfcards/listGiftCards",
-  async (payload, thunkAPI) => {
+  async (payload = [], thunkAPI) => {
     const response = await giftCardsUnitService();
-    return response;
+    const { getState } = thunkAPI;
+    let selectedCountry = {};
+    if (response.code === 200) {
+      const state = getState();
+      selectedCountry = response.data.giftcard_units[0];
+      selectedCountry.id = state.topbar.countries.find(
+        (country) => country.country_name === selectedCountry.country_name
+      )?.id;
+    }
+    return { ...response, selectedCountry };
   }
 );

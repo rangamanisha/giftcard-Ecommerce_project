@@ -45,30 +45,24 @@ export const fetchItemsByCartAction = createAsyncThunk(
 export const addRemoveQuantityAction = createAsyncThunk(
   "cart_items/listaddremove",
   async (payload, thunkAPI) => {
+    console.log("payload ", payload);
+    const { dispatch } = thunkAPI;
     const request = {
       cart_item: {
-        brand_name: payload.data.brand_name,
-        quantity: payload.data.quantity,
-        giftcard_value: payload.data.giftcard_value,
-        currency: payload.data.currency,
-        action: payload.data.action,
+        brand_name: payload.product_name,
+        quantity: payload.quantity,
+        giftcard_value: payload.giftcard_value,
+        currency: payload.currency,
+        action: payload.action,
       },
     };
-    const { dispatch } = thunkAPI;
-    const { removeLineItem, updateLineItem } = cartAction;
     const response = await addRemoveQuantityService(request);
-    if (payload.data.action === "CLEAR") {
-      await dispatch(removeLineItem(payload.item));
-    } else {
-      const data = payload.item;
-      if (payload.data.action === "ADD") {
-        data.quantity = data.quantity + 1;
-      }
-      if (payload.data.action === "REMOVE") {
-        data.quantity = data.quantity - 1;
-      }
-      await dispatch(updateLineItem(data));
-    }
+    dispatch(
+      fetchItemsByCartAction({
+        currency: payload.country.unit_name_short,
+        currency_id: payload.country.id,
+      })
+    );
     return response;
   }
 );
@@ -100,7 +94,7 @@ export const updateCartAction = createAsyncThunk(
       },
     };
     const response = await cartItemsService(request);
-    dispatch(cartTotalCountAction());
+    dispatch(cartTotalCountAction({ currency: payload.currency }));
     return response;
   }
 );
@@ -108,7 +102,11 @@ export const updateCartAction = createAsyncThunk(
 export const getPaymentCurrencyAction = createAsyncThunk(
   "cart_items/listPaymentCurrency",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const response = await getPaymentCurrencyService();
+    if (response.code === 200) {
+      dispatch(getConversionRateAction(response.data.currencies[0]));
+    }
     return response;
   }
 );

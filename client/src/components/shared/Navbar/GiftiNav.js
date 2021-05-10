@@ -16,6 +16,7 @@ import { giftCardsUnitAction } from "../../../actions/giftcards.actions";
 import { isEmpty, get, sortBy } from "lodash";
 import { cartTotalCountAction } from "../../../actions/cart.actions";
 import { getCartItemsState } from "../../../reducer/cart.reducer";
+import { getTopBarState } from "../../../reducer/topbar.reducer";
 //Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
@@ -23,6 +24,7 @@ const GiftiNav = () => {
   const authState = useSelector(getAuthState);
   const giftunitState = useSelector(getGiftcardsState);
   const cartState = useSelector(getCartItemsState);
+  const state = useSelector(getTopBarState);
   const dispatch = useDispatch();
   const countries = isEmpty(giftunitState.countries)
     ? []
@@ -32,9 +34,6 @@ const GiftiNav = () => {
     isTotalCartCountActionCalled,
     setIsTotalCartCountActionCalled,
   ] = useState(false);
-  useEffect(() => {
-    dispatch(giftCardsUnitAction);
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getCountriesListAction());
@@ -57,6 +56,12 @@ const GiftiNav = () => {
   ]);
 
   const countryChanged = (value) => {
+    const filteredId = state.countries.filter(
+      (country) => country.country_name === value.country_name
+    );
+    if (filteredId && filteredId.length) {
+      value = { ...value, id: filteredId[0].id };
+    }
     dispatch(giftCardsAction.selectCountry(value));
   };
 
