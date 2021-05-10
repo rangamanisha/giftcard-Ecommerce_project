@@ -38,7 +38,7 @@ export const categorySlice = createSlice({
       .addCase(categoryAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.data = get(data, "categories");
         }
       })
@@ -52,7 +52,7 @@ export const categorySlice = createSlice({
       .addCase(giftcardUnitAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.giftcardunits = get(data, "giftcard_units");
         }
       })

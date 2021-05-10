@@ -11,7 +11,6 @@ import {
   allBrandAction,
   featureBrandsAction,
 } from "../actions/brands.action";
-import { getBrandsState } from "../reducer/brands.reducer";
 import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import Carousel from "react-elastic-carousel";
@@ -19,10 +18,8 @@ import Carousel from "react-elastic-carousel";
 function AllCategoryCards() {
   const dispatch = useDispatch();
   const state = useSelector(getCategoryState);
-  const brandState = useSelector(getBrandsState);
   const giftunitState = useSelector(getGiftcardsState);
   const categories = get(state, "data");
-  const brandsWithCategory = get(brandState, "allBrands");
   const [activeCategory, setActiveCategory] = React.useState();
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -69,7 +66,7 @@ function AllCategoryCards() {
   }, [giftunitState.giftunit_id, dispatch]);
 
   const getCardsWithCategory = (category) => {
-    const { id, name } = category;
+    const { id } = category;
     //dispatch action to get cards by category
     dispatch(
       brandsByCategoryAction({
@@ -88,7 +85,7 @@ function AllCategoryCards() {
           <Item>
             <button className="transparentButton">
               <div className="box">
-                <a>
+                <a href="#">
                   <img
                     src={Allmenu}
                     alt="Icon"
@@ -102,9 +99,9 @@ function AllCategoryCards() {
             </button>
           </Item>
           {!isEmpty(categories) &&
-            map(categories, (category) => (
+            map(categories, (category, key) => (
               <>
-                <Item>
+                <Item key={key}>
                   {
                     <button
                       className="transparentButton"

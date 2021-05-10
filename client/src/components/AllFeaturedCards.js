@@ -16,7 +16,6 @@ const AllFeaturedCards = () => {
   const dispatch = useDispatch();
   const state = useSelector(getBrandsState);
   const giftunitState = useSelector(getGiftcardsState);
-  const fetaured_brands = get(state, "data");
   const brandsWithfeatutre = get(state, "featured_brands");
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -32,7 +31,7 @@ const AllFeaturedCards = () => {
         program_id: 1,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
     ? get(giftunitState, "countries[0].country_name")
     : get(giftunitState, "selectedCountry.country_name");

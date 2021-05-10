@@ -1,7 +1,6 @@
 import React from "react";
 import Cards from "./Cards";
 import StartGifting from "./StartGifting";
-import RecommandedCards from "./RecommandedCards";
 import AllGiftCard from "./AllGiftCard";
 import AllFeaturedCards from "./AllFeaturedCards";
 import Alert from "react-bootstrap/Alert";
@@ -9,7 +8,6 @@ import checkbox from "../assets/checkbox.svg";
 import { useState, useEffect } from "react";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
 import { getUserActiveState } from "../reducer/useractive.reducer";
-import { alertloginAction } from "../actions/auth.actions";
 import { getuseractiveAction } from "../actions/useractive.actions";
 import Fade from "react-bootstrap/Fade";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,7 +74,7 @@ const Home = () => {
         setVisible(false);
       }, 3000);
     }
-  }, [state.isAuthenticated, state.signupSuccess, state.status]);
+  }, [state.isAuthenticated, state.signupSuccess, state.status, dispatch]);
 
   return (
     <>

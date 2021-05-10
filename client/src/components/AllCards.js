@@ -2,19 +2,12 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { useState, useRef } from "react";
 import AllCategoryCards from "./AllCategoryCards";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryAction } from "../actions/category.actions";
-import { getCategoryState } from "../reducer/category.reducer";
-import { get, map, isEmpty, filter, isUndefined, cloneDeepWith } from "lodash";
-import {
-  brandsByCategoryAction,
-  allBrandAction,
-  featureBrandsAction,
-} from "../actions/brands.action";
+import { get, map, isEmpty } from "lodash";
+import { allBrandAction } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
-import { getTopBarState } from "../reducer/topbar.reducer";
 import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import AllFeaturedCards from "./AllFeaturedCards";
@@ -22,23 +15,9 @@ import Giftcard from "./Giftcard";
 
 function AllCards() {
   const dispatch = useDispatch();
-  const [currency, setCurrency] = useState(1);
-  const [items, setitems] = useState([]);
-  const [visible, setvisible] = useState(3);
-  const state = useSelector(getCategoryState);
   const brandState = useSelector(getBrandsState);
-  const topbarState = useSelector(getTopBarState);
   const giftunitState = useSelector(getGiftcardsState);
-  const categories = get(state, "data");
-  const category_brands = get(brandState, "category_brands");
   const brandsWithCategory = get(brandState, "allBrands");
-  const [activeCategory, setActiveCategory] = React.useState();
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 7 },
-    { width: 1200, itemsToShow: 8 },
-  ];
 
   React.useEffect(() => {
     dispatch(
@@ -47,7 +26,7 @@ function AllCards() {
         program_id: 1,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       allBrandAction({
@@ -58,7 +37,7 @@ function AllCards() {
         list_type: "group",
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
   React.useEffect(() => {
     dispatch(
       giftCardsUnitAction({
@@ -67,7 +46,7 @@ function AllCards() {
         giftunit_id: giftunitState.giftunit_id,
       })
     );
-  }, [giftunitState.giftunit_id]);
+  }, [giftunitState.giftunit_id, dispatch]);
 
   const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
     ? get(giftunitState, "countries[0].country_name")

@@ -63,7 +63,7 @@ export const brandsSlice = createSlice({
       .addCase(descriptionBrandAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.description = data;
         }
       })
@@ -77,7 +77,7 @@ export const brandsSlice = createSlice({
       .addCase(featureBrandsAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.featured_brands = data;
         }
       })
@@ -90,7 +90,7 @@ export const brandsSlice = createSlice({
       .addCase(brandsByCategoryAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.brands = get(data, "brands");
         }
       })
@@ -105,7 +105,7 @@ export const brandsSlice = createSlice({
       .addCase(allBrandAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.allBrands = data.categories;
         }
       })

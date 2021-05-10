@@ -11,7 +11,7 @@ import Image from "react-bootstrap/Image";
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
     <a
-      href=""
+      href="#"
       ref={ref}
       onClick={(e) => {
         e.preventDefault();

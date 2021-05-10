@@ -69,7 +69,7 @@ export const giftcardSlice = createSlice({
       .addCase(giftCardsUnitAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 === code) {
+        if (code === 200) {
           const gift_cards = data?.giftcard_units;
           state.countries = gift_cards;
           if (!state.selectedCountry) {
@@ -87,7 +87,7 @@ export const giftcardSlice = createSlice({
     // .addCase(getPaymentCurrencyAction.fulfilled, (state, action) => {
     //   const response = action.payload;
     //   const { data, code } = response;
-    //   if (200 === code) {
+    //   if (code === 200) {
     //     state.paymentCurrency = data;
     //   }
     // })
@@ -101,7 +101,7 @@ export const giftcardSlice = createSlice({
     // .addCase(getConversionRateAction.fulfilled, (state, action) => {
     //   const response = action.payload;
     //   const { data, code } = response;
-    //   if (200 === code) {
+    //   if (code === 200) {
     //     state.conversion = data;
     //   }
     // })

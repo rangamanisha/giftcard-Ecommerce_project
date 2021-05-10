@@ -64,7 +64,7 @@ const SelectCards = () => {
     }
   };
   const decrement = () => {
-    if (count == 0) {
+    if (count === 0) {
       return null;
     } else {
       dispatch(cartAction.decreaseCount());
@@ -208,7 +208,7 @@ const SelectCards = () => {
               <div>
                 <Nav onSelect={handleSelect}>
                   <Nav.Item id="product">
-                    <Nav.Link eventKey="1" active={eventKey11 == "1"}>
+                    <Nav.Link eventKey="1" active={eventKey11 === "1"}>
                       Description
                     </Nav.Link>
                   </Nav.Item>
@@ -216,7 +216,7 @@ const SelectCards = () => {
                     <Nav.Link eventKey="2">Terms & Condtions</Nav.Link>
                   </Nav.Item>
                 </Nav>
-                {eventKey11 == "1" ? (
+                {eventKey11 === "1" ? (
                   <div
                     className="mt-4"
                     id="profile"
