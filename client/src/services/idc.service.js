@@ -1,4 +1,3 @@
-
 import { apiCall1 } from "./idcApi";
 export const API_URL = process.env.REACT_APP_API_URL;
 
@@ -16,31 +15,29 @@ export const idcSingleOrderApiCall = (idcOrder) => {
   return apiCall1(url, "POST", idcOrder);
 };
 
-
-export const idcTotalCreditApiCall =()=>{
+export const idcTotalCreditApiCall = () => {
   const url = `${API_URL}/user/idc_user_credits/total`;
-  return apiCall1(url,"GET");
-}
+  return apiCall1(url, "GET");
+};
 
-export const idcVaritiesApiCall = () =>{
+export const idcVaritiesApiCall = () => {
   const url = `${API_URL}/brands/idc_varities?program_id=1`;
-  return apiCall1(url,"GET");
-}
+  return apiCall1(url, "GET");
+};
 
-export const idcProfileApiCall =()=>{
+export const idcProfileApiCall = () => {
   const url = `${API_URL}/user`;
-  return apiCall1(url,"GET")
-}
+  return apiCall1(url, "GET");
+};
 
-export const countryCodeApiCall =(country)=>{
+export const countryCodeApiCall = (country) => {
   const url = `${API_URL}/countries/set_phone_attributes?country_name=${country}`;
-  return apiCall1(url,"GET")
-}
-export const idcChangePasswordApiCall =(idc_user_data)=>{
-    const url = `${API_URL}/accounts/passwords/change_password`;
-    return apiCall1(url, "PUT", idc_user_data);
-
-}
+  return apiCall1(url, "GET");
+};
+export const idcChangePasswordApiCall = (idc_user_data) => {
+  const url = `${API_URL}/accounts/passwords/change_password`;
+  return apiCall1(url, "PUT", idc_user_data);
+};
 export const idcCountriesApiCall = () => {
   const url = `${API_URL}/countries`;
   return apiCall1(url, "GET");

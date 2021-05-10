@@ -47,11 +47,10 @@ export const orderSlice = createSlice({
         // state.code = true;
         // state.orders = response.data.order;
       })
-  
-    // .addCase(OrderDetailsAction.rejected, (state) => {
-    //   state.code = true;
-    // })
 
+      // .addCase(OrderDetailsAction.rejected, (state) => {
+      //   state.code = true;
+      // })
 
       .addCase(OrderDetailsAction.pending, (state) => {
         state.code = true;
