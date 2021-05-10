@@ -1,8 +1,10 @@
 import React from 'react';
 import './Idc.scss';
 import { Form } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+
 import swal from 'sweetalert';
-import { CSVLink, CSVDownload } from "react-csv";
+import CsvDownloader from 'react-csv-downloader';
 import { useState } from "react";
 import { map, get, result,find } from "lodash";
 import IDC_Send_Gift_Card_Page from '../../assets/IDC_Send_Gift_Card_Page.png';
@@ -10,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getIdcState } from '../../reducer/idc.reducer';
-import {getTopBarState} from '../../reducer/topbar.reducer';
 import {IdcTotalCreditnAction,IdcConvertCurrencyAction, IdcCountriesAction,IdcProfileAction,IdcVaritiesAction, IdcSignleOrderAction, IdcCountryCode} from '../../actions/idc_action';
 import { countryCodeApiCall } from '../../services/idc.service';
 export const API_URL = process.env.REACT_APP_API_URL;
@@ -18,13 +19,14 @@ export const API_URL = process.env.REACT_APP_API_URL;
 
 
 const Idc_Order = ()=>{
+    const history = useHistory();
     const dispatch = useDispatch();
     const idcState = useSelector(getIdcState);
     // const idcCountries = useSelector(getTopBarState);
     const idc_varities = get(idcState, "idcProduct.idc_product");
     const countries = get(idcState,"countries"); 
     const [selectedFile, setSelectedFile] = useState('');
-    const [filename, setFilename] = useState();
+    const [filename1, setFilename1] = useState();
     const [fileerrors, setFileerrors] = useState();
     const [errorr,seterrorr] = useState();
     const [filecredit,setFilecredit] = useState();
@@ -33,19 +35,19 @@ const Idc_Order = ()=>{
     const [giftcard_variety_id,setgiftcard_variety_id] = useState('');
     const access_token = localStorage.getItem('idc_access_token');
     const delete_uploaded_file = () =>{
-        setFilename("");
+        setFilename1("");
         setFilecredit("");
         setSelectedFile("");
         setFileerrors('');
         seterrorr('');
     }
     const changeHandler = (event) => {
+        event.preventDefault();
         setFileerrors('');
          seterrorr('');
-
-		setSelectedFile(event.target.files[0]);
-        setFilename(event.target.files[0].name);
-        event.preventDefault();
+		   setSelectedFile(event.target.files[0]);
+        setFilename1(event.target.files[0].name);
+       
         let file = event.target.files[0];
         let formData = new FormData();
         formData.append('idc_order_file', file);
@@ -62,9 +64,12 @@ const Idc_Order = ()=>{
                   console.log(result.code);
                   if(result.code === 200 && result.data){
                 setFilecredit(result.data.order.total_credit_to_used)
-              } else if(result.code === 404 || result.code === 400 || result.code === 401)
+              } else if(result.code === 404 || result.code === 400)
               {console.log(result);
                 setFileerrors(result.message);
+              }else if(result.code === 401)
+              {localStorage.clear();
+                history.push({ pathname: "/idc/signin" });
               }
               })
           })
@@ -72,9 +77,11 @@ const Idc_Order = ()=>{
 	};
     const onSubmitfile = (e) =>{
         e.preventDefault();
-        let file = e.target[0].files[0];
+        console.log(e);
+        setSelectedFile(e.target[1].files[0]);
+        let file = e.target[1].files[0];
         let formData = new FormData();
-        formData.append('idc_order_file', selectedFile);
+        formData.append('idc_order_file', file);
         let url  = API_URL + '/idc_orders'
         let bulkapifile = fetch(url, {
             method: 'POST',
@@ -113,9 +120,68 @@ const Idc_Order = ()=>{
     }
 
     const csvData = [
-        ["First_Name", "Last_Name", "Email","Company","Designation","Country","Phone","Product","Currency","Denomination","Quantity"],
-        ["John", "Nick", "john12@gmail.com","MIT","Software Developer","America","992236254","IDC","AED","100","2"],
+        [`First_Name`, `Last_Name`, `Email`,'Company','Designation','Country','Phone','Product','Currency','Denomination','Quantity'],
+        ['John', 'Nick', 'john12@gmail.com','MIT','Software Developer','America','992236254','IDC','AED','100','2']
       ];
+      const columns = [{
+        id: 'first',
+        displayName: 'First_Name'
+      }, {
+        id: 'second',
+        displayName: 'Last_Name'
+      },
+      {
+        id: 'third',
+        displayName: 'Email'
+      },
+      {
+        id: 'fourth',
+        displayName: 'Company'
+      },
+      {
+        id: 'fivth',
+        displayName: 'Designation'
+      },
+      {
+        id: 'sixth',
+        displayName: 'Country'
+      },
+      {
+        id: 'seventh',
+        displayName: 'Phone'
+      },
+      {
+        id: 'eightth',
+        displayName: 'Product'
+      },
+      {
+        id: 'nineth',
+        displayName: 'Currency'
+      },
+      {
+        id: 'tenth',
+        displayName: 'Denomination'
+      },
+      {
+        id: 'eleventh',
+        displayName: 'Quantity'
+      },
+      
+
+    ];
+      const datas = [{
+        first: 'John',
+        second: 'Nick',
+        third:'john12@gmail.com',
+        fivth:'Software Developer',
+        fourth:'MIT',
+        sixth:'America',
+        seventh:'992236254',
+        eightth:'IDC',
+        nineth:'AED',
+        tenth:'100',
+        eleventh:'2'
+      }];
  
 
     const formik = useFormik({
@@ -179,15 +245,16 @@ const Idc_Order = ()=>{
       
  
     const handleOffence = (name)=>{
+        formik.values.quantity ="";
+        setFilecredit("");  
         let match = find(idc_varities, { 'product_name_to_display': name});   
         setDenomination(match.denomination);
         setgiftcard_variety_id(match.giftcard_variety_id);
-        setidccurrency(match.curreny_name);   
+        setidccurrency(match.curreny_name);        
     }
     const creditamount = (e)=>{
         const count = e.target.value;
        const amountValue = denomination*count;
-       console.log(amountValue)
         dispatch(
             IdcConvertCurrencyAction({
               amount: amountValue,
@@ -227,7 +294,15 @@ const Idc_Order = ()=>{
                 <div className="file-drop-box">
                         <div className="download-wrap text-right">
                             <span>Download Sample File</span>
-                            <CSVLink data={csvData}filename={"Sample.csv"} className="btn btn-blue btn-radius">Download me</CSVLink>
+                            <CsvDownloader
+                                filename="Sample.csv"
+                                separator=","
+                                wrapColumnChar=""
+                                columns={columns}
+                                datas={datas}
+                                text="DOWNLOAD" 
+                                className="btn btn-blue btn-radius"/>
+                            {/* <CSVLink data={csvData}filename={"Sample.csv"} enclosingCharacter={``} className="btn btn-blue btn-radius">Download me</CSVLink> */}
                         </div>
                         <div className="drop-file-wrap">
                             <div className="drop-file-icon">+</div>
@@ -241,10 +316,10 @@ const Idc_Order = ()=>{
                         </div>
 
                       
-                    {filename  && !fileerrors ?(
+                    {filename1  && !fileerrors ?(
                         <div>
                             <div className="field-block">
-                                <div className='label label-info' id="upload-file-info">{filename}</div>
+                                <div className='label label-info' id="upload-file-info">{filename1}</div>
                                 <span><a className="delete-btn" onClick={delete_uploaded_file}>&times;</a> </span>
                             </div>
                             </div>):''}
@@ -266,7 +341,7 @@ const Idc_Order = ()=>{
                     </p>
                   ) : null}
                 <div className="btn-layout1 text-center">
-                    <button  className="btn"
+                    <button disabled={!filecredit} className="btn"
                     type="submit">
                         
                         Send IDC Gift Card 
@@ -391,15 +466,13 @@ const Idc_Order = ()=>{
                                         <span>Country</span>
                                     </label>
                                     <Form.Control
-          as="select"
-          custom
-          id = "product_select"
-          name = "country"
-          value={formik.values.country}
-          onChange={formik.handleChange}
-         
-
-        >
+                                        as="select"
+                                        custom
+                                        id = "product_select"
+                                        name = "country"
+                                        value={formik.values.country}
+                                        onChange={formik.handleChange}
+                                        >
             <option value ="Select Country">Select Country</option>
             {map(countries,(c,i)=>(
           <option key={i}  value ={c.country_name}>{c.country_name}</option>
@@ -499,7 +572,7 @@ const Idc_Order = ()=>{
                     </p>
                   ) : null}
                 <div className="btn-layout1 text-center">
-                    <button  className="btn"
+                    <button disabled={!(formik.isValid && formik.dirty)} className="btn"
                   type="submit">
                         
                         Send IDC Gift Card
