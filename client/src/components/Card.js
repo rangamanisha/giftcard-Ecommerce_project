@@ -40,7 +40,7 @@ const card = () => {
             Start Gifiting&nbsp;
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>
-          <Button variant="outline-secondary" onClick="https://www.youtube.com/watch?v=QOvz41v-ozM" >How it works</Button>
+          <Button variant="outline-secondary"  >How it works</Button>
         </div>
         <img src={GiftiGlobal} className="card-image" alt="Gifti-Global" />
       </div>

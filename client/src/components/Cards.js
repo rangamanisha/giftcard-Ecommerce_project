@@ -39,9 +39,7 @@ const Cards = () => {
               </Button>
               <Button variant="outline-secondary" onClick={handleShow}>How it works</Button>
               <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
 
-                </Modal.Header>
                 <iframe
                   width="500px"
                   height="450px"

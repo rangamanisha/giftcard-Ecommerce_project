@@ -82,11 +82,9 @@ const Footer = () => {
             <ul style={{ listStyleType: "none" }}>
               <span>Get in Touch with Us</span>
               <li className="footer-text-list mt-3" >
-              <div style={{display:'flex', alignItems:'center'}}>
                 <img src={Map} alt="map" className="footer_icons"/>
                 Grosvenor Business Tower Office 1102 Barsha Heights TecomDubai,
                 UAE
-                </div>
               </li>
               <li className="footer-text-list mt-3">
                 <img src={PhoneIcon} alt="phone" className="footer_icons"/>+97(0)4872 8418
