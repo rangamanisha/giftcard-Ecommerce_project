@@ -134,7 +134,7 @@ const CartWidget = (props) => {
       total_amount: totalAmount,
       total_amount_aed: convertedAmountAED,
       currency: state.selectedCartCurrency?.unit_name_short,
-      currency_id: state.selectedCartCurreny?.id,
+      currency_id: state.selectedCartCurrency?.id,
     };
     if (authState.isAuthenticated) {
       checkoutObject.are_reward_points_used = useGiftiGlobalPoints;

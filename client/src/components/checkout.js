@@ -22,6 +22,10 @@ const Checkout = () => {
   const cartState = useSelector(getCartItemsState);
   const dispatch = useDispatch();
   const data = profilestate;
+  const publicKey =
+    cartState.checkoutCart.currency !== "SAR"
+      ? `${process.env.REACT_APP_FRAMES_PUBLIC_KEY}`
+      : `${process.env.REACT_APP_FRAMES_PUBLIC_KEY_SAR}`;
 
   useEffect(() => {
     dispatch(getprofileListAction({}));
@@ -34,7 +38,7 @@ const Checkout = () => {
         order_total_aed: cartState.checkoutCart.total_amount_aed,
         program_id: 1,
         use_credits: cartState.checkoutCart.are_reward_points_used,
-        current_exchange_rate: cartState.conversion.current_exchange_rate,
+        current_exchange_rate: cartState.conversion.currency_exchange_rate,
         use_hassad_points: false,
         language_code: "en",
         isbuynow: false,
@@ -47,22 +51,75 @@ const Checkout = () => {
   };
 
   const processOrder = async (event) => {
+    console.log("event ", event);
     await createOrder(event);
-    const payload = {
-      payment: {
-        token: event.token,
-        amount: orderState.created_order.payable_amount,
-        payment_currency: cartState.checkoutCart.currency,
-        currency: cartState.checkoutCart.currency,
-        order_id: orderState.created_order.id,
-      },
-    };
     if (orderState.created_order) {
+      const payload = {
+        payment: {
+          token: event.token,
+          amount: orderState.created_order.payable_amount,
+          payment_currency: cartState.checkoutCart.currency,
+          currency: cartState.checkoutCart.currency,
+          order_id: orderState.created_order.id,
+        },
+      };
       await dispatch(createOrderCheckoutAction(payload));
       if (orderState.created_order["redirect_url"]) {
         window.location.href = orderState.created_order["redirect_url"];
       }
     }
+  };
+
+  const getFramesWidget = () => {
+    console.log("publicKey ", publicKey);
+    if (publicKey) {
+      return (
+        <Frames
+          config={{
+            debug: true,
+            publicKey,
+            localization: {
+              cardNumberPlaceholder: "Card number",
+              expiryMonthPlaceholder: "MM",
+              expiryYearPlaceholder: "YY",
+              cvvPlaceholder: "CVV",
+            },
+            style: {
+              base: {
+                fontSize: "17px",
+              },
+            },
+          }}
+          ready={() => {}}
+          frameActivated={(e) => {}}
+          frameFocus={(e) => {}}
+          frameBlur={(e) => {}}
+          frameValidationChanged={(e) => {}}
+          paymentMethodChanged={(e) => {}}
+          cardValidationChanged={(e) => {}}
+          cardTokenized={(e) => {
+            processOrder(e);
+          }}
+          cardTokenizationFailed={(e) => {}}
+        >
+          <CardNumber />
+          <div className="date-and-code">
+            <ExpiryDate />
+            <Cvv />
+          </div>
+          <button
+            id="pay-button"
+            onClick={() => {
+              Frames.submitCard();
+            }}
+          >
+            PAY {cartState.checkoutCart.currency}{" "}
+            {cartState.checkoutCart.total_amount}
+          </button>
+        </Frames>
+      );
+    }
+    return null;
   };
 
   return (
@@ -85,49 +142,7 @@ const Checkout = () => {
             />
           </Form.Group>
 
-          <Frames
-            config={{
-              debug: true,
-              publicKey: "pk_test_df45f274-5c54-4e59-8587-c52de6ce7a18",
-              localization: {
-                cardNumberPlaceholder: "Card number",
-                expiryMonthPlaceholder: "MM",
-                expiryYearPlaceholder: "YY",
-                cvvPlaceholder: "CVV",
-              },
-              style: {
-                base: {
-                  fontSize: "17px",
-                },
-              },
-            }}
-            ready={() => {}}
-            frameActivated={(e) => {}}
-            frameFocus={(e) => {}}
-            frameBlur={(e) => {}}
-            frameValidationChanged={(e) => {}}
-            paymentMethodChanged={(e) => {}}
-            cardValidationChanged={(e) => {}}
-            cardTokenized={(e) => {
-              processOrder(e);
-            }}
-            cardTokenizationFailed={(e) => {}}
-          >
-            <CardNumber />
-            <div className="date-and-code">
-              <ExpiryDate />
-              <Cvv />
-            </div>
-            <button
-              id="pay-button"
-              onClick={() => {
-                Frames.submitCard();
-              }}
-            >
-              PAY {cartState.checkoutCart.currency}{" "}
-              {cartState.checkoutCart.total_amount}
-            </button>
-          </Frames>
+          {getFramesWidget()}
         </div>
       </Col>
     </Row>

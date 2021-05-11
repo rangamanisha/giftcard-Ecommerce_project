@@ -64,7 +64,7 @@ export const orderSlice = createSlice({
         if (response.code === 200) {
           state.created_order = response.data.order;
         } else {
-          state.error = response.errors.join(",");
+          state.error = response?.errors?.base?.join(",") || "Payment Failed";
         }
       })
       .addCase(createOrderAction.rejected, (state, action) => {
