@@ -81,7 +81,7 @@ const Footer = () => {
           <Col md={4} className="Gifti_Global_is mt-5">
             <ul style={{ listStyleType: "none" }}>
               <span>Get in Touch with Us</span>
-              <li className="footer-text-list mt-3" >
+              <li className="footer-text-list mt-3" style={{display: 'flex', alignItems:'center'}} >
                 <img src={Map} alt="map" className="footer_icons"/>
                 Grosvenor Business Tower Office 1102 Barsha Heights TecomDubai,
                 UAE
