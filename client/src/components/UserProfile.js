@@ -44,7 +44,7 @@ const UserProfile = () => {
   });
 
   return (
-    <div className="profile-card mx-auto mt-5 col-md-5">
+    <div className="profile-card mx-auto col-md-5">
       <Form className="profile" onSubmit={formik.handleSubmit}>
         <Form.Row>
           <Form.Group
