@@ -6,10 +6,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
 import Country from "../assets/country.svg";
 import Target from "../assets/target.svg";
-import Iframe from 'react-iframe'
+import Iframe from "react-iframe";
 import Giftcard from "../assets/gift-card.svg";
-import Modal from 'react-bootstrap/Modal'
-
+import Modal from "react-bootstrap/Modal";
 
 const Cards = () => {
   const [show, setShow] = useState(false);
@@ -37,9 +36,10 @@ const Cards = () => {
                 Start Gifiting&nbsp;
                 <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
               </Button>
-              <Button variant="outline-secondary" onClick={handleShow}>How it works</Button>
+              <Button variant="outline-secondary" onClick={handleShow}>
+                How it works
+              </Button>
               <Modal show={show} onHide={handleClose}>
-
                 <iframe
                   width="500px"
                   height="450px"
@@ -50,9 +50,9 @@ const Cards = () => {
                       autoplay; clipboard-write;
                        encrypted-media;
                         gyroscope;
-                         picture-in-picture" allowfullscreen>
-                </iframe>
-
+                         picture-in-picture"
+                  allowfullscreen
+                ></iframe>
               </Modal>
             </div>
           </Col>

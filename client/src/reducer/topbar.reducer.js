@@ -13,9 +13,8 @@ export const TOPBAR_INITIAL_STATE = {
 
 export const TOPBAR_FEATURE_KEY = "topbar";
 export const topbarAdapter = createEntityAdapter();
-export const initialTopBarState = topbarAdapter.getInitialState(
-  TOPBAR_INITIAL_STATE
-);
+export const initialTopBarState =
+  topbarAdapter.getInitialState(TOPBAR_INITIAL_STATE);
 
 export const topbarSlice = createSlice({
   name: TOPBAR_FEATURE_KEY,
