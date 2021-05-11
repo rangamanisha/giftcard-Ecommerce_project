@@ -20,3 +20,9 @@ export const cartTotalCountService = (cart_items) => {
   const url = `${API_URL}/cart_items/cart_total_count?currency=${currency}`;
   return apiCall(url, "GET");
 };
+
+
+export const getBrandImageById = (id, currency) => {
+  const url = `${API_URL}/brands/${id}/brand_images?currency=${currency}`;
+  return apiCall(url, 'GET');
+};

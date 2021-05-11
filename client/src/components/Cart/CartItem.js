@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtunDelete from "../../assets/Button-Delete.svg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import { getBrandImageById } from '../../services/cart.service'
 
 const CartItem = (props) => {
-  const { item, decrementQuantity, incrementQuantity, removeItem } = props;
+  const { item, decrementQuantity, incrementQuantity, removeItem, topbarState } = props;
 
-  const getImageSrc = () => {};
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const getImageSrc = async () => {
+    if (!imageSrc && item) {
+      const itemCountry = topbarState.countries.find(country => country.country_name === item.country_name);
+      if (itemCountry) {
+        const response = await getBrandImageById(item.brand_id, itemCountry.id);
+        setImageSrc(response.images.medium_rectangle);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getImageSrc();
+  }, []);
 
   return (
     <div className="item-list">
       <Row className="align-items-center">
         <Col md={3}>
           <Image
-            src={item?.images?.color?.medium_rectangle}
+            src={imageSrc}
             rounded
             style={{
               width: "100%",

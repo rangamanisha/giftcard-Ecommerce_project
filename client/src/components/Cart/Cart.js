@@ -18,6 +18,7 @@ import {
 } from "../../actions/cart.actions";
 import CartWidget from "./CartWidget";
 import CartItemContainer from "./CartItemContainer";
+import { getTopBarState } from "../../reducer/topbar.reducer";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function Cart() {
   const cartState = useSelector(getCartItemsState);
   const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
+  const topbarState = useSelector(getTopBarState);
 
   useEffect(() => {
     if (authState.isAuthenticated) {
@@ -162,6 +164,7 @@ function Cart() {
               removeItem={removeItem}
               incrementQuantity={incrementQuantity}
               decrementQuantity={decrementQuantity}
+              topbarState={topbarState}
             />
           </Col>
         </Row>
