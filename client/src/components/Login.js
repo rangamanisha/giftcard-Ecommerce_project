@@ -147,7 +147,7 @@ const Login = () => {
                     />
                   </Form.Group>
                   <Form.Group className="forgot">
-                    <Link className="link-color" to="/auth/forgotpassword">
+                    <Link className="link-color" to={{pathname:"/auth/forgotpassword",state:{"idc":false}}}>
                       Forgot me?
                     </Link>
                   </Form.Group>

@@ -24,7 +24,7 @@ const Idc_Header = () =>{
 
   const clearSession = () => {
      localStorage.removeItem('idc_access_token')
-     localStorage.removeItem('state');
+      localStorage.removeItem('state');
     sessionStorage.clear();
      window.location.reload();
   };
@@ -46,10 +46,6 @@ const Idc_Header = () =>{
         
     }, [state.isIdcAuthenticated]);
 
-    const signout= ()=>{
-        localStorage.clear('idc_access_token');
-        history.push({path:"/idc/signin"});
-    }
     return(
         <>
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
@@ -99,22 +95,7 @@ const Idc_Header = () =>{
       </Dropdown.Menu>
     </Dropdown>
 
-                                {/* <div className="dropdown">
-                                    <button className="btn btn-primary dropdown-toggle btnDesign greenBgBTN" type="button" data-toggle="dropdown">
-                                        <img src={userIcon1} width="18" alt="" />
-                                        <span className="textField">{state.first_name}</span>
-                                        <span className="caret"></span>
-                                    </button>
-                                    <ul className="dropdown-menu">
-                                        <li>
-                                            <a ui-sref="password_change">
-                                                <img src={userIcon2} width="18" alt="" />
-                                                Profile
-                                            </a>
-                                        </li>
 
-                                    </ul>
-                                </div> */}
                             </li>
                         </ul>
                     </div>):''}

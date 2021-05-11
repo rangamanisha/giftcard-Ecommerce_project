@@ -1,6 +1,4 @@
-import React from 'react';
 import swal from 'sweetalert';
-import tick_circle from "../assets/tick_circle.svg";
 import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
 import { IdcSignInAction, IdcTotalCreditnAction, IdcCountriesAction, IdcConvertCurrencyAction, IdcChangePasswordAction, IdcVaritiesAction, IdcProfileAction, IdcCountryCode, IdcSignleOrderAction } from '../actions/idc_action';
 
