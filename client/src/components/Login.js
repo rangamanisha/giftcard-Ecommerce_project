@@ -37,12 +37,13 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().min(2).max(200).email().required(),
+      email: Yup.string().email("Enter a valid email").required("Email is required"),
       password: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
     },
+    validateOnChange: false,
   });
 
   useEffect(() => {
@@ -204,6 +205,7 @@ const Login = () => {
                       clientId={googleId}
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
+
                     ></GoogleLogin>
                   </div>
                   <div className="facebook">
