@@ -22,9 +22,8 @@ export const GIFTCARDS_INIT_STATE = {
 
 export const GIFTCARD_REDUCER = "giftCards";
 export const giftcardsAdaptor = createEntityAdapter();
-export const initialGiftcardState = giftcardsAdaptor.getInitialState(
-  GIFTCARDS_INIT_STATE
-);
+export const initialGiftcardState =
+  giftcardsAdaptor.getInitialState(GIFTCARDS_INIT_STATE);
 
 export const giftcardSlice = createSlice({
   name: GIFTCARD_REDUCER,

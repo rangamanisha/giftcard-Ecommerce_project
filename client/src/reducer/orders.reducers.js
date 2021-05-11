@@ -23,9 +23,8 @@ export const ORDER_INITIAL_STATE = {
 
 export const ORDER__FEATURE_KEY = "order";
 export const OrderAdapter = createEntityAdapter();
-export const intialOrderState = OrderAdapter.getInitialState(
-  ORDER_INITIAL_STATE
-);
+export const intialOrderState =
+  OrderAdapter.getInitialState(ORDER_INITIAL_STATE);
 
 export const orderSlice = createSlice({
   name: ORDER__FEATURE_KEY,

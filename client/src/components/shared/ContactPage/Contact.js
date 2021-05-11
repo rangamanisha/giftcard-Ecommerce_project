@@ -4,10 +4,10 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
 import Header from "../HeaderPage/Header";
-import Mobile from '../../../assets/Mobile.png'
-import email from '../../../assets/email.png'
-import loc from '../../../assets/loc.png'
-import '../../../App.scss'
+import Mobile from "../../../assets/Mobile.png";
+import email from "../../../assets/email.png";
+import loc from "../../../assets/loc.png";
+import "../../../App.scss";
 
 function Contact() {
   useEffect(() => {
@@ -22,9 +22,9 @@ function Contact() {
             <h2 className="my-4 text">Get in Touch</h2>
             <div className="contact-adrs">
               <div className="btn-icons-phone button-icon">
-                <img src={Mobile} alt="mobile" className="contact_icons"/>
+                <img src={Mobile} alt="mobile" className="contact_icons" />
               </div>
-              <div className="c-label " >
+              <div className="c-label ">
                 <label className="lableStyle">phone Number</label>
                 <p className="textContent" /*style={{ marginTop: "-10px"}}*/>
                   +971(0)4 872 8418
@@ -33,21 +33,22 @@ function Contact() {
             </div>
 
             <div className="contact-adrs">
-              <div className="btn-icons-phone button-icon"
-              style={{display:"flex", alignItems:'center'}}
+              <div
+                className="btn-icons-phone button-icon"
+                style={{ display: "flex", alignItems: "center" }}
               >
-                <img src={email} className="contact_icons"/>
+                <img src={email} className="contact_icons" />
               </div>
               <div className="c-label">
-                <label className="lableStyle" >Email</label>
-                <p className="textContent" style={{ font:"Carior"}}>
+                <label className="lableStyle">Email</label>
+                <p className="textContent" style={{ font: "Carior" }}>
                   care@giftiglobal.com
                 </p>
               </div>
             </div>
             <div className="contact-adrs">
               <div className="btn-icons-phone button-icon">
-                <img src={loc} className="contact_icons"/>
+                <img src={loc} className="contact_icons" />
               </div>
               <div className="c-label">
                 <label className="lableStyle">Location</label>
@@ -63,33 +64,48 @@ function Contact() {
               <form className="details">
                 <h1>Contact Us</h1>
                 <div className="form-group ">
-                  <label htmlFor="Name" style={{font:'Roboto-Regular', color:'#77808B'}}>Name</label>
+                  <label
+                    htmlFor="Name"
+                    style={{ font: "Roboto-Regular", color: "#77808B" }}
+                  >
+                    Name
+                  </label>
                   <input
                     type="Name"
                     className="form-control"
                     id="Name"
                     placeholder="Enter your name"
-                    style={{font:'Roboto-Regular', color:'#A2A9B0'}}
+                    style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   />
                 </div>
                 <div className="form-group ">
-                  <label htmlFor="email" style={{font:'Roboto-Regular', color:'#77808B'}}>Email</label>
+                  <label
+                    htmlFor="email"
+                    style={{ font: "Roboto-Regular", color: "#77808B" }}
+                  >
+                    Email
+                  </label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
                     placeholder="Enter your email"
-                    style={{font:'Roboto-Regular', color:'#A2A9B0'}}
+                    style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   />
                 </div>
                 <div className="form-group ">
-                  <label htmlFor="Message" style={{font:'Roboto-Regular', color:'#77808B'}}>Message</label>
+                  <label
+                    htmlFor="Message"
+                    style={{ font: "Roboto-Regular", color: "#77808B" }}
+                  >
+                    Message
+                  </label>
                   <textarea
                     className="form-control"
                     id="Message"
                     rows="3"
                     placeholder="Enter your message"
-                    style={{font:'Roboto-Regular', color:'#A2A9B0'}}
+                    style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   ></textarea>
                 </div>
                 <button

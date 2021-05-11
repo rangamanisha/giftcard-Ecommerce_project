@@ -30,10 +30,8 @@ const GiftiNav = () => {
     ? []
     : sortBy(get(giftunitState, "countries"), ["country_name"]);
 
-  const [
-    isTotalCartCountActionCalled,
-    setIsTotalCartCountActionCalled,
-  ] = useState(false);
+  const [isTotalCartCountActionCalled, setIsTotalCartCountActionCalled] =
+    useState(false);
 
   useEffect(() => {
     dispatch(getCountriesListAction());

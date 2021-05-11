@@ -174,8 +174,7 @@ export const idcSlice = createSlice({
           swal({
             title: "",
             icon: "success",
-            text:
-              "We've successfully received your details. The giftcard will be sent to the user soon.",
+            text: "We've successfully received your details. The giftcard will be sent to the user soon.",
             type: "",
             button: {
               text: "Go Back To Homepage",

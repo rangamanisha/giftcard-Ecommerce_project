@@ -31,9 +31,8 @@ export const BRANDS_INIT_STATE = {
 
 export const BRAND_REDUCER = "brands";
 export const brandsAdaptor = createEntityAdapter();
-export const initialBrandsState = brandsAdaptor.getInitialState(
-  BRANDS_INIT_STATE
-);
+export const initialBrandsState =
+  brandsAdaptor.getInitialState(BRANDS_INIT_STATE);
 
 export const brandsSlice = createSlice({
   name: BRAND_REDUCER,

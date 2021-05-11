@@ -21,9 +21,8 @@ export const CATEGORY_INIT_STATE = {
 
 export const CATEGORY_REDUCER = "category";
 export const categoryAdaptor = createEntityAdapter();
-export const initialCategoryState = categoryAdaptor.getInitialState(
-  CATEGORY_INIT_STATE
-);
+export const initialCategoryState =
+  categoryAdaptor.getInitialState(CATEGORY_INIT_STATE);
 
 export const categorySlice = createSlice({
   name: CATEGORY_REDUCER,
