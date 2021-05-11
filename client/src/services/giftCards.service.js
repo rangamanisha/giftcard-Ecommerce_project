@@ -15,3 +15,8 @@ export const getPaymentCurrencyService = () => {
   const url = `${API_URL}/giftcard_units/get_payment_currencies`;
   return apiCall(url, "GET", null, null, false);
 };
+
+export const getConvertedAmount = (amount, source_currency, dest_currency ) => {
+  const url = `${API_URL}/giftcard_units/get_conversion_amount?amount=${amount}&source_currency=${source_currency}&dest_currency=${dest_currency}`;
+  return apiCall(url, "GET");
+}

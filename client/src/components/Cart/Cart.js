@@ -63,10 +63,72 @@ function Cart() {
         })
       );
     } else {
-      dispatch(cartAction.saveItemsToCart([]));
-      dispatch(cartAction.updateTotalCartItems(0));
+      const lineItems = cartState.lineItems.filter(lineItem => !(lineItem.brand_id === item.brand_id && lineItem.giftcard_value === item.giftcard_value));
+      dispatch(cartAction.saveItemsToCart(lineItems));
+      if (lineItems.length) {
+        const totalCartItems = lineItems.map(lineItem => parseFloat(lineItem.quantity)).reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      } else {
+        dispatch(cartAction.updateTotalCartItems(0));
+      }
+
     }
   };
+
+  const incrementQuantity = (item) => {
+    if (authState.isAuthenticated) {
+      dispatch(
+        addRemoveQuantityAction({
+          ...item,
+          action: "ADD",
+          country: giftunitState.selectedCountry,
+        })
+      );
+    } else {
+      const lineItems = cartState.lineItems.map((lineItem) => {
+        if (
+          lineItem.brand_id === item.brand_id &&
+          lineItem.giftcard_value === item.giftcard_value
+        ) {
+          return Object.assign({}, lineItem, {
+            quantity: parseFloat(lineItem.quantity) + 1,
+          });
+        }
+        return lineItem;
+      });
+      dispatch(cartAction.saveItemsToCart(lineItems));
+    }
+
+  }
+
+  const decrementQuantity = (item) => {
+    if (authState.isAuthenticated) {
+      dispatch(
+        addRemoveQuantityAction({
+          ...item,
+          action: "REMOVE",
+          country: giftunitState.selectedCountry,
+        })
+      );
+    } else {
+      if (item.quantity === 1) {
+        removeItem(item);
+      } else {
+        const lineItems = cartState.lineItems.map((lineItem) => {
+          if (
+            lineItem.brand_id === item.brand_id &&
+            lineItem.giftcard_value === item.giftcard_value
+          ) {
+            return Object.assign({}, lineItem, {
+              quantity: parseFloat(lineItem.quantity) - 1,
+            });
+          }
+          return lineItem;
+        });
+        dispatch(cartAction.saveItemsToCart(lineItems));
+      }
+    }
+  }
 
   return (
     <>
@@ -89,6 +151,8 @@ function Cart() {
               giftCardState={giftunitState}
               history={history}
               removeItem={removeItem}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
             />
           </Col>
         </Row>

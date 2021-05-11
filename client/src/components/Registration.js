@@ -108,7 +108,7 @@ const Signup = () => {
               <Row>
                 <Col>
                   <Form.Group
-                    controlId="formBasicEmail"
+                    controlId="formBasicEmail6"
                     className="icons_login"
                   >
                     <Form.Control

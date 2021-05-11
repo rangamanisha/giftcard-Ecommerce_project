@@ -46,7 +46,7 @@ const GuestForm = () => {
           </div>
 
           <Form.Group
-            controlId="formBasicEmail"
+            controlId="formBasicEmail4"
             className="w-75 mx-auto icons_login"
           >
             <Form.Control

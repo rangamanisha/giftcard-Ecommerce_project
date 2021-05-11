@@ -48,7 +48,7 @@ const Checkout = () => {
       <Col>
         <div className="mt-5 mx-auto custom">
           <Form.Group
-            controlId="formBasicEmail"
+            controlId="formBasicEmail1"
             className="w-100 mx-auto icons_login"
           >
             <Form.Control

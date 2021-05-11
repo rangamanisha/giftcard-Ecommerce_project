@@ -33,11 +33,13 @@ export const cartItemAction = createAsyncThunk(
 export const fetchItemsByCartAction = createAsyncThunk(
   "cart_items/listfetchcart",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const request = {
       currency: payload.currency,
       currency_id: payload.currency_id,
     };
     const response = await fetchItemsByCartService(request);
+    dispatch(cartTotalCountAction(request));
     return response;
   }
 );

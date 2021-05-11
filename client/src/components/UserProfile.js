@@ -152,7 +152,7 @@ const UserProfile = () => {
         ) : null}
 
         <Form.Group
-          controlId="formBasicEmail"
+          controlId="formBasicEmail7"
           className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control

@@ -38,14 +38,14 @@ const CartItem = (props) => {
               <div className="cart-inc-dec-box px-1">
                 <button
                   className="btn btn-link text-decoration-none"
-                  onClick={deleteQuantity}
+                  onClick={() => decrementQuantity(item)}
                 >
                   <span>-</span>
                 </button>
                 <span className="mx-2">{item?.quantity}</span>
                 <button
                   className="btn btn-link text-decoration-none"
-                  onClick={addQuantity}
+                  onClick={(e) => incrementQuantity(item)}
                 >
                   <span>+</span>
                 </button>
