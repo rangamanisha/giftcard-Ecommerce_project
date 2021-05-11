@@ -29,7 +29,6 @@ function Cart() {
 
   useEffect(() => {
     if (authState.isAuthenticated) {
-      console.log("authState ", authState);
       dispatch(
         fetchItemsByCartAction({
           currency: giftunitState?.selectedCountry?.unit_short_name || "AED",

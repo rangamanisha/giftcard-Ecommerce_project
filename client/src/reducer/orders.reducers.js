@@ -58,7 +58,6 @@ export const orderSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.code = true;
-          console.log(response);
           state.orders = response.data.order;
         }
       })

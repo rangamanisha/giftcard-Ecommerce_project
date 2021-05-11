@@ -21,8 +21,6 @@ const UserProfile = () => {
 
   const data = profilestate;
 
-  console.log(data, "0000000000000");
-
   useEffect(() => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
@@ -43,7 +41,6 @@ const UserProfile = () => {
       phone: Yup.string().min(10).max(10).required(),
     }),
     onSubmit: (data) => {
-      console.log(data);
       dispatch(updateUserprofileAction(data));
     },
   });

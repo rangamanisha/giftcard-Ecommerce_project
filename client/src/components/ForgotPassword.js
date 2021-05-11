@@ -25,7 +25,6 @@ const ForgotPassword = () => {
       email: Yup.string().min(2).max(200).email().required(),
     }),
     onSubmit: (data) => {
-      console.log(data);
       dispatch(forgotpasswordAction(data));
     },
   });

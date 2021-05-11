@@ -90,7 +90,6 @@ const Checkout = () => {
               createOrder(e);
             }}
             cardTokenized={(e) => {
-              console.log("cart tokenized triggered");
               processOrder(e);
             }}
             cardTokenizationFailed={(e) => {}}
