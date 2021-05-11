@@ -5,10 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import {
   AllorderAction,
-  ProcessOrderAction,
   OrderDetailsAction,
-  FailedOrderAction,
   createOrderAction,
+  createOrderCheckoutAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -19,6 +18,7 @@ export const ORDER_INITIAL_STATE = {
   order_status: "",
   total: 0,
   error: null,
+  created_order: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -42,15 +42,7 @@ export const orderSlice = createSlice({
           state.data = response.data.orders;
         }
       })
-      .addCase(AllorderAction.rejected, (state) => {
-        // state.code = true;
-        // state.orders = response.data.order;
-      })
-
-      // .addCase(OrderDetailsAction.rejected, (state) => {
-      //   state.code = true;
-      // })
-
+      .addCase(AllorderAction.rejected, (state) => {})
       .addCase(OrderDetailsAction.pending, (state) => {
         state.code = true;
       })
@@ -70,15 +62,26 @@ export const orderSlice = createSlice({
       .addCase(createOrderAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
-          state.orderid = response.data.id;
-          state.order_status = response.data.status;
-          state.total = response.data.total;
+          state.created_order = response.data.order;
         } else {
           state.error = response.errors.join(",");
         }
       })
       .addCase(createOrderAction.rejected, (state, action) => {
         state.error = action.error.message;
+      })
+      .addCase(createOrderCheckoutAction.pending, (state, action) => {
+        state.created_order["redirect_url"] = "";
+      })
+      .addCase(createOrderCheckoutAction.fulfilled, (state, action) => {
+        const { response, code } = action.payload;
+        if (code === 200) {
+          state.created_order["redirect_url"] =
+            response.data.order.redirect_url;
+        }
+      })
+      .addCase(createOrderCheckoutAction.rejected, (state, action) => {
+        state.created_order["redirect_url"] = "";
       });
   },
 });

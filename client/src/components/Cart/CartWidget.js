@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import exclamation from "../../assets/Group4790.svg";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Image from "react-bootstrap/Image";
+import { getConvertedAmountAPI } from "../../services/giftCards.service";
 
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -24,8 +25,14 @@ const CartWidget = (props) => {
   ));
   CustomToggle.displayName = "CustomToggle";
 
-  const { state, authState, rewardState, history, handleChangeCurrency } =
-    props;
+  const {
+    state,
+    authState,
+    rewardState,
+    history,
+    handleChangeCurrency,
+    createCheckout,
+  } = props;
 
   const [useGiftiGlobalPoints, setUseGiftiGlobalPoints] = useState(false);
 
@@ -37,8 +44,13 @@ const CartWidget = (props) => {
       : 0;
   const getConvertedAmount = () => {
     const exchangeRate = state.conversion?.currency_exchange_rate || 0;
-    let total = state.totalCartAmount;
-    if (!authState.isAuthenticated) {
+    let total = 0;
+    if (authState.isAuthenticated) {
+      total = parseFloat(state.totalCartAmount);
+      if (exchangeRate) {
+        total = total * exchangeRate;
+      }
+    } else {
       if (state.lineItems.length) {
         total = state.lineItems
           .map(
@@ -105,6 +117,30 @@ const CartWidget = (props) => {
       totalRewardPoints = 0;
     }
     return parseFloat(totalRewardPoints).toFixed(2);
+  };
+
+  const checkout = async () => {
+    const totalAmount = getTotalConvertedAmount();
+    let convertedAmountAED = totalAmount;
+    if (state.selectedCartCurrency?.unit_name_short !== "AED") {
+      const response = await getConvertedAmountAPI(
+        convertedAmountAED,
+        state.selectedCartCurrency?.unit_name_short,
+        "AED"
+      );
+      convertedAmountAED = response.data.converted_amount;
+    }
+    const checkoutObject = {
+      total_amount: totalAmount,
+      total_amount_aed: convertedAmountAED,
+      currency: state.selectedCartCurrency?.unit_name_short,
+      currency_id: state.selectedCartCurreny?.id,
+    };
+    if (authState.isAuthenticated) {
+      checkoutObject.are_reward_points_used = useGiftiGlobalPoints;
+      checkoutObject.reward_points = getUpdatedRewardPoints();
+    }
+    createCheckout(checkoutObject);
   };
 
   return (
@@ -229,11 +265,7 @@ const CartWidget = (props) => {
             Log In
           </Button>
         )}
-        <Button
-          type="button"
-          variant="persianGreen"
-          onClick={() => history.push("payment")}
-        >
+        <Button type="button" variant="persianGreen" onClick={checkout}>
           {authState.isAuthenticated ? "Checkout" : "Checkout as guest"}
         </Button>
       </div>

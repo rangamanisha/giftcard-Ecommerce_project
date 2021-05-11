@@ -5,6 +5,7 @@ import {
   failedOrderApiCall,
   processOrderApiCall,
   createOrderAPI,
+  createOrderCheckoutAPI,
 } from "../services/orders.service";
 
 export const AllorderAction = createAsyncThunk(
@@ -60,7 +61,10 @@ export const createOrderAction = createAsyncThunk(
   }
 );
 
-export const createOrderCheckout = createAsyncThunk(
+export const createOrderCheckoutAction = createAsyncThunk(
   "order/checkout",
-  async (payload, thunkAPI) => {}
+  async (payload, thunkAPI) => {
+    const response = await createOrderCheckoutAPI(payload);
+    return response;
+  }
 );

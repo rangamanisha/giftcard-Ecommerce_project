@@ -141,6 +141,12 @@ function Cart() {
     }
   };
 
+  const createCheckout = (data) => {
+    console.log("data ", data);
+    dispatch(cartAction.updateCheckout(data));
+    history.push("payment");
+  };
+
   return (
     <>
       <Container fluid>
@@ -153,6 +159,7 @@ function Cart() {
               giftunitState={giftunitState}
               handleChangeCurrency={handleChangeCurrency}
               history={history}
+              createCheckout={createCheckout}
             />
           </Col>
 

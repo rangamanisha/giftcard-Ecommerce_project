@@ -26,6 +26,7 @@ export const CART_ITEMS_INIT_STATE = {
   paymentCurrency: [],
   conversion: null,
   totalCartAmount: 0,
+  checkoutCart: null,
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -38,31 +39,18 @@ export const cartItemsSlice = createSlice({
   name: CART_ITEMS_REDUCER,
   initialState: initialCartItemState,
   reducers: {
-    increaseCount(state) {
-      state.count = state.count + 1;
-    },
-    updateLineItem(state, action) {
-      const { item, index } = action.payload;
-      state.lineItems[index] = item;
-    },
-    decreaseCount(state, action) {
-      state.count = state.count - 1;
-    },
-    setCountZero(state, action) {
-      state.count = 1;
-    },
     saveItemsToCart(state, action) {
       state.lineItems = action.payload;
-    },
-    removeLineItem(state, action) {
-      const line_item = action.payload;
-      remove(state.lineItems, line_item);
     },
     updateSelectedCartCurrency(state, action) {
       state.selectedCartCurrency = action.payload;
     },
     updateTotalCartItems(state, action) {
       state.totalCartItems = action.payload;
+    },
+    updateCheckout(state, action) {
+      console.log("action.payload ", action.payload);
+      state.checkoutCart = action.payload;
     },
   },
   extraReducers: (builder) => {

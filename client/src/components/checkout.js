@@ -9,11 +9,17 @@ import { getprofileListAction } from "../actions/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderState } from "../reducer/orders.reducers";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
+import { getCartItemsState } from "../reducer/cart.reducer";
+import {
+  createOrderAction,
+  createOrderCheckoutAction,
+} from "../actions/orders.action";
 
 const Checkout = () => {
   const profilestate = useSelector(getProfileState);
   const orderState = useSelector(getOrderState);
   const giftCardsState = useSelector(getGiftcardsState);
+  const cartState = useSelector(getCartItemsState);
   const dispatch = useDispatch();
   const data = profilestate;
 
@@ -25,23 +31,39 @@ const Checkout = () => {
     const payload = {
       orders: {
         card_value_aed: null,
-        order_total_aed: "2000.00",
+        order_total_aed: cartState.checkoutCart.total_amount_aed,
         program_id: 1,
-        use_credits: false,
-        current_exchange_rate: 0,
+        use_credits: cartState.checkoutCart.are_reward_points_used,
+        current_exchange_rate: cartState.conversion.current_exchange_rate,
         use_hassad_points: false,
         language_code: "en",
         isbuynow: false,
         isforself: 1,
-        payment_currency:
-          giftCardsState.selectedCurrency.unit_name_short || "AED",
-        currency: giftCardsState.selectedCurrency.id || 1,
+        payment_currency: cartState.checkoutCart.currency || "AED",
+        currency: cartState.checkoutCart.currency_id,
       },
     };
-    dispatch();
+    dispatch(createOrderAction(payload));
   };
 
-  const processOrder = async (event) => {};
+  const processOrder = async (event) => {
+    await createOrder(event);
+    const payload = {
+      payment: {
+        token: event.token,
+        amount: orderState.created_order.payable_amount,
+        payment_currency: cartState.checkoutCart.currency,
+        currency: cartState.checkoutCart.currency,
+        order_id: orderState.created_order.id,
+      },
+    };
+    if (orderState.created_order) {
+      await dispatch(createOrderCheckoutAction(payload));
+      if (orderState.created_order["redirect_url"]) {
+        window.location.href = orderState.created_order["redirect_url"];
+      }
+    }
+  };
 
   return (
     <Row className="mx-auto payment-card">
@@ -86,9 +108,6 @@ const Checkout = () => {
             frameValidationChanged={(e) => {}}
             paymentMethodChanged={(e) => {}}
             cardValidationChanged={(e) => {}}
-            cardSubmitted={(e) => {
-              createOrder(e);
-            }}
             cardTokenized={(e) => {
               processOrder(e);
             }}
@@ -105,7 +124,8 @@ const Checkout = () => {
                 Frames.submitCard();
               }}
             >
-              PAY GBP 25.00
+              PAY {cartState.checkoutCart.currency}{" "}
+              {cartState.checkoutCart.total_amount}
             </button>
           </Frames>
         </div>
