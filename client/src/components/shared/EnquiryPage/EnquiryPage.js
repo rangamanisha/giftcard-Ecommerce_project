@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 // import "./EnquiryPage.scss";
 import { IoIosAdd } from "react-icons/io";
@@ -9,6 +9,9 @@ import { Col, Row } from "react-bootstrap";
 import Header from "../HeaderPage/Header";
 
 function EnquiryPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Header />

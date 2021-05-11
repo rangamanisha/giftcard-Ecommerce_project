@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { Col, Row, Container } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
@@ -39,6 +39,9 @@ const SelectCards = () => {
   const payment = giftunitState.selectedCountry;
   const [rate, setRate] = useState(0);
   const [giftTo, setGiftTo] = useState("myself");
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const topbarState = useSelector(getTopBarState);
 
