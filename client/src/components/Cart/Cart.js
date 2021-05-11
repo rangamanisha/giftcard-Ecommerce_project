@@ -63,15 +63,22 @@ function Cart() {
         })
       );
     } else {
-      const lineItems = cartState.lineItems.filter(lineItem => !(lineItem.brand_id === item.brand_id && lineItem.giftcard_value === item.giftcard_value));
+      const lineItems = cartState.lineItems.filter(
+        (lineItem) =>
+          !(
+            lineItem.brand_id === item.brand_id &&
+            lineItem.giftcard_value === item.giftcard_value
+          )
+      );
       dispatch(cartAction.saveItemsToCart(lineItems));
       if (lineItems.length) {
-        const totalCartItems = lineItems.map(lineItem => parseFloat(lineItem.quantity)).reduce((accumulator, currentValue) => accumulator + currentValue);
+        const totalCartItems = lineItems
+          .map((lineItem) => parseFloat(lineItem.quantity))
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
         dispatch(cartAction.updateTotalCartItems(totalCartItems));
       } else {
         dispatch(cartAction.updateTotalCartItems(0));
       }
-
     }
   };
 
@@ -98,8 +105,7 @@ function Cart() {
       });
       dispatch(cartAction.saveItemsToCart(lineItems));
     }
-
-  }
+  };
 
   const decrementQuantity = (item) => {
     if (authState.isAuthenticated) {
@@ -128,7 +134,7 @@ function Cart() {
         dispatch(cartAction.saveItemsToCart(lineItems));
       }
     }
-  }
+  };
 
   return (
     <>

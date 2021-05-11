@@ -46,8 +46,8 @@ const SelectCards = () => {
   const selectedCountry = giftunitState.selectedCountry;
   const countryId = selectedCountry
     ? topbarState.countries.find(
-      (country) => country.country_name === selectedCountry.country_name
-    )?.id || 0
+        (country) => country.country_name === selectedCountry.country_name
+      )?.id || 0
     : 0;
 
   const handleSelect = (eventKey1) => {
@@ -109,11 +109,20 @@ const SelectCards = () => {
       isforself: giftTo === "myself",
       country_id: giftunitState.selectedCountry?.id,
       name: card.name,
-      country_name: giftunitState.selectedCountry.country_name
+      country_name: giftunitState.selectedCountry.country_name,
     };
-    if (giftunitState.selectedCountry?.unit_name_short && giftunitState.selectedCountry?.unit_name_short !== 'AED') {
-      const response = await getConvertedAmount(selectedDenomination, giftunitState.selectedCountry?.unit_name_short, "AED");
-      addToCartItem.card_value_aed = parseFloat(response.data.converted_amount).toFixed(2);
+    if (
+      giftunitState.selectedCountry?.unit_name_short &&
+      giftunitState.selectedCountry?.unit_name_short !== "AED"
+    ) {
+      const response = await getConvertedAmount(
+        selectedDenomination,
+        giftunitState.selectedCountry?.unit_name_short,
+        "AED"
+      );
+      addToCartItem.card_value_aed = parseFloat(
+        response.data.converted_amount
+      ).toFixed(2);
     }
     if (authState.isAuthenticated) {
       dispatch(updateCartAction(addToCartItem));
@@ -136,7 +145,9 @@ const SelectCards = () => {
               item.giftcard_value === addToCartItem.giftcard_value
             ) {
               return Object.assign({}, item, {
-                quantity: parseFloat(item.quantity) + parseFloat(addToCartItem.quantity),
+                quantity:
+                  parseFloat(item.quantity) +
+                  parseFloat(addToCartItem.quantity),
               });
             }
             return item;
