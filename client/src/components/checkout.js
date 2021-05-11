@@ -52,13 +52,16 @@ const Checkout = () => {
       const payload = {
         payment: {
           token: event.token,
-          amount: orderState.created_order.payable_amount,
+          amount: parseFloat(
+            parseFloat(orderState.created_order.payable_amount) * 100
+          ).toFixed(2),
           payment_currency: cartState.checkoutCart.currency,
           currency: cartState.checkoutCart.currency,
           order_id: orderState.created_order.id,
         },
       };
       await dispatch(createOrderCheckoutAction(payload));
+      console.log("redirect_url ", orderState.created_order["redirect_url"]);
       if (orderState.created_order["redirect_url"]) {
         window.location.href = orderState.created_order["redirect_url"];
       }

@@ -74,10 +74,9 @@ export const orderSlice = createSlice({
         state.created_order["redirect_url"] = "";
       })
       .addCase(createOrderCheckoutAction.fulfilled, (state, action) => {
-        const { response, code } = action.payload;
+        const { data, code } = action.payload;
         if (code === 200) {
-          state.created_order["redirect_url"] =
-            response.data.order.redirect_url;
+          state.created_order["redirect_url"] = data.order.redirect_url;
         }
       })
       .addCase(createOrderCheckoutAction.rejected, (state, action) => {
