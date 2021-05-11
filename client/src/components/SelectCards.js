@@ -13,11 +13,8 @@ import {
 import GiftGiftCard from "./GiftGiftCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrandsState } from "../reducer/brands.reducer";
-import {
-  getGiftcardsState,
-  giftCardsAction,
-} from "../reducer/giftCards.reducer";
-import { get, map, isUndefined } from "lodash";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
+import { get, map } from "lodash";
 import { useHistory } from "react-router-dom";
 import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
@@ -45,13 +42,6 @@ const SelectCards = () => {
   }, []);
 
   const topbarState = useSelector(getTopBarState);
-
-  const selectedCountry = giftunitState.selectedCountry;
-  const countryId = selectedCountry
-    ? topbarState.countries.find(
-        (country) => country.country_name === selectedCountry.country_name
-      )?.id || 0
-    : 0;
 
   const handleSelect = (eventKey1) => {
     seteventkey(eventKey1);
@@ -87,7 +77,7 @@ const SelectCards = () => {
   React.useEffect(() => {
     dispatch(
       termBrandAction({
-        currency: countryId,
+        currency: giftunitState.selectedCountry?.id || 1,
         id: get(card, "id"),
       })
     );
@@ -110,7 +100,7 @@ const SelectCards = () => {
       giftcard_value: selectedDenomination,
       card_value_aed: selectedDenomination,
       isforself: giftTo === "myself",
-      country_id: giftunitState.selectedCountry?.id,
+      country_id: giftunitState.selectedCountry?.country_id,
       name: card.name,
       country_name: giftunitState.selectedCountry.country_name,
     };

@@ -9,7 +9,6 @@ const CartItemContainer = (props) => {
     removeItem,
     incrementQuantity,
     decrementQuantity,
-    topbarState,
   } = props;
 
   return (
@@ -39,7 +38,7 @@ const CartItemContainer = (props) => {
           removeItem={removeItem}
           incrementQuantity={incrementQuantity}
           decrementQuantity={decrementQuantity}
-          topbarState={topbarState}
+          giftCardState={giftCardState}
         />
       ))}
     </div>

@@ -11,19 +11,19 @@ const CartItem = (props) => {
     decrementQuantity,
     incrementQuantity,
     removeItem,
-    topbarState,
+    giftCardState,
   } = props;
 
   const [imageSrc, setImageSrc] = useState(null);
 
   const getImageSrc = async () => {
     if (!imageSrc && item) {
-      const itemCountry = topbarState.countries.find(
-        (country) => country.country_name === item.country_name
+      const itemCountry = giftCardState.countries.find(
+        (country) => country.unit_name_short === item.currency
       );
       if (itemCountry) {
         const response = await getBrandImageById(item.brand_id, itemCountry.id);
-        setImageSrc(response.images.medium_rectangle);
+        setImageSrc(response?.images?.medium_rectangle || null);
       }
     }
   };

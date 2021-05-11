@@ -31,7 +31,7 @@ const Checkout = () => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
 
-  const createOrder = (event) => {
+  const processOrder = async (event) => {
     const payload = {
       orders: {
         card_value_aed: null,
@@ -47,12 +47,7 @@ const Checkout = () => {
         currency: cartState.checkoutCart.currency_id,
       },
     };
-    dispatch(createOrderAction(payload));
-  };
-
-  const processOrder = async (event) => {
-    console.log("event ", event);
-    await createOrder(event);
+    await dispatch(createOrderAction(payload));
     if (orderState.created_order) {
       const payload = {
         payment: {
