@@ -24,14 +24,8 @@ const CartWidget = (props) => {
   ));
   CustomToggle.displayName = "CustomToggle";
 
-  const {
-    state,
-    giftunitState,
-    authState,
-    rewardState,
-    history,
-    handleChangeCurrency,
-  } = props;
+  const { state, authState, rewardState, history, handleChangeCurrency } =
+    props;
 
   const [useGiftiGlobalPoints, setUseGiftiGlobalPoints] = useState(false);
 
@@ -41,8 +35,6 @@ const CartWidget = (props) => {
           (sum, i) => sum + i.selectedDenomination * i.quantity
         )
       : 0;
-  const totalLineAmount = 0;
-
   const getConvertedAmount = () => {
     const exchangeRate = state.conversion?.currency_exchange_rate || 0;
     let total = 0;
@@ -63,16 +55,54 @@ const CartWidget = (props) => {
     return total;
   };
 
+  const getTotalConvertedAmount = (usePoints) => {
+    let total = parseFloat(getConvertedAmount());
+    if (usePoints) {
+      let totalRewardPoints = rewardState?.total_credits || 0;
+      const currencyExchangeRate = state.conversion?.currency_exchange_rate;
+      totalRewardPoints = currencyExchangeRate
+        ? parseFloat(totalRewardPoints * currencyExchangeRate)
+        : parseFloat(totalRewardPoints);
+      if (totalRewardPoints > total) {
+        return 0;
+      } else {
+        return parseFloat(total - totalRewardPoints).toFixed(2);
+      }
+    }
+    return parseFloat(total).toFixed(2);
+  };
+
   const convertedGiftiPoints = () => {
+    const totalAmount = getTotalConvertedAmount();
     const giftiGlobalPoints = rewardState?.total_credits || 0;
-    const selectedCurrency = giftunitState.selectedCurrency;
+    const selectedCurrency = state.selectedCartCurrency;
     const conversionRate = state.conversion?.currency_exchange_rate;
     if (selectedCurrency && selectedCurrency.id && conversionRate) {
       let pointsToCurrency = giftiGlobalPoints * conversionRate;
-      return parseFloat(pointsToCurrency).toFixed(2);
+      if (totalAmount > pointsToCurrency) {
+        return parseFloat(pointsToCurrency).toFixed(2);
+      }
+      return totalAmount;
     } else {
-      return giftiGlobalPoints;
+      if (totalAmount > parseFloat(giftiGlobalPoints)) {
+        return parseFloat(giftiGlobalPoints).toFixed(2);
+      }
+      return totalAmount;
     }
+  };
+
+  const getUpdatedRewardPoints = () => {
+    const totalAmount = parseFloat(getConvertedAmount());
+    let totalRewardPoints = rewardState?.total_credits || 0;
+    const currencyExchangeRate = state.conversion?.currency_exchange_rate;
+    if (totalRewardPoints > totalAmount) {
+      totalRewardPoints = currencyExchangeRate
+        ? totalRewardPoints - totalAmount / currencyExchangeRate
+        : totalRewardPoints - totalAmount;
+    } else {
+      totalRewardPoints = 0;
+    }
+    return parseFloat(totalRewardPoints).toFixed(2);
   };
 
   return (
@@ -135,7 +165,10 @@ const CartWidget = (props) => {
         </span>
         <span>
           <strong>
-            {state.selectedCartCurrency?.unit_name_short} {getConvertedAmount()}
+            {state.selectedCartCurrency?.unit_name_short}{" "}
+            {useGiftiGlobalPoints
+              ? getTotalConvertedAmount(true)
+              : getConvertedAmount()}
           </strong>
         </span>
       </div>
@@ -153,7 +186,7 @@ const CartWidget = (props) => {
               <input
                 type="checkbox"
                 id="giftpoint-checkbox"
-                value="1"
+                disabled={!getConvertedAmount()}
                 name="use giftipoints"
                 onClick={() => {
                   setUseGiftiGlobalPoints(!useGiftiGlobalPoints);
@@ -177,7 +210,9 @@ const CartWidget = (props) => {
             <small>Gifti Global Points</small>
           </span>
           <span className="text-center d-block">
-            {useGiftiGlobalPoints ? 0 : rewardState.total_credits}
+            {useGiftiGlobalPoints
+              ? getUpdatedRewardPoints()
+              : rewardState.total_credits}
           </span>
         </div>
       </div>

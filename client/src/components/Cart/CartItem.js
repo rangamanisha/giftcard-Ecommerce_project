@@ -5,12 +5,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 
 const CartItem = (props) => {
-  const { item, decrementQuantity, incrementQuantity, removeItem, payment } =
-    props;
-
-  const addQuantity = () => {};
-
-  const deleteQuantity = () => {};
+  const { item, decrementQuantity, incrementQuantity, removeItem } = props;
 
   const getImageSrc = () => {};
 

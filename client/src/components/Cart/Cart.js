@@ -32,8 +32,8 @@ function Cart() {
       console.log("authState ", authState);
       dispatch(
         fetchItemsByCartAction({
-          currency: giftunitState?.selectedCurrency?.unit_short_name || "AED",
-          currency_id: giftunitState?.selectedCurrency?.id || 1,
+          currency: giftunitState?.selectedCountry?.unit_short_name || "AED",
+          currency_id: giftunitState?.selectedCountry?.id || 1,
         })
       );
     }
@@ -109,13 +109,17 @@ function Cart() {
 
   const decrementQuantity = (item) => {
     if (authState.isAuthenticated) {
-      dispatch(
-        addRemoveQuantityAction({
-          ...item,
-          action: "REMOVE",
-          country: giftunitState.selectedCountry,
-        })
-      );
+      if (item.quantity === 1) {
+        removeItem(item);
+      } else {
+        dispatch(
+          addRemoveQuantityAction({
+            ...item,
+            action: "REMOVE",
+            country: giftunitState.selectedCountry,
+          })
+        );
+      }
     } else {
       if (item.quantity === 1) {
         removeItem(item);
