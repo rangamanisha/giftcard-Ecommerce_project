@@ -41,8 +41,8 @@ const SelectCards = () => {
   const [rate, setRate] = useState(0);
   const [giftTo, setGiftTo] = useState("myself");
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const topbarState = useSelector(getTopBarState);
 

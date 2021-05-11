@@ -37,18 +37,20 @@ const CartWidget = (props) => {
       : 0;
   const getConvertedAmount = () => {
     const exchangeRate = state.conversion?.currency_exchange_rate || 0;
-    let total = 0;
-    if (state.lineItems.length) {
-      total = state.lineItems
-        .map(
-          (lineItem) =>
-            parseFloat(lineItem.card_value_aed) * parseInt(lineItem.quantity)
-        )
-        .reduce(
-          (accumulatedValue, currentValue) => accumulatedValue + currentValue
-        );
-      if (exchangeRate) {
-        total = total * exchangeRate;
+    let total = state.totalCartAmount;
+    if (!authState.isAuthenticated) {
+      if (state.lineItems.length) {
+        total = state.lineItems
+          .map(
+            (lineItem) =>
+              parseFloat(lineItem.card_value_aed) * parseInt(lineItem.quantity)
+          )
+          .reduce(
+            (accumulatedValue, currentValue) => accumulatedValue + currentValue
+          );
+        if (exchangeRate) {
+          total = total * exchangeRate;
+        }
       }
     }
     total = parseFloat(total).toFixed(2);

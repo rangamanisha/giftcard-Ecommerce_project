@@ -3,22 +3,30 @@ import ButtunDelete from "../../assets/Button-Delete.svg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import { getBrandImageById } from '../../services/cart.service'
+import { getBrandImageById } from "../../services/cart.service";
 
 const CartItem = (props) => {
-  const { item, decrementQuantity, incrementQuantity, removeItem, topbarState } = props;
+  const {
+    item,
+    decrementQuantity,
+    incrementQuantity,
+    removeItem,
+    topbarState,
+  } = props;
 
   const [imageSrc, setImageSrc] = useState(null);
 
   const getImageSrc = async () => {
     if (!imageSrc && item) {
-      const itemCountry = topbarState.countries.find(country => country.country_name === item.country_name);
+      const itemCountry = topbarState.countries.find(
+        (country) => country.country_name === item.country_name
+      );
       if (itemCountry) {
         const response = await getBrandImageById(item.brand_id, itemCountry.id);
         setImageSrc(response.images.medium_rectangle);
       }
     }
-  }
+  };
 
   useEffect(() => {
     getImageSrc();
@@ -62,7 +70,7 @@ const CartItem = (props) => {
               </div>
               <span className="count-name">{item?.country_name}</span>
               <span className="count-symbol">
-                {item?.currency} {item?.giftcard_value * item?.quantity || 0}
+                {item?.currency} {item?.giftcard_value || 0}
               </span>
               <Image
                 src={ButtunDelete}

@@ -21,8 +21,7 @@ export const cartTotalCountService = (cart_items) => {
   return apiCall(url, "GET");
 };
 
-
 export const getBrandImageById = (id, currency) => {
   const url = `${API_URL}/brands/${id}/brand_images?currency=${currency}`;
-  return apiCall(url, 'GET');
+  return apiCall(url, "GET");
 };

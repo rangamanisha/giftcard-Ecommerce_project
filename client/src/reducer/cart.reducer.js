@@ -25,6 +25,7 @@ export const CART_ITEMS_INIT_STATE = {
   selectedCartCurrency: null,
   paymentCurrency: [],
   conversion: null,
+  totalCartAmount: 0,
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -89,6 +90,9 @@ export const cartItemsSlice = createSlice({
         const { data, code } = response;
         if (code === 200) {
           state.lineItems = data.carts;
+          state.totalCartAmount = parseFloat(data.total_price_in_aed).toFixed(
+            2
+          );
         } else {
           state.lineItems = [];
         }
