@@ -1,9 +1,24 @@
-import swal from 'sweetalert';
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
-import { IdcSignInAction, IdcTotalCreditnAction, IdcCountriesAction, IdcConvertCurrencyAction, IdcChangePasswordAction, IdcVaritiesAction, IdcProfileAction, IdcCountryCode, IdcSignleOrderAction } from '../actions/idc_action';
+import React from "react";
+import swal from "sweetalert";
+import tick_circle from "../assets/tick_circle.svg";
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import {
+  IdcSignInAction,
+  IdcTotalCreditnAction,
+  IdcCountriesAction,
+  IdcConvertCurrencyAction,
+  IdcChangePasswordAction,
+  IdcVaritiesAction,
+  IdcProfileAction,
+  IdcCountryCode,
+  IdcSignleOrderAction,
+} from "../actions/idc_action";
 
 const IDC_INITIAL_STATE = {
-
   user: null,
   state: null,
   message: null,
@@ -25,9 +40,8 @@ const IDC_INITIAL_STATE = {
   signupSuccess: false,
   reset: false,
   country_code: 71,
-  order_response: []
-
-}
+  order_response: [],
+};
 
 export const IDC_FEATURE_KEY = "idc_signin";
 export const idcAdapter = createEntityAdapter();
@@ -52,7 +66,10 @@ export const idcSlice = createSlice({
           state.isIdcAuthenticated = true;
           state.message = response.message;
           state.first_name = response.data.user.first_name;
-          localStorage.setItem("idc_access_token", response.data.user.access_token);
+          localStorage.setItem(
+            "idc_access_token",
+            response.data.user.access_token
+          );
         }
         if (response.code === 400) {
           state.user = null;
@@ -81,10 +98,8 @@ export const idcSlice = createSlice({
       })
       .addCase(IdcCountriesAction.rejected, (state, action) => {
         state.countries = [];
-        state.errros = [action.error.message || '']
-
+        state.errros = [action.error.message || ""];
       })
-
 
       .addCase(IdcTotalCreditnAction.pending, (state, action) => {
         state.idcCredits = 0.0;
@@ -98,7 +113,6 @@ export const idcSlice = createSlice({
           state.idcCredits = response.data.credits;
           // state.errors = null;
         }
-
       })
       .addCase(IdcTotalCreditnAction.rejected, (state, action) => {
         state.idcCredits = null;
@@ -117,12 +131,10 @@ export const idcSlice = createSlice({
         state.errors = null;
       })
       .addCase(IdcVaritiesAction.rejected, (state, action) => {
-
         state.idcCredits = null;
-        state.errros = [action.error.message || '']
+        state.errros = [action.error.message || ""];
       })
       .addCase(IdcProfileAction.pending, (state, action) => {
-
         state.errors = null;
       })
       .addCase(IdcProfileAction.fulfilled, (state, action) => {
@@ -136,11 +148,9 @@ export const idcSlice = createSlice({
         state.errors = null;
       })
       .addCase(IdcProfileAction.rejected, (state, action) => {
-
-        state.errros = [action.error.message || '']
+        state.errros = [action.error.message || ""];
       })
       .addCase(IdcCountryCode.pending, (state, action) => {
-
         state.errors = null;
       })
       .addCase(IdcCountryCode.fulfilled, (state, action) => {
@@ -150,7 +160,7 @@ export const idcSlice = createSlice({
         }
       })
       .addCase(IdcCountryCode.rejected, (state, action) => {
-        state.errros = [action.error.message || '']
+        state.errros = [action.error.message || ""];
       })
 
       .addCase(IdcSignleOrderAction.pending, (state, action) => {
@@ -162,10 +172,10 @@ export const idcSlice = createSlice({
         if (response.code === 200) {
           state.order_response = response;
           swal({
-            title: '',
+            title: "",
             icon: "success",
             text: "We've successfully received your details. The giftcard will be sent to the user soon.",
-            type: '',
+            type: "",
             button: {
               text: "Go Back To Homepage",
             },
@@ -173,15 +183,13 @@ export const idcSlice = createSlice({
             showConfirmButton: true,
             showCancelButton: false,
             confirmButtonColor: "#00AF9A",
-
-          }).then(
-            function () { window.location.reload() });
+          }).then(function () {
+            window.location.reload();
+          });
           // localStorage.setItem("first_name", response.data.user.first_name);
-        }
-        else if (response.code === 400) {
+        } else if (response.code === 400) {
           state.errors = [response.message];
         } else if (response.code === 401) {
-        
           state.errors = [response.message || response.detail || ""];
         }
       })
@@ -189,7 +197,6 @@ export const idcSlice = createSlice({
         state.isIdcAuthenticated = false;
         state.errors = [action.error.message || ""];
       })
-
 
       .addCase(IdcConvertCurrencyAction.pending, (state, action) => {
         state.errors = null;
@@ -214,9 +221,8 @@ export const idcSlice = createSlice({
       .addCase(IdcConvertCurrencyAction.rejected, (state, action) => {
         state.points = null;
         // state.isIdcAuthenticated = false;
-        state.errros = [action.error.message || '']
+        state.errros = [action.error.message || ""];
       })
-
 
       .addCase(IdcChangePasswordAction.pending, (state, action) => {
         state.errors = null;
@@ -227,15 +233,14 @@ export const idcSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           swal({
-            title: '',
+            title: "",
             icon: "success",
             text: "Password updated successfully",
-            type: '',
+            type: "",
             allowEscapeKey: false,
             showConfirmButton: true,
             showCancelButton: false,
             confirmButtonColor: "#00AF9A",
-
           });
           // localStorage.setItem("first_name", response.data.user.first_name);
         }
@@ -250,10 +255,8 @@ export const idcSlice = createSlice({
       })
       .addCase(IdcChangePasswordAction.rejected, (state, action) => {
         // state.isIdcAuthenticated = false;
-        state.errros = [action.error.message || '']
-      })
-
-
+        state.errros = [action.error.message || ""];
+      });
   },
 });
 

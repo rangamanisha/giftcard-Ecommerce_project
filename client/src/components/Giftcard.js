@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { get } from "lodash";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { giftCardsAction } from "../reducer/giftCards.reducer";
 
 const Giftcard = ({ brand }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const history = useHistory();
   const dispatch = useDispatch();
   const handleClick = () => {

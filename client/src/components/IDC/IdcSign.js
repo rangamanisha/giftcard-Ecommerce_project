@@ -1,6 +1,6 @@
-import React , { useState, useEffect } from 'react';
-import './Idc.scss';
-import IDC_LOGO_white_icon_1 from '../../assets/IDC_LOGO_white_icon_1.svg';
+import React, { useState, useEffect } from "react";
+import "./Idc.scss";
+import IDC_LOGO_white_icon_1 from "../../assets/IDC_LOGO_white_icon_1.svg";
 import { Link } from "react-router-dom";
 import Slider from '../../assets/Slider.png';
 import Alert from "react-bootstrap/Alert";
@@ -60,24 +60,24 @@ const Idc_Signin = () => {
 }, [state1.signupSuccess, state1.status , state.isIdcAuthenticated]);
 
 
-    const formik = useFormik({
-        initialValues: {
-          email: "",
-          password: "",
-        },
-        validationSchema: Yup.object({
-          email: Yup.string().min(2).max(200).email().required(),
-          password: Yup.string().min(2).max(200).required(),
-        }),
-        onSubmit: (data) => {
-          dispatch(IdcSignInAction(data));
-        },
-      });
-      useEffect(() => {
-        if (state.isIdcAuthenticated) {
-          history.push({ pathname: "/idc/order" });
-        }
-    }, [state.isIdcAuthenticated]);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().min(2).max(200).email().required(),
+      password: Yup.string().min(2).max(200).required(),
+    }),
+    onSubmit: (data) => {
+      dispatch(IdcSignInAction(data));
+    },
+  });
+  useEffect(() => {
+    if (state.isIdcAuthenticated) {
+      history.push({ pathname: "/idc/order" });
+    }
+  }, [state.isIdcAuthenticated]);
 
   return (
     <>
@@ -141,38 +141,49 @@ const Idc_Signin = () => {
                       {state.errors.join("\n")}
                     </p>
                   ) : null}
-                            <div className="btn-layout1 text-center">
-                                <button className="btn" type="submit"
-                                    ng-disabled="idc_order.$invalid">Log in</button>
-                            </div>
-                        </form>
-                        <div className="borderSpaceWhite">
-                            <span className="blank"></span>
-                        </div>
-                        <p className="text-center">
-                            For any assistance please contact <a href="mailto:care@giftiglobal.com" target="_blank">care@giftiglobal.com</a>
-                        </p>
-                        <ul className="social-Layout1">
-                            <li>
-                                <a href="https://www.facebook.com/giftiglobal/"><i className="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/giftiglobal/"><i className="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/giftiglobal"><i className="fa fa-twitter"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+                  <div className="btn-layout1 text-center">
+                    <button
+                      className="btn"
+                      type="submit"
+                      ng-disabled="idc_order.$invalid"
+                    >
+                      Log in
+                    </button>
+                  </div>
+                </form>
+                <div className="borderSpaceWhite">
+                  <span className="blank"></span>
                 </div>
-                <div className="bottomFooterBar">
-
-                </div>
-
-
-      </div></div>
+                <p className="text-center">
+                  For any assistance please contact{" "}
+                  <a href="mailto:care@giftiglobal.com" target="_blank">
+                    care@giftiglobal.com
+                  </a>
+                </p>
+                <ul className="social-Layout1">
+                  <li>
+                    <a href="https://www.facebook.com/giftiglobal/">
+                      <i className="fa fa-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/giftiglobal/">
+                      <i className="fa fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/giftiglobal">
+                      <i className="fa fa-twitter"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="bottomFooterBar"></div>
           </div>
         </div>
+   </div>
+   </div>     
 </>
   );
 };

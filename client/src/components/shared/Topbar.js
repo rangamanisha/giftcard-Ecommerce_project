@@ -133,7 +133,7 @@ const Topbar = (props) => {
                 onClick={() => history.push("/cart")}
               />
               {cartState.totalCartItems > 0 ? (
-                <span class="badge badge-danger" id="lblCartCount">
+                <span className="badge badge-danger" id="lblCartCount">
                   {" "}
                   {cartState.totalCartItems}
                 </span>

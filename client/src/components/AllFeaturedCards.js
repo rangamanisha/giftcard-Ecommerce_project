@@ -12,11 +12,11 @@ import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import { Link } from "react-router-dom";
 import Giftcard from "./Giftcard";
 import Carousel from "react-elastic-carousel";
+
 const AllFeaturedCards = () => {
   const dispatch = useDispatch();
   const state = useSelector(getBrandsState);
   const giftunitState = useSelector(getGiftcardsState);
-  const fetaured_brands = get(state, "data");
   const brandsWithfeatutre = get(state, "featured_brands");
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -25,14 +25,15 @@ const AllFeaturedCards = () => {
     { width: 1200, itemsToShow: 4 },
   ];
   React.useEffect(() => {
-    console.log("hello");
-    dispatch(
-      featureBrandsAction({
-        currency: giftunitState.giftunit_id,
-        program_id: 1,
-      })
-    );
-  }, [giftunitState.giftunit_id]);
+    if (giftunitState.selectedCountry?.id) {
+      dispatch(
+        featureBrandsAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+        })
+      );
+    }
+  }, [giftunitState.selectedCountry?.id, dispatch]);
   const nowCountry = isEmpty(get(giftunitState, "selectedCountry.country_name"))
     ? get(giftunitState, "countries[0].country_name")
     : get(giftunitState, "selectedCountry.country_name");

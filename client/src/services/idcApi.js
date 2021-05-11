@@ -1,9 +1,15 @@
 export const API_URL = process.env.REACT_APP_API_URL;
 
-export const apiCall1 = async (url, method, data, headers, isAuthenticatedReq = true) => {
-  const idcAccessToken = localStorage.getItem('idc_access_token');
+export const apiCall1 = async (
+  url,
+  method,
+  data,
+  headers,
+  isAuthenticatedReq = true
+) => {
+  const idcAccessToken = localStorage.getItem("idc_access_token");
 
- if (isAuthenticatedReq && !idcAccessToken) {
+  if (isAuthenticatedReq && !idcAccessToken) {
     localStorage.removeItem("idc_access_token");
     sessionStorage.clear();
   }
@@ -35,7 +41,7 @@ export const apiCall1 = async (url, method, data, headers, isAuthenticatedReq = 
   if (result.status === 401) {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = '/idc/signin';
+    window.location.href = "/idc/signin";
   }
 
   if (!result.ok) {

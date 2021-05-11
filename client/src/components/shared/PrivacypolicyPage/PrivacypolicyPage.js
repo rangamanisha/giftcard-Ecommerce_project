@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import "./PrivacypolicyPage.css";
 // import "bootstrap/dist/css/bootstrap.css";
 
 import Header from "../HeaderPage/Header";
 
 function PrivacypolicyPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="container">

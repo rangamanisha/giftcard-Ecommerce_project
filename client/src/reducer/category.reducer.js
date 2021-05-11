@@ -21,9 +21,8 @@ export const CATEGORY_INIT_STATE = {
 
 export const CATEGORY_REDUCER = "category";
 export const categoryAdaptor = createEntityAdapter();
-export const initialCategoryState = categoryAdaptor.getInitialState(
-  CATEGORY_INIT_STATE
-);
+export const initialCategoryState =
+  categoryAdaptor.getInitialState(CATEGORY_INIT_STATE);
 
 export const categorySlice = createSlice({
   name: CATEGORY_REDUCER,
@@ -38,7 +37,7 @@ export const categorySlice = createSlice({
       .addCase(categoryAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.data = get(data, "categories");
         }
       })
@@ -52,7 +51,7 @@ export const categorySlice = createSlice({
       .addCase(giftcardUnitAction.fulfilled, (state, action) => {
         const response = action.payload;
         const { data, code } = response;
-        if (200 == code) {
+        if (code === 200) {
           state.giftcardunits = get(data, "giftcard_units");
         }
       })
