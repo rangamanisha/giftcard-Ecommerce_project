@@ -19,6 +19,8 @@ export const ORDER_INITIAL_STATE = {
   total: 0,
   error: null,
   created_order: null,
+  loading: false,
+  redirect_url: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -29,7 +31,13 @@ export const intialOrderState =
 export const orderSlice = createSlice({
   name: ORDER__FEATURE_KEY,
   initialState: ORDER_INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.loading = false;
+      state.created_order = null;
+      state.redirect_url = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(AllorderAction.pending, (state) => {
@@ -58,9 +66,12 @@ export const orderSlice = createSlice({
       })
       .addCase(createOrderAction.pending, (state) => {
         state.orderid = null;
+        state.created_order = null;
+        state.loading = true;
       })
       .addCase(createOrderAction.fulfilled, (state, action) => {
         const response = action.payload;
+        state.loading = false;
         if (response.code === 200) {
           state.created_order = response.data.order;
         } else {
@@ -68,19 +79,24 @@ export const orderSlice = createSlice({
         }
       })
       .addCase(createOrderAction.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action?.error?.message || "Order creation failed";
+        state.loading = false;
+        state.created_order = null;
       })
       .addCase(createOrderCheckoutAction.pending, (state, action) => {
-        state.created_order["redirect_url"] = "";
+        state.redirect_url = null;
+        state.loading = true;
       })
       .addCase(createOrderCheckoutAction.fulfilled, (state, action) => {
         const { data, code } = action.payload;
+        state.loading = false;
         if (code === 200) {
-          state.created_order["redirect_url"] = data.order.redirect_url;
+          state.redirect_url = data.order.redirect_url;
         }
       })
       .addCase(createOrderCheckoutAction.rejected, (state, action) => {
-        state.created_order["redirect_url"] = "";
+        state.redirect_url = null;
+        state.loading = false;
       });
   },
 });

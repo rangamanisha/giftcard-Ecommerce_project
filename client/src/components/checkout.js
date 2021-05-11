@@ -2,24 +2,28 @@ import React, { useEffect } from "react";
 import { Frames, CardNumber, ExpiryDate, Cvv } from "frames-react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import "./Frame.scss";
 import Form from "react-bootstrap/Form";
 import { getProfileState } from "../reducer/profile.reducer";
 import { getprofileListAction } from "../actions/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderState } from "../reducer/orders.reducers";
+import { getOrderState, orderActions } from "../reducer/orders.reducers";
 import { getCartItemsState } from "../reducer/cart.reducer";
 import {
   createOrderAction,
   createOrderCheckoutAction,
 } from "../actions/orders.action";
+import Loader from "./shared/Loader";
+import { cartTotalCountAction } from "../actions/cart.actions";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
 
 const Checkout = () => {
   const profilestate = useSelector(getProfileState);
   const orderState = useSelector(getOrderState);
   const cartState = useSelector(getCartItemsState);
   const dispatch = useDispatch();
-  const data = profilestate;
+  const giftunitState = useSelector(getGiftcardsState);
   const publicKey =
     cartState.checkoutCart.currency !== "SAR"
       ? `${process.env.REACT_APP_FRAMES_PUBLIC_KEY}`
@@ -29,11 +33,31 @@ const Checkout = () => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
 
-  const processOrder = async (event) => {
+  useEffect(() => {
+    if (orderState?.redirect_url) {
+      const url = orderState?.redirect_url;
+      dispatch(orderActions.clearState());
+      dispatch(
+        cartTotalCountAction({
+          currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+        })
+      );
+      setTimeout(() => {
+        window.location.href = url;
+      }, 100);
+    }
+  }, [orderState?.redirect_url, dispatch]);
+
+  useEffect(() => {
+    if (orderState.created_order) {
+    }
+  }, [orderState.created_order]);
+
+  const processOrder = (event) => {
     const payload = {
       orders: {
         card_value_aed: null,
-        order_total_aed: cartState.checkoutCart.total_amount_aed,
+        order_total_aed: cartState.checkoutCart.total_amount,
         program_id: 1,
         use_credits: cartState.checkoutCart.are_reward_points_used,
         current_exchange_rate: cartState.conversion.currency_exchange_rate,
@@ -45,29 +69,10 @@ const Checkout = () => {
         currency: cartState.checkoutCart.currency_id,
       },
     };
-    await dispatch(createOrderAction(payload));
-    if (orderState.created_order) {
-      const payload = {
-        payment: {
-          token: event.token,
-          amount: parseFloat(
-            parseFloat(orderState.created_order.payable_amount) * 100
-          ).toFixed(2),
-          payment_currency: cartState.checkoutCart.currency,
-          currency: cartState.checkoutCart.currency,
-          order_id: orderState.created_order.id,
-        },
-      };
-      await dispatch(createOrderCheckoutAction(payload));
-      console.log("redirect_url ", orderState.created_order["redirect_url"]);
-      if (orderState.created_order["redirect_url"]) {
-        window.location.href = orderState.created_order["redirect_url"];
-      }
-    }
+    dispatch(createOrderAction({ data: payload, event }));
   };
 
   const getFramesWidget = () => {
-    console.log("publicKey ", publicKey);
     if (publicKey) {
       return (
         <Frames
@@ -103,15 +108,17 @@ const Checkout = () => {
             <ExpiryDate />
             <Cvv />
           </div>
-          <button
+          <Button
             id="pay-button"
             onClick={() => {
               Frames.submitCard();
             }}
+            disabled={orderState.loading}
           >
+            {orderState.loading ? <Loader /> : null}
             PAY {cartState.checkoutCart.currency}{" "}
             {cartState.checkoutCart.total_amount}
-          </button>
+          </Button>
         </Frames>
       );
     }
@@ -130,14 +137,13 @@ const Checkout = () => {
               size="md"
               type="text"
               placeholder="Name on the card"
-              value={data.first_name}
+              value={profilestate?.profile?.first_name || ""}
               onChange=""
               className="cc-card card-number field"
               name="first_name"
               readOnly
             />
           </Form.Group>
-
           {getFramesWidget()}
         </div>
       </Col>

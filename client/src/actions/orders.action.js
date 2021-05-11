@@ -56,7 +56,23 @@ export const FailedOrderAction = createAsyncThunk(
 export const createOrderAction = createAsyncThunk(
   "order/create",
   async (payload, thunkAPI) => {
-    const response = await createOrderAPI(payload);
+    const { data, event } = payload;
+    const { dispatch } = thunkAPI;
+    const response = await createOrderAPI(data);
+    if (response?.data?.order) {
+      const payload = {
+        payment: {
+          token: event.token,
+          amount: parseFloat(
+            parseFloat(response?.data?.order?.payable_amount) * 100
+          ).toFixed(2),
+          payment_currency: data.currency,
+          currency: data.currency,
+          order_id: response?.data?.order?.id,
+        },
+      };
+      dispatch(createOrderCheckoutAction(payload));
+    }
     return response;
   }
 );
