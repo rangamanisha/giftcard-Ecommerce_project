@@ -106,11 +106,12 @@ const Login = () => {
                     onChange={formik.handleChange}
                     className="icons_fields"
                     name="email"
+                    isInvalid={formik.touched.email && formik.errors.email}
                   />
                   <img src={Usericon} alt="Icon" className="icon_img" />
                 </Form.Group>
 
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <p className="validation-messages">{formik.errors.email}</p>
                 ) : null}
 
@@ -126,11 +127,14 @@ const Login = () => {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     name="password"
+                    isInvalid={
+                      formik.touched.password && formik.errors.password
+                    }
                   />
                   <img src={Passwordicon} alt="Icon" className="icon_img" />
                 </Form.Group>
 
-                {formik.errors.password ? (
+                {formik.touched.password && formik.errors.password ? (
                   <p className="validation-messages">
                     {formik.errors.password}
                   </p>

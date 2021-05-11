@@ -8,7 +8,6 @@ import { getProfileState } from "../reducer/profile.reducer";
 import { getprofileListAction } from "../actions/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderState } from "../reducer/orders.reducers";
-import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import { getCartItemsState } from "../reducer/cart.reducer";
 import {
   createOrderAction,
@@ -18,7 +17,6 @@ import {
 const Checkout = () => {
   const profilestate = useSelector(getProfileState);
   const orderState = useSelector(getOrderState);
-  const giftCardsState = useSelector(getGiftcardsState);
   const cartState = useSelector(getCartItemsState);
   const dispatch = useDispatch();
   const data = profilestate;
