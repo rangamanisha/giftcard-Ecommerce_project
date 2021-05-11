@@ -11,7 +11,7 @@ import Image from "react-bootstrap/Image";
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
     <a
-      href=""
+      href="#"
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -43,7 +43,25 @@ const CartWidget = (props) => {
       : 0;
   const totalLineAmount = 0;
 
-  const getConvertedAmount = () => {};
+  const getConvertedAmount = () => {
+    const exchangeRate = state.conversion?.currency_exchange_rate || 0;
+    let total = 0;
+    if (state.lineItems.length) {
+      total = state.lineItems
+        .map(
+          (lineItem) =>
+            parseFloat(lineItem.card_value_aed) * parseInt(lineItem.quantity)
+        )
+        .reduce(
+          (accumulatedValue, currentValue) => accumulatedValue + currentValue
+        );
+      if (exchangeRate) {
+        total = total * exchangeRate;
+      }
+    }
+    total = parseFloat(total).toFixed(2);
+    return total;
+  };
 
   const convertedGiftiPoints = () => {
     const giftiGlobalPoints = rewardState?.total_credits || 0;
@@ -117,8 +135,7 @@ const CartWidget = (props) => {
         </span>
         <span>
           <strong>
-            {state.selectedCartCurrency?.unit_name_short}{" "}
-            {lineValue ? totalLineAmount() : 0}
+            {state.selectedCartCurrency?.unit_name_short} {getConvertedAmount()}
           </strong>
         </span>
       </div>

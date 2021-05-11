@@ -793,11 +793,11 @@ border-radius: 10px;
   min-height: 169px;
 }
 
-.active {
-  background-color: map-get($theme-colors, info);
-  color: #fff !important;
-  min-height: max-content;
-}
+// .active {
+//   background-color: map-get($theme-colors, info);
+//   color: #fff !important;
+//   min-height: max-content;
+// }
 
 button.rec-arrow{
   position: absolute;

@@ -1,22 +1,24 @@
 export const API_URL = process.env.REACT_APP_API_URL;
 
-export const apiCall = async (
+export const apiCall1 = async (
   url,
   method,
   data,
   headers,
   isAuthenticatedReq = true
 ) => {
-  const accessToken = localStorage.getItem("access_token");
-  if (isAuthenticatedReq && !accessToken) {
-    localStorage.clear();
+  const idcAccessToken = localStorage.getItem("idc_access_token");
+
+  if (isAuthenticatedReq && !idcAccessToken) {
+    localStorage.removeItem("idc_access_token");
     sessionStorage.clear();
-    // window.location.href = "/";
+    // window.location.reload();
   }
+
   const requestHeaders = isAuthenticatedReq
     ? new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${idcAccessToken}`,
         ...headers,
       })
     : new Headers({ "Content-Type": "application/json", ...headers });
@@ -33,10 +35,14 @@ export const apiCall = async (
     throw new Error("Not Found");
   }
 
-  if (result.status === 403 || result.status === 401) {
+  if (result.status === 403) {
+    throw new Error("Unauthorized");
+  }
+
+  if (result.status === 401) {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = "/";
+    window.location.href = "/idc/signin";
   }
 
   if (!result.ok) {

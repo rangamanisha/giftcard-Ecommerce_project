@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Idc.scss";
 import IDC_LOGO_white_icon_1 from "../../assets/IDC_LOGO_white_icon_1.svg";
+import { Link } from "react-router-dom";
 import Slider from "../../assets/Slider.png";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +31,10 @@ const Idc_Signin = () => {
     },
   });
   useEffect(() => {
-    if (state && state.isIdcAuthenticated) {
+    if (state.isIdcAuthenticated) {
       history.push({ pathname: "/idc/order" });
     }
-  }, []);
+  }, [state.isIdcAuthenticated]);
 
   return (
     <div className="signInLayout1">
@@ -54,7 +55,6 @@ const Idc_Signin = () => {
                   name="idc_order"
                   role="form"
                   onSubmit={formik.handleSubmit}
-                  novalidate
                 >
                   <div className="form-group">
                     <label className="customL">
@@ -62,13 +62,12 @@ const Idc_Signin = () => {
                     </label>
                     <input
                       type="email"
-                      placeholder="{{ 'Email address' | translate }}"
+                      placeholder="Email address"
                       className="form-control"
                       autocomplete="off"
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       name="email"
-                      ng-required="true"
                     />
                     {formik.errors.email ? (
                       <p className="validation-messages">
@@ -79,18 +78,18 @@ const Idc_Signin = () => {
                   <div className="form-group">
                     <label className="customL">
                       <span>PASSWORD</span>
-                      <a
-                        ng-click="dialogForgotPassword1( )"
+                      <Link
+                        className="link-color"
                         className="forgotURL"
+                        to="/auth/forgotpassword"
                       >
                         Forgot Password
-                      </a>
+                      </Link>
                     </label>
                     <input
                       type="password"
                       ng-model="password"
                       name="password"
-                      required
                       autocomplete="off"
                       value={formik.values.password}
                       onChange={formik.handleChange}
@@ -98,6 +97,11 @@ const Idc_Signin = () => {
                       className="form-control"
                     />
                   </div>
+                  {state.errors && state.errors.length ? (
+                    <p className="validation-messages">
+                      {state.errors.join("\n")}
+                    </p>
+                  ) : null}
                   <div className="btn-layout1 text-center">
                     <button
                       className="btn"

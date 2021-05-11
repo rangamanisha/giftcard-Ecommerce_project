@@ -17,7 +17,6 @@ export const AllorderAction = createAsyncThunk(
       offset: payload.offset,
     };
     const response = await allOrderApiCall(request);
-    console.log(response);
     return response;
   }
 );
@@ -28,7 +27,6 @@ export const ProcessOrderAction = createAsyncThunk(
       order_id: payload.order_id,
     };
     const response = await processOrderApiCall(request);
-    console.log(response);
     return response;
   }
 );
@@ -40,7 +38,6 @@ export const OrderDetailsAction = createAsyncThunk(
       image_size: payload.image_size,
     };
     const response = await orderDetailsApiCall(request);
-    console.log(response);
     return response;
   }
 );
@@ -51,7 +48,6 @@ export const FailedOrderAction = createAsyncThunk(
       order_id: payload.order_id,
     };
     const response = await failedOrderApiCall(request);
-    console.log(response);
     return response;
   }
 );

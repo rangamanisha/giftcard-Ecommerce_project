@@ -44,8 +44,13 @@ export const orderSlice = createSlice({
         }
       })
       .addCase(AllorderAction.rejected, (state) => {
-        state.code = true;
+        // state.code = true;
+        // state.orders = response.data.order;
       })
+
+      // .addCase(OrderDetailsAction.rejected, (state) => {
+      //   state.code = true;
+      // })
 
       .addCase(OrderDetailsAction.pending, (state) => {
         state.code = true;
