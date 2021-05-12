@@ -35,16 +35,13 @@ const Checkout = () => {
 
   useEffect(() => {
     if (orderState?.redirect_url) {
-      const url = orderState?.redirect_url;
-      dispatch(orderActions.clearState());
-      dispatch(
-        cartTotalCountAction({
-          currency: giftunitState.selectedCountry?.unit_name_short || "AED",
-        })
-      );
-      setTimeout(() => {
-        window.location.href = url;
-      }, 100);
+      // dispatch(orderActions.clearState());
+      // dispatch(
+      //   cartTotalCountAction({
+      //     currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+      //   })
+      // );
+      window.location.href = orderState?.redirect_url;
     }
   }, [orderState?.redirect_url, dispatch]);
 

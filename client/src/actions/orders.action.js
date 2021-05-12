@@ -6,6 +6,7 @@ import {
   processOrderApiCall,
   createOrderAPI,
   createOrderCheckoutAPI,
+  processOrderByGiftCardAPI,
 } from "../services/orders.service";
 
 export const AllorderAction = createAsyncThunk(
@@ -59,7 +60,7 @@ export const createOrderAction = createAsyncThunk(
     const { data, event } = payload;
     const { dispatch } = thunkAPI;
     const response = await createOrderAPI(data);
-    if (response?.data?.order) {
+    if (response?.data?.order && !data.orders?.use_credits) {
       const payload = {
         payment: {
           token: event.token,
@@ -81,6 +82,14 @@ export const createOrderCheckoutAction = createAsyncThunk(
   "order/checkout",
   async (payload, thunkAPI) => {
     const response = await createOrderCheckoutAPI(payload);
+    return response;
+  }
+);
+
+export const processGiftCardCheckoutAction = createAsyncThunk(
+  "order/giftcard/checkout",
+  async (payload, thunkAPI) => {
+    const response = await processOrderByGiftCardAPI(payload?.order_id);
     return response;
   }
 );

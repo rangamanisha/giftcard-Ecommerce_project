@@ -30,3 +30,8 @@ export const createOrderCheckoutAPI = (payload) => {
   const url = `${API_URL}/payments/create_checkout `;
   return apiCall(url, "POST", payload);
 };
+
+export const processOrderByGiftCardAPI = (orderId) => {
+  const url = `${API_URL}/orders/process_order?order_id=${orderId}`;
+  return apiCall(url, "GET");
+};
