@@ -7,7 +7,7 @@ const giftGiftCard = () => {
     <div>
       <p className="select-card-text mt-5">Sent to</p>
       <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail3">
           <Form.Control type="text" placeholder="Name" className="mt-3" />
           <Form.Control
             type="email"

@@ -25,7 +25,6 @@ const ForgotPassword = () => {
       email: Yup.string().min(2).max(200).email().required(),
     }),
     onSubmit: (data) => {
-      console.log(data);
       dispatch(forgotpasswordAction(data));
     },
   });
@@ -50,7 +49,7 @@ const ForgotPassword = () => {
               </p>
 
               <Form onSubmit={formik.handleSubmit}>
-                <Form.Group controlId="formBasicEmail" className="icons_login">
+                <Form.Group controlId="formBasicEmail2" className="icons_login">
                   <Form.Control
                     size="md"
                     type="email"

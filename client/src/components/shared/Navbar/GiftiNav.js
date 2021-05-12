@@ -58,7 +58,7 @@ const GiftiNav = () => {
       (country) => country.country_name === value.country_name
     );
     if (filteredId && filteredId.length) {
-      value = { ...value, id: filteredId[0].id };
+      value = { ...value, country_id: filteredId[0].id };
     }
     dispatch(giftCardsAction.selectCountry(value));
   };

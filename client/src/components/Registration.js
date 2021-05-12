@@ -38,7 +38,6 @@ const Signup = () => {
       password_confirmation: Yup.string().min(2).max(200).required(),
     }),
     onSubmit: (data) => {
-      console.log("data ", data);
       dispatch(signupAction(data));
     },
   });
@@ -108,7 +107,7 @@ const Signup = () => {
               <Row>
                 <Col>
                   <Form.Group
-                    controlId="formBasicEmail"
+                    controlId="formBasicEmail6"
                     className="icons_login"
                   >
                     <Form.Control

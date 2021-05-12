@@ -10,7 +10,7 @@ export const giftCardsUnitAction = createAsyncThunk(
     if (response.code === 200) {
       const state = getState();
       selectedCountry = response.data.giftcard_units[0];
-      selectedCountry.id = state.topbar.countries.find(
+      selectedCountry["country_id"] = state.topbar.countries.find(
         (country) => country.country_name === selectedCountry.country_name
       )?.id;
     }

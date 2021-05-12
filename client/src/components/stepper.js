@@ -29,6 +29,8 @@ const Stepper = () => {
     <StepProgressBar
       startingStep={authState.isAuthenticated ? 1 : 0}
       onSubmit={onFormSubmit}
+      primaryBtnClass={"invisible"}
+      secondaryBtnClass={"invisible"}
       steps={[
         {
           label: "Order Details",

@@ -1,25 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtunDelete from "../../assets/Button-Delete.svg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import { getBrandImageById } from "../../services/cart.service";
 
 const CartItem = (props) => {
-  const { item, decrementQuantity, incrementQuantity, removeItem, payment } =
-    props;
+  const {
+    item,
+    decrementQuantity,
+    incrementQuantity,
+    removeItem,
+    giftCardState,
+  } = props;
 
-  const addQuantity = () => {};
+  const [imageSrc, setImageSrc] = useState(null);
 
-  const deleteQuantity = () => {};
+  const getImageSrc = async () => {
+    if (!imageSrc && item) {
+      const itemCountry = giftCardState.countries.find(
+        (country) => country.unit_name_short === item.currency
+      );
+      if (itemCountry) {
+        const response = await getBrandImageById(item.brand_id, itemCountry.id);
+        setImageSrc(response?.images?.medium_rectangle || null);
+      }
+    }
+  };
 
-  const getImageSrc = () => {};
+  useEffect(() => {
+    getImageSrc();
+  }, []);
 
   return (
     <div className="item-list">
       <Row className="align-items-center">
         <Col md={3}>
           <Image
-            src={item?.images?.color?.medium_rectangle}
+            src={imageSrc}
             rounded
             style={{
               width: "100%",
@@ -38,21 +56,21 @@ const CartItem = (props) => {
               <div className="cart-inc-dec-box px-1">
                 <button
                   className="btn btn-link text-decoration-none"
-                  onClick={deleteQuantity}
+                  onClick={() => decrementQuantity(item)}
                 >
                   <span>-</span>
                 </button>
                 <span className="mx-2">{item?.quantity}</span>
                 <button
                   className="btn btn-link text-decoration-none"
-                  onClick={addQuantity}
+                  onClick={(e) => incrementQuantity(item)}
                 >
                   <span>+</span>
                 </button>
               </div>
               <span className="count-name">{item?.country_name}</span>
               <span className="count-symbol">
-                {item?.currency} {item?.giftcard_value * item?.quantity || 0}
+                {item?.currency} {item?.giftcard_value || 0}
               </span>
               <Image
                 src={ButtunDelete}

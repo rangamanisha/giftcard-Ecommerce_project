@@ -5,10 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import {
   AllorderAction,
-  ProcessOrderAction,
   OrderDetailsAction,
-  FailedOrderAction,
   createOrderAction,
+  createOrderCheckoutAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -19,6 +18,9 @@ export const ORDER_INITIAL_STATE = {
   order_status: "",
   total: 0,
   error: null,
+  created_order: null,
+  loading: false,
+  redirect_url: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -29,7 +31,13 @@ export const intialOrderState =
 export const orderSlice = createSlice({
   name: ORDER__FEATURE_KEY,
   initialState: ORDER_INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.loading = false;
+      state.created_order = null;
+      state.redirect_url = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(AllorderAction.pending, (state) => {
@@ -42,15 +50,7 @@ export const orderSlice = createSlice({
           state.data = response.data.orders;
         }
       })
-      .addCase(AllorderAction.rejected, (state) => {
-        // state.code = true;
-        // state.orders = response.data.order;
-      })
-
-      // .addCase(OrderDetailsAction.rejected, (state) => {
-      //   state.code = true;
-      // })
-
+      .addCase(AllorderAction.rejected, (state) => {})
       .addCase(OrderDetailsAction.pending, (state) => {
         state.code = true;
       })
@@ -58,7 +58,6 @@ export const orderSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.code = true;
-          console.log(response);
           state.orders = response.data.order;
         }
       })
@@ -67,19 +66,37 @@ export const orderSlice = createSlice({
       })
       .addCase(createOrderAction.pending, (state) => {
         state.orderid = null;
+        state.created_order = null;
+        state.loading = true;
       })
       .addCase(createOrderAction.fulfilled, (state, action) => {
         const response = action.payload;
+        state.loading = false;
         if (response.code === 200) {
-          state.orderid = response.data.id;
-          state.order_status = response.data.status;
-          state.total = response.data.total;
+          state.created_order = response.data.order;
         } else {
-          state.error = response.errors.join(",");
+          state.error = response?.errors?.base?.join(",") || "Payment Failed";
         }
       })
       .addCase(createOrderAction.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action?.error?.message || "Order creation failed";
+        state.loading = false;
+        state.created_order = null;
+      })
+      .addCase(createOrderCheckoutAction.pending, (state, action) => {
+        state.redirect_url = null;
+        state.loading = true;
+      })
+      .addCase(createOrderCheckoutAction.fulfilled, (state, action) => {
+        const { data, code } = action.payload;
+        state.loading = false;
+        if (code === 200) {
+          state.redirect_url = data.order.redirect_url;
+        }
+      })
+      .addCase(createOrderCheckoutAction.rejected, (state, action) => {
+        state.redirect_url = null;
+        state.loading = false;
       });
   },
 });
