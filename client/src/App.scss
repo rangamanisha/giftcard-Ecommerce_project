@@ -1257,6 +1257,57 @@ body {
   width: 100%;
   height: auto;
 }
+///coment
+
+
+.nav-item {
+  background-color: white !important;
+  color: #636D79 !important;
+  font-size: 16px;
+  opacity: 1;
+  margin: -1px;
+}
+.faq-text{
+  font: var(--unnamed-font-style-normal) normal bold 40px/75px Cairo;
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: center;
+font: normal normal bold 40px/75px Cairo;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+.card {
+  margin-bottom: 30px;
+  /* border: 1px solid; */
+  border-radius: 8px;
+  /* opacity: 1; */
+  border: 0.800000011920929px solid #B2B2C9 !important;
+  border-radius: 8px !important;
+  opacity: 1;
+}
+.card-body {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/24px Open Sans;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 16px/24px Open Sans;
+  letter-spacing: 0px;
+  color: #A2A9B0;
+}
+.faq-bootom-border {
+ 
+  background-color: #00B2AE;
+}
+
+.card-header {border-bottom:  none !important;background-color: none !important;}
+.card-header {
+  font: var(--unnamed-font-style-normal) normal bold 18px/24px Open Sans;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal bold 18px/24px Open Sans;
+  letter-spacing: 0px;
+  color: #636D79;
+  opacity: 1;
+}
 
 @media screen and (max-width: 1600px) {
   .pl-3.navbar-nav {
