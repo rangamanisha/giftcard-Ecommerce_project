@@ -44,6 +44,10 @@ export const authSlice = createSlice({
     removeLoginOrSignUpMessage(state, action) {
       state.signupOrLoginActionClicked = action.payload;
     },
+    clearErrors(state, action){
+      state.errors = null;
+
+    }
   },
   extraReducers: (builder) => {
     builder

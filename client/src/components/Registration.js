@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -15,11 +15,24 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GoogleLogin from "react-google-login";
+import Facebookicon from "../assets/Facebook-icon.svg";
+import { loginAction, googlesigninAction } from "../actions/auth.actions";
 
 const Signup = () => {
+  const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
+  const fbId = `${process.env.REACT_APP_FB_APP_ID || ""}`;
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
+  const [showPass, setPass] = useState(false);
+  const togglePass = () => {
+    setPass(showPass ? false : true)
+  }
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +52,9 @@ const Signup = () => {
     }),
     onSubmit: (data) => {
       dispatch(signupAction(data));
+      formik.resetForm();
     },
+    validateOnChange: false,
   });
 
   useEffect(() => {
@@ -47,6 +62,12 @@ const Signup = () => {
       history.push({ pathname: "/" });
     }
   }, [state.signupSuccess, history]);
+
+  const responseGoogle = (response) => {
+    const accessToken = response.accessToken;
+    console.log(accessToken);
+    dispatch(googlesigninAction({ accessToken }));
+  };
 
   return (
     <>
@@ -131,7 +152,7 @@ const Signup = () => {
                   >
                     <Form.Control
                       size="md"
-                      type="password"
+                      type={showPass ? "text" : "password"}
                       placeholder="Password"
                       className="icons_fields"
                       value={formik.values.password}
@@ -139,6 +160,9 @@ const Signup = () => {
                       name="password"
                     />
                     <img src={Passwordicon} alt="Icon" className="icon_img" />
+                    <i onClick={togglePass} className="icon_right">{eye}</i>{" "}
+
+
                   </Form.Group>
                   {formik.errors.password ? (
                     <p className="validation-messages">
@@ -151,13 +175,14 @@ const Signup = () => {
                   >
                     <Form.Control
                       size="md"
-                      type="password"
-                      placeholder="password confirmation"
+                      type={showPass ? "text" : "password"}
+                      placeholder="Confirm Password"
                       className="icons_fields"
                       value={formik.values.password_confirmation}
                       onChange={formik.handleChange}
                       name="password_confirmation"
                     />
+                    <i onClick={togglePass} className="icon_right">{eye}</i>{" "}
                     <img src={Passwordicon} alt="Icon" className="icon_img" />
                   </Form.Group>
                   {formik.errors.password_confirmation ? (
@@ -207,6 +232,33 @@ const Signup = () => {
                       </tr>
                     </tbody>
                   </table>
+                  <div className="social-btn">
+                  <div className="google mr-3">
+                    <GoogleLogin
+                      style={{ display: "block" }}
+                      variant="outline-light"
+                      className="google-button"
+                      clientId={googleId}
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      
+                    ></GoogleLogin>
+                  </div>
+                  <div className="facebook">
+                    <Button
+                      variant="outline-light"
+                      className="facebook-button"
+                      provider="facebook"
+                      appId={fbId}
+                    >
+                      <img
+                        src={Facebookicon}
+                        style={{ width: "50px", height: "50px" }}
+                        alt="Icon"
+                      />
+                    </Button>
+                  </div>
+                  </div>
                 </Col>
               </Row>
             </Form>
