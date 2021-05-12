@@ -18,6 +18,11 @@ const GuestForm = (props) => {
     return cartState.checkoutCart.total_amount;
   };
 
+  const getMarginAmount = (amount) => {
+    const additionalCharge = (parseFloat(amount) * 5) / 100;
+    return parseFloat(additionalCharge + parseFloat(amount)).toFixed(2);
+  };
+
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -43,7 +48,10 @@ const GuestForm = (props) => {
             quantity: lineItem.quantity,
             currency: lineItem.currency,
             country_id: lineItem.country_id,
-            card_value_aed: lineItem.card_value_aed,
+            card_value_aed:
+              cartState.checkoutCart.currency !== "AED"
+                ? getMarginAmount(lineItem.card_value_aed)
+                : lineItem.card_value_aed,
           };
         }),
         order: {
