@@ -37,6 +37,9 @@ export const orderSlice = createSlice({
       state.created_order = null;
       state.redirect_url = null;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder

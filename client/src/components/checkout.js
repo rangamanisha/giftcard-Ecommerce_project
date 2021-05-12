@@ -88,17 +88,9 @@ const Checkout = () => {
               },
             },
           }}
-          ready={() => {}}
-          frameActivated={(e) => {}}
-          frameFocus={(e) => {}}
-          frameBlur={(e) => {}}
-          frameValidationChanged={(e) => {}}
-          paymentMethodChanged={(e) => {}}
-          cardValidationChanged={(e) => {}}
           cardTokenized={(e) => {
             processOrder(e);
           }}
-          cardTokenizationFailed={(e) => {}}
         >
           <CardNumber />
           <div className="date-and-code">
@@ -108,6 +100,7 @@ const Checkout = () => {
           <Button
             id="pay-button"
             onClick={() => {
+              dispatch(orderActions.setLoading(true));
               Frames.submitCard();
             }}
             disabled={orderState.loading}

@@ -61,18 +61,21 @@ export const createOrderAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     const response = await createOrderAPI(data);
     if (response?.data?.order && !data.orders?.use_credits) {
-      const payload = {
+      const request = {
         payment: {
           token: event.token,
-          amount: parseFloat(
-            parseFloat(response?.data?.order?.payable_amount) * 100
-          ).toFixed(2),
-          payment_currency: data.currency,
-          currency: data.currency,
+          amount:
+            parseFloat(
+              parseFloat(response?.data?.order?.payment_currency_amount) * 100
+            ).toFixed(2) || 0,
+          payment_currency: data.orders?.payment_currency,
+          currency: data.orders?.payment_currency,
           order_id: response?.data?.order?.id,
         },
       };
-      dispatch(createOrderCheckoutAction(payload));
+      console.log("data ", data);
+      console.log("payload ", request);
+      dispatch(createOrderCheckoutAction(request));
     }
     return response;
   }

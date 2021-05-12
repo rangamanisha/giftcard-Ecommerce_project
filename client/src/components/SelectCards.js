@@ -297,14 +297,14 @@ const SelectCards = () => {
               </ButtonGroup>
               <Button
                 className="nav-btn mr-2 text-white"
-                disabled={!selectedDenomination}
+                disabled={!selectedDenomination || !count}
                 onClick={(e) => saveToCart(false)}
               >
                 Add to cart
               </Button>{" "}
               <Button
                 className="nav-btn mr-2"
-                disabled={!selectedDenomination}
+                disabled={!selectedDenomination || !count}
                 onClick={() => saveToCart(true)}
                 variant="info"
               >
