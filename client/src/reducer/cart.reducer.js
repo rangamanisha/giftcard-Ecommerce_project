@@ -51,6 +51,11 @@ export const cartItemsSlice = createSlice({
     updateCheckout(state, action) {
       state.checkoutCart = action.payload;
     },
+    clearState(state) {
+      state.checkoutCart = null;
+      state.selectedCartCurrency = null;
+      state.conversion = null;
+    },
   },
   extraReducers: (builder) => {
     builder

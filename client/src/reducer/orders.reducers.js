@@ -39,6 +39,9 @@ export const orderSlice = createSlice({
       state.loading = false;
       state.created_order = null;
       state.redirect_url = null;
+      state.order_checkout_error = null;
+      state.error = null;
+      state.guest_payload = null;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;

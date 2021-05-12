@@ -12,6 +12,7 @@ import {
 } from "../actions/orders.action";
 import Loader from "./shared/Loader";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getOrderState, orderActions } from "../reducer/orders.reducers";
 import { getCartItemsState } from "../reducer/cart.reducer";
 import { getProfileState } from "../reducer/profile.reducer";
@@ -23,6 +24,7 @@ const Checkout = (props) => {
   const dispatch = useDispatch();
   const profileState = useSelector(getProfileState);
   const authState = useSelector(getAuthState);
+  const history = useHistory();
 
   const publicKey =
     cartState.checkoutCart.currency !== "SAR"
@@ -32,6 +34,12 @@ const Checkout = (props) => {
   useEffect(() => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (orderState.error || orderState.order_checkout_error) {
+      history.push({ pathname: "/failure" });
+    }
+  }, [orderState.order_checkout_error, orderState.error, history.push]);
 
   useEffect(() => {
     if (orderState?.redirect_url) {

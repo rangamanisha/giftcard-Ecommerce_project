@@ -7,10 +7,11 @@ import {
   OrderDetailsAction,
   processOrderAfterRedirectAction,
 } from "../../actions/orders.action";
-import { getOrderState } from "../../reducer/orders.reducers";
+import { getOrderState, orderActions } from "../../reducer/orders.reducers";
 import { Col, Image, Row, Container } from "react-bootstrap";
 import { get, map } from "lodash";
 import "./orders.scss";
+import { cartAction } from "../../reducer/cart.reducer";
 
 const Confirm_Order = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,8 @@ const Confirm_Order = () => {
     if (id) {
       if (search.indexOf("cko-session-id")) {
         await dispatch(processOrderAfterRedirectAction({ order_id: id }));
+        await dispatch(orderActions.clearState());
+        await dispatch(cartAction.clearState());
       }
       dispatch(
         OrderDetailsAction({
