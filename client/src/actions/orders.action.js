@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { cartAction } from "../reducer/cart.reducer";
 import {
   allOrderApiCall,
   orderDetailsApiCall,
@@ -7,6 +8,7 @@ import {
   createOrderAPI,
   createOrderCheckoutAPI,
   processOrderByGiftCardAPI,
+  createGuestOrderAPI,
 } from "../services/orders.service";
 
 export const AllorderAction = createAsyncThunk(
@@ -91,6 +93,33 @@ export const processGiftCardCheckoutAction = createAsyncThunk(
   "order/giftcard/checkout",
   async (payload, thunkAPI) => {
     const response = await processOrderByGiftCardAPI(payload?.order_id);
+    return response;
+  }
+);
+
+export const createGuestOrderAction = createAsyncThunk(
+  "order/guest/create",
+  async (payload, thunkAPI) => {
+    const { data, event } = payload;
+    const { dispatch } = thunkAPI;
+    const response = await createGuestOrderAPI(data);
+    if (response?.data?.order) {
+      await dispatch(cartAction.saveItemsToCart([]));
+      await dispatch(cartAction.updateTotalCartItems(0));
+      const request = {
+        payment: {
+          token: event.token,
+          amount:
+            parseFloat(
+              parseFloat(response?.data?.order?.payment_currency_amount) * 100
+            ).toFixed(2) || 0,
+          payment_currency: data.order?.payment_currency,
+          currency: data.order?.payment_currency,
+          order_id: response?.data?.order?.id,
+        },
+      };
+      dispatch(createOrderCheckoutAction(request));
+    }
     return response;
   }
 );

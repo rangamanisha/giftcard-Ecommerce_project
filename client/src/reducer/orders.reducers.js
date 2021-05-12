@@ -8,6 +8,7 @@ import {
   OrderDetailsAction,
   createOrderAction,
   createOrderCheckoutAction,
+  createGuestOrderAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -22,6 +23,7 @@ export const ORDER_INITIAL_STATE = {
   loading: false,
   redirect_url: null,
   order_checkout_error: null,
+  guest_payload: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -40,6 +42,9 @@ export const orderSlice = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    setGuestPayload: (state, action) => {
+      state.guest_payload = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -105,6 +110,26 @@ export const orderSlice = createSlice({
       .addCase(createOrderCheckoutAction.rejected, (state, action) => {
         state.redirect_url = null;
         state.loading = false;
+      })
+      .addCase(createGuestOrderAction.pending, (state) => {
+        state.orderid = null;
+        state.created_order = null;
+        state.loading = true;
+      })
+      .addCase(createGuestOrderAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        state.loading = false;
+        state.guest_payload = null;
+        if (response.code === 200) {
+          state.created_order = response.data.order;
+        } else {
+          state.error = response?.errors?.base?.join(",") || "Payment Failed";
+        }
+      })
+      .addCase(createGuestOrderAction.rejected, (state, action) => {
+        state.error = action?.error?.message || "Order creation failed";
+        state.loading = false;
+        state.created_order = null;
       });
   },
 });
