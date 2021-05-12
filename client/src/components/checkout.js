@@ -71,7 +71,6 @@ const Checkout = (props) => {
       };
       dispatch(createOrderAction({ data: payload, event }));
     } else {
-      console.log("orderState ", orderState.guest_payload);
       dispatch(
         createGuestOrderAction({ data: orderState.guest_payload, event })
       );

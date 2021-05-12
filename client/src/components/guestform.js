@@ -60,7 +60,6 @@ const GuestForm = (props) => {
           currency: cartState.checkoutCart.currency_id, //
         },
       };
-      console.log("triggered ", payload);
       dispatch(orderActions.setGuestPayload(payload));
       const nextButton = document.getElementsByClassName("cart-next-btn")[0];
       nextButton.click();
