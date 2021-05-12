@@ -45,6 +45,10 @@ export const authSlice = createSlice({
       console.log("check alret remove");
       state.signupOrLoginActionClicked = action.payload;
     },
+    clearErrors(state, action){
+      state.errors = null;
+
+    }
   },
   extraReducers: (builder) => {
     builder

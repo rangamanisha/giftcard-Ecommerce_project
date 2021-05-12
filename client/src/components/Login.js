@@ -11,7 +11,7 @@ import Facebookicon from "../assets/Facebook-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
-import { getAuthState } from "../reducer/auth.reducer";
+import { getAuthState, authActions } from "../reducer/auth.reducer";
 import { loginAction, googlesigninAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
@@ -61,6 +61,7 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
+    
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
@@ -69,6 +70,10 @@ const Login = () => {
     console.log(accessToken);
     dispatch(googlesigninAction({ accessToken }));
   };
+  React.useEffect(() => {
+    return dispatch(authActions.clearErrors())
+  })
+
   
 
   return (

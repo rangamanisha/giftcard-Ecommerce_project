@@ -53,6 +53,7 @@ const Signup = () => {
     onSubmit: (data) => {
       console.log("data ", data);
       dispatch(signupAction(data));
+      formik.resetForm();
     },
     validateOnChange: false,
   });
