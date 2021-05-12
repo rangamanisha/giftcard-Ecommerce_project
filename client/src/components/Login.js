@@ -18,6 +18,8 @@ import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
+import { values } from "lodash";
+import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -38,10 +40,11 @@ const Login = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Enter a valid email").required("Email is required"),
-      password: Yup.string().min(2).max(200).required(),
+      password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
+      alert(JSON.stringify(values, null, 2))
     },
     validateOnChange: false,
   });
@@ -66,6 +69,7 @@ const Login = () => {
     console.log(accessToken);
     dispatch(googlesigninAction({ accessToken }));
   };
+  
 
   return (
     <>
@@ -139,17 +143,17 @@ const Login = () => {
                 ) : null}
 
                 <div className="redio-forgot">
-                  <Form.Group className="redio">
+                  {/* <Form.Group className="redio">
                     <Form.Check
                       type="radio"
                       label="Remember Me"
                       name="formHorizontalRadios"
                       id="formHorizontalRadios1"
                     />
-                  </Form.Group>
-                  <Form.Group className="forgot">
+                  </Form.Group> */}
+                  <Form.Group className="forgot" style={{textAlign: 'left'}}>
                     <Link className="link-color" to="/auth/forgotpassword">
-                      Forgot me?
+                      Forgot Password?
                     </Link>
                   </Form.Group>
                 </div>
@@ -205,8 +209,8 @@ const Login = () => {
                       clientId={googleId}
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
-
-                    ></GoogleLogin>
+                      isSignedIn={true}
+                    />
                   </div>
                   <div className="facebook">
                     <Button

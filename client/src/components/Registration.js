@@ -176,7 +176,7 @@ const Signup = () => {
                     <Form.Control
                       size="md"
                       type={showPass ? "text" : "password"}
-                      placeholder="password confirmation"
+                      placeholder="Confirm Password"
                       className="icons_fields"
                       value={formik.values.password_confirmation}
                       onChange={formik.handleChange}
