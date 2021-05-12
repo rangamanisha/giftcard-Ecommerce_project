@@ -8,7 +8,7 @@ export const allOrderApiCall = (order) => {
 
 export const processOrderApiCall = (order) => {
   const url = `${API_URL}/payments/process_order_after_redirect?order_id=${order.order_id}`;
-  return apiCall(url, "POST", order);
+  return apiCall(url, "POST", {});
 };
 
 export const orderDetailsApiCall = (order) => {

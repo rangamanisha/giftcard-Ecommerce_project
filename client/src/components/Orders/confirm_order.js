@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
-import { useLocation, BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import { OrderDetailsAction } from "../../actions/orders.action";
+import {
+  OrderDetailsAction,
+  processOrderAfterRedirectAction,
+} from "../../actions/orders.action";
 import { getOrderState } from "../../reducer/orders.reducers";
 import { Col, Image, Row, Container } from "react-bootstrap";
 import { get, map } from "lodash";
 import "./orders.scss";
-import { deprecationHandler } from "moment";
 
 const Confirm_Order = () => {
   const dispatch = useDispatch();
@@ -16,15 +18,28 @@ const Confirm_Order = () => {
   const orderdetail = get(orderState, "orders");
   const location = useLocation();
 
+  const orderInit = async () => {
+    const search = location.search.split("?order_id=")[1] || null;
+    let id = 0;
+    if (search) {
+      id = search.substring(0, search.indexOf("&"));
+    }
+    if (id) {
+      if (search.indexOf("cko-session-id")) {
+        await dispatch(processOrderAfterRedirectAction({ order_id: id }));
+      }
+      dispatch(
+        OrderDetailsAction({
+          order_id: id,
+          image_size: "medium_rectangle",
+        })
+      );
+    }
+  };
+
   useEffect(() => {
-    let id = location.search.substring(1);
-    dispatch(
-      OrderDetailsAction({
-        order_id: id,
-        image_size: "medium_rectangle",
-      })
-    );
-  }, [dispatch]);
+    orderInit();
+  }, [orderInit]);
 
   return (
     <div className="datatable-responsive-demo">

@@ -21,6 +21,7 @@ export const ORDER_INITIAL_STATE = {
   created_order: null,
   loading: false,
   redirect_url: null,
+  order_checkout_error: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -89,12 +90,16 @@ export const orderSlice = createSlice({
       .addCase(createOrderCheckoutAction.pending, (state, action) => {
         state.redirect_url = null;
         state.loading = true;
+        state.order_checkout_error = null;
       })
       .addCase(createOrderCheckoutAction.fulfilled, (state, action) => {
         const { data, code } = action.payload;
         state.loading = false;
         if (code === 200) {
           state.redirect_url = data.order.redirect_url;
+        } else {
+          state.order_checkout_error =
+            data?.errors || "Error in creating checkout";
         }
       })
       .addCase(createOrderCheckoutAction.rejected, (state, action) => {

@@ -49,7 +49,6 @@ export const cartItemsSlice = createSlice({
       state.totalCartItems = action.payload;
     },
     updateCheckout(state, action) {
-      console.log("action.payload ", action.payload);
       state.checkoutCart = action.payload;
     },
   },

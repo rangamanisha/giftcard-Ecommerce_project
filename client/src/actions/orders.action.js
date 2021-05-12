@@ -22,7 +22,7 @@ export const AllorderAction = createAsyncThunk(
     return response;
   }
 );
-export const ProcessOrderAction = createAsyncThunk(
+export const processOrderAfterRedirectAction = createAsyncThunk(
   "ProcessOrder",
   async (payload, thunkAPI) => {
     const request = {
@@ -73,8 +73,6 @@ export const createOrderAction = createAsyncThunk(
           order_id: response?.data?.order?.id,
         },
       };
-      console.log("data ", data);
-      console.log("payload ", request);
       dispatch(createOrderCheckoutAction(request));
     }
     return response;
