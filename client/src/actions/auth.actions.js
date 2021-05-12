@@ -38,7 +38,6 @@ export const googlesigninAction = createAsyncThunk(
 export const signupAction = createAsyncThunk(
   "auth/signup",
   async (payload, thunkAPI) => {
-    console.log("signup action ");
     const request = {
       signup: {
         first_name: payload.first_name,

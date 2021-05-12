@@ -26,7 +26,7 @@ export const createOrderAPI = (order) => {
   return apiCall(url, "POST", order);
 };
 
-export const createOrderCheckout = (payload) => {
+export const createOrderCheckoutAPI = (payload) => {
   const url = `${API_URL}/payments/create_checkout `;
   return apiCall(url, "POST", payload);
 };

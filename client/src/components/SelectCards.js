@@ -13,16 +13,14 @@ import {
 import GiftGiftCard from "./GiftGiftCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrandsState } from "../reducer/brands.reducer";
-import {
-  getGiftcardsState,
-  giftCardsAction,
-} from "../reducer/giftCards.reducer";
-import { get, map, isUndefined } from "lodash";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
+import { get, map } from "lodash";
 import { useHistory } from "react-router-dom";
 import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
 import { getTopBarState } from "../reducer/topbar.reducer";
+import { getConvertedAmountAPI } from "../services/giftCards.service";
 
 const SelectCards = () => {
   const dispatch = useDispatch();
@@ -40,17 +38,10 @@ const SelectCards = () => {
   const [rate, setRate] = useState(0);
   const [giftTo, setGiftTo] = useState("myself");
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const topbarState = useSelector(getTopBarState);
-
-  const selectedCountry = giftunitState.selectedCountry;
-  const countryId = selectedCountry
-    ? topbarState.countries.find(
-        (country) => country.country_name === selectedCountry.country_name
-      )?.id || 0
-    : 0;
 
   const handleSelect = (eventKey1) => {
     seteventkey(eventKey1);
@@ -86,7 +77,7 @@ const SelectCards = () => {
   React.useEffect(() => {
     dispatch(
       termBrandAction({
-        currency: countryId,
+        currency: giftunitState.selectedCountry?.id || 1,
         id: get(card, "id"),
       })
     );
@@ -101,17 +92,31 @@ const SelectCards = () => {
     );
   }, [get(card, "id")]);
 
-  const saveToCart = (shouldRedirect) => {
+  const saveToCart = async (shouldRedirect) => {
     const addToCartItem = {
       quantity: count,
       brand_id: card.id,
-      currency: giftunitState.selectedCountry?.unit_symbol,
+      currency: giftunitState.selectedCountry?.unit_name_short,
       giftcard_value: selectedDenomination,
       card_value_aed: selectedDenomination,
       isforself: giftTo === "myself",
-      country_id: giftunitState.selectedCountry?.id,
+      country_id: giftunitState.selectedCountry?.country_id,
       name: card.name,
+      country_name: giftunitState.selectedCountry.country_name,
     };
+    if (
+      giftunitState.selectedCountry?.unit_name_short &&
+      giftunitState.selectedCountry?.unit_name_short !== "AED"
+    ) {
+      const response = await getConvertedAmountAPI(
+        selectedDenomination,
+        giftunitState.selectedCountry?.unit_name_short,
+        "AED"
+      );
+      addToCartItem.card_value_aed = parseFloat(
+        response.data.converted_amount
+      ).toFixed(2);
+    }
     if (authState.isAuthenticated) {
       dispatch(updateCartAction(addToCartItem));
     } else {
@@ -133,7 +138,9 @@ const SelectCards = () => {
               item.giftcard_value === addToCartItem.giftcard_value
             ) {
               return Object.assign({}, item, {
-                quantity: addToCartItem.quantity,
+                quantity:
+                  parseFloat(item.quantity) +
+                  parseFloat(addToCartItem.quantity),
               });
             }
             return item;
@@ -184,6 +191,7 @@ const SelectCards = () => {
                       variant="outline-info"
                       className="mr-3 select-card-button mt-2"
                       onClick={() => handleDenomination(d)}
+                      active={selectedDenomination === parseFloat(d)}
                       key={i}
                     >
                       {parseFloat(d)}
@@ -201,7 +209,7 @@ const SelectCards = () => {
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
                   checked={giftTo === "myself"}
-                  onClick={(e) => handleGiftTo(e)}
+                  onChange={(e) => handleGiftTo(e)}
                 />
                 <Form.Check
                   value="someone else"
@@ -211,7 +219,7 @@ const SelectCards = () => {
                   name="formHorizontalRadios"
                   id="formHorizontalRadios2"
                   checked={giftTo === "someone else"}
-                  onClick={(e) => handleGiftTo(e)}
+                  onChange={(e) => handleGiftTo(e)}
                 />
               </div>
               {tempvisible === false ? <GiftGiftCard /> : ""}
@@ -269,7 +277,7 @@ const SelectCards = () => {
               <ButtonGroup className="mr-3" aria-label="Second group">
                 <Button
                   variant="light"
-                  disabled={isUndefined(selectedDenomination)}
+                  disabled={!selectedDenomination}
                   onClick={decrement}
                 >
                   {" "}
@@ -280,7 +288,7 @@ const SelectCards = () => {
                 </Button>{" "}
                 <Button
                   variant="light"
-                  disabled={isUndefined(selectedDenomination)}
+                  disabled={!selectedDenomination}
                   onClick={increment}
                 >
                   {" "}
@@ -289,12 +297,14 @@ const SelectCards = () => {
               </ButtonGroup>
               <Button
                 className="nav-btn mr-2 text-white"
+                disabled={!selectedDenomination}
                 onClick={(e) => saveToCart(false)}
               >
                 Add to cart
               </Button>{" "}
               <Button
                 className="nav-btn mr-2"
+                disabled={!selectedDenomination}
                 onClick={() => saveToCart(true)}
                 variant="info"
               >

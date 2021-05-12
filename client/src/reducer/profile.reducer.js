@@ -6,16 +6,7 @@ import {
 import { getprofileListAction } from "../actions/profile.actions";
 
 export const PROFILE_INITIAL_STATE = {
-  first_name: null,
-  last_name: null,
-  email: null,
-  id: null,
-  is_active: false,
-  role: null,
-  date_joined: null,
-  language: null,
-  date_of_birth: null,
-  country: null,
+  profile: null,
 };
 
 export const PROFILE__FEATURE_KEY = "profile";
@@ -36,13 +27,7 @@ export const profileSlice = createSlice({
       .addCase(getprofileListAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
-          state.is_active = true;
-          state.first_name = response.data.profile.first_name;
-          state.last_name = response.data.profile.last_name;
-          state.language = response.data.profile.language;
-          state.email = response.data.profile.email;
-          state.date_of_birth = response.date_of_birth;
-          state.country = response.data.profile.nationality;
+          state.profile = response.data.profile;
         }
       })
       .addCase(getprofileListAction.rejected, (state, action) => {

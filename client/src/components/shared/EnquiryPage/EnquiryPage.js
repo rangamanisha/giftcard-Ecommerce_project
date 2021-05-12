@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 // import "./EnquiryPage.scss";
 import { IoIosAdd } from "react-icons/io";
@@ -10,8 +10,8 @@ import Header from "../HeaderPage/Header";
 
 function EnquiryPage() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />

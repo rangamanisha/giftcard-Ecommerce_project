@@ -18,7 +18,6 @@ const Confirm_Order = () => {
 
   useEffect(() => {
     let id = location.search.substring(1);
-    console.log(id);
     dispatch(
       OrderDetailsAction({
         order_id: id,

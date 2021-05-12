@@ -67,11 +67,9 @@ const Idc_Order = () => {
     });
     bulkapifile.then((resp) => {
       resp.json().then((result) => {
-        console.log(result.code);
         if (result.code === 200 && result.data) {
           setFilecredit(result.data.order.total_credit_to_used);
         } else if (result.code === 404 || result.code === 400) {
-          console.log(result);
           setFileerrors(result.message);
         } else if (result.code === 401) {
           localStorage.clear();
@@ -82,7 +80,6 @@ const Idc_Order = () => {
   };
   const onSubmitfile = (e) => {
     e.preventDefault();
-    console.log(e);
     setSelectedFile(e.target[1].files[0]);
     let file = e.target[1].files[0];
     let formData = new FormData();
@@ -118,7 +115,6 @@ const Idc_Order = () => {
           result.code === 404 ||
           result.code === 401
         ) {
-          console.log(result.code);
           seterrorr(result.message);
         }
       });

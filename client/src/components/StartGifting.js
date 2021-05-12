@@ -67,7 +67,7 @@ const StartGifting = () => {
                       <Form.Control
                         as="select"
                         className="mr-sm-2"
-                        id="inlineFormCustomSelect"
+                        id="inlineFormCustomSelect1"
                         custom
                       >
                         {countries.map((c, i) => (

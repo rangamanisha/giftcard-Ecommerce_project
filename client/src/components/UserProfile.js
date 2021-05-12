@@ -13,15 +13,12 @@ import {
   getprofileListAction,
   updateUserprofileAction,
 } from "../actions/profile.actions";
+import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-
-  const data = profilestate;
-
-  console.log(data, "0000000000000");
 
   useEffect(() => {
     dispatch(getprofileListAction({}));
@@ -29,27 +26,25 @@ const UserProfile = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: data.first_name ? data.first_name : "",
-      lastName: data.last_name ? data.last_name : "",
-      dob: data.date_of_birth ? data.date_of_birth : "",
-      language: data.language ? data.language : "",
-      country: data.country ? data.country : "",
+      firstName: profilestate.profile?.first_name || "",
+      lastName: profilestate.profile?.last_name || "",
+      dob: profilestate.profile?.birthday || null,
+      language: profilestate.profile?.language || "",
+      country: profilestate.profile?.country || "",
       phone: "",
-      gender: "",
-      email: data.email ? data.email : "",
+      gender: profilestate.profile?.gender || "",
+      email: profilestate.profile?.email || "",
     },
     validationSchema: Yup.object({
-      // email: Yup.string().min(2).max(200).email().required(),
-      phone: Yup.string().min(10).max(10).required(),
+      phone: Yup.string().min(10).max(10),
     }),
     onSubmit: (data) => {
-      console.log(data);
       dispatch(updateUserprofileAction(data));
     },
   });
 
   return (
-    <div className="profile-card mx-auto mt-5 col-md-5">
+    <div className="profile-card mx-auto col-md-5" >
       <Form className="profile" onSubmit={formik.handleSubmit}>
         <Form.Row>
           <Form.Group
@@ -92,12 +87,11 @@ const UserProfile = () => {
 
         <Form.Group
           controlId="formGridEmail"
-          className="w-75 mt-2 mx-auto icons_login"
+          className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control
             size="sm"
             type="date"
-            id="example-date-input"
             className="profile-iconsfields"
             value={formik.values.dob}
             onChange={formik.handleChange}
@@ -152,7 +146,7 @@ const UserProfile = () => {
         ) : null}
 
         <Form.Group
-          controlId="formBasicEmail"
+          controlId="formBasicEmail7"
           className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control
@@ -176,7 +170,7 @@ const UserProfile = () => {
             size="lg"
             type="submit"
           >
-            Edit Profile /save changes
+            Edit Profile
           </Button>
         </div>
       </Form>
