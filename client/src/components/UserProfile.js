@@ -17,6 +17,8 @@ import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-bootstrap/Modal'
 import swal from "sweetalert";
+import { getAuthState } from '../reducer/auth.reducer'
+
 import CountrySelect from 'react-bootstrap-country-select';
 import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 
@@ -24,7 +26,9 @@ import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-
+  const authState = useSelector(getAuthState);
+  const state = useSelector(getProfileState);
+  const profileState = state.profile;
   useEffect(() => {
     dispatch(getprofileListAction({}));
   }, [dispatch]);
@@ -60,6 +64,18 @@ const UserProfile = () => {
     })
   }
   const [ value, setValue ] = React.useState(null);
+  const handleEdit = () => {
+    if(authState.isAuthenticated){
+    dispatch(updateUserprofileAction({
+            first_name: profileState.first_name,
+            last_name: profileState.lastName,
+            birthday: profileState.birthday,
+            gender: profileState.gender,
+            nationality: profileState.nationality
+          })
+          )
+        }
+        }
 
 
   return (
@@ -140,6 +156,7 @@ const UserProfile = () => {
         onChange={setValue}
         matchNameFromStart={false}
         matchAbbreviations
+        name="country"
       />
         </Form>
         </Form.Group>

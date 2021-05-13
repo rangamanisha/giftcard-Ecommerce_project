@@ -7,26 +7,23 @@ import Row from "react-bootstrap/Row";
 import { getProfileState } from '../reducer/profile.reducer'
 import { updateUserprofileAction } from '../actions/profile.actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAuthState } from '../reducer/auth.reducer'
 
 const Editprofile = () => {
   const dispatch = useDispatch();
-  const state = useSelector(getProfileState);
-  const authState = useSelector(getAuthState);
-  const profileState = state.profile;
-  React.useEffect(() => {
-    if (authState.isAuthenticated) {
+  
+  // React.useEffect(() => {
+  //   if (authState.isAuthenticated) {
 
-      dispatch(updateUserprofileAction({
-        first_name: profileState.first_name,
-        last_name: profileState.lastName,
-        birthday: profileState.birthday,
-        gender: profileState.gender,
-        nationality: profileState.nationality
-      })
-      )
-    }
-  }, [dispatch])
+  //     dispatch(updateUserprofileAction({
+  //       first_name: profileState.first_name,
+  //       last_name: profileState.lastName,
+  //       birthday: profileState.birthday,
+  //       gender: profileState.gender,
+  //       nationality: profileState.nationality
+  //     })
+  //     )
+  //   }
+  // }, [dispatch])
 
   return (
     <div className="container-fluid px-0">

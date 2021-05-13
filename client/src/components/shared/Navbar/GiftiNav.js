@@ -17,6 +17,8 @@ import { isEmpty, get, sortBy } from "lodash";
 import { cartTotalCountAction } from "../../../actions/cart.actions";
 import { getCartItemsState } from "../../../reducer/cart.reducer";
 import { getTopBarState } from "../../../reducer/topbar.reducer";
+import {getProfileState} from '../../../reducer/profile.reducer'
+import {updateUserprofileAction} from '../../../actions/profile.actions'
 //Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
@@ -25,6 +27,7 @@ const GiftiNav = () => {
   const giftunitState = useSelector(getGiftcardsState);
   const cartState = useSelector(getCartItemsState);
   const state = useSelector(getTopBarState);
+  const profileState = useSelector(getProfileState)
   const dispatch = useDispatch();
   const countries = isEmpty(giftunitState.countries)
     ? []
@@ -52,6 +55,19 @@ const GiftiNav = () => {
     setIsTotalCartCountActionCalled,
     dispatch,
   ]);
+  React.useEffect(() => {
+    if (authState.isAuthenticated) {
+
+      dispatch(updateUserprofileAction({
+        first_name: profileState.profile.first_name,
+        last_name: profileState.profile.lastName,
+        birthday: profileState.profile.birthday,
+        gender: profileState.profile.gender,
+        nationality: profileState.profile.nationality
+      })
+      )
+    }
+  }, [dispatch])
 
   const countryChanged = (value) => {
     const filteredId = state.countries.filter(
@@ -77,6 +93,7 @@ const GiftiNav = () => {
       showLogin={!authState.isAuthenticated}
       onCountrySelected={countryChanged}
       cartState={cartState}
+      profileState={profileState}
     />
   );
 };
