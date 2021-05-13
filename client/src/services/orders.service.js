@@ -8,7 +8,7 @@ export const allOrderApiCall = (order) => {
 
 export const processOrderApiCall = (order) => {
   const url = `${API_URL}/payments/process_order_after_redirect?order_id=${order.order_id}`;
-  return apiCall(url, "POST", order);
+  return apiCall(url, "POST", {});
 };
 
 export const orderDetailsApiCall = (order) => {
@@ -28,5 +28,15 @@ export const createOrderAPI = (order) => {
 
 export const createOrderCheckoutAPI = (payload) => {
   const url = `${API_URL}/payments/create_checkout `;
+  return apiCall(url, "POST", payload);
+};
+
+export const processOrderByGiftCardAPI = (orderId) => {
+  const url = `${API_URL}/orders/process_order?order_id=${orderId}`;
+  return apiCall(url, "GET");
+};
+
+export const createGuestOrderAPI = (payload) => {
+  const url = `${API_URL}/guest_orders`;
   return apiCall(url, "POST", payload);
 };

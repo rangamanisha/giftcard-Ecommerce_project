@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
 import { values } from "lodash";
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from "react-facebook-login";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,12 +39,13 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Enter a valid email").required("Email is required"),
+      email: Yup.string()
+        .email("Enter a valid email")
+        .required("Email is required"),
       password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
-      alert(JSON.stringify(values, null, 2))
     },
     validateOnChange: false,
   });
@@ -61,7 +62,6 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
-    
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
@@ -70,10 +70,8 @@ const Login = () => {
     dispatch(googlesigninAction({ accessToken }));
   };
   React.useEffect(() => {
-    return dispatch(authActions.clearErrors())
-  })
-
-  
+    return dispatch(authActions.clearErrors());
+  });
 
   return (
     <>
@@ -159,7 +157,7 @@ const Login = () => {
                       id="formHorizontalRadios1"
                     />
                   </Form.Group> */}
-                  <Form.Group className="forgot" style={{textAlign: 'left'}}>
+                  <Form.Group className="forgot" style={{ textAlign: "left" }}>
                     <Link className="link-color" to="/auth/forgotpassword">
                       Forgot Password?
                     </Link>
