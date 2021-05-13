@@ -26,11 +26,11 @@ import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-  const authState = useSelector(getAuthState);
-  const state = useSelector(getProfileState);
-  const profileState = state.profile;
+  const authState = useSelector(getAuthState)
   useEffect(() => {
+    if(authState.isAuthenticated){
     dispatch(getprofileListAction({}));
+    }
   }, [dispatch]);
 
   const formik = useFormik({
@@ -64,18 +64,7 @@ const UserProfile = () => {
     })
   }
   const [ value, setValue ] = React.useState(null);
-  const handleEdit = () => {
-    if(authState.isAuthenticated){
-    dispatch(updateUserprofileAction({
-            first_name: profileState.first_name,
-            last_name: profileState.lastName,
-            birthday: profileState.birthday,
-            gender: profileState.gender,
-            nationality: profileState.nationality
-          })
-          )
-        }
-        }
+  
 
 
   return (

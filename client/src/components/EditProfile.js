@@ -4,27 +4,9 @@ import UserProfile from "./UserProfile";
 import Updatepassword from "./updatepassword";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
-import { getProfileState } from '../reducer/profile.reducer'
-import { updateUserprofileAction } from '../actions/profile.actions'
-import { useDispatch, useSelector } from 'react-redux'
 
 const Editprofile = () => {
-  const dispatch = useDispatch();
   
-  // React.useEffect(() => {
-  //   if (authState.isAuthenticated) {
-
-  //     dispatch(updateUserprofileAction({
-  //       first_name: profileState.first_name,
-  //       last_name: profileState.lastName,
-  //       birthday: profileState.birthday,
-  //       gender: profileState.gender,
-  //       nationality: profileState.nationality
-  //     })
-  //     )
-  //   }
-  // }, [dispatch])
-
   return (
     <div className="container-fluid px-0">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">

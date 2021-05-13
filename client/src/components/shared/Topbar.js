@@ -14,7 +14,6 @@ import {getAuthState} from '../../reducer/auth.reducer'
 import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
 import {getProfileState} from '../../reducer/profile.reducer'
-
 const Topbar = (props) => {
   const {
     bg,
@@ -38,7 +37,11 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
-  const user = profileState.profile.first_name;
+  const user = () => {
+    if(authState.isAuthenticated){
+     return  profileState.profile.first_name
+    }
+  }
   const reward = () => {
     if(authState.isAuthenticated){
       return history.push("/reward-points")
@@ -64,7 +67,7 @@ const Topbar = (props) => {
     }
     return (
       <UserProfileDropDown
-        user={user}
+        user={user()}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
         profileIcon={userIcon}
