@@ -44,7 +44,6 @@ const Login = () => {
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
-      alert(JSON.stringify(values, null, 2))
     },
     validateOnChange: false,
   });

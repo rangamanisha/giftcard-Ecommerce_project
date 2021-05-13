@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Emailicon from "../assets/Email-icon.svg";
@@ -15,6 +15,11 @@ import {
 } from "../actions/profile.actions";
 import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import Modal from 'react-bootstrap/Modal'
+import swal from "sweetalert";
+import CountrySelect from 'react-bootstrap-country-select';
+import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
+
 
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
@@ -42,6 +47,20 @@ const UserProfile = () => {
       dispatch(updateUserprofileAction(data));
     },
   });
+  const handleShow = () => {
+    swal({
+      title: "",
+      icon: "success",
+      text: "We've successfully edited your details..",
+      type: "",
+      allowEscapeKey: false,
+      showConfirmButton: true,
+      showCancelButton: false,
+      confirmButtonColor: "#00AF9A",
+    })
+  }
+  const [ value, setValue ] = React.useState(null);
+
 
   return (
     <div className="profile-card mx-auto col-md-5" >
@@ -114,16 +133,15 @@ const UserProfile = () => {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
-          <Form.Control
-            size="sm"
-            type="text"
-            placeholder="Country"
-            className="profile-iconsfields-b"
-            // value={data.country}
-            value={formik.values.country}
-            onChange={formik.handleChange}
-            name="country"
-          />
+          <Form>
+           
+            <CountrySelect
+        value={value}
+        onChange={setValue}
+        matchNameFromStart={false}
+        matchAbbreviations
+      />
+        </Form>
         </Form.Group>
 
         <Form.Group
@@ -132,7 +150,7 @@ const UserProfile = () => {
         >
           <Form.Control
             size="sm"
-            type="text"
+            type="number"
             placeholder="phone number"
             className="profile-iconsfields"
             value={formik.values.phone}
@@ -169,6 +187,7 @@ const UserProfile = () => {
             variant="info"
             size="lg"
             type="submit"
+            onClick={handleShow}
           >
             Edit Profile
           </Button>

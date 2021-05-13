@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import UserProfile from "./UserProfile";
 import Updatepassword from "./updatepassword";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
+import { getProfileState } from '../reducer/profile.reducer'
+import { updateUserprofileAction } from '../actions/profile.actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuthState } from '../reducer/auth.reducer'
 
 const Editprofile = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(getProfileState);
+  const authState = useSelector(getAuthState);
+  const profileState = state.profile;
+  React.useEffect(() => {
+    if (authState.isAuthenticated) {
+
+      dispatch(updateUserprofileAction({
+        first_name: profileState.first_name,
+        last_name: profileState.lastName,
+        birthday: profileState.birthday,
+        gender: profileState.gender,
+        nationality: profileState.country
+      })
+      )
+    }
+  }, [])
+
   return (
     <div className="container-fluid px-0">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
