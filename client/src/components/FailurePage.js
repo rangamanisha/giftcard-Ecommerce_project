@@ -12,11 +12,14 @@ import FailedIcon from "../assets/failed.svg";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router";
 import Image from "react-bootstrap/Image";
+import { cartTotalCountAction } from "../actions/cart.actions";
+import { getGiftcardsState } from "../reducer/giftCards.reducer";
 
 const FailurePage = () => {
   const dispatch = useDispatch();
   const authState = useSelector(getAuthState);
   const orderState = useSelector(getOrderState);
+  const giftunitState = useSelector(getGiftcardsState);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -26,6 +29,11 @@ const FailurePage = () => {
     setErrorMessage(orderState.error || orderState.order_checkout_error);
     dispatch(orderActions.clearState());
     dispatch(cartAction.clearState());
+    dispatch(
+      cartTotalCountAction({
+        currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+      })
+    );
     setShowModal(true);
   }, [dispatch]);
 

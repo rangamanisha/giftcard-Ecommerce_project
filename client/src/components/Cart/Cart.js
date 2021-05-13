@@ -159,7 +159,7 @@ function Cart() {
           program_id: 1,
           use_credits: data.are_reward_points_used,
           current_exchange_rate: cartState.conversion.currency_exchange_rate,
-          use_hassad_points: false,
+          use_hassad_points: data.are_reward_points_used,
           language_code: "en",
           isbuynow: false,
           isforself: 1,
@@ -168,20 +168,6 @@ function Cart() {
         },
       };
       await dispatch(createOrderAction({ data: payload, event: {} }));
-      if (orderState.created_order) {
-        await dispatch(
-          processGiftCardCheckoutAction({
-            order_id: orderState.created_order?.id,
-          })
-        );
-        history.push({
-          pathname: `/success?order_id=${orderState.created_order?.id}`,
-        });
-      } else {
-        history.push({
-          pathname: `/failure?order_id=${orderState.created_order?.id}`,
-        });
-      }
     }
   };
 

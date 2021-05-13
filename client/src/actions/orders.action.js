@@ -62,20 +62,28 @@ export const createOrderAction = createAsyncThunk(
     const { data, event } = payload;
     const { dispatch } = thunkAPI;
     const response = await createOrderAPI(data);
-    if (response?.data?.order && !data.orders?.use_credits) {
-      const request = {
-        payment: {
-          token: event.token,
-          amount:
-            parseFloat(
-              parseFloat(response?.data?.order?.payment_currency_amount) * 100
-            ).toFixed(2) || 0,
-          payment_currency: data.orders?.payment_currency,
-          currency: data.orders?.payment_currency,
-          order_id: response?.data?.order?.id,
-        },
-      };
-      dispatch(createOrderCheckoutAction(request));
+    if (response?.data?.order) {
+      if (!data.orders?.use_credits) {
+        const request = {
+          payment: {
+            token: event.token,
+            amount:
+              parseFloat(
+                parseFloat(response?.data?.order?.payment_currency_amount) * 100
+              ).toFixed(2) || 0,
+            payment_currency: data.orders?.payment_currency,
+            currency: data.orders?.payment_currency,
+            order_id: response?.data?.order?.id,
+          },
+        };
+        dispatch(createOrderCheckoutAction(request));
+      } else {
+        await dispatch(
+          processGiftCardCheckoutAction({
+            order_id: response?.data?.order?.id,
+          })
+        );
+      }
     }
     return response;
   }
@@ -93,6 +101,16 @@ export const processGiftCardCheckoutAction = createAsyncThunk(
   "order/giftcard/checkout",
   async (payload, thunkAPI) => {
     const response = await processOrderByGiftCardAPI(payload?.order_id);
+    if (
+      response &&
+      response.data &&
+      response.data.order &&
+      response.data.order.id
+    ) {
+      window.location.href = `${window.location.origin}/confirm_order?order_id=${payload?.order_id}`;
+    } else {
+      window.location.href = `${window.location.origin}/failure?order_id=${payload?.order_id}`;
+    }
     return response;
   }
 );

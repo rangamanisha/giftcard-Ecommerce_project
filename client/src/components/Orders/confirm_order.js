@@ -18,10 +18,13 @@ import "./orders.scss";
 import { cartAction } from "../../reducer/cart.reducer";
 import GModal from "../GModal";
 import checkboxImage from "../../assets/checkbox.svg";
+import { cartTotalCountAction } from "../../actions/cart.actions";
+import { getGiftcardsState } from "../../reducer/giftCards.reducer";
 
 const Confirm_Order = () => {
   const dispatch = useDispatch();
   const orderState = useSelector(getOrderState);
+  const giftunitState = useSelector(getGiftcardsState);
   const orderdetail = get(orderState, "orders");
   const location = useLocation();
   const [showModal, setShowModal] = useState(false);
@@ -86,6 +89,11 @@ const Confirm_Order = () => {
         await dispatch(processOrderAfterRedirectAction({ order_id: id }));
         await dispatch(orderActions.clearState());
         await dispatch(cartAction.clearState());
+        dispatch(
+          cartTotalCountAction({
+            currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+          })
+        );
         setShowModal(true);
       }
       dispatch(
