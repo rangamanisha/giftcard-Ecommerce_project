@@ -22,11 +22,11 @@ const Editprofile = () => {
         last_name: profileState.lastName,
         birthday: profileState.birthday,
         gender: profileState.gender,
-        nationality: profileState.country
+        nationality: profileState.nationality
       })
       )
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="container-fluid px-0">

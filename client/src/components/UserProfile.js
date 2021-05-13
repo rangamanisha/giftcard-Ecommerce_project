@@ -35,7 +35,7 @@ const UserProfile = () => {
       lastName: profilestate.profile?.last_name || "",
       dob: profilestate.profile?.birthday || null,
       language: profilestate.profile?.language || "",
-      country: profilestate.profile?.country || "",
+      country: profilestate.profile?.nationality || "",
       phone: "",
       gender: profilestate.profile?.gender || "",
       email: profilestate.profile?.email || "",

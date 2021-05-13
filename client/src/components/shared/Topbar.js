@@ -42,7 +42,7 @@ const Topbar = (props) => {
     }
     else{
 
-      return history.push("auth/login")
+      return history.push(({pathname:"/auth/login"}))
     }
   }
 
