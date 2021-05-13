@@ -25,6 +25,8 @@ export const CART_ITEMS_INIT_STATE = {
   selectedCartCurrency: null,
   paymentCurrency: [],
   conversion: null,
+  totalCartAmount: 0,
+  checkoutCart: null,
 };
 
 export const CART_ITEMS_REDUCER = "cart_items";
@@ -37,31 +39,22 @@ export const cartItemsSlice = createSlice({
   name: CART_ITEMS_REDUCER,
   initialState: initialCartItemState,
   reducers: {
-    increaseCount(state) {
-      state.count = state.count + 1;
-    },
-    updateLineItem(state, action) {
-      const { item, index } = action.payload;
-      state.lineItems[index] = item;
-    },
-    decreaseCount(state, action) {
-      state.count = state.count - 1;
-    },
-    setCountZero(state, action) {
-      state.count = 1;
-    },
     saveItemsToCart(state, action) {
       state.lineItems = action.payload;
-    },
-    removeLineItem(state, action) {
-      const line_item = action.payload;
-      remove(state.lineItems, line_item);
     },
     updateSelectedCartCurrency(state, action) {
       state.selectedCartCurrency = action.payload;
     },
     updateTotalCartItems(state, action) {
       state.totalCartItems = action.payload;
+    },
+    updateCheckout(state, action) {
+      state.checkoutCart = action.payload;
+    },
+    clearState(state) {
+      state.checkoutCart = null;
+      state.selectedCartCurrency = null;
+      state.conversion = null;
     },
   },
   extraReducers: (builder) => {
@@ -89,6 +82,9 @@ export const cartItemsSlice = createSlice({
         const { data, code } = response;
         if (code === 200) {
           state.lineItems = data.carts;
+          state.totalCartAmount = parseFloat(data.total_price_in_aed).toFixed(
+            2
+          );
         } else {
           state.lineItems = [];
         }

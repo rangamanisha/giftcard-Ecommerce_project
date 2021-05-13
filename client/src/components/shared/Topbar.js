@@ -10,8 +10,9 @@ import exitIcon from "../../assets/exit.svg";
 import coinsIcon from "../../assets/coins.svg";
 import cartIcon from "../../assets/cart.svg";
 import userIcon from "../../assets/uprofile.svg";
-
+import { getAuthState } from "../../reducer/auth.reducer";
 import Container from "react-bootstrap/Container";
+import { useSelector } from "react-redux";
 
 const Topbar = (props) => {
   const {
@@ -29,13 +30,20 @@ const Topbar = (props) => {
   } = props;
   const user = localStorage.getItem("first_name");
   const history = useHistory();
-
+  const authState = useSelector(getAuthState);
   const clearsession = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('first_name');
      localStorage.removeItem('state');
     sessionStorage.clear();
     window.location.reload();
+  };
+  const reward = () => {
+    if (authState.isAuthenticated) {
+      return history.push("/reward-points");
+    } else {
+      return history.push("auth/login");
+    }
   };
 
   const getProfile = () => {
@@ -120,7 +128,7 @@ const Topbar = (props) => {
             <Button className="nav-btn text-white">For Business</Button>{" "}
           </div>
           <div className="nav-item mr-2">
-            <Button className="nav-btn" variant="info">
+            <Button className="nav-btn" variant="info" onClick={reward}>
               Redeem Your Gifti Global Card
             </Button>{" "}
           </div>

@@ -18,6 +18,12 @@ import {
 } from "../../actions/cart.actions";
 import CartWidget from "./CartWidget";
 import CartItemContainer from "./CartItemContainer";
+import { getTopBarState } from "../../reducer/topbar.reducer";
+import { getOrderState } from "../../reducer/orders.reducers";
+import {
+  createOrderAction,
+  processGiftCardCheckoutAction,
+} from "../../actions/orders.action";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -26,14 +32,15 @@ function Cart() {
   const cartState = useSelector(getCartItemsState);
   const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
+  const topbarState = useSelector(getTopBarState);
+  const orderState = useSelector(getOrderState);
 
   useEffect(() => {
     if (authState.isAuthenticated) {
-      console.log("authState ", authState);
       dispatch(
         fetchItemsByCartAction({
-          currency: giftunitState?.selectedCurrency?.unit_short_name || "AED",
-          currency_id: giftunitState?.selectedCurrency?.id || 1,
+          currency: giftunitState?.selectedCountry?.unit_short_name || "AED",
+          currency_id: giftunitState?.selectedCountry?.id || 1,
         })
       );
     }
@@ -63,8 +70,104 @@ function Cart() {
         })
       );
     } else {
-      dispatch(cartAction.saveItemsToCart([]));
-      dispatch(cartAction.updateTotalCartItems(0));
+      const lineItems = cartState.lineItems.filter(
+        (lineItem) =>
+          !(
+            lineItem.brand_id === item.brand_id &&
+            lineItem.giftcard_value === item.giftcard_value
+          )
+      );
+      dispatch(cartAction.saveItemsToCart(lineItems));
+      if (lineItems.length) {
+        const totalCartItems = lineItems
+          .map((lineItem) => parseFloat(lineItem.quantity))
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      } else {
+        dispatch(cartAction.updateTotalCartItems(0));
+      }
+    }
+  };
+
+  const incrementQuantity = (item) => {
+    if (authState.isAuthenticated) {
+      dispatch(
+        addRemoveQuantityAction({
+          ...item,
+          action: "ADD",
+          country: giftunitState.selectedCountry,
+        })
+      );
+    } else {
+      const lineItems = cartState.lineItems.map((lineItem) => {
+        if (
+          lineItem.brand_id === item.brand_id &&
+          lineItem.giftcard_value === item.giftcard_value
+        ) {
+          return Object.assign({}, lineItem, {
+            quantity: parseFloat(lineItem.quantity) + 1,
+          });
+        }
+        return lineItem;
+      });
+      dispatch(cartAction.saveItemsToCart(lineItems));
+    }
+  };
+
+  const decrementQuantity = (item) => {
+    if (authState.isAuthenticated) {
+      if (item.quantity === 1) {
+        removeItem(item);
+      } else {
+        dispatch(
+          addRemoveQuantityAction({
+            ...item,
+            action: "REMOVE",
+            country: giftunitState.selectedCountry,
+          })
+        );
+      }
+    } else {
+      if (item.quantity === 1) {
+        removeItem(item);
+      } else {
+        const lineItems = cartState.lineItems.map((lineItem) => {
+          if (
+            lineItem.brand_id === item.brand_id &&
+            lineItem.giftcard_value === item.giftcard_value
+          ) {
+            return Object.assign({}, lineItem, {
+              quantity: parseFloat(lineItem.quantity) - 1,
+            });
+          }
+          return lineItem;
+        });
+        dispatch(cartAction.saveItemsToCart(lineItems));
+      }
+    }
+  };
+
+  const createCheckout = async (data) => {
+    if (!data?.are_reward_points_used) {
+      dispatch(cartAction.updateCheckout(data));
+      history.push("payment");
+    } else {
+      const payload = {
+        orders: {
+          card_value_aed: null,
+          order_total_aed: data.total_amount,
+          program_id: 1,
+          use_credits: data.are_reward_points_used,
+          current_exchange_rate: cartState.conversion.currency_exchange_rate,
+          use_hassad_points: data.are_reward_points_used,
+          language_code: "en",
+          isbuynow: false,
+          isforself: 1,
+          payment_currency: data.currency || "AED",
+          currency: data.currency_id,
+        },
+      };
+      await dispatch(createOrderAction({ data: payload, event: {} }));
     }
   };
 
@@ -80,6 +183,7 @@ function Cart() {
               giftunitState={giftunitState}
               handleChangeCurrency={handleChangeCurrency}
               history={history}
+              createCheckout={createCheckout}
             />
           </Col>
 
@@ -89,6 +193,9 @@ function Cart() {
               giftCardState={giftunitState}
               history={history}
               removeItem={removeItem}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
+              topbarState={topbarState}
             />
           </Col>
         </Row>

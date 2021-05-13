@@ -3,49 +3,48 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 import GuestFrom from "./guestform";
 import Checkout from "./checkout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAuthState } from "../reducer/auth.reducer";
+import { getOrderState, orderActions } from "../reducer/orders.reducers";
+import { getCartItemsState } from "../reducer/cart.reducer";
+import { getProfileState } from "../reducer/profile.reducer";
 
 const Stepper = () => {
-  // setup step validators, will be called before proceeding to the next step
-  function step2Validator() {
-    // return a boolean
-  }
-
-  function step3Validator() {
-    // return a boolean
-  }
-
-  function onFormSubmit() {
-    // handle the submit logic here
-    // This function will be executed at the last step
-    // when the submit button (next button in the previous steps) is pressed
-  }
-
   const authState = useSelector(getAuthState);
+  const orderState = useSelector(getOrderState);
+  const cartState = useSelector(getCartItemsState);
+  const profileState = useSelector(getProfileState);
+
+  const dispatch = useDispatch();
 
   return (
     // render the progress bar
     <StepProgressBar
       startingStep={authState.isAuthenticated ? 1 : 0}
-      onSubmit={onFormSubmit}
+      primaryBtnClass={"invisible cart-next-btn"}
+      secondaryBtnClass={"invisible cart-prev-btn"}
       steps={[
         {
           label: "Order Details",
           name: "step 1",
-          content: <GuestFrom />,
+          content: (
+            <GuestFrom
+              orderState={orderState}
+              cartState={cartState}
+              orderActions={orderActions}
+              dispatch={dispatch}
+            />
+          ),
         },
         {
           label: "Payment",
           name: "step 2",
           content: <Checkout />,
-          validator: step2Validator,
         },
         {
           label: "Order Details",
           name: "step 3",
           content: "",
-          validator: step3Validator,
         },
       ]}
     />

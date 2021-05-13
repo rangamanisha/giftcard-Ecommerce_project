@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
 import { values } from "lodash";
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from "react-facebook-login";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,9 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Enter a valid email").required("Email is required"),
+      email: Yup.string()
+        .email("Enter a valid email")
+        .required("Email is required"),
       password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
@@ -64,16 +66,14 @@ const Login = () => {
     
   }, [state.isAuthenticated, state.reset, history]);
 
-  // const responseGoogle = (response) => {
-  //   debugger;
-  //   const accessToken = response.accessToken;
-  //   dispatch(googlesigninAction({ accessToken }));
-  // };
-  // React.useEffect(() => {
-  //   return dispatch(authActions.clearErrors())
-  // })
-
-  
+  const responseGoogle = (response) => {
+    debugger;
+    const accessToken = response.accessToken;
+    dispatch(googlesigninAction({ accessToken }));
+  };
+  React.useEffect(() => {
+    return dispatch(authActions.clearErrors());
+  });
 
   return (
     <>
@@ -215,8 +215,8 @@ const Login = () => {
                       variant="outline-light"
                       className="google-button"
                       clientId={googleId}
-                      // onSuccess={responseGoogle}
-                      // onFailure={responseGoogle}
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
                       isSignedIn={true}
                     />
                   </div>

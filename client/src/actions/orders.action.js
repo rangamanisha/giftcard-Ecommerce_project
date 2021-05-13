@@ -1,10 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { cartAction } from "../reducer/cart.reducer";
 import {
   allOrderApiCall,
   orderDetailsApiCall,
   failedOrderApiCall,
   processOrderApiCall,
   createOrderAPI,
+  createOrderCheckoutAPI,
+  processOrderByGiftCardAPI,
+  createGuestOrderAPI,
 } from "../services/orders.service";
 
 export const AllorderAction = createAsyncThunk(
@@ -20,7 +24,7 @@ export const AllorderAction = createAsyncThunk(
     return response;
   }
 );
-export const ProcessOrderAction = createAsyncThunk(
+export const processOrderAfterRedirectAction = createAsyncThunk(
   "ProcessOrder",
   async (payload, thunkAPI) => {
     const request = {
@@ -55,12 +59,85 @@ export const FailedOrderAction = createAsyncThunk(
 export const createOrderAction = createAsyncThunk(
   "order/create",
   async (payload, thunkAPI) => {
-    const response = await createOrderAPI(payload);
+    const { data, event } = payload;
+    const { dispatch } = thunkAPI;
+    const response = await createOrderAPI(data);
+    if (response?.data?.order) {
+      if (!data.orders?.use_credits) {
+        const request = {
+          payment: {
+            token: event.token,
+            amount:
+              parseFloat(
+                parseFloat(response?.data?.order?.payment_currency_amount) * 100
+              ).toFixed(2) || 0,
+            payment_currency: data.orders?.payment_currency,
+            currency: data.orders?.payment_currency,
+            order_id: response?.data?.order?.id,
+          },
+        };
+        dispatch(createOrderCheckoutAction(request));
+      } else {
+        await dispatch(
+          processGiftCardCheckoutAction({
+            order_id: response?.data?.order?.id,
+          })
+        );
+      }
+    }
     return response;
   }
 );
 
-export const createOrderCheckout = createAsyncThunk(
+export const createOrderCheckoutAction = createAsyncThunk(
   "order/checkout",
-  async (payload, thunkAPI) => {}
+  async (payload, thunkAPI) => {
+    const response = await createOrderCheckoutAPI(payload);
+    return response;
+  }
+);
+
+export const processGiftCardCheckoutAction = createAsyncThunk(
+  "order/giftcard/checkout",
+  async (payload, thunkAPI) => {
+    const response = await processOrderByGiftCardAPI(payload?.order_id);
+    if (
+      response &&
+      response.data &&
+      response.data.order &&
+      response.data.order.id
+    ) {
+      window.location.href = `${window.location.origin}/confirm_order?order_id=${payload?.order_id}`;
+    } else {
+      window.location.href = `${window.location.origin}/failure?order_id=${payload?.order_id}`;
+    }
+    return response;
+  }
+);
+
+export const createGuestOrderAction = createAsyncThunk(
+  "order/guest/create",
+  async (payload, thunkAPI) => {
+    const { data, event } = payload;
+    const { dispatch } = thunkAPI;
+    const response = await createGuestOrderAPI(data);
+    if (response?.data?.order) {
+      await dispatch(cartAction.saveItemsToCart([]));
+      await dispatch(cartAction.updateTotalCartItems(0));
+      const request = {
+        payment: {
+          token: event.token,
+          amount:
+            parseFloat(
+              parseFloat(response?.data?.order?.payment_currency_amount) * 100
+            ).toFixed(2) || 0,
+          payment_currency: data.order?.payment_currency,
+          currency: data.order?.payment_currency,
+          order_id: response?.data?.order?.id,
+        },
+      };
+      dispatch(createOrderCheckoutAction(request));
+    }
+    return response;
+  }
 );

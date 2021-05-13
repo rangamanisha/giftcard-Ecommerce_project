@@ -33,11 +33,13 @@ export const cartItemAction = createAsyncThunk(
 export const fetchItemsByCartAction = createAsyncThunk(
   "cart_items/listfetchcart",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const request = {
       currency: payload.currency,
       currency_id: payload.currency_id,
     };
     const response = await fetchItemsByCartService(request);
+    dispatch(cartTotalCountAction(request));
     return response;
   }
 );
@@ -45,7 +47,6 @@ export const fetchItemsByCartAction = createAsyncThunk(
 export const addRemoveQuantityAction = createAsyncThunk(
   "cart_items/listaddremove",
   async (payload, thunkAPI) => {
-    console.log("payload ", payload);
     const { dispatch } = thunkAPI;
     const request = {
       cart_item: {
@@ -93,6 +94,11 @@ export const updateCartAction = createAsyncThunk(
         country_id: payload.country_id,
       },
     };
+    if (!request.cart_item.isforself) {
+      request.cart_item["contact_email"] = payload.contact_email;
+      request.cart_item["contact_name"] = payload.contact_name;
+      request.cart_item["gift_message"] = payload.gift_message;
+    }
     const response = await cartItemsService(request);
     dispatch(cartTotalCountAction({ currency: payload.currency }));
     return response;
@@ -118,7 +124,6 @@ export const getConversionRateAction = createAsyncThunk(
       currency: payload.id,
     };
     const { dispatch } = thunkAPI;
-    console.log("inside getConversionRateAction");
     dispatch(cartAction.updateSelectedCartCurrency(payload));
     const response = await getConversionRateService(request);
     return response;

@@ -54,7 +54,6 @@ const RewardPoints = (props) => {
       } else if (
         points_data.message === "Your gift card has already been redeemed"
       ) {
-        console.log(points_data.message);
         setModalShow(true);
       }
     },

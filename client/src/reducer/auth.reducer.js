@@ -42,8 +42,10 @@ export const authSlice = createSlice({
   initialState: AUTH_INITIAL_STATE_LOGIN,
   reducers: {
     removeLoginOrSignUpMessage(state, action) {
-      console.log("check alret remove");
       state.signupOrLoginActionClicked = action.payload;
+    },
+    clearErrors(state, action) {
+      state.errors = null;
     },
   },
   extraReducers: (builder) => {
@@ -82,7 +84,6 @@ export const authSlice = createSlice({
       })
       .addCase(signupAction.fulfilled, (state, action) => {
         const response = action.payload;
-        console.log(response);
         if (response.code === 200) {
           state.signupActionClicked = true;
           state.signupSuccess = true;

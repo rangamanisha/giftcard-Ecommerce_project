@@ -32,6 +32,8 @@ import Idc_Order from "./components/IDC/IdcOrder";
 import Idc_Profile from "./components/IDC/idcProfile";
 import Idc_Header from "./components/IDC/IdcHeader";
 import Idc_Signin from "./components/IDC/IdcSign";
+import SuccessPage from "./components/SuccessPage";
+import FailurePage from "./components/FailurePage";
 
 function App() {
   return (
@@ -62,8 +64,6 @@ function App() {
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
-        {/* <Route path="/allfeaturedcards" component={AllFeaturedCards} exact /> */}
-        {/* <Route path="/selectcard" component={SelectCards} exact /> */}
         <Route path="/profile" component={EditProfile} exact />
         <Route path="/reward-points" component={RewardPoints} exact />
         <Route path="/checkout" component={Checkout} exact />
@@ -75,13 +75,10 @@ function App() {
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order" component={Confirm_Order} />
         <Route path="/terms-and-conditions" component={ConditionsPage} exact />
-        <Route path="/contact-us" component={Contact} exact />
+        <Route path="/contact" component={Contact} exact />
         <Route path="/enquiry" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
-        <Route path="/conditionsPage" component={ConditionsPage} exact />
-        {/* <Route path="/contact" component={Contact} exact />
-        <Route path="/enquiryPage" component={EnquiryPage} exact />
-        <Route path="/privacypolicyPage" component={PrivacypolicyPage} exact /> */}
+        <Route path="/failure" component={FailurePage} exact />
         <Route path="/" exact>
           <Redirect to={{ pathname: "/" }} />
         </Route>

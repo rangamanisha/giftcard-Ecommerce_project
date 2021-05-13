@@ -91,7 +91,6 @@ const Idc_Order = ()=>{
 
   const onSubmitfile = (e) => {
     e.preventDefault();
-    console.log(e);
     setSelectedFile(e.target[1].files[0]);
     let file = e.target[1].files[0];
     let formData = new FormData();
@@ -127,7 +126,6 @@ const Idc_Order = ()=>{
           result.code === 404 ||
           result.code === 401
         ) {
-          console.log(result.code);
           seterrorr(result.message);
         }
       });

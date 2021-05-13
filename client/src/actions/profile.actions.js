@@ -12,6 +12,7 @@ export const getprofileListAction = createAsyncThunk(
 export const updateUserprofileAction = createAsyncThunk(
   "profile/update",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const request = {
       user: {
         first_name: payload.firstName,
@@ -22,6 +23,7 @@ export const updateUserprofileAction = createAsyncThunk(
       },
     };
     const response = await updateprofileAPI(request);
+    dispatch(getprofileListAction());
     return response;
   }
 );
