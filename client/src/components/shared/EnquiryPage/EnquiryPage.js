@@ -635,153 +635,153 @@ function EnquiryPage() {
   </Row>
 </Tab.Container> */}
       <Header />
-
-      <div className="container my-4">
-        <Row className="">
-          <Col md={5}>
-            <h3 className="font-weight-bold faq-col">
-              Frequently Asked Questions
-            </h3>
-          </Col>
-          <Col md={7} className="align-self-center">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control frequently-asked-input enquiry-searchbar"
-                placeholder="What are you looking for?"
-              />
-              <span className="frequently-asked-input enqpage-search enqpage-border">
-                <MdSearch />
-              </span>
-            </div>
-          </Col>
-        </Row>
-        <Row className="mt-3">
-          <Col md={12}>
-            <div className="help-faq mt-3">
-              <h5>Help with your questions…</h5>
-              <p>
-                If you have any questions take a look at our FAQs section below.
-                If you can’t find the answer, please contact us
-              </p>
-            </div>
-          </Col>
-        </Row>
-        <Tab.Container id="faq" defaultActiveKey="account_creation">
-          <Row>
-            <Col md={5} className="mt-4">
-              <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="account_creation">Account Creation</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="account_managemant">Account Management</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="workDoes">How does it work?</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="aboutGiftCard">About GiftiGlobal Gift Card</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="privacy">My Data and Privacy</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="orders">My Orders</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="payment">About My Payment</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="delivery">About My Delivery</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="mb-3 faq-list" eventKey="technicalIssues">Technical issues</Nav.Link>
-                </Nav.Item>
-              </Nav>
-
+      <div className="faqMainWrap">
+        <div className="container my-4">
+          <Row className="">
+            <Col md={4}>
+              <h3 className="font-weight-bold faq-col faq_title">
+                Frequently Asked Questions
+              </h3>
             </Col>
-            <Col md={7} className="align-self-center mt-4">
-              <div >
-                <Tab.Content>
-                  <Tab.Pane eventKey="account_creation">
-                    {account_creation()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="account_managemant">
-                    {Management()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="workDoes">
-                    {workDoes()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="aboutGiftCard">
-                    {aboutGiftiGlobal()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="privacy">
-                    {MyData()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="orders">
-                    {MyOrders()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="payment">
-                    {Payment()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="delivery">
-                    {Deleviery()}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="technicalIssues">
-                    {techincalIssues()}
-                  </Tab.Pane>
-                </Tab.Content>
-                {/* <div className="mb-3 parah-style help-faq">
-                How do i change my password?
-              </div> */}
-                {/* <div className="mb-3" style={{ opacity: "0.5" }}>
-                Click on <strong>‘Sign In’</strong>. Click on{" "}
-                <strong>‘Reset password’</strong> next to your password.
-              </div> */}
-                {/* <div style={{ opacity: "0.5" }}>
-                Once you change your password, you will receive an email with a
-                link to prompt you to change your password. Remember to check
-                your spam folder if you don’t receive an email.
-              </div> */}
-                {/* <IoIosClose
-                style={{
-                  position: "absolute",
-                  right: "24px",
-                  top: "10px",
-                  width: "5%",
-                  height: "15%",
-                }}
-              /> */}
+            <Col md={8} className="d-flex align-items-center">
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control frequently-asked-input enquiry-searchbar"
+                  placeholder="What are you looking for?"
+                />
+                <span className="frequently-asked-input enqpage-search enqpage-border">
+                  <MdSearch />
+                </span>
               </div>
             </Col>
-            {/* </Row> */}
           </Row>
-        </Tab.Container>
-        {/* <Row className="mt-2">
-          <Col md={5}></Col>
-          <Col md={7} className="">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control enqpage-border py-3"
-                placeholder="Problems logging in?"
-              />
-              <IoIosAdd
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  top: "6px",
-                  color: "#3A72EC",
-                  width: "5%",
-                  height: "60%",
-                }}
-              />
-            </div>
-          </Col>
-        </Row> */}
-      </div>
-      <div className ="faq-bootom-border">
+          <Row className="mt-3">
+            <Col md={12}>
+              <div className="help-faq mt-3">
+                <h5>Help with your questions…</h5>
+                <p>
+                  If you have any questions take a look at our FAQs section below.
+                  If you can’t find the answer, please contact us
+                </p>
+              </div>
+            </Col>
+          </Row>
+          <Tab.Container id="faq" defaultActiveKey="account_creation">
+            <Row>
+              <Col md={4} className="mt-4">
+                <Nav variant="pills" className="flex-column">
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="account_creation">Account Creation</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="account_managemant">Account Management</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="workDoes">How does it work?</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="aboutGiftCard">About GiftiGlobal Gift Card</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="privacy">My Data and Privacy</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="orders">My Orders</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="payment">About My Payment</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="delivery">About My Delivery</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link className="mb-3 faq-list" eventKey="technicalIssues">Technical issues</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+
+              </Col>
+              <Col md={8} className="align-self-center mt-4">
+                <div >
+                  <Tab.Content>
+                    <Tab.Pane eventKey="account_creation">
+                      {account_creation()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="account_managemant">
+                      {Management()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="workDoes">
+                      {workDoes()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="aboutGiftCard">
+                      {aboutGiftiGlobal()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="privacy">
+                      {MyData()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="orders">
+                      {MyOrders()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="payment">
+                      {Payment()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="delivery">
+                      {Deleviery()}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="technicalIssues">
+                      {techincalIssues()}
+                    </Tab.Pane>
+                  </Tab.Content>
+                  {/* <div className="mb-3 parah-style help-faq">
+                  How do i change my password?
+                </div> */}
+                  {/* <div className="mb-3" style={{ opacity: "0.5" }}>
+                  Click on <strong>‘Sign In’</strong>. Click on{" "}
+                  <strong>‘Reset password’</strong> next to your password.
+                </div> */}
+                  {/* <div style={{ opacity: "0.5" }}>
+                  Once you change your password, you will receive an email with a
+                  link to prompt you to change your password. Remember to check
+                  your spam folder if you don’t receive an email.
+                </div> */}
+                  {/* <IoIosClose
+                  style={{
+                    position: "absolute",
+                    right: "24px",
+                    top: "10px",
+                    width: "5%",
+                    height: "15%",
+                  }}
+                /> */}
+                </div>
+              </Col>
+              {/* </Row> */}
+            </Row>
+          </Tab.Container>
+          {/* <Row className="mt-2">
+            <Col md={5}></Col>
+            <Col md={7} className="">
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control enqpage-border py-3"
+                  placeholder="Problems logging in?"
+                />
+                <IoIosAdd
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "6px",
+                    color: "#3A72EC",
+                    width: "5%",
+                    height: "60%",
+                  }}
+                />
+              </div>
+            </Col>
+          </Row> */}
+        </div>
+        <div className ="faq-bootom-border">
         <div class = "row pb-5">
           <div className =" col-sm-2"></div>
           <div className = " col-sm-8">
@@ -802,6 +802,7 @@ function EnquiryPage() {
 
 </div>
         </div>
+      </div>
       </div>
     </>
   )
