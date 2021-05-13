@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import { useLocation } from "react-router-dom";
@@ -8,28 +8,85 @@ import {
   processOrderAfterRedirectAction,
 } from "../../actions/orders.action";
 import { getOrderState, orderActions } from "../../reducer/orders.reducers";
-import { Col, Image, Row, Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import { get, map } from "lodash";
 import "./orders.scss";
 import { cartAction } from "../../reducer/cart.reducer";
+import GModal from "../GModal";
+import checkboxImage from "../../assets/checkbox.svg";
 
 const Confirm_Order = () => {
   const dispatch = useDispatch();
   const orderState = useSelector(getOrderState);
   const orderdetail = get(orderState, "orders");
   const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalClose = () => {
+    console.log("triggered ");
+    setShowModal(false);
+  };
+
+  const modalBody = () => {
+    return (
+      <Container fluid className="p-2">
+        <Row>
+          <Col xs={12} className="text-center">
+            <Image
+              src={checkboxImage}
+              rounded
+              className="rounded"
+              style={{ width: "4em" }}
+            />
+          </Col>
+          <Col xs={12} className="text-center pt-2">
+            <h2>Payment Successful</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} className="pt-3 text-center">
+            <p style={{ opacity: "0.9" }}>
+              You can find the voucher in the email soon after the order status
+              is fulfilled
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Button
+              className="profile-btn mt-2 btn-block"
+              variant="info"
+              size="lg"
+              type="button"
+              onClick={handleModalClose}
+            >
+              Ok
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+    );
+  };
 
   const orderInit = async () => {
     const search = location.search.split("?order_id=")[1] || null;
     let id = 0;
     if (search) {
-      id = search.substring(0, search.indexOf("&"));
+      id = search.substring(
+        0,
+        search.indexOf("&") !== -1 ? search.indexOf("&") : search.length
+      );
     }
     if (id) {
-      if (search.indexOf("cko-session-id")) {
+      if (search.indexOf("cko-session-id") !== -1) {
         await dispatch(processOrderAfterRedirectAction({ order_id: id }));
         await dispatch(orderActions.clearState());
         await dispatch(cartAction.clearState());
+        setShowModal(true);
       }
       dispatch(
         OrderDetailsAction({
@@ -42,7 +99,7 @@ const Confirm_Order = () => {
 
   useEffect(() => {
     orderInit();
-  }, [orderInit]);
+  }, []);
 
   return (
     <div className="datatable-responsive-demo">
@@ -167,6 +224,7 @@ const Confirm_Order = () => {
           </>
         ))}
       </div>
+      {showModal ? <GModal show={showModal}>{modalBody()}</GModal> : null}
     </div>
   );
 };

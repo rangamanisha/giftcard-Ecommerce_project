@@ -42,6 +42,8 @@ export const orderSlice = createSlice({
       state.order_checkout_error = null;
       state.error = null;
       state.guest_payload = null;
+      state.data = [];
+      state.orders = [];
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -65,6 +67,7 @@ export const orderSlice = createSlice({
       .addCase(AllorderAction.rejected, (state) => {})
       .addCase(OrderDetailsAction.pending, (state) => {
         state.code = true;
+        state.orders = null;
       })
       .addCase(OrderDetailsAction.fulfilled, (state, action) => {
         const response = action.payload;
