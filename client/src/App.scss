@@ -221,6 +221,7 @@ opacity: 1;
 .home-footer {
   width: auto;
   background-color: #ffffff !important;
+  box-shadow: 0px -2px 6px #00000029;
 }
 
 .Footer-text {
@@ -321,13 +322,17 @@ opacity: 1;
   margin-top: 65px;
   top: 40px;
   left: 130px;
-  width: 500px;
-  height: 450px;
+  max-width: 500px;
+  max-height: 450px;
+  min-height: 400px;
+  width: auto;
+  height: auto;
   border-radius: 12px;
   background-color: #FFFFFF !important;
   font-family: Open Sans,bold;
   color:#03014C;
   box-shadow: 0px 2px 28px #3e357824;
+  padding: 0em 2em;
 }
 
 
@@ -494,6 +499,11 @@ border: 1px solid #00B2AE !important;
   position: absolute;
   bottom: 16px;
   left: 24px;
+}
+.icon_right{
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
 }
 
 .location {
@@ -941,7 +951,7 @@ align-self: center !important;
     border: solid 0.5px #E1E1EA;;
     border-radius: 5px;
     background-color: #E1E1EA;
-    //  opacity: 0.25
+    //  opacity: 0.25                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 }
 .nav a{
   color: black;
@@ -977,6 +987,11 @@ font-size: 25px;
 
 .active{
   color:#000000;
+}
+
+
+input.redeem-button-a.form-control {
+  height: auto;
 }
 
 
@@ -1079,9 +1094,27 @@ height: 35%;
 }
 
 .font-balance{
-  font-family:OpenSans-Bold;
-  font-weight: lighter;
+
+  color:#00B2AE;
+  font: var(--unnamed-font-style-normal) normal bold 18px/24px Open Sans;
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal bold 18px/24px Open Sans;
+letter-spacing: 0px;
+color: #00B2AE;
+opacity: 1;
+  
 }
+.font-balance-red{
+  font: var(--unnamed-font-style-normal) normal bold 18px/24px Open Sans;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal bold 18px/24px Open Sans;
+  letter-spacing: 0px;
+  color: #F22462;
+  opacity: 1;
+}
+
 
 .popup-btn{
   width: 55%;
@@ -1260,7 +1293,6 @@ body {
 ///coment
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 .faqMainWrap {
   .faq_title {
@@ -1310,7 +1342,9 @@ body {
         padding: 0;
         padding-left: 60px;
         position: relative;
-        font-family: 'Roboto', sans-serif;
+       
+        font-weight:400;
+        
 
         &::before {
           content: "";
@@ -1326,6 +1360,8 @@ body {
       a.faq-list.nav-link.active {
         background-color: transparent;
         color: #3A86FF;
+        font-family: Roboto-Bold !important;
+        font-weight: bold;
 
         &::before {
           opacity: 1;
@@ -1335,11 +1371,11 @@ body {
   }
 
   .tab-content {
-    .faq.card {
-        margin-bottom: 30px;
+    .card {
+        margin-bottom: 30px !important;
         border-bottom: 1px solid !important;
         border-color: #ddd !important;
-        border-radius: 10px;
+        border-radius: 10px !important;
         font-family: 'Open Sans';
     }
     .card-header {
@@ -1366,12 +1402,27 @@ body {
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
+  padding-top: 70px;
   }
   
   .faq-bootom-border {
   
     background-color: #00B2AE;
   }
+  button{
+    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+    border-radius: 8px;
+    opacity: 1;
+    padding: 12px;
+    font-size: 18px;
+    font: var(--unnamed-font-style-normal) normal bold 18px/19.2px Cairo;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal bold 18px/19px Cairo;
+    letter-spacing: 0px;
+    /* color: #FFFFFF; */
+    opacity: 1;
+}
 
   
 }

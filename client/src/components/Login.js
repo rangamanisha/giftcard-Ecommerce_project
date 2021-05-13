@@ -11,13 +11,15 @@ import Facebookicon from "../assets/Facebook-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
-import { getAuthState } from "../reducer/auth.reducer";
+import { getAuthState, authActions } from "../reducer/auth.reducer";
 import { loginAction, googlesigninAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
+import { values } from "lodash";
+import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -37,12 +39,14 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().min(2).max(200).email().required(),
-      password: Yup.string().min(2).max(200).required(),
+      email: Yup.string().email("Enter a valid email").required("Email is required"),
+      password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
+      alert(JSON.stringify(values, null, 2))
     },
+    validateOnChange: false,
   });
 
   useEffect(() => {
@@ -57,14 +61,19 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
+    
   }, [state.isAuthenticated, state.reset, history]);
 
-  const responseGoogle = (response) => {
-    debugger;
-    const accessToken = response.accessToken;
-    console.log(accessToken);
-    dispatch(googlesigninAction({ accessToken }));
-  };
+  // const responseGoogle = (response) => {
+  //   debugger;
+  //   const accessToken = response.accessToken;
+  //   dispatch(googlesigninAction({ accessToken }));
+  // };
+  // React.useEffect(() => {
+  //   return dispatch(authActions.clearErrors())
+  // })
+
+  
 
   return (
     <>
@@ -98,7 +107,7 @@ const Login = () => {
               </p>
 
               <Form onSubmit={formik.handleSubmit} className="user login-form">
-                <Form.Group controlId="formBasicEmail" className="icons_login">
+                <Form.Group controlId="formBasicEmail5" className="icons_login">
                   <Form.Control
                     size="md"
                     type="email"
@@ -107,11 +116,12 @@ const Login = () => {
                     onChange={formik.handleChange}
                     className="icons_fields"
                     name="email"
+                    isInvalid={formik.touched.email && formik.errors.email}
                   />
                   <img src={Usericon} alt="Icon" className="icon_img" />
                 </Form.Group>
 
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <p className="validation-messages">{formik.errors.email}</p>
                 ) : null}
 
@@ -127,28 +137,31 @@ const Login = () => {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     name="password"
+                    isInvalid={
+                      formik.touched.password && formik.errors.password
+                    }
                   />
                   <img src={Passwordicon} alt="Icon" className="icon_img" />
                 </Form.Group>
 
-                {formik.errors.password ? (
+                {formik.touched.password && formik.errors.password ? (
                   <p className="validation-messages">
                     {formik.errors.password}
                   </p>
                 ) : null}
 
                 <div className="redio-forgot">
-                  <Form.Group className="redio">
+                  {/* <Form.Group className="redio">
                     <Form.Check
                       type="radio"
                       label="Remember Me"
                       name="formHorizontalRadios"
                       id="formHorizontalRadios1"
                     />
-                  </Form.Group>
-                  <Form.Group className="forgot">
+                  </Form.Group> */}
+                    <Form.Group className="forgot" style={{textAlign:"left"}}>
                     <Link className="link-color" to={{pathname:"/auth/forgotpassword",state:{"idc":false}}}>
-                      Forgot me?
+                      Forgot Password?
                     </Link>
                   </Form.Group>
                 </div>
@@ -202,16 +215,17 @@ const Login = () => {
                       variant="outline-light"
                       className="google-button"
                       clientId={googleId}
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                    ></GoogleLogin>
+                      // onSuccess={responseGoogle}
+                      // onFailure={responseGoogle}
+                      isSignedIn={true}
+                    />
                   </div>
                   <div className="facebook">
                     <Button
                       variant="outline-light"
                       className="facebook-button"
                       provider="facebook"
-                      appId={fbId}
+                      // appId={fbId}
                     >
                       <img
                         src={Facebookicon}
