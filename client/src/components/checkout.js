@@ -135,7 +135,11 @@ const Checkout = (props) => {
               size="md"
               type="text"
               placeholder="Name on the card"
-              value={profileState?.profile?.first_name || ""}
+              value={
+                profileState?.profile?.first_name ||
+                orderState?.guest_payload?.user?.first_name ||
+                ""
+              }
               onChange=""
               className="cc-card card-number field"
               name="first_name"
