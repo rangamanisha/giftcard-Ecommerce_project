@@ -18,12 +18,13 @@ import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
-import { values } from "lodash";
-import FacebookLogin from "react-facebook-login";
+import { getuseractiveAction } from "../actions/useractive.actions";
+import { getUserActiveState } from "../reducer/useractive.reducer";
 
 const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
+  const useractive = useSelector(getUserActiveState);
   const history = useHistory();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -49,6 +50,25 @@ const Login = () => {
     },
     validateOnChange: false,
   });
+
+  useEffect(() => {
+    const search = history.location.search;
+    console.log("search ", search);
+    if (search.indexOf("?confirm_account=") !== -1) {
+      const token = search.split("confirm_account=")[1];
+      const data = { token };
+      dispatch(getuseractiveAction(data));
+      if (useractive.verified === true) {
+        setIsValid(true);
+        setMessage(
+          "Your account has been successfully created. Go to profile !"
+        );
+        window.setTimeout(() => {
+          setVisible(false);
+        }, 3000);
+      }
+    }
+  }, [dispatch, useractive.verified, history]);
 
   useEffect(() => {
     if (state.isAuthenticated) {

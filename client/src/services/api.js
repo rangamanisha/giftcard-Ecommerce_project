@@ -36,7 +36,7 @@ export const apiCall = async (
   if (result.status === 403 || result.status === 401) {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = "/";
+    window.location.href = `${window.location.origin}/auth/login`;
   }
 
   if (!result.ok) {
@@ -44,5 +44,13 @@ export const apiCall = async (
     return body;
   }
 
-  return result.json();
+  const response = await result.json();
+
+  if (response.code === 401 || response.code === 403) {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
+  }
+
+  return response;
 };

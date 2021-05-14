@@ -47,6 +47,13 @@ export const authSlice = createSlice({
     clearErrors(state, action) {
       state.errors = null;
     },
+    setAuthState(state, action) {
+      state.user = action.payload;
+      state.accessToken = action.payload.access_token;
+      state.isAuthenticated = true;
+      localStorage.setItem("access_token", action.payload.access_token);
+      localStorage.setItem("first_name", action.payload.first_name);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,6 +96,11 @@ export const authSlice = createSlice({
           state.signupSuccess = true;
           state.is_active = true;
           state.signupOrLoginActionClicked = true;
+          state.user = response.data.user;
+          state.accessToken = response.data.user.access_token;
+          state.isAuthenticated = true;
+          localStorage.setItem("access_token", response.data.user.access_token);
+          localStorage.setItem("first_name", response.data.user.first_name);
         }
         if (response.code === 400) {
           state.signupSuccess = false;
