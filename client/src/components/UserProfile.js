@@ -47,8 +47,14 @@ const UserProfile = () => {
     validationSchema: Yup.object({
       phone: Yup.string().min(10).max(10),
     }),
-    onSubmit: (data) => {
-      dispatch(updateUserprofileAction(data));
+    onSubmit: () => {
+      dispatch(updateUserprofileAction({
+        first_name: profilestate.profile?.first_name || "",
+        last_name: profilestate.profile?.lastName || "",
+        birthday: profilestate.profile?.birthday || "",
+        gender: profilestate.profile?.gender || "",
+        nationality: profilestate.profile?.nationality || ""
+      } ));
     },
   });
   const handleShow = () => {

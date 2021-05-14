@@ -7,12 +7,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Usericon from "../assets/User-icon.svg";
 import Passwordicon from "../assets/Password-icon.svg";
-import Facebookicon from "../assets/Facebook-icon.svg";
+import Facebookicon from "../assets/facebook-icon.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
-import { loginAction, googlesigninAction } from "../actions/auth.actions";
+import { loginAction, googlesigninAction, facebookAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ const Login = () => {
   const history = useHistory();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
-
+  const [login, setLogin] = useState(false)
   const [message, setMessage] = useState("");
 
   const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
@@ -62,12 +62,17 @@ const Login = () => {
     }
     
   }, [state.isAuthenticated, state.reset, history]);
-
   const responseGoogle = (response) => {
-    debugger;
     const accessToken = response.accessToken;
-    dispatch(googlesigninAction({ accessToken }));
+    dispatch(googlesigninAction({accessToken}))
   };
+  const responseFacebook = (response) => {
+    const accessToken = response.accessToken;
+    if(accessToken){
+       setLogin(true)
+    }
+    else setLogin(false)
+  }
   React.useEffect(() => {
     return dispatch(authActions.clearErrors())
   })
@@ -219,19 +224,31 @@ const Login = () => {
                       isSignedIn={true}
                     />
                   </div>
-                  <div className="facebook">
-                    <Button
-                      variant="outline-light"
-                      className="facebook-button"
+                  <div className="">
+                    {/* <Button
                       provider="facebook"
                       appId={fbId}
                     >
-                      <img
+                    <img
                         src={Facebookicon}
+                        className="facebook-button"
                         style={{ width: "50px", height: "50px" }}
                         alt="Icon"
                       />
-                    </Button>
+                    </Button> */}
+                    <FacebookLogin
+                    variant="outline-light"
+                    className="google-button"
+                appId={fbId}
+                callback={responseFacebook}
+                size="small"
+                className="facebook-button"
+                icon={Facebookicon}
+                
+              />
+                        
+                    
+
                   </div>
                 </div>
               </Form>

@@ -37,14 +37,10 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
-  const user = () => {
-    if(authState.isAuthenticated){
-     return  profileState.profile.first_name
-    }
-  }
+  const user = profileState.profile?.first_name || "" 
   const reward = () => {
     if(authState.isAuthenticated){
-      return history.push("/reward-points")
+      return history.push(({pathname:"/reward-points"}))
     }
     else{
 
@@ -67,7 +63,7 @@ const Topbar = (props) => {
     }
     return (
       <UserProfileDropDown
-        user={user()}
+        user={user}
         userLoginIcon={userLoginIcon}
         clearSession={clearsession}
         profileIcon={userIcon}

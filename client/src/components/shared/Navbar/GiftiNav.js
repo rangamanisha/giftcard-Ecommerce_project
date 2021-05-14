@@ -59,11 +59,11 @@ const GiftiNav = () => {
     if (authState.isAuthenticated) {
 
       dispatch(updateUserprofileAction({
-        first_name: profileState.profile.first_name,
-        last_name: profileState.profile.lastName,
-        birthday: profileState.profile.birthday,
-        gender: profileState.profile.gender,
-        nationality: profileState.profile.nationality
+        first_name: profileState.profile?.first_name || "",
+        last_name: profileState.profile?.lastName || "",
+        birthday: profileState.profile?.birthday || "",
+        gender: profileState.profile?.gender || "",
+        nationality: profileState.profile?.nationality || ""
       })
       )
     }

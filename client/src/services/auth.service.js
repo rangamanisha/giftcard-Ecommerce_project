@@ -29,3 +29,7 @@ export const googleloginAPI = (userData) => {
   const url = `${API_URL}/accounts/sessions/signin`;
   return apiCall(url, "POST", userData, null, false);
 };
+export const facebookAPI = (userData) => {
+  const url = `${API_URL}/accounts/sessions/signin`;
+  return apiCall(url, "POST", userData, null, false)
+}

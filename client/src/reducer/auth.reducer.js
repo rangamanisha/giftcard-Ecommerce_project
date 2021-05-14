@@ -10,6 +10,7 @@ import {
   forgotpasswordAction,
   googlesigninAction,
   updatepasswordAction,
+  facebookAction
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -139,6 +140,19 @@ export const authSlice = createSlice({
         }
         if (response.code === undefined) {
           state.errors = [response.email];
+        }
+      })
+      .addCase(facebookAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if(response.code === 200){
+          state.isAuthenticated = true;
+          state.first_name = response.data.user.first_name;
+          localStorage.setItem("access_token", response.data.user.access_token);
+          localStorage.setItem("first_name", response.data.user.first_name);
+
+        }
+        if(response.code === 400){
+          state.errors = [response.message];
         }
       })
 
