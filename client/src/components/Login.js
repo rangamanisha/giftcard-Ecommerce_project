@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Usericon from "../assets/User-icon.svg";
 import Passwordicon from "../assets/Password-icon.svg";
-import Facebookicon from "../assets/facebook-icon.png";
+import Facebookicon from "../assets/Facebook-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
@@ -19,7 +19,8 @@ import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
 import { values } from "lodash";
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -64,9 +65,26 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
   const responseGoogle = (response) => {
     const accessToken = response.accessToken;
+    dispatch(googlesigninAction({
+      email: state.email,
+      provider: state.provider,
+      token_type: state.token_type,
+      accessToken: state.accessToken,
+      expiresIn: state.expiresIn
+
+    }))
+    
   };
-  const responseFacebook = (response) => {
+ const responseFacebook = (response) => {
     const accessToken = response.accessToken;
+    
+    dispatch(facebookAction({
+      email: state.email,
+      provider: state.provider,
+      token_type: state.token_type,
+      accessToken: state.accessToken,
+      expiresIn: state.expiresIn
+    }))
   }
   React.useEffect(() => {
     return dispatch(authActions.clearErrors())
@@ -149,14 +167,7 @@ const Login = () => {
                 ) : null}
 
                 <div className="redio-forgot">
-                  {/* <Form.Group className="redio">
-                    <Form.Check
-                      type="radio"
-                      label="Remember Me"
-                      name="formHorizontalRadios"
-                      id="formHorizontalRadios1"
-                    />
-                  </Form.Group> */}
+                  
                   <Form.Group className="forgot" style={{textAlign: 'left'}}>
                     <Link className="link-color" to="/auth/forgotpassword">
                       Forgot Password?
@@ -218,26 +229,24 @@ const Login = () => {
                       isSignedIn={true}
                     />
                   </div>
-                  <div className="">
-                    {/* <Button
-                      provider="facebook"
-                      appId={fbId}
-                    >
-                    <img
-                        src={Facebookicon}
-                        className="facebook-button"
-                        style={{ width: "50px", height: "50px" }}
-                        alt="Icon"
-                      />
-                    </Button> */}
+                  <div className="facebook">
+                    
                     <FacebookLogin
-                    variant="outline-light"
-                    className="google-button"
-                appId={fbId}
-                callback={responseFacebook}
-                size="small"
-                className="facebook-button"
-                icon={Facebookicon}
+                    appId={fbId}
+                    callback={responseFacebook}
+                    size="medium"
+                    autoLoad="true"
+                    render={renderProps => (
+                      <button onClick={renderProps.onClick}><img 
+                      src={Facebookicon}
+                      variant="outline-light"
+                      autoLoad
+                      auto_logout_link={true}
+                      className="facebook-button"
+                      style={{ width: "50px", height: "50px" }}
+                        alt="Icon"/>
+                      </button>
+                    )}
                 
               />
                         

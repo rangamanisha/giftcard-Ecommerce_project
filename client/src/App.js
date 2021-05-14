@@ -32,6 +32,7 @@ import Idc_Order from "./components/IDC/IdcOrder";
 import Idc_Profile from "./components/IDC/idcProfile";
 import Idc_Header from "./components/IDC/IdcHeader";
 import Idc_Signin from "./components/IDC/IdcSign";
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -63,9 +64,9 @@ function App() {
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
         <Route path="/profile" component={EditProfile} exact />
-        <Route path="/reward-points" component={RewardPoints} exact />
-        <Route path="/checkout" component={Checkout} exact />
-        <Route path="/payment" component={StepsDemo} exact />
+        <ProtectedRoute path="/reward-points" component={RewardPoints} exact />
+        <ProtectedRoute path="/checkout" component={Checkout} exact />
+        <ProtectedRoute path="/payment" component={StepsDemo} exact />
         <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
         <Route path="/selectcard" component={SelectCards} exact />
         <Route path="/order/allorder" component={AllOrder} exact />

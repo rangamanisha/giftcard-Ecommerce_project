@@ -30,6 +30,9 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   signupOrLoginActionClicked: false,
   signupSuccess: false,
   reset: false,
+  email: null,
+  provider: null,
+
 };
 
 export const AUTH_FEATURE_KEY = "auth";
@@ -64,6 +67,8 @@ export const authSlice = createSlice({
           state.isAuthenticated = true;
           state.message = response.message;
           state.first_name = response.data.user.first_name;
+          state.email = response.data.user.email;
+          state.provider = response.data.provider
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
           state.alertlogin = true;
@@ -142,10 +147,15 @@ export const authSlice = createSlice({
           state.errors = [response.email];
         }
       })
+      .addCase(facebookAction.pending, (state, action) => {
+        state.errors = null;
+        state.user = null;
+      })
       .addCase(facebookAction.fulfilled, (state, action) => {
         const response = action.payload;
         if(response.code === 200){
           state.isAuthenticated = true;
+          state.provider = "Facebook"
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
@@ -155,11 +165,18 @@ export const authSlice = createSlice({
           state.errors = [response.message];
         }
       })
-
+      .addCase(facebookAction.rejected, (state, action) => {
+        state.errors = [action.error.message || ""];
+      })
+      .addCase(googlesigninAction.pending, (state, action) => {
+        state.errors = null;
+        state.user = null;
+      }) 
       .addCase(googlesigninAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.isAuthenticated = true;
+          state.provider = "Google"
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
@@ -167,7 +184,12 @@ export const authSlice = createSlice({
         if (response.code === 400) {
           state.errors = [response.message];
         }
-      });
+      })
+      .addCase(googlesigninAction.rejected, (state, action) => {
+        state.errors = [action.error.message || ""]
+      })
+      
+      
   },
 });
 

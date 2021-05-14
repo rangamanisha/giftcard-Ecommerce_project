@@ -29,6 +29,7 @@ export const googlesigninAction = createAsyncThunk(
         provider: "Google",
         token_type: "access_token",
         token: payload.accessToken,
+        expiresIn: payload.expiresIn
       },
     };
     const response = await googleloginAPI(request);
@@ -43,7 +44,8 @@ export const facebookAction = createAsyncThunk(
         email: payload.email,
         provider: "Facebook",
         token_type: "access_token",
-        token: payload.accessToken
+        token: payload.accessToken,
+        expiresIn: payload.expiresIn
       },
     };
     const response = await facebookAPI(request);
