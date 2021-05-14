@@ -64,21 +64,15 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
   const responseGoogle = (response) => {
     const accessToken = response.accessToken;
-    dispatch(googlesigninAction({accessToken}))
   };
   const responseFacebook = (response) => {
     const accessToken = response.accessToken;
-    if(accessToken){
-       setLogin(true)
-    }
-    else setLogin(false)
   }
   React.useEffect(() => {
     return dispatch(authActions.clearErrors())
   })
 
   
-
   return (
     <>
       <div>
