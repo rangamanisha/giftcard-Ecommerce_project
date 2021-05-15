@@ -4,6 +4,9 @@
     padding: 15px 0;
     font-family: 'Nunito', sans-serif;
 }
+button.btn {
+    cursor: not-allowed;
+}
 .swal-button-container {
     margin: 5px !important;
      display: inherit !important;
@@ -728,7 +731,7 @@ label.customL {
 
 @media (min-width: 768px) {
     .headerLayout1 {
-        margin-top: -40px;
+        margin-top: 0px;
     }
 }
 @media (min-width: 1200px) {

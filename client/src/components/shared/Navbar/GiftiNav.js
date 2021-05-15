@@ -26,6 +26,7 @@ const GiftiNav = () => {
   const cartState = useSelector(getCartItemsState);
   const state = useSelector(getTopBarState);
   const dispatch = useDispatch();
+  const token = localStorage.getItem('access_token');
   const countries = isEmpty(giftunitState.countries)
     ? []
     : sortBy(get(giftunitState, "countries"), ["country_name"]);
@@ -74,7 +75,7 @@ const GiftiNav = () => {
       searchIcon={Search}
       userLoginIcon={UserLogin}
       shoppingCartIcon={Shoppingcart}
-      showLogin={!authState.isAuthenticated}
+      showLogin={!token}
       onCountrySelected={countryChanged}
       cartState={cartState}
     />

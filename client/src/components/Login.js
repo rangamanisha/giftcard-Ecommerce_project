@@ -47,6 +47,7 @@ const Login = () => {
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
+      alert(JSON.stringify(values, null, 2))
     },
     validateOnChange: false,
   });
@@ -82,6 +83,7 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
+    
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
@@ -177,8 +179,8 @@ const Login = () => {
                       id="formHorizontalRadios1"
                     />
                   </Form.Group> */}
-                  <Form.Group className="forgot" style={{ textAlign: "left" }}>
-                    <Link className="link-color" to="/auth/forgotpassword">
+                    <Form.Group className="forgot" style={{textAlign:"left"}}>
+                    <Link className="link-color" to={{pathname:"/auth/forgotpassword",state:{"idc":false}}}>
                       Forgot Password?
                     </Link>
                   </Form.Group>
@@ -243,7 +245,7 @@ const Login = () => {
                       variant="outline-light"
                       className="facebook-button"
                       provider="facebook"
-                      appId={fbId}
+                      // appId={fbId}
                     >
                       <img
                         src={Facebookicon}
