@@ -44,13 +44,13 @@ export const apiCall = async (
     return body;
   }
 
-  const response = await result.json();
+  // const response = await result.json();
 
-  if (response.code === 401 || response.code === 403) {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.reload();
-  }
+  // if (response.code === 401) {
+  //   localStorage.clear();
+  //   sessionStorage.clear();
+  //   window.location.href = `${window.location.origin}/auth/login`;
+  // }
 
-  return response;
+  return result.json();
 };
