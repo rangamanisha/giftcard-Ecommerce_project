@@ -25,16 +25,19 @@ const ForgotPassword = (props) => {
       email: Yup.string().min(2).max(200).email().required(),
     }),
     onSubmit: (data) => {
-      dispatch(forgotpasswordAction({
-        email:data.email,
-        idc: props.location.state.idc}));
+      dispatch(
+        forgotpasswordAction({
+          email: data.email,
+          idc: props.location.state.idc,
+        })
+      );
     },
   });
 
   useEffect(() => {
     if (state.status === "OK" && props.location.state.idc === false) {
       history.push({ pathname: "/" });
-    }else if (state.status === "OK" && props.location.state.idc === true) {
+    } else if (state.status === "OK" && props.location.state.idc === true) {
       history.push({ pathname: "/idc/signin" });
     }
   });

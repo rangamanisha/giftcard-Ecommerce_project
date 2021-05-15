@@ -30,7 +30,6 @@ const Confirm_Order = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModalClose = () => {
-    console.log("triggered ");
     setShowModal(false);
   };
 

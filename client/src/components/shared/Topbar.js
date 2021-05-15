@@ -32,9 +32,9 @@ const Topbar = (props) => {
   const history = useHistory();
   const authState = useSelector(getAuthState);
   const clearsession = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('first_name');
-     localStorage.removeItem('state');
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("first_name");
+    localStorage.removeItem("state");
     sessionStorage.clear();
     window.location.reload();
   };

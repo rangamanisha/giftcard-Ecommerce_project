@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 // import "./EnquiryPage.scss";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
@@ -8,45 +8,41 @@ import { MdSearch } from "react-icons/md";
 import Accordion from "react-bootstrap/Accordion";
 import Header from "../HeaderPage/Header";
 
-import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
-
+import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 
 import Mail from "../../../assets/Mail.png";
 import PhoneIcon from "../../../assets/PhoneIcon.png";
 
-
 function EnquiryPage() {
- 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-const ContextAwareToggle = ({ children, eventKey, callback }) => {
-  const currentEventKey = eventKey;
+  const ContextAwareToggle = ({ children, eventKey, callback }) => {
+    const currentEventKey = eventKey;
 
-  const decoratedOnClick = useAccordionToggle(
-    eventKey,
-    () => callback && callback(eventKey),
-  );
+    const decoratedOnClick = useAccordionToggle(
+      eventKey,
+      () => callback && callback(eventKey)
+    );
 
-  const isCurrentEventKey = currentEventKey === eventKey;
+    const isCurrentEventKey = currentEventKey === eventKey;
 
-  return (
-    <div
-      style={{ p: isCurrentEventKey ? '+' : '-' }}
-      onClick={decoratedOnClick}
-    >
-      {children}
-    </div>
-  );
-}
+    return (
+      <div
+        style={{ p: isCurrentEventKey ? "+" : "-" }}
+        onClick={decoratedOnClick}
+      >
+        {children}
+      </div>
+    );
+  };
   const account_creation = () => {
     return (
       <Accordion defaultActiveKey="0">
         <Card>
-          
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            How can I create an account  
+            How can I create an account
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
@@ -613,9 +609,6 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>
-     
- 
-    
         </Accordion>
       </>
     );
@@ -884,48 +877,77 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
               <div className="help-faq mt-3">
                 <h5>Help with your questions…</h5>
                 <p>
-                  If you have any questions take a look at our FAQs section below.
-                  If you can’t find the answer, please contact us
+                  If you have any questions take a look at our FAQs section
+                  below. If you can’t find the answer, please contact us
                 </p>
               </div>
             </Col>
           </Row>
           <Tab.Container id="faq" defaultActiveKey="account_creation">
-            <Row className ="mt-5">
+            <Row className="mt-5">
               <Col md={4} className="mt-4">
                 <Nav variant="pills" className="flex-column">
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="account_creation">Account Creation</Nav.Link>
+                    <Nav.Link
+                      className="mb-3 faq-list"
+                      eventKey="account_creation"
+                    >
+                      Account Creation
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="account_managemant">Account Management</Nav.Link>
+                    <Nav.Link
+                      className="mb-3 faq-list"
+                      eventKey="account_managemant"
+                    >
+                      Account Management
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="workDoes">How does it work?</Nav.Link>
+                    <Nav.Link className="mb-3 faq-list" eventKey="workDoes">
+                      How does it work?
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="aboutGiftCard">About GiftiGlobal Gift Card</Nav.Link>
+                    <Nav.Link
+                      className="mb-3 faq-list"
+                      eventKey="aboutGiftCard"
+                    >
+                      About GiftiGlobal Gift Card
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="privacy">My Data and Privacy</Nav.Link>
+                    <Nav.Link className="mb-3 faq-list" eventKey="privacy">
+                      My Data and Privacy
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="orders">My Orders</Nav.Link>
+                    <Nav.Link className="mb-3 faq-list" eventKey="orders">
+                      My Orders
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="payment">About My Payment</Nav.Link>
+                    <Nav.Link className="mb-3 faq-list" eventKey="payment">
+                      About My Payment
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="delivery">About My Delivery</Nav.Link>
+                    <Nav.Link className="mb-3 faq-list" eventKey="delivery">
+                      About My Delivery
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="mb-3 faq-list" eventKey="technicalIssues">Technical issues</Nav.Link>
+                    <Nav.Link
+                      className="mb-3 faq-list"
+                      eventKey="technicalIssues"
+                    >
+                      Technical issues
+                    </Nav.Link>
                   </Nav.Item>
                 </Nav>
-
               </Col>
               <Col md={8} className="align-self-center mt-4">
-                <div >
+                <div>
                   <Tab.Content>
                     <Tab.Pane eventKey="account_creation">
                       {account_creation()}
@@ -933,24 +955,14 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
                     <Tab.Pane eventKey="account_managemant">
                       {Management()}
                     </Tab.Pane>
-                    <Tab.Pane eventKey="workDoes">
-                      {workDoes()}
-                    </Tab.Pane>
+                    <Tab.Pane eventKey="workDoes">{workDoes()}</Tab.Pane>
                     <Tab.Pane eventKey="aboutGiftCard">
                       {aboutGiftiGlobal()}
                     </Tab.Pane>
-                    <Tab.Pane eventKey="privacy">
-                      {MyData()}
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="orders">
-                      {MyOrders()}
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="payment">
-                      {Payment()}
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="delivery">
-                      {Deleviery()}
-                    </Tab.Pane>
+                    <Tab.Pane eventKey="privacy">{MyData()}</Tab.Pane>
+                    <Tab.Pane eventKey="orders">{MyOrders()}</Tab.Pane>
+                    <Tab.Pane eventKey="payment">{Payment()}</Tab.Pane>
+                    <Tab.Pane eventKey="delivery">{Deleviery()}</Tab.Pane>
                     <Tab.Pane eventKey="technicalIssues">
                       {techincalIssues()}
                     </Tab.Pane>
@@ -1004,28 +1016,42 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
             </Col>
           </Row> */}
         </div>
-        <div className ="faq-bootom-border">
-        <div class = "row pb-5">
-          <div className =" col-sm-2"></div>
-          <div className = " col-sm-8">
-          <div className ="faq-text">We’re always happy to serve you <br/> Reach out to us through any of these channels</div>
-          
+        <div className="faq-bootom-border">
+          <div class="row pb-5">
+            <div className=" col-sm-2"></div>
+            <div className=" col-sm-8">
+              <div className="faq-text">
+                We’re always happy to serve you <br /> Reach out to us through
+                any of these channels
+              </div>
+            </div>
+            <div className="col-sm-2"></div>
           </div>
-          <div className="col-sm-2"></div>
-        </div>
-        <div className="row pb-5">
-          <div className="col-sm-3"></div>
-          <div className="col-sm-6" style={{ textAlign: "center" }}>
-            <Button className="nav-btn text-white mr-5">
-            <a href="mailto:care@giftiglobal.com" target="_blank" style ={{color:"white",textDecoration:"none"}}>
-              <img src={Mail} alt="mail"  />&nbsp; &nbsp; &nbsp;care@giftiglobal.com
-              </a>
-            </Button>{" "}
-            <Button  variant="light" className="nav-btn " style = {{color:"#544E5D"}}>  <img src={PhoneIcon} alt="phone" /> +971 (0)4 872 8418</Button>{" "}
+          <div className="row pb-5">
+            <div className="col-sm-3"></div>
+            <div className="col-sm-6" style={{ textAlign: "center" }}>
+              <Button className="nav-btn text-white mr-5">
+                <a
+                  href="mailto:care@giftiglobal.com"
+                  target="_blank"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  <img src={Mail} alt="mail" />
+                  &nbsp; &nbsp; &nbsp;care@giftiglobal.com
+                </a>
+              </Button>{" "}
+              <Button
+                variant="light"
+                className="nav-btn "
+                style={{ color: "#544E5D" }}
+              >
+                {" "}
+                <img src={PhoneIcon} alt="phone" /> +971 (0)4 872 8418
+              </Button>{" "}
+            </div>
+            <div className="col-sm-3"></div>
           </div>
-          <div className="col-sm-3"></div>
         </div>
-      </div>
       </div>
     </>
   );

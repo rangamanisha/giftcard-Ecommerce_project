@@ -89,7 +89,7 @@ export const forgotpasswordAction = createAsyncThunk(
   async (payload, thunkAPI) => {
     const request = {
       email: payload.email,
-      idc:payload.idc
+      idc: payload.idc,
     };
 
     const response = await forgotpasswordAPI(request);

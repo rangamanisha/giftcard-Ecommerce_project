@@ -142,16 +142,23 @@ const RewardPoints = (props) => {
                         </Moment>
                       </td>
                       <td>{transaction.type}</td>
-                      {transaction.type === "GIFT CARD"?
-                      (<td>Gift Card Redemption: &nbsp;{transaction.card_number}</td>):
-                     (<td>Order Number: &nbsp;{transaction.order_id}</td>)}
-                      {transaction.transaction_type === "CREDITED" || transaction.transaction_type === "CASHBACK" ?(
-                      <td className="font-balance">
-                        
-                        + &nbsp;{transaction.amount}
-                      </td>):( <td className="font-balance-red">
-                        - &nbsp;{transaction.amount}
-                      </td>)}
+                      {transaction.type === "GIFT CARD" ? (
+                        <td>
+                          Gift Card Redemption: &nbsp;{transaction.card_number}
+                        </td>
+                      ) : (
+                        <td>Order Number: &nbsp;{transaction.order_id}</td>
+                      )}
+                      {transaction.transaction_type === "CREDITED" ||
+                      transaction.transaction_type === "CASHBACK" ? (
+                        <td className="font-balance">
+                          + &nbsp;{transaction.amount}
+                        </td>
+                      ) : (
+                        <td className="font-balance-red">
+                          - &nbsp;{transaction.amount}
+                        </td>
+                      )}
                       <td>{transaction.current_balance}</td>
                     </tr>
                   );

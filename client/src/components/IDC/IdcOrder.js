@@ -23,71 +23,61 @@ import {
 import { countryCodeApiCall } from "../../services/idc.service";
 export const API_URL = process.env.REACT_APP_API_URL;
 
+const Idc_Order = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const idcState = useSelector(getIdcState);
+  const [points, setPoints] = useState();
+  const idc_varities = get(idcState, "idcProduct.idc_product");
+  const countries = get(idcState, "countries");
+  const [selectedFile, setSelectedFile] = useState("");
+  const [filename1, setFilename1] = useState();
+  const [fileerrors, setFileerrors] = useState();
+  const [errorr, seterrorr] = useState();
+  const [filecredit, setFilecredit] = useState();
+  const [idccurrency, setidccurrency] = useState();
+  const [denomination, setDenomination] = useState("");
+  const [giftcard_variety_id, setgiftcard_variety_id] = useState("");
+  const access_token = localStorage.getItem("idc_access_token");
+  const delete_uploaded_file = () => {
+    setFilename1("");
+    setFilecredit("");
+    setSelectedFile("");
+    setFileerrors("");
+    seterrorr("");
+  };
 
+  const changeHandler = (event) => {
+    event.preventDefault();
+    setFileerrors("");
+    seterrorr("");
+    setSelectedFile(event.target.files[0]);
+    setFilename1(event.target.files[0].name);
 
-
-const Idc_Order = ()=>{
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const idcState = useSelector(getIdcState);
-    const [points,setPoints] = useState();
-    const idc_varities = get(idcState, "idcProduct.idc_product");
-    const countries = get(idcState,"countries"); 
-    const [selectedFile, setSelectedFile] = useState('');
-    const [filename1, setFilename1] = useState();
-    const [fileerrors, setFileerrors] = useState();
-    const [errorr,seterrorr] = useState();
-    const [filecredit,setFilecredit] = useState();
-    const [idccurrency,setidccurrency] = useState();
-    const [denomination, setDenomination] = useState('');
-    const [giftcard_variety_id,setgiftcard_variety_id] = useState('');
-    const access_token = localStorage.getItem('idc_access_token');
-    const delete_uploaded_file = () => {
-      setFilename1("");
-      setFilecredit("");
-      setSelectedFile("");
-      setFileerrors("");
-      seterrorr("");
-    };
-
-    const changeHandler = (event) => {
-        event.preventDefault();
-        setFileerrors('');
-         seterrorr('');
-		   setSelectedFile(event.target.files[0]);
-        setFilename1(event.target.files[0].name);
-       
-        let file = event.target.files[0];
-        let formData = new FormData();
-        formData.append('idc_order_file', file);
-        let url  = API_URL + '/idc_orders/get_use_credit_for_file'
-        let bulkapifile = fetch(url, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'Authorization': 'Bearer ' + access_token,
-            }
-          })
-          bulkapifile.then((resp) => {
-            resp.json().then((result) => {
-              console.log(result.code);
-              if (result.code === 200 && result.data) {
-                setFilecredit(result.data.order.total_credit_to_used);
-              } else if (result.code === 404 || result.code === 400) {
-                console.log(result);
-                setFileerrors(result.message);
-              } else if (result.code === 401) {
-                localStorage.clear();
-                history.push({ pathname: "/idc/signin" });
-              }
-            });
-          });
-        
-
-	};
-    
-
-    
+    let file = event.target.files[0];
+    let formData = new FormData();
+    formData.append("idc_order_file", file);
+    let url = API_URL + "/idc_orders/get_use_credit_for_file";
+    let bulkapifile = fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: "Bearer " + access_token,
+      },
+    });
+    bulkapifile.then((resp) => {
+      resp.json().then((result) => {
+        if (result.code === 200 && result.data) {
+          setFilecredit(result.data.order.total_credit_to_used);
+        } else if (result.code === 404 || result.code === 400) {
+          setFileerrors(result.message);
+        } else if (result.code === 401) {
+          localStorage.clear();
+          history.push({ pathname: "/idc/signin" });
+        }
+      });
+    });
+  };
 
   const onSubmitfile = (e) => {
     e.preventDefault();
@@ -131,7 +121,6 @@ const Idc_Order = ()=>{
       });
     });
   };
-
 
   const columns = [
     {
@@ -241,43 +230,41 @@ const Idc_Order = ()=>{
     },
   });
 
+  React.useEffect(() => {
+    dispatch(IdcTotalCreditnAction());
+  }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(IdcVaritiesAction());
+  }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(IdcProfileAction());
+  }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(IdcCountriesAction());
+  }, [dispatch]);
 
-        
-React.useEffect(() => {
-  dispatch(IdcTotalCreditnAction());
-}, [dispatch]);
-React.useEffect(() => {
-  dispatch(IdcVaritiesAction());
-}, [dispatch]);
-React.useEffect(() => {
-  dispatch(IdcProfileAction());
-}, [dispatch]);
-React.useEffect(() => {
-  dispatch(IdcCountriesAction());
-}, [dispatch]);
-
-  const handleOffence = (name)=>{
+  const handleOffence = (name) => {
     formik.values.quantity = "";
-    setPoints("");  
-    let match = find(idc_varities, { 'product_name_to_display': name});   
+    setPoints("");
+    let match = find(idc_varities, { product_name_to_display: name });
     setDenomination(match.denomination);
     setgiftcard_variety_id(match.giftcard_variety_id);
-    setidccurrency(match.curreny_name);        
-}
+    setidccurrency(match.curreny_name);
+  };
 
-  const creditamount = (e)=>{
+  const creditamount = (e) => {
     const count = e.target.value;
-   const amountValue = denomination*count;
-   setPoints(amountValue);
+    const amountValue = denomination * count;
+    setPoints(amountValue);
     dispatch(
-        IdcConvertCurrencyAction({
-          amount: amountValue,
-          margin:0,
-          dest:'AED',
-          source:{idccurrency}
-        })
-    )}
-
+      IdcConvertCurrencyAction({
+        amount: amountValue,
+        margin: 0,
+        dest: "AED",
+        source: { idccurrency },
+      })
+    );
+  };
 
   return (
     <>
@@ -434,40 +421,50 @@ React.useEffect(() => {
                 onSubmit={formik.handleSubmit}
               >
                 <div className="row">
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group">
-                            <label className="customL">
-                                <span>First Name</span>
-                            </label>
-                            <input type="text" name="first_name" 
-                                placeholder="First Name " value={formik.values.first_name}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                  className="form-control"
-                                />
-         {formik.touched.first_name && formik.errors.first_name ? (
-            <p className="validation-messages">{formik.errors.first_name}</p>
-          ) : null}
-                        </div>
-                    </div>
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group" >
-                            <label className="customL">
-                                <span>Last Name</span>
-                            </label>
-                            <input type="text" name="last_name" 
-                                placeholder="Last Name " 
-                                value={formik.values.last_name}
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}
-                                className="form-control"/>
-         {formik.touched.last_name  && formik.errors.last_name ? (
-            <p className="validation-messages">{formik.errors.last_name}</p>
-          ) : null}
-                        </div>
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>First Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name "
+                        value={formik.values.first_name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className="form-control"
+                      />
+                      {formik.touched.first_name && formik.errors.first_name ? (
+                        <p className="validation-messages">
+                          {formik.errors.first_name}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
-              
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Last Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name "
+                        value={formik.values.last_name}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        className="form-control"
+                      />
+                      {formik.touched.last_name && formik.errors.last_name ? (
+                        <p className="validation-messages">
+                          {formik.errors.last_name}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="form-group">
                   <label className="customL">
                     <span>Email</span>
@@ -480,160 +477,181 @@ React.useEffect(() => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     type="email"
-                        placeholder="Email"
-                        pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'/>
-                                 {formik.touched.email  && formik.errors.email ? (
-            <p className="validation-messages">{formik.errors.email}</p>
-          ) : null}
+                    placeholder="Email"
+                    pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <p className="validation-messages">{formik.errors.email}</p>
+                  ) : null}
                 </div>
-              
-              
-                <div className="row">
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group">
-                            <label className="customL">
-                                <span>Company</span>
-                            </label>
-                            <input type="text" name="company_name" 
-                                placeholder="Company " 
-                                value={formik.values.company_name}
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}  className="form-control" />
-         { formik.touched.company_name && formik.errors.company_name ? (
-            <p className="validation-messages">{formik.errors.company_name}</p>
-          ) : null}
-                        </div>
-                    </div>
-                  
 
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group">
-                            <label className="customL">
-                                <span>Designation</span>
-                            </label>
-                            <input type="text" name="company_title" value={formik.values.company_title}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                placeholder="Designation " 
-                                className="form-control"/>
-         {formik.touched.company_title && formik.errors.company_title ? (
-            <p className="validation-messages">{formik.errors.company_title}</p>
-          ) : null}
-                        </div>
+                <div className="row">
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Company</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="company_name"
+                        placeholder="Company "
+                        value={formik.values.company_name}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        className="form-control"
+                      />
+                      {formik.touched.company_name &&
+                      formik.errors.company_name ? (
+                        <p className="validation-messages">
+                          {formik.errors.company_name}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
-              
-              
-                <div className="row">
-                
-                        <div className="col-xs-12 col-md-6">
-                            <div className="form-group">
-              
-                                    <label className="customL">
-                                        <span>Country</span>
-                                    </label>
-                                    <Form.Control
-                                        as="select"
-                                        custom
-                                        id = "product_select"
-                                        name = "country"
-                                        value={formik.values.country}
-                                        onBlur={formik.handleBlur}
-                                        onChange={formik.handleChange}
-                                        >
-            <option value ="Select Country">Select Country</option>
-            {map(countries,(c,i)=>(
-          <option key={i}  value ={c.country_name}>{c.country_name}</option>
-            ))}
 
-        </Form.Control>
-                                
-                                {formik.touched.country && formik.errors.country ? (
-            <p className="validation-messages">{formik.errors.country}</p>
-          ) : null}
-                            </div>
-                        </div>
-
-                        <div className="col-xs-12 col-md-6">
-                            <div className="form-group">
-                                <label className="customL">
-                                    <span>Mobile Number</span>
-                                </label>
-                                
-                                    {/* <span className="input-group-addon">{idcState.country_code}</span> */}
-                                    <input type="text" name="phone" value={formik.values.phone}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                         placeholder="Mobile Number "
-                                         className="form-control mobile-number-input"
-                                        />
-                                             { formik.touched.phone && formik.errors.phone ? (
-            <p className="validation-messages">{formik.errors.phone}</p>
-          ) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                
-                <div className="row">
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group">
-                            <label className="customL">
-                                <span>Product</span>
-                            </label>
-                            <Form.Control
-          as="select"
-          custom
-          id = "product_select"
-          value={formik.values.product}
-          onBlur={formik.handleBlur}
-          onChange={(e) => {
-            formik.handleChange(e);
-            handleOffence(e.currentTarget.value);
-          }}
-          name = "product">
-            <option value ="Select Product">Select Product</option>
-            {map(idc_varities,(c,i)=>(
-          <option  key={i} value ={c.product_name_to_display}>{c.product_name_to_display}</option>
-            ))}
-        </Form.Control>
-             { formik.touched.product && formik.errors.product ? (
-            <p className="validation-messages">{formik.errors.product}</p>
-          ) : null}
-
- 
-                        </div>
-                    </div>
-                  
-
-                    <div className="col-xs-12 col-md-6">
-                        <div className="form-group">
-                            <label className="customL">
-                                <span>Quantity</span>
-                            </label>
-                            <input type="number" name="quantity" 
-                            value={formik.values.quantity}
-                            onBlur={formik.handleBlur}
-                            onChange={(e) => {
-                                formik.handleChange(e);
-                                creditamount(e);
-                              }}
-                            placeholder="Enter Quantity"
-                              
-                                className="form-control"
-                             
-                               /> 
-                            {formik.touched.quantity && formik.errors.quantity ? (
-            <p className="validation-messages">{formik.errors.quantity}</p>
-          ) : null}
-                        </div>
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Designation</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="company_title"
+                        value={formik.values.company_title}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        placeholder="Designation "
+                        className="form-control"
+                      />
+                      {formik.touched.company_title &&
+                      formik.errors.company_title ? (
+                        <p className="validation-messages">
+                          {formik.errors.company_title}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
-              
-{idcState.points && points?(
-                <div className="col-xs-12 col-md-12">
+                </div>
+
+                <div className="row">
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Country</span>
+                      </label>
+                      <Form.Control
+                        as="select"
+                        custom
+                        id="product_select"
+                        name="country"
+                        value={formik.values.country}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                      >
+                        <option value="Select Country">Select Country</option>
+                        {map(countries, (c, i) => (
+                          <option key={i} value={c.country_name}>
+                            {c.country_name}
+                          </option>
+                        ))}
+                      </Form.Control>
+
+                      {formik.touched.country && formik.errors.country ? (
+                        <p className="validation-messages">
+                          {formik.errors.country}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Mobile Number</span>
+                      </label>
+
+                      {/* <span className="input-group-addon">{idcState.country_code}</span> */}
+                      <input
+                        type="text"
+                        name="phone"
+                        value={formik.values.phone}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        placeholder="Mobile Number "
+                        className="form-control mobile-number-input"
+                      />
+                      {formik.touched.phone && formik.errors.phone ? (
+                        <p className="validation-messages">
+                          {formik.errors.phone}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Product</span>
+                      </label>
+                      <Form.Control
+                        as="select"
+                        custom
+                        id="product_select"
+                        value={formik.values.product}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          formik.handleChange(e);
+                          handleOffence(e.currentTarget.value);
+                        }}
+                        name="product"
+                      >
+                        <option value="Select Product">Select Product</option>
+                        {map(idc_varities, (c, i) => (
+                          <option key={i} value={c.product_name_to_display}>
+                            {c.product_name_to_display}
+                          </option>
+                        ))}
+                      </Form.Control>
+                      {formik.touched.product && formik.errors.product ? (
+                        <p className="validation-messages">
+                          {formik.errors.product}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="col-xs-12 col-md-6">
+                    <div className="form-group">
+                      <label className="customL">
+                        <span>Quantity</span>
+                      </label>
+                      <input
+                        type="number"
+                        name="quantity"
+                        value={formik.values.quantity}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          formik.handleChange(e);
+                          creditamount(e);
+                        }}
+                        placeholder="Enter Quantity"
+                        className="form-control"
+                      />
+                      {formik.touched.quantity && formik.errors.quantity ? (
+                        <p className="validation-messages">
+                          {formik.errors.quantity}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+
+                {idcState.points && points ? (
+                  <div className="col-xs-12 col-md-12">
                     <div className="credit-values">
-                        Total Value :{parseFloat(idcState.points).toFixed(2)}
+                      Total Value :{parseFloat(idcState.points).toFixed(2)}
                     </div>
                   </div>
                 ) : (
@@ -656,7 +674,6 @@ React.useEffect(() => {
                 </div>
                 <br />
                 <br />
-                
               </form>
 
               <div className="footer-section mobile">

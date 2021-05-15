@@ -47,14 +47,12 @@ const Login = () => {
     }),
     onSubmit: (data) => {
       dispatch(loginAction(data));
-      alert(JSON.stringify(values, null, 2))
     },
     validateOnChange: false,
   });
 
   useEffect(() => {
     const search = history.location.search;
-    console.log("search ", search);
     if (search.indexOf("?confirm_account=") !== -1) {
       const token = search.split("confirm_account=")[1];
       const data = { token };
@@ -83,7 +81,6 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
-    
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
@@ -179,8 +176,14 @@ const Login = () => {
                       id="formHorizontalRadios1"
                     />
                   </Form.Group> */}
-                    <Form.Group className="forgot" style={{textAlign:"left"}}>
-                    <Link className="link-color" to={{pathname:"/auth/forgotpassword",state:{"idc":false}}}>
+                  <Form.Group className="forgot" style={{ textAlign: "left" }}>
+                    <Link
+                      className="link-color"
+                      to={{
+                        pathname: "/auth/forgotpassword",
+                        state: { idc: false },
+                      }}
+                    >
                       Forgot Password?
                     </Link>
                   </Form.Group>

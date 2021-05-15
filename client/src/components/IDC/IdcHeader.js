@@ -41,7 +41,6 @@ const Idc_Header = () => {
     }
   }, [state.isIdcAuthenticated]);
 
-
   return (
     <>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -107,17 +106,17 @@ const Idc_Header = () => {
                             </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
-
-
-                            </li>
-                        </ul>
-                    </div>):''}
-                </div>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
         </div>
- 
+      </div>
     </>
   );
 };
