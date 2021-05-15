@@ -32,8 +32,8 @@ export const createOrderCheckoutAPI = (payload) => {
 };
 
 export const processOrderByGiftCardAPI = (orderId) => {
-  const url = `${API_URL}/orders/process_order?order_id=${orderId}`;
-  return apiCall(url, "GET");
+  const url = `${API_URL}/orders/process_order`;
+  return apiCall(url, "POST", { order_id: `${orderId}` });
 };
 
 export const createGuestOrderAPI = (payload) => {
