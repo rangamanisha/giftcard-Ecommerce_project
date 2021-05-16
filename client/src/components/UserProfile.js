@@ -15,7 +15,6 @@ import {
 } from "../actions/profile.actions";
 import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from 'react-bootstrap/Modal'
 import swal from "sweetalert";
 import { getAuthState } from '../reducer/auth.reducer'
 
@@ -40,7 +39,7 @@ const UserProfile = () => {
       dob: profilestate.profile?.birthday || null,
       language: profilestate.profile?.language || "",
       country: profilestate.profile?.nationality || "",
-      phone: "",
+      phone: profilestate.profile?.phone || "",
       gender: profilestate.profile?.gender || "",
       email: profilestate.profile?.email || "",
     },

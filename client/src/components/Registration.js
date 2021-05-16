@@ -10,7 +10,7 @@ import Emailicon from "../assets/Email-icon.svg";
 import Usericon from "../assets/User-icon.svg";
 import Passwordicon from "../assets/Password-icon.svg";
 import { signupAction } from "../actions/auth.actions";
-import { getAuthState } from "../reducer/auth.reducer";
+import { getAuthState, authActions } from "../reducer/auth.reducer";
 import { useFormik } from "formik";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
@@ -62,7 +62,9 @@ const Signup = () => {
       history.push({ pathname: "/" });
     }
   }, [state.signupSuccess, history]);
-
+  React.useEffect(() => {
+    return dispatch(authActions.clearErrors())
+  })
   const responseGoogle = (response) => {
     const accessToken = response.accessToken;
     console.log(accessToken);
