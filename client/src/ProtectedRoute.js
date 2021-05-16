@@ -10,7 +10,7 @@ const authState = useSelector(getAuthState)
       {...rest}
       render={props => {
         if (authState.isAuthenticated) {
-          return <Component {...props} />;
+          return <Component {...props} />
         } else {
           return (
             <Redirect

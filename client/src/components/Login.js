@@ -64,26 +64,24 @@ const Login = () => {
     
   }, [state.isAuthenticated, state.reset, history]);
   const responseGoogle = (response) => {
-    const accessToken = response.accessToken;
+    //const accessToken = response.accessToken;
     dispatch(googlesigninAction({
-      email: state.email,
-      provider: state.provider,
-      token_type: state.token_type,
-      accessToken: state.accessToken,
-      expiresIn: state.expiresIn
+      email: response.email,
+      provider: response.provider,
+      token_type: response.token_type,
+      accessToken: response.accessToken,
+      expiresIn: response.expiresIn
 
     }))
-    
   };
  const responseFacebook = (response) => {
-    const accessToken = response.accessToken;
-    
+    //const accessToken = response.accessToken;
     dispatch(facebookAction({
-      email: state.email,
-      provider: state.provider,
-      token_type: state.token_type,
-      accessToken: state.accessToken,
-      expiresIn: state.expiresIn
+      email: response.email,
+      provider: response.provider,
+      token_type: response.token_type,
+      accessToken: response.accessToken,
+      expiresIn: response.expiresIn
     }))
   }
   React.useEffect(() => {

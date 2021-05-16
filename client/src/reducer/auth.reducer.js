@@ -22,6 +22,7 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   first_name: null,
   accessToken: null,
   idToken: null,
+  token_type: "",
   refreshToken: null,
   expiresIn: null,
   status: null,

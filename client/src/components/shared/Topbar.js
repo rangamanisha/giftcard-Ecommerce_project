@@ -47,7 +47,6 @@ const Topbar = (props) => {
       return history.push(({pathname:"/auth/login"}))
     }
   }
-
   const getProfile = () => {
     if (showLogin) {
       return (
@@ -155,5 +154,4 @@ const Topbar = (props) => {
     </Navbar>
   );
 };
-
 export default Topbar;
