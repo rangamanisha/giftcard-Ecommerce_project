@@ -112,7 +112,7 @@ const SuccessPage = () => {
               </Col>
             </Row>
             <Row>
-              <Col xs={12} md={{ span: 6, offset: 3 }}>
+              <Col xs={12} md={{ span: 10, offset: 1 }}>
                 <Button
                   className="profile-btn mt-2 btn-block"
                   variant="info"
