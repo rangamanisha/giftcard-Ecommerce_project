@@ -24,6 +24,7 @@ export const ORDER_INITIAL_STATE = {
   redirect_url: null,
   order_checkout_error: null,
   guest_payload: null,
+  accessToken: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -50,6 +51,9 @@ export const orderSlice = createSlice({
     },
     setGuestPayload: (state, action) => {
       state.guest_payload = action.payload;
+    },
+    updateAccessToken: (state, action) => {
+      state.accessToken = action.payload;
     },
   },
   extraReducers: (builder) => {

@@ -34,6 +34,7 @@ const Confirm_Order = (props) => {
         OrderDetailsAction({
           order_id: id,
           image_size: "medium_rectangle",
+          accessToken: orderState.accessToken || null,
         })
       );
     }

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { cartAction } from "../reducer/cart.reducer";
+import { orderActions } from "../reducer/orders.reducers";
 import {
   allOrderApiCall,
   orderDetailsApiCall,
@@ -31,6 +32,14 @@ export const processOrderAfterRedirectAction = createAsyncThunk(
       order_id: payload.order_id,
     };
     const response = await processOrderApiCall(request);
+    if (
+      response.code === 200 &&
+      response.data &&
+      response.data.order &&
+      response.data.access_token
+    ) {
+      orderActions.updateAccessToken(response.data.order.access_token);
+    }
     return response;
   }
 );
@@ -41,7 +50,7 @@ export const OrderDetailsAction = createAsyncThunk(
       order_id: payload.order_id,
       image_size: payload.image_size,
     };
-    const response = await orderDetailsApiCall(request);
+    const response = await orderDetailsApiCall(request, payload.accessToken);
     return response;
   }
 );
