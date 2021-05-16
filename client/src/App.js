@@ -79,6 +79,7 @@ function App() {
         <Route path="/enquiry" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/failure" component={FailurePage} exact />
+        <Route path="/success" component={SuccessPage} exact />
         <Route path="/" exact>
           <Redirect to={{ pathname: "/" }} />
         </Route>

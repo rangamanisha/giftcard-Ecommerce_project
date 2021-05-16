@@ -79,7 +79,7 @@ function AllCategoryCards() {
   return (
     <div className="allGiftCard">
       <div className="slideclass" id="categorycarousel">
-        <Carousel pagination={0} breakPoints={breakPoints}>
+        <Carousel pagination={false} breakPoints={breakPoints}>
           <Item>
             <button className="transparentButton">
               <div className="box">

@@ -49,7 +49,7 @@ const GuestForm = (props) => {
             currency: lineItem.currency,
             country_id: lineItem.country_id,
             card_value_aed:
-              cartState.checkoutCart.currency !== "AED"
+              lineItem.currency !== cartState.checkoutCart.currency
                 ? getMarginAmount(lineItem.card_value_aed)
                 : lineItem.card_value_aed,
           };

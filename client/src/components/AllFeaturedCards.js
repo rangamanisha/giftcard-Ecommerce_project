@@ -55,9 +55,9 @@ const AllFeaturedCards = () => {
               <div className="carosel_images">
                 {
                   <>
-                    <Carousel pagination={0} breakPoints={breakPoints}>
+                    <Carousel pagination={false} breakPoints={breakPoints}>
                       {map(get(brandsWithfeatutre, "brands"), (brand, i) => (
-                        <Item>
+                        <Item key={i}>
                           <>
                             <Link to="/selectcard">
                               <Giftcard brand={brand} />
