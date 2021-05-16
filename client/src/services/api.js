@@ -8,18 +8,14 @@ export const apiCall = async (
   isAuthenticatedReq = true
 ) => {
   const accessToken = localStorage.getItem("access_token");
-  if (isAuthenticatedReq && !accessToken) {
-    localStorage.clear();
-    sessionStorage.clear();
-    // window.location.href = "/";
-  }
-  const requestHeaders = isAuthenticatedReq
-    ? new Headers({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        ...headers,
-      })
-    : new Headers({ "Content-Type": "application/json", ...headers });
+  const requestHeaders =
+    accessToken !== null && accessToken !== undefined
+      ? new Headers({
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          ...headers,
+        })
+      : new Headers({ ...headers });
 
   const config = {
     method,

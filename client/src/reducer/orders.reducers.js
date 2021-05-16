@@ -9,6 +9,7 @@ import {
   createOrderAction,
   createOrderCheckoutAction,
   createGuestOrderAction,
+  processOrderAfterRedirectAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -140,6 +141,18 @@ export const orderSlice = createSlice({
         state.error = action?.error?.message || "Order creation failed";
         state.loading = false;
         state.created_order = null;
+      })
+      .addCase(processOrderAfterRedirectAction.pending, (state, action) => {
+        state.accessToken = null;
+      })
+      .addCase(processOrderAfterRedirectAction.fulfilled, (state, action) => {
+        const { data, code } = action.payload;
+        if (code === 200) {
+          state.accessToken = data.order?.access_token || null;
+        }
+      })
+      .addCase(processOrderAfterRedirectAction.rejected, (state, action) => {
+        state.accessToken = null;
       });
   },
 });

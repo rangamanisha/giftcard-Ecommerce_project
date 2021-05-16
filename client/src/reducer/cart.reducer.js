@@ -4,6 +4,7 @@ import {
   addRemoveQuantityAction,
   cartTotalCountAction,
   getConversionRateAction,
+  getFixerConversionRateAction,
 } from "../actions/cart.actions";
 import {
   createEntityAdapter,
@@ -150,6 +151,19 @@ export const cartItemsSlice = createSlice({
       })
       .addCase(getConversionRateAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
+      })
+      .addCase(getFixerConversionRateAction.pending, (state) => {
+        state.conversion = null;
+      })
+      .addCase(getFixerConversionRateAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        const { data, code } = response;
+        if (code === 200) {
+          state.conversion = data;
+        }
+      })
+      .addCase(getFixerConversionRateAction.rejected, (state) => {
+        state.conversion = null;
       });
   },
 });
