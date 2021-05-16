@@ -29,10 +29,9 @@ const Signup = () => {
   const history = useHistory();
   const [showPass, setPass] = useState(false);
   const togglePass = () => {
-    setPass(showPass ? false : true)
-  }
+    setPass(showPass ? false : true);
+  };
   const eye = <FontAwesomeIcon icon={faEye} />;
-
 
   const formik = useFormik({
     initialValues: {
@@ -67,7 +66,6 @@ const Signup = () => {
   })
   const responseGoogle = (response) => {
     const accessToken = response.accessToken;
-    console.log(accessToken);
     dispatch(googlesigninAction({ accessToken }));
   };
 
@@ -162,9 +160,9 @@ const Signup = () => {
                       name="password"
                     />
                     <img src={Passwordicon} alt="Icon" className="icon_img" />
-                    <i onClick={togglePass} className="icon_right">{eye}</i>{" "}
-
-
+                    <i onClick={togglePass} className="icon_right">
+                      {eye}
+                    </i>{" "}
                   </Form.Group>
                   {formik.errors.password ? (
                     <p className="validation-messages">
@@ -184,7 +182,9 @@ const Signup = () => {
                       onChange={formik.handleChange}
                       name="password_confirmation"
                     />
-                    <i onClick={togglePass} className="icon_right">{eye}</i>{" "}
+                    <i onClick={togglePass} className="icon_right">
+                      {eye}
+                    </i>{" "}
                     <img src={Passwordicon} alt="Icon" className="icon_img" />
                   </Form.Group>
                   {formik.errors.password_confirmation ? (
@@ -235,31 +235,30 @@ const Signup = () => {
                     </tbody>
                   </table>
                   <div className="social-btn">
-                  <div className="google mr-3">
-                    <GoogleLogin
-                      style={{ display: "block" }}
-                      variant="outline-light"
-                      className="google-button"
-                      clientId={googleId}
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                      
-                    ></GoogleLogin>
-                  </div>
-                  <div className="facebook">
-                    <Button
-                      variant="outline-light"
-                      className="facebook-button"
-                      provider="facebook"
-                      appId={fbId}
-                    >
-                      <img
-                        src={Facebookicon}
-                        style={{ width: "50px", height: "50px" }}
-                        alt="Icon"
-                      />
-                    </Button>
-                  </div>
+                    <div className="google mr-3">
+                      <GoogleLogin
+                        style={{ display: "block" }}
+                        variant="outline-light"
+                        className="google-button"
+                        clientId={googleId}
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                      ></GoogleLogin>
+                    </div>
+                    <div className="facebook">
+                      <Button
+                        variant="outline-light"
+                        className="facebook-button"
+                        provider="facebook"
+                        appId={fbId}
+                      >
+                        <img
+                          src={Facebookicon}
+                          style={{ width: "50px", height: "50px" }}
+                          alt="Icon"
+                        />
+                      </Button>
+                    </div>
                   </div>
                 </Col>
               </Row>

@@ -21,10 +21,13 @@ import GoogleLogin from "react-google-login";
 import { values } from "lodash";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
+import { getuseractiveAction } from "../actions/useractive.actions";
+import { getUserActiveState } from "../reducer/useractive.reducer";
 
 const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
+  const useractive = useSelector(getUserActiveState);
   const history = useHistory();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -40,7 +43,9 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Enter a valid email").required("Email is required"),
+      email: Yup.string()
+        .email("Enter a valid email")
+        .required("Email is required"),
       password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
@@ -48,6 +53,24 @@ const Login = () => {
     },
     validateOnChange: false,
   });
+
+  useEffect(() => {
+    const search = history.location.search;
+    if (search.indexOf("?confirm_account=") !== -1) {
+      const token = search.split("confirm_account=")[1];
+      const data = { token };
+      dispatch(getuseractiveAction(data));
+      if (useractive.verified === true) {
+        setIsValid(true);
+        setMessage(
+          "Your account has been successfully created. Go to profile !"
+        );
+        window.setTimeout(() => {
+          setVisible(false);
+        }, 3000);
+      }
+    }
+  }, [dispatch, useractive.verified, history]);
 
   useEffect(() => {
     if (state.isAuthenticated) {
@@ -61,7 +84,6 @@ const Login = () => {
         setVisible(false);
       }, 3000);
     }
-    
   }, [state.isAuthenticated, state.reset, history]);
   const responseGoogle = (response) => {
     //const accessToken = response.accessToken;
@@ -162,8 +184,14 @@ const Login = () => {
 
                 <div className="redio-forgot">
                   
-                  <Form.Group className="forgot" style={{textAlign: 'left'}}>
-                    <Link className="link-color" to="/auth/forgotpassword">
+                  <Form.Group className="forgot" style={{ textAlign: "left" }}>
+                    <Link
+                      className="link-color"
+                      to={{
+                        pathname: "/auth/forgotpassword",
+                        state: { idc: false },
+                      }}
+                    >
                       Forgot Password?
                     </Link>
                   </Form.Group>

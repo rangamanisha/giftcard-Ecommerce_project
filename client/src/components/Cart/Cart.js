@@ -19,6 +19,11 @@ import {
 import CartWidget from "./CartWidget";
 import CartItemContainer from "./CartItemContainer";
 import { getTopBarState } from "../../reducer/topbar.reducer";
+import { getOrderState } from "../../reducer/orders.reducers";
+import {
+  createOrderAction,
+  processGiftCardCheckoutAction,
+} from "../../actions/orders.action";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -28,6 +33,7 @@ function Cart() {
   const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
   const topbarState = useSelector(getTopBarState);
+  const orderState = useSelector(getOrderState);
 
   useEffect(() => {
     if (authState.isAuthenticated) {
@@ -141,10 +147,28 @@ function Cart() {
     }
   };
 
-  const createCheckout = (data) => {
-    console.log("data ", data);
-    dispatch(cartAction.updateCheckout(data));
-    history.push("payment");
+  const createCheckout = async (data) => {
+    if (!data?.are_reward_points_used) {
+      dispatch(cartAction.updateCheckout(data));
+      history.push("payment");
+    } else {
+      const payload = {
+        orders: {
+          card_value_aed: null,
+          order_total_aed: data.total_amount,
+          program_id: 1,
+          use_credits: data.are_reward_points_used,
+          current_exchange_rate: cartState.conversion.currency_exchange_rate,
+          use_hassad_points: data.are_reward_points_used,
+          language_code: "en",
+          isbuynow: false,
+          isforself: 1,
+          payment_currency: data.currency || "AED",
+          currency: data.currency_id,
+        },
+      };
+      await dispatch(createOrderAction({ data: payload, event: {} }));
+    }
   };
 
   return (

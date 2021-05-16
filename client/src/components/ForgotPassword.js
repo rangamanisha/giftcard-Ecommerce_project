@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useEffect } from "react";
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
   const dispatch = useDispatch();
   const state = useSelector(getAuthState);
   const history = useHistory();
@@ -25,13 +25,20 @@ const ForgotPassword = () => {
       email: Yup.string().min(2).max(200).email().required(),
     }),
     onSubmit: (data) => {
-      dispatch(forgotpasswordAction(data));
+      dispatch(
+        forgotpasswordAction({
+          email: data.email,
+          idc: props.location.state.idc,
+        })
+      );
     },
   });
 
   useEffect(() => {
-    if (state.status === "OK") {
+    if (state.status === "OK" && props.location.state.idc === false) {
       history.push({ pathname: "/" });
+    } else if (state.status === "OK" && props.location.state.idc === true) {
+      history.push({ pathname: "/idc/signin" });
     }
   });
 

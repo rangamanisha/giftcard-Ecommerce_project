@@ -27,7 +27,10 @@ const AllOrder = () => {
 
   const handleRowSelection = (e) => {
     setSelectedProduct1(e.data.id);
-    history.push({ pathname: "/order/confirm_order", search: `${e.data.id}` });
+    history.push({
+      pathname: "/order/confirm_order",
+      search: `?order_id=${e.data.id}`,
+    });
   };
   const codeBodyTemplate = (rowData) => {
     return (

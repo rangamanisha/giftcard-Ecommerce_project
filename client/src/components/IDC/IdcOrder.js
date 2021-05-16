@@ -2,7 +2,6 @@ import React from "react";
 import "./Idc.scss";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-
 import swal from "sweetalert";
 import CsvDownloader from "react-csv-downloader";
 import { useState } from "react";
@@ -28,7 +27,7 @@ const Idc_Order = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const idcState = useSelector(getIdcState);
-  // const idcCountries = useSelector(getTopBarState);
+  const [points, setPoints] = useState();
   const idc_varities = get(idcState, "idcProduct.idc_product");
   const countries = get(idcState, "countries");
   const [selectedFile, setSelectedFile] = useState("");
@@ -47,6 +46,7 @@ const Idc_Order = () => {
     setFileerrors("");
     seterrorr("");
   };
+
   const changeHandler = (event) => {
     event.preventDefault();
     setFileerrors("");
@@ -78,6 +78,7 @@ const Idc_Order = () => {
       });
     });
   };
+
   const onSubmitfile = (e) => {
     e.preventDefault();
     setSelectedFile(e.target[1].files[0]);
@@ -121,34 +122,6 @@ const Idc_Order = () => {
     });
   };
 
-  const csvData = [
-    [
-      `First_Name`,
-      `Last_Name`,
-      `Email`,
-      "Company",
-      "Designation",
-      "Country",
-      "Phone",
-      "Product",
-      "Currency",
-      "Denomination",
-      "Quantity",
-    ],
-    [
-      "John",
-      "Nick",
-      "john12@gmail.com",
-      "MIT",
-      "Software Developer",
-      "America",
-      "992236254",
-      "IDC",
-      "AED",
-      "100",
-      "2",
-    ],
-  ];
   const columns = [
     {
       id: "first",
@@ -236,7 +209,7 @@ const Idc_Order = () => {
       product: Yup.string().min(2).max(200).required(),
       country: Yup.string().min(2).max(200).required(),
       phone: Yup.number().required(),
-      quantity: Yup.number().min(1).max(25).required(),
+      quantity: Yup.number().min(1).max(5).required(),
     }),
     onSubmit: (data) => {
       dispatch(
@@ -272,15 +245,17 @@ const Idc_Order = () => {
 
   const handleOffence = (name) => {
     formik.values.quantity = "";
-    setFilecredit("");
+    setPoints("");
     let match = find(idc_varities, { product_name_to_display: name });
     setDenomination(match.denomination);
     setgiftcard_variety_id(match.giftcard_variety_id);
     setidccurrency(match.curreny_name);
   };
+
   const creditamount = (e) => {
     const count = e.target.value;
     const amountValue = denomination * count;
+    setPoints(amountValue);
     dispatch(
       IdcConvertCurrencyAction({
         amount: amountValue,
@@ -457,9 +432,10 @@ const Idc_Order = () => {
                         placeholder="First Name "
                         value={formik.values.first_name}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         className="form-control"
                       />
-                      {formik.errors.first_name ? (
+                      {formik.touched.first_name && formik.errors.first_name ? (
                         <p className="validation-messages">
                           {formik.errors.first_name}
                         </p>
@@ -476,10 +452,11 @@ const Idc_Order = () => {
                         name="last_name"
                         placeholder="Last Name "
                         value={formik.values.last_name}
+                        onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         className="form-control"
                       />
-                      {formik.errors.last_name ? (
+                      {formik.touched.last_name && formik.errors.last_name ? (
                         <p className="validation-messages">
                           {formik.errors.last_name}
                         </p>
@@ -487,6 +464,7 @@ const Idc_Order = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className="form-group">
                   <label className="customL">
                     <span>Email</span>
@@ -496,15 +474,17 @@ const Idc_Order = () => {
                     className="form-control"
                     name="email"
                     value={formik.values.email}
+                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     type="email"
                     placeholder="Email"
                     pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))|[0-9]{10}$/'
                   />
-                  {formik.errors.email ? (
+                  {formik.touched.email && formik.errors.email ? (
                     <p className="validation-messages">{formik.errors.email}</p>
                   ) : null}
                 </div>
+
                 <div className="row">
                   <div className="col-xs-12 col-md-6">
                     <div className="form-group">
@@ -516,16 +496,19 @@ const Idc_Order = () => {
                         name="company_name"
                         placeholder="Company "
                         value={formik.values.company_name}
+                        onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         className="form-control"
                       />
-                      {formik.errors.company_name ? (
+                      {formik.touched.company_name &&
+                      formik.errors.company_name ? (
                         <p className="validation-messages">
                           {formik.errors.company_name}
                         </p>
                       ) : null}
                     </div>
                   </div>
+
                   <div className="col-xs-12 col-md-6">
                     <div className="form-group">
                       <label className="customL">
@@ -536,10 +519,12 @@ const Idc_Order = () => {
                         name="company_title"
                         value={formik.values.company_title}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         placeholder="Designation "
                         className="form-control"
                       />
-                      {formik.errors.company_title ? (
+                      {formik.touched.company_title &&
+                      formik.errors.company_title ? (
                         <p className="validation-messages">
                           {formik.errors.company_title}
                         </p>
@@ -547,6 +532,7 @@ const Idc_Order = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className="row">
                   <div className="col-xs-12 col-md-6">
                     <div className="form-group">
@@ -559,6 +545,7 @@ const Idc_Order = () => {
                         id="product_select"
                         name="country"
                         value={formik.values.country}
+                        onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                       >
                         <option value="Select Country">Select Country</option>
@@ -569,7 +556,7 @@ const Idc_Order = () => {
                         ))}
                       </Form.Control>
 
-                      {formik.errors.country ? (
+                      {formik.touched.country && formik.errors.country ? (
                         <p className="validation-messages">
                           {formik.errors.country}
                         </p>
@@ -582,25 +569,26 @@ const Idc_Order = () => {
                       <label className="customL">
                         <span>Mobile Number</span>
                       </label>
-                      <div>
-                        {/* <span className="input-group-addon">{idcState.country_code}</span> */}
-                        <input
-                          type="text"
-                          name="phone"
-                          value={formik.values.phone}
-                          onChange={formik.handleChange}
-                          placeholder="Mobile Number "
-                          className="form-control mobile-number-input"
-                        />
-                        {formik.errors.phone ? (
-                          <p className="validation-messages">
-                            {formik.errors.phone}
-                          </p>
-                        ) : null}
-                      </div>
+
+                      {/* <span className="input-group-addon">{idcState.country_code}</span> */}
+                      <input
+                        type="text"
+                        name="phone"
+                        value={formik.values.phone}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        placeholder="Mobile Number "
+                        className="form-control mobile-number-input"
+                      />
+                      {formik.touched.phone && formik.errors.phone ? (
+                        <p className="validation-messages">
+                          {formik.errors.phone}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>
+
                 <div className="row">
                   <div className="col-xs-12 col-md-6">
                     <div className="form-group">
@@ -612,6 +600,7 @@ const Idc_Order = () => {
                         custom
                         id="product_select"
                         value={formik.values.product}
+                        onBlur={formik.handleBlur}
                         onChange={(e) => {
                           formik.handleChange(e);
                           handleOffence(e.currentTarget.value);
@@ -625,7 +614,7 @@ const Idc_Order = () => {
                           </option>
                         ))}
                       </Form.Control>
-                      {formik.errors.product ? (
+                      {formik.touched.product && formik.errors.product ? (
                         <p className="validation-messages">
                           {formik.errors.product}
                         </p>
@@ -642,16 +631,15 @@ const Idc_Order = () => {
                         type="number"
                         name="quantity"
                         value={formik.values.quantity}
+                        onBlur={formik.handleBlur}
                         onChange={(e) => {
                           formik.handleChange(e);
                           creditamount(e);
                         }}
                         placeholder="Enter Quantity"
-                        min="1"
-                        max="10"
                         className="form-control"
                       />
-                      {formik.errors.quantity ? (
+                      {formik.touched.quantity && formik.errors.quantity ? (
                         <p className="validation-messages">
                           {formik.errors.quantity}
                         </p>
@@ -659,10 +647,11 @@ const Idc_Order = () => {
                     </div>
                   </div>
                 </div>
-                {idcState.points ? (
+
+                {idcState.points && points ? (
                   <div className="col-xs-12 col-md-12">
                     <div className="credit-values">
-                      Total Value :{idcState.points}
+                      Total Value :{parseFloat(idcState.points).toFixed(2)}
                     </div>
                   </div>
                 ) : (

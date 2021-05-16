@@ -94,6 +94,11 @@ export const updateCartAction = createAsyncThunk(
         country_id: payload.country_id,
       },
     };
+    if (!request.cart_item.isforself) {
+      request.cart_item["contact_email"] = payload.contact_email;
+      request.cart_item["contact_name"] = payload.contact_name;
+      request.cart_item["gift_message"] = payload.gift_message;
+    }
     const response = await cartItemsService(request);
     dispatch(cartTotalCountAction({ currency: payload.currency }));
     return response;

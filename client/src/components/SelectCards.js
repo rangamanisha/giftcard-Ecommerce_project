@@ -10,7 +10,7 @@ import {
   descriptionBrandAction,
   termBrandAction,
 } from "../actions/brands.action";
-import GiftGiftCard from "./GiftGiftCard";
+import GiftiGiftCard from "./GiftGiftCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrandsState } from "../reducer/brands.reducer";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
@@ -37,11 +37,15 @@ const SelectCards = () => {
   const payment = giftunitState.selectedCountry;
   const [rate, setRate] = useState(0);
   const [giftTo, setGiftTo] = useState("myself");
+  const [giftToParams, setGiftToParams] = useState({
+    email: null,
+    name: null,
+    message: null,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const topbarState = useSelector(getTopBarState);
 
   const handleSelect = (eventKey1) => {
     seteventkey(eventKey1);
@@ -49,6 +53,7 @@ const SelectCards = () => {
   const handleGiftTo = (e) => {
     setTempVisible(e.target.value === "myself" ? true : false);
     setGiftTo(e.target.value);
+    setGiftToParams({ email: null, name: null, message: null });
   };
   const increment = () => {
     if (count >= 5) {
@@ -104,6 +109,13 @@ const SelectCards = () => {
       name: card.name,
       country_name: giftunitState.selectedCountry.country_name,
     };
+
+    if (!addToCartItem.isforself) {
+      addToCartItem["gift_message"] = giftToParams?.message || "";
+      addToCartItem["contact_name"] = giftToParams?.name || null;
+      addToCartItem["contact_email"] = giftToParams?.email || null;
+    }
+
     if (
       giftunitState.selectedCountry?.unit_name_short &&
       giftunitState.selectedCountry?.unit_name_short !== "AED"
@@ -163,6 +175,17 @@ const SelectCards = () => {
       history.push("cart");
     }
   };
+
+  const disableAddToCartButton = () => {
+    if (
+      !giftTo === "myself" &&
+      !(giftToParams.email && giftToParams.name && giftToParams.message)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
       <Container fluid className="selected-card-box">
@@ -222,7 +245,14 @@ const SelectCards = () => {
                   onChange={(e) => handleGiftTo(e)}
                 />
               </div>
-              {tempvisible === false ? <GiftGiftCard /> : ""}
+              {tempvisible === false ? (
+                <GiftiGiftCard
+                  giftToParams={giftToParams}
+                  setGiftToParams={setGiftToParams}
+                />
+              ) : (
+                ""
+              )}
               <div>
                 <Nav onSelect={handleSelect}>
                   <Nav.Item id="product">
@@ -297,14 +327,32 @@ const SelectCards = () => {
               </ButtonGroup>
               <Button
                 className="nav-btn mr-2 text-white"
-                disabled={!selectedDenomination}
+                disabled={
+                  !selectedDenomination ||
+                  !count ||
+                  (giftTo !== "myself" &&
+                    !(
+                      giftToParams.email &&
+                      giftToParams.name &&
+                      giftToParams.message
+                    ))
+                }
                 onClick={(e) => saveToCart(false)}
               >
                 Add to cart
               </Button>{" "}
               <Button
                 className="nav-btn mr-2"
-                disabled={!selectedDenomination}
+                disabled={
+                  !selectedDenomination ||
+                  !count ||
+                  (giftTo !== "myself" &&
+                    !(
+                      giftToParams.email ||
+                      giftToParams.name ||
+                      giftToParams.message
+                    ))
+                }
                 onClick={() => saveToCart(true)}
                 variant="info"
               >

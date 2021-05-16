@@ -12,7 +12,6 @@ export const apiCall1 = async (
   if (isAuthenticatedReq && !idcAccessToken) {
     localStorage.removeItem("idc_access_token");
     sessionStorage.clear();
-    // window.location.reload();
   }
 
   const requestHeaders = isAuthenticatedReq

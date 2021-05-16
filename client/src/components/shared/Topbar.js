@@ -10,7 +10,7 @@ import exitIcon from "../../assets/exit.svg";
 import coinsIcon from "../../assets/coins.svg";
 import cartIcon from "../../assets/cart.svg";
 import userIcon from "../../assets/uprofile.svg";
-import {getAuthState} from '../../reducer/auth.reducer'
+import { getAuthState } from "../../reducer/auth.reducer";
 import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
 import {getProfileState} from '../../reducer/profile.reducer'
@@ -33,7 +33,9 @@ const Topbar = (props) => {
   const authState = useSelector(getAuthState)
   const profileState = useSelector(getProfileState)
   const clearsession = () => {
-    localStorage.clear();
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("first_name");
+    localStorage.removeItem("state");
     sessionStorage.clear();
     window.location.reload();
   };

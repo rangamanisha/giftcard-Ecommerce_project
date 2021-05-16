@@ -33,6 +33,8 @@ import Idc_Profile from "./components/IDC/idcProfile";
 import Idc_Header from "./components/IDC/IdcHeader";
 import Idc_Signin from "./components/IDC/IdcSign";
 import ProtectedRoute from './ProtectedRoute';
+import SuccessPage from "./components/SuccessPage";
+import FailurePage from "./components/FailurePage";
 
 function App() {
   return (
@@ -77,8 +79,7 @@ function App() {
         <Route path="/contact" component={Contact} exact />
         <Route path="/enquiry" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
-        <Route path="/success" component={Home} exact />
-        <Route path="/failure" component={Home} exact />
+        <Route path="/failure" component={FailurePage} exact />
         <Route path="/" exact>
           <Redirect to={{ pathname: "/" }} />
         </Route>

@@ -6,7 +6,23 @@ import Emailicon from "../assets/Email-icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const GuestForm = () => {
+const GuestForm = (props) => {
+  const { orderState, cartState, orderActions, dispatch } = props;
+
+  const getTotalAmount = () => {
+    if (cartState.checkoutCart.currency !== "AED") {
+      const totalAmount = parseFloat(cartState.checkoutCart.total_amount);
+      const additionalCharge = (totalAmount * 5) / 100;
+      return parseFloat(totalAmount + additionalCharge).toFixed(2);
+    }
+    return cartState.checkoutCart.total_amount;
+  };
+
+  const getMarginAmount = (amount) => {
+    const additionalCharge = (parseFloat(amount) * 5) / 100;
+    return parseFloat(additionalCharge + parseFloat(amount)).toFixed(2);
+  };
+
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -18,6 +34,44 @@ const GuestForm = () => {
       last_name: Yup.string().min(1).max(500),
       email: Yup.string().min(2).max(500).email("Please enter valid email"),
     }),
+    onSubmit: (data) => {
+      const payload = {
+        user: {
+          first_name: data.first_name,
+          email: data.email,
+          last_name: data.last_name,
+        },
+        giftcard: cartState.lineItems.map((lineItem) => {
+          return {
+            brand_id: lineItem.brand_id,
+            giftcard_value: lineItem.giftcard_value,
+            quantity: lineItem.quantity,
+            currency: lineItem.currency,
+            country_id: lineItem.country_id,
+            card_value_aed:
+              cartState.checkoutCart.currency !== "AED"
+                ? getMarginAmount(lineItem.card_value_aed)
+                : lineItem.card_value_aed,
+          };
+        }),
+        order: {
+          order_total_aed: getTotalAmount(),
+          program_id: 1, //
+          payment_currency: cartState.checkoutCart.currency,
+          isforself: true, //
+          isbuynow: false, //
+          card_value_aed: null, //
+          use_credits: false, //
+          current_exchange_rate: cartState.conversion.currency_exchange_rate, //
+          use_hassad_points: false, //
+          language_code: "en", //
+          currency: cartState.checkoutCart.currency_id, //
+        },
+      };
+      dispatch(orderActions.setGuestPayload(payload));
+      const nextButton = document.getElementsByClassName("cart-next-btn")[0];
+      nextButton.click();
+    },
   });
 
   return (
@@ -91,7 +145,7 @@ const GuestForm = () => {
             className="btn-custom mt-3"
             variant="info"
             size="lg"
-            type="button"
+            type="submit"
           >
             Next
           </Button>
