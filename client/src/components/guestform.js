@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const GuestForm = (props) => {
-  const { orderState, cartState, orderActions, dispatch } = props;
+  const { cartState, orderActions, dispatch } = props;
 
   const getTotalAmount = () => {
     if (cartState.checkoutCart.currency !== "AED") {

@@ -59,8 +59,9 @@ function App() {
         <Route path="/order/allorder" component={AllOrder} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
-        <Route path="/order/confirm_order" component={Confirm_Order} />
-
+        <Route path="/order/confirm_order">
+          <Confirm_Order showOrdersHeading={true} />
+        </Route>
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
         <Route path="/auth/resetpassword" component={ResetPassword} exact />

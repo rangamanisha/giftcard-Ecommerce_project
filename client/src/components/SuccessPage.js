@@ -21,6 +21,7 @@ const SuccessPage = () => {
   const giftunitState = useSelector(getGiftcardsState);
 
   const [showModal, setShowModal] = useState(false);
+  const [loadOrder, setLoadOrder] = useState(false);
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -51,7 +52,7 @@ const SuccessPage = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12}>
+          <Col xs={12} md={{ span: 10, offset: 1 }}>
             <Button
               className="profile-btn mt-2 btn-block"
               variant="info"
@@ -77,23 +78,22 @@ const SuccessPage = () => {
       );
     }
     if (id) {
-      if (search.indexOf("cko-session-id") !== -1) {
-        await dispatch(processOrderAfterRedirectAction({ order_id: id }));
-        await dispatch(orderActions.clearState());
-        await dispatch(cartAction.clearState());
-        dispatch(
-          cartTotalCountAction({
-            currency: giftunitState.selectedCountry?.unit_name_short || "AED",
-          })
-        );
-        setShowModal(true);
-      }
+      await dispatch(processOrderAfterRedirectAction({ order_id: id }));
+      await dispatch(orderActions.clearState());
+      await dispatch(cartAction.clearState());
+      dispatch(
+        cartTotalCountAction({
+          currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+        })
+      );
+      setShowModal(true);
+      setLoadOrder(true);
     }
   };
 
   useEffect(() => {
     orderInit();
-  }, [orderInit]);
+  }, []);
 
   return (
     <Container fluid>
@@ -127,10 +127,12 @@ const SuccessPage = () => {
           </div>
         </Col>
         <Col xs={12} sm={12} md={7}>
-          <Confirm_Order key={`1`} showOrdersHeading={false} />
-          {showModal ? <GModal show={showModal}>{modalBody()}</GModal> : null}
+          {loadOrder ? (
+            <Confirm_Order key={`1`} showOrdersHeading={false} />
+          ) : null}
         </Col>
       </Row>
+      {showModal ? <GModal show={showModal}>{modalBody()}</GModal> : null}
     </Container>
   );
 };

@@ -32,7 +32,9 @@ const Checkout = (props) => {
       : `${process.env.REACT_APP_FRAMES_PUBLIC_KEY_SAR}`;
 
   useEffect(() => {
-    dispatch(getprofileListAction({}));
+    if (authState.isAuthenticated) {
+      dispatch(getprofileListAction({}));
+    }
   }, [dispatch]);
 
   useEffect(() => {
