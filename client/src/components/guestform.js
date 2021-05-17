@@ -30,9 +30,13 @@ const GuestForm = (props) => {
       email: "",
     },
     validationSchema: Yup.object({
-      first_name: Yup.string().min(1).max(500),
-      last_name: Yup.string().min(1).max(500),
-      email: Yup.string().min(2).max(500).email("Please enter valid email"),
+      first_name: Yup.string().min(1).max(500).required(),
+      last_name: Yup.string().min(1).max(500).required(),
+      email: Yup.string()
+        .min(2)
+        .max(500)
+        .email("Please enter valid email")
+        .required(),
     }),
     onSubmit: (data) => {
       const payload = {

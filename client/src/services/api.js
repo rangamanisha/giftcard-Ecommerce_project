@@ -15,7 +15,7 @@ export const apiCall = async (
           Authorization: `Bearer ${accessToken}`,
           ...headers,
         })
-      : new Headers({ ...headers });
+      : new Headers({ "Content-Type": "application/json", ...headers });
 
   const config = {
     method,

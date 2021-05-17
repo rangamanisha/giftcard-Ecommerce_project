@@ -35,7 +35,9 @@ export const getFixerConvertedAmount = async (
   const fixerURL = `${process.env.REACT_APP_FIXER_URL}`;
   const fixerAPIKey = `${process.env.REACT_APP_FIXER_API_KEY}`;
   const url = `${fixerURL}/convert?access_key=${fixerAPIKey}&from=${source_currency}&to=${dest_currency}&amount=${amount}`;
-  const response = await apiCall(url, "GET");
+  // const response = await apiCall(url, "GET");
+  const request = await fetch(url, { method: "GET" });
+  const response = await request.json();
   if (response && response.success) {
     return { converted_amount: parseFloat(response.result).toFixed(2) };
   }
