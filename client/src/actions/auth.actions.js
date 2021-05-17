@@ -27,7 +27,7 @@ export const googlesigninAction = createAsyncThunk(
     const request = {
       signin: {
         email:payload.email,
-        phone:payload.email,
+        phone:payload.phone,
         provider: payload.provider,
         token_type: "Bearer",
         token: payload.accessToken,
