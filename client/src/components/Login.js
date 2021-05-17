@@ -234,8 +234,6 @@ const Login = () => {
                       <button onClick={renderProps.onClick}><img 
                       src={Facebookicon}
                       variant="outline-light"
-                      autoLoad
-                      auto_logout_link={true}
                       className="facebook-button"
                       style={{ width: "50px", height: "50px" }}
                         alt="Icon"/>

@@ -27,7 +27,7 @@ export const googlesigninAction = createAsyncThunk(
     const request = {
       signin: {
         email:payload.email,
-        phone:payload.email,
+        phone:payload.phone,
         provider: payload.provider,
         token_type: "Bearer",
         token: payload.accessToken,
@@ -109,6 +109,7 @@ export const forgotpasswordAction = createAsyncThunk(
   async (payload, thunkAPI) => {
     const request = {
       email: payload.email,
+      idc: payload.idc,
     };
 
     const response = await forgotpasswordAPI(request);
