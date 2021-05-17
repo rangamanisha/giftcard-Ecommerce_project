@@ -41,7 +41,7 @@ export const OrderDetailsAction = createAsyncThunk(
       order_id: payload.order_id,
       image_size: payload.image_size,
     };
-    const response = await orderDetailsApiCall(request);
+    const response = await orderDetailsApiCall(request, payload.accessToken);
     return response;
   }
 );

@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const GuestForm = (props) => {
-  const { orderState, cartState, orderActions, dispatch } = props;
+  const { cartState, orderActions, dispatch } = props;
 
   const getTotalAmount = () => {
     if (cartState.checkoutCart.currency !== "AED") {
@@ -30,9 +30,13 @@ const GuestForm = (props) => {
       email: "",
     },
     validationSchema: Yup.object({
-      first_name: Yup.string().min(1).max(500),
-      last_name: Yup.string().min(1).max(500),
-      email: Yup.string().min(2).max(500).email("Please enter valid email"),
+      first_name: Yup.string().min(1).max(500).required(),
+      last_name: Yup.string().min(1).max(500).required(),
+      email: Yup.string()
+        .min(2)
+        .max(500)
+        .email("Please enter valid email")
+        .required(),
     }),
     onSubmit: (data) => {
       const payload = {
@@ -49,7 +53,7 @@ const GuestForm = (props) => {
             currency: lineItem.currency,
             country_id: lineItem.country_id,
             card_value_aed:
-              cartState.checkoutCart.currency !== "AED"
+              lineItem.currency !== cartState.checkoutCart.currency
                 ? getMarginAmount(lineItem.card_value_aed)
                 : lineItem.card_value_aed,
           };

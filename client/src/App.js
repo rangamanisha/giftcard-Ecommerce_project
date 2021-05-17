@@ -60,8 +60,9 @@ function App() {
         <ProtectedRoute path="/order/allorder" component={AllOrder} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
-        <Route path="/order/confirm_order" component={Confirm_Order} />
-
+        <Route path="/order/confirm_order">
+          <Confirm_Order showOrdersHeading={true} />
+        </Route>
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
@@ -80,6 +81,7 @@ function App() {
         <Route path="/enquiry" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/failure" component={FailurePage} exact />
+        <Route path="/success" component={SuccessPage} exact />
         <Route path="/" exact>
           <Redirect to={{ pathname: "/" }} />
         </Route>

@@ -14,6 +14,7 @@ import {
   addRemoveQuantityAction,
   fetchItemsByCartAction,
   getConversionRateAction,
+  getFixerConversionRateAction,
   getPaymentCurrencyAction,
 } from "../../actions/cart.actions";
 import CartWidget from "./CartWidget";
@@ -33,7 +34,6 @@ function Cart() {
   const rewardState = useSelector(getRewardPointsState);
   const giftunitState = useSelector(getGiftcardsState);
   const topbarState = useSelector(getTopBarState);
-  const orderState = useSelector(getOrderState);
 
   useEffect(() => {
     if (authState.isAuthenticated) {
@@ -56,7 +56,7 @@ function Cart() {
   const handleChangeCurrency = (event) => {
     const selectedCurrency = JSON.parse(event);
     if (selectedCurrency) {
-      dispatch(getConversionRateAction(selectedCurrency));
+      dispatch(getFixerConversionRateAction(selectedCurrency));
     }
   };
 

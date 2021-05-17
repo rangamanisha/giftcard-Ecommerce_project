@@ -5,6 +5,7 @@ import {
   fetchItemsByCartService,
   addRemoveQuantityService,
   cartTotalCountService,
+  getFixerConversionRateAPI,
 } from "../services/cart.service";
 import {
   getConversionRateService,
@@ -111,7 +112,7 @@ export const getPaymentCurrencyAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     const response = await getPaymentCurrencyService();
     if (response.code === 200) {
-      dispatch(getConversionRateAction(response.data.currencies[0]));
+      dispatch(getFixerConversionRateAction(response.data.currencies[0]));
     }
     return response;
   }
@@ -126,6 +127,17 @@ export const getConversionRateAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     dispatch(cartAction.updateSelectedCartCurrency(payload));
     const response = await getConversionRateService(request);
+    return response;
+  }
+);
+
+export const getFixerConversionRateAction = createAsyncThunk(
+  "cart_items/fixer/conversionrate",
+  async (payload, thunkAPI) => {
+    const currency = payload?.unit_name_short;
+    const { dispatch } = thunkAPI;
+    await dispatch(cartAction.updateSelectedCartCurrency(payload));
+    const response = await getFixerConversionRateAPI(currency);
     return response;
   }
 );

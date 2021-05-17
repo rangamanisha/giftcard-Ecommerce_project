@@ -91,11 +91,11 @@ function AllGiftCard() {
             {isEmpty(get(brandState, "brands"))
               ? map(allTheBrands, (brand, i) => (
                   <>
-                    <Giftcard brand={brand} />
+                    <Giftcard brand={brand} key={i} />
                   </>
                 ))
               : map(get(brandState, "brands"), (brand, i) => (
-                  <>{i <= 15 ? <Giftcard brand={brand} /> : null}</>
+                  <>{i <= 15 ? <Giftcard brand={brand} key={i} /> : null}</>
                 ))}
           </div>
           <div className="text-center">

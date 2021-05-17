@@ -92,9 +92,7 @@ const StartGifting = () => {
                         id="inlineFormCustomSelect"
                         custom
                       >
-                        <option value="0" selected="selected">
-                          Treat Myself
-                        </option>
+                        <option value="0">Treat Myself</option>
                         <option value="1">Send a gift</option>
                       </Form.Control>
                     </Form.Group>

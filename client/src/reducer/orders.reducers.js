@@ -9,6 +9,7 @@ import {
   createOrderAction,
   createOrderCheckoutAction,
   createGuestOrderAction,
+  processOrderAfterRedirectAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -24,6 +25,7 @@ export const ORDER_INITIAL_STATE = {
   redirect_url: null,
   order_checkout_error: null,
   guest_payload: null,
+  accessToken: null,
 };
 
 export const ORDER__FEATURE_KEY = "order";
@@ -50,6 +52,9 @@ export const orderSlice = createSlice({
     },
     setGuestPayload: (state, action) => {
       state.guest_payload = action.payload;
+    },
+    updateAccessToken: (state, action) => {
+      state.accessToken = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -136,6 +141,18 @@ export const orderSlice = createSlice({
         state.error = action?.error?.message || "Order creation failed";
         state.loading = false;
         state.created_order = null;
+      })
+      .addCase(processOrderAfterRedirectAction.pending, (state, action) => {
+        state.accessToken = null;
+      })
+      .addCase(processOrderAfterRedirectAction.fulfilled, (state, action) => {
+        const { data, code } = action.payload;
+        if (code === 200) {
+          state.accessToken = data.order?.access_token || null;
+        }
+      })
+      .addCase(processOrderAfterRedirectAction.rejected, (state, action) => {
+        state.accessToken = null;
       });
   },
 });

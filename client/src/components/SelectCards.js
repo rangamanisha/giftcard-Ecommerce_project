@@ -20,7 +20,7 @@ import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
 import { getTopBarState } from "../reducer/topbar.reducer";
-import { getConvertedAmountAPI } from "../services/giftCards.service";
+import { getFixerConvertedAmount } from "../services/giftCards.service";
 
 const SelectCards = () => {
   const dispatch = useDispatch();
@@ -120,14 +120,12 @@ const SelectCards = () => {
       giftunitState.selectedCountry?.unit_name_short &&
       giftunitState.selectedCountry?.unit_name_short !== "AED"
     ) {
-      const response = await getConvertedAmountAPI(
+      const response = await getFixerConvertedAmount(
         selectedDenomination,
         giftunitState.selectedCountry?.unit_name_short,
         "AED"
       );
-      addToCartItem.card_value_aed = parseFloat(
-        response.data.converted_amount
-      ).toFixed(2);
+      addToCartItem.card_value_aed = response.converted_amount; // Converted amount is already fixed to 2 decimal places
     }
     if (authState.isAuthenticated) {
       dispatch(updateCartAction(addToCartItem));

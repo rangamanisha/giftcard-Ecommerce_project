@@ -11,9 +11,12 @@ export const processOrderApiCall = (order) => {
   return apiCall(url, "POST", {});
 };
 
-export const orderDetailsApiCall = (order) => {
+export const orderDetailsApiCall = (order, accessToken = null) => {
   const url = `${API_URL}/orders/${order.order_id}?image_size=${order.image_size}`;
-  return apiCall(url, "GET");
+  if (!accessToken) {
+    return apiCall(url, "GET");
+  }
+  return apiCall(url, "GET", null, { Authorization: `Bearer ${accessToken}` });
 };
 
 export const failedOrderApiCall = (order) => {

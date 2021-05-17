@@ -1520,9 +1520,7 @@ body {
   color: #544E5D
 }
 .social :hover{
-  color: #00B2AE;
- 
-  
+  color: #00B2AE; 
 }
 .social :link{
   background-color:#E6E6E6 0% 0% no-repeat padding-box;
@@ -1540,6 +1538,13 @@ body {
   margin-right: 10px;
 }
 .g-modal {
+  font-family: Cairo-Bold;
+  font-style: normal;
+}
+
+.go-back-to-homepage-box {
+  background: #EDEDF1 0% 0% no-repeat padding-box;
+  border-radius: 12px;
   font-family: Cairo-Bold;
   font-style: normal;
 }
