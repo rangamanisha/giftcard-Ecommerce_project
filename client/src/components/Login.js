@@ -262,7 +262,7 @@ const Login = () => {
                       appId={fbId}
                       callback={responseFacebook}
                       size="medium"
-                      autoLoad="true"
+                      autoLoad={false}
                       render={(renderProps) => (
                         <button onClick={renderProps.onClick}>
                           <img

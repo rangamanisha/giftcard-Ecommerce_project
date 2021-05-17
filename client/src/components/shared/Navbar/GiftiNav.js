@@ -18,7 +18,7 @@ import { cartTotalCountAction } from "../../../actions/cart.actions";
 import { getCartItemsState } from "../../../reducer/cart.reducer";
 import { getTopBarState } from "../../../reducer/topbar.reducer";
 import { getProfileState } from "../../../reducer/profile.reducer";
-import { updateUserprofileAction } from "../../../actions/profile.actions";
+import { getprofileListAction } from "../../../actions/profile.actions";
 //Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
@@ -49,6 +49,7 @@ const GiftiNav = () => {
           currency: giftunitState.selectedCountry?.unit_name_short || "AED",
         })
       );
+      dispatch(getprofileListAction());
     }
   }, [
     authState.isAuthenticated,
@@ -56,19 +57,6 @@ const GiftiNav = () => {
     setIsTotalCartCountActionCalled,
     dispatch,
   ]);
-  React.useEffect(() => {
-    if (authState.isAuthenticated) {
-      dispatch(
-        updateUserprofileAction({
-          first_name: profileState.profile?.first_name || "",
-          last_name: profileState.profile?.lastName || "",
-          birthday: profileState.profile?.birthday || "",
-          gender: profileState.profile?.gender || "",
-          nationality: profileState.profile?.nationality || "",
-        })
-      );
-    }
-  }, [dispatch]);
 
   const countryChanged = (value) => {
     const filteredId = state.countries.filter(
