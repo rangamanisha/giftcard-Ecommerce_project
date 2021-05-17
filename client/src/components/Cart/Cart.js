@@ -53,10 +53,18 @@ function Cart() {
     }
   }, [dispatch]);
 
-  const handleChangeCurrency = (event) => {
+  const handleChangeCurrency = async (event) => {
     const selectedCurrency = JSON.parse(event);
     if (selectedCurrency) {
-      dispatch(getFixerConversionRateAction(selectedCurrency));
+      if (authState.isAuthenticated) {
+        await dispatch(
+          fetchItemsByCartAction({
+            currency: selectedCurrency?.unit_name_short || "AED",
+            currency_id: selectedCurrency?.id || 1,
+          })
+        );
+      }
+      await dispatch(getFixerConversionRateAction(selectedCurrency));
     }
   };
 
