@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { cartAction } from "../reducer/cart.reducer";
+import { pageLoaderActions } from "../reducer/page-loader.reducer";
 import {
   cartItemsService,
   fetchItemsByCartService,
@@ -15,6 +16,8 @@ import {
 export const cartItemAction = createAsyncThunk(
   "cart_items/listcartItem",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       cart_item: {
         brand_id: payload.brand_id,
@@ -27,6 +30,7 @@ export const cartItemAction = createAsyncThunk(
       },
     };
     const response = await cartItemsService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -35,11 +39,13 @@ export const fetchItemsByCartAction = createAsyncThunk(
   "cart_items/listfetchcart",
   async (payload, thunkAPI) => {
     const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       currency: payload.currency,
       currency_id: payload.currency_id,
     };
     const response = await fetchItemsByCartService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     dispatch(cartTotalCountAction(request));
     return response;
   }
@@ -49,6 +55,7 @@ export const addRemoveQuantityAction = createAsyncThunk(
   "cart_items/listaddremove",
   async (payload, thunkAPI) => {
     const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       cart_item: {
         brand_name: payload.product_name,
@@ -59,6 +66,7 @@ export const addRemoveQuantityAction = createAsyncThunk(
       },
     };
     const response = await addRemoveQuantityService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     dispatch(
       fetchItemsByCartAction({
         currency: payload.country.unit_name_short,
@@ -72,10 +80,13 @@ export const addRemoveQuantityAction = createAsyncThunk(
 export const cartTotalCountAction = createAsyncThunk(
   "cart_items/listcountTotal",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       currency: payload.currency,
     };
     const response = await cartTotalCountService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -84,6 +95,7 @@ export const updateCartAction = createAsyncThunk(
   "cart_items/update",
   async (payload, thunkAPI) => {
     const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       cart_item: {
         brand_id: payload.brand_id,
@@ -101,6 +113,7 @@ export const updateCartAction = createAsyncThunk(
       request.cart_item["gift_message"] = payload.gift_message;
     }
     const response = await cartItemsService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     dispatch(cartTotalCountAction({ currency: payload.currency }));
     return response;
   }
@@ -110,10 +123,12 @@ export const getPaymentCurrencyAction = createAsyncThunk(
   "cart_items/listPaymentCurrency",
   async (payload, thunkAPI) => {
     const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await getPaymentCurrencyService();
     if (response.code === 200) {
-      dispatch(getFixerConversionRateAction(response.data.currencies[0]));
+      await dispatch(getFixerConversionRateAction(response.data.currencies[0]));
     }
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -121,12 +136,14 @@ export const getPaymentCurrencyAction = createAsyncThunk(
 export const getConversionRateAction = createAsyncThunk(
   "cart_items/listPaymentConversions",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       currency: payload.id,
     };
-    const { dispatch } = thunkAPI;
     dispatch(cartAction.updateSelectedCartCurrency(payload));
     const response = await getConversionRateService(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -136,8 +153,10 @@ export const getFixerConversionRateAction = createAsyncThunk(
   async (payload, thunkAPI) => {
     const currency = payload?.unit_name_short;
     const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     await dispatch(cartAction.updateSelectedCartCurrency(payload));
     const response = await getFixerConversionRateAPI(currency);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );

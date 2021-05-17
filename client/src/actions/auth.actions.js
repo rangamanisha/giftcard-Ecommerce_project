@@ -8,13 +8,18 @@ import {
   updatepasswordAPI,
 } from "../services/auth.service";
 
+import { pageLoaderActions } from "../reducer/page-loader.reducer";
+
 export const loginAction = createAsyncThunk(
   "auth/login",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       signin: { email: payload.email, password: payload.password },
     };
     const response = await loginAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -22,6 +27,8 @@ export const loginAction = createAsyncThunk(
 export const googlesigninAction = createAsyncThunk(
   "auth/googlelogin",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       signin: {
         email: payload.email,
@@ -31,6 +38,7 @@ export const googlesigninAction = createAsyncThunk(
       },
     };
     const response = await googleloginAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -38,6 +46,8 @@ export const googlesigninAction = createAsyncThunk(
 export const signupAction = createAsyncThunk(
   "auth/signup",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       signup: {
         first_name: payload.first_name,
@@ -49,6 +59,7 @@ export const signupAction = createAsyncThunk(
     };
 
     const response = await signupAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -56,6 +67,8 @@ export const signupAction = createAsyncThunk(
 export const resetpasswordAction = createAsyncThunk(
   "auth/resetpassword",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       change_password: {
         password: payload.password,
@@ -65,6 +78,7 @@ export const resetpasswordAction = createAsyncThunk(
     };
 
     const response = await resetpasswordAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -72,6 +86,8 @@ export const resetpasswordAction = createAsyncThunk(
 export const updatepasswordAction = createAsyncThunk(
   "auth/updatepassword",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       change_password: {
         password: payload.password,
@@ -80,6 +96,7 @@ export const updatepasswordAction = createAsyncThunk(
     };
 
     const response = await updatepasswordAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -87,12 +104,15 @@ export const updatepasswordAction = createAsyncThunk(
 export const forgotpasswordAction = createAsyncThunk(
   "auth/forgotpassword",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       email: payload.email,
       idc: payload.idc,
     };
 
     const response = await forgotpasswordAPI(request);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );

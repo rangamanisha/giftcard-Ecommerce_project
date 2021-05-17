@@ -34,6 +34,7 @@ import Idc_Header from "./components/IDC/IdcHeader";
 import Idc_Signin from "./components/IDC/IdcSign";
 import SuccessPage from "./components/SuccessPage";
 import FailurePage from "./components/FailurePage";
+import PageLoader from "./components/PageLoader";
 
 function App() {
   return (
@@ -45,7 +46,10 @@ function App() {
       {window.location.pathname === "/idc/order" ||
       window.location.pathname === "/idc/signin" ||
       window.location.pathname === "/idc/profile" ? null : (
-        <GiftiNav />
+        <>
+          <GiftiNav />
+          <PageLoader />
+        </>
       )}
       <Switch>
         <Route path="/" component={Home} exact />

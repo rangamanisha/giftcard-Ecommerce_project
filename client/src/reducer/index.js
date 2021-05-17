@@ -16,6 +16,11 @@ import {
 } from "./rewardpoints.reducer";
 import { orderReducer, ORDER__FEATURE_KEY } from "./orders.reducers";
 import { idcReducer, IDC_FEATURE_KEY } from "./idc.reducer";
+import {
+  pageLoaderReducer,
+  PAGE_LOADER_FEATURE_KEY,
+} from "./page-loader.reducer";
+
 const saveToLocalStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state);
@@ -51,6 +56,7 @@ const store = configureStore({
     [CART_ITEMS_REDUCER]: cartItemReducer,
     [ORDER__FEATURE_KEY]: orderReducer,
     [IDC_FEATURE_KEY]: idcReducer,
+    [PAGE_LOADER_FEATURE_KEY]: pageLoaderReducer,
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
