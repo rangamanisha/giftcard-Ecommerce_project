@@ -46,6 +46,7 @@ const GuestForm = (props) => {
           last_name: data.last_name,
         },
         giftcard: cartState.lineItems.map((lineItem) => {
+          console.log('lineItem ', lineItem);
           return {
             brand_id: lineItem.brand_id,
             giftcard_value: lineItem.giftcard_value,
@@ -72,6 +73,7 @@ const GuestForm = (props) => {
           currency: cartState.checkoutCart.currency_id, //
         },
       };
+      console.log('payload ', payload);
       dispatch(orderActions.setGuestPayload(payload));
       const nextButton = document.getElementsByClassName("cart-next-btn")[0];
       nextButton.click();

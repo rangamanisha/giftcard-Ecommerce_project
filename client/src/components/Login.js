@@ -84,7 +84,6 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
 
   const responseGoogle = (response) => {
-    debugger;
     const accessToken = response.accessToken;
     dispatch(googlesigninAction({ accessToken }));
   };
