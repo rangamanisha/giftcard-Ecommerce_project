@@ -10,9 +10,13 @@ const GuestForm = (props) => {
   const { cartState, orderActions, dispatch } = props;
 
   const getTotalAmount = (lineItems) => {
-    return lineItems
-      .map((lineItem) => parseFloat(lineItem.card_value_aed))
-      .reduce((accumulator, currentValue) => accumulator + currentValue);
+    return parseFloat(
+      lineItems
+        .map(
+          (lineItem) => parseFloat(lineItem.card_value_aed) * lineItem.quantity
+        )
+        .reduce((accumulator, currentValue) => accumulator + currentValue)
+    ).toFixed(2);
   };
 
   const getMarginAmount = (amount) => {
@@ -66,7 +70,9 @@ const GuestForm = (props) => {
           isbuynow: false, //
           card_value_aed: null, //
           use_credits: false, //
-          current_exchange_rate: cartState.conversion.currency_exchange_rate, //
+          current_exchange_rate: parseFloat(
+            cartState.conversion.currency_exchange_rate
+          ).toFixed(2), //
           use_hassad_points: false, //
           language_code: "en", //
           currency: cartState.checkoutCart.currency_id, //

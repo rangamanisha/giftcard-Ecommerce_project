@@ -132,11 +132,12 @@ export const orderSlice = createSlice({
       })
       .addCase(createGuestOrderAction.fulfilled, (state, action) => {
         const response = action.payload;
-        state.loading = false;
         state.guest_payload = null;
         if (response.code === 200) {
+          state.loading = true;
           state.created_order = response.data.order;
         } else {
+          state.loading = false;
           state.error = response?.errors?.base?.join(",") || "Payment Failed";
         }
       })

@@ -119,9 +119,7 @@ const Checkout = (props) => {
           >
             {orderState.loading ? <Loader /> : null}
             PAY {cartState.checkoutCart.currency}{" "}
-            {authState.isAuthenticated
-              ? cartState.checkoutCart.total_amount
-              : orderState.guest_payload?.order?.order_total_aed}
+            {cartState.checkoutCart.total_amount}
           </Button>
         </Frames>
       );

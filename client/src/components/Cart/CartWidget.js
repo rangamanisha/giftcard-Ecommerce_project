@@ -7,7 +7,10 @@ import Button from "react-bootstrap/Button";
 import exclamation from "../../assets/Group4790.svg";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Image from "react-bootstrap/Image";
-import { getConvertedAmountAPI } from "../../services/giftCards.service";
+import {
+  getConvertedAmountAPI,
+  getFixerConvertedAmount,
+} from "../../services/giftCards.service";
 
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -36,6 +39,14 @@ const CartWidget = (props) => {
 
   const [useGiftiGlobalPoints, setUseGiftiGlobalPoints] = useState(false);
 
+  const getMarginAmount = (amount) => {
+    const additionalCharge = (parseFloat(amount) * 5) / 100;
+    const totalAmount = parseFloat(
+      additionalCharge + parseFloat(amount)
+    ).toFixed(2);
+    return totalAmount;
+  };
+
   const lineValue =
     state && state.lineItems && state.lineItems.length
       ? state.lineItems.reduce(
@@ -53,9 +64,12 @@ const CartWidget = (props) => {
     } else {
       if (state.lineItems.length) {
         total = state.lineItems
-          .map(
-            (lineItem) =>
-              parseFloat(lineItem.card_value_aed) * parseInt(lineItem.quantity)
+          .map((lineItem) =>
+            lineItem.currency !== state.selectedCartCurrency?.unit_name_short
+              ? parseFloat(getMarginAmount(lineItem.card_value_aed)) *
+                parseInt(lineItem.quantity)
+              : parseFloat(lineItem.card_value_aed) *
+                parseInt(lineItem.quantity)
           )
           .reduce(
             (accumulatedValue, currentValue) => accumulatedValue + currentValue
@@ -123,12 +137,12 @@ const CartWidget = (props) => {
     const totalAmount = getTotalConvertedAmount();
     let convertedAmountAED = totalAmount;
     if (state.selectedCartCurrency?.unit_name_short !== "AED") {
-      const response = await getConvertedAmountAPI(
+      const response = await getFixerConvertedAmount(
         convertedAmountAED,
         state.selectedCartCurrency?.unit_name_short,
         "AED"
       );
-      convertedAmountAED = response.data.converted_amount;
+      convertedAmountAED = response.converted_amount;
     }
     const checkoutObject = {
       total_amount: totalAmount,
