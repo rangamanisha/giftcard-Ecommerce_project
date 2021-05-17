@@ -55,6 +55,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-social-login": "^3.4.13",
+    "react-spinners": "^0.10.6",
     "react-step-progress": "^1.0.3",
     "react-top-loading-bar": "^2.0.1",
     "redux-devtools-extension": "^2.13.9",

@@ -11,7 +11,7 @@ export const getCountriesListAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await getCountriesAPI();
-    await dispatch(giftCardsUnitAction());
+    dispatch(giftCardsUnitAction());
     dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }

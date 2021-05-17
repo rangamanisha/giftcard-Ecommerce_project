@@ -17,6 +17,7 @@ import { getOrderState, orderActions } from "../reducer/orders.reducers";
 import { getCartItemsState } from "../reducer/cart.reducer";
 import { getProfileState } from "../reducer/profile.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
+import { pageLoaderActions } from "../reducer/page-loader.reducer";
 
 const Checkout = (props) => {
   const orderState = useSelector(getOrderState);
@@ -111,6 +112,7 @@ const Checkout = (props) => {
             id="pay-button"
             onClick={() => {
               dispatch(orderActions.setLoading(true));
+              dispatch(pageLoaderActions.setPageLoadingAction(true));
               Frames.submitCard();
             }}
             disabled={orderState.loading}

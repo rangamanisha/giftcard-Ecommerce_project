@@ -111,6 +111,14 @@ function Cart() {
         return lineItem;
       });
       dispatch(cartAction.saveItemsToCart(lineItems));
+      if (lineItems.length) {
+        const totalCartItems = lineItems
+          .map((lineItem) => parseFloat(lineItem.quantity))
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      } else {
+        dispatch(cartAction.updateTotalCartItems(0));
+      }
     }
   };
 
@@ -143,6 +151,14 @@ function Cart() {
           return lineItem;
         });
         dispatch(cartAction.saveItemsToCart(lineItems));
+        if (lineItems.length) {
+          const totalCartItems = lineItems
+            .map((lineItem) => parseFloat(lineItem.quantity))
+            .reduce((accumulator, currentValue) => accumulator + currentValue);
+          dispatch(cartAction.updateTotalCartItems(totalCartItems));
+        } else {
+          dispatch(cartAction.updateTotalCartItems(0));
+        }
       }
     }
   };

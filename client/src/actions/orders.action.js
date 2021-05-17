@@ -128,7 +128,7 @@ export const processGiftCardCheckoutAction = createAsyncThunk(
       response.data.order &&
       response.data.order.id
     ) {
-      window.location.href = `${window.location.origin}/confirm_order?order_id=${payload?.order_id}`;
+      window.location.href = `${window.location.origin}/success?order_id=${payload?.order_id}`;
     } else {
       window.location.href = `${window.location.origin}/failure?order_id=${payload?.order_id}`;
     }
