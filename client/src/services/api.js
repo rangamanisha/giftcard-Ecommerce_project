@@ -8,20 +8,14 @@ export const apiCall = async (
   isAuthenticatedReq = true
 ) => {
   const accessToken = localStorage.getItem("access_token");
-  console.log('accessToken ', accessToken);
-  if (isAuthenticatedReq && !accessToken) {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "/";
-  }
-
-  const requestHeaders = isAuthenticatedReq
-    ? new Headers({
-      ...headers,
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`
-    })
-    : new Headers({ ...headers, "Content-Type": "application/json" });
+  const requestHeaders =
+    accessToken !== null && accessToken !== undefined
+      ? new Headers({
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          ...headers,
+        })
+      : new Headers({ "Content-Type": "application/json", ...headers });
 
   const config = {
     method,
@@ -38,13 +32,21 @@ export const apiCall = async (
   if (result.status === 403 || result.status === 401) {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = "/";
+    window.location.href = `${window.location.origin}/auth/login`;
   }
 
   if (!result.ok) {
     const body = await result.json();
     return body;
   }
+
+  // const response = await result.json();
+
+  // if (response.code === 401) {
+  //   localStorage.clear();
+  //   sessionStorage.clear();
+  //   window.location.href = `${window.location.origin}/auth/login`;
+  // }
 
   return result.json();
 };

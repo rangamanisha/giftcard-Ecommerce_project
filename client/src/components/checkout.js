@@ -84,7 +84,7 @@ const Checkout = (props) => {
       return (
         <Frames
           config={{
-            debug: true,
+            debug: !process.env.REACT_APP_IS_PRODUCTION,
             publicKey,
             localization: {
               cardNumberPlaceholder: "Card number",
@@ -117,7 +117,9 @@ const Checkout = (props) => {
           >
             {orderState.loading ? <Loader /> : null}
             PAY {cartState.checkoutCart.currency}{" "}
-            {cartState.checkoutCart.total_amount}
+            {authState.isAuthenticated
+              ? cartState.checkoutCart.total_amount
+              : orderState.guest_payload?.order?.order_total_aed}
           </Button>
         </Frames>
       );
