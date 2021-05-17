@@ -13,7 +13,7 @@ import userIcon from "../../assets/uprofile.svg";
 import { getAuthState } from "../../reducer/auth.reducer";
 import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
-
+import { getProfileState } from "../../reducer/profile.reducer";
 const Topbar = (props) => {
   const {
     bg,
@@ -28,9 +28,10 @@ const Topbar = (props) => {
     state,
     cartState,
   } = props;
-  const user = localStorage.getItem("first_name");
+  // const user = localStorage.getItem(profileState.profile.first_name);
   const history = useHistory();
   const authState = useSelector(getAuthState);
+  const profileState = useSelector(getProfileState);
   const clearsession = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("first_name");
@@ -38,14 +39,14 @@ const Topbar = (props) => {
     sessionStorage.clear();
     window.location.reload();
   };
+  const user = profileState.profile?.first_name || "";
   const reward = () => {
     if (authState.isAuthenticated) {
-      return history.push("/reward-points");
+      return history.push({ pathname: "/reward-points" });
     } else {
-      return history.push("auth/login");
+      return history.push({ pathname: "/auth/login" });
     }
   };
-
   const getProfile = () => {
     if (showLogin) {
       return (
@@ -153,5 +154,4 @@ const Topbar = (props) => {
     </Navbar>
   );
 };
-
 export default Topbar;

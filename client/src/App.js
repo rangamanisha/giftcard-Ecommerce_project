@@ -32,6 +32,7 @@ import Idc_Order from "./components/IDC/IdcOrder";
 import Idc_Profile from "./components/IDC/idcProfile";
 import Idc_Header from "./components/IDC/IdcHeader";
 import Idc_Signin from "./components/IDC/IdcSign";
+import ProtectedRoute from "./ProtectedRoute";
 import SuccessPage from "./components/SuccessPage";
 import FailurePage from "./components/FailurePage";
 import PageLoader from "./components/PageLoader";
@@ -60,7 +61,7 @@ function App() {
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
         <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
         <Route path="/selectcard" component={SelectCards} exact />
-        <Route path="/order/allorder" component={AllOrder} exact />
+        <ProtectedRoute path="/order/allorder" component={AllOrder} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order">
@@ -69,13 +70,13 @@ function App() {
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
-        <Route path="/profile" component={EditProfile} exact />
-        <Route path="/reward-points" component={RewardPoints} exact />
-        <Route path="/checkout" component={Checkout} exact />
-        <Route path="/payment" component={StepsDemo} exact />
+        <ProtectedRoute path="/profile" component={EditProfile} exact />
+        <ProtectedRoute path="/reward-points" component={RewardPoints} exact />
+        <ProtectedRoute path="/checkout" component={Checkout} exact />
+        <ProtectedRoute path="/payment" component={StepsDemo} exact />
         <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
         <Route path="/selectcard" component={SelectCards} exact />
-        <Route path="/order/allorder" component={AllOrder} exact />
+        <ProtectedRoute path="/order/allorder" component={AllOrder} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order" component={Confirm_Order} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Emailicon from "../assets/Email-icon.svg";
@@ -15,13 +15,20 @@ import {
 } from "../actions/profile.actions";
 import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+import { getAuthState } from "../reducer/auth.reducer";
+
+import CountrySelect from "react-bootstrap-country-select";
+import "react-bootstrap-country-select/dist/react-bootstrap-country-select.css";
 
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-
+  const authState = useSelector(getAuthState);
   useEffect(() => {
-    dispatch(getprofileListAction({}));
+    if (authState.isAuthenticated) {
+      dispatch(getprofileListAction({}));
+    }
   }, [dispatch]);
 
   const formik = useFormik({
@@ -30,8 +37,8 @@ const UserProfile = () => {
       lastName: profilestate.profile?.last_name || "",
       dob: profilestate.profile?.birthday || null,
       language: profilestate.profile?.language || "",
-      country: profilestate.profile?.country || "",
-      phone: "",
+      country: profilestate.profile?.nationality || "",
+      phone: profilestate.profile?.phone || "",
       gender: profilestate.profile?.gender || "",
       email: profilestate.profile?.email || "",
     },
@@ -42,6 +49,19 @@ const UserProfile = () => {
       dispatch(updateUserprofileAction(data));
     },
   });
+  const handleShow = () => {
+    swal({
+      title: "",
+      icon: "success",
+      text: "We've successfully edited your details..",
+      type: "",
+      allowEscapeKey: false,
+      showConfirmButton: true,
+      showCancelButton: false,
+      confirmButtonColor: "#00AF9A",
+    });
+  };
+  const [value, setValue] = React.useState(null);
 
   return (
     <div className="profile-card mx-auto col-md-5">
@@ -87,7 +107,7 @@ const UserProfile = () => {
 
         <Form.Group
           controlId="formGridEmail"
-          className="w-75 mt-2 mx-auto icons_login"
+          className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control
             size="sm"
@@ -114,16 +134,15 @@ const UserProfile = () => {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
-          <Form.Control
-            size="sm"
-            type="text"
-            placeholder="Country"
-            className="profile-iconsfields-b"
-            // value={data.country}
-            value={formik.values.country}
-            onChange={formik.handleChange}
-            name="country"
-          />
+          <Form>
+            <CountrySelect
+              value={value}
+              onChange={setValue}
+              matchNameFromStart={false}
+              matchAbbreviations
+              name="country"
+            />
+          </Form>
         </Form.Group>
 
         <Form.Group
@@ -132,7 +151,7 @@ const UserProfile = () => {
         >
           <Form.Control
             size="sm"
-            type="text"
+            type="number"
             placeholder="phone number"
             className="profile-iconsfields"
             value={formik.values.phone}
@@ -169,8 +188,9 @@ const UserProfile = () => {
             variant="info"
             size="lg"
             type="submit"
+            onClick={handleShow}
           >
-            Edit Profile /save changes
+            Edit Profile
           </Button>
         </div>
       </Form>

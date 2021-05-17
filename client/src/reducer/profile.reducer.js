@@ -3,7 +3,10 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { getprofileListAction } from "../actions/profile.actions";
+import {
+  getprofileListAction,
+  updateUserprofileAction,
+} from "../actions/profile.actions";
 
 export const PROFILE_INITIAL_STATE = {
   profile: null,
@@ -31,6 +34,18 @@ export const profileSlice = createSlice({
         }
       })
       .addCase(getprofileListAction.rejected, (state, action) => {
+        state.is_active = true;
+      })
+      .addCase(updateUserprofileAction.pending, (state, action) => {
+        state.is_active = true;
+      })
+      .addCase(updateUserprofileAction.fulfilled, (state, action) => {
+        const response = action.payload;
+        if (response.code === 200) {
+          state.profile = response.data.profile;
+        }
+      })
+      .addCase(updateUserprofileAction.rejected, (state, action) => {
         state.is_active = true;
       });
   },
