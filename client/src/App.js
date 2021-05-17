@@ -72,8 +72,8 @@ function App() {
         <Route path="/auth/resetpassword" component={ResetPassword} exact />
         <ProtectedRoute path="/profile" component={EditProfile} exact />
         <ProtectedRoute path="/reward-points" component={RewardPoints} exact />
-        <ProtectedRoute path="/checkout" component={Checkout} exact />
-        <ProtectedRoute path="/payment" component={StepsDemo} exact />
+        <Route path="/checkout" component={Checkout} exact />
+        <Route path="/payment" component={StepsDemo} exact />
         <Route path="/allfeaturedcards" component={AllFeaturedCards} exact />
         <Route path="/selectcard" component={SelectCards} exact />
         <ProtectedRoute path="/order/allorder" component={AllOrder} exact />
