@@ -28,7 +28,7 @@ const Footer = () => {
     getYear();
   }, []);
   return (
-    <footer className="home-footer">
+    <footer className="home-footer"  >
       <Container>
         <Row>
           <Col md={4}>
@@ -96,7 +96,7 @@ const Footer = () => {
               </li>
               <li
                 className="footer-text-list mt-3"
-                onClick={() => history.push("/contact-us")}
+                onClick={() => history.push("/contact")}
                 style={{ cursor: "pointer" }}
               >
                 Contact us

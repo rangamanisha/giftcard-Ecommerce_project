@@ -6,6 +6,7 @@ import {
   forgotpasswordAPI,
   googleloginAPI,
   updatepasswordAPI,
+  facebookAPI
 } from "../services/auth.service";
 
 export const loginAction = createAsyncThunk(
@@ -22,19 +23,38 @@ export const loginAction = createAsyncThunk(
 export const googlesigninAction = createAsyncThunk(
   "auth/googlelogin",
   async (payload, thunkAPI) => {
+    console.log(payload)
     const request = {
       signin: {
-        email: payload.email,
-        provider: "Google",
-        token_type: "access_token",
+        email:payload.email,
+        phone:payload.email,
+        provider: payload.provider,
+        token_type: "Bearer",
         token: payload.accessToken,
+        expires_at: payload.expires_at
       },
     };
     const response = await googleloginAPI(request);
     return response;
   }
 );
-
+export const facebookAction = createAsyncThunk(
+  "auth/facebooklogin",
+  async(payload, thunkAPI) => {
+    const request = {
+      signin : {
+        email:payload.email,
+        phone:payload.email,
+        token_type: "Bearer",
+        provider: payload.provider,
+        token: payload.accessToken,
+        expires_at: payload.expires_at
+      },
+    };
+    const response = await facebookAPI(request);
+    return response
+  }
+);
 export const signupAction = createAsyncThunk(
   "auth/signup",
   async (payload, thunkAPI) => {

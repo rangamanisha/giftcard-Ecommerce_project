@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import UserProfile from "./UserProfile";
 import Updatepassword from "./updatepassword";
@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 
 const Editprofile = () => {
+  
   return (
     <div className="container-fluid px-0">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
