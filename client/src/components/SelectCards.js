@@ -21,6 +21,7 @@ import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
 import { getTopBarState } from "../reducer/topbar.reducer";
 import { getFixerConvertedAmount } from "../services/giftCards.service";
+import { pageLoaderActions } from "../reducer/page-loader.reducer";
 
 const SelectCards = () => {
   const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const SelectCards = () => {
   }, [get(card, "id")]);
 
   const saveToCart = async (shouldRedirect) => {
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const addToCartItem = {
       quantity: count,
       brand_id: card.id,
@@ -169,6 +171,7 @@ const SelectCards = () => {
     setCount(0);
     setRate(0);
     setSelectedDenomiation(null);
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     if (shouldRedirect) {
       history.push("cart");
     }
