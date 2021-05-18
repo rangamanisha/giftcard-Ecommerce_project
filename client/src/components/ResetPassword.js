@@ -28,13 +28,16 @@ const ResetPassword = () => {
       token: value,
     },
     validationSchema: Yup.object({
-      password: Yup.string().min(2).max(200).required(),
-      password_confirmation: Yup.string().min(2).max(200).required(),
-    }),
+      password: Yup.string().required('Password is required'),
+      password_confirmation: Yup.string().required('Confirm your password')
+         .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    })
+    ,
     onSubmit: (data) => {
       dispatch(resetpasswordAction(data));
       dispatch(updatepasswordAction(data));
     },
+        validateOnChange: false,
   });
 
   useEffect(() => {
