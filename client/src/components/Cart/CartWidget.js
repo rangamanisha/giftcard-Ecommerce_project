@@ -87,7 +87,11 @@ const CartWidget = (props) => {
       total = state.lineItems
         .map((lineItem) =>
           lineItem.currency !== state.selectedCartCurrency?.unit_name_short
-            ? parseFloat(getMarginAmount(lineItem.card_value_aed)) *
+            ? parseFloat(
+                authState.isAuthenticated
+                  ? lineItem.card_value_aed
+                  : getMarginAmount(lineItem.card_value_aed)
+              ) *
               parseInt(lineItem.quantity) *
               exchangeRate
             : parseFloat(lineItem.giftcard_value) * parseInt(lineItem.quantity)
