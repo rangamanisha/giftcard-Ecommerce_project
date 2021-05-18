@@ -487,12 +487,12 @@ border: 1px solid #00B2AE !important;
   left:24px;
 }
 .no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0 !important;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
 }
 
 .no-spin {
-  -moz-appearance:textfield !important;
+    -moz-appearance:textfield !important;
 }
 
 .icon_img {

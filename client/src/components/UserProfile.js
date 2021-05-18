@@ -62,19 +62,21 @@ const UserProfile = () => {
       confirmButtonColor: "#00AF9A",
     })
   }
-  const [ value, setValue ] = React.useState(null);
+  const [ country, setCountry ] = React.useState(null);
   
 
 
   return (
     <div className="profile-card mx-auto col-md-5" >
       <Form className="profile" onSubmit={formik.handleSubmit}>
-        <Form.Row>
+        <Form.Row style={{paddingRight: '8px'}}>
           <Form.Group
             as={Col}
             xs={5}
             controlId="formBasicText"
             className="icons_login profile-input"
+            style={{paddingLeft: '0px',
+              paddingRight: '2px'}}
           >
             <Form.Control
               size="sm"
@@ -137,11 +139,11 @@ const UserProfile = () => {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
-          <Form>
+          <Form >
            
             <CountrySelect
-        value={value}
-        onChange={setValue}
+        value={country}
+        onChange={setCountry}
         matchNameFromStart={false}
         matchAbbreviations
         name="country"

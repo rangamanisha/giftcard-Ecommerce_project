@@ -21,6 +21,7 @@ export const updateUserprofileAction = createAsyncThunk(
         birthday: payload.dob,
         gender: payload.gender,
         nationality: payload.country,
+        phone: payload.phone
       },
     };
     const response = await updateprofileAPI(request);
