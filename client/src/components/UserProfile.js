@@ -64,7 +64,7 @@ const UserProfile = () => {
   const [value, setValue] = React.useState(null);
 
   return (
-    <div className="profile-card mx-auto col-md-5" >
+    <div className="profile-card mx-auto col-md-5">
       <Form className="profile" onSubmit={formik.handleSubmit}>
         <Form.Row>
           <Form.Group

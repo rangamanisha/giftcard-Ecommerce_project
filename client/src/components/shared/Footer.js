@@ -28,7 +28,7 @@ const Footer = () => {
     getYear();
   }, []);
   return (
-    <footer className="home-footer"  >
+    <footer className="home-footer">
       <Container>
         <Row>
           <Col md={4}>
