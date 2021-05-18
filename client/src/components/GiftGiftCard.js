@@ -59,7 +59,7 @@ const GiftiGiftCard = (props) => {
           />
         </Form.Group>
       </Form>
-      <p className="select-card-text mt-5">Choose A Template</p>
+      {/* <p className="select-card-text mt-5">Choose A Template</p>
       <div className="row">
         <img
           src={AmazonMedium}
@@ -76,7 +76,7 @@ const GiftiGiftCard = (props) => {
           alt="AmazonMedium"
           className="templatetheme ml-5"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

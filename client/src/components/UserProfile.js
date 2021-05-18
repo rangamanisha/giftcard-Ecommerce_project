@@ -161,6 +161,7 @@ const UserProfile = () => {
             value={formik.values.phone}
             onChange={formik.handleChange}
             name="phone"
+            className="no-spin"
           />
           <img src={Phoneicon} alt="Icon" className="profile_icon" />
         </Form.Group>
