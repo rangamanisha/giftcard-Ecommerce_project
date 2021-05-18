@@ -9,18 +9,22 @@ import * as Yup from "yup";
 const GuestForm = (props) => {
   const { cartState, orderActions, dispatch } = props;
 
-  const getTotalAmount = () => {
-    if (cartState.checkoutCart.currency !== "AED") {
-      const totalAmount = parseFloat(cartState.checkoutCart.total_amount);
-      const additionalCharge = (totalAmount * 5) / 100;
-      return parseFloat(totalAmount + additionalCharge).toFixed(2);
-    }
-    return cartState.checkoutCart.total_amount;
+  const getTotalAmount = (lineItems) => {
+    return parseFloat(
+      lineItems
+        .map(
+          (lineItem) => parseFloat(lineItem.card_value_aed) * lineItem.quantity
+        )
+        .reduce((accumulator, currentValue) => accumulator + currentValue)
+    ).toFixed(2);
   };
 
   const getMarginAmount = (amount) => {
     const additionalCharge = (parseFloat(amount) * 5) / 100;
-    return parseFloat(additionalCharge + parseFloat(amount)).toFixed(2);
+    const totalAmount = parseFloat(
+      additionalCharge + parseFloat(amount)
+    ).toFixed(2);
+    return totalAmount;
   };
 
   const formik = useFormik({
@@ -59,19 +63,23 @@ const GuestForm = (props) => {
           };
         }),
         order: {
-          order_total_aed: getTotalAmount(),
+          order_total_aed: 0,
           program_id: 1, //
           payment_currency: cartState.checkoutCart.currency,
           isforself: true, //
           isbuynow: false, //
           card_value_aed: null, //
           use_credits: false, //
-          current_exchange_rate: cartState.conversion.currency_exchange_rate, //
+          current_exchange_rate: parseFloat(
+            cartState.conversion.currency_exchange_rate
+          ).toFixed(2), //
           use_hassad_points: false, //
           language_code: "en", //
           currency: cartState.checkoutCart.currency_id, //
         },
       };
+
+      payload.order.order_total_aed = getTotalAmount(payload.giftcard);
       dispatch(orderActions.setGuestPayload(payload));
       const nextButton = document.getElementsByClassName("cart-next-btn")[0];
       nextButton.click();

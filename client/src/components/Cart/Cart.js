@@ -53,10 +53,18 @@ function Cart() {
     }
   }, [dispatch]);
 
-  const handleChangeCurrency = (event) => {
+  const handleChangeCurrency = async (event) => {
     const selectedCurrency = JSON.parse(event);
     if (selectedCurrency) {
-      dispatch(getFixerConversionRateAction(selectedCurrency));
+      if (authState.isAuthenticated) {
+        await dispatch(
+          fetchItemsByCartAction({
+            currency: selectedCurrency?.unit_name_short || "AED",
+            currency_id: selectedCurrency?.id || 1,
+          })
+        );
+      }
+      await dispatch(getFixerConversionRateAction(selectedCurrency));
     }
   };
 
@@ -111,6 +119,14 @@ function Cart() {
         return lineItem;
       });
       dispatch(cartAction.saveItemsToCart(lineItems));
+      if (lineItems.length) {
+        const totalCartItems = lineItems
+          .map((lineItem) => parseFloat(lineItem.quantity))
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      } else {
+        dispatch(cartAction.updateTotalCartItems(0));
+      }
     }
   };
 
@@ -143,6 +159,14 @@ function Cart() {
           return lineItem;
         });
         dispatch(cartAction.saveItemsToCart(lineItems));
+        if (lineItems.length) {
+          const totalCartItems = lineItems
+            .map((lineItem) => parseFloat(lineItem.quantity))
+            .reduce((accumulator, currentValue) => accumulator + currentValue);
+          dispatch(cartAction.updateTotalCartItems(totalCartItems));
+        } else {
+          dispatch(cartAction.updateTotalCartItems(0));
+        }
       }
     }
   };

@@ -16,19 +16,18 @@ import {
 import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-import { getAuthState } from '../reducer/auth.reducer'
+import { getAuthState } from "../reducer/auth.reducer";
 
-import CountrySelect from 'react-bootstrap-country-select';
-import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
-
+import CountrySelect from "react-bootstrap-country-select";
+import "react-bootstrap-country-select/dist/react-bootstrap-country-select.css";
 
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
   const dispatch = useDispatch();
-  const authState = useSelector(getAuthState)
+  const authState = useSelector(getAuthState);
   useEffect(() => {
-    if(authState.isAuthenticated){
-    dispatch(getprofileListAction({}));
+    if (authState.isAuthenticated) {
+      dispatch(getprofileListAction({}));
     }
   }, [dispatch]);
 
@@ -60,11 +59,9 @@ const UserProfile = () => {
       showConfirmButton: true,
       showCancelButton: false,
       confirmButtonColor: "#00AF9A",
-    })
-  }
-  const [ value, setValue ] = React.useState(null);
-  
-
+    });
+  };
+  const [value, setValue] = React.useState(null);
 
   return (
     <div className="profile-card mx-auto col-md-5" >
@@ -138,15 +135,14 @@ const UserProfile = () => {
 
         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
           <Form>
-           
             <CountrySelect
-        value={value}
-        onChange={setValue}
-        matchNameFromStart={false}
-        matchAbbreviations
-        name="country"
-      />
-        </Form>
+              value={value}
+              onChange={setValue}
+              matchNameFromStart={false}
+              matchAbbreviations
+              name="country"
+            />
+          </Form>
         </Form.Group>
 
         <Form.Group

@@ -62,8 +62,8 @@ const Signup = () => {
     }
   }, [state.signupSuccess, history]);
   React.useEffect(() => {
-    return dispatch(authActions.clearErrors())
-  })
+    return dispatch(authActions.clearErrors());
+  });
   const responseGoogle = (response) => {
     const accessToken = response.accessToken;
     dispatch(googlesigninAction({ accessToken }));

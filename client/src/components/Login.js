@@ -12,14 +12,18 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
-import { loginAction, googlesigninAction, facebookAction } from "../actions/auth.actions";
+import {
+  loginAction,
+  googlesigninAction,
+  facebookAction,
+} from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
 import { values } from "lodash";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import { getuseractiveAction } from "../actions/useractive.actions";
 import { getUserActiveState } from "../reducer/useractive.reducer";
@@ -31,7 +35,7 @@ const Login = () => {
   const history = useHistory();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(false);
   const [message, setMessage] = useState("");
 
   const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
@@ -87,25 +91,28 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
   const responseGoogle = (response) => {
     //const accessToken = response.accessToken;
-    dispatch(googlesigninAction({
-      email: response.email,
-      provider: response.provider,
-      token_type: response.token_type,
-      accessToken: response.accessToken,
-      expiresIn: response.expiresIn
-
-    }))
+    dispatch(
+      googlesigninAction({
+        email: response.email,
+        provider: response.provider,
+        token_type: response.token_type,
+        accessToken: response.accessToken,
+        expiresIn: response.expiresIn,
+      })
+    );
   };
- const responseFacebook = (response) => {
+  const responseFacebook = (response) => {
     //const accessToken = response.accessToken;
-    dispatch(facebookAction({
-      email: response.email,
-      provider: response.provider,
-      token_type: response.token_type,
-      accessToken: response.accessToken,
-      expiresIn: response.expiresIn
-    }))
-  }
+    dispatch(
+      facebookAction({
+        email: response.email,
+        provider: response.provider,
+        token_type: response.token_type,
+        accessToken: response.accessToken,
+        expiresIn: response.expiresIn,
+      })
+    );
+  };
 
   return (
     <>
@@ -183,7 +190,6 @@ const Login = () => {
                 ) : null}
 
                 <div className="redio-forgot">
-                  
                   <Form.Group className="forgot" style={{ textAlign: "left" }}>
                     <Link
                       className="link-color"
@@ -252,26 +258,25 @@ const Login = () => {
                     />
                   </div>
                   <div className="facebook">
-                    
                     <FacebookLogin
-                    appId={fbId}
-                    callback={responseFacebook}
-                    size="medium"
-                    autoLoad="true"
-                    render={renderProps => (
-                      <button onClick={renderProps.onClick}><img 
-                      src={Facebookicon}
-                      variant="outline-light"
-                      className="facebook-button"
-                      style={{ width: "50px", height: "50px" }}
-                        alt="Icon"/>
-                      </button>
-                    )}
-                
-              />
-                        
-                    
-
+                      appId={fbId}
+                      callback={responseFacebook}
+                      size="medium"
+                      autoLoad={false}
+                      render={(renderProps) => (
+                        <button onClick={renderProps.onClick}>
+                          <img
+                            src={Facebookicon}
+                            variant="outline-light"
+                            autoLoad
+                            auto_logout_link={true}
+                            className="facebook-button"
+                            style={{ width: "50px", height: "50px" }}
+                            alt="Icon"
+                          />
+                        </button>
+                      )}
+                    />
                   </div>
                 </div>
               </Form>
