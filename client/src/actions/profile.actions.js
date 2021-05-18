@@ -14,13 +14,15 @@ export const updateUserprofileAction = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload)
     const { dispatch } = thunkAPI;
+    console.log(payload)
     const request = {
       user: {
         first_name: payload.firstName,
         last_name: payload.lastName,
         birthday: payload.dob,
-        gender: payload.gender,
         nationality: payload.country,
+        gender: payload.gender,
+        language:payload.language,
         phone: payload.phone
       },
     };

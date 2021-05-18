@@ -13,6 +13,7 @@ import {
   getprofileListAction,
   updateUserprofileAction,
 } from "../actions/profile.actions";
+import {getGiftcardsState} from '../reducer/giftCards.reducer'
 import * as moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
@@ -31,6 +32,9 @@ const UserProfile = () => {
     dispatch(getprofileListAction({}));
     }
   }, [dispatch]);
+  const giftunitState = useSelector(getGiftcardsState);
+  const countries = giftunitState.countries.
+  map((country) => country["country_name"]).sort();
 
   const formik = useFormik({
     initialValues: {
@@ -38,7 +42,7 @@ const UserProfile = () => {
       lastName: profilestate.profile?.last_name || "",
       dob: profilestate.profile?.birthday || null,
       language: profilestate.profile?.language || "",
-      country: profilestate.profile?.nationality || "",
+      country: profilestate.profile?.nationality || null,
       phone: profilestate.profile?.phone || "",
       gender: profilestate.profile?.gender || "",
       email: profilestate.profile?.email || "",
@@ -62,9 +66,7 @@ const UserProfile = () => {
       confirmButtonColor: "#00AF9A",
     })
   }
-  const [ country, setCountry ] = React.useState(null);
   
-
 
   return (
     <div className="profile-card mx-auto col-md-5" >
@@ -138,8 +140,7 @@ const UserProfile = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
-          <Form >
+          {/* <Form >
            
             <CountrySelect
         value={country}
@@ -148,9 +149,22 @@ const UserProfile = () => {
         matchAbbreviations
         name="country"
       />
-        </Form>
+        </Form> */}
+         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
+          <Form.Control
+            size="sm"
+            as="select"
+            placeholder="Country"
+            className="profile-iconsfields-b"
+            value={formik.values.country}
+            onChange={formik.handleChange}
+            name="country"
+          >
+            {countries.map((c, i) => (
+                          <option key={i}>{c}</option>
+                        ))}
+            </Form.Control>
         </Form.Group>
-
         <Form.Group
           controlId="formBasicPassword"
           className="w-75 mt-4 mx-auto icons_login"
