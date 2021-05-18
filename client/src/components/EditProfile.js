@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 
 const Editprofile = () => {
+  
   return (
     <div className="container-fluid px-0">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">

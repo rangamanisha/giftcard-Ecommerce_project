@@ -3,10 +3,7 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import {
-  getprofileListAction,
-  updateUserprofileAction,
-} from "../actions/profile.actions";
+import { getprofileListAction, updateUserprofileAction } from "../actions/profile.actions";
 
 export const PROFILE_INITIAL_STATE = {
   profile: null,
