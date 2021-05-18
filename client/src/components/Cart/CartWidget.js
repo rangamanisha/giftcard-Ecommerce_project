@@ -96,7 +96,7 @@ const CartWidget = (props) => {
           (accumulatedValue, currentValue) => accumulatedValue + currentValue
         );
     }
-    return total;
+    return parseFloat(total).toFixed(2);
   };
 
   const getTotalConvertedAmount = (usePoints) => {
