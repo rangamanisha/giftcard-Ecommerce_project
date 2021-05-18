@@ -93,7 +93,7 @@ const CartWidget = (props) => {
                   : getMarginAmount(lineItem.card_value_aed)
               ) *
               parseInt(lineItem.quantity) *
-              exchangeRate
+              (authState.isAuthenticated ? 1 : exchangeRate)
             : parseFloat(lineItem.giftcard_value) * parseInt(lineItem.quantity)
         )
         .reduce(
