@@ -32,13 +32,16 @@ export const getFixerConversionRateAPI = async (currency) => {
   const fixerURL = `${process.env.REACT_APP_FIXER_URL}`;
   const fixerAPIKey = `${process.env.REACT_APP_FIXER_API_KEY}`;
   const url = `${fixerURL}/latest?access_key=${fixerAPIKey}&base=AED&symbols=${currency}`;
-  // const response = await apiCall(url, "GET");
   const request = await fetch(url, { method: "GET" });
   const response = await request.json();
   if (response && response.success) {
     return {
       code: 200,
-      data: { currency_exchange_rate: response.rates[currency] },
+      data: {
+        currency_exchange_rate: parseFloat(
+          parseFloat(response.rates[currency]).toFixed(2)
+        ),
+      },
     };
   }
   return { code: 200, data: { currency_exchange_rate: 1 } };

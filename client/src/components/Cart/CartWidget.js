@@ -7,10 +7,7 @@ import Button from "react-bootstrap/Button";
 import exclamation from "../../assets/Group4790.svg";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Image from "react-bootstrap/Image";
-import {
-  getConvertedAmountAPI,
-  getFixerConvertedAmount,
-} from "../../services/giftCards.service";
+import { getFixerConvertedAmount } from "../../services/giftCards.service";
 
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -53,33 +50,52 @@ const CartWidget = (props) => {
           (sum, i) => sum + i.selectedDenomination * i.quantity
         )
       : 0;
+  // const getConvertedAmount = () => {
+  //   const exchangeRate = state.conversion?.currency_exchange_rate || 0;
+  //   let total = 0;
+  //   if (authState.isAuthenticated) {
+  //     total = parseFloat(state.totalCartAmount);
+  //     if (exchangeRate) {
+  //       total = total * exchangeRate;
+  //     }
+  //   } else {
+  //     if (state.lineItems.length) {
+  //       total = state.lineItems
+  //         .map((lineItem) =>
+  //           lineItem.currency !== state.selectedCartCurrency?.unit_name_short
+  //             ? parseFloat(getMarginAmount(lineItem.card_value_aed)) *
+  //               parseInt(lineItem.quantity)
+  //             : parseFloat(lineItem.card_value_aed) *
+  //               parseInt(lineItem.quantity)
+  //         )
+  //         .reduce(
+  //           (accumulatedValue, currentValue) => accumulatedValue + currentValue
+  //         );
+  //       if (exchangeRate) {
+  //         total = total * exchangeRate;
+  //       }
+  //     }
+  //   }
+  //   total = parseFloat(total).toFixed(2);
+  //   return total;
+  // };
+
   const getConvertedAmount = () => {
     const exchangeRate = state.conversion?.currency_exchange_rate || 0;
     let total = 0;
-    if (authState.isAuthenticated) {
-      total = parseFloat(state.totalCartAmount);
-      if (exchangeRate) {
-        total = total * exchangeRate;
-      }
-    } else {
-      if (state.lineItems.length) {
-        total = state.lineItems
-          .map((lineItem) =>
-            lineItem.currency !== state.selectedCartCurrency?.unit_name_short
-              ? parseFloat(getMarginAmount(lineItem.card_value_aed)) *
-                parseInt(lineItem.quantity)
-              : parseFloat(lineItem.card_value_aed) *
-                parseInt(lineItem.quantity)
-          )
-          .reduce(
-            (accumulatedValue, currentValue) => accumulatedValue + currentValue
-          );
-        if (exchangeRate) {
-          total = total * exchangeRate;
-        }
-      }
+    if (state.lineItems.length) {
+      total = state.lineItems
+        .map((lineItem) =>
+          lineItem.currency !== state.selectedCartCurrency?.unit_name_short
+            ? parseFloat(getMarginAmount(lineItem.card_value_aed)) *
+              parseInt(lineItem.quantity) *
+              exchangeRate
+            : parseFloat(lineItem.giftcard_value) * parseInt(lineItem.quantity)
+        )
+        .reduce(
+          (accumulatedValue, currentValue) => accumulatedValue + currentValue
+        );
     }
-    total = parseFloat(total).toFixed(2);
     return total;
   };
 

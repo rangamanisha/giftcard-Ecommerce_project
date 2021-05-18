@@ -9,16 +9,6 @@ import * as Yup from "yup";
 const GuestForm = (props) => {
   const { cartState, orderActions, dispatch } = props;
 
-  const getTotalAmount = (lineItems) => {
-    return parseFloat(
-      lineItems
-        .map(
-          (lineItem) => parseFloat(lineItem.card_value_aed) * lineItem.quantity
-        )
-        .reduce((accumulator, currentValue) => accumulator + currentValue)
-    ).toFixed(2);
-  };
-
   const getMarginAmount = (amount) => {
     const additionalCharge = (parseFloat(amount) * 5) / 100;
     const totalAmount = parseFloat(
@@ -63,7 +53,7 @@ const GuestForm = (props) => {
           };
         }),
         order: {
-          order_total_aed: 0,
+          order_total_aed: cartState.checkoutCart.total_amount,
           program_id: 1, //
           payment_currency: cartState.checkoutCart.currency,
           isforself: true, //
@@ -78,8 +68,6 @@ const GuestForm = (props) => {
           currency: cartState.checkoutCart.currency_id, //
         },
       };
-
-      payload.order.order_total_aed = getTotalAmount(payload.giftcard);
       dispatch(orderActions.setGuestPayload(payload));
       const nextButton = document.getElementsByClassName("cart-next-btn")[0];
       nextButton.click();

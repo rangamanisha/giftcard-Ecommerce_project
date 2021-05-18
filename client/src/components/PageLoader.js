@@ -12,7 +12,7 @@ const PageLoader = () => {
         <>
           <BarLoader
             width="100%"
-            height="4"
+            height="4px"
             color="#00B2AE"
             css={`
               display: block;

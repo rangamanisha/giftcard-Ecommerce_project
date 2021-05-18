@@ -115,7 +115,7 @@ const Checkout = (props) => {
               dispatch(pageLoaderActions.setPageLoadingAction(true));
               Frames.submitCard();
             }}
-            disabled={orderState.loading}
+            disabled={!Frames.isCardValid || orderState.loading}
           >
             {orderState.loading ? <Loader /> : null}
             PAY {cartState.checkoutCart.currency}{" "}
