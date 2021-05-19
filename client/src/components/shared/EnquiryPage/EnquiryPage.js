@@ -1,13 +1,11 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
+import "./EnquiryPage.scss";
 import Button from "react-bootstrap/Button";
-// import "./EnquiryPage.scss";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import { MdSearch } from "react-icons/md";
 import Accordion from "react-bootstrap/Accordion";
 import Header from "../HeaderPage/Header";
-
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 
 import Mail from "../../../assets/Mail.png";

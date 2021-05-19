@@ -81,7 +81,7 @@ function App() {
         <Route path="/order/confirm_order" component={Confirm_Order} />
         <Route path="/terms-and-conditions" component={ConditionsPage} exact />
         <Route path="/contact" component={Contact} exact />
-        <Route path="/enquiry" component={EnquiryPage} exact />
+        <Route path="/faq" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/failure" component={FailurePage} exact />
         <Route path="/success" component={SuccessPage} exact />

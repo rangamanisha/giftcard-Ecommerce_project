@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
               <li
                 className="footer-text-list mt-3"
-                onClick={() => history.push("/enquiry")}
+                onClick={() => history.push("/faq")}
                 style={{ cursor: "pointer" }}
               >
                 FAQS
