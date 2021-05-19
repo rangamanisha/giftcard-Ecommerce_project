@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Frames, CardNumber, ExpiryDate, Cvv } from "frames-react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -55,6 +55,8 @@ const Checkout = (props) => {
     }
   }, [orderState.created_order]);
 
+  const [areCardDetailsValid, setAreCardDetailsValid] = useState(false);
+
   const processOrder = (event) => {
     if (authState.isAuthenticated) {
       const payload = {
@@ -72,12 +74,20 @@ const Checkout = (props) => {
           currency: cartState.checkoutCart.currency_id,
         },
       };
+      if (cartState.checkoutCart.are_reward_points_used) {
+        payload.orders["used_credits"] =
+          cartState.checkoutCart?.used_credits || 0;
+      }
       dispatch(createOrderAction({ data: payload, event }));
     } else {
       dispatch(
         createGuestOrderAction({ data: orderState.guest_payload, event })
       );
     }
+  };
+
+  const checkCardValidation = (event) => {
+    setAreCardDetailsValid(event.isValid);
   };
 
   const getFramesWidget = () => {
@@ -102,6 +112,7 @@ const Checkout = (props) => {
           cardTokenized={(e) => {
             processOrder(e);
           }}
+          cardValidationChanged={checkCardValidation}
         >
           <CardNumber />
           <div className="date-and-code">
@@ -115,11 +126,11 @@ const Checkout = (props) => {
               dispatch(pageLoaderActions.setPageLoadingAction(true));
               Frames.submitCard();
             }}
-            disabled={!Frames.isCardValid || orderState.loading}
+            disabled={!areCardDetailsValid || orderState.loading}
           >
             {orderState.loading ? <Loader /> : null}
             PAY {cartState.checkoutCart.currency}{" "}
-            {cartState.checkoutCart.total_amount}
+            {cartState.checkoutCart.amount_to_pay}
           </Button>
         </Frames>
       );

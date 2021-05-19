@@ -173,10 +173,7 @@ function Cart() {
   };
 
   const createCheckout = async (data) => {
-    if (!data?.are_reward_points_used) {
-      dispatch(cartAction.updateCheckout(data));
-      history.push("payment");
-    } else {
+    if (data?.are_reward_points_used && !data?.isDiffAmountToBePaid) {
       const payload = {
         orders: {
           card_value_aed: null,
@@ -193,6 +190,9 @@ function Cart() {
         },
       };
       await dispatch(createOrderAction({ data: payload, event: {} }));
+    } else {
+      dispatch(cartAction.updateCheckout(data));
+      history.push("payment");
     }
   };
 

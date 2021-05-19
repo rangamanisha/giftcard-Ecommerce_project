@@ -77,7 +77,7 @@ export const createOrderAction = createAsyncThunk(
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await createOrderAPI(data);
     if (response?.data?.order) {
-      if (!data.orders?.use_credits) {
+      if (!data.orders?.used_credits) {
         const request = {
           payment: {
             token: event.token,
