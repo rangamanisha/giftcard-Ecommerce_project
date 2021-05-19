@@ -16,7 +16,6 @@ export const getprofileListAction = createAsyncThunk(
 export const updateUserprofileAction = createAsyncThunk(
   "profile/update",
   async (payload, thunkAPI) => {
-    console.log(payload);
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {

@@ -65,7 +65,6 @@ const StartGifting = () => {
       await dispatch(commonActions.setUser(null));
       await dispatch(commonActions.setGiftingToUser({ name: data.sendGiftTo }));
     }
-    console.log("selectedCountry ", selectedCountry);
     await dispatch(
       giftCardsAction.selectCountry({
         ...selectedCountry,
@@ -76,7 +75,6 @@ const StartGifting = () => {
   };
 
   const getAdditionalFields = () => {
-    console.log("formik.values ", formik.values);
     if (formik.values.wantTo === "sendAGift") {
       return (
         <Row className="col-xs-12 col-md-9 offset-md-1">

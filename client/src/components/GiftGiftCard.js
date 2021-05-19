@@ -7,8 +7,6 @@ import * as Yup from "yup";
 const GiftiGiftCard = (props) => {
   const { giftToParams, setGiftToParams } = props;
 
-  console.log("giftToParams ", giftToParams);
-
   const formik = useFormik({
     initialValues: {
       name: giftToParams.name,
