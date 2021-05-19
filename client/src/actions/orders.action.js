@@ -77,7 +77,7 @@ export const createOrderAction = createAsyncThunk(
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await createOrderAPI(data);
     if (response?.data?.order) {
-      console.log('data ', data);
+      console.log("data ", data);
       if (data.orders?.use_credits && !parseFloat(data.orders?.used_credits)) {
         console.log(`processGiftCardCheckoutAction action dispatched`);
         //   await dispatch(

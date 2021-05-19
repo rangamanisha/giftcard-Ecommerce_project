@@ -9,6 +9,9 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUsAction } from "../../../actions/common.actions";
 import { commonActions, getCommonState } from "../../../reducer/common.reducer";
+import Fade from "react-bootstrap/Fade";
+import Alert from "react-bootstrap/Alert";
+import checkbox from "../../../assets/checkbox.svg";
 
 function Contact() {
   useEffect(() => {
@@ -17,12 +20,6 @@ function Contact() {
 
   const dispatch = useDispatch();
   const commonState = useSelector(getCommonState);
-
-  useEffect(() => {
-    if (commonState.contact) {
-      dispatch(commonActions.updateContact(null));
-    }
-  }, [commonState.contact]);
 
   const formik = useFormik({
     initialValues: {
@@ -33,18 +30,40 @@ function Contact() {
     validationSchema: Yup.object({
       name: Yup.string().min(1).max(100).required(),
       email: Yup.string().email().min(1).max(300).required(),
-      message: Yup.string().min(1).max(500).required(),
+      message: Yup.string().min(5).max(500).required(),
     }),
     onSubmit: (data) => {
       const payload = {
-        contact_us: { ...payload },
+        contact_us: { ...data },
       };
       dispatch(contactUsAction(payload));
     },
   });
 
+  useEffect(() => {
+    if (commonState.contact) {
+      setTimeout(() => {
+        dispatch(commonActions.updateContact(null));
+        formik.resetForm();
+      }, 2000);
+    }
+  }, [commonState.contact]);
+
   return (
     <>
+      {commonState.contact ? (
+        <Fade>
+          <Alert variant="info" transition={true}>
+            <img
+              src={checkbox}
+              className="mr-3"
+              style={{ width: "30px" }}
+              alt="Icon"
+            />
+            {commonState?.contact}
+          </Alert>
+        </Fade>
+      ) : null}
       <Header />
       <div className="container my-5">
         <div className="row">

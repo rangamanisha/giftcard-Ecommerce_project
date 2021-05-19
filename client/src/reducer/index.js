@@ -62,8 +62,8 @@ const store = configureStore({
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
-   preloadedState: loadFromLocalStorage(),
-   serializableCheck:false
+  preloadedState: loadFromLocalStorage(),
+  serializableCheck: false,
 });
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;
