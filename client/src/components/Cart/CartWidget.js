@@ -11,8 +11,9 @@ import { getFixerConvertedAmount } from "../../services/giftCards.service";
 
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
-    <a
-      href="#"
+    <Button
+      variant="link"
+      className="p-0 align-top shadow-none"
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const CartWidget = (props) => {
     >
       {children}
       <RiArrowDownSLine />
-    </a>
+    </Button>
   ));
   CustomToggle.displayName = "CustomToggle";
 

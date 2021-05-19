@@ -13,18 +13,13 @@ import { cartAction, getCartItemsState } from "../../reducer/cart.reducer";
 import {
   addRemoveQuantityAction,
   fetchItemsByCartAction,
-  getConversionRateAction,
   getFixerConversionRateAction,
   getPaymentCurrencyAction,
 } from "../../actions/cart.actions";
 import CartWidget from "./CartWidget";
 import CartItemContainer from "./CartItemContainer";
 import { getTopBarState } from "../../reducer/topbar.reducer";
-import { getOrderState } from "../../reducer/orders.reducers";
-import {
-  createOrderAction,
-  processGiftCardCheckoutAction,
-} from "../../actions/orders.action";
+import { createOrderAction } from "../../actions/orders.action";
 
 function Cart() {
   const dispatch = useDispatch();

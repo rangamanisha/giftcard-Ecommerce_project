@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Idc.scss";
 import Group1 from "../../assets/Group 1.svg";
 import userIcon1 from "../../assets/userIcon1.svg";
-import { map, get } from "lodash";
+import { get } from "lodash";
 import userIcon2 from "../../assets/userIcon2.svg";
 import exitIcon from "../../assets/exitIcon.svg";
 import { useHistory } from "react-router";

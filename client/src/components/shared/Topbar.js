@@ -98,7 +98,7 @@ const Topbar = (props) => {
         <div className="navbar-nav flex-row order-first mb-2">
           <div className="nav-item">
             <Navbar.Brand onClick={() => history.push({ pathname: "/" })}>
-              <Button variant="white">
+              <Button variant="white" className="shadow-none">
                 <img src={logoIcon} alt="Icon" />
               </Button>
             </Navbar.Brand>

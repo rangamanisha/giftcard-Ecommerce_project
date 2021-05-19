@@ -4,9 +4,7 @@ import {
   signupAPI,
   resetpasswordAPI,
   forgotpasswordAPI,
-  googleloginAPI,
   updatepasswordAPI,
-  facebookAPI,
   logoutAPI,
 } from "../services/auth.service";
 

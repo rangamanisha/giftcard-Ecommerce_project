@@ -13,7 +13,7 @@ import {
 } from "../actions/brands.action";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import Carousel from "react-elastic-carousel";
-import { getTopBarState } from "../reducer/topbar.reducer";
+import Button from "react-bootstrap/Button";
 
 function AllCategoryCards() {
   const dispatch = useDispatch();
@@ -93,38 +93,38 @@ function AllCategoryCards() {
       <div className="slideclass" id="categorycarousel">
         <Carousel pagination={false} breakPoints={breakPoints}>
           <Item>
-            <button
+            <Button
               className="transparentButton"
+              variant="link"
               onClick={() => getCardsWithCategory(null)}
             >
               <div className="box">
-                <a>
-                  <img
-                    src={Allmenu}
-                    alt="Icon"
-                    className="rounded"
-                    style={{ maxWidth: "50px" }}
-                  />
-                  <br />
-                  <p className="products_icons">All Gift Cards</p>
-                </a>
+                <img
+                  src={Allmenu}
+                  alt="Icon"
+                  className="rounded"
+                  style={{ maxWidth: "50px" }}
+                />
+                <br />
+                <p className="products_icons">All Gift Cards</p>
               </div>
-            </button>
+            </Button>
           </Item>
           {!isEmpty(categories) &&
             map(categories, (category, key) => (
               <Item key={key}>
                 {
-                  <button
+                  <Button
                     className="transparentButton"
                     onClick={() => getCardsWithCategory(category)}
+                    variant="link"
                   >
                     <CategoryCard
                       category={category}
                       key={category.id}
                       nowActive={category.id === activeCategory ? true : false}
                     />
-                  </button>
+                  </Button>
                 }
               </Item>
             ))}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAuthState } from "../reducer/auth.reducer";
 import { cartAction } from "../reducer/cart.reducer";
 import { getOrderState, orderActions } from "../reducer/orders.reducers";
-import Confirm_Order from "./Orders/confirm_order";
+import ConfirmOrder from "./Orders/confirm_order";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -85,7 +85,7 @@ const FailurePage = () => {
   const getFailure = () => {
     return (
       <>
-        {authState.isAuthenticated ? <Confirm_Order /> : null}
+        {authState.isAuthenticated ? <ConfirmOrder /> : null}
         {showModal ? <GModal show={showModal}>{modalBody()}</GModal> : null}
       </>
     );

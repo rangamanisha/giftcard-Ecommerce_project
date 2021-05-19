@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import CsvDownloader from "react-csv-downloader";
 import { useState } from "react";
-import { map, get, result, find } from "lodash";
+import { map, get, find } from "lodash";
 import IDC_Send_Gift_Card_Page from "../../assets/IDC_Send_Gift_Card_Page.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
