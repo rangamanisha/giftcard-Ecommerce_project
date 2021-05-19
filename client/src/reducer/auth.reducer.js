@@ -10,7 +10,7 @@ import {
   forgotpasswordAction,
   googlesigninAction,
   updatepasswordAction,
-  facebookAction
+  facebookAction,
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -33,7 +33,6 @@ export const AUTH_INITIAL_STATE_LOGIN = {
   reset: false,
   email: null,
   provider: null,
-
 };
 
 export const AUTH_FEATURE_KEY = "auth";
@@ -75,7 +74,7 @@ export const authSlice = createSlice({
           state.message = response.message;
           state.first_name = response.data.user.first_name;
           state.email = response.data.user.email;
-          state.provider = response.data.provider
+          state.provider = response.data.provider;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
           state.alertlogin = true;
@@ -165,15 +164,14 @@ export const authSlice = createSlice({
       })
       .addCase(facebookAction.fulfilled, (state, action) => {
         const response = action.payload;
-        if(response.code === 200){
+        if (response.code === 200) {
           state.isAuthenticated = true;
-          state.provider = "Facebook"
+          state.provider = "Facebook";
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
-
         }
-        if(response.code === 400){
+        if (response.code === 400) {
           state.errors = [response.message];
         }
       })
@@ -183,12 +181,12 @@ export const authSlice = createSlice({
       .addCase(googlesigninAction.pending, (state, action) => {
         state.errors = null;
         state.user = null;
-      }) 
+      })
       .addCase(googlesigninAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.isAuthenticated = true;
-          state.provider = "Google"
+          state.provider = "Google";
           state.first_name = response.data.user.first_name;
           localStorage.setItem("access_token", response.data.user.access_token);
           localStorage.setItem("first_name", response.data.user.first_name);
@@ -198,10 +196,8 @@ export const authSlice = createSlice({
         }
       })
       .addCase(googlesigninAction.rejected, (state, action) => {
-        state.errors = [action.error.message || ""]
-      })
-      
-      
+        state.errors = [action.error.message || ""];
+      });
   },
 });
 

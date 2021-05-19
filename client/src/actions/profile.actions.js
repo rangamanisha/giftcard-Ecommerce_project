@@ -1,10 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { pageLoaderActions } from "../reducer/page-loader.reducer";
 import { getprofileAPI, updateprofileAPI } from "../services/profile.service";
 
 export const getprofileListAction = createAsyncThunk(
   "profile/get",
   async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await getprofileAPI();
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );
@@ -12,7 +16,7 @@ export const getprofileListAction = createAsyncThunk(
 export const updateUserprofileAction = createAsyncThunk(
   "profile/update",
   async (payload, thunkAPI) => {
-    console.log(payload)
+    console.log(payload);
     const { dispatch } = thunkAPI;
     console.log(payload)
     const request = {
@@ -28,6 +32,7 @@ export const updateUserprofileAction = createAsyncThunk(
     };
     const response = await updateprofileAPI(request);
     dispatch(getprofileListAction());
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );

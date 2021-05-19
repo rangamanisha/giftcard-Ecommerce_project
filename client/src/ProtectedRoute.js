@@ -1,24 +1,24 @@
 import React from "react";
-import { Route, Redirect,withRouter } from "react-router-dom";
-import {getAuthState} from "./reducer/auth.reducer";
-import {useSelector} from 'react-redux'
+import { Route, Redirect, withRouter } from "react-router-dom";
+import { getAuthState } from "./reducer/auth.reducer";
+import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({component: Component,...rest}) => {
-const authState = useSelector(getAuthState)
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const authState = useSelector(getAuthState);
   return (
     <Route
       {...rest}
-      render={props => {
+      render={(props) => {
         if (authState.isAuthenticated) {
-          return <Component {...props} />
+          return <Component {...props} />;
         } else {
           return (
             <Redirect
               to={{
                 pathname: "/auth/login",
                 state: {
-                  from: props.location
-                }
+                  from: props.location,
+                },
               }}
             />
           );

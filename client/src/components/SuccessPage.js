@@ -78,7 +78,9 @@ const SuccessPage = () => {
       );
     }
     if (id) {
-      await dispatch(processOrderAfterRedirectAction({ order_id: id }));
+      if (search.indexOf("cko-session-id") !== -1) {
+        await dispatch(processOrderAfterRedirectAction({ order_id: id }));
+      }
       await dispatch(orderActions.clearState());
       await dispatch(cartAction.clearState());
       dispatch(

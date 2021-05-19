@@ -39,8 +39,8 @@ function Cart() {
     if (authState.isAuthenticated) {
       dispatch(
         fetchItemsByCartAction({
-          currency: giftunitState?.selectedCountry?.unit_short_name || "AED",
-          currency_id: giftunitState?.selectedCountry?.id || 1,
+          currency: cartState?.selectedCurrency?.unit_short_name || "AED",
+          currency_id: cartState?.selectedCurrency?.id || 1,
         })
       );
     }
@@ -53,11 +53,20 @@ function Cart() {
     }
   }, [dispatch]);
 
-  const handleChangeCurrency = (event) => {
+  const handleChangeCurrency = async (event) => {
     const selectedCurrency = JSON.parse(event);
     if (selectedCurrency) {
-      dispatch(getFixerConversionRateAction(selectedCurrency));
+      if (authState.isAuthenticated) {
+        await dispatch(
+          fetchItemsByCartAction({
+            currency: selectedCurrency?.unit_name_short || "AED",
+            currency_id: selectedCurrency?.id || 1,
+          })
+        );
+      }
+      await dispatch(getFixerConversionRateAction(selectedCurrency));
     }
+    // dispatch(getFixerConversionRateAction(selectedCurrency));
   };
 
   const removeItem = (item) => {
@@ -111,6 +120,14 @@ function Cart() {
         return lineItem;
       });
       dispatch(cartAction.saveItemsToCart(lineItems));
+      if (lineItems.length) {
+        const totalCartItems = lineItems
+          .map((lineItem) => parseFloat(lineItem.quantity))
+          .reduce((accumulator, currentValue) => accumulator + currentValue);
+        dispatch(cartAction.updateTotalCartItems(totalCartItems));
+      } else {
+        dispatch(cartAction.updateTotalCartItems(0));
+      }
     }
   };
 
@@ -143,6 +160,14 @@ function Cart() {
           return lineItem;
         });
         dispatch(cartAction.saveItemsToCart(lineItems));
+        if (lineItems.length) {
+          const totalCartItems = lineItems
+            .map((lineItem) => parseFloat(lineItem.quantity))
+            .reduce((accumulator, currentValue) => accumulator + currentValue);
+          dispatch(cartAction.updateTotalCartItems(totalCartItems));
+        } else {
+          dispatch(cartAction.updateTotalCartItems(0));
+        }
       }
     }
   };

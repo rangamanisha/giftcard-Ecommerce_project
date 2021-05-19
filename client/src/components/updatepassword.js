@@ -27,13 +27,15 @@ const UpdatePassword = () => {
       password_confirmation: "",
     },
     validationSchema: Yup.object({
-      password: Yup.string().min(2).max(200).required(),
-      password_confirmation: Yup.string().min(2).max(200).required(),
+      password: Yup.string().required('Password is required'),
+      password_confirmation: Yup.string().required('Confirm your password')
+         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
     onSubmit: (data) => {
       dispatch(updatepasswordAction(data));
       formik.resetForm();
     },
+    validateOnChange:false,
   });
 
   useEffect(() => {
