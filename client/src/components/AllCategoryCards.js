@@ -64,16 +64,28 @@ function AllCategoryCards() {
   }, [giftunitState.selectedCountry?.id, dispatch]);
 
   const getCardsWithCategory = (category) => {
-    const { id } = category;
-    //dispatch action to get cards by category
-    dispatch(
-      brandsByCategoryAction({
-        currency: giftunitState.selectedCountry.id,
-        program_id: 1,
-        category_id: id,
-      })
-    );
-    setActiveCategory(id);
+    if (!category) {
+      dispatch(
+        allBrandAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+          image_size: "medium_rectangle",
+          image_type: "Color",
+          list_type: "group",
+        })
+      );
+    } else {
+      const { id } = category;
+      //dispatch action to get cards by category
+      dispatch(
+        brandsByCategoryAction({
+          currency: giftunitState.selectedCountry.id,
+          program_id: 1,
+          category_id: id,
+        })
+      );
+      setActiveCategory(id);
+    }
   };
 
   return (
@@ -81,9 +93,12 @@ function AllCategoryCards() {
       <div className="slideclass" id="categorycarousel">
         <Carousel pagination={false} breakPoints={breakPoints}>
           <Item>
-            <button className="transparentButton">
+            <button
+              className="transparentButton"
+              onClick={() => getCardsWithCategory(null)}
+            >
               <div className="box">
-                <a href="#">
+                <a>
                   <img
                     src={Allmenu}
                     alt="Icon"
@@ -98,24 +113,20 @@ function AllCategoryCards() {
           </Item>
           {!isEmpty(categories) &&
             map(categories, (category, key) => (
-              <>
-                <Item key={key}>
-                  {
-                    <button
-                      className="transparentButton"
-                      onClick={() => getCardsWithCategory(category)}
-                    >
-                      <CategoryCard
-                        category={category}
-                        key={category.id}
-                        nowActive={
-                          category.id === activeCategory ? true : false
-                        }
-                      />
-                    </button>
-                  }
-                </Item>
-              </>
+              <Item key={key}>
+                {
+                  <button
+                    className="transparentButton"
+                    onClick={() => getCardsWithCategory(category)}
+                  >
+                    <CategoryCard
+                      category={category}
+                      key={category.id}
+                      nowActive={category.id === activeCategory ? true : false}
+                    />
+                  </button>
+                }
+              </Item>
             ))}
         </Carousel>
       </div>

@@ -12,9 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
-import {
-  loginAction
-} from "../actions/auth.actions";
+import { loginAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
