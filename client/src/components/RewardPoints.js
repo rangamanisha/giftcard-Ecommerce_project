@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import store from "../reducer/index";
 import { useFormik } from "formik";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+import swal from "sweetalert";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { getRewardPointsState } from "../reducer/rewardpoints.reducer";
@@ -26,37 +28,50 @@ const RewardPoints = (props) => {
   const points = useSelector(getRewardPointsState);
   const dispatch = useDispatch();
   const points_data = points;
-
   const transactions = points_data.credits;
   const [modalShow, setModalShow] = React.useState(false);
+  const [errors, setErrors] = React.useState([]);
   const [progress, setProgress] = React.useState(0);
 
   useEffect(() => {
+    setErrors(points_data.errors);
+  }, [points_data.errors]);
+  useEffect(() => {
     dispatch(getRewardPointsAction({}));
     dispatch(getTransactionsAction({}));
-  }, [dispatch, points_data.message]);
+  }, [dispatch, points_data.message, points_data.triggerConversion]);
+
+  const handleOffence = (name) => {
+    setErrors([]);
+  };
 
   const formik = useFormik({
     initialValues: {
       giftcard_number: "",
     },
     validationSchema: Yup.object({
-      giftcard_number: Yup.string().min(2).max(200).required(),
+      giftcard_number: Yup.string().min(2).max(200),
     }),
-    onSubmit: (data) => {
-      dispatch(getConvertAction(data));
-      dispatch(getRemainingAction(data));
-      dispatch(getConvertCreditsAction(data));
-      if (
-        points_data.message === "Gift card successfully converted to points."
-      ) {
-        setModalShow(true);
-      } else if (
-        points_data.message === "Your gift card has already been redeemed"
-      ) {
-        setModalShow(true);
+    onSubmit: async (data) => {
+      await dispatch(getConvertAction(data));
+      if (store.getState().rewardpoints.triggerConversion) {
+        await dispatch(getRemainingAction(data));
+      }
+      if (store.getState().rewardpoints.remaining_value > 0) {
+        swal({
+          title: "Are you sure?",
+          text: "By clicking Yes, your gift card will be converted to Gifti Global points and the balance of your gift card will be redeemed. This cannot be undone.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+            dispatch(getConvertCreditsAction(data));
+          }
+        });
       }
     },
+    validateOnChange: false,
   });
 
   return (
@@ -81,7 +96,11 @@ const RewardPoints = (props) => {
                 aria-describedby="basic-addon2"
                 className="redeem-button-a"
                 value={formik.values.giftcard_number}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  handleOffence(e.currentTarget.value);
+                }}
+                onBlur={formik.handleBlur}
                 name="giftcard_number"
               />
               <InputGroup.Append>
@@ -90,6 +109,7 @@ const RewardPoints = (props) => {
                   className="redeem-button-b"
                   type="Submit"
                   value="Redeem"
+                  disabled={!formik.isValid}
                 >
                   Redeem
                 </Button>
@@ -98,6 +118,19 @@ const RewardPoints = (props) => {
             {formik.errors.giftcard_number ? (
               <p className="validation-messages text-left">
                 {formik.errors.giftcard_number}
+              </p>
+            ) : null}
+
+            {/* {points_data.errors &&
+            points_data.errors.length &&
+            formik.values.giftcard_number ? (
+              <p className="validation-messages text-left">
+                {points_data.errors.join("\n")}
+              </p>
+            ) : null} */}
+            {errors && errors.length && formik.values.giftcard_number ? (
+              <p className="validation-messages text-left">
+                {errors.join("\n")}
               </p>
             ) : null}
           </Form>

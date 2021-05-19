@@ -1283,7 +1283,58 @@ body {
   height: auto;
 }
 ///coment
+.swal-footer {
+  display: inline-table;
+  text-align: justify;
+  margin: 26px 0px;
 
+}
+
+// button.swal-button.swal-button--confirm {
+//   /* width: 82px; */
+//   background: #00B2AE 0% 0% no-repeat padding-box;
+
+//   border-radius: 8px;
+//   opacity: 1;
+//   padding: 8.33px;
+//   width: 146px;
+//   height: 63px;
+//   border: B2B2C9;
+// }
+
+
+// // button.swal-button.swal-button--cancel {
+//   background: #B2B2C9 0% 0% no-repeat padding-box;
+
+//   border-radius: 8px;
+//   opacity: 1;
+//   color: white;
+//   padding: 8.33px;
+//   border:1px solid white ;
+//   width: 146px;
+//   height: 63px
+//   /* width: 98px; */
+// }
+
+.swal-text {
+  font: var(--unnamed-font-style-normal) normal 600 20px/27px Open Sans !important;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal 600 20px/27px Open Sans;
+  letter-spacing: 0px;
+  display: block;
+  color: #000000 !important;
+  opacity: 1;
+  font-size: 20px !important;
+  font-family:Open Sans Semibold !important
+ 
+}
+
+.swal-title {
+  font-size: 40px !important;
+  font-family: 'Cairo-Bold'!important;
+  color: #000000 !important;
+}
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap');
 
 .faqMainWrap {

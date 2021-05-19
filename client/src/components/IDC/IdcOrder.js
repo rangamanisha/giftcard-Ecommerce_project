@@ -227,6 +227,8 @@ const Idc_Order = () => {
           giftcard_variety_id: { giftcard_variety_id },
         })
       );
+        formik.resetForm();
+
     },
   });
 
