@@ -43,7 +43,7 @@ export const initialAuthState = authAdapter.getInitialState(
 
 export const authSlice = createSlice({
   name: AUTH_FEATURE_KEY,
-  initialState: AUTH_INITIAL_STATE_LOGIN,
+  initialState: initialAuthState,
   reducers: {
     removeLoginOrSignUpMessage(state, action) {
       state.signupOrLoginActionClicked = action.payload;
@@ -57,6 +57,9 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       localStorage.setItem("access_token", action.payload.access_token);
       localStorage.setItem("first_name", action.payload.first_name);
+    },
+    setErrors(state, action) {
+      state.errors = action.payload;
     },
   },
   extraReducers: (builder) => {

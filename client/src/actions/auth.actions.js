@@ -17,7 +17,7 @@ export const loginAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
-      signin: { email: payload.email, password: payload.password },
+      signin: { ...payload },
     };
     const response = await loginAPI(request);
     dispatch(pageLoaderActions.setPageLoadingAction(false));
@@ -32,12 +32,7 @@ export const googlesigninAction = createAsyncThunk(
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const request = {
       signin: {
-        email: payload.email,
-        phone: payload.email,
-        provider: payload.provider,
-        token_type: "Bearer",
-        token: payload.accessToken,
-        expires_at: payload.expires_at,
+        ...payload,
       },
     };
     const response = await googleloginAPI(request);
