@@ -17,9 +17,9 @@ button.btn {
         position: relative;
         float: none;
         line-height: normal;
-        vertical-align: top;
+        // vertical-align: top;
         text-align: center;
-        display: inline-block;
+        // display: inline-block;
         margin: 0;
         padding: 0 10px;
         font-weight: 300;
@@ -35,14 +35,14 @@ button.btn {
     justify-content: space-between;
     position: relative;
 }
-.swal-button {
-    padding: 7px 19px;
-    border-radius: 2px;
-    background-color: #00AF9A;
-    font-size: 12px;
-    border: 1px solid #3e549a;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-  }
+// .swal-button {
+//     padding: 7px 19px;
+//     border-radius: 2px;
+//     background-color: #00AF9A;
+//     font-size: 12px;
+//     border: 1px solid #3e549a;
+//     text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+//   }
 .credit-values{
     color: #000;
     margin-bottom: 30px;
