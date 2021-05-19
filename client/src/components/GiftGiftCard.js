@@ -7,6 +7,8 @@ import * as Yup from "yup";
 const GiftiGiftCard = (props) => {
   const { giftToParams, setGiftToParams } = props;
 
+  console.log("giftToParams ", giftToParams);
+
   const formik = useFormik({
     initialValues: {
       name: giftToParams.name,
@@ -40,6 +42,7 @@ const GiftiGiftCard = (props) => {
             name="name"
             className="mt-3"
             onChange={(e) => updateGiftToParams("name", e)}
+            value={formik.values.name}
           />
           <Form.Control
             type="email"

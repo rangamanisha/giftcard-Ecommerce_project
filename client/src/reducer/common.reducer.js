@@ -6,6 +6,8 @@ import {
 
 export const COMMON_INITIAL_STATE = {
   contact: null,
+  user: null,
+  giftingToUser: null,
 };
 
 export const COMMON_FEATURE_KEY = "common";
@@ -19,6 +21,12 @@ export const commonSlice = createSlice({
   reducers: {
     updateContact(state, action) {
       state.contact = action.payload;
+    },
+    setUser(state, action) {
+      state.user = action.payload;
+    },
+    setGiftingToUser(state, action) {
+      state.giftingToUser = action.payload;
     },
   },
 });
