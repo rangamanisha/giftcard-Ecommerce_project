@@ -13,9 +13,7 @@ import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
 import {
-  loginAction,
-  googlesigninAction,
-  facebookAction,
+  loginAction
 } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
@@ -90,7 +88,6 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
 
   const googleLoginSuccess = (event) => {
-    console.log("googleLoginSuccess ", event);
     dispatch(
       loginAction({
         provider: "Google",
@@ -255,7 +252,7 @@ const Login = () => {
                       clientId={googleId}
                       onSuccess={googleLoginSuccess}
                       onFailure={googleLoginFailure}
-                      isSignedIn={true}
+                      isSignedIn={false}
                     />
                   </div>
                   <div className="facebook">

@@ -7,6 +7,7 @@ import {
   googleloginAPI,
   updatepasswordAPI,
   facebookAPI,
+  logoutAPI,
 } from "../services/auth.service";
 
 import { pageLoaderActions } from "../reducer/page-loader.reducer";
@@ -20,42 +21,6 @@ export const loginAction = createAsyncThunk(
       signin: { ...payload },
     };
     const response = await loginAPI(request);
-    dispatch(pageLoaderActions.setPageLoadingAction(false));
-    return response;
-  }
-);
-
-export const googlesigninAction = createAsyncThunk(
-  "auth/googlelogin",
-  async (payload, thunkAPI) => {
-    const { dispatch } = thunkAPI;
-    dispatch(pageLoaderActions.setPageLoadingAction(true));
-    const request = {
-      signin: {
-        ...payload,
-      },
-    };
-    const response = await googleloginAPI(request);
-    dispatch(pageLoaderActions.setPageLoadingAction(false));
-    return response;
-  }
-);
-export const facebookAction = createAsyncThunk(
-  "auth/facebooklogin",
-  async (payload, thunkAPI) => {
-    const { dispatch } = thunkAPI;
-    dispatch(pageLoaderActions.setPageLoadingAction(true));
-    const request = {
-      signin: {
-        email: payload.email,
-        phone: payload.email,
-        token_type: "Bearer",
-        provider: payload.provider,
-        token: payload.accessToken,
-        expires_at: payload.expires_at,
-      },
-    };
-    const response = await facebookAPI(request);
     dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
@@ -130,6 +95,17 @@ export const forgotpasswordAction = createAsyncThunk(
 
     const response = await forgotpasswordAPI(request);
     dispatch(pageLoaderActions.setPageLoadingAction(false));
+    return response;
+  }
+);
+
+export const logoutAction = createAsyncThunk(
+  "auth/logout",
+  async (payload, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
+    const response = await logoutAPI();
+    dispatch(pageLoaderActions.setPageLoadingAction(true));
     return response;
   }
 );

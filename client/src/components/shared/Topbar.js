@@ -27,18 +27,17 @@ const Topbar = (props) => {
     onCountrySelected,
     state,
     cartState,
+    triggerLogout,
   } = props;
   // const user = localStorage.getItem(profileState.profile.first_name);
   const history = useHistory();
   const authState = useSelector(getAuthState);
   const profileState = useSelector(getProfileState);
+
   const clearsession = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("first_name");
-    localStorage.removeItem("state");
-    sessionStorage.clear();
-    window.location.reload();
+    triggerLogout();
   };
+
   const user = profileState.profile?.first_name || "";
   const reward = () => {
     if (authState.isAuthenticated) {
