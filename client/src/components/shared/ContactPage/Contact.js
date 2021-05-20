@@ -1,20 +1,69 @@
 import React, { useEffect } from "react";
-// import "./Contact.scss";
-import { FaPhoneAlt } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
-import { GoLocation } from "react-icons/go";
 import Header from "../HeaderPage/Header";
 import Mobile from "../../../assets/Mobile.png";
 import email from "../../../assets/email.png";
 import loc from "../../../assets/loc.png";
 import "../../../App.scss";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { contactUsAction } from "../../../actions/common.actions";
+import { commonActions, getCommonState } from "../../../reducer/common.reducer";
+import Fade from "react-bootstrap/Fade";
+import Alert from "react-bootstrap/Alert";
+import checkbox from "../../../assets/checkbox.svg";
 
 function Contact() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const dispatch = useDispatch();
+  const commonState = useSelector(getCommonState);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().min(1).max(100).required(),
+      email: Yup.string().email().min(1).max(300).required(),
+      message: Yup.string().min(5).max(500).required(),
+    }),
+    onSubmit: (data) => {
+      const payload = {
+        contact_us: { ...data },
+      };
+      dispatch(contactUsAction(payload));
+    },
+  });
+
+  useEffect(() => {
+    if (commonState.contact) {
+      setTimeout(() => {
+        dispatch(commonActions.updateContact(null));
+        formik.resetForm();
+      }, 2000);
+    }
+  }, [commonState.contact]);
+
   return (
     <>
+      {commonState.contact ? (
+        <Fade>
+          <Alert variant="info" transition={true}>
+            <img
+              src={checkbox}
+              className="mr-3"
+              style={{ width: "30px" }}
+              alt="Icon"
+            />
+            {commonState?.contact}
+          </Alert>
+        </Fade>
+      ) : null}
       <Header />
       <div className="container my-5">
         <div className="row">
@@ -61,7 +110,7 @@ function Contact() {
           </div>
           <div className="col-md-7">
             <div className="contact-form">
-              <form className="details">
+              <form className="details" onSubmit={formik.handleSubmit}>
                 <h1>Contact Us</h1>
                 <div className="form-group ">
                   <label
@@ -71,10 +120,13 @@ function Contact() {
                     Name
                   </label>
                   <input
-                    type="Name"
+                    type="text"
                     className="form-control"
-                    id="Name"
+                    id="name"
+                    name="name"
                     placeholder="Enter your name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
                     style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   />
                 </div>
@@ -89,6 +141,9 @@ function Contact() {
                     type="email"
                     className="form-control"
                     id="email"
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                     placeholder="Enter your email"
                     style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   />
@@ -102,14 +157,17 @@ function Contact() {
                   </label>
                   <textarea
                     className="form-control"
-                    id="Message"
+                    id="message"
+                    name="message"
+                    value={formik.values.message}
+                    onChange={formik.handleChange}
                     rows="3"
                     placeholder="Enter your message"
                     style={{ font: "Roboto-Regular", color: "#A2A9B0" }}
                   ></textarea>
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="startgf-fields-button  btn btn-info"
                 >
                   send

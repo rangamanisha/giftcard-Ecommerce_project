@@ -12,7 +12,6 @@ import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import { useHistory } from "react-router-dom";
 import Giftcard from "./Giftcard";
-import { getTopBarState } from "../reducer/topbar.reducer";
 
 function AllGiftCard() {
   const dispatch = useDispatch();
@@ -90,13 +89,11 @@ function AllGiftCard() {
           <div className="gificards ">
             {isEmpty(get(brandState, "brands"))
               ? map(allTheBrands, (brand, i) => (
-                  <>
-                    <Giftcard brand={brand} key={i} />
-                  </>
+                  <Giftcard brand={brand} key={i} />
                 ))
-              : map(get(brandState, "brands"), (brand, i) => (
-                  <>{i <= 15 ? <Giftcard brand={brand} key={i} /> : null}</>
-                ))}
+              : map(get(brandState, "brands"), (brand, i) =>
+                  i <= 15 ? <Giftcard brand={brand} key={i} /> : null
+                )}
           </div>
           <div className="text-center">
             <button

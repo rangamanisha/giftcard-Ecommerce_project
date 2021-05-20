@@ -12,17 +12,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
-import {
-  loginAction,
-  googlesigninAction,
-  facebookAction,
-} from "../actions/auth.actions";
+import { loginAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login";
 
 import { getuseractiveAction } from "../actions/useractive.actions";
 import { getUserActiveState } from "../reducer/useractive.reducer";
@@ -34,7 +31,6 @@ const Login = () => {
   const history = useHistory();
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [login, setLogin] = useState(false);
   const [message, setMessage] = useState("");
 
   const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
@@ -88,29 +84,30 @@ const Login = () => {
       }, 3000);
     }
   }, [state.isAuthenticated, state.reset, history]);
-  const responseGoogle = (response) => {
-    //const accessToken = response.accessToken;
+
+  const googleLoginSuccess = (event) => {
     dispatch(
-      googlesigninAction({
-        email: response.email,
-        provider: response.provider,
-        token_type: response.token_type,
-        accessToken: response.accessToken,
-        expiresIn: response.expiresIn,
+      loginAction({
+        provider: "Google",
+        token_type: "access_token",
+        token: event.accessToken,
+        expires_at: event?.tokenObj?.expires_at,
       })
     );
   };
-  const responseFacebook = (response) => {
-    //const accessToken = response.accessToken;
-    dispatch(
-      facebookAction({
-        email: response.email,
-        provider: response.provider,
-        token_type: response.token_type,
-        accessToken: response.accessToken,
-        expiresIn: response.expiresIn,
-      })
-    );
+
+  const googleLoginFailure = (event) => {
+    console.log("error ", event);
+    dispatch(authActions.setErrors(["Login failed, Please try again..."]));
+  };
+
+  const facebookLoginSuccess = (event) => {
+    console.log("facebookLoginSuccess ", event);
+  };
+
+  const facebookLoginFailure = (event) => {
+    console.log("error ", event);
+    dispatch(authActions.setErrors(["Login failed, Please try again..."]));
   };
 
   return (
@@ -251,15 +248,16 @@ const Login = () => {
                       variant="outline-light"
                       className="google-button"
                       clientId={googleId}
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                      isSignedIn={true}
+                      onSuccess={googleLoginSuccess}
+                      onFailure={googleLoginFailure}
+                      isSignedIn={false}
                     />
                   </div>
                   <div className="facebook">
                     <FacebookLogin
                       appId={fbId}
-                      callback={responseFacebook}
+                      callback={facebookLoginSuccess}
+                      onFailure={facebookLoginFailure}
                       size="medium"
                       autoLoad={false}
                       render={(renderProps) => (

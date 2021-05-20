@@ -8,11 +8,9 @@ import { categoryAction } from "../actions/category.actions";
 import { get, map, isEmpty } from "lodash";
 import { allBrandAction } from "../actions/brands.action";
 import { getBrandsState } from "../reducer/brands.reducer";
-// import { giftCardsUnitAction } from "../actions/giftcards.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
 import AllFeaturedCards from "./AllFeaturedCards";
 import Giftcard from "./Giftcard";
-import { getTopBarState } from "../reducer/topbar.reducer";
 
 function AllCards() {
   const dispatch = useDispatch();

@@ -43,7 +43,7 @@ export const initialAuthState = authAdapter.getInitialState(
 
 export const authSlice = createSlice({
   name: AUTH_FEATURE_KEY,
-  initialState: AUTH_INITIAL_STATE_LOGIN,
+  initialState: initialAuthState,
   reducers: {
     removeLoginOrSignUpMessage(state, action) {
       state.signupOrLoginActionClicked = action.payload;
@@ -57,6 +57,9 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       localStorage.setItem("access_token", action.payload.access_token);
       localStorage.setItem("first_name", action.payload.first_name);
+    },
+    setErrors(state, action) {
+      state.errors = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -157,46 +160,6 @@ export const authSlice = createSlice({
         if (response.code === undefined) {
           state.errors = [response.email];
         }
-      })
-      .addCase(facebookAction.pending, (state, action) => {
-        state.errors = null;
-        state.user = null;
-      })
-      .addCase(facebookAction.fulfilled, (state, action) => {
-        const response = action.payload;
-        if (response.code === 200) {
-          state.isAuthenticated = true;
-          state.provider = "Facebook";
-          state.first_name = response.data.user.first_name;
-          localStorage.setItem("access_token", response.data.user.access_token);
-          localStorage.setItem("first_name", response.data.user.first_name);
-        }
-        if (response.code === 400) {
-          state.errors = [response.message];
-        }
-      })
-      .addCase(facebookAction.rejected, (state, action) => {
-        state.errors = [action.error.message || ""];
-      })
-      .addCase(googlesigninAction.pending, (state, action) => {
-        state.errors = null;
-        state.user = null;
-      })
-      .addCase(googlesigninAction.fulfilled, (state, action) => {
-        const response = action.payload;
-        if (response.code === 200) {
-          state.isAuthenticated = true;
-          state.provider = "Google";
-          state.first_name = response.data.user.first_name;
-          localStorage.setItem("access_token", response.data.user.access_token);
-          localStorage.setItem("first_name", response.data.user.first_name);
-        }
-        if (response.code === 400) {
-          state.errors = [response.message];
-        }
-      })
-      .addCase(googlesigninAction.rejected, (state, action) => {
-        state.errors = [action.error.message || ""];
       });
   },
 });

@@ -19,28 +19,33 @@ import { useHistory } from "react-router-dom";
 import { cartAction, getCartItemsState } from "../reducer/cart.reducer";
 import { getAuthState } from "../reducer/auth.reducer";
 import { updateCartAction } from "../actions/cart.actions";
-import { getTopBarState } from "../reducer/topbar.reducer";
 import { getFixerConvertedAmount } from "../services/giftCards.service";
 import { pageLoaderActions } from "../reducer/page-loader.reducer";
+import { getCommonState } from "../reducer/common.reducer";
 
 const SelectCards = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [eventKey11, seteventkey] = useState(1);
-  const [tempvisible, setTempVisible] = useState(true);
   const [selectedDenomination, setSelectedDenomiation] = useState(null);
   const [count, setCount] = useState(0);
   const giftunitState = useSelector(getGiftcardsState);
   const productAndTermState = useSelector(getBrandsState);
   const authState = useSelector(getAuthState);
   const cartState = useSelector(getCartItemsState);
+  const commonState = useSelector(getCommonState);
+  const [tempvisible, setTempVisible] = useState(
+    !commonState?.giftingToUser?.name
+  );
   const card = giftunitState.selectedBrand;
   const payment = giftunitState.selectedCountry;
   const [rate, setRate] = useState(0);
-  const [giftTo, setGiftTo] = useState("myself");
+  const [giftTo, setGiftTo] = useState(
+    commonState?.giftingToUser?.name ? "someoneElse" : "myself"
+  );
   const [giftToParams, setGiftToParams] = useState({
     email: null,
-    name: null,
+    name: commonState?.giftingToUser?.name || null,
     message: null,
   });
 
@@ -236,13 +241,13 @@ const SelectCards = () => {
                   onChange={(e) => handleGiftTo(e)}
                 />
                 <Form.Check
-                  value="someone else"
+                  value="someoneElse"
                   type="radio"
                   className="giftslabs"
                   label="Someone else"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios2"
-                  checked={giftTo === "someone else"}
+                  checked={giftTo === "someoneElse"}
                   onChange={(e) => handleGiftTo(e)}
                 />
               </div>

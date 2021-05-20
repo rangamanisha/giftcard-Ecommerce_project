@@ -40,6 +40,7 @@ const GiftiGiftCard = (props) => {
             name="name"
             className="mt-3"
             onChange={(e) => updateGiftToParams("name", e)}
+            value={formik.values.name}
           />
           <Form.Control
             type="email"

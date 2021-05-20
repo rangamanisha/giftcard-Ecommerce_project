@@ -18,6 +18,7 @@ import { getCartItemsState } from "../../../reducer/cart.reducer";
 import { getTopBarState } from "../../../reducer/topbar.reducer";
 import { getProfileState } from "../../../reducer/profile.reducer";
 import { getprofileListAction } from "../../../actions/profile.actions";
+import { logoutAction } from "../../../actions/auth.actions";
 //Countries are comming from giftunit
 const GiftiNav = () => {
   const bg = "white";
@@ -67,6 +68,16 @@ const GiftiNav = () => {
     dispatch(giftCardsAction.selectCountry(value));
   };
 
+  const triggerLogout = async () => {
+    await dispatch(logoutAction());
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("first_name");
+    localStorage.removeItem("state");
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <Topbar
       bg={bg}
@@ -82,6 +93,7 @@ const GiftiNav = () => {
       onCountrySelected={countryChanged}
       cartState={cartState}
       profileState={profileState}
+      triggerLogout={triggerLogout}
     />
   );
 };

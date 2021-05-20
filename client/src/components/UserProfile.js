@@ -29,15 +29,15 @@ const UserProfile = () => {
   useEffect(() => {
     if (authState.isAuthenticated) {
       dispatch(updateUserprofileAction({
-        firstName: profilestate.profile?.first_name || "",
-        lastName: profilestate.profile?.last_name || "",
-        dob: profilestate.profile?.birthday || null,
-        language: profilestate.profile?.language || "",
-        country: profilestate.profile?.nationality || null,
-        phone: profilestate.profile?.phone || "",
-        gender: profilestate.profile?.gender || "",
-        email: profilestate.profile?.email || "",
-        countryName: profilestate.profile?.country_name || "" 
+       firstName: profilestate.profile?.first_name || "",
+      lastName: profilestate.profile?.last_name || "",
+      dob: profilestate.profile?.birthday || null,
+      language: profilestate.profile?.language || "",
+      country: profilestate.profile?.nationality || null,
+      phone: profilestate.profile?.phone || "",
+      gender: profilestate.profile?.gender || "",
+      email: profilestate.profile?.email || "",
+      countryName: profilestate.profile?.country_name || "" 
       }));
     }
   }, [dispatch]);

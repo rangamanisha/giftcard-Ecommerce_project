@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Tab from "react-bootstrap/Tab";
 import UserProfile from "./UserProfile";
 import Updatepassword from "./updatepassword";

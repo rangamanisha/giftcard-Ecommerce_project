@@ -20,6 +20,7 @@ import {
   pageLoaderReducer,
   PAGE_LOADER_FEATURE_KEY,
 } from "./page-loader.reducer";
+import { commonReducer, COMMON_FEATURE_KEY } from "./common.reducer";
 
 const saveToLocalStorage = (state) => {
   try {
@@ -57,10 +58,12 @@ const store = configureStore({
     [ORDER__FEATURE_KEY]: orderReducer,
     [IDC_FEATURE_KEY]: idcReducer,
     [PAGE_LOADER_FEATURE_KEY]: pageLoaderReducer,
+    [COMMON_FEATURE_KEY]: commonReducer,
   },
   middleware: [...getDefaultMiddleware()],
   enhancers: [],
   preloadedState: loadFromLocalStorage(),
+  serializableCheck: false,
 });
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;

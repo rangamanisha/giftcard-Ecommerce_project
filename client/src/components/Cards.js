@@ -6,7 +6,6 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import GiftiGlobal from "../assets/Gifti-Global.png";
 import Country from "../assets/country.svg";
 import Target from "../assets/target.svg";
-import Iframe from "react-iframe";
 import Giftcard from "../assets/gift-card.svg";
 import Modal from "react-bootstrap/Modal";
 

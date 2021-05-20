@@ -11,7 +11,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import Confirm_Order from "./components/Orders/confirm_order";
+import ConfirmOrder from "./components/Orders/confirm_order";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import AllFeaturedCards from "./components/AllFeaturedCards";
@@ -65,7 +65,7 @@ function App() {
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/order/confirm_order">
-          <Confirm_Order showOrdersHeading={true} />
+          <ConfirmOrder showOrdersHeading={true} />
         </Route>
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
@@ -78,10 +78,9 @@ function App() {
         <Route path="/selectcard" component={SelectCards} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
         <Route path="/cart" component={Cart} exact />
-        <Route path="/order/confirm_order" component={Confirm_Order} />
         <Route path="/terms-and-conditions" component={ConditionsPage} exact />
         <Route path="/contact" component={Contact} exact />
-        <Route path="/enquiry" component={EnquiryPage} exact />
+        <Route path="/faq" component={EnquiryPage} exact />
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/failure" component={FailurePage} exact />
         <Route path="/success" component={SuccessPage} exact />

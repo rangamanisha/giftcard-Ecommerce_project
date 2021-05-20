@@ -11,8 +11,9 @@ import { getFixerConvertedAmount } from "../../services/giftCards.service";
 
 const CartWidget = (props) => {
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
-    <a
-      href="#"
+    <Button
+      variant="link"
+      className="p-0 align-top shadow-none"
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const CartWidget = (props) => {
     >
       {children}
       <RiArrowDownSLine />
-    </a>
+    </Button>
   ));
   CustomToggle.displayName = "CustomToggle";
 
@@ -141,12 +142,11 @@ const CartWidget = (props) => {
 
   const getUpdatedRewardPoints = () => {
     const totalAmount = parseFloat(getConvertedAmount());
-    let totalRewardPoints = rewardState?.total_credits || 0;
     const currencyExchangeRate = state.conversion?.currency_exchange_rate;
+    let totalRewardPoints =
+      (rewardState?.total_credits || 0) * currencyExchangeRate;
     if (totalRewardPoints > totalAmount) {
-      totalRewardPoints = currencyExchangeRate
-        ? totalRewardPoints - totalAmount / currencyExchangeRate
-        : totalRewardPoints - totalAmount;
+      totalRewardPoints = totalRewardPoints - totalAmount;
     } else {
       totalRewardPoints = 0;
     }
@@ -166,13 +166,26 @@ const CartWidget = (props) => {
     }
     const checkoutObject = {
       total_amount: totalAmount,
-      total_amount_aed: convertedAmountAED,
+      amount_to_pay: totalAmount,
+      total_amount_aed: parseFloat(convertedAmountAED).toFixed(2),
       currency: state.selectedCartCurrency?.unit_name_short,
       currency_id: state.selectedCartCurrency?.id,
     };
     if (authState.isAuthenticated) {
       checkoutObject.are_reward_points_used = useGiftiGlobalPoints;
       checkoutObject.reward_points = getUpdatedRewardPoints();
+      if (useGiftiGlobalPoints) {
+        const diffAmount =
+          parseFloat(totalAmount) - parseFloat(convertedGiftiPoints());
+        const isDiffAmountToBePaid = diffAmount > 0;
+        checkoutObject.amount_to_pay = isDiffAmountToBePaid
+          ? parseFloat(diffAmount).toFixed(2)
+          : checkoutObject.total_amount;
+        checkoutObject.isDiffAmountToBePaid = isDiffAmountToBePaid;
+        checkoutObject.used_credits = isDiffAmountToBePaid
+          ? rewardState?.total_credits
+          : 0;
+      }
     }
     createCheckout(checkoutObject);
   };

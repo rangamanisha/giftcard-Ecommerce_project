@@ -25,11 +25,7 @@ export const forgotpasswordAPI = (userData) => {
   return apiCall(url, "POST", userData, null, false);
 };
 
-export const googleloginAPI = (userData) => {
-  const url = `${API_URL}/accounts/sessions/signin`;
-  return apiCall(url, "POST", userData, null, false);
-};
-export const facebookAPI = (userData) => {
-  const url = `${API_URL}/accounts/sessions/signin`;
-  return apiCall(url, "POST", userData, null, false);
+export const logoutAPI = () => {
+  const url = `${API_URL}/accounts/sessions/signout`;
+  return apiCall(url, "DELETE", {});
 };

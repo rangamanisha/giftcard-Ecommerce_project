@@ -18,8 +18,9 @@ import { Link } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Facebookicon from "../assets/Facebook-icon.svg";
-import { loginAction, googlesigninAction } from "../actions/auth.actions";
+import { loginAction } from "../actions/auth.actions";
 
 const Signup = () => {
   const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
@@ -61,12 +62,33 @@ const Signup = () => {
       history.push({ pathname: "/" });
     }
   }, [state.signupSuccess, history]);
-  React.useEffect(() => {
-    return dispatch(authActions.clearErrors());
-  });
-  const responseGoogle = (response) => {
-    const accessToken = response.accessToken;
-    dispatch(googlesigninAction({ accessToken }));
+  useEffect(() => {
+    dispatch(authActions.clearErrors());
+  }, []);
+
+  const googleLoginSuccess = (event) => {
+    dispatch(
+      loginAction({
+        provider: "Google",
+        token_type: "access_token",
+        token: event.accessToken,
+        expires_at: event?.tokenObj?.expires_at,
+      })
+    );
+  };
+
+  const googleLoginFailure = (event) => {
+    console.log("error ", event);
+    dispatch(authActions.setErrors(["Login failed, Please try again..."]));
+  };
+
+  const facebookLoginSuccess = (event) => {
+    console.log("facebookLoginSuccess ", event);
+  };
+
+  const facebookLoginFailure = (event) => {
+    console.log("error ", event);
+    dispatch(authActions.setErrors(["Login failed, Please try again..."]));
   };
 
   return (
@@ -241,23 +263,32 @@ const Signup = () => {
                         variant="outline-light"
                         className="google-button"
                         clientId={googleId}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                      ></GoogleLogin>
+                        onSuccess={googleLoginSuccess}
+                        onFailure={googleLoginFailure}
+                        isSignedIn={false}
+                      />
                     </div>
                     <div className="facebook">
-                      <Button
-                        variant="outline-light"
-                        className="facebook-button"
-                        provider="facebook"
+                      <FacebookLogin
                         appId={fbId}
-                      >
-                        <img
-                          src={Facebookicon}
-                          style={{ width: "50px", height: "50px" }}
-                          alt="Icon"
-                        />
-                      </Button>
+                        callback={facebookLoginSuccess}
+                        onFailure={facebookLoginFailure}
+                        size="medium"
+                        autoLoad={false}
+                        render={(renderProps) => (
+                          <button onClick={renderProps.onClick}>
+                            <img
+                              src={Facebookicon}
+                              variant="outline-light"
+                              autoLoad
+                              auto_logout_link={true}
+                              className="facebook-button"
+                              style={{ width: "50px", height: "50px" }}
+                              alt="Icon"
+                            />
+                          </button>
+                        )}
+                      />
                     </div>
                   </div>
                 </Col>
