@@ -7,5 +7,5 @@ export const getprofileAPI = () => {
 
 export const updateprofileAPI = (userData) => {
   const url = `${API_URL}/user`;
-  return apiCall(url, "PUT", userData, null, true, true);
+  return apiCall(url, "PUT", userData, null, true);
 };

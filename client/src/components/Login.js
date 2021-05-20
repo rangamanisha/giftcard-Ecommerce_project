@@ -22,7 +22,6 @@ import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
 import checkbox from "../assets/checkbox.svg";
 import GoogleLogin from "react-google-login";
-import { values } from "lodash";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import { getuseractiveAction } from "../actions/useractive.actions";

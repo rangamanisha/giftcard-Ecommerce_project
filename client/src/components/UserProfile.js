@@ -28,7 +28,17 @@ const UserProfile = () => {
   const authState = useSelector(getAuthState);
   useEffect(() => {
     if (authState.isAuthenticated) {
-      dispatch(getprofileListAction({}));
+      dispatch(updateUserprofileAction({
+        firstName: profilestate.profile?.first_name || "",
+        lastName: profilestate.profile?.last_name || "",
+        dob: profilestate.profile?.birthday || null,
+        language: profilestate.profile?.language || "",
+        country: profilestate.profile?.nationality || null,
+        phone: profilestate.profile?.phone || "",
+        gender: profilestate.profile?.gender || "",
+        email: profilestate.profile?.email || "",
+        countryName: profilestate.profile?.country_name || "" 
+      }));
     }
   }, [dispatch]);
   const giftunitState = useSelector(getGiftcardsState);
@@ -45,6 +55,7 @@ const UserProfile = () => {
       phone: profilestate.profile?.phone || "",
       gender: profilestate.profile?.gender || "",
       email: profilestate.profile?.email || "",
+      countryName: profilestate.profile?.country_name || ""
     },
     validationSchema: Yup.object({
       phone: Yup.string().min(10).max(10),
@@ -65,7 +76,6 @@ const UserProfile = () => {
       confirmButtonColor: "#00AF9A",
     })
   }
-  
 
   return (
     <div className="profile-card mx-auto col-md-5">
@@ -95,7 +105,7 @@ const UserProfile = () => {
           <Form.Group
             as={Col}
             xs={4}
-            controlId="formBasicText"
+            controlId="formBasicText2"
             className="icons_login"
           >
             <Form.Control
@@ -149,7 +159,7 @@ const UserProfile = () => {
         name="country"
       />
         </Form> */}
-         <Form.Group controlId="formBasicPassword" className="w-75 mt-4 mx-auto">
+         <Form.Group controlId="exampleForm.ControlSelect1" className="w-75 mt-4 mx-auto">
           <Form.Control
             size="sm"
             as="select"
@@ -165,7 +175,7 @@ const UserProfile = () => {
             </Form.Control>
         </Form.Group>
         <Form.Group
-          controlId="formBasicPassword"
+          controlId="formBasicNumber"
           className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control
