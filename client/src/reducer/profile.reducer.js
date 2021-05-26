@@ -10,6 +10,8 @@ import {
 
 export const PROFILE_INITIAL_STATE = {
   profile: null,
+  error: null,
+  profile_updated: false,
 };
 
 export const PROFILE__FEATURE_KEY = "profile";
@@ -21,7 +23,12 @@ export const initialProfileState = ProfileAdapter.getInitialState(
 export const profileSlice = createSlice({
   name: PROFILE__FEATURE_KEY,
   initialState: PROFILE_INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    clearErrors(state) {
+      state.error = null;
+      state.profile_updated = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getprofileListAction.pending, (state, action) => {
@@ -38,15 +45,22 @@ export const profileSlice = createSlice({
       })
       .addCase(updateUserprofileAction.pending, (state, action) => {
         state.is_active = true;
+        state.error = null;
+        state.profile_updated = false;
       })
       .addCase(updateUserprofileAction.fulfilled, (state, action) => {
         const response = action.payload;
         if (response.code === 200) {
           state.profile = response.data.profile;
+          state.profile_updated = true;
+        } else {
+          state.error = response?.message || "Error in updating profile.";
         }
       })
       .addCase(updateUserprofileAction.rejected, (state, action) => {
         state.is_active = true;
+        state.error = null;
+        state.profile_updated = true;
       });
   },
 });

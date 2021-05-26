@@ -40,17 +40,14 @@ const GuestForm = (props) => {
           last_name: data.last_name,
         },
         giftcard: cartState.lineItems.map((lineItem) => {
-          return {
-            brand_id: lineItem.brand_id,
-            giftcard_value: lineItem.giftcard_value,
-            quantity: lineItem.quantity,
-            currency: lineItem.currency,
-            country_id: lineItem.country_id,
+          const item = {
+            ...lineItem,
             card_value_aed:
               lineItem.currency !== cartState.checkoutCart.currency
                 ? getMarginAmount(lineItem.card_value_aed)
                 : lineItem.card_value_aed,
           };
+          return item;
         }),
         order: {
           order_total_aed: cartState.checkoutCart.total_amount,

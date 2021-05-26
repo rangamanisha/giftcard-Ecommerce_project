@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { giftCardsUnitService } from "../services/giftCards.service";
+import { giftCardsUnitService,giftCardThemeApiCall } from "../services/giftCards.service";
 
 export const giftCardsUnitAction = createAsyncThunk(
   "gitfcards/listGiftCards",
@@ -15,5 +15,14 @@ export const giftCardsUnitAction = createAsyncThunk(
       )?.id;
     }
     return { ...response, selectedCountry };
+  }
+);
+
+
+export const giftCardThemeAction = createAsyncThunk(
+  "giftcard_theme",
+  async (payload, thunkAPI) => {
+    const response = await giftCardThemeApiCall();
+    return response;
   }
 );

@@ -55,15 +55,18 @@ export const OrderDetailsAction = createAsyncThunk(
     return response;
   }
 );
-export const FailedOrderAction = createAsyncThunk(
+export const failedOrderAction = createAsyncThunk(
   "FailedOrder",
   async (payload, thunkAPI) => {
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
-    const request = {
-      order_id: payload.order_id,
-    };
-    const response = await failedOrderApiCall(request);
+    let response = null;
+    if (payload.order_id) {
+      const request = {
+        order_id: payload.order_id,
+      };
+      response = await failedOrderApiCall(request);
+    }
     dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
@@ -72,7 +75,7 @@ export const FailedOrderAction = createAsyncThunk(
 export const createOrderAction = createAsyncThunk(
   "order/create",
   async (payload, thunkAPI) => {
-    const { data, event } = payload;
+    const { data, event, amount_to_pay } = payload;
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await createOrderAPI(data);
@@ -87,10 +90,7 @@ export const createOrderAction = createAsyncThunk(
         const request = {
           payment: {
             token: event.token,
-            amount:
-              parseFloat(
-                parseFloat(response?.data?.order?.payment_currency_amount) * 100
-              ).toFixed(2) || 0,
+            amount: parseFloat(parseFloat(amount_to_pay) * 100).toFixed(2) || 0,
             payment_currency: data.orders?.payment_currency,
             currency: data.orders?.payment_currency,
             order_id: response?.data?.order?.id,
@@ -139,7 +139,7 @@ export const processGiftCardCheckoutAction = createAsyncThunk(
 export const createGuestOrderAction = createAsyncThunk(
   "order/guest/create",
   async (payload, thunkAPI) => {
-    const { data, event } = payload;
+    const { data, event, amount_to_pay } = payload;
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await createGuestOrderAPI(data);
@@ -149,10 +149,7 @@ export const createGuestOrderAction = createAsyncThunk(
       const request = {
         payment: {
           token: event.token,
-          amount:
-            parseFloat(
-              parseFloat(response?.data?.order?.payment_currency_amount) * 100
-            ).toFixed(2) || 0,
+          amount: parseFloat(parseFloat(amount_to_pay) * 100).toFixed(2) || 0,
           payment_currency: data.order?.payment_currency,
           currency: data.order?.payment_currency,
           order_id: response?.data?.order?.id,

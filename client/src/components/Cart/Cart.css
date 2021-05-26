@@ -57,6 +57,22 @@ span.cart-head {
   font-weight: 600;
   font-size: 20px;
 }
+.empty-cart-container {
+  padding: 5rem;
+}
+.empty-cart-image {
+  max-height: 22rem;
+}
+.empty-cart-header {
+  font-family: Cairo-Bold;
+}
+.empty-cart-header {
+  font-family: Cairo-Bold;
+}
+.start-gifting-btn {
+  font-family: Cairo-semibold;
+  padding: 0.8rem;
+}
 @media screen and (max-width: 1365px) and (min-width: 768px) {
   span.count-name,
   span.count-symbol {

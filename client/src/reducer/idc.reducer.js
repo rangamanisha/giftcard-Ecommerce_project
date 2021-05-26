@@ -1,6 +1,4 @@
-import React from "react";
 import swal from "sweetalert";
-import tick_circle from "../assets/tick_circle.svg";
 import {
   createEntityAdapter,
   createSelector,

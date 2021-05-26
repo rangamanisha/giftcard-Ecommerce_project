@@ -20,12 +20,11 @@ const ResetPassword = () => {
   const state = useSelector(getAuthState);
   const history = useHistory();
 
-  const value = localStorage.getItem("token");
   const formik = useFormik({
     initialValues: {
       password: "",
       password_confirmation: "",
-      token: value,
+      token: "",
     },
     validationSchema: Yup.object({
       password: Yup.string().required('Password is required'),
@@ -34,14 +33,24 @@ const ResetPassword = () => {
     })
     ,
     onSubmit: (data) => {
-      dispatch(resetpasswordAction(data));
-      dispatch(updatepasswordAction(data));
+      if (state.isAuthenticated) {
+        dispatch(updatepasswordAction(data));
+      } else {
+        dispatch(resetpasswordAction(data));
+      }
     },
         validateOnChange: false,
   });
 
   useEffect(() => {
-    localStorage.setItem("token", history.location["search"].split("?", 2)[1]);
+    const token = history.location.search.substring(
+      1,
+      history.location.search.length
+    );
+    formik.setFieldValue("token", token);
+  }, []);
+
+  useEffect(() => {
     if (state.reset) {
       history.push({ pathname: "/auth/login" });
     }
@@ -70,7 +79,7 @@ const ResetPassword = () => {
                   />
                   <img src={Passwordicon} alt="Icon" className="icon_img" />
                 </Form.Group>
-                {formik.errors.password ? (
+                {formik.touched.password && formik.errors.password ? (
                   <p className="validation-messages">
                     {formik.errors.password}
                   </p>
@@ -91,7 +100,8 @@ const ResetPassword = () => {
                   />
                   <img src={Passwordicon} alt="Icon" className="icon_img" />
                 </Form.Group>
-                {formik.errors.password_confirmation ? (
+                {formik.touched.password_confirmation &&
+                formik.errors.password_confirmation ? (
                   <p className="validation-messages">
                     {formik.errors.password_confirmation}
                   </p>

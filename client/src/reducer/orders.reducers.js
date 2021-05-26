@@ -10,6 +10,7 @@ import {
   createOrderCheckoutAction,
   createGuestOrderAction,
   processOrderAfterRedirectAction,
+  failedOrderAction,
 } from "../actions/orders.action";
 
 export const ORDER_INITIAL_STATE = {
@@ -157,6 +158,29 @@ export const orderSlice = createSlice({
       })
       .addCase(processOrderAfterRedirectAction.rejected, (state, action) => {
         state.accessToken = null;
+      })
+      .addCase(failedOrderAction.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(failedOrderAction.fulfilled, (state) => {
+        state.loading = false;
+        state.created_order = null;
+        state.redirect_url = null;
+        state.order_checkout_error = null;
+        state.error = null;
+        state.guest_payload = null;
+        state.data = [];
+        state.orders = [];
+      })
+      .addCase(failedOrderAction.rejected, (state) => {
+        state.loading = false;
+        state.created_order = null;
+        state.redirect_url = null;
+        state.order_checkout_error = null;
+        state.error = null;
+        state.guest_payload = null;
+        state.data = [];
+        state.orders = [];
       });
   },
 });

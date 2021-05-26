@@ -7,13 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAuthState } from "../reducer/auth.reducer";
 import { getOrderState, orderActions } from "../reducer/orders.reducers";
 import { getCartItemsState } from "../reducer/cart.reducer";
-import { getProfileState } from "../reducer/profile.reducer";
 
 const Stepper = () => {
   const authState = useSelector(getAuthState);
   const orderState = useSelector(getOrderState);
   const cartState = useSelector(getCartItemsState);
-  const profileState = useSelector(getProfileState);
 
   const dispatch = useDispatch();
 

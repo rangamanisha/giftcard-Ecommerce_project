@@ -8,7 +8,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Header from "../HeaderPage/Header";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 
-import Mail from "../../../assets/Mail.png";
+import Mail from "../../../assets/email-white.svg";
 import PhoneIcon from "../../../assets/PhoneIcon.png";
 
 function EnquiryPage() {
@@ -852,12 +852,12 @@ function EnquiryPage() {
       <div className="faqMainWrap">
         <div className="container my-4">
           <Row className="">
-            <Col md={4}>
+            <Col md={12}>
               <h3 className="font-weight-bold faq-col faq_title">
                 Frequently Asked Questions
               </h3>
             </Col>
-            <Col md={8} className="d-flex align-items-center">
+            {/* <Col md={8} className="d-flex align-items-center">
               <div className="input-group">
                 <input
                   type="text"
@@ -868,7 +868,7 @@ function EnquiryPage() {
                   <MdSearch />
                 </span>
               </div>
-            </Col>
+            </Col> */}
           </Row>
           <Row className="mt-3">
             <Col md={12}>
@@ -1015,7 +1015,7 @@ function EnquiryPage() {
           </Row> */}
         </div>
         <div className="faq-bootom-border">
-          <div class="row pb-5">
+          <div className="row pb-5">
             <div className=" col-sm-2"></div>
             <div className=" col-sm-8">
               <div className="faq-text">

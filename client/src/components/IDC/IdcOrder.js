@@ -18,9 +18,7 @@ import {
   IdcProfileAction,
   IdcVaritiesAction,
   IdcSignleOrderAction,
-  IdcCountryCode,
 } from "../../actions/idc_action";
-import { countryCodeApiCall } from "../../services/idc.service";
 export const API_URL = process.env.REACT_APP_API_URL;
 
 const Idc_Order = () => {
@@ -300,7 +298,7 @@ const Idc_Order = () => {
                   <span>to follow the correct format for your upload.</span>
                 </p>
               </div>
-              <form role="form" onSubmit={onSubmitfile}>
+              <form onSubmit={onSubmitfile}>
                 <div className="file-drop-box">
                   <div className="download-wrap text-right">
                     <span>Download Sample File</span>

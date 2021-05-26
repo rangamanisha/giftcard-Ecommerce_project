@@ -5,7 +5,7 @@ export const descriptionBrand = (brands) => {
   return apiCall(url, "GET", null, null, false);
 };
 export const termBrand = (brands) => {
-  const { id, currency, program_id } = brands;
+  const { id, currency } = brands;
   const url = `${API_URL}/brands/${id}/terms?currency=${currency}`;
   return apiCall(url, "GET", null, null, false);
 };

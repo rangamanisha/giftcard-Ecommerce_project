@@ -5,8 +5,7 @@ import {
   brandsByCategoryAction,
   allBrandAction,
 } from "../actions/brands.action";
-import constants from "../constants/brands.constants";
-import { get, filter } from "lodash";
+import { get } from "lodash";
 import {
   createEntityAdapter,
   createSelector,

@@ -150,7 +150,7 @@ const RewardPoints = (props) => {
 
         <Col sm="12" className="mt-5 pl-5">
           <h2 className="trans-detail">Transaction Details</h2>
-          <Table border className="mt-4 hover border">
+          <Table className="mt-4 hover border">
             <thead className="table-head">
               <tr>
                 <th>Date</th>

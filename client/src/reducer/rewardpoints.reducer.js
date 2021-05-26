@@ -71,7 +71,25 @@ export const rewardpointsSlice = createSlice({
         const response = action.payload;
         if (response.code === 200) {
           state.conversion_limit = response.data.conversion_limit;
-          state.triggerConversion = true;
+          if (response.data.conversion_limit >= 5) {
+            swal({
+              icon: "error",
+              title: "Conversion limit",
+              text: "Sorry, you can only convert a maximum of 5 gift cards per day. If you'd like to convert your remaining cards please contact care@giftiglobal.com and we will be happy to assist you",
+              buttons: {
+                cancel: {
+                  text: "Cancel",
+                  value: false,
+                  visible: true,
+                  className: "",
+                  closeModal: true,
+                },
+              },
+            });
+            state.triggerConversion = "";
+          } else {
+            state.triggerConversion = true;
+          }
 
           state.errors = [];
         } else if (response.code === 400 || response.code === 401) {

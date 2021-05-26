@@ -1,4 +1,4 @@
-.p-dropdown {
+.country-nav-dropdown {
   background: none !important ;
    border: none !important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -6,7 +6,7 @@
 }
 
     
-.p-dropdown .p-dropdown-label {
+.country-nav-dropdown .p-dropdown-label {
   background: transparent;
   border: 0 none;
   color: #00B2AE !important;
@@ -14,10 +14,10 @@
   font-size: 16px;
 
 }
-.p-dropdown:not(.p-disabled).p-focus{
+.country-nav-dropdown:not(.p-disabled).p-focus{
   box-shadow: none !important;
 }
-.p-dropdown .p-dropdown-trigger {
+.country-nav-dropdown .p-dropdown-trigger {
   background: transparent;
   color: #00B2AE !important;;
   // width: 2.357rem;

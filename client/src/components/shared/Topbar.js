@@ -109,6 +109,7 @@ const Topbar = (props) => {
             </p>
             <img src={locationIcon} alt="Icon" />
             <Dropdown
+              className="country-nav-dropdown"
               value={state.selectedCountry}
               options={countriesList}
               onChange={onCountryChange}
@@ -125,7 +126,12 @@ const Topbar = (props) => {
         </div>
         <div className="navbar-nav flex-lg-row gifti-nav-flex order-lg-last">
           <div className="nav-item mr-2">
-            <Button className="nav-btn text-white">For Business</Button>{" "}
+            <Button
+              className="nav-btn text-white"
+              onClick={(e) => history.push({ pathname: "/contact" })}
+            >
+              For Business
+            </Button>{" "}
           </div>
           <div className="nav-item mr-2">
             <Button className="nav-btn" variant="info" onClick={reward}>

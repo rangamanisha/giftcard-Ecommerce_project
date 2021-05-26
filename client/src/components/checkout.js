@@ -78,10 +78,20 @@ const Checkout = (props) => {
         payload.orders["used_credits"] =
           cartState.checkoutCart?.used_credits || 0;
       }
-      dispatch(createOrderAction({ data: payload, event }));
+      dispatch(
+        createOrderAction({
+          data: payload,
+          event,
+          amount_to_pay: cartState.checkoutCart.amount_to_pay,
+        })
+      );
     } else {
       dispatch(
-        createGuestOrderAction({ data: orderState.guest_payload, event })
+        createGuestOrderAction({
+          data: orderState.guest_payload,
+          event,
+          amount_to_pay: cartState.checkoutCart.amount_to_pay,
+        })
       );
     }
   };

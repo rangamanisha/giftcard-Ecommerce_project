@@ -111,6 +111,7 @@ export const updateCartAction = createAsyncThunk(
       request.cart_item["contact_email"] = payload.contact_email;
       request.cart_item["contact_name"] = payload.contact_name;
       request.cart_item["gift_message"] = payload.gift_message;
+      request.cart_item["gifting_image_id"] = payload.gifting_image_id;
     }
     const response = await cartItemsService(request);
     dispatch(pageLoaderActions.setPageLoadingAction(false));

@@ -14,6 +14,7 @@ import { useHistory } from "react-router";
 import Image from "react-bootstrap/Image";
 import { cartTotalCountAction } from "../actions/cart.actions";
 import { getGiftcardsState } from "../reducer/giftCards.reducer";
+import { failedOrderAction } from "../actions/orders.action";
 
 const FailurePage = () => {
   const dispatch = useDispatch();
@@ -27,13 +28,15 @@ const FailurePage = () => {
 
   useEffect(() => {
     setErrorMessage(orderState.error || orderState.order_checkout_error);
-    dispatch(orderActions.clearState());
+    dispatch(failedOrderAction({ order_id: orderState.orderid }));
+    if (authState.isAuthenticated) {
+      dispatch(
+        cartTotalCountAction({
+          currency: giftunitState.selectedCountry?.unit_name_short || "AED",
+        })
+      );
+    }
     dispatch(cartAction.clearState());
-    dispatch(
-      cartTotalCountAction({
-        currency: giftunitState.selectedCountry?.unit_name_short || "AED",
-      })
-    );
     setShowModal(true);
   }, [dispatch]);
 

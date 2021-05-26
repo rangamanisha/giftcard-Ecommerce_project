@@ -37,7 +37,6 @@
     "primereact": "^6.3.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
-    "react-bootstrap-country-select": "^0.7.12",
     "react-bootstrap-sweetalert": "^5.2.0",
     "react-country-region-selector": "^3.1.0",
     "react-csv": "^2.0.3",
@@ -60,6 +59,7 @@
     "react-social-login": "^3.4.13",
     "react-spinners": "^0.10.6",
     "react-step-progress": "^1.0.3",
+    "react-textarea-counter": "^1.0.0",
     "react-top-loading-bar": "^2.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-file-upload": "0.0.19",
@@ -100,5 +100,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^7.4.0"
   }
 }

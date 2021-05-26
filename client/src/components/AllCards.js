@@ -48,6 +48,13 @@ function AllCards() {
 
   return (
     <div className="allgiftcards-sec">
+      <Row>
+        <Col>
+          <div>
+            <AllFeaturedCards />
+          </div>
+        </Col>
+      </Row>
       <Container>
         <Row className="allGiftCard-box">
           <Col>
@@ -56,13 +63,6 @@ function AllCards() {
           </Col>
         </Row>
       </Container>
-      <Row>
-        <Col>
-          <div>
-            <AllFeaturedCards />
-          </div>
-        </Col>
-      </Row>
 
       <Container>
         <Row className="giftiallcard-row-3">

@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Alert from "react-bootstrap/Alert";
 import { getAuthState, authActions } from "../reducer/auth.reducer";
-import { loginAction } from "../actions/auth.actions";
+import { loginAction, logoutAction } from "../actions/auth.actions";
 import { useHistory } from "react-router";
 import Fade from "react-bootstrap/Fade";
 import { Link } from "react-router-dom";
@@ -32,6 +32,7 @@ const Login = () => {
   const [isValid, setIsValid] = useState(false);
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState("");
+  const [loginBtnClicked, setLoginBtnClicked] = useState(false);
 
   const googleId = `${process.env.REACT_APP_GOOGLE_API_KEY || ""}`;
   const fbId = `${process.env.REACT_APP_FB_APP_ID || ""}`;
@@ -48,10 +49,16 @@ const Login = () => {
       password: Yup.string().min(2).max(200).required("Password is required"),
     }),
     onSubmit: (data) => {
+      setLoginBtnClicked(true);
       dispatch(loginAction(data));
     },
     validateOnChange: false,
   });
+
+  useEffect(() => {
+    localStorage.clear();
+    dispatch(logoutAction());
+  }, []);
 
   useEffect(() => {
     const search = history.location.search;
@@ -72,7 +79,7 @@ const Login = () => {
   }, [dispatch, useractive.verified, history]);
 
   useEffect(() => {
-    if (state.isAuthenticated) {
+    if (loginBtnClicked && state.isAuthenticated) {
       history.push({ pathname: "/" });
     }
 
@@ -86,6 +93,7 @@ const Login = () => {
   }, [state.isAuthenticated, state.reset, history]);
 
   const googleLoginSuccess = (event) => {
+    setLoginBtnClicked(true);
     dispatch(
       loginAction({
         provider: "Google",
@@ -102,7 +110,15 @@ const Login = () => {
   };
 
   const facebookLoginSuccess = (event) => {
-    console.log("facebookLoginSuccess ", event);
+    setLoginBtnClicked(true);
+    dispatch(
+      loginAction({
+        provider: "Facebook",
+        token_type: "access_token",
+        token: event.accessToken,
+        expires_at: event?.data_access_expiration_time,
+      })
+    );
   };
 
   const facebookLoginFailure = (event) => {
@@ -266,7 +282,7 @@ const Login = () => {
                             src={Facebookicon}
                             variant="outline-light"
                             autoLoad
-                            auto_logout_link={true}
+                            auto_logout_link={`true`}
                             className="facebook-button"
                             style={{ width: "50px", height: "50px" }}
                             alt="Icon"

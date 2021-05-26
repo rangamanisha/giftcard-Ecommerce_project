@@ -36,6 +36,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import SuccessPage from "./components/SuccessPage";
 import FailurePage from "./components/FailurePage";
 import PageLoader from "./components/PageLoader";
+import ClearPage from "./components/ClearPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   return (
@@ -69,7 +71,6 @@ function App() {
         </Route>
         <Route path="/" exact />
         <Route path="/auth/forgotpassword" component={ForgotPassword} exact />
-        <Route path="/auth/resetpassword" component={ResetPassword} exact />
         <ProtectedRoute path="/profile" component={EditProfile} exact />
         <ProtectedRoute path="/reward-points" component={RewardPoints} exact />
         <Route path="/checkout" component={Checkout} exact />
@@ -84,11 +85,13 @@ function App() {
         <Route path="/privacy-policy" component={PrivacypolicyPage} exact />
         <Route path="/failure" component={FailurePage} exact />
         <Route path="/success" component={SuccessPage} exact />
+        <Route path="/clear" component={ClearPage} exact />
         <Route path="/" exact>
           <Redirect to={{ pathname: "/" }} />
         </Route>
         <Route path="/allcards" component={AllCards} exact />
         <Route path="/emptycart" component={EmptyCart} exact />
+        <Route component={NotFoundPage} />
       </Switch>
       {window.location.pathname === "/idc/order" ||
       window.location.pathname === "/idc/signin" ||

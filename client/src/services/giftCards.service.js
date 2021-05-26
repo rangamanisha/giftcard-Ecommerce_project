@@ -6,6 +6,11 @@ export const giftCardsUnitService = () => {
   return apiCall(url, "GET", null, null, false);
 };
 
+export const giftCardThemeApiCall = () => {
+  const url = `${API_URL}/gifting_images`;
+  return apiCall(url, "GET", null, null, false);
+};
+
 export const getConversionRateService = (giftcardConversion) => {
   const { currency } = giftcardConversion;
   const url = `${API_URL}/giftcard_units/get_conversion_rate?currency=${currency}`;

@@ -19,8 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { getAuthState } from "../reducer/auth.reducer";
 
-import CountrySelect from "react-bootstrap-country-select";
-import "react-bootstrap-country-select/dist/react-bootstrap-country-select.css";
 
 const UserProfile = () => {
   const profilestate = useSelector(getProfileState);
@@ -28,17 +26,7 @@ const UserProfile = () => {
   const authState = useSelector(getAuthState);
   useEffect(() => {
     if (authState.isAuthenticated) {
-      dispatch(updateUserprofileAction({
-       firstName: profilestate.profile?.first_name || "",
-      lastName: profilestate.profile?.last_name || "",
-      dob: profilestate.profile?.birthday || null,
-      language: profilestate.profile?.language || "",
-      country: profilestate.profile?.nationality || null,
-      phone: profilestate.profile?.phone || "",
-      gender: profilestate.profile?.gender || "",
-      email: profilestate.profile?.email || "",
-      countryName: profilestate.profile?.country_name || "" 
-      }));
+      dispatch(getprofileListAction({}));
     }
   }, [dispatch]);
   const giftunitState = useSelector(getGiftcardsState);
@@ -105,7 +93,7 @@ const UserProfile = () => {
           <Form.Group
             as={Col}
             xs={4}
-            controlId="formBasicText2"
+            controlId="formBasicText"
             className="icons_login"
           >
             <Form.Control
@@ -175,7 +163,7 @@ const UserProfile = () => {
             </Form.Control>
         </Form.Group>
         <Form.Group
-          controlId="formBasicNumber"
+          controlId="formBasicP"
           className="w-75 mt-4 mx-auto icons_login"
         >
           <Form.Control

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import Passwordicon from "../assets/Password-icon.svg";
 import * as Yup from "yup";
-import { getAuthState } from "../reducer/auth.reducer";
+import { authActions, getAuthState } from "../reducer/auth.reducer";
 import { useFormik } from "formik";
 import {
   resetpasswordAction,
@@ -39,11 +39,16 @@ const UpdatePassword = () => {
   });
 
   useEffect(() => {
+    dispatch(authActions.clearErrors());
+  }, []);
+
+  useEffect(() => {
     if (state.message === "Password updated successfully!") {
       setIsValid(true);
       setMessage("Password updated successfully!");
       window.setTimeout(() => {
         setVisible(false);
+        dispatch(authActions.clearErrors());
       }, 3000);
     }
   }, [state.message]);
@@ -85,7 +90,7 @@ const UpdatePassword = () => {
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
-          {formik.errors.password ? (
+          {formik.touched.password && formik.errors.password ? (
             <p className="validation-messages">{formik.errors.password}</p>
           ) : null}
 
@@ -104,7 +109,8 @@ const UpdatePassword = () => {
             />
             <img src={Passwordicon} alt="Icon" className="icon_img" />
           </Form.Group>
-          {formik.errors.password_confirmation ? (
+          {formik.touched.password_confirmation &&
+          formik.errors.password_confirmation ? (
             <p className="validation-messages">
               {formik.errors.password_confirmation}
             </p>

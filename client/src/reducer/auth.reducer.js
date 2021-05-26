@@ -8,9 +8,8 @@ import {
   signupAction,
   resetpasswordAction,
   forgotpasswordAction,
-  googlesigninAction,
   updatepasswordAction,
-  facebookAction,
+  logoutAction,
 } from "../actions/auth.actions";
 
 export const AUTH_INITIAL_STATE_LOGIN = {
@@ -50,6 +49,12 @@ export const authSlice = createSlice({
     },
     clearErrors(state, action) {
       state.errors = null;
+      state.reset = false;
+      state.signupSuccess = false;
+      state.verified = true;
+      state.signupOrLoginActionClicked = false;
+      state.status = null;
+      state.message = null;
     },
     setAuthState(state, action) {
       state.user = action.payload;
@@ -160,6 +165,27 @@ export const authSlice = createSlice({
         if (response.code === undefined) {
           state.errors = [response.email];
         }
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.user = null;
+        state.state = null;
+        state.message = null;
+        state.errors = null;
+        state.isAuthenticated = false;
+        state.first_name = null;
+        state.accessToken = null;
+        state.idToken = null;
+        state.token_type = "";
+        state.refreshToken = null;
+        state.expiresIn = null;
+        state.status = null;
+        state.success = false;
+        state.alertlogin = false;
+        state.signupOrLoginActionClicked = false;
+        state.signupSuccess = false;
+        state.reset = false;
+        state.email = null;
+        state.provider = null;
       });
   },
 });

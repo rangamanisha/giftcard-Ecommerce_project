@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import "./Cart.css";
-import { Col, Row, Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,6 +23,7 @@ import CartWidget from "./CartWidget";
 import CartItemContainer from "./CartItemContainer";
 import { getTopBarState } from "../../reducer/topbar.reducer";
 import { createOrderAction } from "../../actions/orders.action";
+import EmptyCartImage from "../../assets/empty-state-cart.svg";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -191,9 +195,9 @@ function Cart() {
     }
   };
 
-  return (
-    <>
-      <Container fluid>
+  const getCartContent = () => {
+    if (cartState.lineItems.length) {
+      return (
         <Row className="my-5">
           <Col md={5}>
             <CartWidget
@@ -219,6 +223,46 @@ function Cart() {
             />
           </Col>
         </Row>
+      );
+    }
+    return (
+      <>
+        <Row>
+          <Col xs={12} className="text-center">
+            <img src={EmptyCartImage} className="img-fluid empty-cart-image" />
+          </Col>
+          <Col xs={12} className="text-center pt-4">
+            <h2 className="empty-cart-header">Your orders list looks empty!</h2>
+          </Col>
+          <Col xs={12} className="text-center pt-2">
+            <h6 className="empty-cart-subheader">What are you waiting for?</h6>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={{ offset: 4, span: 4 }} className="pt-4">
+            <Button
+              className="btn-block start-gifting-btn"
+              variant="info"
+              type="button"
+              onClick={(e) => history.push({ pathname: "/" })}
+            >
+              Start Gifting
+            </Button>
+          </Col>
+        </Row>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <Container
+        fluid={cartState.lineItems.length}
+        className={`${
+          !cartState.lineItems.length ? "empty-cart-container" : ""
+        }`}
+      >
+        {getCartContent()}
       </Container>
     </>
   );

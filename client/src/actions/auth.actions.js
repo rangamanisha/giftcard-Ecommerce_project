@@ -103,7 +103,7 @@ export const logoutAction = createAsyncThunk(
     const { dispatch } = thunkAPI;
     dispatch(pageLoaderActions.setPageLoadingAction(true));
     const response = await logoutAPI();
-    dispatch(pageLoaderActions.setPageLoadingAction(true));
+    dispatch(pageLoaderActions.setPageLoadingAction(false));
     return response;
   }
 );

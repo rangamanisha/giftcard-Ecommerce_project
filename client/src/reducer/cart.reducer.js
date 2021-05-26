@@ -11,7 +11,6 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { remove } from "lodash";
 import { getPaymentCurrencyAction } from "../actions/cart.actions";
 
 export const CART_ITEMS_INIT_STATE = {

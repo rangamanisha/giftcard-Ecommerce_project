@@ -10,7 +10,6 @@ const footerStyle = {
   position: "fixed",
   left: "0",
   bottom: "0",
-  height: "65px",
   width: "100%",
 };
 

@@ -1,5 +1,4 @@
 import { apiCall, API_URL } from "./api";
-import * as moment from "moment";
 
 export const cartItemsService = (cart_items) => {
   const url = `${API_URL}/cart_items`;

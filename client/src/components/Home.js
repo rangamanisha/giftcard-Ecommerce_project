@@ -23,6 +23,10 @@ const Home = () => {
   const history = useHistory();
 
   useEffect(() => {
+    dispatch(authActions.clearErrors());
+  }, [dispatch]);
+
+  useEffect(() => {
     const value = history.location["search"].split("?", 2)[1];
     if (value !== undefined) {
       const data = { token: value };

@@ -58,15 +58,16 @@ const Signup = () => {
   });
 
   useEffect(() => {
-    if (state.signupSuccess) {
+    if (state.signupSuccess || state.isAuthenticated) {
       history.push({ pathname: "/" });
     }
-  }, [state.signupSuccess, history]);
+  }, [state.signupSuccess, state.isAuthenticated, history]);
   useEffect(() => {
     dispatch(authActions.clearErrors());
   }, []);
 
   const googleLoginSuccess = (event) => {
+    console.log("googleLoginSuccess ", event);
     dispatch(
       loginAction({
         provider: "Google",
@@ -83,7 +84,14 @@ const Signup = () => {
   };
 
   const facebookLoginSuccess = (event) => {
-    console.log("facebookLoginSuccess ", event);
+    dispatch(
+      loginAction({
+        provider: "Facebook",
+        token_type: "access_token",
+        token: event.accessToken,
+        expires_at: event?.data_access_expiration_time,
+      })
+    );
   };
 
   const facebookLoginFailure = (event) => {
@@ -103,7 +111,7 @@ const Signup = () => {
 
             <Form onSubmit={formik.handleSubmit} className="user">
               <Row>
-                <Col md={7}>
+                <Col md={6}>
                   <Form.Group
                     controlId="formBasicText"
                     className="singup-input icons_login"
@@ -120,7 +128,7 @@ const Signup = () => {
                     <img src={Usericon} alt="Icon" className="icon_img" />
                   </Form.Group>
                 </Col>
-                <Col md={5}>
+                <Col md={6}>
                   <Form.Group
                     controlId="formBasiclast-name"
                     className="singup-inputfield "
@@ -281,7 +289,7 @@ const Signup = () => {
                               src={Facebookicon}
                               variant="outline-light"
                               autoLoad
-                              auto_logout_link={true}
+                              auto_logout_link={`true`}
                               className="facebook-button"
                               style={{ width: "50px", height: "50px" }}
                               alt="Icon"

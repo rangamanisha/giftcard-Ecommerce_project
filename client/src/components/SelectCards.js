@@ -47,6 +47,7 @@ const SelectCards = () => {
     email: null,
     name: commonState?.giftingToUser?.name || null,
     message: null,
+    gifting_image_id:null,
   });
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const SelectCards = () => {
   const handleGiftTo = (e) => {
     setTempVisible(e.target.value === "myself" ? true : false);
     setGiftTo(e.target.value);
-    setGiftToParams({ email: null, name: null, message: null });
+    setGiftToParams({ email: null, name: null, message: null,gifting_image_id:null, });
   };
   const increment = () => {
     if (count >= 5) {
@@ -117,10 +118,11 @@ const SelectCards = () => {
       country_name: giftunitState.selectedCountry.country_name,
     };
 
-    if (!addToCartItem.isforself) {
+    if (!addToCartItem.isforself){
       addToCartItem["gift_message"] = giftToParams?.message || "";
       addToCartItem["contact_name"] = giftToParams?.name || null;
       addToCartItem["contact_email"] = giftToParams?.email || null;
+      addToCartItem["gifting_image_id"] = giftToParams?.gifting_image_id || "";
     }
 
     if (
@@ -185,7 +187,7 @@ const SelectCards = () => {
   const disableAddToCartButton = () => {
     if (
       !giftTo === "myself" &&
-      !(giftToParams.email && giftToParams.name && giftToParams.message)
+      !(giftToParams.email && giftToParams.name && giftToParams.message )
     ) {
       return true;
     }
@@ -197,11 +199,10 @@ const SelectCards = () => {
       <Container fluid className="selected-card-box">
         <Row>
           <Col md={4}>
-            <div className="selected-img">
+            <div style ={{textAlign:"center"}}>
               <img
                 src={get(card, "images.color.medium_rectangle")}
-                alt="AmazonMedium"
-                className="select-card-size1"
+                alt="AmazonMedium"style ={{maxWidth:"100%"}}
               />
             </div>
           </Col>
@@ -305,65 +306,108 @@ const SelectCards = () => {
       <div className="fix-footer">
         <Footer1 className="">
           <div className="fix-footer row">
-            <small className="ml-sm-5 ml-33 amttext">Total Amount</small>
-            <h4 className="ml-sm-2 amttext2">
-              {rate} {get(payment, "unit_name_short")}
-            </h4>
-            <div className="col mr-5">
-              <ButtonGroup className="mr-3" aria-label="Second group">
-                <Button
-                  variant="light"
-                  disabled={!selectedDenomination}
-                  onClick={decrement}
-                >
-                  {" "}
-                  <img src={minusicon} />
-                </Button>{" "}
-                <Button disabled variant="light">
-                  {count}
-                </Button>{" "}
-                <Button
-                  variant="light"
-                  disabled={!selectedDenomination}
-                  onClick={increment}
-                >
-                  {" "}
-                  <img src={plusicon} />
-                </Button>
-              </ButtonGroup>
-              <Button
-                className="nav-btn mr-2 text-white"
-                disabled={
-                  !selectedDenomination ||
-                  !count ||
-                  (giftTo !== "myself" &&
-                    !(
-                      giftToParams.email &&
-                      giftToParams.name &&
-                      giftToParams.message
-                    ))
-                }
-                onClick={(e) => saveToCart(false)}
-              >
-                Add to cart
-              </Button>{" "}
-              <Button
-                className="nav-btn mr-2"
-                disabled={
-                  !selectedDenomination ||
-                  !count ||
-                  (giftTo !== "myself" &&
-                    !(
-                      giftToParams.email ||
-                      giftToParams.name ||
-                      giftToParams.message
-                    ))
-                }
-                onClick={() => saveToCart(true)}
-                variant="info"
-              >
-                Buy Now
-              </Button>{" "}
+            <div className="col-lg-4"></div>
+            <div className="col-lg-8 col-md-12 col-sm-12">
+              <div className="row">
+                <div className="col-md-5 col-sm-12 d-flex">
+                  <div className="d-flex">
+                    <small className="amttext">Total Amount</small>
+                    <h4 className="ml-sm-2 amttext2">
+                      {rate} {get(payment, "unit_name_short")}
+                    </h4>
+                  </div>
+
+                  <div className="mobile-view">
+                    <ButtonGroup
+                      className="btnclasss mr-3"
+                      aria-label="Second group"
+                    >
+                      <Button
+                        variant="link"
+                        disabled={!selectedDenomination}
+                        onClick={decrement}
+                      >
+                        {" "}
+                        <img style={{ maxHeight: "3px" }} src={minusicon} />
+                      </Button>{" "}
+                      <Button disabled variant="link">
+                        <b>{count}</b>
+                      </Button>{" "}
+                      <Button
+                        variant="link"
+                        disabled={!selectedDenomination}
+                        onClick={increment}
+                      >
+                        {" "}
+                        <img style={{ maxHeight: "11px" }} src={plusicon} />
+                      </Button>
+                    </ButtonGroup>
+                  </div>
+                </div>
+                <div className="col-md-7 col-sm-12">
+                  <span className="desktop-view">
+                    <ButtonGroup
+                      className="btnclasss mr-3"
+                      aria-label="Second group"
+                    >
+                      <Button
+                        variant="link"
+                        disabled={!selectedDenomination}
+                        onClick={decrement}
+                      >
+                        {" "}
+                        <img style={{ maxHeight: "3px" }} src={minusicon} />
+                      </Button>{" "}
+                      <Button disabled variant="link">
+                        <b>{count}</b>
+                      </Button>{" "}
+                      <Button
+                        variant="link"
+                        disabled={!selectedDenomination}
+                        onClick={increment}
+                      >
+                        {" "}
+                        <img style={{ maxHeight: "11px" }} src={plusicon} />
+                      </Button>
+                    </ButtonGroup>
+                  </span>
+                  <Button
+                    className="nav-btn mr-2 text-white"
+                    disabled={
+                      !selectedDenomination ||
+                      !count ||
+                      (giftTo !== "myself" &&
+                        !(
+                          giftToParams.email &&
+                          giftToParams.name ||
+                          giftToParams.message ||
+                          giftToParams.gifting_image_id
+                        ))
+                    }
+                    onClick={(e) => saveToCart(false)}
+                    variant="info"
+                  >
+                    Add to cart
+                  </Button>{" "}
+                  <Button
+                    className="nav-btn mr-2 text-white"
+                    disabled={
+                      !selectedDenomination ||
+                      !count ||
+                      (giftTo !== "myself" &&
+                        !(
+                          giftToParams.email ||
+                          giftToParams.name ||
+                          giftToParams.message||
+                          giftToParams.gifting_image_id
+                        ))
+                    }
+                    onClick={() => saveToCart(true)}
+                  >
+                    Buy Now
+                  </Button>{" "}
+                </div>
+              </div>
             </div>
           </div>
         </Footer1>

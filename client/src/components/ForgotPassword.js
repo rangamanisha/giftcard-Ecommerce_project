@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Emailicon from "../assets/Email-icon.svg";
 import { Button, Form } from "react-bootstrap";
-import { getAuthState } from "../reducer/auth.reducer";
+import { authActions, getAuthState } from "../reducer/auth.reducer";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { forgotpasswordAction } from "../actions/auth.actions";
@@ -42,6 +42,10 @@ const ForgotPassword = (props) => {
     }
   });
 
+  useEffect(() => {
+    dispatch(authActions.clearErrors());
+  }, []);
+
   return (
     <>
       <Container>
@@ -68,8 +72,7 @@ const ForgotPassword = (props) => {
                   />
                   <img src={Emailicon} alt="Icon" className="icon_img" />
                 </Form.Group>
-
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <p className="validation-messages">{formik.errors.email}</p>
                 ) : null}
                 {state.errors && state.errors.length ? (

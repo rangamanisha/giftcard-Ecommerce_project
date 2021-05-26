@@ -3,7 +3,7 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { giftCardsUnitAction } from "../actions/giftcards.actions";
+import { giftCardsUnitAction,giftCardThemeAction } from "../actions/giftcards.actions";
 
 export const GIFTCARDS_INIT_STATE = {
   message: "",
@@ -16,6 +16,7 @@ export const GIFTCARDS_INIT_STATE = {
   countries: [],
   selectedCountry: null,
   selectedBrand: [],
+  theme:[],
   selectedCurrency: undefined,
   conversion: undefined,
 };
@@ -72,7 +73,24 @@ export const giftcardSlice = createSlice({
       })
       .addCase(giftCardsUnitAction.rejected, (state, action) => {
         state.errors = [action.error.message || ""];
+      })
+      .addCase(giftCardThemeAction.pending, (state, action) => {
+        state.errors = null;
+        state.theme = null;
+      })
+      .addCase(giftCardThemeAction.fulfilled, (state, action) => {
+        const response = action.payload;
+    
+        if(response.code = 200){
+          console.log(state);
+          state.theme = response.gifting_category
+        }
+      })
+      .addCase(giftCardThemeAction.rejected, (state, action) => {
+        state.errors = null;
+        state.theme = null;
       });
+      
   },
 });
 

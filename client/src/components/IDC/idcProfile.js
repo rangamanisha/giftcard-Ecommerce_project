@@ -46,7 +46,7 @@ const IdcProfile = () => {
           <div className="tabs-container vertical-buffer-10">
             <Tabs id="profile-info">
               <Tab eventKey="profile" title="Profile info">
-                <div class="row m-t m-b card-1">
+                <div className="row m-t m-b card-1">
                   <div className="container-fluid">
                     <div className="row">
                       {/* <div className="visible-xs col-xs-12 vertical-buffer-20"></div> */}
@@ -70,7 +70,7 @@ const IdcProfile = () => {
               </Tab>
 
               <Tab eventKey="contact" title="Change password">
-                <div class="row m-t m-b card-1">
+                <div className="row m-t m-b card-1">
                   <div className="col-sm-6 mt-5 mb-5">
                     <form
                       name="forms.updatePasswordForm"

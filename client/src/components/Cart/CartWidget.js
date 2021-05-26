@@ -316,7 +316,7 @@ const CartWidget = (props) => {
           type="button"
           variant="persianGreen"
           onClick={checkout}
-          disabled={!state.lineItems}
+          disabled={!state.lineItems.length}
         >
           {authState.isAuthenticated ? "Checkout" : "Checkout as guest"}
         </Button>
